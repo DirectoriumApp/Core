@@ -1,0 +1,6 @@
+# Normalize line endings to LF for all text files.
+* text=auto eol=lf
+
+# Generated corpus + fixtures: tracked as text, but not diffed inline.
+src/**/Data/*.php linguist-generated=true
+tests/fixtures/*.json -diff linguist-generated=true

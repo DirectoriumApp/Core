@@ -1,0 +1,29 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [develop]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.1', '8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl, calendar
+          coverage: none
+      - name: Lint PHP (syntax)
+        run: |
+          mapfile -d '' files < <(find . -path ./vendor -prune -o -name '*.php' -print0)
+          if [ ${#files[@]} -gt 0 ]; then
+            printf '%s\0' "${files[@]}" | xargs -0 -n1 -P4 php -l
+          else
+            echo "No PHP sources yet — scaffold lint is a no-op."
+          fi
+      # NOTE: phpcs (PSR-12 / WPCS), PHPStan, and the validate-*.php / render-harness
+      # test steps are added by the first code issues, once src/ and tests/ exist.

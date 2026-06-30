@@ -1,0 +1,13 @@
+{
+    "name": "introibo/core",
+    "description": "The Introibo liturgical engine: a clean-room PHP library computing the traditional Roman calendar.",
+    "type": "library",
+    "license": "AGPL-3.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.10",
+        "phpstan/phpstan": "^1.12"
+    }
+}

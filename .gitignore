@@ -1,0 +1,24 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build artifacts
+/build/
+/dist/
+*.zip
+
+# Logs, caches, temp
+*.log
+*.cache
+.phpunit.result.cache
+.phpcs.cache
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+
+# Large local liturgical data — full multi-century oracles are never committed;
+# CI validates against the small fixtures under tests/fixtures/.
+/tests/fixtures/*1950-2120*.json
+*.oracle.json
