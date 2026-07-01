@@ -1,6 +1,8 @@
 # Dependencies
 /vendor/
 /node_modules/
+# Libraries pin ranges, not a lockfile — consumers resolve their own.
+/composer.lock
 
 # Build artifacts
 /build/
