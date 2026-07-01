@@ -1,7 +1,7 @@
-# Temporal fill model — the Christmas and Lenten cycles
+# Temporal fill model — the Christmas cycle, the Lenten cycle, and Holy Week
 
-_Design record for Core #17 (Advent → Epiphany) and #18 (Septuagesima → Passiontide). Status:
-accepted. Baseline edition: **Rubricae Generales 1960 (= 1962)**._
+_Design record for Core #17 (Advent → Epiphany), #18 (Septuagesima → Passiontide), and #19 (Holy
+Week & the Paschal Triduum). Status: accepted. Baseline edition: **Rubricae Generales 1960 (= 1962)**._
 
 ## What a temporal fill produces
 
@@ -128,10 +128,36 @@ Lent this notably includes transferring a first-class feast off a Sunday of Lent
 Annunciation) and the movable Seven Sorrows on the Friday of Passion Week (#22/#23) — the skeleton
 emits the underlying temporal feria there.
 
+## Holy Week and the Paschal Triduum
+
+`HolyWeek::forYear($year)` fills the summit of the year — the seven days `[Palm Sunday, Easter)`
+(Easter−7 … Easter−1), Easter-anchored via the `PaschalSkeleton`. `$year` is the year Easter falls.
+`LentenCycle` hands off at Palm Sunday; Easter Sunday opens Eastertide (#20). **Every day is first
+class and Passiontide** — the guarantee that no sanctoral feast may displace it.
+
+| Day | Identity | Kind | Class | Colour |
+|-----|----------|------|:-----:|--------|
+| Palm Sunday (Easter−7) | `…paschal:palm-sunday` | Sunday | **I** | violet |
+| Monday–Wednesday of Holy Week | `…paschal:holy-week:feria-{2..4}` | Feria | **I** | violet |
+| Maundy Thursday (Easter−3) | `…paschal:maundy-thursday` | Feria | **I** | white |
+| Good Friday (Easter−2) | `…paschal:good-friday` | Feria | **I** | **black** |
+| Holy Saturday (Easter−1) | `…paschal:holy-saturday` | Feria | **I** | violet |
+
+The last three days are the **Sacrum Triduum**; `HolyWeek::triduum()` / `isTriduum()` mark them so the
+precedence engine (#29) can give them absolute priority (they sit at the apex of the Table of
+Precedence and admit no occurrence).
+
+Colours are the **principal** vestment colour of each day's chief act under the 1955/1962 reform.
+Good Friday is **black** (turning violet only for Communion) — the red of the modern rite is *not* the
+1962 colour, so the issue's "red Good Friday" example is followed in spirit (a colour transition) but
+corrected in fact. The within-day changes the reform introduced are a per-element concern of the
+rubrics layer, not this skeleton: the **red** Palm-Sunday procession (violet Mass), the **violet**
+Good-Friday Communion (black liturgy), and the **violet→white** Paschal Vigil (violet Holy Saturday).
+
 ## Shared helpers
 
-Both fillers share `TemporalCalendar`, a stateless helper holding the plain UTC-midnight date
+The block fillers share `TemporalCalendar`, a stateless helper holding the plain UTC-midnight date
 arithmetic (`addDays`, `daysBetween`, `sameDay`, `isSunday`, `utcDate`) and the one definition of
 liturgical weekday naming (`roman`, `feriaToken`, `feriaLatin` — Monday = feria II … Saturday =
 Sabbatum). Keeping the feria numbering in a single place is what lets every block name its days
-identically; the remaining block fillers (#19–#22) build on the same helper.
+identically; the remaining block fillers (#20–#22) build on the same helper.
