@@ -34,5 +34,7 @@ jobs:
         run: composer run-script lint
       - name: Static analysis (PHPStan)
         run: composer run-script analyse
-      # NOTE: PHPUnit and the validate-*.php / corpus-build steps are added by the
-      # engine issues, once tests/ and the generator exist.
+      - name: Unit tests (PHPUnit)
+        run: composer run-script test
+      # NOTE: the validate-*.php / corpus-build steps are added by the later
+      # engine issues, once the generator and validation harness exist.
