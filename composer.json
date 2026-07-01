@@ -3,11 +3,33 @@
     "description": "The Introibo liturgical engine: a clean-room PHP library computing the traditional Roman calendar.",
     "type": "library",
     "license": "AGPL-3.0-or-later",
+    "keywords": [
+        "liturgical",
+        "calendar",
+        "catholic",
+        "ordo",
+        "computus"
+    ],
     "require": {
         "php": ">=7.4"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.10",
-        "phpstan/phpstan": "^1.12"
-    }
+        "phpstan/phpstan": "^1.12",
+        "squizlabs/php_codesniffer": "^3.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Introibo\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Introibo\\Core\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
