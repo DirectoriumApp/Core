@@ -1,0 +1,17 @@
+name: add-to-project
+on:
+  issues:
+    types: [opened, transferred]
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+    steps:
+      # No-op until the ADD_TO_PROJECT_PAT org secret exists (a PAT with project write).
+      - name: Add issue to the Introibo Platform board
+        if: ${{ env.TOKEN != '' }}
+        uses: actions/add-to-project@v2
+        with:
+          project-url: https://github.com/orgs/Introibo-App/projects/1
+          github-token: ${{ env.TOKEN }}
