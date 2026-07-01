@@ -1,7 +1,7 @@
-# Temporal fill model — the Christmas cycle (Advent → Epiphany)
+# Temporal fill model — the Christmas and Lenten cycles
 
-_Design record for Core #17. Status: accepted. Baseline edition: **Rubricae Generales 1960
-(= 1962)**._
+_Design record for Core #17 (Advent → Epiphany) and #18 (Septuagesima → Passiontide). Status:
+accepted. Baseline edition: **Rubricae Generales 1960 (= 1962)**._
 
 ## What a temporal fill produces
 
@@ -94,3 +94,44 @@ This filler is a **temporal skeleton**. Composing feasts and transfers on top of
 - **Edition sensitivity.** Ranks/colours here are 1960. The days after Epiphany are green because the
   octave of the Epiphany was suppressed in 1955; in the older editions (Divino Afflatu, Tridentine)
   6–12 January are white days within that octave. Those engines are the historical-edition epics.
+
+## The Lenten cycle
+
+`LentenCycle::forYear($year)` fills the **Septuagesima-to-Passiontide block** — the penitential run
+toward Easter, entirely Easter-anchored via the `PaschalSkeleton`. `$year` is the civil year in which
+Easter falls (the whole block lies within it). The block spans `[Septuagesima, Palm Sunday)` — a fixed
+56-day run (Easter−63 to Easter−7); Septuagesima is where the `ChristmasCycle` hands off, and Palm
+Sunday is the exclusive end boundary handed to the Holy Week block (#19). Everything is **violet**.
+
+Days are addressed by Easter offset (all identities sit under the `paschal` anchor family):
+
+| Day | Identity | Kind | Season | Class | Colour |
+|-----|----------|------|--------|:-----:|--------|
+| Septuagesima / Sexagesima / Quinquagesima | `…paschal:{gesima}` | Sunday | Septuagesima | II | violet |
+| Pre-Lenten ferias | `…paschal:{gesima}:feria-{d}` | Feria | Septuagesima | IV | violet |
+| Ash Wednesday (Easter−46) | `…paschal:ash-wednesday` | Feria | Lent | **I** | violet |
+| Ferias after Ash Wednesday (Thu–Sat) | `…paschal:post-cineres:feria-{d}` | Feria | Lent | III | violet |
+| Sundays I–IV of Lent | `…paschal:lent-{1..4}` | Sunday | Lent | **I** | violet (IV = **rose permitted** — Laetare) |
+| Lenten ferias (weeks I–IV) | `…paschal:lent-week-{w}:feria-{d}` | Feria | Lent | III | violet |
+| Lenten Ember Wed/Fri/Sat (week I) | `…paschal:quattuor-temporum-quadragesimae:{d}` | Ember day | Lent | II | violet |
+| Passion Sunday (Easter−14) | `…paschal:passion-sunday` | Sunday | Passiontide | **I** | violet |
+| Ferias of Passion Week | `…paschal:passion-week:feria-{d}` | Feria | Passiontide | III | violet |
+
+The raised Lenten ferial ranks are the point of the block (Rubricae Generales 1960, n. 23): Ash
+Wednesday is a **first-class** feria; the Ember Days of Lent are **second class**; the other ferias of
+Lent and Passiontide are **third class** — whereas the pre-Lenten ferias stay **fourth class**. The
+Sundays of Lent are all **first class** (feasts yield to them), unlike the second-class pre-Lenten
+Sundays and Advent II–IV.
+
+Scope boundaries as above: the sanctoral (#23) and precedence/commemoration (#29) compose on top. In
+Lent this notably includes transferring a first-class feast off a Sunday of Lent (St Joseph, the
+Annunciation) and the movable Seven Sorrows on the Friday of Passion Week (#22/#23) — the skeleton
+emits the underlying temporal feria there.
+
+## Shared helpers
+
+Both fillers share `TemporalCalendar`, a stateless helper holding the plain UTC-midnight date
+arithmetic (`addDays`, `daysBetween`, `sameDay`, `isSunday`, `utcDate`) and the one definition of
+liturgical weekday naming (`roman`, `feriaToken`, `feriaLatin` — Monday = feria II … Saturday =
+Sabbatum). Keeping the feria numbering in a single place is what lets every block name its days
+identically; the remaining block fillers (#19–#22) build on the same helper.

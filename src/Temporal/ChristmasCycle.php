@@ -6,7 +6,6 @@ namespace Introibo\Core\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
-use DateTimeZone;
 use Introibo\Core\Attribute\Colour;
 use Introibo\Core\Attribute\ElementColour;
 use Introibo\Core\Attribute\RankClass;
@@ -37,9 +36,6 @@ use InvalidArgumentException;
  */
 final class ChristmasCycle
 {
-    /** @var array<int, string> */
-    private const ROMAN = [1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V', 6 => 'VI', 7 => 'VII'];
-
     private int $year;
 
     private DateTimeImmutable $firstSunday;
@@ -77,22 +73,22 @@ final class ChristmasCycle
 
         $this->year = $year;
         $this->firstSunday = self::firstSundayOfAdvent($year);
-        $this->christmas = self::utcDate($year, 12, 25);
-        $this->vigil = self::utcDate($year, 12, 24);
-        $this->octaveDay = self::utcDate($year + 1, 1, 1);
-        $this->epiphany = self::utcDate($year + 1, 1, 6);
+        $this->christmas = TemporalCalendar::utcDate($year, 12, 25);
+        $this->vigil = TemporalCalendar::utcDate($year, 12, 24);
+        $this->octaveDay = TemporalCalendar::utcDate($year + 1, 1, 1);
+        $this->epiphany = TemporalCalendar::utcDate($year + 1, 1, 6);
         $this->septuagesima = PaschalSkeleton::forYear($year + 1)->septuagesima();
 
-        $thirdSunday = $this->addDays($this->firstSunday, 14);
-        $this->emberWednesday = $this->addDays($thirdSunday, 3);
-        $this->emberFriday = $this->addDays($thirdSunday, 5);
-        $this->emberSaturday = $this->addDays($thirdSunday, 6);
+        $thirdSunday = TemporalCalendar::addDays($this->firstSunday, 14);
+        $this->emberWednesday = TemporalCalendar::addDays($thirdSunday, 3);
+        $this->emberFriday = TemporalCalendar::addDays($thirdSunday, 5);
+        $this->emberSaturday = TemporalCalendar::addDays($thirdSunday, 6);
 
         $epiphanyDow = (int) $this->epiphany->format('w'); // 0 = Sunday … 6 = Saturday
-        $this->firstSundayAfterEpiphany = $this->addDays($this->epiphany, 7 - $epiphanyDow);
+        $this->firstSundayAfterEpiphany = TemporalCalendar::addDays($this->epiphany, 7 - $epiphanyDow);
 
         $this->days = [];
-        for ($date = $this->firstSunday; $date < $this->septuagesima; $date = $this->addDays($date, 1)) {
+        for ($date = $this->firstSunday; $date < $this->septuagesima; $date = TemporalCalendar::addDays($date, 1)) {
             $this->days[$date->format('Y-m-d')] = $this->classify($date);
         }
     }
@@ -109,7 +105,7 @@ final class ChristmasCycle
      */
     public static function firstSundayOfAdvent(int $year): DateTimeImmutable
     {
-        $christmasEve = self::utcDate($year, 12, 24);
+        $christmasEve = TemporalCalendar::utcDate($year, 12, 24);
         $dow = (int) $christmasEve->format('w'); // 0 = Sunday … 6 = Saturday
         $fourthSunday = $dow === 0 ? $christmasEve : $christmasEve->sub(new DateInterval('P' . $dow . 'D'));
 
@@ -155,13 +151,13 @@ final class ChristmasCycle
      */
     public function isShortAdvent(): bool
     {
-        return $this->addDays($this->firstSunday, 21)->format('Y-m-d') === $this->vigil->format('Y-m-d');
+        return TemporalCalendar::addDays($this->firstSunday, 21)->format('Y-m-d') === $this->vigil->format('Y-m-d');
     }
 
     /** How many Sundays after the Epiphany occur before Septuagesima (1–6). */
     public function sundaysAfterEpiphany(): int
     {
-        return intdiv($this->daysBetween($this->firstSundayAfterEpiphany, $this->septuagesima), 7);
+        return intdiv(TemporalCalendar::daysBetween($this->firstSundayAfterEpiphany, $this->septuagesima), 7);
     }
 
     /**
@@ -183,7 +179,7 @@ final class ChristmasCycle
     private function classify(DateTimeImmutable $date): TemporalObservance
     {
         // Fixed temporal feasts take the day (§ precedence: feast › Sunday › octave day › feria).
-        if ($this->sameDay($date, $this->christmas)) {
+        if (TemporalCalendar::sameDay($date, $this->christmas)) {
             return $this->mint(
                 'roman:temporale:christmas:nativity',
                 ObservanceKind::FEAST,
@@ -194,7 +190,7 @@ final class ChristmasCycle
             );
         }
 
-        if ($this->sameDay($date, $this->octaveDay)) {
+        if (TemporalCalendar::sameDay($date, $this->octaveDay)) {
             return $this->mint(
                 'roman:temporale:christmas:octave-day',
                 ObservanceKind::OCTAVE_DAY,
@@ -205,7 +201,7 @@ final class ChristmasCycle
             );
         }
 
-        if ($this->sameDay($date, $this->epiphany)) {
+        if (TemporalCalendar::sameDay($date, $this->epiphany)) {
             return $this->mint(
                 'roman:temporale:epiphany:domini',
                 ObservanceKind::FEAST,
@@ -216,7 +212,7 @@ final class ChristmasCycle
             );
         }
 
-        if ($this->sameDay($date, $this->vigil)) {
+        if (TemporalCalendar::sameDay($date, $this->vigil)) {
             return $this->mint(
                 'roman:temporale:christmas:vigil',
                 ObservanceKind::VIGIL,
@@ -244,8 +240,8 @@ final class ChristmasCycle
 
     private function classifyAdvent(DateTimeImmutable $date): TemporalObservance
     {
-        if ($this->isSunday($date)) {
-            $n = intdiv($this->daysBetween($this->firstSunday, $date), 7) + 1;
+        if (TemporalCalendar::isSunday($date)) {
+            $n = intdiv(TemporalCalendar::daysBetween($this->firstSunday, $date), 7) + 1;
             $colour = $n === 3 ? ElementColour::violetWithRose() : ElementColour::of(Colour::violet());
 
             return $this->mint(
@@ -254,37 +250,37 @@ final class ChristmasCycle
                 Season::advent(),
                 $n === 1 ? RankClass::classI() : RankClass::classII(),
                 $colour,
-                'Dominica ' . self::ROMAN[$n] . ' Adventus'
+                'Dominica ' . TemporalCalendar::roman($n) . ' Adventus'
             );
         }
 
         if ($this->isEmberDay($date)) {
             return $this->mint(
-                'roman:temporale:advent:quattuor-temporum:' . self::feriaToken($date),
+                'roman:temporale:advent:quattuor-temporum:' . TemporalCalendar::feriaToken($date),
                 ObservanceKind::EMBER_DAY,
                 Season::advent(),
                 RankClass::classII(),
                 ElementColour::of(Colour::violet()),
-                $this->feriaLatin($date, 'Quattuor Temporum Adventus')
+                TemporalCalendar::feriaLatin($date, 'Quatuor Temporum Adventus')
             );
         }
 
-        $week = intdiv($this->daysBetween($this->firstSunday, $date), 7) + 1;
-        $isGreaterFeria = $date >= self::utcDate($this->year, 12, 17); // greater ferias: 17–23 December
+        $week = intdiv(TemporalCalendar::daysBetween($this->firstSunday, $date), 7) + 1;
+        $isGreaterFeria = $date >= TemporalCalendar::utcDate($this->year, 12, 17); // greater ferias: 17–23 December
 
         return $this->mint(
-            'roman:temporale:advent:week-' . $week . ':' . self::feriaToken($date),
+            'roman:temporale:advent:week-' . $week . ':' . TemporalCalendar::feriaToken($date),
             ObservanceKind::FERIA,
             Season::advent(),
             $isGreaterFeria ? RankClass::classII() : RankClass::classIV(),
             ElementColour::of(Colour::violet()),
-            $this->feriaLatin($date, 'hebdomadae ' . self::ROMAN[$week] . ' Adventus')
+            TemporalCalendar::feriaLatin($date, 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' Adventus')
         );
     }
 
     private function classifyWithinOctave(DateTimeImmutable $date): TemporalObservance
     {
-        if ($this->isSunday($date)) {
+        if (TemporalCalendar::isSunday($date)) {
             return $this->mint(
                 'roman:temporale:christmas:sunday-within-octave',
                 ObservanceKind::SUNDAY,
@@ -295,7 +291,7 @@ final class ChristmasCycle
             );
         }
 
-        $dayOfOctave = $this->daysBetween($this->christmas, $date) + 1; // 25 Dec = 1, so 26–31 Dec = 2–7
+        $dayOfOctave = TemporalCalendar::daysBetween($this->christmas, $date) + 1; // 25 Dec = 1, so 26–31 Dec = 2–7
 
         return $this->mint(
             'roman:temporale:christmas:within-octave:day-' . $dayOfOctave,
@@ -303,13 +299,13 @@ final class ChristmasCycle
             Season::christmastide(),
             RankClass::classII(),
             ElementColour::of(Colour::white()),
-            'De ' . self::ROMAN[$dayOfOctave] . ' die infra Octavam Nativitatis'
+            'De ' . TemporalCalendar::roman($dayOfOctave) . ' die infra Octavam Nativitatis'
         );
     }
 
     private function classifyAfterOctave(DateTimeImmutable $date): TemporalObservance
     {
-        if ($this->isSunday($date)) {
+        if (TemporalCalendar::isSunday($date)) {
             // The Sunday falling 2–5 January. The 1962 books have no "II Sunday
             // after Christmas" (that is a 1969+ construct); this is structurally
             // the Sunday after the Octave, over which the Most Holy Name is laid (#22).
@@ -324,19 +320,19 @@ final class ChristmasCycle
         }
 
         return $this->mint(
-            'roman:temporale:christmas:post-octavam:' . self::feriaToken($date),
+            'roman:temporale:christmas:post-octavam:' . TemporalCalendar::feriaToken($date),
             ObservanceKind::FERIA,
             Season::christmastide(),
             RankClass::classIV(),
             ElementColour::of(Colour::white()),
-            $this->feriaLatin($date, 'post Octavam Nativitatis')
+            TemporalCalendar::feriaLatin($date, 'post Octavam Nativitatis')
         );
     }
 
     private function classifyAfterEpiphany(DateTimeImmutable $date): TemporalObservance
     {
-        if ($this->isSunday($date)) {
-            $n = intdiv($this->daysBetween($this->firstSundayAfterEpiphany, $date), 7) + 1;
+        if (TemporalCalendar::isSunday($date)) {
+            $n = intdiv(TemporalCalendar::daysBetween($this->firstSundayAfterEpiphany, $date), 7) + 1;
 
             return $this->mint(
                 'roman:temporale:epiphany:sunday-' . $n,
@@ -344,30 +340,31 @@ final class ChristmasCycle
                 Season::epiphany(),
                 RankClass::classII(),
                 ElementColour::of(Colour::green()),
-                'Dominica ' . self::ROMAN[$n] . ' post Epiphaniam'
+                'Dominica ' . TemporalCalendar::roman($n) . ' post Epiphaniam'
             );
         }
 
         if ($date < $this->firstSundayAfterEpiphany) {
             return $this->mint(
-                'roman:temporale:epiphany:post-epiphaniam:' . self::feriaToken($date),
+                'roman:temporale:epiphany:post-epiphaniam:' . TemporalCalendar::feriaToken($date),
                 ObservanceKind::FERIA,
                 Season::epiphany(),
                 RankClass::classIV(),
                 ElementColour::of(Colour::green()),
-                $this->feriaLatin($date, 'post Epiphaniam')
+                TemporalCalendar::feriaLatin($date, 'post Epiphaniam')
             );
         }
 
-        $week = intdiv($this->daysBetween($this->firstSundayAfterEpiphany, $date), 7) + 1;
+        $week = intdiv(TemporalCalendar::daysBetween($this->firstSundayAfterEpiphany, $date), 7) + 1;
+        $phrase = 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' post Epiphaniam';
 
         return $this->mint(
-            'roman:temporale:epiphany:week-' . $week . ':' . self::feriaToken($date),
+            'roman:temporale:epiphany:week-' . $week . ':' . TemporalCalendar::feriaToken($date),
             ObservanceKind::FERIA,
             Season::epiphany(),
             RankClass::classIV(),
             ElementColour::of(Colour::green()),
-            $this->feriaLatin($date, 'hebdomadae ' . self::ROMAN[$week] . ' post Epiphaniam')
+            TemporalCalendar::feriaLatin($date, $phrase)
         );
     }
 
@@ -391,54 +388,8 @@ final class ChristmasCycle
 
     private function isEmberDay(DateTimeImmutable $date): bool
     {
-        return $this->sameDay($date, $this->emberWednesday)
-            || $this->sameDay($date, $this->emberFriday)
-            || $this->sameDay($date, $this->emberSaturday);
-    }
-
-    /** The liturgical feria name of a weekday (never called for a Sunday). */
-    private function feriaLatin(DateTimeImmutable $date, string $phrase): string
-    {
-        $dow = (int) $date->format('N'); // 1 = Monday … 7 = Sunday
-
-        if ($dow === 6) {
-            return 'Sabbato ' . $phrase;
-        }
-
-        return 'Feria ' . self::ROMAN[$dow + 1] . ' ' . $phrase;
-    }
-
-    /** The structural feria token of a weekday (never called for a Sunday). */
-    private static function feriaToken(DateTimeImmutable $date): string
-    {
-        $dow = (int) $date->format('N'); // 1 = Monday … 7 = Sunday
-
-        return $dow === 6 ? 'sabbatum' : 'feria-' . ($dow + 1);
-    }
-
-    private function isSunday(DateTimeImmutable $date): bool
-    {
-        return (int) $date->format('N') === 7;
-    }
-
-    private function sameDay(DateTimeImmutable $a, DateTimeImmutable $b): bool
-    {
-        return $a->format('Y-m-d') === $b->format('Y-m-d');
-    }
-
-    private function daysBetween(DateTimeImmutable $from, DateTimeImmutable $to): int
-    {
-        return (int) $from->diff($to)->days;
-    }
-
-    private function addDays(DateTimeImmutable $date, int $days): DateTimeImmutable
-    {
-        return $date->add(new DateInterval('P' . $days . 'D'));
-    }
-
-    private static function utcDate(int $year, int $month, int $day): DateTimeImmutable
-    {
-        return (new DateTimeImmutable('1970-01-01 00:00:00', new DateTimeZone('UTC')))
-            ->setDate($year, $month, $day);
+        return TemporalCalendar::sameDay($date, $this->emberWednesday)
+            || TemporalCalendar::sameDay($date, $this->emberFriday)
+            || TemporalCalendar::sameDay($date, $this->emberSaturday);
     }
 }

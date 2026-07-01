@@ -262,13 +262,15 @@ final class ChristmasCycleTest extends TestCase
     public function latinNames(): array
     {
         return [
+            'Advent feria' => ['2024-12-03', 'Feria III infra Hebdomadam I Adventus'],
             'Gaudete' => ['2024-12-15', 'Dominica III Adventus'],
-            'Advent Ember Wednesday' => ['2024-12-18', 'Feria IV Quattuor Temporum Adventus'],
-            'Advent Ember Saturday' => ['2024-12-21', 'Sabbato Quattuor Temporum Adventus'],
+            'Advent Ember Wednesday' => ['2024-12-18', 'Feria IV Quatuor Temporum Adventus'],
+            'Advent Ember Saturday' => ['2024-12-21', 'Sabbato Quatuor Temporum Adventus'],
             'Nativity' => ['2024-12-25', 'In Nativitate Domini'],
             'Circumcision' => ['2025-01-01', 'In Circumcisione Domini'],
             'Epiphany' => ['2025-01-06', 'In Epiphania Domini'],
             'Sunday after Epiphany' => ['2025-01-12', 'Dominica I post Epiphaniam'],
+            'Feria after Epiphany' => ['2025-01-13', 'Feria II infra Hebdomadam I post Epiphaniam'],
         ];
     }
 
