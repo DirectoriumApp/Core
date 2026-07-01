@@ -27,6 +27,21 @@
             "Introibo\\Core\\Tests\\": "tests/"
         }
     },
+    "scripts": {
+        "lint": "phpcs",
+        "lint:fix": "phpcbf",
+        "analyse": "phpstan analyse",
+        "check": [
+            "@lint",
+            "@analyse"
+        ]
+    },
+    "scripts-descriptions": {
+        "lint": "Check coding standards (PSR-12) with PHP_CodeSniffer.",
+        "lint:fix": "Auto-fix coding-standard violations with phpcbf.",
+        "analyse": "Run PHPStan static analysis at the configured level.",
+        "check": "Run all quality gates locally (lint + analyse)."
+    },
     "config": {
         "sort-packages": true
     },

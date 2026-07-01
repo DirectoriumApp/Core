@@ -17,6 +17,11 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: mbstring, intl, calendar
           coverage: none
+          tools: composer:v2
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-publish
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
       - name: Lint PHP (syntax)
         run: |
           mapfile -d '' files < <(find . -path ./vendor -prune -o -name '*.php' -print0)
@@ -25,5 +30,9 @@ jobs:
           else
             echo "No PHP sources yet — scaffold lint is a no-op."
           fi
-      # NOTE: phpcs (PSR-12 / WPCS), PHPStan, and the validate-*.php / render-harness
-      # test steps are added by the first code issues, once src/ and tests/ exist.
+      - name: Coding standards (PSR-12)
+        run: composer run-script lint
+      - name: Static analysis (PHPStan)
+        run: composer run-script analyse
+      # NOTE: PHPUnit and the validate-*.php / corpus-build steps are added by the
+      # engine issues, once tests/ and the generator exist.
