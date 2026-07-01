@@ -1,7 +1,8 @@
-# Temporal fill model — the Christmas cycle, the Lenten cycle, and Holy Week
+# Temporal fill model — the Christmas cycle, the Lenten cycle, Holy Week, and Eastertide
 
-_Design record for Core #17 (Advent → Epiphany), #18 (Septuagesima → Passiontide), and #19 (Holy
-Week & the Paschal Triduum). Status: accepted. Baseline edition: **Rubricae Generales 1960 (= 1962)**._
+_Design record for Core #17 (Advent → Epiphany), #18 (Septuagesima → Passiontide), #19 (Holy Week &
+the Paschal Triduum), and #20 (Eastertide → Pentecost). Status: accepted. Baseline edition:
+**Rubricae Generales 1960 (= 1962)**._
 
 ## What a temporal fill produces
 
@@ -154,10 +155,42 @@ corrected in fact. The within-day changes the reform introduced are a per-elemen
 rubrics layer, not this skeleton: the **red** Palm-Sunday procession (violet Mass), the **violet**
 Good-Friday Communion (black liturgy), and the **violet→white** Paschal Vigil (violet Holy Saturday).
 
+## Eastertide
+
+`Eastertide::forYear($year)` fills the festal half of the year — the fifty-six days `[Easter, Trinity
+Sunday)` (Easter+0 … Easter+55), Easter-anchored. `$year` is the year Easter falls. Holy Week hands off
+at Easter; Trinity Sunday (Easter+56) opens the Time after Pentecost (#21). The **whole block is the
+`eastertide` season** — Eastertide runs to the None of the Saturday after Pentecost, so the red
+Pentecost octave is still Eastertide, not the green time that follows.
+
+| Day | Identity | Kind | Class | Colour |
+|-----|----------|------|:-----:|--------|
+| Easter Sunday (Easter+0) | `…paschal:easter` | Sunday | **I** | white |
+| Days within the Easter octave | `…paschal:easter-octave:{feria}` | Within octave | **I** | white |
+| Low Sunday (Easter+7) | `…paschal:low-sunday` | Sunday | **I** | white |
+| Sundays II–V after Easter | `…paschal:paschaltide:sunday-{2..5}` | Sunday | II | white |
+| Ferias post Octavam Paschae | `…paschal:paschaltide:week-{1..4}:{feria}` | Feria | IV | white |
+| Rogation days (Easter+36..38) | `…paschal:rogation:{feria}` | Rogation day | IV | **violet** |
+| Ascension (Easter+39) | `…paschal:ascension` | Feast | **I** | white |
+| Ferias after Ascension | `…paschal:ascension-week:{feria}` / `…paschal:post-ascension:{feria}` | Feria | IV | white |
+| Sunday after Ascension (Easter+42) | `…paschal:sunday-after-ascension` | Sunday | II | white |
+| Vigil of Pentecost (Easter+48) | `…paschal:pentecost-vigil` | Vigil | **I** | **red** |
+| Pentecost (Easter+49) | `…paschal:pentecost` | Sunday | **I** | **red** |
+| Days within the Pentecost octave | `…paschal:pentecost-octave:{feria}` | Within octave | **I** | **red** |
+| Whit Ember Wed/Fri/Sat | `…paschal:pentecost-octave:quattuor-temporum:{feria}` | Ember day | **I** | **red** |
+
+Under the 1960 rubrics only the privileged octaves of Easter and Pentecost survive (the octave of the
+Ascension was suppressed in 1955, so its days are ordinary ferias). The Pentecost vigil and Ember days
+are **red**, not violet — the one exception to violet vigils and Ember days (the joyful fast). The
+**Rogation days** keep their penitential **violet** even in Eastertide. The within-day colour changes
+(the red-and-white Pentecost vigil, the Paschal-vigil note carried in from Holy Saturday) are a
+per-element concern of the rubrics layer. As with the earlier blocks, the sanctoral (#23) and
+precedence (#29) compose on top.
+
 ## Shared helpers
 
 The block fillers share `TemporalCalendar`, a stateless helper holding the plain UTC-midnight date
 arithmetic (`addDays`, `daysBetween`, `sameDay`, `isSunday`, `utcDate`) and the one definition of
 liturgical weekday naming (`roman`, `feriaToken`, `feriaLatin` — Monday = feria II … Saturday =
 Sabbatum). Keeping the feria numbering in a single place is what lets every block name its days
-identically; the remaining block fillers (#20–#22) build on the same helper.
+identically; the remaining block fillers (#21–#22) build on the same helper.
