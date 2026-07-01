@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Introibo or its dataset, please cite it as below."
+title: "Introibo Core — traditional Roman liturgical-calendar engine"
+abstract: >-
+  A clean-room PHP engine that computes the traditional Roman liturgical
+  calendar and generates a cited, independently-validated corpus.
+type: software
+authors:
+  - name: "Introibo"
+repository-code: "https://github.com/Introibo-App/Core"
+url: "https://introibo.org"
+license: AGPL-3.0-or-later
+keywords:
+  - liturgical calendar
+  - traditional Roman rite
+  - computus
+  - ordo
+# The compiled dataset is released separately under CC0; a versioned, archival
+# (DOI-bearing) release of the dataset is a roadmap item.
