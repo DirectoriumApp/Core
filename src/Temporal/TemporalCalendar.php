@@ -25,20 +25,37 @@ use InvalidArgumentException;
  */
 final class TemporalCalendar
 {
-    /** @var array<int, string> */
-    private const ROMAN = [1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V', 6 => 'VI', 7 => 'VII'];
+    /** @var array<int, string> Value → symbol, in descending order, for composition. */
+    private const ROMAN = [
+        1000 => 'M', 900 => 'CM', 500 => 'D', 400 => 'CD',
+        100 => 'C', 90 => 'XC', 50 => 'L', 40 => 'XL',
+        10 => 'X', 9 => 'IX', 5 => 'V', 4 => 'IV', 1 => 'I',
+    ];
 
     private function __construct()
     {
     }
 
+    /**
+     * The Roman numeral for a positive integer (1–3999) — the Time after
+     * Pentecost alone counts Sundays past XX, so this composes rather than
+     * looking up a fixed table.
+     */
     public static function roman(int $number): string
     {
-        if (!isset(self::ROMAN[$number])) {
-            throw new InvalidArgumentException(sprintf('No Roman numeral for %d (supported: 1–7).', $number));
+        if ($number < 1 || $number > 3999) {
+            throw new InvalidArgumentException(sprintf('Roman numerals cover 1–3999; got %d.', $number));
         }
 
-        return self::ROMAN[$number];
+        $result = '';
+        foreach (self::ROMAN as $value => $symbol) {
+            while ($number >= $value) {
+                $result .= $symbol;
+                $number -= $value;
+            }
+        }
+
+        return $result;
     }
 
     /** The structural feria token of a weekday: `feria-2` … `feria-6`, or `sabbatum`. */

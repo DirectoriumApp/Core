@@ -1,8 +1,8 @@
-# Temporal fill model — the Christmas cycle, the Lenten cycle, Holy Week, and Eastertide
+# Temporal fill model — the whole Proper of Time
 
 _Design record for Core #17 (Advent → Epiphany), #18 (Septuagesima → Passiontide), #19 (Holy Week &
-the Paschal Triduum), and #20 (Eastertide → Pentecost). Status: accepted. Baseline edition:
-**Rubricae Generales 1960 (= 1962)**._
+the Paschal Triduum), #20 (Eastertide → Pentecost), and #21 (Time after Pentecost). Status: accepted.
+Baseline edition: **Rubricae Generales 1960 (= 1962)**._
 
 ## What a temporal fill produces
 
@@ -187,10 +187,41 @@ are **red**, not violet — the one exception to violet vigils and Ember days (t
 per-element concern of the rubrics layer. As with the earlier blocks, the sanctoral (#23) and
 precedence (#29) compose on top.
 
+## The Time after Pentecost
+
+`TimeAfterPentecost::forYear($year)` fills the long green season — every day from Trinity Sunday (the
+first Sunday after Pentecost, Easter+56) to the First Sunday of Advent, which is `endsBefore()` (Advent
+of the same civil year closes the season, computed by `ChristmasCycle::firstSundayOfAdvent`). Eastertide
+(#20) hands off at Trinity Sunday. The whole block is the green `pentecost` season; Sundays are second
+class, ferias fourth class.
+
+The number of Sundays after Pentecost **varies with Easter** — 23 to 28. Two rules make it come out
+right for any year:
+
+- The **last** Sunday before Advent always takes the "24th and last" Mass (`…pentecost-time:sunday-ultima`,
+  *Dominica ultima post Pentecosten*), no matter how many Sundays the year has.
+- When a year has **more than 24 Sundays**, the surplus slots between the 23rd and the last are filled
+  by the **Sundays after Epiphany that were crowded out before Septuagesima**. These resumed Sundays end
+  with the **VIth** (immediately before the last) and count backward, so a year with N resumed slots
+  revives the last N Sundays after Epiphany (`…pentecost-time:resumed-epiphany-{m}`, *Dominica m quae
+  superfuit post Epiphaniam* — the missal's "which was left over", distinct from the ordinary Epiphany
+  Sunday). The count of Sundays after Pentecost stays continuous, and no Sunday-after-Epiphany
+  Mass is dropped that had a place. (The mapping depends only on how many slots there are, not on how
+  many Epiphany Sundays occurred — the two are not perfectly coupled, so the resumed set is always the
+  top of the range.)
+
+Ferias are `…pentecost-time:week-{n}:{feria}`, *Feria N infra Hebdomadam {n} post Octavam Pentecostes*
+— the ferial weeks are counted from the octave of Pentecost (Eastertide runs through it), while only
+the Sundays are *post Pentecosten*. The first Sunday's slot (`…pentecost-time:sunday-1`) is the green office the **Most Holy Trinity** overlays;
+`TemporalCalendar::roman()` composes numerals here since the count runs past XX. This is the temporal
+skeleton: the Easter-anchored feasts of the early weeks (**Trinity, Corpus Christi, the Sacred Heart**)
+and the month-computed **September Ember days** are deferred to the movable-feast (#22) and later passes,
+which overlay them on the green Sundays and ferias here.
+
 ## Shared helpers
 
 The block fillers share `TemporalCalendar`, a stateless helper holding the plain UTC-midnight date
 arithmetic (`addDays`, `daysBetween`, `sameDay`, `isSunday`, `utcDate`) and the one definition of
 liturgical weekday naming (`roman`, `feriaToken`, `feriaLatin` — Monday = feria II … Saturday =
 Sabbatum). Keeping the feria numbering in a single place is what lets every block name its days
-identically; the remaining block fillers (#21–#22) build on the same helper.
+identically; the movable-feast pass (#22) builds on the same helper.

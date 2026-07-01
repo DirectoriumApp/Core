@@ -30,6 +30,11 @@ final class TemporalCalendarTest extends TestCase
             'four' => [4, 'IV'],
             'six' => [6, 'VI'],
             'seven' => [7, 'VII'],
+            'eight' => [8, 'VIII'],
+            // The Time after Pentecost counts Sundays into the twenties.
+            'twenty-three' => [23, 'XXIII'],
+            'twenty-four' => [24, 'XXIV'],
+            'twenty-eight' => [28, 'XXVIII'],
         ];
     }
 
@@ -48,7 +53,7 @@ final class TemporalCalendarTest extends TestCase
      */
     public function outOfRangeNumbers(): array
     {
-        return ['zero' => [0], 'eight' => [8], 'negative' => [-1]];
+        return ['zero' => [0], 'negative' => [-1], 'too big' => [4000]];
     }
 
     /**
