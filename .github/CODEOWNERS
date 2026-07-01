@@ -1,0 +1,18 @@
+# Code owners for Introibo Core.
+# Order matters: the last matching pattern wins. Owners are requested for review
+# automatically on pull requests that touch matching paths.
+
+# Default owner for everything.
+*                           @manlycucumber
+
+# Liturgical data, rubric rules, and provenance require a liturgical-data
+# reviewer: changes here must be justified against the cited source
+# (see CONTRIBUTING and SOURCES.md). These paths may not all exist yet — they
+# reserve the review convention for when the corpus and rule sets land.
+/src/Corpus/                @manlycucumber
+/src/Precedence/            @manlycucumber
+/src/Provenance/            @manlycucumber
+/data/                      @manlycucumber
+/SOURCES.md                 @manlycucumber
+/ERRATA.md                  @manlycucumber
+/KNOWN-LIMITATIONS.md       @manlycucumber
