@@ -2,8 +2,9 @@
 <ruleset name="introibo-core">
     <description>Coding standard for introibo/core: PSR-12.</description>
 
-    <!-- Scan the library source. Test sources are added with the first tests. -->
+    <!-- Scan the library source and the test suite. -->
     <file>src</file>
+    <file>tests</file>
 
     <!-- Report paths relative to the project root; run in parallel with colour. -->
     <arg name="basepath" value="."/>
