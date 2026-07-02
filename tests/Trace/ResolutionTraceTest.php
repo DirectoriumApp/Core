@@ -81,6 +81,27 @@ final class ResolutionTraceTest extends TestCase
         self::assertSame('rg-1960:95', $annunciation['citation']);
     }
 
+    public function testTraceExplainsTheColourOfTheCelebratedOffice(): void
+    {
+        $colour = explain(new DateTimeImmutable('2024-12-25'))['resolution']['colour'];
+
+        self::assertSame('white', $colour['base']);
+        self::assertFalse($colour['roseAllowed']);
+        self::assertSame('colour-of-celebration', $colour['rule']);
+        self::assertStringContainsString('colour of the celebrated office', $colour['summary']);
+        self::assertSame('rg-1960', $colour['citation']);
+    }
+
+    public function testTraceExplainsTheSeasonFromTheTemporalOffice(): void
+    {
+        $season = explain(new DateTimeImmutable('2024-06-20'))['resolution']['season'];
+
+        self::assertSame('pentecost', $season['value']);
+        self::assertSame('season-of-temporal-office', $season['rule']);
+        self::assertStringContainsString('season of the day', $season['summary']);
+        self::assertSame('rg-1960', $season['citation']);
+    }
+
     public function testEveryTraceStepCarriesAnRg1960Citation(): void
     {
         foreach (['2024-06-20', '2024-03-25', '2024-11-01', '2024-12-25', '2025-09-15'] as $date) {

@@ -89,4 +89,10 @@ interface PrecedenceRules
         RealizedObservance $celebration,
         PrecedenceContext $context
     ): ResolutionReason;
+
+    /** The cited reason the day is the liturgical colour it is — the colour of the celebrated office. */
+    public function explainColour(RealizedObservance $celebration): ResolutionReason;
+
+    /** The cited reason the day is in the season it is — the season of its temporal office, or none. */
+    public function explainSeason(?string $season): ResolutionReason;
 }

@@ -282,13 +282,14 @@ final class DayResolver
             return $day;
         }
 
-        return $day->withTrace($this->buildTrace($candidates, $celebration, $traceLosers, $context));
+        return $day->withTrace($this->buildTrace($candidates, $celebration, $traceLosers, $temporalOffice, $context));
     }
 
     /**
      * The show-your-work trace of one day's resolution (#233): the sorted field of
      * candidates with their tiers, the celebrated winner and why it won, each loser's
-     * occurrence outcome and cited reason, and the day's commemoration limit.
+     * occurrence outcome and cited reason, the day's commemoration limit, and how its
+     * colour and season were derived (#235).
      *
      * @param list<RealizedObservance> $candidates
      * @param list<array{id: string, outcome: string, reason: \Introibo\Core\Trace\ResolutionReason}> $losers
@@ -297,6 +298,7 @@ final class DayResolver
         array $candidates,
         RealizedObservance $celebration,
         array $losers,
+        ?TemporalObservance $temporalOffice,
         PrecedenceContext $context
     ): ResolutionTrace {
         $candidateRows = [];
@@ -314,6 +316,9 @@ final class DayResolver
             ];
         }
 
+        $colour = $celebration->colour();
+        $season = $temporalOffice !== null ? $temporalOffice->season()->value() : null;
+
         return new ResolutionTrace(
             [
                 'id' => $celebration->id()->toString(),
@@ -323,7 +328,16 @@ final class DayResolver
             $candidateRows,
             $losers,
             $this->rules->commemorationLimit($celebration, $context),
-            $this->rules->explainCommemorationLimit($celebration, $context)
+            $this->rules->explainCommemorationLimit($celebration, $context),
+            [
+                'base' => $colour->base()->value(),
+                'roseAllowed' => $colour->roseAllowed(),
+                'reason' => $this->rules->explainColour($celebration),
+            ],
+            [
+                'value' => $season,
+                'reason' => $this->rules->explainSeason($season),
+            ]
         );
     }
 

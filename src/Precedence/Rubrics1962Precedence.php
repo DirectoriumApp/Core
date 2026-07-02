@@ -304,6 +304,34 @@ final class Rubrics1962Precedence implements PrecedenceRules
         );
     }
 
+    public function explainColour(RealizedObservance $celebration): ResolutionReason
+    {
+        $colour = $celebration->colour();
+        $rose = $colour->roseAllowed() ? ', with rose permitted on Gaudete and Laetare' : '';
+
+        return ResolutionReason::cited(
+            'colour-of-celebration',
+            sprintf('%s: the liturgical colour of the celebrated office%s', $colour->base()->value(), $rose),
+            'rg-1960'
+        );
+    }
+
+    public function explainSeason(?string $season): ResolutionReason
+    {
+        if ($season === null) {
+            return ResolutionReason::uncited(
+                'no-temporal-season',
+                'no temporal office governs the day, so it carries no season'
+            );
+        }
+
+        return ResolutionReason::cited(
+            'season-of-temporal-office',
+            sprintf('%s: the season of the day\'s temporal office', $season),
+            'rg-1960'
+        );
+    }
+
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
     {
         // n. 96(a): the Annunciation, impeded into Holy Week or the Easter octave,

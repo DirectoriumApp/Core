@@ -80,14 +80,14 @@ fall out of sync — the engine does one thing and reports another. Two safeguar
   "colour": {                                // #235
     "base": "violet", "roseAllowed": false,
     "rule": "colour-of-celebration",
-    "summary": "violet: the colour of the celebrated office (a first-class Sunday of Advent)",
-    "citation": "rg-1960:117"
+    "summary": "violet: the liturgical colour of the celebrated office",
+    "citation": "rg-1960"
   },
   "season": {                                // #235
     "value": "advent",
     "rule": "season-of-temporal-office",
-    "summary": "Advent: the season of the day's temporal office",
-    "citation": "rg-1960:74"
+    "summary": "advent: the season of the day's temporal office",
+    "citation": "rg-1960"
   }
 }
 ```
@@ -114,8 +114,10 @@ in `Rubrics1962Precedence`:
 | `commemoration-admitted` | commemorate | `rg-1960:112` | otherwise the loser is commemorated |
 
 The winner's reason cites the Table of Liturgical Days itself (`rg-1960:91`); the
-commemoration limit cites `rg-1960:111`. Colour and season (#235) cite the general
-rubrics on colour and the liturgical year.
+commemoration limit cites `rg-1960:111`. Colour and season (#235) cite the Codex
+Rubricarum at the document level (`rg-1960`) — the governing rubric for both — rather
+than inventing a paragraph number; a placeholder day with no temporal office honestly
+carries an uncited `no-temporal-season` reason.
 
 ## Delivery
 
