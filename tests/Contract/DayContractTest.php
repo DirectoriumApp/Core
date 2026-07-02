@@ -36,7 +36,7 @@ final class DayContractTest extends TestCase
     {
         $expected = [
             'contractVersion' => '1.0.0',
-            'corpusVersion' => '1962-seed',
+            'corpusVersion' => '1962-seed-2026-07-02',
             'engineVersion' => '0.4.0',
             'rite' => 'roman',
             'edition' => 'roman:rubricae-1960',
@@ -60,6 +60,25 @@ final class DayContractTest extends TestCase
         ];
 
         self::assertSame($expected, contract(self::utc('2025-07-15')));
+    }
+
+    /** The three provenance axes are present, well-formed, and independent (corpus carries no edition token). */
+    public function testProvenanceStampsThreeIndependentVersionAxes(): void
+    {
+        $day = contract(self::utc('2025-07-15'));
+
+        self::assertSame('1.0.0', $day['contractVersion']);
+        self::assertSame('0.4.0', $day['engineVersion']);
+        self::assertSame('roman:rubricae-1960', $day['edition']);
+        self::assertSame('roman', $day['rite']);
+
+        $corpus = $day['corpusVersion'];
+        self::assertIsString($corpus);
+        self::assertMatchesRegularExpression('/^1962-seed-\d{4}-\d{2}-\d{2}$/', $corpus);
+        // The corpus version names the data build only — never the edition.
+        self::assertStringNotContainsString(':', $corpus);
+        self::assertStringNotContainsString('roman', $corpus);
+        self::assertStringNotContainsString('rubricae', $corpus);
     }
 
     /** A sanctoral celebration carries its names and titulars; the yielding Sunday is commemorated. */

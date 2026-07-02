@@ -35,7 +35,7 @@ all three — any one moving means the resolved output may differ:
 | Field | Source | Meaning |
 | --- | --- | --- |
 | `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.0). |
-| `corpusVersion` | `Provenance` (seed: `1962-seed`) | The **calendar data** build; carries no edition token. |
+| `corpusVersion` | `SanctoralData::version()` (seed: `1962-seed-<date>`) | The **calendar data** build; carries no edition token. |
 | `engineVersion` | `Introibo::VERSION` | The **resolver** version; hand-bumped when output changes. |
 
 The **edition** (`roman:rubricae-1960`) is the rules-family that governed the
@@ -135,7 +135,7 @@ Pentecost; the feria is both the celebration and the tempora):
 ```json
 {
   "contractVersion": "1.0.0",
-  "corpusVersion": "1962-seed",
+  "corpusVersion": "1962-seed-2026-07-02",
   "engineVersion": "0.4.0",
   "rite": "roman",
   "edition": "roman:rubricae-1960",

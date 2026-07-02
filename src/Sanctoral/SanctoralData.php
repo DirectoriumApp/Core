@@ -16,4 +16,12 @@ interface SanctoralData
 {
     /** @return list<SanctoralEntry> */
     public function entries(): array;
+
+    /**
+     * The version stamp of this corpus of calendar data — a stable identifier of
+     * the feast-list build, carrying no edition token (the same data can be
+     * resolved under different editions). It is stamped onto the output
+     * contract's provenance (#52) so consumers can key caches on the data build.
+     */
+    public function version(): string;
 }
