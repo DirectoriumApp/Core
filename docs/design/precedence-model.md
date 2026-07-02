@@ -101,10 +101,20 @@ Source: the New Rubrics of the Roman Breviary and Missal (1960) nn. 92–114
 (occurrence n. 93, transference nn. 95–96, commemorations nn. 106–114), from the
 Divinum Officium transcription, cross-checked against the SSPX summary.
 
+## Occurrence, lower classes (#32)
+
+The unified `occurrenceOutcome()` resolves the second- to fourth-class pairings
+too: a lower office impeded on a second-, third-, or fourth-class day is
+**commemorated** (a II-class Sunday over a II- or III-class feast; a Lenten feria
+over a third-class feast; a feria over a fourth-class commemoration). The
+occurrence-boundary this fixes is n. 95: a **second-class feast is never
+transferred** — impeded by a first-class day it is *omitted* (a first-class day
+admits only privileged commemorations, n. 111a), not moved. Verified by tests.
+
 ## Still to come in this epic
 
-- **Occurrence coverage (#32–#33)** — second/third/fourth-class pairings and the
-  Sunday-vs-feast-of-the-Lord exclusions (nn. 15, 112) over this same method.
+- **Sunday vs feast of the Lord (#33)** — the exclusion that a Sunday and a
+  feast/mystery of the Lord do not commemorate each other (nn. 15, 112b).
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.
