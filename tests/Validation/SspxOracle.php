@@ -5,34 +5,38 @@ declare(strict_types=1);
 namespace Introibo\Core\Tests\Validation;
 
 use Introibo\Core\Contract\DayContract;
+use Introibo\Core\Overlay\CalendarCatalog;
 use Introibo\Core\Precedence\DayResolver;
 use Introibo\Core\Temporal\TemporalCalendar;
 use RuntimeException;
 
 /**
- * The engine ↔ SSPX comparison for the validation harness (#45 / #49).
+ * The engine-under-the-SSPX-overlay ↔ SSPX conformance gate (#45 / #49 / #80).
  *
- * The SSPX 1962 ordo ({@see fixtures/sspx}) is a *second, independent* witness to the
- * 1962 calendar. It is deliberately NOT the authority on the base edition —
- * missalemeum is ({@see MissalemeumOracle}) — because SSPX keeps a *particular*
- * calendar: the universal 1962 base plus its own observances (St Pius X and the Seven
- * Sorrows elevated to first class, tagged "(FSSPX)" upstream). Its value is twofold:
+ * The SSPX 1962 ordo ({@see fixtures/sspx}) is the authority for the SSPX *particular*
+ * calendar: the universal 1962 base plus the Society's own elevations (St Pius X and
+ * the Seven Sorrows to first class, tagged "(FSSPX)" upstream). This harness resolves
+ * the engine **under the SSPX overlay** (#76/#78, via {@see CalendarCatalog}) and
+ * compares its per-day class to the ordo. Its two jobs:
  *
- *   1. **Corroboration.** Where SSPX and missalemeum agree on a class the engine does
- *      not, two independent sources indict the same base-1962 rank — stronger evidence
- *      than either alone, and material for the accuracy worklist (#428).
- *   2. **Overlay discovery.** Where SSPX alone differs, the difference is a candidate
- *      entry for the v0.2 SSPX particular-calendar overlay — the R2 priority.
+ *   1. **Conformance.** Every FSSPX-tagged particular the ordo publishes must match the
+ *      engine under the overlay — the overlay reproduces the Society's proper calendar
+ *      exactly. {@see SspxOracleTest::testOverlayModelsEverySspxParticular()} asserts
+ *      no `particular:true` day differs; a newly-published proper feast, or a broken
+ *      overlay, fails it.
+ *   2. **Tracked residual.** The differences that remain are all `particular:false`:
+ *      base-1962 ranks the base engine still gets wrong, corroborated by missalemeum
+ *      (the September Ember week #439, the Ascension vigil #440, n. 33 #441; also
+ *      feeding #428), plus two SSPX divergences the fixed-date overlay does not model —
+ *      the movable Seven Sorrows (Friday after Passion Sunday, an Easter-relative
+ *      office beyond a SanctoralData overlay) and the Vigil of the Assumption (third
+ *      class upstream against a second-class vigil under the 1960 Code of Rubrics
+ *      n. 91, treated as a feed artifact, not conformed to). These are frozen,
+ *      categorised, into the baseline ({@see baselinePath()}) and guarded for drift.
  *
- * The feed exposes the office's class (I..IV); it does not expose colour or a
- * commemoration count, so only class is compared (a documented allowance), and days
- * whose class is absent upstream are skipped. Each class mismatch is frozen into a
- * categorised baseline ({@see baselinePath()}) exactly like the missalemeum harness:
- * the test is green when the live mismatches equal it, so a regression (a new
- * difference) and a drift (a baselined difference that changes) both fail until
- * reviewed. Because SSPX is a particular calendar every mismatch here is *expected* —
- * the baseline is a living catalogue of how the base engine relates to SSPX, not a
- * bug list.
+ * The feed exposes only the office's class (I..IV) — not colour or a commemoration
+ * count — so only class is compared (a documented allowance), and days whose class is
+ * absent upstream are skipped.
  *
  * @see SspxOracleTest
  */
@@ -40,6 +44,9 @@ final class SspxOracle
 {
     private const FIXTURE_DIR = __DIR__ . '/fixtures/sspx';
     private const MISSALEMEUM_DIR = __DIR__ . '/fixtures/missalemeum';
+
+    /** The particular-calendar overlay the engine resolves under here. */
+    private const CALENDAR = 'sspx';
 
     public static function baselinePath(): string
     {
@@ -60,19 +67,22 @@ final class SspxOracle
     }
 
     /**
-     * Every engine ↔ SSPX class mismatch across the fixture, ascending by date. Each
-     * is a self-describing row carrying both other witnesses (the engine's class and
-     * missalemeum's, where it has a reading) and a category.
+     * Every engine-under-overlay ↔ SSPX class mismatch across the fixture, ascending by
+     * date. Each is a self-describing row carrying both other witnesses (the engine's
+     * class under the SSPX overlay and missalemeum's, where it has a reading) and a
+     * category. A conformant FSSPX particular is not a mismatch and so never appears.
      *
      * @return list<array{date: string, name: string, sspx: int, engine: int, missalemeum: int|null, category: string}>
      */
     public static function divergences(): array
     {
+        $engine = self::engine();
+
         $rows = [];
         foreach (self::years() as $year) {
             $fixture = self::loadFixture($year);
             $missalemeum = self::missalemeumClasses($year);
-            $resolved = DayResolver::for1962()->resolveYear($year);
+            $resolved = $engine->resolveYear($year);
             $provenance = $resolved->provenance();
 
             foreach ($fixture as $date => $sspx) {
@@ -110,6 +120,17 @@ final class SspxOracle
         return $rows;
     }
 
+    /**
+     * The engine resolving under the SSPX particular calendar — the base 1962 engine
+     * with the SSPX overlay (#76) layered on, exactly as a consumer gets by selecting
+     * that calendar (#78). This is what makes the harness a conformance gate rather
+     * than a base-engine divergence tracker.
+     */
+    private static function engine(): DayResolver
+    {
+        return (new CalendarCatalog())->resolver(self::CALENDAR);
+    }
+
     /** The baseline text: one JSON mismatch per line, ascending, trailing newline. */
     public static function freezeText(): string
     {
@@ -122,26 +143,30 @@ final class SspxOracle
     }
 
     /**
-     * A deterministic taxonomy that turns each class mismatch into a worklist item.
-     * The overlay categories seed the v0.2 SSPX overlay; the corroboration category
-     * seeds the base-1962 accuracy worklist (#428).
+     * A deterministic taxonomy that turns each residual class mismatch into a worklist
+     * item. Under the overlay a `sspx-particular` row is a conformance gap (the test
+     * fails on it); the other categories are the tracked residual — corroborated
+     * base-rank issues (#428) and the unmodelled SSPX divergences.
      *
      * @param array{name: string, klasse: int|null, particular: bool, feast: bool} $sspx
      */
     private static function classify(array $sspx, int $engineRank, ?int $missalemeum): string
     {
         if ($sspx['particular']) {
-            // Upstream flags the day "(FSSPX)": a definite SSPX particular observance.
+            // Upstream flags the day "(FSSPX)": an SSPX proper observance the overlay is
+            // meant to reproduce. Appearing here means the overlay did NOT model it — a
+            // conformance gap (see SspxOracleTest::testOverlayModelsEverySspxParticular).
             return 'sspx-particular';
         }
         if ($missalemeum !== null && $missalemeum === $sspx['klasse'] && $missalemeum !== $engineRank) {
             // Both independent sources agree against the engine — a base-1962 rank the
-            // engine gets wrong, corroborated (see #428).
+            // base engine gets wrong (the overlay does not touch it), corroborated (#428).
             return 'corroborates-base-rank';
         }
         if ($missalemeum === $engineRank && $missalemeum !== $sspx['klasse']) {
-            // The engine matches the base authority; SSPX stands alone — a particular
-            // difference to model in the overlay.
+            // The engine (under the overlay) matches the base authority; SSPX stands
+            // alone — a particular divergence the fixed-date overlay does not model
+            // (the movable Seven Sorrows, the Assumption-vigil feed reading).
             return 'sspx-diverges-from-base';
         }
 
