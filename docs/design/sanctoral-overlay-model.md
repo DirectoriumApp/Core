@@ -138,6 +138,23 @@ II. St Lawrence's feast (08-10, II, red) is seeded alongside its vigil. Every
 other historical vigil was suppressed under the 1960 rubrics and is simply
 absent from the data, so it is never emitted.
 
+## Octaves (#28)
+
+Under the 1960 rubrics only three octaves survive — **Christmas, Easter, and
+Pentecost** — and all three are **temporal**: the block-fillers already emit
+their days (kind `octave-day` / `within-octave`). Every other historical octave
+(Epiphany, Corpus Christi, the Assumption, All Saints, the patronal octaves, …)
+was abolished. So the sanctoral overlay generates **no** octaves at all — there
+are no octave entries in the data and the loader invents none.
+
+Where a sanctoral feast falls within the surviving Christmas octave — St Stephen
+(26 Dec), St John (27 Dec), the Holy Innocents (28 Dec) — the overlay and the
+temporal layer both produce an office for the day. Resolving that (celebrate the
+feast, commemorate the octave) and transferring or omitting feasts impeded by
+the Easter and Pentecost octaves is the resolver's work (#29). #28 only
+establishes that the overlay adds no octaves and that the co-occurrence is
+available to resolve.
+
 ## Scope boundaries (deferred, on purpose)
 
 - **Precedence, commemoration, transfer** — Epic #29. The overlay never decides
