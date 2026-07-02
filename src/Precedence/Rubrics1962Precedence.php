@@ -219,6 +219,13 @@ final class Rubrics1962Precedence implements PrecedenceRules
             return OccurrenceOutcome::omit();
         }
 
+        // n. 15 / n. 112(b): a feast of the Lord and a Sunday do not commemorate
+        // each other — the loser is omitted rather than commemorated. (A feast of
+        // Our Lady or a saint on a Sunday still commemorates it.)
+        if ($this->lordSundayExclusion($winner, $loser)) {
+            return OccurrenceOutcome::omit();
+        }
+
         // n. 111(a): a first-class day admits only a privileged commemoration.
         if ($winner->rank()->ordinal() === 1) {
             return $this->isPrivilegedCommemoration($loser)
@@ -282,6 +289,24 @@ final class Rubrics1962Precedence implements PrecedenceRules
         // (d) the September Ember days and (f) the greater Litanies are added
         // with the data that carries them (#36 / #38).
         return false;
+    }
+
+    private function lordSundayExclusion(RealizedObservance $winner, RealizedObservance $loser): bool
+    {
+        $winnerSunday = $winner->kind()->value() === ObservanceKind::SUNDAY;
+        $loserSunday = $loser->kind()->value() === ObservanceKind::SUNDAY;
+
+        return ($loserSunday && $this->isFeastOfTheLord($winner))
+            || ($winnerSunday && $this->isFeastOfTheLord($loser));
+    }
+
+    private function isFeastOfTheLord(RealizedObservance $office): bool
+    {
+        $id = $office->id()->toString();
+
+        return in_array($id, self::GREATEST, true)
+            || in_array($id, self::GREAT_LORD, true)
+            || in_array($id, self::SECOND_LORD_FEASTS, true);
     }
 
     private function isWithinPaschalOctave(string $id): bool
