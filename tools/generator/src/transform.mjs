@@ -90,6 +90,40 @@ function byKey(key) {
 }
 
 /**
+ * Fan the temporal archetypes into the two schema'd shapes, joined by the
+ * `archetype` key: the edition-invariant identity (kind + the Latin name
+ * template) and the per-edition attributes (rank + colour). Mirrors the sanctoral
+ * identity/attributes split. `names.la` is a template the PHP fillers render.
+ */
+export function transformTemporale(archetypes, edition) {
+  const identity = [];
+  const attributes = [];
+
+  for (const a of archetypes) {
+    const cites = a.cites || {};
+
+    identity.push({
+      archetype: a.key,
+      kind: a.kind,
+      names: { la: a.name },
+      cites: { 'names.la': cites.name },
+    });
+
+    attributes.push({
+      archetype: a.key,
+      rank: a.rank,
+      colour: colourOf(a.colour),
+      cites: { rank: cites.rank, colour: cites.colour },
+    });
+  }
+
+  identity.sort(byKey('archetype'));
+  attributes.sort(byKey('archetype'));
+
+  return { identity, attributes, edition };
+}
+
+/**
  * Fan the temporal-skeleton facts into the two edition-invariant NDJSON shapes:
  * the Easter offsets (`{ slot, offset, cite }`) and the block->season assignments
  * (`{ block, season, cite }`). Both validate against the temporal-skeleton schema.

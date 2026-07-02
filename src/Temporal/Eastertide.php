@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Introibo\Core\Temporal;
 
 use DateTimeImmutable;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 use LogicException;
 
@@ -47,6 +43,8 @@ final class Eastertide
 
     private DateTimeImmutable $trinitySunday;
 
+    private TemporalAttributes $attributes;
+
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
@@ -60,6 +58,7 @@ final class Eastertide
             ));
         }
 
+        $this->attributes = TemporalAttributes::default();
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->easter = $skeleton->easter();
@@ -126,43 +125,27 @@ final class Eastertide
         $offset = TemporalCalendar::daysBetween($this->easter, $date); // days after Easter, 0..55
 
         if ($offset === 0) {
-            return $this->white(
-                'roman:temporale:paschal:easter',
-                ObservanceKind::SUNDAY,
-                RankClass::classI(),
-                'Dominica Resurrectionis'
-            );
+            return $this->mint('roman:temporale:paschal:easter', 'easter', $date);
         }
         if ($offset >= 1 && $offset <= 6) {
             return $this->easterOctaveFeria($date, $offset);
         }
         if ($offset === 7) {
-            return $this->white(
-                'roman:temporale:paschal:low-sunday',
-                ObservanceKind::SUNDAY,
-                RankClass::classI(),
-                'Dominica in Albis'
-            );
+            return $this->mint('roman:temporale:paschal:low-sunday', 'low-sunday', $date);
         }
 
         // Sundays II–V after Easter, and the ferias of the weeks after the Easter octave.
         if ($offset === 14 || $offset === 21 || $offset === 28 || $offset === 35) {
             $n = intdiv($offset, 7); // 2..5
-            return $this->white(
-                'roman:temporale:paschal:paschaltide:sunday-' . $n,
-                ObservanceKind::SUNDAY,
-                RankClass::classII(),
-                'Dominica ' . TemporalCalendar::roman($n) . ' post Pascha'
-            );
+            return $this->mint('roman:temporale:paschal:paschaltide:sunday-' . $n, 'paschaltide-sunday', $date, $n);
         }
         if ($offset >= 8 && $offset <= 34) {
             $week = intdiv($offset - 8, 7) + 1; // weeks I–IV post Octavam Paschae
-            $phrase = 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' post Octavam Paschae';
-            return $this->white(
+            return $this->mint(
                 'roman:temporale:paschal:paschaltide:week-' . $week . ':' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
-                RankClass::classIV(),
-                TemporalCalendar::feriaLatin($date, $phrase)
+                'paschaltide-week-feria',
+                $date,
+                $week
             );
         }
 
@@ -172,57 +155,41 @@ final class Eastertide
         if ($offset === 36 || $offset === 37 || $offset === 38) {
             return $this->mint(
                 'roman:temporale:paschal:rogation:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::ROGATION_DAY,
-                RankClass::classIV(),
-                ElementColour::of(Colour::violet()),
-                TemporalCalendar::feriaLatin($date, 'in Rogationibus')
+                'rogation',
+                $date
             );
         }
 
         if ($offset === 39) {
-            return $this->white(
-                'roman:temporale:paschal:ascension',
-                ObservanceKind::FEAST,
-                RankClass::classI(),
-                'In Ascensione Domini'
-            );
+            return $this->mint('roman:temporale:paschal:ascension', 'ascension', $date);
         }
         if ($offset === 40 || $offset === 41) {
-            return $this->white(
+            return $this->mint(
                 'roman:temporale:paschal:ascension-week:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
-                RankClass::classIV(),
-                TemporalCalendar::feriaLatin($date, 'post Ascensionem')
+                'ascension-week-feria',
+                $date
             );
         }
         if ($offset === 42) {
-            return $this->white(
+            return $this->mint(
                 'roman:temporale:paschal:sunday-after-ascension',
-                ObservanceKind::SUNDAY,
-                RankClass::classII(),
-                'Dominica post Ascensionem'
+                'sunday-after-ascension',
+                $date
             );
         }
         if ($offset >= 43 && $offset <= 47) {
             // The week naming does not restart at the Sunday after Ascension: every
             // feria from Ascension to the Pentecost vigil is "N post Ascensionem".
-            return $this->white(
+            return $this->mint(
                 'roman:temporale:paschal:post-ascension:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
-                RankClass::classIV(),
-                TemporalCalendar::feriaLatin($date, 'post Ascensionem')
+                'post-ascension-feria',
+                $date
             );
         }
 
         // The Vigil of Pentecost — first class, red (not violet: the joyful fast).
         if ($offset === 48) {
-            return $this->mint(
-                'roman:temporale:paschal:pentecost-vigil',
-                ObservanceKind::VIGIL,
-                RankClass::classI(),
-                ElementColour::of(Colour::red()),
-                'Sabbato in Vigilia Pentecostes'
-            );
+            return $this->mint('roman:temporale:paschal:pentecost-vigil', 'pentecost-vigil', $date);
         }
 
         return $this->classifyPentecost($date, $offset);
@@ -231,24 +198,24 @@ final class Eastertide
     private function classifyPentecost(DateTimeImmutable $date, int $offset): TemporalObservance
     {
         if ($offset === 49) {
-            return $this->red('roman:temporale:paschal:pentecost', ObservanceKind::SUNDAY, 'Dominica Pentecostes');
+            return $this->mint('roman:temporale:paschal:pentecost', 'pentecost', $date);
         }
 
         // The Ember Days of Pentecost (Wednesday, Friday, Saturday) — red, first class.
         if ($offset === 52 || $offset === 54 || $offset === 55) {
-            return $this->red(
+            return $this->mint(
                 'roman:temporale:paschal:pentecost-octave:quattuor-temporum:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::EMBER_DAY,
-                TemporalCalendar::feriaLatin($date, 'Quatuor Temporum Pentecostes')
+                'pentecost-ember',
+                $date
             );
         }
 
         // The other days within the Octave of Pentecost (Monday, Tuesday, Thursday).
         if ($offset === 50 || $offset === 51 || $offset === 53) {
-            return $this->red(
+            return $this->mint(
                 'roman:temporale:paschal:pentecost-octave:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::WITHIN_OCTAVE,
-                TemporalCalendar::feriaLatin($date, 'infra Octavam Pentecostes')
+                'pentecost-octave-feria',
+                $date
             );
         }
 
@@ -258,42 +225,32 @@ final class Eastertide
     private function easterOctaveFeria(DateTimeImmutable $date, int $offset): TemporalObservance
     {
         // The Saturday within the octave has its own name; the rest are numbered ferias.
-        $latin = $offset === 6
-            ? 'Sabbato in Albis'
-            : TemporalCalendar::feriaLatin($date, 'infra Octavam Paschae');
+        $archetype = $offset === 6 ? 'easter-octave-saturday' : 'easter-octave-feria';
 
-        return $this->white(
+        return $this->mint(
             'roman:temporale:paschal:easter-octave:' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::WITHIN_OCTAVE,
-            RankClass::classI(),
-            $latin
+            $archetype,
+            $date
         );
     }
 
-    private function white(string $slug, string $kind, RankClass $rank, string $latinName): TemporalObservance
+    /**
+     * Mint the temporal office of an Eastertide day: the slug is structural, the
+     * season is always Eastertide, and the kind, rank, colour, and Latin name
+     * come from the corpus archetype overlay, rendered with the day's `$ord`
+     * (Sunday / week number) and weekday.
+     */
+    private function mint(string $slug, string $archetype, DateTimeImmutable $date, int $ord = 0): TemporalObservance
     {
-        return $this->mint($slug, $kind, $rank, ElementColour::of(Colour::white()), $latinName);
-    }
+        $office = $this->attributes->archetype($archetype);
 
-    private function red(string $slug, string $kind, string $latinName): TemporalObservance
-    {
-        return $this->mint($slug, $kind, RankClass::classI(), ElementColour::of(Colour::red()), $latinName);
-    }
-
-    private function mint(
-        string $slug,
-        string $kind,
-        RankClass $rank,
-        ElementColour $colour,
-        string $latinName
-    ): TemporalObservance {
         return new TemporalObservance(
             ObservanceId::parse($slug),
-            ObservanceKind::fromString($kind),
+            $office->kind(),
             Season::eastertide(),
-            $rank,
-            $colour,
-            $latinName
+            $office->rank(),
+            $office->colour(),
+            $office->renderName($date, $ord)
         );
     }
 }

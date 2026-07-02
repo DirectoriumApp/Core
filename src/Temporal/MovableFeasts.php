@@ -6,11 +6,7 @@ namespace Introibo\Core\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 use LogicException;
 
@@ -51,6 +47,8 @@ final class MovableFeasts
 
     private DateTimeImmutable $christTheKing;
 
+    private TemporalAttributes $attributes;
+
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $feasts;
 
@@ -64,6 +62,7 @@ final class MovableFeasts
             ));
         }
 
+        $this->attributes = TemporalAttributes::default();
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->trinitySunday = $skeleton->date('trinity-sunday');
@@ -144,38 +143,38 @@ final class MovableFeasts
             $this->holyName->format('Y-m-d') => $this->feast(
                 'roman:temporale:christmas:holy-name',
                 Season::christmastide(),
-                RankClass::classII(),
-                'In Festo Sanctissimi Nominis Iesu'
+                'holy-name',
+                $this->holyName
             ),
             $this->holyFamily->format('Y-m-d') => $this->feast(
                 'roman:temporale:epiphany:holy-family',
                 Season::epiphany(),
-                RankClass::classII(),
-                'In Festo Sanctae Familiae Iesu, Mariae, Ioseph'
+                'holy-family',
+                $this->holyFamily
             ),
             $this->trinitySunday->format('Y-m-d') => $this->feast(
                 'roman:temporale:paschal:trinity-sunday',
                 Season::pentecost(),
-                RankClass::classI(),
-                'In Festo Sanctissimae Trinitatis'
+                'trinity-sunday',
+                $this->trinitySunday
             ),
             $this->corpusChristi->format('Y-m-d') => $this->feast(
                 'roman:temporale:paschal:corpus-christi',
                 Season::pentecost(),
-                RankClass::classI(),
-                'In Festo Sanctissimi Corporis Christi'
+                'corpus-christi',
+                $this->corpusChristi
             ),
             $this->sacredHeart->format('Y-m-d') => $this->feast(
                 'roman:temporale:paschal:sacred-heart',
                 Season::pentecost(),
-                RankClass::classI(),
-                'In Festo Sacratissimi Cordis Iesu'
+                'sacred-heart',
+                $this->sacredHeart
             ),
             $this->christTheKing->format('Y-m-d') => $this->feast(
                 'roman:temporale:month-computed:christ-the-king',
                 Season::pentecost(),
-                RankClass::classI(),
-                'In Festo Domini Nostri Iesu Christi Regis'
+                'christ-the-king',
+                $this->christTheKing
             ),
         ];
 
@@ -219,15 +218,23 @@ final class MovableFeasts
         return $lastOfOctober->sub(new DateInterval('P' . $weekday . 'D'));
     }
 
-    private function feast(string $slug, Season $season, RankClass $rank, string $latinName): TemporalObservance
+    /**
+     * Build one movable feast: the slug and season are structural (the feast's
+     * placement rule), while the kind, rank, colour, and Latin name come from the
+     * corpus archetype overlay. `$date` is the feast's own date, unused by these
+     * fixed (non-ordinal, non-feria) names.
+     */
+    private function feast(string $slug, Season $season, string $archetype, DateTimeImmutable $date): TemporalObservance
     {
+        $office = $this->attributes->archetype($archetype);
+
         return new TemporalObservance(
             ObservanceId::parse($slug),
-            ObservanceKind::fromString(ObservanceKind::FEAST),
+            $office->kind(),
             $season,
-            $rank,
-            ElementColour::of(Colour::white()),
-            $latinName
+            $office->rank(),
+            $office->colour(),
+            $office->renderName($date)
         );
     }
 }

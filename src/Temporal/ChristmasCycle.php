@@ -6,11 +6,7 @@ namespace Introibo\Core\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 
 /**
@@ -58,6 +54,8 @@ final class ChristmasCycle
 
     private DateTimeImmutable $emberSaturday;
 
+    private TemporalAttributes $attributes;
+
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
@@ -71,6 +69,7 @@ final class ChristmasCycle
             ));
         }
 
+        $this->attributes = TemporalAttributes::default();
         $this->year = $year;
         $this->firstSunday = self::firstSundayOfAdvent($year);
         $this->christmas = TemporalCalendar::utcDate($year, 12, 25);
@@ -180,47 +179,24 @@ final class ChristmasCycle
     {
         // Fixed temporal feasts take the day (§ precedence: feast › Sunday › octave day › feria).
         if (TemporalCalendar::sameDay($date, $this->christmas)) {
-            return $this->mint(
-                'roman:temporale:christmas:nativity',
-                ObservanceKind::FEAST,
-                Season::christmastide(),
-                RankClass::classI(),
-                ElementColour::of(Colour::white()),
-                'In Nativitate Domini'
-            );
+            return $this->mint('roman:temporale:christmas:nativity', Season::christmastide(), 'nativity', $date);
         }
 
         if (TemporalCalendar::sameDay($date, $this->octaveDay)) {
             return $this->mint(
                 'roman:temporale:christmas:octave-day',
-                ObservanceKind::OCTAVE_DAY,
                 Season::christmastide(),
-                RankClass::classI(),
-                ElementColour::of(Colour::white()),
-                'In Circumcisione Domini'
+                'christmas-octave-day',
+                $date
             );
         }
 
         if (TemporalCalendar::sameDay($date, $this->epiphany)) {
-            return $this->mint(
-                'roman:temporale:epiphany:domini',
-                ObservanceKind::FEAST,
-                Season::epiphany(),
-                RankClass::classI(),
-                ElementColour::of(Colour::white()),
-                'In Epiphania Domini'
-            );
+            return $this->mint('roman:temporale:epiphany:domini', Season::epiphany(), 'epiphany', $date);
         }
 
         if (TemporalCalendar::sameDay($date, $this->vigil)) {
-            return $this->mint(
-                'roman:temporale:christmas:vigil',
-                ObservanceKind::VIGIL,
-                Season::advent(),
-                RankClass::classI(),
-                ElementColour::of(Colour::violet()),
-                'In Vigilia Nativitatis Domini'
-            );
+            return $this->mint('roman:temporale:christmas:vigil', Season::advent(), 'christmas-vigil', $date);
         }
 
         if ($date < $this->christmas) {
@@ -242,26 +218,17 @@ final class ChristmasCycle
     {
         if (TemporalCalendar::isSunday($date)) {
             $n = intdiv(TemporalCalendar::daysBetween($this->firstSunday, $date), 7) + 1;
-            $colour = $n === 3 ? ElementColour::violetWithRose() : ElementColour::of(Colour::violet());
+            $archetype = $n === 1 ? 'advent-sunday-i' : ($n === 3 ? 'advent-sunday-gaudete' : 'advent-sunday');
 
-            return $this->mint(
-                'roman:temporale:advent:sunday-' . $n,
-                ObservanceKind::SUNDAY,
-                Season::advent(),
-                $n === 1 ? RankClass::classI() : RankClass::classII(),
-                $colour,
-                'Dominica ' . TemporalCalendar::roman($n) . ' Adventus'
-            );
+            return $this->mint('roman:temporale:advent:sunday-' . $n, Season::advent(), $archetype, $date, $n);
         }
 
         if ($this->isEmberDay($date)) {
             return $this->mint(
                 'roman:temporale:advent:quattuor-temporum:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::EMBER_DAY,
                 Season::advent(),
-                RankClass::classII(),
-                ElementColour::of(Colour::violet()),
-                TemporalCalendar::feriaLatin($date, 'Quatuor Temporum Adventus')
+                'advent-ember',
+                $date
             );
         }
 
@@ -270,11 +237,10 @@ final class ChristmasCycle
 
         return $this->mint(
             'roman:temporale:advent:week-' . $week . ':' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::FERIA,
             Season::advent(),
-            $isGreaterFeria ? RankClass::classII() : RankClass::classIV(),
-            ElementColour::of(Colour::violet()),
-            TemporalCalendar::feriaLatin($date, 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' Adventus')
+            $isGreaterFeria ? 'advent-feria-greater' : 'advent-feria',
+            $date,
+            $week
         );
     }
 
@@ -283,11 +249,9 @@ final class ChristmasCycle
         if (TemporalCalendar::isSunday($date)) {
             return $this->mint(
                 'roman:temporale:christmas:sunday-within-octave',
-                ObservanceKind::SUNDAY,
                 Season::christmastide(),
-                RankClass::classII(),
-                ElementColour::of(Colour::white()),
-                'Dominica infra Octavam Nativitatis'
+                'christmas-sunday-within-octave',
+                $date
             );
         }
 
@@ -295,11 +259,10 @@ final class ChristmasCycle
 
         return $this->mint(
             'roman:temporale:christmas:within-octave:day-' . $dayOfOctave,
-            ObservanceKind::WITHIN_OCTAVE,
             Season::christmastide(),
-            RankClass::classII(),
-            ElementColour::of(Colour::white()),
-            'De ' . TemporalCalendar::roman($dayOfOctave) . ' die infra Octavam Nativitatis'
+            'christmas-within-octave',
+            $date,
+            $dayOfOctave
         );
     }
 
@@ -311,21 +274,17 @@ final class ChristmasCycle
             // the Sunday after the Octave, over which the Most Holy Name is laid (#22).
             return $this->mint(
                 'roman:temporale:christmas:sunday-after-octave',
-                ObservanceKind::SUNDAY,
                 Season::christmastide(),
-                RankClass::classII(),
-                ElementColour::of(Colour::white()),
-                'Dominica post Octavam Nativitatis'
+                'christmas-sunday-after-octave',
+                $date
             );
         }
 
         return $this->mint(
             'roman:temporale:christmas:post-octavam:' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::FERIA,
             Season::christmastide(),
-            RankClass::classIV(),
-            ElementColour::of(Colour::white()),
-            TemporalCalendar::feriaLatin($date, 'post Octavam Nativitatis')
+            'christmas-post-octave-feria',
+            $date
         );
     }
 
@@ -336,53 +295,55 @@ final class ChristmasCycle
 
             return $this->mint(
                 'roman:temporale:epiphany:sunday-' . $n,
-                ObservanceKind::SUNDAY,
                 Season::epiphany(),
-                RankClass::classII(),
-                ElementColour::of(Colour::green()),
-                'Dominica ' . TemporalCalendar::roman($n) . ' post Epiphaniam'
+                'epiphany-sunday',
+                $date,
+                $n
             );
         }
 
         if ($date < $this->firstSundayAfterEpiphany) {
             return $this->mint(
                 'roman:temporale:epiphany:post-epiphaniam:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
                 Season::epiphany(),
-                RankClass::classIV(),
-                ElementColour::of(Colour::green()),
-                TemporalCalendar::feriaLatin($date, 'post Epiphaniam')
+                'epiphany-feria',
+                $date
             );
         }
 
         $week = intdiv(TemporalCalendar::daysBetween($this->firstSundayAfterEpiphany, $date), 7) + 1;
-        $phrase = 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' post Epiphaniam';
 
         return $this->mint(
             'roman:temporale:epiphany:week-' . $week . ':' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::FERIA,
             Season::epiphany(),
-            RankClass::classIV(),
-            ElementColour::of(Colour::green()),
-            TemporalCalendar::feriaLatin($date, $phrase)
+            'epiphany-week-feria',
+            $date,
+            $week
         );
     }
 
+    /**
+     * Mint the temporal office of a day: the slug and season are structural (built
+     * here from the date), the kind, rank, colour, and Latin name come from the
+     * archetype overlay in the corpus, rendered with the day's `$ord` (week /
+     * Sunday number) and weekday.
+     */
     private function mint(
         string $slug,
-        string $kind,
         Season $season,
-        RankClass $rank,
-        ElementColour $colour,
-        string $latinName
+        string $archetype,
+        DateTimeImmutable $date,
+        int $ord = 0
     ): TemporalObservance {
+        $office = $this->attributes->archetype($archetype);
+
         return new TemporalObservance(
             ObservanceId::parse($slug),
-            ObservanceKind::fromString($kind),
+            $office->kind(),
             $season,
-            $rank,
-            $colour,
-            $latinName
+            $office->rank(),
+            $office->colour(),
+            $office->renderName($date, $ord)
         );
     }
 

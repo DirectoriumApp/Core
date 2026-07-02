@@ -1,0 +1,406 @@
+# Cited temporal ARCHETYPES — the per-office overlay the temporal fillers lay on
+# the Easter/Advent skeleton. Each archetype is a stable structural bucket (an
+# Advent Sunday, a Lenten Ember day, the Nativity …); the fillers compute WHICH
+# archetype a given date is and its runtime parameters (the week ordinal, the
+# weekday), then read the office's kind, rank, colour, and Latin name from here.
+# Date arithmetic and the naming GRAMMAR (Roman numerals, the Feria/Sabbato
+# prefix) stay in PHP; only these edition-varying FACTS are data.
+#
+# Fanned out by the generator into two schema'd shapes:
+#   identity.temporale   (edition-invariant): archetype, kind, names.la template
+#   attributes.temporale (per edition):       archetype, rank, colour
+# joined by the archetype key, exactly as the sanctoral identity/attributes split.
+#
+# names.la is a Latin TEMPLATE. Placeholders the filler fills:
+#   {ord}    a Roman numeral (the week / Sunday / octave-day ordinal)
+#   {feria}  a leading Feria-N / Sabbato prefix; a "{feria} …" name is composed
+#            by the engine's feriaLatin() from the phrase that follows.
+# A template with neither placeholder is a fixed name.
+#
+# Season is NOT here: it is a structural feature of the block a day sits in
+# (handled by the temporal skeleton's block->season table), so the fillers carry
+# it, not this overlay. rank is the 1960 class (1 = highest); colour is a base
+# colour, or `{ base: violet, roseAllowed: true }` for the rose-permitted Gaudete
+# and Laetare Sundays.
+#
+# Every name is transcribed from the public-domain Missale Romanum (mr-1920);
+# every rank and colour is a fact cited to the 1960 rubrics (rg-1960).
+
+archetypes:
+  # ---- Christmas cycle (Advent -> Epiphany) --------------------------------
+  - key: advent-sunday-i
+    kind: sunday
+    name: "Dominica {ord} Adventus"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: advent-sunday-gaudete
+    kind: sunday
+    name: "Dominica {ord} Adventus"
+    rank: 2
+    colour: { base: violet, roseAllowed: true }
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: advent-sunday
+    kind: sunday
+    name: "Dominica {ord} Adventus"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: advent-ember
+    kind: ember-day
+    name: "{feria} Quatuor Temporum Adventus"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: advent-feria-greater
+    kind: feria
+    name: "{feria} infra Hebdomadam {ord} Adventus"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: advent-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam {ord} Adventus"
+    rank: 4
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christmas-vigil
+    kind: vigil
+    name: "In Vigilia Nativitatis Domini"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: nativity
+    kind: feast
+    name: "In Nativitate Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christmas-sunday-within-octave
+    kind: sunday
+    name: "Dominica infra Octavam Nativitatis"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christmas-within-octave
+    kind: within-octave
+    name: "De {ord} die infra Octavam Nativitatis"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christmas-octave-day
+    kind: octave-day
+    name: "In Circumcisione Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christmas-sunday-after-octave
+    kind: sunday
+    name: "Dominica post Octavam Nativitatis"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christmas-post-octave-feria
+    kind: feria
+    name: "{feria} post Octavam Nativitatis"
+    rank: 4
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: epiphany
+    kind: feast
+    name: "In Epiphania Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: epiphany-sunday
+    kind: sunday
+    name: "Dominica {ord} post Epiphaniam"
+    rank: 2
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: epiphany-feria
+    kind: feria
+    name: "{feria} post Epiphaniam"
+    rank: 4
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: epiphany-week-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam {ord} post Epiphaniam"
+    rank: 4
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+
+  # ---- Septuagesima -> Passiontide (the Lenten cycle) ----------------------
+  - key: septuagesima-sunday
+    kind: sunday
+    name: "Dominica in Septuagesima"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: sexagesima-sunday
+    kind: sunday
+    name: "Dominica in Sexagesima"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: quinquagesima-sunday
+    kind: sunday
+    name: "Dominica in Quinquagesima"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: septuagesima-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam Septuagesimae"
+    rank: 4
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: sexagesima-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam Sexagesimae"
+    rank: 4
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: quinquagesima-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam Quinquagesimae"
+    rank: 4
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: ash-wednesday
+    kind: feria
+    name: "Feria IV Cinerum"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: post-cineres-feria
+    kind: feria
+    name: "{feria} post Cineres"
+    rank: 3
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: lent-sunday
+    kind: sunday
+    name: "Dominica {ord} in Quadragesima"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: lent-sunday-laetare
+    kind: sunday
+    name: "Dominica {ord} in Quadragesima"
+    rank: 1
+    colour: { base: violet, roseAllowed: true }
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: lent-ember
+    kind: ember-day
+    name: "{feria} Quatuor Temporum Quadragesimae"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: lent-week-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam {ord} in Quadragesima"
+    rank: 3
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: passion-sunday
+    kind: sunday
+    name: "Dominica I Passionis"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: passion-week-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam Passionis"
+    rank: 3
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+
+  # ---- Holy Week and the Sacred Triduum ------------------------------------
+  - key: palm-sunday
+    kind: sunday
+    name: "Dominica II Passionis seu in Palmis"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: holy-week-feria
+    kind: feria
+    name: "{feria} Majoris Hebdomadae"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: maundy-thursday
+    kind: feria
+    name: "Feria V in Cena Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: good-friday
+    kind: feria
+    name: "Feria VI in Passione et Morte Domini"
+    rank: 1
+    colour: black
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: holy-saturday
+    kind: feria
+    name: "Sabbato Sancto"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+
+  # ---- Eastertide (Easter -> the Saturday after Pentecost) -----------------
+  - key: easter
+    kind: sunday
+    name: "Dominica Resurrectionis"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: easter-octave-feria
+    kind: within-octave
+    name: "{feria} infra Octavam Paschae"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: easter-octave-saturday
+    kind: within-octave
+    name: "Sabbato in Albis"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: low-sunday
+    kind: sunday
+    name: "Dominica in Albis"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: paschaltide-sunday
+    kind: sunday
+    name: "Dominica {ord} post Pascha"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: paschaltide-week-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam {ord} post Octavam Paschae"
+    rank: 4
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: rogation
+    kind: rogation-day
+    name: "{feria} in Rogationibus"
+    rank: 4
+    colour: violet
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: ascension
+    kind: feast
+    name: "In Ascensione Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: ascension-week-feria
+    kind: feria
+    name: "{feria} post Ascensionem"
+    rank: 4
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: sunday-after-ascension
+    kind: sunday
+    name: "Dominica post Ascensionem"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: post-ascension-feria
+    kind: feria
+    name: "{feria} post Ascensionem"
+    rank: 4
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost-vigil
+    kind: vigil
+    name: "Sabbato in Vigilia Pentecostes"
+    rank: 1
+    colour: red
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost
+    kind: sunday
+    name: "Dominica Pentecostes"
+    rank: 1
+    colour: red
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost-ember
+    kind: ember-day
+    name: "{feria} Quatuor Temporum Pentecostes"
+    rank: 1
+    colour: red
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost-octave-feria
+    kind: within-octave
+    name: "{feria} infra Octavam Pentecostes"
+    rank: 1
+    colour: red
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+
+  # ---- Time after Pentecost (the green season to Advent) -------------------
+  - key: pentecost-time-sunday
+    kind: sunday
+    name: "Dominica {ord} post Pentecosten"
+    rank: 2
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost-time-sunday-ultima
+    kind: sunday
+    name: "Dominica ultima post Pentecosten"
+    rank: 2
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost-time-resumed-epiphany
+    kind: sunday
+    name: "Dominica {ord} quae superfuit post Epiphaniam"
+    rank: 2
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: pentecost-time-feria
+    kind: feria
+    name: "{feria} infra Hebdomadam {ord} post Octavam Pentecostes"
+    rank: 4
+    colour: green
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+
+  # ---- Movable feasts of the Lord (placed by a Sunday / Easter rule) -------
+  - key: holy-name
+    kind: feast
+    name: "In Festo Sanctissimi Nominis Iesu"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: holy-family
+    kind: feast
+    name: "In Festo Sanctae Familiae Iesu, Mariae, Ioseph"
+    rank: 2
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: trinity-sunday
+    kind: feast
+    name: "In Festo Sanctissimae Trinitatis"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: corpus-christi
+    kind: feast
+    name: "In Festo Sanctissimi Corporis Christi"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: sacred-heart
+    kind: feast
+    name: "In Festo Sacratissimi Cordis Iesu"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
+  - key: christ-the-king
+    kind: feast
+    name: "In Festo Domini Nostri Iesu Christi Regis"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }

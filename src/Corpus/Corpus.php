@@ -159,6 +159,26 @@ final class Corpus
         return $this->records('temporal/block-seasons.ndjson');
     }
 
+    /**
+     * The edition-invariant temporal identity rows (archetype, kind, name template).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function identityTemporale(): array
+    {
+        return $this->records('identity/temporale.ndjson');
+    }
+
+    /**
+     * The per-edition temporal attribute rows (archetype, rank, colour).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function attributesTemporale(string $editionDir): array
+    {
+        return $this->records('editions/' . $editionDir . '/attributes.temporale.ndjson');
+    }
+
     private function read(string $path): string
     {
         $contents = @file_get_contents($path);

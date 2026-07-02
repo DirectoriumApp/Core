@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Introibo\Core\Temporal;
 
 use DateTimeImmutable;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 use LogicException;
 
@@ -49,6 +45,8 @@ final class HolyWeek
 
     private DateTimeImmutable $holySaturday;
 
+    private TemporalAttributes $attributes;
+
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
@@ -62,6 +60,7 @@ final class HolyWeek
             ));
         }
 
+        $this->attributes = TemporalAttributes::default();
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->easter = $skeleton->easter();
@@ -161,72 +160,48 @@ final class HolyWeek
         $offset = -TemporalCalendar::daysBetween($date, $this->easter); // days before Easter, as a negative
 
         if ($offset === -7) {
-            return $this->mint(
-                'roman:temporale:paschal:palm-sunday',
-                ObservanceKind::SUNDAY,
-                RankClass::classI(),
-                ElementColour::of(Colour::violet()),
-                'Dominica II Passionis seu in Palmis'
-            );
+            return $this->mint('roman:temporale:paschal:palm-sunday', 'palm-sunday', $date);
         }
 
         // Monday, Tuesday, Wednesday of Holy Week — first-class ferias, violet.
         if ($offset === -6 || $offset === -5 || $offset === -4) {
             return $this->mint(
                 'roman:temporale:paschal:holy-week:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
-                RankClass::classI(),
-                ElementColour::of(Colour::violet()),
-                TemporalCalendar::feriaLatin($date, 'Majoris Hebdomadae')
+                'holy-week-feria',
+                $date
             );
         }
 
         // The Sacred Triduum.
         if ($offset === -3) {
-            return $this->mint(
-                'roman:temporale:paschal:maundy-thursday',
-                ObservanceKind::FERIA,
-                RankClass::classI(),
-                ElementColour::of(Colour::white()),
-                'Feria V in Cena Domini'
-            );
+            return $this->mint('roman:temporale:paschal:maundy-thursday', 'maundy-thursday', $date);
         }
         if ($offset === -2) {
-            return $this->mint(
-                'roman:temporale:paschal:good-friday',
-                ObservanceKind::FERIA,
-                RankClass::classI(),
-                ElementColour::of(Colour::black()),
-                'Feria VI in Passione et Morte Domini'
-            );
+            return $this->mint('roman:temporale:paschal:good-friday', 'good-friday', $date);
         }
         if ($offset === -1) {
-            return $this->mint(
-                'roman:temporale:paschal:holy-saturday',
-                ObservanceKind::FERIA,
-                RankClass::classI(),
-                ElementColour::of(Colour::violet()),
-                'Sabbato Sancto'
-            );
+            return $this->mint('roman:temporale:paschal:holy-saturday', 'holy-saturday', $date);
         }
 
         throw new LogicException(sprintf('Unclassified Holy Week day at Easter offset %d.', $offset));
     }
 
-    private function mint(
-        string $slug,
-        string $kind,
-        RankClass $rank,
-        ElementColour $colour,
-        string $latinName
-    ): TemporalObservance {
+    /**
+     * Mint the temporal office of a Holy Week day: the slug is structural, the
+     * season is always Passiontide, and the kind, rank, colour, and Latin name
+     * come from the corpus archetype overlay (Holy Week has no ordinal names).
+     */
+    private function mint(string $slug, string $archetype, DateTimeImmutable $date): TemporalObservance
+    {
+        $office = $this->attributes->archetype($archetype);
+
         return new TemporalObservance(
             ObservanceId::parse($slug),
-            ObservanceKind::fromString($kind),
+            $office->kind(),
             Season::passiontide(),
-            $rank,
-            $colour,
-            $latinName
+            $office->rank(),
+            $office->colour(),
+            $office->renderName($date)
         );
     }
 }
