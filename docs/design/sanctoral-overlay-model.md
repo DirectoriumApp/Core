@@ -98,6 +98,16 @@ same-date **ordering** (#25), the **commemoration/displaced** containers (#26),
 **vigils** (#27), **octave** interaction (#28), and the **bissextile** shift
 (#333) build on this.
 
+## Ordering co-occurring offices (#25)
+
+When more than one fixed-date office lands on a civil date, `SanctoralCalendar`
+orders them **highest rank first** (ascending `RankClass` ordinal, since class I
+is ordinal 1), tie-broken by the canonical `ObservanceId` string — a fixed,
+edition-invariant key, so the order is deterministic and reproducible run to run
+(the validation oracle depends on it). This is a **pre-sort of candidates**;
+deciding which office is actually celebrated, and which are commemorated or
+displaced, is the resolver's work (#29).
+
 ## Scope boundaries (deferred, on purpose)
 
 - **Precedence, commemoration, transfer** — Epic #29. The overlay never decides

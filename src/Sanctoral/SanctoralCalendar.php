@@ -58,8 +58,8 @@ final class SanctoralCalendar
 
     /**
      * The sanctoral office(s) placed on a date, or an empty list if none falls
-     * there. From #25 the list is ordered by rank; until then it is in source
-     * order.
+     * there. Co-occurring offices are ordered by rank (highest first), so the
+     * resolver (#29) sees the strongest candidate first.
      *
      * @return list<SanctoralObservance>
      */
@@ -99,9 +99,36 @@ final class SanctoralCalendar
             );
         }
 
+        foreach ($days as $key => $offices) {
+            usort($offices, [self::class, 'byPrecedence']);
+            $days[$key] = $offices;
+        }
+
         ksort($days);
 
         return $days;
+    }
+
+    /**
+     * Order two co-occurring offices for the resolver: highest rank first, then
+     * a stable tiebreak on the canonical identifier.
+     *
+     * Rank comes first — a lower {@see RankClass} ordinal is a higher class
+     * (class I = 1), so ascending ordinal is descending precedence. When two
+     * offices share a class the canonical {@see ObservanceId} string breaks the
+     * tie: it is fixed and edition-invariant, so the order is deterministic and
+     * reproducible run to run (which the validation oracle depends on). This is a
+     * pre-sort of candidates, not the precedence decision itself — deciding which
+     * office is actually celebrated is the resolver's work (#29).
+     */
+    private static function byPrecedence(SanctoralObservance $a, SanctoralObservance $b): int
+    {
+        $byRank = $a->rank()->ordinal() <=> $b->rank()->ordinal();
+        if ($byRank !== 0) {
+            return $byRank;
+        }
+
+        return $a->id()->toString() <=> $b->id()->toString();
     }
 
     /**
