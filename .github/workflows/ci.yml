@@ -36,8 +36,38 @@ jobs:
         run: composer run-script analyse
       - name: Unit tests (PHPUnit)
         run: composer run-script test
-      # NOTE: the validate-*.php / corpus-build steps are added by the later
-      # engine issues, once the generator and validation harness exist.
+      # The full suite above already includes the validation harness across every PHP
+      # version; the dedicated `validate` job below runs it as an explicit, named gate.
+
+  # Validation harness gate (#45 / #51): re-prove the engine against the pinned
+  # oracles on every PR — Computus vs easter_days(), the missalemeum fixture, and the
+  # SSPX feed — so any divergence from the committed baselines fails the build. This is
+  # an explicit, named check (distinct from the matrix's full run) so it can be required
+  # to merge. The oracle fixtures are committed (no network at test time), so only the
+  # Composer dependencies are cached to keep the job fast.
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, intl, calendar
+          coverage: none
+          tools: composer:v2
+      - name: Locate Composer cache
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
+      - name: Validation harness (oracles)
+        run: composer run-script validate-oracles
 
   # Build-time corpus generator (Node only; the runtime engine never runs it).
   # Asserts the committed corpus is reproducible and matches a fresh build.

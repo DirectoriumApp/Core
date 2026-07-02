@@ -37,7 +37,8 @@
         "lint": "phpcs",
         "lint:fix": "phpcbf",
         "analyse": "phpstan analyse",
-        "test": "phpunit",
+        "test": "phpunit --testsuite introibo-core",
+        "validate-oracles": "phpunit --testsuite validation",
         "check": [
             "@lint",
             "@analyse",
@@ -49,6 +50,7 @@
         "lint:fix": "Auto-fix coding-standard violations with phpcbf.",
         "analyse": "Run PHPStan static analysis at the configured level.",
         "test": "Run the PHPUnit test suite.",
+        "validate-oracles": "Re-prove the engine against the pinned oracles (the #45 validation harness).",
         "check": "Run all quality gates locally (lint + analyse + test)."
     },
     "config": {
