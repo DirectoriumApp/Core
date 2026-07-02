@@ -1,0 +1,5 @@
+{"archetype":"advent-greater-feria","rank":0,"colour":{"base":"violet"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"archetype":"advent-greater-feria","rank":2,"colour":{"base":"violet"},"cites":{"colour":"rg-1960"}}
+{"archetype":"gaudete-sunday","rank":1,"colour":{"base":"violet","roseAllowed":"yes"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"archetype":"advent-greater-feria","rank":2,"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"archetype":"gaudete-sunday","rank":2,"colour":{"base":"rose"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}

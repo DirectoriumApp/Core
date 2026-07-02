@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/precedence-tier.schema.json",
+  "title": "Precedence tier row (n.91 Table of Liturgical Days)",
+  "description": "One row of the n.91 table as data: a tier selector mapped to its ordinal (= the n.91 line number) and sub-order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["line", "ordinal", "subOrder", "selector", "cite"],
+  "properties": {
+    "line": {
+      "description": "The n.91 line number.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "ordinal": {
+      "description": "Precedence ordinal; lower wins.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "subOrder": {
+      "description": "Tie-break order within a collapsed line (0 = none).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "selector": {
+      "description": "Stable key the tier-derivation code branches on.",
+      "$ref": "#/$defs/slug"
+    },
+    "cite": { "$ref": "#/$defs/sourceRef" }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    }
+  }
+}

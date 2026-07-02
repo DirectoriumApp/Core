@@ -35,7 +35,8 @@ Core/
     LICENSE.txt                    #   CC0-1.0 dedication for the dataset
     schema/                        #   JSON Schema (draft 2020-12) for every record shape
       source.schema.json
-      identity.schema.json
+      identity.sanctorale.schema.json
+      identity.temporale.schema.json
       attributes.sanctorale.schema.json
       placement.sanctorale.schema.json
       attributes.temporale.schema.json
@@ -169,7 +170,7 @@ Edition-varying fixed-date placement (a feast can move between editions).
 
 ```json
 {"id":"roman:sanctorale:ioseph","month":3,"day":19,"cites":{"month":"rg-1960","day":"rg-1960"}}
-{"id":"roman:sanctorale:assumptio-vigilia","month":8,"day":14,"vigilOf":"roman:sanctorale:assumptio","cites":{"month":"mr-1962","day":"mr-1962"}}
+{"id":"roman:sanctorale:assumptio:vigilia","month":8,"day":14,"vigilOf":"roman:sanctorale:assumptio","cites":{"month":"mr-1962","day":"mr-1962"}}
 ```
 
 `vigilOf` (optional) is the id of the feast a vigil anticipates.
@@ -180,7 +181,7 @@ Rank/colour/name per **archetype** (Decision C), not per day.
 
 ```json
 {"archetype":"advent-greater-feria","rank":2,"colour":{"base":"violet"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
-{"archetype":"gaudete-sunday","rank":1,"colour":{"base":"violet","roseAllowed":true},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"archetype":"gaudete-sunday","rank":2,"colour":{"base":"violet","roseAllowed":true},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
 ```
 
 ### Precedence tiers — `editions/&lt;edition&gt;/precedence.tiers.ndjson`
@@ -199,7 +200,7 @@ zero-commemoration set the rules engine reads (replacing the private consts in
 `Rubrics1962Precedence`).
 
 ```json
-{"rule":"membership","name":"great-lord-feasts","ids":["roman:temporale:epiphany:domini","roman:paschal:ascension"],"cite":"rg-1960:n.91"}
+{"rule":"membership","name":"great-lord-feasts","ids":["roman:temporale:epiphany:domini","roman:temporale:paschal:ascension"],"cite":"rg-1960:n.91"}
 {"rule":"commemoration-limit","dayClass":1,"limit":1,"cite":"rg-1960:n.107"}
 ```
 
@@ -220,6 +221,10 @@ Each shape has a JSON Schema (draft 2020-12) under `data/corpus/schema/`. The
 Node generator validates every emitted record against its schema (#40); this
 issue (#39) ships the schemas plus representative sample records and a test that
 asserts the samples validate, so the contract is executable from the start.
+Both valid and deliberately-malformed samples live under
+`tests/fixtures/corpus/{valid,invalid}/`; `tests/Corpus/SchemaValidationTest.php`
+(using `opis/json-schema`) asserts every valid record conforms and every
+malformed one is rejected — so a too-loose or too-strict rule fails CI.
 
 ## Licensing
 

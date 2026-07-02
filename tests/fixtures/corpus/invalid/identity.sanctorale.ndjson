@@ -1,0 +1,12 @@
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"rank":1,"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"colour":{"base":"white"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"month":3,"day":19,"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"en":"Joseph"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":[],"names":{"la":"x"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"solemnity","titulars":["ioseph"],"names":{"la":"x"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"cites":{"names.en":"mr-1920"}}
+{"id":"roman:sanctorale:Ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:temporale:advent:sunday-3","kind":"sunday","titulars":["advent"],"names":{"la":"x"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"aliases":{"secondaryFacet":"also honours companions"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"aliases":{"splitFrom":"roman:temporale:easter-offset:46"},"cites":{"names.la":"mr-1920"}}
+{"id":"roman:sanctorale:ioseph","kind":"feast","titulars":["ioseph"],"names":{"la":"x"},"cites":{"names.la":"mr-1920","bogus-key":"mr-1920"}}

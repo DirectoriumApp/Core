@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/precedence-rules.schema.json",
+  "title": "Precedence rule row",
+  "description": "One membership id-list or one commemoration-limit fact the rules engine reads (replacing the private consts in Rubrics1962Precedence). Each row is one variant.",
+  "oneOf": [
+    {
+      "title": "Membership list",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "name", "ids", "cite"],
+      "properties": {
+        "rule": { "const": "membership" },
+        "name": {
+          "description": "The membership set's stable name (e.g. great-lord-feasts).",
+          "$ref": "#/$defs/slug"
+        },
+        "ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/observanceId" }
+        },
+        "cite": { "$ref": "#/$defs/sourceRef" }
+      }
+    },
+    {
+      "title": "Commemoration limit",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "dayClass", "limit", "cite"],
+      "properties": {
+        "rule": { "const": "commemoration-limit" },
+        "dayClass": {
+          "description": "The class of the day the limit applies to (1 = highest).",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "limit": {
+          "description": "Maximum commemorations admitted.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "cite": { "$ref": "#/$defs/sourceRef" }
+      }
+    }
+  ],
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "observanceId": {
+      "description": "An ObservanceId slug. The temporale branch mirrors ObservanceId::parse(): the first body segment must be a real anchor family, and the easter-offset addressing form is never an identifier.",
+      "type": "string",
+      "pattern": "^roman:(?:(?:sanctorale|votive):[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)*|temporale:(?!(?:[a-z0-9]+(?:-[a-z0-9]+)*:)*easter-offset(?::|$))(?:paschal|advent|christmas|epiphany|civil-fixed|month-computed)(?::[a-z0-9]+(?:-[a-z0-9]+)*)*)$"
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    }
+  }
+}

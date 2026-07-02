@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/attributes.sanctorale.schema.json",
+  "title": "Sanctoral edition attributes (Layer 2)",
+  "description": "Per-edition rank/colour for a sanctoral observance, keyed by id within the edition directory. rank and colour are always cited; a nameOverride, when present, must cite nameOverride.la.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "rank", "colour", "cites"],
+  "properties": {
+    "id": {
+      "description": "Foreign key to a sanctoral identity record.",
+      "type": "string",
+      "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
+    },
+    "rank": { "$ref": "#/$defs/rank" },
+    "colour": { "$ref": "#/$defs/colour" },
+    "nameOverride": { "$ref": "#/$defs/names" },
+    "cites": {
+      "allOf": [
+        { "$ref": "#/$defs/cites" },
+        { "required": ["rank", "colour"] }
+      ]
+    }
+  },
+  "if": { "required": ["nameOverride"] },
+  "then": { "properties": { "cites": { "required": ["nameOverride.la"] } } },
+  "$defs": {
+    "rank": {
+      "description": "RankClass ordinal (1 = class I, highest ... 4 = class IV).",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "colour": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base"],
+      "properties": {
+        "base": {
+          "description": "A stored base colour; rose is NEVER a base (it is expressed via roseAllowed on violet).",
+          "enum": ["white", "red", "green", "violet", "black"]
+        },
+        "roseAllowed": { "type": "boolean" }
+      }
+    },
+    "names": {
+      "type": "object",
+      "required": ["la"],
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^(rank|colour)$|^nameOverride\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{"rule":"weighting","name":"x","ids":["roman:sanctorale:ioseph"],"cite":"rg-1960"}
+{"rule":"membership","name":"x","ids":[],"cite":"rg-1960"}
+{"rule":"membership","name":"x","ids":["roman:paschal:ascension"],"cite":"rg-1960"}
+{"rule":"commemoration-limit","dayClass":1,"cite":"rg-1960"}
+{"rule":"commemoration-limit","dayClass":5,"limit":1,"cite":"rg-1960"}
+{"rule":"membership","name":"x","ids":["roman:temporale:foobar:sunday-1"],"cite":"rg-1960"}
+{"rule":"membership","name":"x","ids":["roman:temporale:easter-offset:46"],"cite":"rg-1960"}
+{"rule":"membership","name":"x","ids":["roman:temporale:paschal:easter-offset:46"],"cite":"rg-1960"}

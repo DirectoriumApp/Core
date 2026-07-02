@@ -1,0 +1,5 @@
+{"archetype":"advent-greater-feria","kind":"feria","names":{"la":"x"},"rank":2,"cites":{"names.la":"mr-1920"}}
+{"archetype":"advent-greater-feria","kind":"feria","names":{"en":"x"},"cites":{"names.la":"mr-1920"}}
+{"archetype":"Advent","kind":"feria","names":{"la":"x"},"cites":{"names.la":"mr-1920"}}
+{"archetype":"advent-greater-feria","kind":"feria","names":{"la":"x"},"cites":{"names.en":"mr-1920"}}
+{"archetype":"advent-greater-feria","kind":"holiday","names":{"la":"x"},"cites":{"names.la":"mr-1920"}}

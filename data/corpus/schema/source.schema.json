@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/source.schema.json",
+  "title": "Source registry row",
+  "description": "One row of sources.ndjson: a citable source and its rights. A cite/cites marker elsewhere in the corpus resolves to one of these by `key`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["key", "urn", "kind", "title", "rights"],
+  "properties": {
+    "key": {
+      "description": "Local registry key; the target of every cite/cites marker.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*$"
+    },
+    "urn": {
+      "description": "Stable platform URN; must be introibo:source:<key>.",
+      "type": "string",
+      "pattern": "^introibo:source:[a-z0-9]+(-[a-z0-9.]+)*$"
+    },
+    "kind": {
+      "description": "text = a transcribable work; reference = consult-only; oracle = validation input (#45).",
+      "enum": ["text", "reference", "oracle"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 1
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 1500,
+      "maximum": 2200
+    },
+    "rights": {
+      "description": "public-domain = a title may be transcribed from it; reference = consult-only, never transcribed; oracle = validation only.",
+      "enum": ["public-domain", "reference", "oracle"]
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}
