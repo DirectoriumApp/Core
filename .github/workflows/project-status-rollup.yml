@@ -1,0 +1,148 @@
+name: project-status-rollup
+
+# Rolls the org Project board's Status field for every issue in the project, so
+# the board reflects real progress without manual nudging:
+#   - closed issue                         -> Done
+#   - open epic with a completed sub-issue  -> In Progress   (else Todo)
+#   - open issue with an open linked PR     -> In Progress   (else Todo)
+#
+# The whole project is read each run, so a single copy of this workflow (in Core)
+# keeps every repo's items current via the hourly schedule; Core's own issue/PR
+# events give faster updates for the active repo.
+#
+# Org Projects v2 writes require a PAT (GITHUB_TOKEN cannot write org projects),
+# so this no-ops until a `PROJECTS_PAT` secret is set — a fine-grained PAT with
+# Projects: read & write (and repo Issues/PRs: read). See issue #360.
+
+on:
+  issues:
+    types: [opened, closed, reopened, labeled, unlabeled]
+  pull_request:
+    types: [opened, closed, reopened, ready_for_review, converted_to_draft]
+  schedule:
+    - cron: '19 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-status-rollup
+  cancel-in-progress: false
+
+jobs:
+  rollup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for PROJECTS_PAT
+        id: guard
+        env:
+          PROJECTS_PAT: ${{ secrets.PROJECTS_PAT }}
+        run: |
+          if [ -n "$PROJECTS_PAT" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::PROJECTS_PAT is not set — skipping board rollup. Add the secret to enable it."
+          fi
+
+      - name: Roll up project status
+        if: steps.guard.outputs.ok == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECTS_PAT }}
+          script: |
+            const OWNER = 'Introibo-App';
+            const PROJECT_NUMBER = 1;
+
+            // Resolve the project and its Status single-select field (by name, so
+            // ids are never hard-coded).
+            const meta = await github.graphql(`
+              query($owner:String!, $num:Int!) {
+                organization(login:$owner) {
+                  projectV2(number:$num) {
+                    id
+                    field(name:"Status") {
+                      ... on ProjectV2SingleSelectField { id options { id name } }
+                    }
+                  }
+                }
+              }`, { owner: OWNER, num: PROJECT_NUMBER });
+
+            const project = meta.organization.projectV2;
+            const field = project.field;
+            const optionId = {};
+            for (const o of field.options) optionId[o.name] = o.id;
+            for (const name of ['Todo', 'In Progress', 'Done']) {
+              if (!optionId[name]) throw new Error(`Status option "${name}" not found on the project`);
+            }
+
+            // Page through every project item with the content it needs.
+            const items = [];
+            let cursor = null;
+            do {
+              const page = await github.graphql(`
+                query($proj:ID!, $cursor:String) {
+                  node(id:$proj) {
+                    ... on ProjectV2 {
+                      items(first:100, after:$cursor) {
+                        pageInfo { hasNextPage endCursor }
+                        nodes {
+                          id
+                          fieldValueByName(name:"Status") {
+                            ... on ProjectV2ItemFieldSingleSelectValue { name }
+                          }
+                          content {
+                            __typename
+                            ... on Issue {
+                              number
+                              state
+                              repository { name }
+                              labels(first:20) { nodes { name } }
+                              subIssuesSummary { total completed }
+                              closedByPullRequestsReferences(first:5, includeClosedPrs:false) {
+                                totalCount
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }`, { proj: project.id, cursor });
+              const conn = page.node.items;
+              items.push(...conn.nodes);
+              cursor = conn.pageInfo.hasNextPage ? conn.pageInfo.endCursor : null;
+            } while (cursor);
+
+            const setStatus = (itemId, optId) => github.graphql(`
+              mutation($proj:ID!, $item:ID!, $field:ID!, $opt:String!) {
+                updateProjectV2ItemFieldValue(input:{
+                  projectId:$proj, itemId:$item, fieldId:$field,
+                  value:{ singleSelectOptionId:$opt }
+                }) { projectV2Item { id } }
+              }`, { proj: project.id, item: itemId, field: field.id, opt: optId });
+
+            let changed = 0;
+            for (const it of items) {
+              const c = it.content;
+              if (!c || c.__typename !== 'Issue') continue;
+
+              const isEpic = (c.labels?.nodes || []).some(l => l.name === 'epic');
+              let want;
+              if (c.state === 'CLOSED') {
+                want = 'Done';
+              } else if (isEpic) {
+                want = (c.subIssuesSummary?.completed || 0) > 0 ? 'In Progress' : 'Todo';
+              } else {
+                want = (c.closedByPullRequestsReferences?.totalCount || 0) > 0 ? 'In Progress' : 'Todo';
+              }
+
+              const current = it.fieldValueByName?.name || null;
+              if (current !== want) {
+                await setStatus(it.id, optionId[want]);
+                changed++;
+                core.info(`#${c.number} (${c.repository?.name}): ${current ?? '—'} -> ${want}`);
+              }
+            }
+            core.info(`Rollup complete: ${changed} item(s) updated of ${items.length}.`);
