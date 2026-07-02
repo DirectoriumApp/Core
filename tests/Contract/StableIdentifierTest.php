@@ -54,9 +54,9 @@ final class StableIdentifierTest extends TestCase
                 'roman:temporale:paschal:pentecost-time:sunday-3',
             ],
             'temporal feria' => [
-                '2025-07-15',
+                '2025-07-11',
                 'celebration',
-                'roman:temporale:paschal:pentecost-time:week-5:feria-3',
+                'roman:temporale:paschal:pentecost-time:week-4:feria-6',
             ],
             'sanctoral feast' => [
                 '2025-06-29',

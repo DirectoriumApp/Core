@@ -12,9 +12,9 @@ use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Calendar\RoledObservance;
 use Introibo\Core\Contract\Provenance;
 use Introibo\Core\Introibo;
+use Introibo\Core\Sanctoral\CorpusSanctoralData;
 use Introibo\Core\Sanctoral\SanctoralCalendar;
 use Introibo\Core\Sanctoral\SanctoralData;
-use Introibo\Core\Sanctoral\SeedSanctoralData;
 use Introibo\Core\Temporal\ChristmasCycle;
 use Introibo\Core\Temporal\Eastertide;
 use Introibo\Core\Temporal\HolyWeek;
@@ -61,7 +61,7 @@ final class DayResolver
         return new self(
             new Rubrics1962Precedence(),
             'roman:rubricae-1960',
-            $sanctoralData ?? new SeedSanctoralData()
+            $sanctoralData ?? new CorpusSanctoralData()
         );
     }
 

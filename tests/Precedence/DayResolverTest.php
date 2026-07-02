@@ -10,6 +10,7 @@ use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Precedence\DayResolver;
 use Introibo\Core\Precedence\ResolvedYear;
+use Introibo\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -102,7 +103,9 @@ final class DayResolverTest extends TestCase
 
     private static function resolve(int $year): ResolvedYear
     {
-        return DayResolver::for1962()->resolveYear($year);
+        // The precedence scenarios are pinned to the small seed fixture so they
+        // stay deterministic and independent of the full production calendar.
+        return DayResolver::for1962(new SeedSanctoralData())->resolveYear($year);
     }
 
     private static function celebrationId(LiturgicalDay $day): string

@@ -21,9 +21,9 @@ use InvalidArgumentException;
  * Composing this overlay with the temporal skeleton — deciding by precedence
  * which office is celebrated and which are commemorated or displaced — is the
  * resolver's work (#29). This layer only places and (from #25) orders the
- * candidates. The default source is the provisional {@see SeedSanctoralData};
- * the cited corpus generator (#38) will supply a fuller one without changing
- * this class. See docs/design/sanctoral-overlay-model.md.
+ * candidates. The default source is the cited {@see CorpusSanctoralData}, read
+ * from the generated corpus (#41); any {@see SanctoralData} can be injected
+ * without changing this class. See docs/design/sanctoral-overlay-model.md.
  */
 final class SanctoralCalendar
 {
@@ -48,7 +48,7 @@ final class SanctoralCalendar
 
     public static function forYear(int $year, ?SanctoralData $data = null): self
     {
-        return new self($year, $data ?? new SeedSanctoralData());
+        return new self($year, $data ?? new CorpusSanctoralData());
     }
 
     public function year(): int

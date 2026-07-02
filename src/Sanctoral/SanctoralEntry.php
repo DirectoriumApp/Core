@@ -6,6 +6,7 @@ namespace Introibo\Core\Sanctoral;
 
 use Introibo\Core\Attribute\ElementColour;
 use Introibo\Core\Attribute\RankClass;
+use Introibo\Core\Citation\CitationSet;
 use Introibo\Core\Observance\Observance;
 use Introibo\Core\Observance\ObservanceId;
 use InvalidArgumentException;
@@ -18,10 +19,12 @@ use InvalidArgumentException;
  * the Layer-1 {@see Observance} identity, and the 1962 {@see RankClass} and
  * {@see ElementColour} it wears. A vigil additionally records the id of the
  * feast it is the vigil OF ({@see vigilOfId}); the loader then places it on the
- * preceding day. That field is a trailing optional so later issues (#27 vigils)
- * add data, not constructor churn — the shape is fixed now, and is structured so
- * the cited corpus generator (#38) can attach provenance later without changing
- * it. See docs/design/sanctoral-overlay-model.md.
+ * preceding day. Trailing optionals let later issues add data, not constructor
+ * churn: {@see vigilOfId} arrived with #27 vigils, and {@see citations} arrives
+ * with the cited corpus (#41) — the {@see CitationSet} the corpus generator (#38)
+ * attaches per datum, carried here ready for the output contract's reserved
+ * `citations` slot to surface in a later issue. See
+ * docs/design/sanctoral-overlay-model.md.
  *
  * Immutable: it holds only value objects and two integers.
  */
@@ -39,13 +42,16 @@ final class SanctoralEntry
 
     private ?ObservanceId $vigilOfId;
 
+    private CitationSet $citations;
+
     public function __construct(
         int $month,
         int $day,
         Observance $identity,
         RankClass $rank,
         ElementColour $colour,
-        ?ObservanceId $vigilOfId = null
+        ?ObservanceId $vigilOfId = null,
+        ?CitationSet $citations = null
     ) {
         if ($month < 1 || $month > 12) {
             throw new InvalidArgumentException(sprintf('Month must be 1-12, got %d.', $month));
@@ -60,6 +66,7 @@ final class SanctoralEntry
         $this->rank = $rank;
         $this->colour = $colour;
         $this->vigilOfId = $vigilOfId;
+        $this->citations = $citations ?? CitationSet::empty();
     }
 
     public function month(): int
@@ -91,6 +98,12 @@ final class SanctoralEntry
     public function vigilOfId(): ?ObservanceId
     {
         return $this->vigilOfId;
+    }
+
+    /** The provenance citations for this entry's fields; empty for uncited sources (the seed). */
+    public function citations(): CitationSet
+    {
+        return $this->citations;
     }
 
     public function isVigil(): bool

@@ -13,6 +13,11 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   the pre-1911 and Divino Afflatu psalters are a later milestone.
 - **Particular calendars:** the **universal** calendar comes first. Regional/diocesan calendars, religious
   order propers, and society presets (SSPX/FSSP/…) are roadmapped.
+- **Movable feasts of the Lord/Saints:** the sanctoral corpus (#41) covers the **fixed-date** universal
+  calendar. Feasts tied to a Sunday rather than a civil date — the **Holy Name of Jesus** (Sunday between
+  1 and 5 Jan, else 2 Jan), the **Holy Family** (Sunday after Epiphany), and **Christ the King** (last
+  Sunday of October) — are not yet modelled; they await a movable-feast treatment in the temporal layer.
+  The fixed feasts of the Lord that *are* octave days (the Circumcision on 1 Jan) are resolved temporally.
 
 ## Reckoning & edge cases
 

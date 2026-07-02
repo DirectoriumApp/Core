@@ -14,6 +14,7 @@ use Introibo\Core\Observance\ObservanceKind;
 use Introibo\Core\Sanctoral\SanctoralCalendar;
 use Introibo\Core\Sanctoral\SanctoralData;
 use Introibo\Core\Sanctoral\SanctoralEntry;
+use Introibo\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,16 +27,17 @@ final class SanctoralBissextileTest extends TestCase
 {
     public function testStMatthiasMovesToFeb25InLeapYears(): void
     {
-        self::assertSame('2024-02-25', self::dateOf(SanctoralCalendar::forYear(2024), 'matthias'));
-        self::assertSame('2025-02-24', self::dateOf(SanctoralCalendar::forYear(2025), 'matthias'));
+        $seed = new SeedSanctoralData();
+        self::assertSame('2024-02-25', self::dateOf(SanctoralCalendar::forYear(2024, $seed), 'matthias'));
+        self::assertSame('2025-02-24', self::dateOf(SanctoralCalendar::forYear(2025, $seed), 'matthias'));
     }
 
     public function testStGabrielMovesToFeb28InLeapYears(): void
     {
         $id = 'gabriel-a-virgine-perdolente';
 
-        self::assertSame('2024-02-28', self::dateOf(SanctoralCalendar::forYear(2024), $id));
-        self::assertSame('2025-02-27', self::dateOf(SanctoralCalendar::forYear(2025), $id));
+        self::assertSame('2024-02-28', self::dateOf(SanctoralCalendar::forYear(2024, new SeedSanctoralData()), $id));
+        self::assertSame('2025-02-27', self::dateOf(SanctoralCalendar::forYear(2025, new SeedSanctoralData()), $id));
     }
 
     public function testTheWholeFebruary24To28TailShiftsInLeapYears(): void
@@ -69,7 +71,7 @@ final class SanctoralBissextileTest extends TestCase
     public function testBissextileInvariantsHold(): void
     {
         for ($year = 1583; $year <= 2200; $year++) {
-            $calendar = SanctoralCalendar::forYear($year);
+            $calendar = SanctoralCalendar::forYear($year, new SeedSanctoralData());
 
             foreach ($calendar->all() as $ymd => $offices) {
                 self::assertCount(1, $offices, "one office per realized date ($ymd)");

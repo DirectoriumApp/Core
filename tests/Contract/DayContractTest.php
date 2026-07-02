@@ -14,6 +14,7 @@ use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Calendar\RoledObservance;
 use Introibo\Core\Contract\DayContract;
 use Introibo\Core\Contract\Provenance;
+use Introibo\Core\Corpus\Corpus;
 use Introibo\Core\Observance\Observance;
 use Introibo\Core\Observance\ObservanceId;
 use Introibo\Core\Observance\ObservanceKind;
@@ -36,11 +37,11 @@ final class DayContractTest extends TestCase
     {
         $expected = [
             'contractVersion' => '1.0.0',
-            'corpusVersion' => '1962-seed-2026-07-02',
+            'corpusVersion' => Corpus::default()->corpusVersion(),
             'engineVersion' => '0.4.0',
             'rite' => 'roman',
             'edition' => 'roman:rubricae-1960',
-            'date' => '2025-07-15',
+            'date' => '2025-07-11',
             'season' => 'pentecost',
             'commemorationLimit' => 2,
             'celebration' => [self::pentecostFeria('celebration')],
@@ -59,7 +60,7 @@ final class DayContractTest extends TestCase
             'calendar' => null,
         ];
 
-        self::assertSame($expected, contract(self::utc('2025-07-15')));
+        self::assertSame($expected, contract(self::utc('2025-07-11')));
     }
 
     /** The three provenance axes are present, well-formed, and independent (corpus carries no edition token). */
@@ -74,7 +75,7 @@ final class DayContractTest extends TestCase
 
         $corpus = $day['corpusVersion'];
         self::assertIsString($corpus);
-        self::assertMatchesRegularExpression('/^1962-seed-\d{4}-\d{2}-\d{2}$/', $corpus);
+        self::assertSame(Corpus::default()->corpusVersion(), $corpus);
         // The corpus version names the data build only — never the edition.
         self::assertStringNotContainsString(':', $corpus);
         self::assertStringNotContainsString('roman', $corpus);
@@ -190,8 +191,8 @@ final class DayContractTest extends TestCase
     private static function pentecostFeria(string $role): array
     {
         return [
-            'id' => 'roman:temporale:paschal:pentecost-time:week-5:feria-3',
-            'urn' => 'introibo:observance:roman:temporale:paschal:pentecost-time:week-5:feria-3',
+            'id' => 'roman:temporale:paschal:pentecost-time:week-4:feria-6',
+            'urn' => 'introibo:observance:roman:temporale:paschal:pentecost-time:week-4:feria-6',
             'role' => $role,
             'kind' => 'feria',
             'rank' => 'IV',
@@ -201,7 +202,7 @@ final class DayContractTest extends TestCase
                 'base' => 'green',
                 'roseAllowed' => false,
             ],
-            'names' => ['la' => 'Feria III infra Hebdomadam V post Octavam Pentecostes'],
+            'names' => ['la' => 'Feria VI infra Hebdomadam IV post Octavam Pentecostes'],
             'titulars' => [],
             'outcome' => null,
             'transferredTo' => null,

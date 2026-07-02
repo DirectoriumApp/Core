@@ -47,6 +47,7 @@ are AGPL-3.0-or-later, the corpus is CC0.
 
 ## Scope
 
-The pipeline skeleton (#40) and born-cited provenance + CC0 (#44) are in place,
-proven on the sanctoral shapes. The full 1962 sanctoral dataset (#41), temporal
-definitions (#42), and precedence table (#43) build on them.
+The pipeline skeleton (#40), born-cited provenance + CC0 (#44), and the full 1962
+sanctoral dataset (#41 — the fixed-date universal calendar, read into the engine
+by `CorpusSanctoralData`) are in place. The temporal definitions (#42) and
+precedence table (#43) build on the same shapes.
