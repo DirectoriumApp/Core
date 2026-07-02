@@ -1,0 +1,8 @@
+{"id":"roman:sanctorale:ioseph","rank":5,"colour":{"base":"white"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","rank":1,"colour":{"base":"gold"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","rank":1,"colour":{"base":"white"},"cites":{"rank":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","rank":1,"colour":{"base":"white"},"nameOverride":{"la":"x"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","rank":1,"colour":{"base":"white","shade":"pale"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","colour":{"base":"white"},"cites":{"colour":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","rank":1,"colour":{"base":"rose"},"cites":{"rank":"rg-1960","colour":"rg-1960"}}
+{"id":"roman:sanctorale:ioseph","rank":1,"colour":{"base":"white"},"cites":{"rank":"rg-1960","colour":"rg-1960","totally bogus":"rg-1960"}}

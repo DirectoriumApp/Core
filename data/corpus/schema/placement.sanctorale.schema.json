@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/placement.sanctorale.schema.json",
+  "title": "Sanctoral edition placement",
+  "description": "Edition-varying fixed-date placement for a sanctoral observance (a feast can move between editions). month and day are always cited; vigilOf, when present, names the feast a vigil anticipates.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "month", "day", "cites"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
+    },
+    "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+    "day": { "type": "integer", "minimum": 1, "maximum": 31 },
+    "vigilOf": {
+      "type": "string",
+      "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
+    },
+    "cites": {
+      "allOf": [
+        { "$ref": "#/$defs/cites" },
+        { "required": ["month", "day"] }
+      ]
+    }
+  },
+  "$defs": {
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^(month|day)$" },
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/attributes.temporale.schema.json",
+  "title": "Temporal edition attributes (Layer 2, per archetype)",
+  "description": "Per-edition rank/colour keyed by temporal archetype (Decision C), not per day. roseAllowed carries Gaudete/Laetare. rank and colour are always cited.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["archetype", "rank", "colour", "cites"],
+  "properties": {
+    "archetype": { "$ref": "#/$defs/slug" },
+    "rank": { "$ref": "#/$defs/rank" },
+    "colour": { "$ref": "#/$defs/colour" },
+    "nameOverride": { "$ref": "#/$defs/names" },
+    "cites": {
+      "allOf": [
+        { "$ref": "#/$defs/cites" },
+        { "required": ["rank", "colour"] }
+      ]
+    }
+  },
+  "if": { "required": ["nameOverride"] },
+  "then": { "properties": { "cites": { "required": ["nameOverride.la"] } } },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "rank": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "colour": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base"],
+      "properties": {
+        "base": {
+          "description": "A stored base colour; rose is NEVER a base (it is expressed via roseAllowed on violet).",
+          "enum": ["white", "red", "green", "violet", "black"]
+        },
+        "roseAllowed": { "type": "boolean" }
+      }
+    },
+    "names": {
+      "type": "object",
+      "required": ["la"],
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^(rank|colour)$|^nameOverride\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    }
+  }
+}

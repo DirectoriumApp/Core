@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/temporal-skeleton.schema.json",
+  "title": "Temporal skeleton row",
+  "description": "One structural fact the Paschal computation consumes: either an Easter-offset for a slot, or a block->season mapping. No rank/colour (those are the edition's attributes.temporale). Each row is one variant.",
+  "oneOf": [
+    {
+      "title": "Easter-offset row",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slot", "offset", "cite"],
+      "properties": {
+        "slot": { "$ref": "#/$defs/slug" },
+        "offset": {
+          "description": "Signed day offset from Easter Sunday (0).",
+          "type": "integer",
+          "minimum": -200,
+          "maximum": 400
+        },
+        "cite": { "$ref": "#/$defs/sourceRef" }
+      }
+    },
+    {
+      "title": "Block-to-season row",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block", "season", "cite"],
+      "properties": {
+        "block": { "$ref": "#/$defs/slug" },
+        "season": { "$ref": "#/$defs/slug" },
+        "cite": { "$ref": "#/$defs/sourceRef" }
+      }
+    }
+  ],
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    }
+  }
+}

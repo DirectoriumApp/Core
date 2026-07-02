@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/identity.sanctorale.schema.json",
+  "title": "Sanctoral identity record (Layer 1)",
+  "description": "Edition-invariant identity for a sanctoral observance. Carries identity ONLY: never rank, colour, octave, month, or day (those are per-edition attributes or per-year realization). additionalProperties:false enforces the exclusion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "kind", "titulars", "names", "cites"],
+  "properties": {
+    "id": {
+      "description": "ObservanceId slug in the sanctorale cycle.",
+      "type": "string",
+      "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
+    },
+    "kind": {
+      "$ref": "#/$defs/observanceKind"
+    },
+    "titulars": {
+      "description": "One or more titular subject slugs.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/slug" }
+    },
+    "names": { "$ref": "#/$defs/names" },
+    "aliases": { "$ref": "#/$defs/aliases" },
+    "cites": {
+      "description": "Field-path -> source key. names.la is always cited.",
+      "allOf": [
+        { "$ref": "#/$defs/cites" },
+        { "required": ["names.la"] }
+      ]
+    }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "observanceKind": {
+      "enum": [
+        "sunday", "feria", "feast", "special-movable", "vigil",
+        "octave-day", "within-octave", "ember-day", "rogation-day",
+        "lady-on-saturday", "commemoration-only", "office-of-the-dead"
+      ]
+    },
+    "names": {
+      "type": "object",
+      "required": ["la"],
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "aliases": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "secondaryFacet": {
+          "description": "Other liturgical address(es) of this same observance, as ObservanceId slugs.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/observanceId" }
+        },
+        "splitFrom": { "$ref": "#/$defs/observanceId" },
+        "mergedInto": { "$ref": "#/$defs/observanceId" },
+        "externalUrns": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "observanceId": {
+      "description": "An ObservanceId slug. The temporale branch mirrors ObservanceId::parse(): the first body segment must be a real anchor family, and the easter-offset addressing form is never an identifier.",
+      "type": "string",
+      "pattern": "^roman:(?:(?:sanctorale|votive):[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)*|temporale:(?!(?:[a-z0-9]+(?:-[a-z0-9]+)*:)*easter-offset(?::|$))(?:paschal|advent|christmas|epiphany|civil-fixed|month-computed)(?::[a-z0-9]+(?:-[a-z0-9]+)*)*)$"
+    },
+    "sourceRef": {
+      "description": "A source key, optionally suffixed with a :locator (e.g. rg-1960:n.91).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^names\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    }
+  }
+}

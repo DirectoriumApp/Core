@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/identity.temporale.schema.json",
+  "title": "Temporal identity record (Layer 1, archetypal)",
+  "description": "Edition-invariant identity for a temporal ARCHETYPE (not a per-day slug; the fillers mint concrete day slugs algorithmically). names.la is a Latin template with {ord}/{wk}-style placeholders the filler fills. No rank, colour, or date.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["archetype", "kind", "names", "cites"],
+  "properties": {
+    "archetype": {
+      "description": "Stable archetype key the temporal fillers reference.",
+      "$ref": "#/$defs/slug"
+    },
+    "kind": { "$ref": "#/$defs/observanceKind" },
+    "names": { "$ref": "#/$defs/names" },
+    "cites": {
+      "allOf": [
+        { "$ref": "#/$defs/cites" },
+        { "required": ["names.la"] }
+      ]
+    }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "observanceKind": {
+      "enum": [
+        "sunday", "feria", "feast", "special-movable", "vigil",
+        "octave-day", "within-octave", "ember-day", "rogation-day",
+        "lady-on-saturday", "commemoration-only", "office-of-the-dead"
+      ]
+    },
+    "names": {
+      "type": "object",
+      "required": ["la"],
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^names\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    }
+  }
+}
