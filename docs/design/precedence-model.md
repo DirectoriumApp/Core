@@ -71,10 +71,40 @@ weekday office; and within second class, **feast of the Lord (14) > Sunday (15)
 Source: *The New Rubrics of the Roman Breviary and Missal* (1960) n. 91,
 cross-checked against the SSPX "Classifications of Feasts" transcription.
 
+## Occurrence outcomes (#31)
+
+When two offices fall on one day, the higher (by tier) is celebrated;
+`Rubrics1962Precedence::occurrenceOutcome()` decides the loser's fate as an
+`OccurrenceOutcome` — **commemorate | transfer | omit**:
+
+- **Transfer** — only first-class *feasts* (n. 95), plus All Souls (n. 96b). A
+  displaced first-class feast keeps its identity so the transfer queue (#34) can
+  re-place it; no lower feast is ever transferred.
+- **Omit** — on a day that admits no commemoration at all (the Triduum n. 23,
+  the days within the Easter and Pentecost octaves n. 66, the first-class vigils
+  n. 30), or when the loser is an *ordinary* office on a first-class day (which
+  admits only a *privileged* commemoration, n. 111a).
+- **Commemorate** — otherwise. A **privileged commemoration** (n. 108: a Sunday,
+  a first-class day, a day within the Christmas octave, a feria of
+  Advent/Lent/Passiontide; September Ember days and the greater Litanies are
+  added with the data that carries them) survives even on a first-class day; an
+  ordinary office survives on a second- to fourth-class day.
+
+This yields the headline resolutions: the Immaculate Conception is celebrated
+with the Advent Sunday **commemorated**; St Joseph on a first-class Lenten Sunday
+is **transferred**; a third-class saint on a first-class Sunday is **omitted**; a
+first-class feast in the Easter octave is **transferred**, a lower one **omitted**.
+The per-day commemoration *count* limit (n. 111b–d / 114) is applied by the
+resolver (#36); this method gives each pair's intrinsic outcome.
+
+Source: the New Rubrics of the Roman Breviary and Missal (1960) nn. 92–114
+(occurrence n. 93, transference nn. 95–96, commemorations nn. 106–114), from the
+Divinum Officium transcription, cross-checked against the SSPX summary.
+
 ## Still to come in this epic
 
-- **Occurrence outcomes (#31–#33)** — over this one tier order: who is
-  celebrated, commemorated, transferred, or omitted, per class pairing.
+- **Occurrence coverage (#32–#33)** — second/third/fourth-class pairings and the
+  Sunday-vs-feast-of-the-Lord exclusions (nn. 15, 112) over this same method.
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.

@@ -25,4 +25,15 @@ interface PrecedenceRules
      * key occurrence resolves on.
      */
     public function tierOf(RealizedObservance $observance, PrecedenceContext $context): PrecedenceTier;
+
+    /**
+     * The fate of the office that loses an occurrence to $winner on this day:
+     * commemorated, transferred to another day, or omitted entirely. $winner is
+     * assumed to already outrank $loser by {@see tierOf()}.
+     */
+    public function occurrenceOutcome(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): OccurrenceOutcome;
 }

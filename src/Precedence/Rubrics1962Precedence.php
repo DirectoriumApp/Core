@@ -202,6 +202,88 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return PrecedenceTier::of(self::TIER_LENT_FERIA);
     }
 
+    public function occurrenceOutcome(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): OccurrenceOutcome {
+        // n. 95: only first-class feasts (and, n. 96b, All Souls) are transferred;
+        // every other impeded office is commemorated or omitted.
+        if ($this->isTransferable($loser)) {
+            return OccurrenceOutcome::transfer();
+        }
+
+        // n. 23 / 30 / 66: the Triduum, the days within the Easter and Pentecost
+        // octaves, and the first-class vigils admit no commemoration at all.
+        if ($this->admitsNoCommemoration($winner, $context)) {
+            return OccurrenceOutcome::omit();
+        }
+
+        // n. 111(a): a first-class day admits only a privileged commemoration.
+        if ($winner->rank()->ordinal() === 1) {
+            return $this->isPrivilegedCommemoration($loser)
+                ? OccurrenceOutcome::commemorate()
+                : OccurrenceOutcome::omit();
+        }
+
+        // Second- to fourth-class days admit the loser as a commemoration; the
+        // per-day count limit (n. 111b–d / 114) is applied by the resolver (#36).
+        return OccurrenceOutcome::commemorate();
+    }
+
+    private function isTransferable(RealizedObservance $office): bool
+    {
+        // All Souls is reassigned to the next day when impeded (n. 96b).
+        if ($office->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
+            return true;
+        }
+
+        return $office->rank()->ordinal() === 1
+            && $office->kind()->value() === ObservanceKind::FEAST;
+    }
+
+    private function admitsNoCommemoration(RealizedObservance $winner, PrecedenceContext $context): bool
+    {
+        if ($context->isTriduum()) {
+            return true;
+        }
+
+        $id = $winner->id()->toString();
+        if ($this->isWithinPaschalOctave($id)) {
+            return true;
+        }
+
+        return $id === 'roman:temporale:christmas:vigil' || $id === self::PENTECOST_VIGIL;
+    }
+
+    private function isPrivilegedCommemoration(RealizedObservance $office): bool
+    {
+        $kind = $office->kind()->value();
+
+        // (a) a Sunday; (b) a first-class day.
+        if ($kind === ObservanceKind::SUNDAY || $office->rank()->ordinal() === 1) {
+            return true;
+        }
+
+        // (c) a day within the octave of Christmas.
+        if (strpos($office->id()->toString(), 'christmas:within-octave') !== false) {
+            return true;
+        }
+
+        // (e) a feria of Advent, Lent, or Passiontide.
+        if ($kind === ObservanceKind::FERIA) {
+            return in_array(
+                $this->seasonOf($office),
+                [Season::ADVENT, Season::LENT, Season::PASSIONTIDE],
+                true
+            );
+        }
+
+        // (d) the September Ember days and (f) the greater Litanies are added
+        // with the data that carries them (#36 / #38).
+        return false;
+    }
+
     private function isWithinPaschalOctave(string $id): bool
     {
         return strpos($id, ':easter-octave') !== false
