@@ -1,0 +1,17 @@
+# REUSE (https://reuse.software) annotations that make the two-licence split
+# machine-verifiable: the engine and its tooling are AGPL-3.0-or-later; the
+# generated liturgical corpus (uncopyrightable facts) is dedicated to the public
+# domain under CC0-1.0. Licence texts live in LICENSES/.
+version = 1
+
+[[annotations]]
+path = "data/corpus/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Introibo"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "tools/generator/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Introibo"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
