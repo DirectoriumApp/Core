@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Introibo\Core\Precedence;
 
+use DateTimeImmutable;
 use Introibo\Core\Calendar\RealizedObservance;
 
 /**
@@ -36,4 +37,12 @@ interface PrecedenceRules
         RealizedObservance $loser,
         PrecedenceContext $context
     ): OccurrenceOutcome;
+
+    /**
+     * The rubrically fixed day a transferred feast must be kept on, or null if
+     * it takes the ordinary next-free-day placement. The Annunciation, when
+     * impeded into Holy Week or the Easter octave, is kept on the Monday after
+     * Low Sunday (n. 96a).
+     */
+    public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable;
 }

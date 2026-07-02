@@ -121,13 +121,26 @@ is not barred, so it still commemorates the Sunday (the Immaculate Conception
 commemorates its Advent Sunday; the Holy Name does not). "Feast of the Lord" is
 recognised by the same identity sets that place lines 1/3/14 of the tier table.
 
+## The transfer queue (#34)
+
+A displaced first-class feast (n. 95) is transferred, not dropped.
+`Precedence\TransferLedger` is the queue: the year sweep enqueues an impeded
+first-class feast with the day it was impeded on, then drains the queue onto free
+days, placing the highest-precedence pending feast first (earliest impeded, then
+by canonical id). `Rubrics1962Precedence::forcedTransferDate()` gives the one
+feast with a fixed target — the **Annunciation → the Monday after Low Sunday**
+(Easter + 8, n. 96a) — which the sweep places directly, bypassing the queue.
+
+The whole-year forward sweep that drives the queue (and All Souls' next-day
+reassignment, n. 96b, via the ordinary next-free-day placement) is the
+resolver's assembly step (#37); this issue delivers the queue and the fixed
+target rule.
+
 ## Still to come in this epic
 
-- **The transfer queue (#34)** — a displaced first-class feast to the next free
-  day (the Annunciation to the Monday after Low Sunday), via a deterministic
-  whole-year forward sweep.
 - **Concurrence (#35)**, **commemoration limits (#36)**, and **assembly + `day()`
-  wiring (#37)**.
+  wiring (#37)** — the whole-year sweep that gathers candidates, drives the
+  transfer queue, and builds the `LiturgicalDay`.
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.

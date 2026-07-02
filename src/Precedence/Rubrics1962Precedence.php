@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Introibo\Core\Precedence;
 
+use DateInterval;
+use DateTimeImmutable;
 use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Observance\ObservanceKind;
+use Introibo\Core\Temporal\Computus;
 use Introibo\Core\Temporal\Season;
 use Introibo\Core\Temporal\TemporalObservance;
 
@@ -236,6 +239,19 @@ final class Rubrics1962Precedence implements PrecedenceRules
         // Second- to fourth-class days admit the loser as a commemoration; the
         // per-day count limit (n. 111b–d / 114) is applied by the resolver (#36).
         return OccurrenceOutcome::commemorate();
+    }
+
+    public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
+    {
+        // n. 96(a): the Annunciation, impeded into Holy Week or the Easter octave,
+        // is kept on the Monday after Low Sunday (Low Sunday is Easter + 7).
+        if ($feast->id()->toString() === 'roman:sanctorale:annuntiatio') {
+            $year = (int) $context->date()->format('Y');
+
+            return Computus::gregorianEaster($year)->add(new DateInterval('P8D'));
+        }
+
+        return null;
     }
 
     private function isTransferable(RealizedObservance $office): bool
