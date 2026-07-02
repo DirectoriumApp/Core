@@ -17,14 +17,6 @@
 {"date":"2024-09-27","name":"Sts. Cosmas and Damian","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2024-09-28","name":"St. Wenceslaus","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2024-10-21","name":"Feria","sspx":4,"engine":3,"missalemeum":4,"category":"corroborates-base-rank"}
-{"date":"2024-12-05","name":"Advent Feria (First Thursday)","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2024-12-09","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2024-12-10","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2024-12-12","name":"Advent feria or Our Lady of Guadalupe","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2024-12-14","name":"Advent Feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2024-12-15","name":"III Sunday of Advent (Gaudete)","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
-{"date":"2024-12-16","name":"St. Eusebius","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2024-12-22","name":"IV Sunday of Advent","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
 {"date":"2025-01-13","name":"The Baptism of Our Lord Jesus Christ","sspx":2,"engine":4,"missalemeum":2,"category":"corroborates-base-rank"}
 {"date":"2025-01-30","name":"St. Martina","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2025-04-11","name":"Seven Sorrows of the BVM","sspx":1,"engine":3,"missalemeum":3,"category":"sspx-diverges-from-base"}
@@ -45,16 +37,6 @@
 {"date":"2025-09-27","name":"Ember Saturday of September","sspx":3,"engine":4,"missalemeum":2,"category":"sspx-divergent-other"}
 {"date":"2025-10-13","name":"St. Edward the Confessor","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2025-10-21","name":"Feria","sspx":4,"engine":3,"missalemeum":4,"category":"corroborates-base-rank"}
-{"date":"2025-12-01","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-05","name":"Advent Feria (First Friday)","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-07","name":"II Sunday of Advent","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
-{"date":"2025-12-09","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-10","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-12","name":"Advent feria and Our Lady of Guadalupe","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-14","name":"III Sunday of Advent (Gaudete)","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
-{"date":"2025-12-15","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-16","name":"St. Eusebius","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2025-12-21","name":"IV Sunday of Advent","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
 {"date":"2026-01-13","name":"The Baptism of Our Lord Jesus Christ","sspx":2,"engine":4,"missalemeum":2,"category":"corroborates-base-rank"}
 {"date":"2026-01-30","name":"St. Martina","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2026-03-27","name":"Seven Sorrows of the BVM","sspx":1,"engine":3,"missalemeum":3,"category":"sspx-diverges-from-base"}
@@ -73,13 +55,3 @@
 {"date":"2026-09-28","name":"St. Wenceslaus","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2026-10-13","name":"St. Edward the Confessor","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
 {"date":"2026-10-21","name":"Feria","sspx":4,"engine":3,"missalemeum":4,"category":"corroborates-base-rank"}
-{"date":"2026-12-01","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-05","name":"Advent feria (First Saturday)","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-06","name":"II Sunday of Advent","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
-{"date":"2026-12-09","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-10","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-12","name":"Advent feria and Our Lady of Guadalupe","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-13","name":"III Sunday of Advent (Gaudete)","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}
-{"date":"2026-12-14","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-15","name":"Advent feria","sspx":3,"engine":4,"missalemeum":3,"category":"corroborates-base-rank"}
-{"date":"2026-12-20","name":"IV Sunday of Advent","sspx":1,"engine":2,"missalemeum":1,"category":"corroborates-base-rank"}

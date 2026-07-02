@@ -37,13 +37,13 @@ archetypes:
   - key: advent-sunday-gaudete
     kind: sunday
     name: "Dominica {ord} Adventus"
-    rank: 2
+    rank: 1
     colour: { base: violet, roseAllowed: true }
     cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
   - key: advent-sunday
     kind: sunday
     name: "Dominica {ord} Adventus"
-    rank: 2
+    rank: 1
     colour: violet
     cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
   - key: advent-ember
@@ -61,7 +61,7 @@ archetypes:
   - key: advent-feria
     kind: feria
     name: "{feria} infra Hebdomadam {ord} Adventus"
-    rank: 4
+    rank: 3
     colour: violet
     cites: { name: mr-1920, rank: rg-1960, colour: rg-1960 }
   - key: christmas-vigil

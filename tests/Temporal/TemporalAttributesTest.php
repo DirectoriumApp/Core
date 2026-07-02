@@ -33,7 +33,7 @@ final class TemporalAttributesTest extends TestCase
     {
         $gaudete = TemporalAttributes::default()->archetype('advent-sunday-gaudete');
 
-        self::assertSame(2, $gaudete->rank()->ordinal());
+        self::assertSame(1, $gaudete->rank()->ordinal());
         self::assertSame('violet', $gaudete->colour()->base()->value());
         self::assertTrue($gaudete->colour()->roseAllowed());
     }
