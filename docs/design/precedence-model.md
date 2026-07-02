@@ -158,11 +158,27 @@ commemoration candidates — **privileged first** (n. 108, so a tight count keep
 them), then by tier, then by id — and trims to the limit, dropping the rest
 (n. 114).
 
-## Still to come in this epic
+## Assembly and `day()` (#37)
 
-- **Assembly + `day()` wiring (#37)** — the whole-year sweep that gathers
-  candidates, runs occurrence, drives the transfer queue, applies the limits,
-  and builds the `LiturgicalDay` behind `day()`.
+`Precedence\DayResolver` composes everything. Because a transferred feast lands
+on a later day, it resolves a whole civil year in one deterministic forward
+sweep: for each day it gathers the temporal office (from the block-fillers), the
+movable feasts, and the sanctoral offices — plus any feast transferred onto the
+day — orders them by tier, takes the top as the **celebration**, and resolves
+every other office to a commemoration (trimmed by `CommemorationSelector`), a
+transfer (into the `TransferLedger` or a forced date), or an omission. A day is
+free for a pending transfer when its natural celebration is third- or
+fourth-class. A second pass fills in the evening concurrence from the following
+day. The result is an immutable `ResolvedYear`.
+
+`LiturgicalDay` now carries `RealizedObservance`s in its four roles (the role is
+the array) plus a `secondVespers()` concurrence outcome. `day()` resolves the
+date's civil year once, memoises it for the process, and returns the day — the
+temporal and sanctoral layers are finally wired into a single resolved office.
+
+The overlay/fillers remain standalone producers; the resolver is the only place
+they are composed, and the whole edition-specific policy lives behind
+`PrecedenceRules`, so #59 can add other editions without touching it.
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.

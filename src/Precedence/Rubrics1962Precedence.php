@@ -230,6 +230,13 @@ final class Rubrics1962Precedence implements PrecedenceRules
             return OccurrenceOutcome::omit();
         }
 
+        // An ordinary feria (not of Advent, Lent, or Passiontide) carries no
+        // commemoration when impeded — only privileged ferias are commemorated
+        // (n. 108e); the ferial office simply yields to the feast.
+        if ($this->isOrdinaryFeria($loser)) {
+            return OccurrenceOutcome::omit();
+        }
+
         // n. 111(a): a first-class day admits only a privileged commemoration.
         if ($winner->rank()->ordinal() === 1) {
             return $this->isPrivilegedCommemoration($loser)
@@ -280,6 +287,12 @@ final class Rubrics1962Precedence implements PrecedenceRules
     {
         // A fourth-class feria carries no Vespers commemoration; higher days do.
         return $office->rank()->ordinal() < 4 || $office->kind()->value() === ObservanceKind::SUNDAY;
+    }
+
+    private function isOrdinaryFeria(RealizedObservance $office): bool
+    {
+        return $office->kind()->value() === ObservanceKind::FERIA
+            && !$this->isPrivilegedCommemoration($office);
     }
 
     private function isTransferable(RealizedObservance $office): bool
