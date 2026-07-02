@@ -6,6 +6,7 @@ namespace Introibo\Core;
 
 use DateTimeImmutable;
 use Introibo\Core\Calendar\LiturgicalDay;
+use Introibo\Core\Contract\DayContract;
 use Introibo\Core\Precedence\DayResolver;
 use Introibo\Core\Precedence\ResolvedYear;
 
@@ -21,13 +22,40 @@ use Introibo\Core\Precedence\ResolvedYear;
  */
 function day(DateTimeImmutable $date): LiturgicalDay
 {
+    return resolvedYear((int) $date->format('Y'))->day($date);
+}
+
+/**
+ * The public output contract for a civil date: the same resolved day as
+ * {@see day()}, serialised to the versioned, JSON-ready structure the other
+ * Introibo repos build on (see {@see DayContract} and
+ * docs/design/output-contract.md).
+ *
+ * @return array<string, mixed>
+ */
+function contract(DateTimeImmutable $date): array
+{
+    $year = resolvedYear((int) $date->format('Y'));
+
+    return DayContract::from($year->day($date), $year->provenance())->toArray();
+}
+
+/**
+ * The resolved civil year, memoised for the life of the process.
+ *
+ * Shared by {@see day()} and {@see contract()} so a year is resolved at most
+ * once regardless of which entry point is called.
+ *
+ * @internal Not part of the public contract; the stable API is day()/contract().
+ */
+function resolvedYear(int $year): ResolvedYear
+{
     /** @var array<int, ResolvedYear> $resolved */
     static $resolved = [];
 
-    $year = (int) $date->format('Y');
     if (!isset($resolved[$year])) {
         $resolved[$year] = DayResolver::for1962()->resolveYear($year);
     }
 
-    return $resolved[$year]->day($date);
+    return $resolved[$year];
 }

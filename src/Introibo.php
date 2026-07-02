@@ -22,4 +22,16 @@ final class Introibo
      * against before any engine behaviour exists.
      */
     public const NAME = 'introibo/core';
+
+    /**
+     * The engine (resolver) version, one of the three axes of the output
+     * contract's provenance.
+     *
+     * This tracks the resolver's behaviour, not the corpus data or the contract
+     * shape — it is hand-bumped whenever a change would alter the resolved
+     * output for identical inputs, so a consumer keying a cache on
+     * `(edition, corpusVersion, engineVersion)` re-reads when the engine moves.
+     * See {@see \Introibo\Core\Contract\Provenance}.
+     */
+    public const VERSION = '0.4.0';
 }

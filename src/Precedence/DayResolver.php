@@ -6,8 +6,12 @@ namespace Introibo\Core\Precedence;
 
 use DateInterval;
 use DateTimeImmutable;
+use Introibo\Core\Calendar\CelebrationRole;
 use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Calendar\RealizedObservance;
+use Introibo\Core\Calendar\RoledObservance;
+use Introibo\Core\Contract\Provenance;
+use Introibo\Core\Introibo;
 use Introibo\Core\Sanctoral\SanctoralCalendar;
 use Introibo\Core\Sanctoral\SanctoralData;
 use Introibo\Core\Temporal\ChristmasCycle;
@@ -35,22 +39,38 @@ use Introibo\Core\Temporal\TimeAfterPentecost;
  */
 final class DayResolver
 {
+    /**
+     * The corpus-version stamp for the built-in seed data. A placeholder until
+     * the corpus generator (#38) and {@see SanctoralData::version()} (#54) supply
+     * a real, dated build id; it carries no edition token by design.
+     */
+    private const SEED_CORPUS_VERSION = '1962-seed';
+
     private PrecedenceRules $rules;
 
     private CommemorationSelector $commemorations;
 
+    private string $edition;
+
     private ?SanctoralData $sanctoralData;
 
-    private function __construct(PrecedenceRules $rules, ?SanctoralData $sanctoralData)
+    private function __construct(PrecedenceRules $rules, string $edition, ?SanctoralData $sanctoralData)
     {
         $this->rules = $rules;
         $this->commemorations = new CommemorationSelector($rules);
+        $this->edition = $edition;
         $this->sanctoralData = $sanctoralData;
     }
 
     public static function for1962(?SanctoralData $sanctoralData = null): self
     {
-        return new self(new Rubrics1962Precedence(), $sanctoralData);
+        return new self(new Rubrics1962Precedence(), 'roman:rubricae-1960', $sanctoralData);
+    }
+
+    /** The edition, corpus, and engine versions this resolver stamps onto a year. */
+    public function provenance(): Provenance
+    {
+        return new Provenance($this->edition, self::SEED_CORPUS_VERSION, Introibo::VERSION);
     }
 
     public function resolveDay(DateTimeImmutable $date): LiturgicalDay
@@ -97,7 +117,9 @@ final class DayResolver
             $date = $date->add($oneDay);
         }
 
-        return new ResolvedYear($year, $this->withConcurrence($days, $oneDay));
+        $days = $this->withTransferLinks($days);
+
+        return new ResolvedYear($year, $this->withConcurrence($days, $oneDay), $this->provenance());
     }
 
     /**
@@ -182,30 +204,53 @@ final class DayResolver
 
         $celebration = $candidates[0];
         $commemorationCandidates = [];
+
+        /** @var list<RoledObservance> $displaced */
         $displaced = [];
 
         foreach (array_slice($candidates, 1) as $loser) {
             $outcome = $this->rules->occurrenceOutcome($celebration, $loser, $context);
             if ($outcome->isTransfer()) {
                 $this->scheduleTransfer($loser, $date, $context, $ledger, $forced);
-                $displaced[] = $loser;
+                $displaced[] = new RoledObservance($loser, CelebrationRole::displaced(), $outcome);
             } elseif ($outcome->isCommemoration()) {
                 $commemorationCandidates[] = $loser;
             } else {
-                $displaced[] = $loser;
+                $displaced[] = new RoledObservance($loser, CelebrationRole::displaced(), $outcome);
             }
         }
 
-        $commemorations = $this->commemorations->select($celebration, $commemorationCandidates, $context);
+        $selected = $this->commemorations->select($celebration, $commemorationCandidates, $context);
+
+        /** @var list<RoledObservance> $commemorations */
+        $commemorations = [];
+        foreach ($selected as $office) {
+            $commemorations[] = new RoledObservance(
+                $office,
+                CelebrationRole::commemoration(),
+                OccurrenceOutcome::commemorate()
+            );
+        }
+
+        // A commemoration eligible on the merits but trimmed by the day's limit
+        // (n. 114) is dropped from the day: displaced, marked omitted.
         foreach ($commemorationCandidates as $candidate) {
-            if (!$this->contains($commemorations, $candidate)) {
-                $displaced[] = $candidate;
+            if (!$this->contains($selected, $candidate)) {
+                $displaced[] = new RoledObservance($candidate, CelebrationRole::displaced(), OccurrenceOutcome::omit());
             }
         }
 
-        $tempora = $temporalOffice !== null ? [$temporalOffice] : [];
+        $tempora = $temporalOffice !== null
+            ? [new RoledObservance($temporalOffice, CelebrationRole::tempora())]
+            : [];
 
-        return new LiturgicalDay($date, [$celebration], $commemorations, $displaced, $tempora);
+        return new LiturgicalDay(
+            $date,
+            [new RoledObservance($celebration, CelebrationRole::celebration())],
+            $commemorations,
+            $displaced,
+            $tempora
+        );
     }
 
     /**
@@ -247,17 +292,133 @@ final class DayResolver
                 PrecedenceContext::of($day->date(), false)
             );
 
-            $days[$key] = new LiturgicalDay(
-                $day->date(),
-                $day->celebration(),
-                $day->commemoration(),
-                $day->displaced(),
-                $day->tempora(),
-                $outcome
-            );
+            $days[$key] = $day->withSecondVespers($outcome);
         }
 
         return $days;
+    }
+
+    /**
+     * Reconciliation pass: with the whole year resolved, link the ends of every
+     * transfer so each office is self-describing — `transferredTo` on the day a
+     * feast was impeded, `transferredFrom` on the day it lands. The output
+     * contract (#52) then needs no cross-day correlation.
+     *
+     * A feast can be impeded more than once — a first-class feast transferred to
+     * a free day that is itself later claimed by a higher pending feast, bumping
+     * it onward — so links are computed from the *chain* of a feast's
+     * appearances across the year, not a single impeded/landing pair: each hop
+     * points to the next, and only a celebration reached from an earlier
+     * impediment is stamped `transferredFrom`. That also keeps a feast celebrated
+     * on its own date from being mistaken for a landing.
+     *
+     * @param array<string, LiturgicalDay> $days
+     *
+     * @return array<string, LiturgicalDay>
+     */
+    private function withTransferLinks(array $days): array
+    {
+        $links = $this->transferLinks($days);
+        if ($links === []) {
+            return $days;
+        }
+
+        foreach ($days as $key => $day) {
+            if (!isset($links[$key])) {
+                continue;
+            }
+            $rewritten = [];
+            $changed = false;
+            foreach ($day->offices() as $office) {
+                $link = $links[$key][$office->observance()->id()->toString()] ?? [];
+                $to = $link['to'] ?? null;
+                $from = $link['from'] ?? null;
+                if ($to !== null || $from !== null) {
+                    $rewritten[] = $office->withTransfer($to, $from);
+                    $changed = true;
+                } else {
+                    $rewritten[] = $office;
+                }
+            }
+            if ($changed) {
+                $days[$key] = $day->withOffices($rewritten);
+            }
+        }
+
+        return $days;
+    }
+
+    /**
+     * The transfer links to stamp, indexed by date key then feast id.
+     *
+     * For each feast impeded at least once, its appearances (each a
+     * displaced-transfer "moved on" node or a celebration node) are ordered by
+     * date and linked hop to hop: a moved node points `to` the next appearance,
+     * and a celebration reached from a moved node points `from` it.
+     *
+     * @param array<string, LiturgicalDay> $days
+     *
+     * @return array<string, array<string, array<string, DateTimeImmutable>>>
+     */
+    private function transferLinks(array $days): array
+    {
+        /** @var array<string, list<array{date: DateTimeImmutable, moved: bool}>> $appearances */
+        $appearances = [];
+        foreach ($days as $day) {
+            foreach ($day->offices() as $office) {
+                $role = $office->role()->value();
+                $moved = $role === CelebrationRole::DISPLACED
+                    && $office->outcome() !== null
+                    && $office->outcome()->isTransfer();
+                if (!$moved && $role !== CelebrationRole::CELEBRATION) {
+                    continue;
+                }
+                $appearances[$office->observance()->id()->toString()][] = [
+                    'date' => $day->date(),
+                    'moved' => $moved,
+                ];
+            }
+        }
+
+        /** @var array<string, array<string, array<string, DateTimeImmutable>>> $links */
+        $links = [];
+        foreach ($appearances as $id => $sequence) {
+            if (!self::wasImpeded($sequence)) {
+                continue;
+            }
+            usort(
+                $sequence,
+                static fn (array $a, array $b): int => $a['date']->getTimestamp() <=> $b['date']->getTimestamp()
+            );
+
+            $last = count($sequence) - 1;
+            for ($i = 0; $i < $last; $i++) {
+                if (!$sequence[$i]['moved']) {
+                    continue;
+                }
+                $next = $sequence[$i + 1];
+                $links[$sequence[$i]['date']->format('Y-m-d')][$id]['to'] = $next['date'];
+                if (!$next['moved']) {
+                    $links[$next['date']->format('Y-m-d')][$id]['from'] = $sequence[$i]['date'];
+                }
+            }
+        }
+
+        return $links;
+    }
+
+    /**
+     * @param list<array{date: DateTimeImmutable, moved: bool}> $sequence
+     */
+    private static function wasImpeded(array $sequence): bool
+    {
+        foreach ($sequence as $node) {
+            if ($node['moved']) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -18,35 +18,38 @@ use Introibo\Core\Precedence\ConcurrenceOutcome;
  *  - **tempora** — the temporal office of the season (the Sunday or feria),
  *    always reported even when it is also the celebration.
  *
- * Each role holds {@see RealizedObservance}s, so every office carries the rank
- * and colour it wears this day; the role is the array it sits in. The evening
- * boundary with the next day is reported by {@see secondVespers()} (null on a
- * placeholder). The aggregate is immutable: it holds only value objects and
- * hands back copied arrays.
+ * Each role holds {@see RoledObservance}s: an office paired with its role and,
+ * where relevant, its occurrence outcome and transfer links. Convenience readers
+ * ({@see celebration()} and the other three) hand back the bare
+ * {@see RealizedObservance}s for callers that only need identity and attributes;
+ * {@see offices()} hands back the full roled offices the output contract (#52)
+ * serialises. The evening boundary with the next day is reported by
+ * {@see secondVespers()} (null on a placeholder). The aggregate is immutable: it
+ * holds only value objects and hands back copied arrays.
  */
 final class LiturgicalDay
 {
     private DateTimeImmutable $date;
 
-    /** @var list<RealizedObservance> */
+    /** @var list<RoledObservance> */
     private array $celebration;
 
-    /** @var list<RealizedObservance> */
+    /** @var list<RoledObservance> */
     private array $commemoration;
 
-    /** @var list<RealizedObservance> */
+    /** @var list<RoledObservance> */
     private array $displaced;
 
-    /** @var list<RealizedObservance> */
+    /** @var list<RoledObservance> */
     private array $tempora;
 
     private ?ConcurrenceOutcome $secondVespers;
 
     /**
-     * @param list<RealizedObservance> $celebration
-     * @param list<RealizedObservance> $commemoration
-     * @param list<RealizedObservance> $displaced
-     * @param list<RealizedObservance> $tempora
+     * @param list<RoledObservance> $celebration
+     * @param list<RoledObservance> $commemoration
+     * @param list<RoledObservance> $displaced
+     * @param list<RoledObservance> $tempora
      */
     public function __construct(
         DateTimeImmutable $date,
@@ -78,31 +81,84 @@ final class LiturgicalDay
     /** @return list<RealizedObservance> */
     public function celebration(): array
     {
-        return $this->celebration;
+        return self::unwrap($this->celebration);
     }
 
     /** @return list<RealizedObservance> */
     public function commemoration(): array
     {
-        return $this->commemoration;
+        return self::unwrap($this->commemoration);
     }
 
     /** @return list<RealizedObservance> */
     public function displaced(): array
     {
-        return $this->displaced;
+        return self::unwrap($this->displaced);
     }
 
     /** @return list<RealizedObservance> */
     public function tempora(): array
     {
-        return $this->tempora;
+        return self::unwrap($this->tempora);
+    }
+
+    /**
+     * Every office of the day in role order (celebration, commemoration,
+     * displaced, tempora), each carrying its role, outcome, and transfer links.
+     *
+     * @return list<RoledObservance>
+     */
+    public function offices(): array
+    {
+        return array_merge($this->celebration, $this->commemoration, $this->displaced, $this->tempora);
     }
 
     /** How the evening concurs with the following day, or null when not resolved. */
     public function secondVespers(): ?ConcurrenceOutcome
     {
         return $this->secondVespers;
+    }
+
+    /** A copy of the day with its evening concurrence resolved. */
+    public function withSecondVespers(ConcurrenceOutcome $secondVespers): self
+    {
+        return new self(
+            $this->date,
+            $this->celebration,
+            $this->commemoration,
+            $this->displaced,
+            $this->tempora,
+            $secondVespers
+        );
+    }
+
+    /**
+     * A copy of the day rebuilt from a flat list of offices, re-bucketed by
+     * their roles. Used by the resolver's reconciliation pass to stamp transfer
+     * links without disturbing the date or the resolved evening concurrence.
+     *
+     * @param list<RoledObservance> $offices
+     */
+    public function withOffices(array $offices): self
+    {
+        $byRole = [
+            CelebrationRole::CELEBRATION => [],
+            CelebrationRole::COMMEMORATION => [],
+            CelebrationRole::DISPLACED => [],
+            CelebrationRole::TEMPORA => [],
+        ];
+        foreach ($offices as $office) {
+            $byRole[$office->role()->value()][] = $office;
+        }
+
+        return new self(
+            $this->date,
+            $byRole[CelebrationRole::CELEBRATION],
+            $byRole[CelebrationRole::COMMEMORATION],
+            $byRole[CelebrationRole::DISPLACED],
+            $byRole[CelebrationRole::TEMPORA],
+            $this->secondVespers
+        );
     }
 
     /** True when no observance occupies any of the four roles. */
@@ -112,5 +168,20 @@ final class LiturgicalDay
             && $this->commemoration === []
             && $this->displaced === []
             && $this->tempora === [];
+    }
+
+    /**
+     * @param list<RoledObservance> $offices
+     *
+     * @return list<RealizedObservance>
+     */
+    private static function unwrap(array $offices): array
+    {
+        $bare = [];
+        foreach ($offices as $office) {
+            $bare[] = $office->observance();
+        }
+
+        return $bare;
     }
 }

@@ -8,7 +8,9 @@ use DateTimeImmutable;
 use Introibo\Core\Attribute\Colour;
 use Introibo\Core\Attribute\ElementColour;
 use Introibo\Core\Attribute\RankClass;
+use Introibo\Core\Calendar\CelebrationRole;
 use Introibo\Core\Calendar\LiturgicalDay;
+use Introibo\Core\Calendar\RoledObservance;
 use Introibo\Core\Observance\Observance;
 use Introibo\Core\Observance\ObservanceId;
 use Introibo\Core\Observance\ObservanceKind;
@@ -38,7 +40,13 @@ final class LiturgicalDayTest extends TestCase
         $displaced = self::observance('roman:sanctorale:hippolytus', ObservanceKind::COMMEMORATION_ONLY, 'hippolytus');
         $temporal = self::observance('roman:temporale:paschal:feria', ObservanceKind::FERIA, 'paschal');
 
-        $day = new LiturgicalDay($date, [$celebrated], [$commemorated], [$displaced], [$temporal]);
+        $day = new LiturgicalDay(
+            $date,
+            [new RoledObservance($celebrated, CelebrationRole::celebration())],
+            [new RoledObservance($commemorated, CelebrationRole::commemoration())],
+            [new RoledObservance($displaced, CelebrationRole::displaced())],
+            [new RoledObservance($temporal, CelebrationRole::tempora())]
+        );
 
         self::assertFalse($day->isEmpty());
         self::assertTrue($day->celebration()[0]->id()->equals($celebrated->id()));
@@ -51,7 +59,13 @@ final class LiturgicalDayTest extends TestCase
     {
         $date = new DateTimeImmutable('2026-08-10');
         $celebrated = self::observance('roman:sanctorale:laurentius', ObservanceKind::FEAST, 'laurentius');
-        $day = new LiturgicalDay($date, [$celebrated], [], [], []);
+        $day = new LiturgicalDay(
+            $date,
+            [new RoledObservance($celebrated, CelebrationRole::celebration())],
+            [],
+            [],
+            []
+        );
 
         $celebration = $day->celebration();
         $celebration[] = self::observance('roman:sanctorale:hippolytus', ObservanceKind::FEAST, 'hippolytus');
