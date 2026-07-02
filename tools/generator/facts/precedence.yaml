@@ -1,0 +1,92 @@
+# Cited precedence rules of the 1962 edition (Rubricae 1960 / Codex Rubricarum) —
+# the Table of Liturgical Days and its commemoration limits, as data. The resolver
+# stays rubric-generic: it reads the tier order and the membership/limit facts from
+# here, so a later rules-family (1954, 1955, the Novus Ordo) supplies its own table
+# without an engine edit.
+#
+# Fanned out by the generator into the two frozen #39 shapes, per edition:
+#   precedence-tiers.ndjson  (precedence-tier): selector -> n.91 line / ordinal
+#   precedence-rules.ndjson  (precedence-rules): membership id-sets + commemoration
+#                            limits (a oneOf; each row is one variant)
+#
+# tiers: the ordinal IS the n.91 line number of the 1960 Table of Liturgical Days,
+#   so the gaps are meaningful (lines this edition's data cannot yet tell apart
+#   collapse onto the line the engine can detect). subOrder breaks a tie within a
+#   line (0 = none). A lower ordinal wins.
+# membership: the named id-sets the tier-derivation branches on (the great feasts,
+#   recognised by identity because e.g. Easter and Pentecost are kind=sunday yet are
+#   not first-class Sundays).
+# commemorationLimits: how many commemorations a day of each class admits (n.111b-d).
+#
+# Every row is a fact cited to the 1960 rubrics (rg-1960).
+
+tiers:
+  # First class (n.91 lines 1-13).
+  - { selector: greatest, line: 1, ordinal: 1, subOrder: 0, cite: rg-1960 }
+  - { selector: triduum, line: 2, ordinal: 2, subOrder: 0, cite: rg-1960 }
+  - { selector: great-lord, line: 3, ordinal: 3, subOrder: 0, cite: rg-1960 }
+  - { selector: great-lady, line: 4, ordinal: 4, subOrder: 0, cite: rg-1960 }
+  - { selector: christmas-vigil-octave, line: 5, ordinal: 5, subOrder: 0, cite: rg-1960 }
+  - { selector: first-sunday, line: 6, ordinal: 6, subOrder: 0, cite: rg-1960 }
+  - { selector: first-feria, line: 7, ordinal: 7, subOrder: 0, cite: rg-1960 }
+  - { selector: all-souls, line: 8, ordinal: 8, subOrder: 0, cite: rg-1960 }
+  - { selector: pentecost-vigil, line: 9, ordinal: 9, subOrder: 0, cite: rg-1960 }
+  - { selector: paschal-octave, line: 10, ordinal: 10, subOrder: 0, cite: rg-1960 }
+  - { selector: first-feast, line: 11, ordinal: 11, subOrder: 0, cite: rg-1960 }
+  # Second class (n.91 lines 14-21).
+  - { selector: second-lord-feast, line: 14, ordinal: 14, subOrder: 0, cite: rg-1960 }
+  - { selector: second-sunday, line: 15, ordinal: 15, subOrder: 0, cite: rg-1960 }
+  - { selector: second-feast, line: 16, ordinal: 16, subOrder: 0, cite: rg-1960 }
+  - { selector: christmas-octave, line: 17, ordinal: 17, subOrder: 0, cite: rg-1960 }
+  - { selector: second-feria, line: 18, ordinal: 18, subOrder: 0, cite: rg-1960 }
+  - { selector: second-vigil, line: 21, ordinal: 21, subOrder: 0, cite: rg-1960 }
+  # Third class (n.91 lines 22-26).
+  - { selector: lent-feria, line: 22, ordinal: 22, subOrder: 0, cite: rg-1960 }
+  - { selector: third-feast, line: 24, ordinal: 24, subOrder: 0, cite: rg-1960 }
+  - { selector: advent-feria, line: 25, ordinal: 25, subOrder: 0, cite: rg-1960 }
+  - { selector: third-vigil, line: 26, ordinal: 26, subOrder: 0, cite: rg-1960 }
+  # Fourth class (n.91 lines 27-28).
+  - { selector: lady-on-saturday, line: 27, ordinal: 27, subOrder: 0, cite: rg-1960 }
+  - { selector: fourth, line: 28, ordinal: 28, subOrder: 0, cite: rg-1960 }
+
+membership:
+  - name: greatest
+    cite: rg-1960
+    ids:
+      - roman:temporale:christmas:nativity
+      - roman:temporale:paschal:easter
+      - roman:temporale:paschal:pentecost
+  - name: great-lord
+    cite: rg-1960
+    ids:
+      - roman:temporale:epiphany:domini
+      - roman:temporale:paschal:ascension
+      - roman:temporale:paschal:trinity-sunday
+      - roman:temporale:paschal:corpus-christi
+      - roman:temporale:paschal:sacred-heart
+      - roman:temporale:month-computed:christ-the-king
+  - name: great-lady
+    cite: rg-1960
+    ids:
+      - roman:sanctorale:immaculata-conceptio
+      - roman:sanctorale:assumptio
+  - name: christmas-vigil-octave
+    cite: rg-1960
+    ids:
+      - roman:temporale:christmas:vigil
+      - roman:temporale:christmas:octave-day
+  - name: pentecost-vigil
+    cite: rg-1960
+    ids:
+      - roman:temporale:paschal:pentecost-vigil
+  - name: second-lord-feasts
+    cite: rg-1960
+    ids:
+      - roman:temporale:christmas:holy-name
+      - roman:temporale:epiphany:holy-family
+
+commemorationLimits:
+  - { dayClass: 1, limit: 1, cite: rg-1960 }
+  - { dayClass: 2, limit: 1, cite: rg-1960 }
+  - { dayClass: 3, limit: 2, cite: rg-1960 }
+  - { dayClass: 4, limit: 2, cite: rg-1960 }

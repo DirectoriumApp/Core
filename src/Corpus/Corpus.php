@@ -47,6 +47,12 @@ final class Corpus
         return new self($baseDir);
     }
 
+    /** The corpus root directory — a stable identity for readers that cache per corpus. */
+    public function baseDir(): string
+    {
+        return $this->baseDir;
+    }
+
     /**
      * The decoded `MANIFEST.json`.
      *
@@ -177,6 +183,27 @@ final class Corpus
     public function attributesTemporale(string $editionDir): array
     {
         return $this->records('editions/' . $editionDir . '/attributes.temporale.ndjson');
+    }
+
+    /**
+     * The per-edition precedence tier rows (selector, line, ordinal, subOrder).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function precedenceTiers(string $editionDir): array
+    {
+        return $this->records('editions/' . $editionDir . '/precedence-tiers.ndjson');
+    }
+
+    /**
+     * The per-edition precedence rule rows (membership id-sets and commemoration
+     * limits — a heterogeneous list discriminated by the `rule` field).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function precedenceRules(string $editionDir): array
+    {
+        return $this->records('editions/' . $editionDir . '/precedence-rules.ndjson');
     }
 
     private function read(string $path): string

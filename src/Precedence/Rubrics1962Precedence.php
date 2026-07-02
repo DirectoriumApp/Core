@@ -6,7 +6,6 @@ namespace Introibo\Core\Precedence;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Calendar\CommemorationLimit;
 use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Observance\ObservanceKind;
 use Introibo\Core\Temporal\Computus;
@@ -16,12 +15,16 @@ use Introibo\Core\Temporal\TemporalObservance;
 /**
  * Precedence under the 1962 rubrics (Rubricae 1960 / editio typica 1962).
  *
- * The tier ordinals below ARE the line numbers of the 1960 Table of Liturgical
- * Days (Codex Rubricarum n. 91), so the gaps are meaningful: lines that this
- * edition's data cannot yet tell apart (a "proper" vs a "universal-Church" vs an
- * "indult" feast of the same class — n. 91 lines 12/13, 19/20, 23) collapse onto
- * the universal-Church line, and are refined when the corpus (#38) carries that
- * provenance. Every line the engine CAN detect maps to its exact n. 91 position.
+ * The tier ordinals ARE the line numbers of the 1960 Table of Liturgical Days
+ * (Codex Rubricarum n. 91). They, the named membership sets, and the commemoration
+ * limits are now CORPUS DATA read through {@see PrecedenceTable} (#43): this class
+ * holds the branching logic (which selector a day maps to), the table holds the
+ * facts (which ordinal a selector is, which ids are great feasts, how many
+ * commemorations a class admits). A later rules-family supplies its own table with
+ * no edit here. The gaps in the ordinals are meaningful: lines this edition's data
+ * cannot yet tell apart (a "proper" vs a "universal-Church" vs an "indult" feast of
+ * the same class — n. 91 lines 12/13, 19/20, 23) collapse onto the line the engine
+ * can detect, and are refined when the corpus (#38) carries that provenance.
  *
  * The named great feasts (lines 1, 3, 4, 5) are recognised by their canonical
  * {@see \Introibo\Core\Observance\ObservanceId} — Easter and Pentecost are
@@ -36,73 +39,12 @@ use Introibo\Core\Temporal\TemporalObservance;
  */
 final class Rubrics1962Precedence implements PrecedenceRules
 {
-    // First class (n. 91 lines 1–13).
-    private const TIER_GREATEST = 1;              // Christmas, Easter, Pentecost
-    private const TIER_TRIDUUM = 2;              // the Sacred Triduum
-    private const TIER_GREAT_LORD = 3;           // Epiphany, Ascension, and the other great feasts of the Lord
-    private const TIER_GREAT_LADY = 4;           // Immaculate Conception, Assumption
-    private const TIER_CHRISTMAS_VIGIL_OCTAVE = 5; // Vigil (24 Dec) and Octave-day (1 Jan) of Christmas
-    private const TIER_FIRST_SUNDAY = 6;         // Sundays of Advent, Lent, Passiontide, and Low Sunday
-    private const TIER_FIRST_FERIA = 7;          // Ash Wednesday and Mon/Tue/Wed of Holy Week
-    private const TIER_ALL_SOULS = 8;            // Commemoration of All the Faithful Departed
-    private const TIER_PENTECOST_VIGIL = 9;      // Vigil of Pentecost
-    private const TIER_PASCHAL_OCTAVE = 10;      // days within the Easter and Pentecost octaves
-    private const TIER_FIRST_FEAST = 11;         // other first-class feasts (universal/proper/indult)
+    private PrecedenceTable $table;
 
-    // Second class (n. 91 lines 14–21).
-    private const TIER_SECOND_LORD_FEAST = 14;   // second-class feasts of the Lord
-    private const TIER_SECOND_SUNDAY = 15;       // second-class Sundays
-    private const TIER_SECOND_FEAST = 16;        // other second-class feasts
-    private const TIER_CHRISTMAS_OCTAVE = 17;    // days within the octave of Christmas
-    private const TIER_SECOND_FERIA = 18;        // greater Advent ferias and the Ember Days
-    private const TIER_SECOND_VIGIL = 21;        // second-class vigils
-
-    // Third class (n. 91 lines 22–26).
-    private const TIER_LENT_FERIA = 22;          // ferias of Lent and Passiontide (except Ember Days)
-    private const TIER_THIRD_FEAST = 24;         // third-class feasts
-    private const TIER_ADVENT_FERIA = 25;        // ferias of Advent to 16 December (except Ember Days)
-    private const TIER_THIRD_VIGIL = 26;         // third-class vigils
-
-    // Fourth class (n. 91 lines 27–28).
-    private const TIER_LADY_ON_SATURDAY = 27;    // the Saturday Office of Our Lady
-    private const TIER_FOURTH = 28;              // ferias of the fourth class and commemorations
-
-    /** @var list<string> Line 1: the three greatest feasts (I class with octave). */
-    private const GREATEST = [
-        'roman:temporale:christmas:nativity',
-        'roman:temporale:paschal:easter',
-        'roman:temporale:paschal:pentecost',
-    ];
-
-    /** @var list<string> Line 3: the other great first-class feasts of the Lord. */
-    private const GREAT_LORD = [
-        'roman:temporale:epiphany:domini',
-        'roman:temporale:paschal:ascension',
-        'roman:temporale:paschal:trinity-sunday',
-        'roman:temporale:paschal:corpus-christi',
-        'roman:temporale:paschal:sacred-heart',
-        'roman:temporale:month-computed:christ-the-king',
-    ];
-
-    /** @var list<string> Line 4: the two named first-class feasts of Our Lady. */
-    private const GREAT_LADY = [
-        'roman:sanctorale:immaculata-conceptio',
-        'roman:sanctorale:assumptio',
-    ];
-
-    /** @var list<string> Line 5: the Vigil and Octave-day of Christmas. */
-    private const CHRISTMAS_VIGIL_OCTAVE = [
-        'roman:temporale:christmas:vigil',
-        'roman:temporale:christmas:octave-day',
-    ];
-
-    private const PENTECOST_VIGIL = 'roman:temporale:paschal:pentecost-vigil';
-
-    /** @var list<string> Second-class feasts of the Lord (line 14). */
-    private const SECOND_LORD_FEASTS = [
-        'roman:temporale:christmas:holy-name',
-        'roman:temporale:epiphany:holy-family',
-    ];
+    public function __construct(?PrecedenceTable $table = null)
+    {
+        $this->table = $table ?? PrecedenceTable::default();
+    }
 
     public function tierOf(RealizedObservance $observance, PrecedenceContext $context): PrecedenceTier
     {
@@ -110,20 +52,20 @@ final class Rubrics1962Precedence implements PrecedenceRules
 
         // Named great feasts, by identity — checked first because Easter and
         // Pentecost are kind=sunday and must not fall into the Sunday line.
-        if (in_array($id, self::GREATEST, true)) {
-            return PrecedenceTier::of(self::TIER_GREATEST);
+        if ($this->table->isMember('greatest', $id)) {
+            return $this->table->tier('greatest');
         }
         if ($context->isTriduum()) {
-            return PrecedenceTier::of(self::TIER_TRIDUUM);
+            return $this->table->tier('triduum');
         }
-        if (in_array($id, self::GREAT_LORD, true)) {
-            return PrecedenceTier::of(self::TIER_GREAT_LORD);
+        if ($this->table->isMember('great-lord', $id)) {
+            return $this->table->tier('great-lord');
         }
-        if (in_array($id, self::GREAT_LADY, true)) {
-            return PrecedenceTier::of(self::TIER_GREAT_LADY);
+        if ($this->table->isMember('great-lady', $id)) {
+            return $this->table->tier('great-lady');
         }
-        if (in_array($id, self::CHRISTMAS_VIGIL_OCTAVE, true)) {
-            return PrecedenceTier::of(self::TIER_CHRISTMAS_VIGIL_OCTAVE);
+        if ($this->table->isMember('christmas-vigil-octave', $id)) {
+            return $this->table->tier('christmas-vigil-octave');
         }
 
         $kind = $observance->kind()->value();
@@ -141,69 +83,69 @@ final class Rubrics1962Precedence implements PrecedenceRules
 
         // Fourth class: the Saturday Office of Our Lady, else ferias and commemorations.
         if ($kind === ObservanceKind::LADY_ON_SATURDAY) {
-            return PrecedenceTier::of(self::TIER_LADY_ON_SATURDAY);
+            return $this->table->tier('lady-on-saturday');
         }
 
-        return PrecedenceTier::of(self::TIER_FOURTH);
+        return $this->table->tier('fourth');
     }
 
     private function firstClassTier(string $kind, string $id): PrecedenceTier
     {
         if ($kind === ObservanceKind::SUNDAY) {
-            return PrecedenceTier::of(self::TIER_FIRST_SUNDAY);
+            return $this->table->tier('first-sunday');
         }
         if ($kind === ObservanceKind::FERIA) {
-            return PrecedenceTier::of(self::TIER_FIRST_FERIA);
+            return $this->table->tier('first-feria');
         }
         if ($kind === ObservanceKind::OFFICE_OF_THE_DEAD) {
-            return PrecedenceTier::of(self::TIER_ALL_SOULS);
+            return $this->table->tier('all-souls');
         }
-        if ($id === self::PENTECOST_VIGIL) {
-            return PrecedenceTier::of(self::TIER_PENTECOST_VIGIL);
+        if ($this->table->isMember('pentecost-vigil', $id)) {
+            return $this->table->tier('pentecost-vigil');
         }
         if ($this->isWithinPaschalOctave($id)) {
-            return PrecedenceTier::of(self::TIER_PASCHAL_OCTAVE);
+            return $this->table->tier('paschal-octave');
         }
 
-        return PrecedenceTier::of(self::TIER_FIRST_FEAST);
+        return $this->table->tier('first-feast');
     }
 
     private function secondClassTier(string $kind, string $id): PrecedenceTier
     {
         if ($kind === ObservanceKind::FEAST) {
-            return in_array($id, self::SECOND_LORD_FEASTS, true)
-                ? PrecedenceTier::of(self::TIER_SECOND_LORD_FEAST)
-                : PrecedenceTier::of(self::TIER_SECOND_FEAST);
+            return $this->table->isMember('second-lord-feasts', $id)
+                ? $this->table->tier('second-lord-feast')
+                : $this->table->tier('second-feast');
         }
         if ($kind === ObservanceKind::SUNDAY) {
-            return PrecedenceTier::of(self::TIER_SECOND_SUNDAY);
+            return $this->table->tier('second-sunday');
         }
         if ($kind === ObservanceKind::WITHIN_OCTAVE || $kind === ObservanceKind::OCTAVE_DAY) {
-            return PrecedenceTier::of(self::TIER_CHRISTMAS_OCTAVE);
+            return $this->table->tier('christmas-octave');
         }
         if ($kind === ObservanceKind::VIGIL) {
-            return PrecedenceTier::of(self::TIER_SECOND_VIGIL);
+            return $this->table->tier('second-vigil');
         }
 
         // Greater Advent ferias (17–23 Dec) and the Ember Days.
-        return PrecedenceTier::of(self::TIER_SECOND_FERIA);
+        return $this->table->tier('second-feria');
     }
 
     private function thirdClassTier(RealizedObservance $observance, string $kind): PrecedenceTier
     {
         if ($kind === ObservanceKind::FEAST) {
-            return PrecedenceTier::of(self::TIER_THIRD_FEAST);
+            return $this->table->tier('third-feast');
         }
         if ($kind === ObservanceKind::VIGIL) {
-            return PrecedenceTier::of(self::TIER_THIRD_VIGIL);
+            return $this->table->tier('third-vigil');
         }
 
         // Ferias: Lent/Passiontide (privileged, above third-class feasts) vs Advent.
         if ($this->seasonOf($observance) === Season::ADVENT) {
-            return PrecedenceTier::of(self::TIER_ADVENT_FERIA);
+            return $this->table->tier('advent-feria');
         }
 
-        return PrecedenceTier::of(self::TIER_LENT_FERIA);
+        return $this->table->tier('lent-feria');
     }
 
     public function occurrenceOutcome(
@@ -317,7 +259,7 @@ final class Rubrics1962Precedence implements PrecedenceRules
             return true;
         }
 
-        return $id === 'roman:temporale:christmas:vigil' || $id === self::PENTECOST_VIGIL;
+        return $id === 'roman:temporale:christmas:vigil' || $this->table->isMember('pentecost-vigil', $id);
     }
 
     public function commemorationLimit(RealizedObservance $celebration, PrecedenceContext $context): int
@@ -327,7 +269,7 @@ final class Rubrics1962Precedence implements PrecedenceRules
         }
 
         // The day takes the class of its celebrated office (n. 111b–d).
-        return CommemorationLimit::forDayClass($celebration->rank());
+        return $this->table->commemorationLimit($celebration->rank()->ordinal());
     }
 
     public function isPrivilegedCommemoration(RealizedObservance $office): bool
@@ -371,9 +313,9 @@ final class Rubrics1962Precedence implements PrecedenceRules
     {
         $id = $office->id()->toString();
 
-        return in_array($id, self::GREATEST, true)
-            || in_array($id, self::GREAT_LORD, true)
-            || in_array($id, self::SECOND_LORD_FEASTS, true);
+        return $this->table->isMember('greatest', $id)
+            || $this->table->isMember('great-lord', $id)
+            || $this->table->isMember('second-lord-feasts', $id);
     }
 
     private function isWithinPaschalOctave(string $id): bool
