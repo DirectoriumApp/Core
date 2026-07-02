@@ -48,6 +48,11 @@ tiers:
   # Fourth class (n.91 lines 27-28).
   - { selector: lady-on-saturday, line: 27, ordinal: 27, subOrder: 0, cite: rg-1960 }
   - { selector: fourth, line: 28, ordinal: 28, subOrder: 0, cite: rg-1960 }
+  # Below the Table of Liturgical Days: a commemoration has no proper office
+  # (nn. 106-114) and never celebrates. It yields the day to any real office and
+  # is merely commemorated, so it sorts last. `line` 29 is synthetic (one past the
+  # table's 28 lines) — commemorations are not themselves days of the table.
+  - { selector: commemoration, line: 29, ordinal: 29, subOrder: 0, cite: rg-1960 }
 
 membership:
   - name: greatest

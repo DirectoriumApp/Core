@@ -96,8 +96,10 @@ final class Rubrics1962PrecedenceTest extends TestCase
                 ['roman:sanctorale:sancta-maria-sabbato', 'lady-on-saturday', 4, 'pentecost', false, 27],
             'fourth-class feria' =>
                 ['roman:temporale:epiphany:feria', 'feria', 4, 'epiphany', false, 28],
-            'fourth-class commemoration' =>
-                ['roman:sanctorale:quatuor-coronati', 'commemoration-only', 4, 'pentecost', false, 28],
+            // A commemoration has no proper office (nn. 106-114); it sits below the
+            // whole Table of Liturgical Days (synthetic line 29) so it never wins.
+            'commemoration (below the table)' =>
+                ['roman:sanctorale:quatuor-coronati', 'commemoration-only', 4, 'pentecost', false, 29],
         ];
     }
 
