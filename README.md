@@ -36,6 +36,15 @@ echo $day->rank;         // class (I–IV)
 print_r($day->colors);   // liturgical colour(s)
 ```
 
+## Output contract
+
+`Introibo\Core\contract(new DateTimeImmutable('2026-06-30'))` returns the
+versioned, JSON-ready **output contract** — the public shape the Api, Site, and
+Ordo repos build on. It is frozen at contract version 1.0.0 and grows only
+additively. Every field, the three-version provenance scheme, the stability
+guarantees, and worked examples are documented in
+[docs/design/output-contract.md](docs/design/output-contract.md).
+
 ## Development
 
 Work branches off `develop`, lands via squash PRs with Conventional-Commit titles, and releases

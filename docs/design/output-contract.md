@@ -6,12 +6,9 @@ The versioned, serialisable shape that `Introibo\Core\contract()` emits — the
 The engine resolves a civil date to a `Calendar\LiturgicalDay` (Epic #29). That
 aggregate is kept pure: it holds value objects and knows nothing about JSON. A
 separate serialiser, `Contract\DayContract`, turns it into a stable, JSON-ready
-structure. The shape is frozen at **contract version 1.0.0** and only ever grows
+structure. The shape is **frozen at contract version 1.0.0** and only ever grows
 additively (reserved slots fill; keys are added, never removed or repurposed).
-
-> This document describes the shape as built in #53. The full versioning
-> bump-rules, the reserved-slot catalogue, and additional worked examples are
-> expanded in #58.
+This document is the spec downstream teams build against.
 
 ## Where it lives
 
@@ -27,10 +24,10 @@ additively (reserved slots fill; keys are added, never removed or repurposed).
   | JSON_THROW_ON_ERROR` — Latin names and ids/dates stay legible, and a failure
   is an exception, never a silent `false`.
 
-## The three version axes
+## Versioning & stability
 
-Every day carries three independent version stamps, so a consumer keys a cache on
-all three — any one moving means the resolved output may differ:
+Every day carries three **independent** version stamps, so a consumer keys a
+cache on all three — any one moving means the resolved output may differ:
 
 | Field | Source | Meaning |
 | --- | --- | --- |
@@ -39,63 +36,102 @@ all three — any one moving means the resolved output may differ:
 | `engineVersion` | `Introibo::VERSION` | The **resolver** version; hand-bumped when output changes. |
 
 The **edition** (`roman:rubricae-1960`) is the rules-family that governed the
-resolution, and **rite** (`roman`) is its leading segment. The same 1962 corpus
-can be resolved under different editions, which is why corpus and edition are
-separate.
+resolution, and **rite** (`roman`) is its leading segment. The same corpus can
+be resolved under different editions, which is why corpus and edition are
+separate axes.
+
+### Closed vs open enums
+
+A value's enum being **closed** or **open** is what makes a change breaking or
+additive (see bump rules):
+
+- **Closed** (a new member is a *major* change):
+  - `role` — `celebration` · `commemoration` · `displaced` · `tempora`
+  - office `outcome` — `commemorate` · `transfer` · `omit`
+  - `secondVespers.outcome` — `full-of-preceding` · `preceding-commem-following` ·
+    `following-commem-preceding` · `full-of-following`
+  - `colour.base` — `white` · `red` · `green` · `violet` · `black` (rose is never
+    a base — see [Colour & rose](#colour--rose))
+  - `season` — `advent` · `christmastide` · `epiphany` · `septuagesima` · `lent` ·
+    `passiontide` · `eastertide` · `pentecost`
+- **Open** (a new member is a *minor* change):
+  - office `kind` — the `ObservanceKind` set (`feast`, `feria`, `sunday`, `vigil`,
+    `octave-day`, `within-octave`, `ember-day`, `rogation-day`, `special-movable`,
+    `lady-on-saturday`, `commemoration-only`, `office-of-the-dead`), extensible as
+    editions add species.
+  - `names` locale keys, `rite`, `edition`.
+
+### Bump rules
+
+- **Patch** — a reserved slot goes `null` → populated in a tolerated way (a
+  consumer that ignored the null still works).
+- **Minor** — a new optional key is added, or an **open** enum gains a member.
+- **Major** — a key is removed, renamed, or repurposed, or a **closed** enum
+  gains a member. Frozen: no major change before v2.
+
+### The stability promise
+
+- Published `id`s / `urn`s never change or are re-homed; identity lineage lives in
+  the reserved `aliases` slot, never by mutating an id.
+- Reserved slots are only ever *filled*, never removed.
+- Fields are only added, never repurposed.
+- Within each role, offices are ordered deterministically (precedence tier, then
+  canonical id) and pinned by snapshot.
 
 ## The day shape
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `contractVersion` | string | `1.0.0`. |
-| `corpusVersion` | string | e.g. `1962-seed`. |
-| `engineVersion` | string | e.g. `0.4.0`. |
-| `rite` | string | `roman`. |
-| `edition` | string | `roman:rubricae-1960`. |
-| `date` | string | ISO-8601 `Y-m-d`. |
-| `season` | string \| null | The day's tempus, from its temporal office. |
-| `commemorationLimit` | int | Commemorations admitted by the day's class (I/II: 1, III/IV: 2). |
-| `celebration` | office[] | The office celebrated (normally one). |
-| `commemoration` | office[] | Offices commemorated within it. |
-| `displaced` | office[] | Offices impeded this day (transferred or omitted). |
-| `tempora` | office[] | The temporal office of the season, always reported. |
-| `secondVespers` | object \| null | The evening concurrence with the next day. |
-| `firstVespers` | null | Reserved (Office layer). |
-| `resolution` | null | Reserved (the "why-this-won" trace). |
-| `fasting` | null | Reserved (fasting/abstinence layer). |
-| `calendar` | null | Reserved (calendrical/astronomical block). |
+| Field | Type | Source | Notes |
+| --- | --- | --- | --- |
+| `contractVersion` | string | `SHAPE_VERSION` | `1.0.0`. |
+| `corpusVersion` | string | `SanctoralData::version()` | e.g. `1962-seed-2026-07-02`. |
+| `engineVersion` | string | `Introibo::VERSION` | e.g. `0.4.0`. |
+| `rite` | string | edition head | `roman`. |
+| `edition` | string | `Provenance` | `roman:rubricae-1960`. |
+| `date` | string | resolved date | ISO-8601 `Y-m-d`. |
+| `season` | string \| null | the temporal office | Closed `season` enum; null on a placeholder. |
+| `commemorationLimit` | int | `CommemorationLimit::forDayClass` | Commemorations admitted by the day's class (I/II: 1, III/IV: 2); 0 when nothing is celebrated. |
+| `celebration` | office[] | `LiturgicalDay` | The office celebrated (normally one). |
+| `commemoration` | office[] | `LiturgicalDay` | Offices commemorated within it. |
+| `displaced` | office[] | `LiturgicalDay` | Offices impeded this day (transferred or omitted). |
+| `tempora` | office[] | `LiturgicalDay` | The temporal office of the season, always reported. |
+| `secondVespers` | object \| null | `ConcurrenceOutcome` | The evening concurrence (below); null when unresolved. |
+| `firstVespers` | null | reserved | Office layer. |
+| `resolution` | null | reserved | The "why-this-won" trace. |
+| `fasting` | null | reserved | Fasting/abstinence layer. |
+| `calendar` | null | reserved | Calendrical/astronomical block. |
 
-The **secondVespers** object is `{ outcome, favoursFollowing, holder, commemorated }`
-— `outcome` is a `ConcurrenceOutcome` value; `holder`/`commemorated` are reserved
-for the Office layer (null in 1.0).
+The **`secondVespers`** object is `{ outcome, favoursFollowing, holder,
+commemorated }`: `outcome` is the closed `ConcurrenceOutcome` value,
+`favoursFollowing` a bool; `holder`/`commemorated` are reserved for the Office
+layer (null in 1.0).
 
 ## The office shape
 
 Each office is self-describing: identity, per-edition attributes, and how it
 fared this day.
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `id` | string | `ObservanceId` — the **stable** cross-system id. |
-| `urn` | string | `introibo:observance:<id>`. |
-| `role` | string | `celebration` \| `commemoration` \| `displaced` \| `tempora`. |
-| `kind` | string | `ObservanceKind` (feast, feria, sunday, vigil, …). |
-| `rank` | string | `I`–`IV`. |
-| `rankOrdinal` | int | 1 (highest) – 4. |
-| `season` | string \| null | Set on temporal offices; null on sanctoral. |
-| `colour` | object | `{ base, roseAllowed }` — colour is per element; rose is a permission, not a base. |
-| `names` | object | Locale → name; `la` always present, no baked vernacular in 1.0. |
-| `titulars` | string[] | Titular subjects (sanctoral); `[]` for temporal. |
-| `outcome` | string \| null | `commemorate` \| `transfer` \| `omit`; null on a celebration or the tempora. |
-| `transferredTo` | string \| null | ISO date a displaced (impeded) office moved to. |
-| `transferredFrom` | string \| null | ISO date a landed office was transferred from. |
-| `vigilOf` | string \| null | The feast id this office is the vigil of. |
-| `octaveOf` | null | Reserved (octave layer). |
-| `aliases` | null | Reserved (`IdentityAliases`). |
-| `citations` | null | Reserved (provenance/authority). |
-| `text` | null | Reserved (Missal proper texts). |
-| `chant` | null | Reserved (GABC). |
-| `audio` | null | Reserved. |
+| Field | Type | Source | Notes |
+| --- | --- | --- | --- |
+| `id` | string | `ObservanceId` | The **stable** cross-system id. |
+| `urn` | string | id | `introibo:observance:<id>`. |
+| `role` | string | `CelebrationRole` | Closed enum. |
+| `kind` | string | `ObservanceKind` | Open enum. |
+| `rank` | string | `RankClass` | `I`–`IV`. |
+| `rankOrdinal` | int | `RankClass` | 1 (highest) – 4. |
+| `season` | string \| null | `TemporalObservance` | Set on temporal offices; null on sanctoral. |
+| `colour` | object | `ElementColour` | `{ base, roseAllowed }` (below). |
+| `names` | object | `Observance::names()` | Locale → name; `la` always present. |
+| `titulars` | string[] | `Observance::titulars()` | Titular subjects (sanctoral); `[]` for temporal. |
+| `outcome` | string \| null | `OccurrenceOutcome` | Closed enum; null on a celebration or the tempora. |
+| `transferredTo` | string \| null | resolver | ISO date a displaced (impeded) office moved to. |
+| `transferredFrom` | string \| null | resolver | ISO date a landed office was transferred from. |
+| `vigilOf` | string \| null | `SanctoralObservance::vigilOfId()` | The feast id this office is the vigil of. |
+| `octaveOf` | null | reserved | Octave layer. |
+| `aliases` | null | reserved | `IdentityAliases` lineage. |
+| `citations` | null | reserved | Provenance/authority. |
+| `text` | null | reserved | Missal proper texts. |
+| `chant` | null | reserved | GABC. |
+| `audio` | null | reserved | Audio. |
 
 ### i18n & content hooks
 
@@ -104,8 +140,8 @@ with the invariant `la` (the liturgical Latin, not a "translation") always
 present. v1.0 ships Latin only; the text layer (v1.1) adds vernacular locales as
 further keys without reshaping anything. The proper-text pipelines attach through
 reserved, nullable office hooks — `text` (Missal propers), `chant` (GABC), `audio`
-— alongside `citations`; all are null in 1.0 and only ever filled. The engine
-hard-codes no language text: every name comes from the corpus data.
+— alongside `citations`. The engine hard-codes no language text: every name comes
+from the corpus data.
 
 ### Stable identifiers (a compatibility surface)
 
@@ -116,31 +152,38 @@ separate registry is needed. `urn` is the same id under the platform URN scheme
 (`introibo:observance:<id>`), and round-trips: stripping the prefix and parsing
 yields the identical id.
 
-These identifiers are a **compatibility surface** and are guaranteed stable:
-
-- An id, once published, is never renamed or re-homed. Later editions
-  (1954/1955, monastic) reuse the same ids for the same feast.
-- A renamed *display* name never moves the id (names are separate, i18n-keyed).
-- Identity lineage — a feast split into two, or two merged — is expressed in the
-  reserved `aliases` slot, never by changing an existing id.
-
-A golden-list test (`tests/Contract/StableIdentifierTest.php`) pins a
-representative set (temporal Sunday and feria, a sanctoral feast, a sanctoral
-vigil) so any accidental change to a published identifier fails loudly.
+These identifiers are a **compatibility surface** and are guaranteed stable: an
+id, once published, is never renamed or re-homed; later editions (1954/1955,
+monastic) reuse the same ids; a renamed *display* name never moves the id; and
+identity lineage (a feast split, or two merged) is expressed in the reserved
+`aliases` slot. A golden-list test (`tests/Contract/StableIdentifierTest.php`)
+pins a representative set so any accidental change fails loudly.
 
 ### Transfer links
 
-When a first-class feast is impeded, it appears in `displaced` on the impeded day
+When a first-class feast is impeded it appears in `displaced` on the impeded day
 with `outcome: transfer` and `transferredTo` pointing at where it lands; on the
-landing day it is the `celebration` with `transferredFrom` pointing back. These
-two links are stamped by the resolver's reconciliation pass once the whole year
-is known, so a consumer never has to correlate days.
+landing day it is the `celebration` with `transferredFrom` pointing back. Both
+links are stamped by the resolver's reconciliation pass once the whole year is
+known — following each feast's *chain* of appearances, so a re-transfer cascade
+or a feast celebrated on its own date link correctly — and a consumer never has
+to correlate days.
+
+### Colour & rose
+
+A day is **not** a single colour: the principal office and each commemoration
+each carry their own, so colour is per office element, not per day. `colour.base`
+is a closed enum of the five base colours. **Rose is never a base**: Gaudete and
+Laetare are violet days on which rose vestments are *permitted*, expressed as
+`roseAllowed: true` on a violet base. Whether rose is actually worn is a
+celebrant's choice, not calendar data, so no single "effective" colour is
+derived.
 
 ### Derived fields deliberately dropped
 
 `isVigil` (⇔ `vigilOf != null`), `isTransferred` (⇔ `transferredFrom != null`),
-and a raw precedence `tier` (context-derived, not a stable office property — hence
-`rankOrdinal` instead) are not shipped: they are derivable and would be redundant
+and a raw precedence `tier` (context-derived, not a stable office property —
+hence `rankOrdinal`) are not shipped: they are derivable and would be redundant
 surface to keep stable.
 
 ## Day boundary & First Vespers
@@ -160,12 +203,30 @@ this so a client renders the right day at the right time:
 - **`firstVespers`** is a reserved day-level slot the Office layer (v1.1) fills
   with the First Vespers actually said this evening; it is null in 1.0.
 
+## Reserved slots
+
+Every planned feature layer attaches through a slot that ships as `null` now, so
+adding it is additive (a patch bump):
+
+| Slot | Level | Filled by |
+| --- | --- | --- |
+| `firstVespers` | day | Office layer (v1.1) |
+| `resolution` | day | Show-your-work resolution trace |
+| `fasting` | day | Fasting & abstinence layer |
+| `calendar` | day | Calendrical/astronomical block |
+| `octaveOf` | office | Octave modelling |
+| `aliases` | office | `IdentityAliases` lineage |
+| `citations` | office | Provenance/authority subsystem |
+| `text` | office | Missal proper texts (v1.2) |
+| `chant` | office | Gregorian chant / GABC |
+| `audio` | office | Audio |
+
 ## Determinism & ordering
 
 Same inputs produce byte-identical JSON. Within each role, offices keep the
-resolver's deterministic order (precedence tier, then canonical id). A golden
-snapshot test pins the full shape for a sample day, and focused snapshots pin the
-transfer, omission, and commemoration cases.
+resolver's deterministic order (precedence tier, then canonical id). Golden
+snapshot tests pin the full shape for a sample day and the transfer, omission,
+commemoration, i18n, identifier, and boundary cases.
 
 ## Worked example — a simple day
 
@@ -198,12 +259,8 @@ Pentecost; the feria is both the celebration and the tempora):
       "transferredTo": null,
       "transferredFrom": null,
       "vigilOf": null,
-      "octaveOf": null,
-      "aliases": null,
-      "citations": null,
-      "text": null,
-      "chant": null,
-      "audio": null
+      "octaveOf": null, "aliases": null, "citations": null,
+      "text": null, "chant": null, "audio": null
     }
   ],
   "commemoration": [],
@@ -222,5 +279,55 @@ Pentecost; the feria is both the celebration and the tempora):
 }
 ```
 
-A worked **transfer** example (St Joseph impeded by the Third Sunday of Lent in
-2017, landing on the Monday) and the full versioning bump-rules follow in #58.
+## Worked example — a transfer (complex day)
+
+St Joseph (19 March, first class) is impeded by the Third Sunday of Lent in 2017
+and transferred to the following Monday. The two ends link across days.
+
+**2017-03-19** — the Sunday is celebrated; St Joseph is displaced with `outcome:
+transfer` pointing at the Monday:
+
+```json
+{
+  "date": "2017-03-19",
+  "season": "lent",
+  "commemorationLimit": 1,
+  "celebration": [
+    { "id": "roman:temporale:paschal:lent-3", "kind": "sunday", "rank": "I",
+      "colour": { "base": "violet", "roseAllowed": false }, "outcome": null }
+  ],
+  "commemoration": [],
+  "displaced": [
+    { "id": "roman:sanctorale:ioseph", "kind": "feast", "rank": "I",
+      "titulars": ["ioseph"], "outcome": "transfer",
+      "transferredTo": "2017-03-20", "transferredFrom": null }
+  ],
+  "tempora": [ { "id": "roman:temporale:paschal:lent-3", "role": "tempora" } ],
+  "secondVespers": { "outcome": "preceding-commem-following", "favoursFollowing": false }
+}
+```
+
+**2017-03-20** — St Joseph lands and is celebrated with `transferredFrom` pointing
+back at the Sunday; the Monday's Lenten feria is commemorated:
+
+```json
+{
+  "date": "2017-03-20",
+  "season": "lent",
+  "commemorationLimit": 1,
+  "celebration": [
+    { "id": "roman:sanctorale:ioseph", "kind": "feast", "rank": "I",
+      "titulars": ["ioseph"], "outcome": null,
+      "transferredTo": null, "transferredFrom": "2017-03-19" }
+  ],
+  "commemoration": [
+    { "id": "roman:temporale:paschal:lent-week-3:feria-2", "kind": "feria",
+      "rank": "III", "outcome": "commemorate" }
+  ],
+  "displaced": [],
+  "tempora": [ { "id": "roman:temporale:paschal:lent-week-3:feria-2", "role": "tempora" } ]
+}
+```
+
+*(Fields elided for brevity are present exactly as in the simple-day example and
+are pinned in full by `tests/Contract/DayContractTest.php`.)*
