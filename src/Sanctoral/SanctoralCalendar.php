@@ -95,7 +95,8 @@ final class SanctoralCalendar
             $days[$date->format('Y-m-d')][] = new SanctoralObservance(
                 $entry->identity(),
                 $entry->rank(),
-                $entry->colour()
+                $entry->colour(),
+                $entry->vigilOfId()
             );
         }
 
