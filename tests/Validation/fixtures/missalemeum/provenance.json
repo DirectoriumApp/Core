@@ -1,0 +1,35 @@
+{
+  "source": {
+    "name": "missalemeum",
+    "homepage": "https://www.missalemeum.com",
+    "repository": "https://github.com/mmolenda/missalemeum",
+    "license": "MIT",
+    "apiVersion": "v5"
+  },
+  "harvestedOn": "2026-07-02",
+  "range": {
+    "firstYear": 2024,
+    "lastYear": 2026
+  },
+  "files": [
+    {
+      "year": 2024,
+      "days": 366
+    },
+    {
+      "year": 2025,
+      "days": 365
+    },
+    {
+      "year": 2026,
+      "days": 365
+    }
+  ],
+  "fields": {
+    "date": "ISO date (YYYY-MM-DD)",
+    "title": "the office's English title (for readable divergence reports; not compared)",
+    "rank": "liturgical class, 1 (highest) .. 4",
+    "colors": "liturgical colour codes: w white, r red, g green, v violet, b black, p rose",
+    "commemorations": "count of commemorations on the day"
+  }
+}
