@@ -336,6 +336,24 @@ final class Rubrics1962PrecedenceTest extends TestCase
             ->value();
     }
 
+    public function testAnOrdinaryFeriaIsOmittedNotCommemorated(): void
+    {
+        // A pre-Lent (Sexagesima) feria is ordinary, not privileged: St Matthias
+        // (II) omits it rather than commemorating it (n. 108e).
+        $matthias = self::build('roman:sanctorale:matthias', 'feast', 2, 'septuagesima');
+        $ordinaryFeria = self::build('roman:temporale:paschal:sexagesima:feria-2', 'feria', 4, 'septuagesima');
+
+        self::assertSame('omit', self::outcome($matthias, $ordinaryFeria));
+    }
+
+    public function testAPrivilegedFeriaIsStillCommemorated(): void
+    {
+        $ioseph = self::build('roman:sanctorale:ioseph', 'feast', 1, 'lent');
+        $lentenFeria = self::build('roman:temporale:paschal:lent-feria', 'feria', 3, 'lent');
+
+        self::assertSame('commemorate', self::outcome($ioseph, $lentenFeria));
+    }
+
     private static function outcome(
         RealizedObservance $winner,
         RealizedObservance $loser,

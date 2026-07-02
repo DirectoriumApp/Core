@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Introibo\Core\Tests\Calendar;
 
 use DateTimeImmutable;
+use Introibo\Core\Attribute\Colour;
+use Introibo\Core\Attribute\ElementColour;
+use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Observance\Observance;
 use Introibo\Core\Observance\ObservanceId;
 use Introibo\Core\Observance\ObservanceKind;
+use Introibo\Core\Sanctoral\SanctoralObservance;
 use PHPUnit\Framework\TestCase;
 
 final class LiturgicalDayTest extends TestCase
@@ -56,13 +60,17 @@ final class LiturgicalDayTest extends TestCase
         self::assertCount(1, $day->celebration());
     }
 
-    private static function observance(string $id, string $kind, string $titular): Observance
+    private static function observance(string $id, string $kind, string $titular): SanctoralObservance
     {
-        return new Observance(
-            ObservanceId::parse($id),
-            ObservanceKind::fromString($kind),
-            [$titular],
-            ['la' => ucfirst($titular)]
+        return new SanctoralObservance(
+            new Observance(
+                ObservanceId::parse($id),
+                ObservanceKind::fromString($kind),
+                [$titular],
+                ['la' => ucfirst($titular)]
+            ),
+            RankClass::classIII(),
+            ElementColour::of(Colour::white())
         );
     }
 }

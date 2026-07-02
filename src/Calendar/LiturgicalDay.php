@@ -5,65 +5,69 @@ declare(strict_types=1);
 namespace Introibo\Core\Calendar;
 
 use DateTimeImmutable;
-use Introibo\Core\Observance\Observance;
+use Introibo\Core\Precedence\ConcurrenceOutcome;
 
 /**
  * The resolved liturgical day: the immutable aggregate returned by
  * {@see \Introibo\Core\day()}.
  *
- * A day groups the observances in play into four roles:
- *  - **celebration** — the office(s) actually celebrated (normally one principal);
- *  - **commemoration** — offices commemorated within another office;
+ * A day groups the offices in play into four roles:
+ *  - **celebration** — the office actually celebrated (normally one principal);
+ *  - **commemoration** — offices commemorated within the celebration;
  *  - **displaced** — offices impeded on this day (transferred away or omitted);
- *  - **tempora** — the temporal office(s): the Sunday or feria of the season.
+ *  - **tempora** — the temporal office of the season (the Sunday or feria),
+ *    always reported even when it is also the celebration.
  *
- * This is the contract seam. It exists before the resolver phases so callers can
- * build against a stable shape; until those phases run, a day is an empty
- * {@see placeholder()}. The per-day realization of rank, colour and season
- * attaches to the observances as later phases populate the day, and the
- * output-contract epic formalises serialisation. The aggregate is immutable once
- * built: it holds only value objects and hands back copied arrays.
+ * Each role holds {@see RealizedObservance}s, so every office carries the rank
+ * and colour it wears this day; the role is the array it sits in. The evening
+ * boundary with the next day is reported by {@see secondVespers()} (null on a
+ * placeholder). The aggregate is immutable: it holds only value objects and
+ * hands back copied arrays.
  */
 final class LiturgicalDay
 {
     private DateTimeImmutable $date;
 
-    /** @var list<Observance> */
+    /** @var list<RealizedObservance> */
     private array $celebration;
 
-    /** @var list<Observance> */
+    /** @var list<RealizedObservance> */
     private array $commemoration;
 
-    /** @var list<Observance> */
+    /** @var list<RealizedObservance> */
     private array $displaced;
 
-    /** @var list<Observance> */
+    /** @var list<RealizedObservance> */
     private array $tempora;
 
+    private ?ConcurrenceOutcome $secondVespers;
+
     /**
-     * @param list<Observance> $celebration
-     * @param list<Observance> $commemoration
-     * @param list<Observance> $displaced
-     * @param list<Observance> $tempora
+     * @param list<RealizedObservance> $celebration
+     * @param list<RealizedObservance> $commemoration
+     * @param list<RealizedObservance> $displaced
+     * @param list<RealizedObservance> $tempora
      */
     public function __construct(
         DateTimeImmutable $date,
         array $celebration,
         array $commemoration,
         array $displaced,
-        array $tempora
+        array $tempora,
+        ?ConcurrenceOutcome $secondVespers = null
     ) {
         $this->date = $date;
         $this->celebration = array_values($celebration);
         $this->commemoration = array_values($commemoration);
         $this->displaced = array_values($displaced);
         $this->tempora = array_values($tempora);
+        $this->secondVespers = $secondVespers;
     }
 
     /** An empty placeholder day for the given date: no observances in any role. */
     public static function placeholder(DateTimeImmutable $date): self
     {
-        return new self($date, [], [], [], []);
+        return new self($date, [], [], [], [], null);
     }
 
     public function date(): DateTimeImmutable
@@ -71,28 +75,34 @@ final class LiturgicalDay
         return $this->date;
     }
 
-    /** @return list<Observance> */
+    /** @return list<RealizedObservance> */
     public function celebration(): array
     {
         return $this->celebration;
     }
 
-    /** @return list<Observance> */
+    /** @return list<RealizedObservance> */
     public function commemoration(): array
     {
         return $this->commemoration;
     }
 
-    /** @return list<Observance> */
+    /** @return list<RealizedObservance> */
     public function displaced(): array
     {
         return $this->displaced;
     }
 
-    /** @return list<Observance> */
+    /** @return list<RealizedObservance> */
     public function tempora(): array
     {
         return $this->tempora;
+    }
+
+    /** How the evening concurs with the following day, or null when not resolved. */
+    public function secondVespers(): ?ConcurrenceOutcome
+    {
+        return $this->secondVespers;
     }
 
     /** True when no observance occupies any of the four roles. */
