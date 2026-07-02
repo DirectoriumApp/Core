@@ -185,6 +185,50 @@ final class Rubrics1962PrecedenceTest extends TestCase
         self::assertSame('omit', self::outcome($goodFriday, $saint, true));
     }
 
+    public function testSecondClassSaintFeastIsCommemoratedUnderASecondClassSunday(): void
+    {
+        // II-class Sunday (tier 15) beats a II-class saint feast (tier 16); the feast is commemorated.
+        $secondSunday = self::build('roman:temporale:epiphany:sunday-3', 'sunday', 2, 'epiphany');
+        $saintFeastII = self::build('roman:sanctorale:cathedra-petri', 'feast', 2, 'epiphany');
+
+        self::assertSame('commemorate', self::outcome($secondSunday, $saintFeastII));
+    }
+
+    public function testThirdClassFeastIsCommemoratedUnderASecondClassSunday(): void
+    {
+        $secondSunday = self::build('roman:temporale:epiphany:sunday-3', 'sunday', 2, 'epiphany');
+        $thirdClassSaint = self::build('roman:sanctorale:thomas-aquinas', 'feast', 3, 'epiphany');
+
+        self::assertSame('commemorate', self::outcome($secondSunday, $thirdClassSaint));
+    }
+
+    public function testThirdClassFeastIsCommemoratedUnderALentenFeria(): void
+    {
+        // A Lenten feria (III, tier 22) outranks a III-class feast (tier 24), which is commemorated.
+        $lentenFeria = self::build('roman:temporale:paschal:lent-feria', 'feria', 3, 'lent');
+        $thirdClassSaint = self::build('roman:sanctorale:thomas-aquinas', 'feast', 3, 'lent');
+
+        self::assertSame('commemorate', self::outcome($lentenFeria, $thirdClassSaint));
+    }
+
+    public function testFourthClassCommemorationIsCommemoratedUnderAFeria(): void
+    {
+        $feria = self::build('roman:temporale:epiphany:feria', 'feria', 4, 'epiphany');
+        $commemoration = self::build('roman:sanctorale:quatuor-coronati', 'commemoration-only', 4, 'epiphany');
+
+        self::assertSame('commemorate', self::outcome($feria, $commemoration));
+    }
+
+    public function testSecondClassFeastIsOmittedNotTransferredOnAFirstClassDay(): void
+    {
+        // Only first-class feasts transfer (n. 95): a II-class saint feast impeded by a
+        // first-class day is omitted, since a first-class day admits only privileged commemorations.
+        $firstClassSunday = self::build('roman:temporale:advent:sunday-1', 'sunday', 1, 'advent');
+        $saintFeastII = self::build('roman:sanctorale:cathedra-petri', 'feast', 2, 'advent');
+
+        self::assertSame('omit', self::outcome($firstClassSunday, $saintFeastII));
+    }
+
     private static function outcome(
         RealizedObservance $winner,
         RealizedObservance $loser,
