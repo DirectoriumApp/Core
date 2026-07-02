@@ -38,3 +38,19 @@ jobs:
         run: composer run-script test
       # NOTE: the validate-*.php / corpus-build steps are added by the later
       # engine issues, once the generator and validation harness exist.
+
+  # Build-time corpus generator (Node only; the runtime engine never runs it).
+  # Asserts the committed corpus is reproducible and matches a fresh build.
+  corpus-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install generator dependencies
+        run: npm ci
+        working-directory: tools/generator
+      - name: Verify corpus is reproducible and the committed copy is fresh
+        run: npm run verify
+        working-directory: tools/generator

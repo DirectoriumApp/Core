@@ -1,0 +1,5 @@
+{"cites":{"day":"rg-1960","month":"rg-1960"},"day":19,"id":"roman:sanctorale:ioseph","month":3}
+{"cites":{"day":"rg-1960","month":"rg-1960"},"day":10,"id":"roman:sanctorale:laurentius","month":8}
+{"cites":{"day":"rg-1960","month":"rg-1960"},"day":9,"id":"roman:sanctorale:laurentius:vigilia","month":8,"vigilOf":"roman:sanctorale:laurentius"}
+{"cites":{"day":"rg-1960","month":"rg-1960"},"day":29,"id":"roman:sanctorale:petrus-paulus","month":6}
+{"cites":{"day":"rg-1960","month":"rg-1960"},"day":8,"id":"roman:sanctorale:quatuor-coronati","month":11}

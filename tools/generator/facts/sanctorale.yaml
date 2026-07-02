@@ -1,0 +1,86 @@
+# Cited 1962 sanctoral facts — skeleton set.
+#
+# Each entry states its edition-invariant identity (id, kind, titulars, names) once
+# and its per-edition realization under the edition key (rank, colour, month, day).
+# Every datum is cited: `cites` maps a field to a source key. This is the clean-room
+# boundary — a human asserts a fact and its source, never a scrape.
+#
+# Source keys used here:
+#   mr-1920  — Missale Romanum (1920, public domain) — for the Latin titles.
+#   rg-1960  — Rubricarum generalium (the 1960 New Rubrics) — for rank/colour/date.
+#
+# This is a representative set that proves the pipeline end to end; the full
+# ~200-entry General Calendar lands in #41. Ranks: 1 = class I ... 4 = class IV.
+
+- id: roman:sanctorale:ioseph
+  kind: feast
+  titulars: [ioseph]
+  names:
+    la: "S. Ioseph Sponsi B.M.V. Confessoris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: white
+    month: 3
+    day: 19
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:petrus-paulus
+  kind: feast
+  titulars: [petrus, paulus]
+  names:
+    la: "Ss. Petri et Pauli Apostolorum"
+    en: "Ss. Peter and Paul, Apostles"
+  cites:
+    names.la: mr-1920
+    names.en: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: red
+    month: 6
+    day: 29
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:laurentius
+  kind: feast
+  titulars: [laurentius]
+  names:
+    la: "S. Laurentii Martyris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: red
+    month: 8
+    day: 10
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:laurentius:vigilia
+  kind: vigil
+  titulars: [laurentius]
+  names:
+    la: "In Vigilia S. Laurentii Martyris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 3
+    colour: violet
+    month: 8
+    day: 9
+    vigilOf: roman:sanctorale:laurentius
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:quatuor-coronati
+  kind: commemoration-only
+  titulars: [quatuor-coronati]
+  names:
+    la: "Ss. Quatuor Coronatorum Martyrum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 4
+    colour: red
+    month: 11
+    day: 8
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }

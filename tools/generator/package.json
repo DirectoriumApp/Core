@@ -1,0 +1,19 @@
+{
+  "name": "@introibo/corpus-generator",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build-time generator for the Introibo CC0 liturgical corpus. Node is build-time only; the runtime engine is PHP and never runs this.",
+  "license": "AGPL-3.0-or-later",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node src/build.mjs",
+    "verify": "node src/verify.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1",
+    "js-yaml": "4.1.0"
+  }
+}

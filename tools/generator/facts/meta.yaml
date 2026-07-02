@@ -1,0 +1,7 @@
+# Corpus build metadata. corpusVersion is an explicit fact, never the wall clock,
+# so the build is reproducible: datestamp + serial (bump the serial on a re-cut of
+# the same day). No edition token here — the edition is named below and keyed into
+# the output tree.
+corpusVersion: "1962-2026-07-02.1"
+edition: roman-rubricae-1960
+generator: "@introibo/corpus-generator"
