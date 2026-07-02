@@ -12,7 +12,7 @@
     "editions/roman-rubricae-1960/attributes.temporale.ndjson": {
       "primaryKey": "archetype",
       "records": 61,
-      "sha256": "af5af6dea88ead15aec839638e21a98fba2c80c06c1b0240df5729b1a9fbf62f"
+      "sha256": "9055c7a938e76d322cf654ca2d24dbe1d83c2d07fa5e526647c53adfbb3fc82a"
     },
     "editions/roman-rubricae-1960/placement.sanctorale.ndjson": {
       "primaryKey": "id",
