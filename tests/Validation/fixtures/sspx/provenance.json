@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "SSPX 1962 ordo",
+    "publisher": "Society of St Pius X, District of the USA",
+    "homepage": "https://1962ordo.today",
+    "endpoint": "https://1962ordo.today/get-liturgical-days/",
+    "particularCalendar": true
+  },
+  "harvestedOn": "2026-07-02",
+  "range": {
+    "firstYear": 2024,
+    "lastYear": 2026
+  },
+  "files": [
+    {
+      "year": 2024,
+      "days": 365,
+      "withClass": 365
+    },
+    {
+      "year": 2025,
+      "days": 364,
+      "withClass": 364
+    },
+    {
+      "year": 2026,
+      "days": 365,
+      "withClass": 364
+    }
+  ],
+  "fields": {
+    "date": "ISO date (YYYY-MM-DD)",
+    "name": "the office's English name (for readable divergence reports; not compared)",
+    "klasse": "liturgical class parsed from the German localisation, 1 (highest) .. 4, or null when absent upstream",
+    "particular": "true when upstream tags the day \"(FSSPX)\" — an SSPX particular observance",
+    "feast": "upstream feast flag"
+  },
+  "notes": "SSPX is a particular calendar (universal 1962 base plus its own observances). Colour and commemoration counts are not exposed by the feed, so they are not compared. Class is compared where parsed; days without a parsed class are skipped (a documented allowance)."
+}

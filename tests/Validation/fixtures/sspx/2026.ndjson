@@ -1,0 +1,365 @@
+{"date":"2026-01-01","name":"Octave Day of the Nativity of Our Lord","klasse":1,"particular":false,"feast":false}
+{"date":"2026-01-02","name":"Ferial Day (First Friday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-03","name":"B. V. M. on Saturday (First Saturday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-04","name":"Feast of the Holy Name of Jesus","klasse":2,"particular":false,"feast":false}
+{"date":"2026-01-05","name":"Ferial Day","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-06","name":"The Epiphany of the Lord","klasse":1,"particular":false,"feast":false}
+{"date":"2026-01-07","name":"Feria after Epiphany","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-08","name":"Feria after Epiphany","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-09","name":"Feria after Epiphany","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-10","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-11","name":"Feast of the Holy Family","klasse":2,"particular":false,"feast":false}
+{"date":"2026-01-12","name":"Ferial day","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-13","name":"The Baptism of Our Lord Jesus Christ","klasse":2,"particular":false,"feast":false}
+{"date":"2026-01-14","name":"St. Hilary","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-15","name":"St. Paul, First Hermit","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-16","name":"St. Marcellus I","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-17","name":"St. Anthony","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-18","name":"II Sunday after Epiphany","klasse":2,"particular":false,"feast":false}
+{"date":"2026-01-19","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-01-20","name":"Sts. Fabian and Sebastian","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-21","name":"St. Agnes","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-22","name":"Sts. Vincent and Anastasius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-23","name":"St. Raymond of Peñafort","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-24","name":"St. Timothy","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-25","name":"III Sunday after Epiphany","klasse":2,"particular":false,"feast":false}
+{"date":"2026-01-26","name":"St. Polycarp","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-27","name":"St. John Chrysostom","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-28","name":"St. Peter Nolasco","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-29","name":"St. Francis de Sales","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-30","name":"St. Martina","klasse":3,"particular":false,"feast":false}
+{"date":"2026-01-31","name":"St. John Bosco","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-01","name":"Septuagesima Sunday","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-02","name":"Purification of the B.V.M, Candlemas","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-03","name":"Feria – St. Blaise","klasse":4,"particular":false,"feast":false}
+{"date":"2026-02-04","name":"St. Andrew Corsini","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-05","name":"St. Agatha (First Thursday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-06","name":"St. Titus (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-07","name":"St. Romuald (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-08","name":"Sexagesima Sunday","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-09","name":"St. Cyril of Alexandria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-10","name":"St. Scholastica","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-11","name":"Apparition of the B.V.M at Lourdes","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-12","name":"Seven Holy Founders","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-13","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-02-14","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-02-15","name":"Quinquagesima Sunday","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-16","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-02-17","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-02-18","name":"Ash Wednesday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-02-19","name":"Thursday after Ash Wednesday","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-20","name":"Friday after Ash Wednesday","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-21","name":"Saturday after Ash Wednesday","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-22","name":"I Sunday of Lent","klasse":1,"particular":false,"feast":false}
+{"date":"2026-02-23","name":"Monday after the 1st Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-24","name":"St. Matthias","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-25","name":"Ember Wednesday of Lent","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-26","name":"Thursday after the 1st Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-02-27","name":"Ember Friday of Lent","klasse":2,"particular":false,"feast":false}
+{"date":"2026-02-28","name":"Ember Saturday of Lent","klasse":2,"particular":false,"feast":false}
+{"date":"2026-03-01","name":"II Sunday of Lent","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-02","name":"Monday after the 2nd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-03","name":"Tuesday after the 2nd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-04","name":"Wednesday after the 2nd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-05","name":"Thursday after the 2nd Sunday of Lent (First Thursday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-06","name":"Friday after the 2nd Sunday of Lent (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-07","name":"Saturday after the 2nd Sunday of Lent (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-08","name":"III Sunday of Lent","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-09","name":"Monday after the 3rd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-10","name":"Tuesday after the 3rd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-11","name":"Wednesday after the 3rd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-12","name":"Thursday after the 3rd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-13","name":"Friday after the 3rd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-14","name":"Saturday after the 3rd Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-15","name":"IV Sunday of Lent (Laetare Sunday)","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-16","name":"Monday after the 4th Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-17","name":"Tuesday after the 4th Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-18","name":"Wednesday after the 4th Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-19","name":"St. Joseph","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-20","name":"Friday after the 4th Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-21","name":"Saturday after the 4th Sunday of Lent","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-22","name":"Passion Sunday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-23","name":"Monday in Passion Week","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-24","name":"Tuesday in Passion Week","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-25","name":"Annunciation of the B.V.M","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-26","name":"Thursday in Passion Week","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-27","name":"Seven Sorrows of the BVM","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-28","name":"Saturday in Passion Week","klasse":3,"particular":false,"feast":false}
+{"date":"2026-03-29","name":"Palm Sunday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-30","name":"Monday in Holy Week","klasse":1,"particular":false,"feast":false}
+{"date":"2026-03-31","name":"Tuesday in Holy Week","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-01","name":"Wednesday in Holy Week","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-02","name":"Holy Thursday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-03","name":"Good Friday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-04","name":"Holy Saturday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-05","name":"Easter Sunday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-06","name":"Monday in the Octave of Easter","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-07","name":"Tuesday in the Octave of Easter","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-08","name":"Wednesday in the Octave of Easter","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-09","name":"Thursday in the Octave of Easter","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-10","name":"Friday in the Octave of Easter","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-11","name":"Saturday in the Octave of Easter","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-12","name":"Low Sunday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-04-13","name":"St. Hermenegild","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-14","name":"St. Justin Martyr","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-15","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-04-16","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-04-17","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-04-18","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-04-19","name":"II Sunday after Easter","klasse":2,"particular":false,"feast":false}
+{"date":"2026-04-20","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-04-21","name":"St. Anselm","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-22","name":"Sts. Soter and Caius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-23","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-04-24","name":"St. Fidelis of Sigmaringen","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-25","name":"St. Mark, Greater Litanies","klasse":2,"particular":false,"feast":false}
+{"date":"2026-04-26","name":"III Sunday after Easter","klasse":2,"particular":false,"feast":false}
+{"date":"2026-04-27","name":"St. Peter Canisius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-28","name":"St. Paul of the Cross","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-29","name":"St. Peter Martyr","klasse":3,"particular":false,"feast":false}
+{"date":"2026-04-30","name":"St. Catherine of Siena","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-01","name":"St. Joseph the Worker (First Friday)","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-02","name":"St. Athanasius (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-03","name":"IV Sunday after Easter","klasse":2,"particular":false,"feast":false}
+{"date":"2026-05-04","name":"St. Monica","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-05","name":"St. Pius V","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-06","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-05-07","name":"St. Stanislaus (First Thursday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-08","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-05-09","name":"St. Gregory of Nazianzen","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-10","name":"V Sunday after Easter","klasse":2,"particular":false,"feast":false}
+{"date":"2026-05-11","name":"Sts. Philip and James, Rogations","klasse":2,"particular":false,"feast":false}
+{"date":"2026-05-12","name":"Sts. Nereus, Achilleus, Domitilla, and Pancratius, Rogations","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-13","name":"Vigil of the Ascension, Rogations","klasse":2,"particular":false,"feast":false}
+{"date":"2026-05-14","name":"Ascension of Our Lord","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-15","name":"St. Jean Baptiste de la Salle","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-16","name":"St. Ubald","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-17","name":"Sunday after the Ascension","klasse":2,"particular":false,"feast":false}
+{"date":"2026-05-18","name":"St. Venantius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-19","name":"St. Peter Celestine","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-20","name":"St. Bernardine of Siena","klasse":3,"particular":false,"feast":false}
+{"date":"2026-05-21","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-05-22","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-05-23","name":"Vigil of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-24","name":"Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-25","name":"Monday in the Octave of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-26","name":"Tuesday in the Octave of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-27","name":"Ember Wednesday in the Octave of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-28","name":"Thursday in the Octave of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-29","name":"Ember Friday in the Octave of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-30","name":"Ember Saturday in the Octave of Pentecost","klasse":1,"particular":false,"feast":false}
+{"date":"2026-05-31","name":"Trinity Sunday","klasse":1,"particular":false,"feast":false}
+{"date":"2026-06-01","name":"St. Angela Merici","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-02","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-03","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-04","name":"Corpus Christi (First Thursday)","klasse":1,"particular":false,"feast":false}
+{"date":"2026-06-05","name":"St. Boniface (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-06","name":"St. Norbert (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-07","name":"II Sunday after Pentecost, External Solemnity of Corpus Christi","klasse":2,"particular":false,"feast":false}
+{"date":"2026-06-08","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-09","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-10","name":"St. Margaret","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-11","name":"St. Barnabas","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-12","name":"Sacred Heart of Jesus","klasse":1,"particular":false,"feast":false}
+{"date":"2026-06-13","name":"St. Anthony of Padua","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-14","name":"III Sunday after Pentecost, External Solemnity of the Sacred Heart","klasse":2,"particular":false,"feast":false}
+{"date":"2026-06-15","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-16","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-17","name":"St. Gregory Barbarigo","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-18","name":"St. Ephrem the Syrian","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-19","name":"St. Juliana Falconieri","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-20","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-21","name":"IV Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-06-22","name":"St. Paulinus","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-23","name":"Vigil of the Nativity of St. John the Baptist","klasse":2,"particular":false,"feast":false}
+{"date":"2026-06-24","name":"Nativity of St. John the Baptist","klasse":1,"particular":false,"feast":false}
+{"date":"2026-06-25","name":"St. William","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-26","name":"Sts. John and Paul","klasse":3,"particular":false,"feast":false}
+{"date":"2026-06-27","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-06-28","name":"V Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-06-29","name":"Saints Peter and Paul","klasse":1,"particular":false,"feast":false}
+{"date":"2026-06-30","name":"Commemoration of St. Paul","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-01","name":"Feast of the Most Precious Blood","klasse":1,"particular":false,"feast":false}
+{"date":"2026-07-02","name":"Visitation of the B. V. M. (First Thursday)","klasse":2,"particular":false,"feast":false}
+{"date":"2026-07-03","name":"St. Irenaeus (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-04","name":"B. V. M. on Saturday (First Saturday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-05","name":"VI Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-07-06","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-07","name":"Sts. Cyril and Methodius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-08","name":"St. Elizabeth of Portugal","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-09","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-10","name":"The Seven Holy Brothers et al.","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-11","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-12","name":"VII Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-07-13","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-14","name":"St. Bonaventure","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-15","name":"St. Henry","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-16","name":"Feria / Our Lady of Mount Carmel","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-17","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-18","name":"St. Camillus de Lellis","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-19","name":"VIII Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-07-20","name":"St. Jerome Emiliani","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-21","name":"St. Lawrence of Brindisi","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-22","name":"St. Mary Magdalen","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-23","name":"St. Apollinaris","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-24","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-25","name":"St. James","klasse":2,"particular":false,"feast":false}
+{"date":"2026-07-26","name":"IX Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-07-27","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-28","name":"Sts. Nazarius & Celsus","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-29","name":"St. Martha","klasse":3,"particular":false,"feast":false}
+{"date":"2026-07-30","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-07-31","name":"St. Ignatius of Loyola","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-01","name":"B. V. M. on Saturday (First Saturday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-08-02","name":"X Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-03","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-08-04","name":"St. Dominic","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-05","name":"Dedication of Our Lady of the Snows","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-06","name":"Transfiguration of Our Lord Jesus Christ (First Thursday)","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-07","name":"St. Caietanus (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-08","name":"St. John Mary Vianney","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-09","name":"XI Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-10","name":"St. Lawrence","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-11","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-08-12","name":"St. Clare","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-13","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-08-14","name":"Vigil of the Assumption","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-15","name":"Assumption of the B. V. M.","klasse":1,"particular":false,"feast":false}
+{"date":"2026-08-16","name":"XII Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-17","name":"St. Hyacinth","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-18","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-08-19","name":"St. John Eudes","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-20","name":"St. Bernard","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-21","name":"St. Jane Frances Fremiot de Chantal","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-22","name":"The Immaculate Heart of the B. V. M.","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-23","name":"XIII Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-24","name":"St. Bartholomew","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-25","name":"St. Louis IX","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-26","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-08-27","name":"St. Joseph Calasanctius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-28","name":"St. Augustine","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-29","name":"Beheading of St. John the Baptist","klasse":3,"particular":false,"feast":false}
+{"date":"2026-08-30","name":"XIV Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-08-31","name":"St. Raymond Nonnatus","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-01","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-02","name":"St. Stephen","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-03","name":"Saint Pius X (First Thursday)","klasse":1,"particular":true,"feast":false}
+{"date":"2026-09-04","name":"Feria (First Friday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-05","name":"St. Lawrence Justinian (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-06","name":"XV Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-07","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-08","name":"Nativity of the Blessed Virgin Mary","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-09","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-10","name":"St. Nicholas of Tolentino","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-11","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-12","name":"Most Holy Name of the B. V. M.","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-13","name":"XVI Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-14","name":"Exaltation of the Holy Cross","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-15","name":"The Seven Sorrows of the Blessed Virgin Mary","klasse":1,"particular":true,"feast":false}
+{"date":"2026-09-16","name":"Sts. Cornelius and Cyprian","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-17","name":"Feria / Stigmata of St. Francis","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-18","name":"St. Joseph of Cupertino","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-19","name":"St. Januarius and Companions","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-20","name":"XVII Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-21","name":"St. Matthew","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-22","name":"St. Thomas of Villanova","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-23","name":"Ember Wednesday of September","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-24","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-09-25","name":"Ember Friday of September","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-26","name":"Ember Saturday of September","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-27","name":"XVIII Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-09-28","name":"St. Wenceslaus","klasse":3,"particular":false,"feast":false}
+{"date":"2026-09-29","name":"Dedication of St. Michael the Archangel","klasse":1,"particular":false,"feast":false}
+{"date":"2026-09-30","name":"St. Jerome","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-01","name":"Feria (First Thursday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-02","name":"Holy Guardian Angels (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-03","name":"St. Therese of the Child Jesus (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-04","name":"XIX Sunday after Pentecost (Rosary Sunday)","klasse":2,"particular":false,"feast":false}
+{"date":"2026-10-05","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-06","name":"St. Bruno","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-07","name":"The Most Holy Rosary","klasse":2,"particular":false,"feast":false}
+{"date":"2026-10-08","name":"St. Bridget of Sweden","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-09","name":"St. John Leonardi","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-10","name":"St. Francis Borgia","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-11","name":"XX Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-10-12","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-13","name":"St. Edward the Confessor","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-14","name":"St. Callistus","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-15","name":"St. Teresa of Avila","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-16","name":"St. Hedwig","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-17","name":"St. Margaret Mary Alacoque","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-18","name":"XXI Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-10-19","name":"St. Peter of Alcantara","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-20","name":"St. John Cantius","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-21","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-22","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-23","name":"St. Anthony Mary Claret","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-24","name":"St. Raphael the Archangel","klasse":3,"particular":false,"feast":false}
+{"date":"2026-10-25","name":"Feast of Christ the King","klasse":1,"particular":false,"feast":false}
+{"date":"2026-10-26","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-27","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-28","name":"Sts. Simon and Jude","klasse":2,"particular":false,"feast":false}
+{"date":"2026-10-29","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-30","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-10-31","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-01","name":"All Saints","klasse":null,"particular":false,"feast":false}
+{"date":"2026-11-02","name":"All Souls’ Day","klasse":1,"particular":false,"feast":false}
+{"date":"2026-11-03","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-04","name":"St. Charles Borromeo","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-05","name":"Feria (First Thursday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-06","name":"Feria (First Friday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-07","name":"B. V. M. on Saturday (First Saturday)","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-08","name":"V Sunday which remained after Epiphany","klasse":2,"particular":false,"feast":false}
+{"date":"2026-11-09","name":"Dedication of the Archbasilica of the Holy Savior","klasse":2,"particular":false,"feast":false}
+{"date":"2026-11-10","name":"St. Andrew Avellino","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-11","name":"St. Martin of Tours","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-12","name":"St. Martin I","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-13","name":"St. Didacus (and St. Frances X. Cabrini)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-14","name":"St. Josaphat","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-15","name":"VI Sunday which remained after Epiphany","klasse":2,"particular":false,"feast":false}
+{"date":"2026-11-16","name":"St. Gertrude","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-17","name":"St. Gregory the Wonderworker","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-18","name":"Dedication of the Basilicas of Sts. Peter & Paul","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-19","name":"St. Elizabeth of Hungary","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-20","name":"St. Felix of Valois","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-21","name":"Presentation of the B. V. M.","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-22","name":"XXIV and Last Sunday after Pentecost","klasse":2,"particular":false,"feast":false}
+{"date":"2026-11-23","name":"St. Clement","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-24","name":"St. John of the Cross","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-25","name":"St. Catherine of Alexandria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-26","name":"St. Sylvester","klasse":3,"particular":false,"feast":false}
+{"date":"2026-11-27","name":"Feria","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-28","name":"B. V. M. on Saturday","klasse":4,"particular":false,"feast":false}
+{"date":"2026-11-29","name":"I Sunday of Advent","klasse":1,"particular":false,"feast":false}
+{"date":"2026-11-30","name":"St. Andrew","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-01","name":"Advent feria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-02","name":"St. Bibiana","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-03","name":"St. Francis Xavier (First Thursday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-04","name":"St. Peter Chrysologus (First Friday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-05","name":"Advent feria (First Saturday)","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-06","name":"II Sunday of Advent","klasse":1,"particular":false,"feast":false}
+{"date":"2026-12-07","name":"St. Ambrose","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-08","name":"Feast of the Immaculate Conception","klasse":1,"particular":false,"feast":false}
+{"date":"2026-12-09","name":"Advent feria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-10","name":"Advent feria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-11","name":"St. Damasus","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-12","name":"Advent feria and Our Lady of Guadalupe","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-13","name":"III Sunday of Advent (Gaudete)","klasse":1,"particular":false,"feast":false}
+{"date":"2026-12-14","name":"Advent feria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-15","name":"Advent feria","klasse":3,"particular":false,"feast":false}
+{"date":"2026-12-16","name":"Ember Wednesday in Advent","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-17","name":"Advent Feria","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-18","name":"Ember Friday in Advent","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-19","name":"Ember Saturday in Advent","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-20","name":"IV Sunday of Advent","klasse":1,"particular":false,"feast":false}
+{"date":"2026-12-21","name":"St. Thomas","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-22","name":"Advent Feria","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-23","name":"Advent feria","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-24","name":"Vigil of the Nativity of the Lord","klasse":1,"particular":false,"feast":false}
+{"date":"2026-12-25","name":"The Nativity of the Lord","klasse":1,"particular":false,"feast":false}
+{"date":"2026-12-26","name":"St. Stephen","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-27","name":"Sunday within the Octave of the Nativity","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-28","name":"The Holy Innocents","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-29","name":"Fifth Day within the Octave of the Nativity","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-30","name":"Sixth day within the Octave of the Nativity","klasse":2,"particular":false,"feast":false}
+{"date":"2026-12-31","name":"Seventh day within the Octave of the Nativity","klasse":2,"particular":false,"feast":false}
