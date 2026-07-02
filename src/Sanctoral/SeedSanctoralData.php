@@ -26,6 +26,17 @@ use Introibo\Core\Observance\ObservanceKind;
  */
 final class SeedSanctoralData implements SanctoralData
 {
+    /**
+     * The version stamp for this seed corpus, dated to when the slice was last
+     * revised. It names only the data build — no edition token — so the same
+     * seed can be resolved under any edition. The cited corpus generator (#38)
+     * supplies its own build id in its place.
+     */
+    public function version(): string
+    {
+        return '1962-seed-2026-07-02';
+    }
+
     /** @return list<SanctoralEntry> */
     public function entries(): array
     {

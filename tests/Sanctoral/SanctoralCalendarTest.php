@@ -152,6 +152,11 @@ final class SanctoralCalendarTest extends TestCase
     private static function february29Source(): SanctoralData
     {
         return new class implements SanctoralData {
+            public function version(): string
+            {
+                return 'test-corpus';
+            }
+
             /** @return list<SanctoralEntry> */
             public function entries(): array
             {

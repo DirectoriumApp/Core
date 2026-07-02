@@ -129,6 +129,11 @@ final class SanctoralBissextileTest extends TestCase
                 $this->entries = $entries;
             }
 
+            public function version(): string
+            {
+                return 'test-corpus';
+            }
+
             /** @return list<SanctoralEntry> */
             public function entries(): array
             {

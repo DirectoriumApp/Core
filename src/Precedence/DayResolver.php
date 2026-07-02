@@ -14,6 +14,7 @@ use Introibo\Core\Contract\Provenance;
 use Introibo\Core\Introibo;
 use Introibo\Core\Sanctoral\SanctoralCalendar;
 use Introibo\Core\Sanctoral\SanctoralData;
+use Introibo\Core\Sanctoral\SeedSanctoralData;
 use Introibo\Core\Temporal\ChristmasCycle;
 use Introibo\Core\Temporal\Eastertide;
 use Introibo\Core\Temporal\HolyWeek;
@@ -39,22 +40,15 @@ use Introibo\Core\Temporal\TimeAfterPentecost;
  */
 final class DayResolver
 {
-    /**
-     * The corpus-version stamp for the built-in seed data. A placeholder until
-     * the corpus generator (#38) and {@see SanctoralData::version()} (#54) supply
-     * a real, dated build id; it carries no edition token by design.
-     */
-    private const SEED_CORPUS_VERSION = '1962-seed';
-
     private PrecedenceRules $rules;
 
     private CommemorationSelector $commemorations;
 
     private string $edition;
 
-    private ?SanctoralData $sanctoralData;
+    private SanctoralData $sanctoralData;
 
-    private function __construct(PrecedenceRules $rules, string $edition, ?SanctoralData $sanctoralData)
+    private function __construct(PrecedenceRules $rules, string $edition, SanctoralData $sanctoralData)
     {
         $this->rules = $rules;
         $this->commemorations = new CommemorationSelector($rules);
@@ -64,13 +58,17 @@ final class DayResolver
 
     public static function for1962(?SanctoralData $sanctoralData = null): self
     {
-        return new self(new Rubrics1962Precedence(), 'roman:rubricae-1960', $sanctoralData);
+        return new self(
+            new Rubrics1962Precedence(),
+            'roman:rubricae-1960',
+            $sanctoralData ?? new SeedSanctoralData()
+        );
     }
 
     /** The edition, corpus, and engine versions this resolver stamps onto a year. */
     public function provenance(): Provenance
     {
-        return new Provenance($this->edition, self::SEED_CORPUS_VERSION, Introibo::VERSION);
+        return new Provenance($this->edition, $this->sanctoralData->version(), Introibo::VERSION);
     }
 
     public function resolveDay(DateTimeImmutable $date): LiturgicalDay
