@@ -7,7 +7,7 @@ namespace Introibo\Core;
 use DateTimeImmutable;
 use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Precedence\DayResolver;
+use Introibo\Core\Overlay\CalendarCatalog;
 use Introibo\Core\Precedence\ResolvedYear;
 
 /**
@@ -19,10 +19,15 @@ use Introibo\Core\Precedence\ResolvedYear;
  * once and memoised for the life of the process, so repeated calls within a year
  * are cheap. A {@see DateTimeImmutable} is required so the returned day cannot be
  * changed out from under the caller.
+ *
+ * `$calendar` selects the calendar to resolve under (#78): null for the universal
+ * 1962 calendar, or a particular calendar named by its slug (`sspx`) or overlay URN
+ * (`introibo:overlay:roman:sspx`). A particular calendar layers its own observances
+ * over the universal base without changing the engine.
  */
-function day(DateTimeImmutable $date): LiturgicalDay
+function day(DateTimeImmutable $date, ?string $calendar = null): LiturgicalDay
 {
-    return resolvedYear((int) $date->format('Y'))->day($date);
+    return resolvedYear((int) $date->format('Y'), $calendar)->day($date);
 }
 
 /**
@@ -31,13 +36,22 @@ function day(DateTimeImmutable $date): LiturgicalDay
  * Introibo repos build on (see {@see DayContract} and
  * docs/design/output-contract.md).
  *
+ * `$calendar` selects the calendar as for {@see day()}; when a particular calendar
+ * is chosen it is stamped into the contract's `calendar` block.
+ *
  * @return array<string, mixed>
  */
-function contract(DateTimeImmutable $date, bool $explain = false): array
+function contract(DateTimeImmutable $date, bool $explain = false, ?string $calendar = null): array
 {
-    $year = $explain ? explainedYear((int) $date->format('Y')) : resolvedYear((int) $date->format('Y'));
+    $year = $explain
+        ? explainedYear((int) $date->format('Y'), $calendar)
+        : resolvedYear((int) $date->format('Y'), $calendar);
 
-    return DayContract::from($year->day($date), $year->provenance())->toArray();
+    return DayContract::from(
+        $year->day($date),
+        $year->provenance(),
+        (new CalendarCatalog())->descriptor($calendar)
+    )->toArray();
 }
 
 /**
@@ -49,29 +63,30 @@ function contract(DateTimeImmutable $date, bool $explain = false): array
  *
  * @return array<string, mixed>
  */
-function explain(DateTimeImmutable $date): array
+function explain(DateTimeImmutable $date, ?string $calendar = null): array
 {
-    return contract($date, true);
+    return contract($date, true, $calendar);
 }
 
 /**
  * The resolved civil year, memoised for the life of the process.
  *
- * Shared by {@see day()} and {@see contract()} so a year is resolved at most
- * once regardless of which entry point is called.
+ * Shared by {@see day()} and {@see contract()} so a (year, calendar) pair is
+ * resolved at most once regardless of which entry point is called.
  *
  * @internal Not part of the public contract; the stable API is day()/contract().
  */
-function resolvedYear(int $year): ResolvedYear
+function resolvedYear(int $year, ?string $calendar = null): ResolvedYear
 {
-    /** @var array<int, ResolvedYear> $resolved */
+    /** @var array<string, ResolvedYear> $resolved */
     static $resolved = [];
 
-    if (!isset($resolved[$year])) {
-        $resolved[$year] = DayResolver::for1962()->resolveYear($year);
+    $key = $year . '|' . ($calendar ?? '');
+    if (!isset($resolved[$key])) {
+        $resolved[$key] = (new CalendarCatalog())->resolver($calendar)->resolveYear($year);
     }
 
-    return $resolved[$year];
+    return $resolved[$key];
 }
 
 /**
@@ -81,14 +96,15 @@ function resolvedYear(int $year): ResolvedYear
  *
  * @internal Not part of the public contract; the stable API is explain()/contract().
  */
-function explainedYear(int $year): ResolvedYear
+function explainedYear(int $year, ?string $calendar = null): ResolvedYear
 {
-    /** @var array<int, ResolvedYear> $explained */
+    /** @var array<string, ResolvedYear> $explained */
     static $explained = [];
 
-    if (!isset($explained[$year])) {
-        $explained[$year] = DayResolver::for1962()->explaining()->resolveYear($year);
+    $key = $year . '|' . ($calendar ?? '');
+    if (!isset($explained[$key])) {
+        $explained[$key] = (new CalendarCatalog())->resolver($calendar)->explaining()->resolveYear($year);
     }
 
-    return $explained[$year];
+    return $explained[$key];
 }

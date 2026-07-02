@@ -38,15 +38,25 @@ final class DayContract
 
     private Provenance $provenance;
 
-    private function __construct(LiturgicalDay $day, Provenance $provenance)
+    private ?CalendarDescriptor $calendar;
+
+    private function __construct(LiturgicalDay $day, Provenance $provenance, ?CalendarDescriptor $calendar)
     {
         $this->day = $day;
         $this->provenance = $provenance;
+        $this->calendar = $calendar;
     }
 
-    public static function from(LiturgicalDay $day, Provenance $provenance): self
-    {
-        return new self($day, $provenance);
+    /**
+     * @param CalendarDescriptor|null $calendar the particular calendar the day was
+     *        resolved under (#78), or null for the universal 1962 calendar
+     */
+    public static function from(
+        LiturgicalDay $day,
+        Provenance $provenance,
+        ?CalendarDescriptor $calendar = null
+    ): self {
+        return new self($day, $provenance, $calendar);
     }
 
     /**
@@ -96,8 +106,25 @@ final class DayContract
             'firstVespers' => null,
             'resolution' => $this->resolution(),
             'fasting' => null,
-            'calendar' => null,
+            'calendar' => $this->calendar(),
         ];
+    }
+
+    /**
+     * The `calendar` block. Under the universal 1962 calendar it stays null (the
+     * frozen default shape); when the day was resolved under a particular calendar
+     * (#78) it names that calendar under a `particular` key — additive, leaving room
+     * for the reserved astronomical/lectionary fields (v0.4). See output-contract.md.
+     *
+     * @return array<string, mixed>|null
+     */
+    private function calendar(): ?array
+    {
+        if ($this->calendar === null) {
+            return null;
+        }
+
+        return ['particular' => $this->calendar->toArray()];
     }
 
     /**
