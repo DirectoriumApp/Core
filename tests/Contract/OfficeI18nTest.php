@@ -51,7 +51,7 @@ final class OfficeI18nTest extends TestCase
     public function testTitularsArePresentForSanctoralAndEmptyForTemporal(): void
     {
         self::assertSame(['petrus', 'paulus'], self::firstOffice('2025-06-29', 'celebration')['titulars']);
-        self::assertSame([], self::firstOffice('2025-07-15', 'celebration')['titulars']);
+        self::assertSame([], self::firstOffice('2025-07-11', 'celebration')['titulars']);
     }
 
     /**
@@ -61,7 +61,7 @@ final class OfficeI18nTest extends TestCase
     {
         return [
             'sanctoral feast' => ['2025-06-29', 'celebration'],
-            'temporal feria' => ['2025-07-15', 'celebration'],
+            'temporal feria' => ['2025-07-11', 'celebration'],
         ];
     }
 

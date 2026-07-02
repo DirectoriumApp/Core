@@ -10,6 +10,7 @@ use Introibo\Core\Temporal\ChristmasCycle;
 use Introibo\Core\Temporal\Eastertide;
 use Introibo\Core\Temporal\TemporalObservance;
 use Introibo\Core\Sanctoral\SanctoralCalendar;
+use Introibo\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +24,7 @@ final class SanctoralOctaveTest extends TestCase
 {
     public function testOverlayEmitsNoSanctoralOctaves(): void
     {
-        foreach (SanctoralCalendar::forYear(2025)->all() as $ymd => $offices) {
+        foreach (SanctoralCalendar::forYear(2025, new SeedSanctoralData())->all() as $ymd => $offices) {
             foreach ($offices as $office) {
                 self::assertNotSame('octave-day', $office->kind()->value(), $ymd);
                 self::assertNotSame('within-octave', $office->kind()->value(), $ymd);
@@ -65,7 +66,7 @@ final class SanctoralOctaveTest extends TestCase
         self::assertNotNull($temporal);
         self::assertSame('within-octave', $temporal->kind()->value());
 
-        $sanctoral = SanctoralCalendar::forYear(2024)->on(self::utc('2024-12-26'));
+        $sanctoral = SanctoralCalendar::forYear(2024, new SeedSanctoralData())->on(self::utc('2024-12-26'));
         self::assertCount(1, $sanctoral);
         self::assertSame('roman:sanctorale:stephanus', $sanctoral[0]->id()->toString());
     }

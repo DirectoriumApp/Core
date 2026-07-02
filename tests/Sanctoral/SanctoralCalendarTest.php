@@ -17,6 +17,7 @@ use Introibo\Core\Sanctoral\SanctoralCalendar;
 use Introibo\Core\Sanctoral\SanctoralData;
 use Introibo\Core\Sanctoral\SanctoralEntry;
 use Introibo\Core\Temporal\TemporalObservance;
+use Introibo\Core\Tests\Fixture\SeedSanctoralData;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +25,7 @@ final class SanctoralCalendarTest extends TestCase
 {
     public function testPlacesFeastsOnTheirCivilDates(): void
     {
-        $calendar = SanctoralCalendar::forYear(2025);
+        $calendar = SanctoralCalendar::forYear(2025, new SeedSanctoralData());
 
         self::assertSame(
             'roman:sanctorale:immaculata-conceptio',
@@ -43,7 +44,7 @@ final class SanctoralCalendarTest extends TestCase
     /** December is the representative month: it carries feasts of three classes. */
     public function testRepresentativeMonthIsFullyPlaced(): void
     {
-        $calendar = SanctoralCalendar::forYear(2025);
+        $calendar = SanctoralCalendar::forYear(2025, new SeedSanctoralData());
 
         $december = [
             '2025-12-08' => 'roman:sanctorale:immaculata-conceptio',
@@ -58,7 +59,7 @@ final class SanctoralCalendarTest extends TestCase
 
     public function testEachPlacedOfficeCarriesRankColourIdAndName(): void
     {
-        $office = $this->soleOn(SanctoralCalendar::forYear(2025), '2025-12-08');
+        $office = $this->soleOn(SanctoralCalendar::forYear(2025, new SeedSanctoralData()), '2025-12-08');
 
         self::assertSame('roman:sanctorale:immaculata-conceptio', $office->id()->toString());
         self::assertSame('feast', $office->kind()->value());
@@ -74,7 +75,7 @@ final class SanctoralCalendarTest extends TestCase
      */
     public function testASuppressedSaintIsSeededAsACommemoration(): void
     {
-        $office = $this->soleOn(SanctoralCalendar::forYear(2025), '2025-11-08');
+        $office = $this->soleOn(SanctoralCalendar::forYear(2025, new SeedSanctoralData()), '2025-11-08');
 
         self::assertSame('roman:sanctorale:quatuor-coronati', $office->id()->toString());
         self::assertSame('commemoration-only', $office->kind()->value());
@@ -84,14 +85,14 @@ final class SanctoralCalendarTest extends TestCase
 
     public function testOnReturnsEmptyWhenNoFeastFalls(): void
     {
-        self::assertSame([], SanctoralCalendar::forYear(2025)->on(self::utc('2025-12-09')));
+        self::assertSame([], SanctoralCalendar::forYear(2025, new SeedSanctoralData())->on(self::utc('2025-12-09')));
     }
 
     /** The seed spans every rank class, so the loader must realize all four. */
     public function testSeedExercisesAllFourRankClasses(): void
     {
         $labels = [];
-        foreach (SanctoralCalendar::forYear(2025)->all() as $offices) {
+        foreach (SanctoralCalendar::forYear(2025, new SeedSanctoralData())->all() as $offices) {
             foreach ($offices as $office) {
                 $labels[$office->rank()->label()] = true;
             }
@@ -107,7 +108,7 @@ final class SanctoralCalendarTest extends TestCase
         // The sanctoral side, at runtime…
         self::assertInstanceOf(
             RealizedObservance::class,
-            $this->soleOn(SanctoralCalendar::forYear(2025), '2025-08-15')
+            $this->soleOn(SanctoralCalendar::forYear(2025, new SeedSanctoralData()), '2025-08-15')
         );
         // …and the temporal side, structurally: the seam both cycles share.
         self::assertContains(RealizedObservance::class, class_implements(TemporalObservance::class));
@@ -127,7 +128,7 @@ final class SanctoralCalendarTest extends TestCase
 
     public function testDaysAreInChronologicalOrder(): void
     {
-        $keys = array_keys(SanctoralCalendar::forYear(2025)->all());
+        $keys = array_keys(SanctoralCalendar::forYear(2025, new SeedSanctoralData())->all());
         $sorted = $keys;
         sort($sorted);
 

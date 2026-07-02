@@ -7,7 +7,7 @@ namespace Introibo\Core\Tests\Sanctoral;
 use Introibo\Core\Corpus\Corpus;
 use Introibo\Core\Sanctoral\CorpusSanctoralData;
 use Introibo\Core\Sanctoral\SanctoralEntry;
-use Introibo\Core\Sanctoral\SeedSanctoralData;
+use Introibo\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 final class CorpusSanctoralDataTest extends TestCase

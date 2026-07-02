@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Sanctoral;
+namespace Introibo\Core\Tests\Fixture;
 
 use Introibo\Core\Attribute\Colour;
 use Introibo\Core\Attribute\ElementColour;
@@ -10,27 +10,29 @@ use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\Observance;
 use Introibo\Core\Observance\ObservanceId;
 use Introibo\Core\Observance\ObservanceKind;
+use Introibo\Core\Sanctoral\SanctoralData;
+use Introibo\Core\Sanctoral\SanctoralEntry;
 
 /**
- * A provisional, representative seed of the 1962 General Roman Calendar's
- * fixed-date sanctoral entries.
+ * A small, representative, 100%-correct slice of the 1962 sanctoral — the test
+ * fixture the engine was proven against before the cited corpus existed.
  *
- * This is NOT the complete calendar. It is a deliberately small, cited,
- * 100%-correct slice chosen to exercise every overlay mechanism: each rank
- * class (I–IV), a feast in the surviving Christmas octave, the bissextile
- * candidates (St Matthias 24 Feb, St Gabriel 27 Feb), and — added in #27 — the
- * surviving vigils. The full, cited General Calendar is authored by the corpus
- * epic (#38); when it lands it provides another {@see SanctoralData}
- * implementation and this seed is retired. See
- * docs/design/sanctoral-overlay-model.md for the seed rationale and sources.
+ * It was the engine's provisional {@see SanctoralData} through the overlay,
+ * precedence, and contract epics; the cited {@see \Introibo\Core\Sanctoral\CorpusSanctoralData}
+ * (issue #41) is now the production source, and this seed is retained here as a
+ * controlled fixture. Its 21 entries are the verified anchors the corpus must
+ * reproduce byte for byte (see the CorpusSanctoralData test), and they exercise
+ * every overlay mechanism: each rank class (I–IV), the bissextile candidates
+ * (St Matthias 24 Feb, St Gabriel 27 Feb), the surviving Christmas-octave feasts,
+ * and the surviving vigils. Tests that need a known, sparse calendar inject this
+ * fixture rather than the full production corpus.
  */
 final class SeedSanctoralData implements SanctoralData
 {
     /**
      * The version stamp for this seed corpus, dated to when the slice was last
      * revised. It names only the data build — no edition token — so the same
-     * seed can be resolved under any edition. The cited corpus generator (#38)
-     * supplies its own build id in its place.
+     * seed can be resolved under any edition.
      */
     public function version(): string
     {
@@ -147,13 +149,6 @@ final class SeedSanctoralData implements SanctoralData
     }
 
     /**
-     * Build one fixed-date entry. Rank is given as its ordinal (1 = class I,
-     * highest) and colour by its machine name; both are widened to their value
-     * objects here to keep the table above readable. The kind defaults to a
-     * feast; a saint suppressed under the 1960 reform and kept only as a
-     * commemoration passes {@see ObservanceKind::COMMEMORATION_ONLY} (there is
-     * no IV-class saints' *feast* in 1962 — IV models the commemoration tier).
-     *
      * @param list<string> $titulars
      */
     private function entry(
@@ -183,10 +178,6 @@ final class SeedSanctoralData implements SanctoralData
     }
 
     /**
-     * Build one surviving sanctoral vigil, kept on the day before its feast and
-     * carrying the feast's id as its parent link. Vigils are violet under the
-     * 1960 rubrics.
-     *
      * @param list<string> $titulars
      */
     private function vigil(

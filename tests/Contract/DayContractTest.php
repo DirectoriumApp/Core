@@ -41,7 +41,7 @@ final class DayContractTest extends TestCase
             'engineVersion' => '0.4.0',
             'rite' => 'roman',
             'edition' => 'roman:rubricae-1960',
-            'date' => '2025-07-15',
+            'date' => '2025-07-11',
             'season' => 'pentecost',
             'commemorationLimit' => 2,
             'celebration' => [self::pentecostFeria('celebration')],
@@ -60,7 +60,7 @@ final class DayContractTest extends TestCase
             'calendar' => null,
         ];
 
-        self::assertSame($expected, contract(self::utc('2025-07-15')));
+        self::assertSame($expected, contract(self::utc('2025-07-11')));
     }
 
     /** The three provenance axes are present, well-formed, and independent (corpus carries no edition token). */
@@ -191,8 +191,8 @@ final class DayContractTest extends TestCase
     private static function pentecostFeria(string $role): array
     {
         return [
-            'id' => 'roman:temporale:paschal:pentecost-time:week-5:feria-3',
-            'urn' => 'introibo:observance:roman:temporale:paschal:pentecost-time:week-5:feria-3',
+            'id' => 'roman:temporale:paschal:pentecost-time:week-4:feria-6',
+            'urn' => 'introibo:observance:roman:temporale:paschal:pentecost-time:week-4:feria-6',
             'role' => $role,
             'kind' => 'feria',
             'rank' => 'IV',
@@ -202,7 +202,7 @@ final class DayContractTest extends TestCase
                 'base' => 'green',
                 'roseAllowed' => false,
             ],
-            'names' => ['la' => 'Feria III infra Hebdomadam V post Octavam Pentecostes'],
+            'names' => ['la' => 'Feria VI infra Hebdomadam IV post Octavam Pentecostes'],
             'titulars' => [],
             'outcome' => null,
             'transferredTo' => null,
