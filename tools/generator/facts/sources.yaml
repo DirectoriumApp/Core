@@ -1,0 +1,30 @@
+# The corpus source registry — the authoritative list of works every `cite`/`cites`
+# marker foreign-keys into. Generated to data/corpus/sources.ndjson.
+#
+#   kind: text      — a transcribable work; a Latin title may be taken from it.
+#         reference — consult-only; cited for uncopyrightable facts, never transcribed.
+#         oracle    — validation input only (issue #45).
+#   rights: public-domain — a title may be transcribed from it.
+#           reference     — consult-only.
+#           oracle        — validation only.
+#
+# The provenance gate enforces the clean-room rule: a transcribed name (names.*,
+# nameOverride.*) must cite a `text` source whose rights are `public-domain`. Facts
+# (rank, colour, month, day) may cite any registered source.
+
+- key: mr-1920
+  urn: introibo:source:mr-1920
+  kind: text
+  title: "Missale Romanum, editio typica"
+  publisher: "Typis Polyglottis Vaticanis"
+  year: 1920
+  rights: public-domain
+  note: "Public domain by age. The source for transcribed Latin titles in this set."
+
+- key: rg-1960
+  urn: introibo:source:rg-1960
+  kind: reference
+  title: "Rubricae Generales / Codex Rubricarum (1960)"
+  year: 1960
+  rights: reference
+  note: "Consult-only. Cited for uncopyrightable facts (rank, colour, date); never transcribed."

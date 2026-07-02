@@ -6,12 +6,13 @@
 // The output is committed to the repository. Consumers (the PHP engine) load the
 // committed files and never run this generator — Node is build-time only.
 
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, copyFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadYaml } from './facts.mjs';
 import { makeValidators, validateAll } from './validate.mjs';
 import { transformSanctorale } from './transform.mjs';
+import { checkProvenance, usedSources } from './provenance.mjs';
 import { toNdjson, toPretty, sha256 } from './canonical.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -19,6 +20,7 @@ export const GENERATOR_DIR = join(HERE, '..');
 export const CORE_DIR = join(GENERATOR_DIR, '..', '..');
 export const SCHEMA_DIR = join(CORE_DIR, 'data', 'corpus', 'schema');
 export const FACTS_DIR = join(GENERATOR_DIR, 'facts');
+export const TEMPLATES_DIR = join(GENERATOR_DIR, 'templates');
 export const DEFAULT_OUT = join(CORE_DIR, 'data', 'corpus');
 
 /** Sort records by their `id` primary key in code-unit order (stable, explicit). */
@@ -39,6 +41,10 @@ export function build(outDir = DEFAULT_OUT) {
   const edition = meta.edition;
   const entries = loadYaml(join(FACTS_DIR, 'sanctorale.yaml'));
 
+  const sources = loadYaml(join(FACTS_DIR, 'sources.yaml')).sort((a, b) =>
+    a.key < b.key ? -1 : a.key > b.key ? 1 : 0,
+  );
+
   const { identity, attributes, placement } = transformSanctorale(entries, edition);
   identity.sort(byId);
   attributes.sort(byId);
@@ -49,22 +55,40 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),
     ...validateAll(validators['attributes.sanctorale'], attributes, 'attributes.sanctorale'),
     ...validateAll(validators['placement.sanctorale'], placement, 'placement.sanctorale'),
+    ...validateAll(validators['source'], sources, 'source'),
   ];
   if (errors.length > 0) {
     throw new Error('Corpus schema validation failed:\n  ' + errors.join('\n  '));
   }
 
-  // Declared primary sort key per file is `id`; records were sorted above.
+  // Born-cited provenance gate: fail closed on any uncited string, dangling
+  // source key, or title transcribed from a non-public-domain source.
+  const { problems, usage } = checkProvenance(
+    [
+      { shape: 'identity.sanctorale', records: identity },
+      { shape: 'attributes.sanctorale', records: attributes },
+      { shape: 'placement.sanctorale', records: placement },
+    ],
+    sources,
+  );
+  if (problems.length > 0) {
+    throw new Error('Corpus provenance gate failed:\n  ' + problems.join('\n  '));
+  }
+
+  // Declared primary sort key per file; records were sorted above.
   const outputs = {
-    'identity/sanctorale.ndjson': { text: toNdjson(identity), records: identity.length },
+    'identity/sanctorale.ndjson': { text: toNdjson(identity), records: identity.length, primaryKey: 'id' },
     [`editions/${edition}/attributes.sanctorale.ndjson`]: {
       text: toNdjson(attributes),
       records: attributes.length,
+      primaryKey: 'id',
     },
     [`editions/${edition}/placement.sanctorale.ndjson`]: {
       text: toNdjson(placement),
       records: placement.length,
+      primaryKey: 'id',
     },
+    'sources.ndjson': { text: toNdjson(sources), records: sources.length, primaryKey: 'key' },
   };
 
   const relPaths = Object.keys(outputs).sort();
@@ -74,11 +98,16 @@ export function build(outDir = DEFAULT_OUT) {
     writeFileSync(dest, outputs[rel].text);
   }
 
+  // Stamp the dataset CC0 by copying the canonical licence text into the tree.
+  const licenseDest = join(outDir, 'LICENSE.txt');
+  mkdirSync(dirname(licenseDest), { recursive: true });
+  copyFileSync(join(TEMPLATES_DIR, 'CC0-1.0.txt'), licenseDest);
+
   const files = {};
   for (const rel of relPaths) {
     files[rel] = {
       records: outputs[rel].records,
-      primaryKey: 'id',
+      primaryKey: outputs[rel].primaryKey,
       sha256: sha256(outputs[rel].text),
     };
   }
@@ -87,11 +116,12 @@ export function build(outDir = DEFAULT_OUT) {
     generator: meta.generator || '@introibo/corpus-generator',
     license: 'CC0-1.0',
     editions: [edition],
+    sources: usedSources(sources, usage),
     files,
   };
   writeFileSync(join(outDir, 'MANIFEST.json'), toPretty(manifest));
 
-  return [...relPaths, 'MANIFEST.json'].sort();
+  return [...relPaths, 'MANIFEST.json', 'LICENSE.txt'].sort();
 }
 
 // CLI entry point (`npm run build`).

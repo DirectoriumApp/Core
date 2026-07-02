@@ -20,21 +20,33 @@ npm run verify    # assert the build is reproducible and matches the committed c
 
 ```
 facts/*.yaml  →  transform  →  validate (data/corpus/schema, draft 2020-12)
-              →  canonical serialize  →  data/corpus/**.ndjson + MANIFEST.json
+              →  provenance gate  →  canonical serialize
+              →  data/corpus/**.ndjson + sources.ndjson + MANIFEST.json + LICENSE.txt
 ```
 
 - **facts/** — the clean-room boundary. A human asserts each fact together with a
   citation (`cites: { field: source-key }`); the generator never scrapes.
+  `facts/sources.yaml` is the source registry every citation resolves into.
 - **src/canonical.mjs** — byte-stable serialization: keys sorted by code unit,
   compact NDJSON with a trailing LF, no wall clock, no randomness, no floats. The
   corpus version comes from `facts/meta.yaml`, never the clock.
 - **src/validate.mjs** — validates every emitted record against the frozen corpus
   schemas (issue #39), so an invalid record fails the build, not review.
+- **src/provenance.mjs** — the born-cited gate: the build fails closed if any
+  human-readable string lacks a citation, any citation points at an unregistered
+  source, or a transcribed title cites a non-public-domain source (clean room).
 - **src/verify.mjs** — the reproducibility gate CI runs: two fresh builds must be
   byte-identical (determinism) and must match the committed corpus (freshness).
 
+## Licensing
+
+The generated corpus is uncopyrightable facts, dedicated to the public domain
+under **CC0-1.0** (`data/corpus/LICENSE.txt`, and `MANIFEST.json`'s `license`).
+`REUSE.toml` records the split machine-verifiably: the engine and this generator
+are AGPL-3.0-or-later, the corpus is CC0.
+
 ## Scope
 
-This is the pipeline skeleton (issue #40), proven on the sanctoral shapes. The full
-1962 sanctoral dataset (#41), temporal definitions (#42), precedence table (#43),
-and the born-cited provenance gate + CC0 licensing (#44) build on it.
+The pipeline skeleton (#40) and born-cited provenance + CC0 (#44) are in place,
+proven on the sanctoral shapes. The full 1962 sanctoral dataset (#41), temporal
+definitions (#42), and precedence table (#43) build on them.
