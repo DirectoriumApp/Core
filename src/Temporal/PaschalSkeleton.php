@@ -12,12 +12,12 @@ use InvalidArgumentException;
  * The paschal skeleton: every movable point of the temporal cycle that is
  * anchored to Easter, for one year.
  *
- * Each anchor is defined purely as a signed day-offset from Easter Sunday (the
- * {@see OFFSETS} table), so nothing is hard-coded to a civil date — the actual
- * dates are derived by counting days from {@see Computus::gregorianEaster()}.
- * Because the arithmetic is done in whole days, February 29 in a leap year is
- * handled for free: Ash Wednesday is always exactly 46 days before Easter, leap
- * year or not.
+ * Each anchor is defined purely as a signed day-offset from Easter Sunday, read
+ * from the corpus temporal skeleton via {@see TemporalDefinitions} (#42), so
+ * nothing is hard-coded to a civil date — the actual dates are derived by counting
+ * days from {@see Computus::gregorianEaster()}. Because the arithmetic is done in
+ * whole days, February 29 in a leap year is handled for free: Ash Wednesday is
+ * always exactly 46 days before Easter, leap year or not.
  *
  * These anchors are the load-bearing points the temporal-block fillers count
  * from (Septuagesima → Lent → Passiontide → Triduum → Eastertide → Pentecost
@@ -27,42 +27,11 @@ use InvalidArgumentException;
 final class PaschalSkeleton
 {
     /**
-     * Anchor slug => signed offset in days from Easter Sunday.
+     * The offset table read from the corpus, memoised for the process.
      *
-     * @var array<string, int>
+     * @var array<string, int>|null
      */
-    private const OFFSETS = [
-        'septuagesima' => -63,
-        'sexagesima' => -56,
-        'quinquagesima' => -49,
-        'ash-wednesday' => -46,
-        'lent-1' => -42,
-        'lent-ember-wednesday' => -39,
-        'lent-ember-friday' => -37,
-        'lent-ember-saturday' => -36,
-        'lent-2' => -35,
-        'lent-3' => -28,
-        'lent-4' => -21,
-        'passion-sunday' => -14,
-        'palm-sunday' => -7,
-        'maundy-thursday' => -3,
-        'good-friday' => -2,
-        'holy-saturday' => -1,
-        'easter' => 0,
-        'low-sunday' => 7,
-        'rogation-monday' => 36,
-        'rogation-tuesday' => 37,
-        'rogation-wednesday' => 38,
-        'ascension' => 39,
-        'sunday-after-ascension' => 42,
-        'pentecost' => 49,
-        'whit-ember-wednesday' => 52,
-        'whit-ember-friday' => 54,
-        'whit-ember-saturday' => 55,
-        'trinity-sunday' => 56,
-        'corpus-christi' => 60,
-        'sacred-heart' => 68,
-    ];
+    private static ?array $offsets = null;
 
     private DateTimeImmutable $easter;
 
@@ -93,15 +62,16 @@ final class PaschalSkeleton
      */
     public function date(string $anchor): DateTimeImmutable
     {
-        if (!isset(self::OFFSETS[$anchor])) {
+        $offsets = self::offsets();
+        if (!isset($offsets[$anchor])) {
             throw new InvalidArgumentException(sprintf(
                 'Unknown paschal anchor "%s"; valid anchors: %s',
                 $anchor,
-                implode(', ', array_keys(self::OFFSETS))
+                implode(', ', array_keys($offsets))
             ));
         }
 
-        return $this->shift(self::OFFSETS[$anchor]);
+        return $this->shift($offsets[$anchor]);
     }
 
     /**
@@ -112,7 +82,7 @@ final class PaschalSkeleton
     public function all(): array
     {
         $dates = [];
-        foreach (self::OFFSETS as $anchor => $offset) {
+        foreach (self::offsets() as $anchor => $offset) {
             $dates[$anchor] = $this->shift($offset);
         }
 
@@ -120,13 +90,21 @@ final class PaschalSkeleton
     }
 
     /**
-     * The offset table: anchor slug => days from Easter.
+     * The offset table: anchor slug => days from Easter, read from the corpus
+     * temporal skeleton (#42) and memoised for the process. Kept in chronological
+     * order (ascending offset) so callers see the anchors as the year unfolds.
      *
      * @return array<string, int>
      */
     public static function offsets(): array
     {
-        return self::OFFSETS;
+        if (self::$offsets === null) {
+            $map = TemporalDefinitions::default()->easterOffsets();
+            asort($map);
+            self::$offsets = $map;
+        }
+
+        return self::$offsets;
     }
 
     public function septuagesima(): DateTimeImmutable

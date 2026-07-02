@@ -48,27 +48,6 @@ final class Season
         self::PENTECOST,
     ];
 
-    /**
-     * The coarse temporal blocks of the Proper of Time, each mapped to the
-     * season it belongs to. This is the seam the temporal factory feeds: a
-     * block is a contiguous named stretch of the temporal cycle, and several
-     * blocks may share one season — Passion Week and Holy Week are both
-     * Passiontide.
-     *
-     * @var array<string, string>
-     */
-    private const BLOCK_SEASONS = [
-        'advent' => self::ADVENT,
-        'christmastide' => self::CHRISTMASTIDE,
-        'time-after-epiphany' => self::EPIPHANY,
-        'septuagesima' => self::SEPTUAGESIMA,
-        'lent' => self::LENT,
-        'passiontide' => self::PASSIONTIDE,
-        'holy-week' => self::PASSIONTIDE,
-        'eastertide' => self::EASTERTIDE,
-        'time-after-pentecost' => self::PENTECOST,
-    ];
-
     private string $value;
 
     private function __construct(string $value)
@@ -91,21 +70,25 @@ final class Season
 
     /**
      * Map a coarse temporal block — a named stretch of the Proper of Time — to
-     * the season it belongs to.
+     * the season it belongs to. The mapping is read from the corpus temporal
+     * skeleton (#42) via {@see TemporalDefinitions}: a block is a contiguous named
+     * stretch of the temporal cycle, and several blocks may share one season
+     * (Passion Week and Holy Week are both Passiontide).
      *
      * @throws InvalidArgumentException if the block is not a known temporal block
      */
     public static function forBlock(string $block): self
     {
-        if (!isset(self::BLOCK_SEASONS[$block])) {
+        $blockSeasons = TemporalDefinitions::default()->blockSeasons();
+        if (!isset($blockSeasons[$block])) {
             throw new InvalidArgumentException(sprintf(
                 'Unknown temporal block "%s"; valid blocks: %s',
                 $block,
-                implode(', ', array_keys(self::BLOCK_SEASONS))
+                implode(', ', array_keys($blockSeasons))
             ));
         }
 
-        return new self(self::BLOCK_SEASONS[$block]);
+        return self::fromString($blockSeasons[$block]);
     }
 
     public static function advent(): self

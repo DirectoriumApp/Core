@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadYaml } from './facts.mjs';
 import { makeValidators, validateAll } from './validate.mjs';
-import { transformSanctorale } from './transform.mjs';
+import { transformSanctorale, transformTemporalSkeleton } from './transform.mjs';
 import { checkProvenance, usedSources } from './provenance.mjs';
 import { toNdjson, toPretty, sha256 } from './canonical.mjs';
 
@@ -50,11 +50,17 @@ export function build(outDir = DEFAULT_OUT) {
   attributes.sort(byId);
   placement.sort(byId);
 
+  const { offsets, blockSeasons } = transformTemporalSkeleton(
+    loadYaml(join(FACTS_DIR, 'temporal-skeleton.yaml')),
+  );
+
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),
     ...validateAll(validators['attributes.sanctorale'], attributes, 'attributes.sanctorale'),
     ...validateAll(validators['placement.sanctorale'], placement, 'placement.sanctorale'),
+    ...validateAll(validators['temporal-skeleton'], offsets, 'temporal-skeleton'),
+    ...validateAll(validators['temporal-skeleton'], blockSeasons, 'temporal-skeleton'),
     ...validateAll(validators['source'], sources, 'source'),
   ];
   if (errors.length > 0) {
@@ -71,6 +77,19 @@ export function build(outDir = DEFAULT_OUT) {
     ],
     sources,
   );
+
+  // The temporal-skeleton rows carry no human-readable strings, only a single
+  // `cite` per structural fact — still every cite must resolve to a registered
+  // source (the clean-room rule), and its use is counted for the manifest report.
+  const sourceKeys = new Set(sources.map((source) => source.key));
+  for (const row of [...offsets, ...blockSeasons]) {
+    const key = String(row.cite).split(':')[0];
+    usage.set(key, (usage.get(key) || 0) + 1);
+    if (!sourceKeys.has(key)) {
+      problems.push(`temporal-skeleton ${row.slot || row.block}: cites unknown source "${key}"`);
+    }
+  }
+
   if (problems.length > 0) {
     throw new Error('Corpus provenance gate failed:\n  ' + problems.join('\n  '));
   }
@@ -87,6 +106,12 @@ export function build(outDir = DEFAULT_OUT) {
       text: toNdjson(placement),
       records: placement.length,
       primaryKey: 'id',
+    },
+    'temporal/easter-offsets.ndjson': { text: toNdjson(offsets), records: offsets.length, primaryKey: 'slot' },
+    'temporal/block-seasons.ndjson': {
+      text: toNdjson(blockSeasons),
+      records: blockSeasons.length,
+      primaryKey: 'block',
     },
     'sources.ndjson': { text: toNdjson(sources), records: sources.length, primaryKey: 'key' },
   };

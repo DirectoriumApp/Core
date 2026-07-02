@@ -23,6 +23,16 @@
       "primaryKey": "key",
       "records": 2,
       "sha256": "b5d72463b5672d5723db245db26f26c1d82c1fde399becf09c3e513d2b521f41"
+    },
+    "temporal/block-seasons.ndjson": {
+      "primaryKey": "block",
+      "records": 9,
+      "sha256": "fa6eca2c29f81659dd8e41f09f7ae1af8fbee89be6b1e2c45f11ba4767a4e84e"
+    },
+    "temporal/easter-offsets.ndjson": {
+      "primaryKey": "slot",
+      "records": 30,
+      "sha256": "47b672d23649d479af21e20ff72a6b156f43ad604d660c8c18e0365bd1a722bd"
     }
   },
   "generator": "@introibo/corpus-generator",
@@ -42,7 +52,7 @@
       "rights": "reference",
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "introibo:source:rg-1960",
-      "uses": 1188
+      "uses": 1227
     }
   ]
 }

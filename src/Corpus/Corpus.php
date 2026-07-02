@@ -139,6 +139,26 @@ final class Corpus
         return $this->records('editions/' . $editionDir . '/placement.sanctorale.ndjson');
     }
 
+    /**
+     * The edition-invariant Easter-offset rows (slot, offset in days from Easter).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function easterOffsets(): array
+    {
+        return $this->records('temporal/easter-offsets.ndjson');
+    }
+
+    /**
+     * The edition-invariant block->season rows.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function blockSeasons(): array
+    {
+        return $this->records('temporal/block-seasons.ndjson');
+    }
+
     private function read(string $path): string
     {
         $contents = @file_get_contents($path);

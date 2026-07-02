@@ -1,0 +1,55 @@
+# Cited temporal skeleton — the edition-invariant structural facts the Paschal
+# computation consumes: the signed day-offset of every Easter-anchored point, and
+# the season each coarse temporal block belongs to. Date ARITHMETIC stays in PHP
+# (the fillers count days from Gregorian Easter); only these facts are data.
+#
+# Every row is cited. The offsets and block-season assignments are structural
+# facts of the 1962 temporal cycle, cited to the 1960 rubrics (rg-1960).
+#
+#   easterOffsets: slot -> signed days from Easter Sunday (0). The Major Rogation
+#     (25 Apr) is a fixed civil date, not Easter-relative, so it is not here.
+#   blockSeasons:  coarse block -> the season it belongs to (several blocks may
+#     share one season: Passion Week and Holy Week are both Passiontide).
+
+easterOffsets:
+  - { slot: septuagesima, offset: -63, cite: rg-1960 }
+  - { slot: sexagesima, offset: -56, cite: rg-1960 }
+  - { slot: quinquagesima, offset: -49, cite: rg-1960 }
+  - { slot: ash-wednesday, offset: -46, cite: rg-1960 }
+  - { slot: lent-1, offset: -42, cite: rg-1960 }
+  - { slot: lent-ember-wednesday, offset: -39, cite: rg-1960 }
+  - { slot: lent-ember-friday, offset: -37, cite: rg-1960 }
+  - { slot: lent-ember-saturday, offset: -36, cite: rg-1960 }
+  - { slot: lent-2, offset: -35, cite: rg-1960 }
+  - { slot: lent-3, offset: -28, cite: rg-1960 }
+  - { slot: lent-4, offset: -21, cite: rg-1960 }
+  - { slot: passion-sunday, offset: -14, cite: rg-1960 }
+  - { slot: palm-sunday, offset: -7, cite: rg-1960 }
+  - { slot: maundy-thursday, offset: -3, cite: rg-1960 }
+  - { slot: good-friday, offset: -2, cite: rg-1960 }
+  - { slot: holy-saturday, offset: -1, cite: rg-1960 }
+  - { slot: easter, offset: 0, cite: rg-1960 }
+  - { slot: low-sunday, offset: 7, cite: rg-1960 }
+  - { slot: rogation-monday, offset: 36, cite: rg-1960 }
+  - { slot: rogation-tuesday, offset: 37, cite: rg-1960 }
+  - { slot: rogation-wednesday, offset: 38, cite: rg-1960 }
+  - { slot: ascension, offset: 39, cite: rg-1960 }
+  - { slot: sunday-after-ascension, offset: 42, cite: rg-1960 }
+  - { slot: pentecost, offset: 49, cite: rg-1960 }
+  - { slot: whit-ember-wednesday, offset: 52, cite: rg-1960 }
+  - { slot: whit-ember-friday, offset: 54, cite: rg-1960 }
+  - { slot: whit-ember-saturday, offset: 55, cite: rg-1960 }
+  - { slot: trinity-sunday, offset: 56, cite: rg-1960 }
+  - { slot: corpus-christi, offset: 60, cite: rg-1960 }
+  - { slot: sacred-heart, offset: 68, cite: rg-1960 }
+
+blockSeasons:
+  - { block: advent, season: advent, cite: rg-1960 }
+  - { block: christmastide, season: christmastide, cite: rg-1960 }
+  - { block: time-after-epiphany, season: epiphany, cite: rg-1960 }
+  - { block: septuagesima, season: septuagesima, cite: rg-1960 }
+  - { block: lent, season: lent, cite: rg-1960 }
+  - { block: passiontide, season: passiontide, cite: rg-1960 }
+  - { block: holy-week, season: passiontide, cite: rg-1960 }
+  - { block: eastertide, season: eastertide, cite: rg-1960 }
+  - { block: time-after-pentecost, season: pentecost, cite: rg-1960 }
