@@ -1,4 +1,4 @@
-# Cited 1962 sanctoral facts — skeleton set.
+# Cited 1962 sanctoral facts.
 #
 # Each entry states its edition-invariant identity (id, kind, titulars, names) once
 # and its per-edition realization under the edition key (rank, colour, month, day).
@@ -9,8 +9,70 @@
 #   mr-1920  — Missale Romanum (1920, public domain) — for the Latin titles.
 #   rg-1960  — Rubricarum generalium (the 1960 New Rubrics) — for rank/colour/date.
 #
-# This is a representative set that proves the pipeline end to end; the full
-# ~200-entry General Calendar lands in #41. Ranks: 1 = class I ... 4 = class IV.
+# Names are Latin-first (`la`), the invariant fallback the engine requires;
+# vernacular locales are added progressively in later work, each still cited.
+# Ranks: 1 = class I (highest) … 4 = the commemoration tier. Vigils are violet
+# under the 1960 rubrics and carry `vigilOf` linking to their feast.
+#
+# This set reproduces, byte for byte in resolved output, the entries the retired
+# SeedSanctoralData carried, so the corpus swap (#41) is a provable no-op before
+# the calendar is expanded. See docs/design/sanctoral-overlay-model.md.
+
+- id: roman:sanctorale:cathedra-petri
+  kind: feast
+  titulars: [petrus]
+  names:
+    la: "Cathedra S. Petri Apostoli"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: white
+    month: 2
+    day: 22
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:matthias
+  kind: feast
+  titulars: [matthias]
+  names:
+    la: "S. Matthiae Apostoli"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: red
+    month: 2
+    day: 24
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:gabriel-a-virgine-perdolente
+  kind: feast
+  titulars: [gabriel-a-virgine-perdolente]
+  names:
+    la: "S. Gabrielis a Virgine Perdolente Confessoris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 3
+    colour: white
+    month: 2
+    day: 27
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:thomas-aquinas
+  kind: feast
+  titulars: [thomas-aquinas]
+  names:
+    la: "S. Thomae de Aquino Confessoris et Ecclesiae Doctoris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 3
+    colour: white
+    month: 3
+    day: 7
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:ioseph
   kind: feast
@@ -26,15 +88,71 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+- id: roman:sanctorale:annuntiatio
+  kind: feast
+  titulars: [maria]
+  names:
+    la: "In Annuntiatione B.M.V."
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: white
+    month: 3
+    day: 25
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:ioannes-baptista:vigilia
+  kind: vigil
+  titulars: [ioannes-baptista]
+  names:
+    la: "In Vigilia S. Ioannis Baptistae"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: violet
+    month: 6
+    day: 23
+    vigilOf: roman:sanctorale:nativitas-ioannis-baptistae
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:nativitas-ioannis-baptistae
+  kind: feast
+  titulars: [ioannes-baptista]
+  names:
+    la: "In Nativitate S. Ioannis Baptistae"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: white
+    month: 6
+    day: 24
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:petrus-paulus:vigilia
+  kind: vigil
+  titulars: [petrus, paulus]
+  names:
+    la: "In Vigilia Ss. Petri et Pauli Apostolorum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: violet
+    month: 6
+    day: 28
+    vigilOf: roman:sanctorale:petrus-paulus
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
 - id: roman:sanctorale:petrus-paulus
   kind: feast
   titulars: [petrus, paulus]
   names:
     la: "Ss. Petri et Pauli Apostolorum"
-    en: "Ss. Peter and Paul, Apostles"
   cites:
     names.la: mr-1920
-    names.en: mr-1920
   roman-rubricae-1960:
     rank: 1
     colour: red
@@ -42,17 +160,17 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
-- id: roman:sanctorale:laurentius
+- id: roman:sanctorale:septem-fratres
   kind: feast
-  titulars: [laurentius]
+  titulars: [septem-fratres]
   names:
-    la: "S. Laurentii Martyris"
+    la: "Ss. Septem Fratrum Martyrum ac Rufinae et Secundae Virginum et Martyrum"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 2
+    rank: 3
     colour: red
-    month: 8
+    month: 7
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
@@ -71,6 +189,63 @@
     vigilOf: roman:sanctorale:laurentius
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+- id: roman:sanctorale:laurentius
+  kind: feast
+  titulars: [laurentius]
+  names:
+    la: "S. Laurentii Martyris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: red
+    month: 8
+    day: 10
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:assumptio:vigilia
+  kind: vigil
+  titulars: [maria]
+  names:
+    la: "In Vigilia Assumptionis B.M.V."
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: violet
+    month: 8
+    day: 14
+    vigilOf: roman:sanctorale:assumptio
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:assumptio
+  kind: feast
+  titulars: [maria]
+  names:
+    la: "In Assumptione B.M.V."
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: white
+    month: 8
+    day: 15
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:omnes-sancti
+  kind: feast
+  titulars: [omnes-sancti]
+  names:
+    la: "Festum Omnium Sanctorum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: white
+    month: 11
+    day: 1
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
 - id: roman:sanctorale:quatuor-coronati
   kind: commemoration-only
   titulars: [quatuor-coronati]
@@ -83,4 +258,60 @@
     colour: red
     month: 11
     day: 8
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:immaculata-conceptio
+  kind: feast
+  titulars: [maria]
+  names:
+    la: "In Conceptione Immaculata B.M.V."
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 1
+    colour: white
+    month: 12
+    day: 8
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:stephanus
+  kind: feast
+  titulars: [stephanus]
+  names:
+    la: "S. Stephani Protomartyris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: red
+    month: 12
+    day: 26
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:ioannes-evangelista
+  kind: feast
+  titulars: [ioannes-evangelista]
+  names:
+    la: "S. Ioannis Apostoli et Evangelistae"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: white
+    month: 12
+    day: 27
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:innocentes
+  kind: feast
+  titulars: [innocentes]
+  names:
+    la: "Ss. Innocentium Martyrum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: red
+    month: 12
+    day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }

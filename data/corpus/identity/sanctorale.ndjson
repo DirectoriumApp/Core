@@ -1,5 +1,21 @@
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:annuntiatio","kind":"feast","names":{"la":"In Annuntiatione B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:assumptio","kind":"feast","names":{"la":"In Assumptione B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:assumptio:vigilia","kind":"vigil","names":{"la":"In Vigilia Assumptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cathedra-petri","kind":"feast","names":{"la":"Cathedra S. Petri Apostoli"},"titulars":["petrus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gabriel-a-virgine-perdolente","kind":"feast","names":{"la":"S. Gabrielis a Virgine Perdolente Confessoris"},"titulars":["gabriel-a-virgine-perdolente"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio","kind":"feast","names":{"la":"In Conceptione Immaculata B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:innocentes","kind":"feast","names":{"la":"Ss. Innocentium Martyrum"},"titulars":["innocentes"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-baptista:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Ioannis Baptistae"},"titulars":["ioannes-baptista"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-evangelista","kind":"feast","names":{"la":"S. Ioannis Apostoli et Evangelistae"},"titulars":["ioannes-evangelista"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioseph","kind":"feast","names":{"la":"S. Ioseph Sponsi B.M.V. Confessoris"},"titulars":["ioseph"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius","kind":"feast","names":{"la":"S. Laurentii Martyris"},"titulars":["laurentius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Laurentii Martyris"},"titulars":["laurentius"]}
-{"cites":{"names.en":"mr-1920","names.la":"mr-1920"},"id":"roman:sanctorale:petrus-paulus","kind":"feast","names":{"en":"Ss. Peter and Paul, Apostles","la":"Ss. Petri et Pauli Apostolorum"},"titulars":["petrus","paulus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:matthias","kind":"feast","names":{"la":"S. Matthiae Apostoli"},"titulars":["matthias"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:nativitas-ioannis-baptistae","kind":"feast","names":{"la":"In Nativitate S. Ioannis Baptistae"},"titulars":["ioannes-baptista"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti","kind":"feast","names":{"la":"Festum Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus-paulus","kind":"feast","names":{"la":"Ss. Petri et Pauli Apostolorum"},"titulars":["petrus","paulus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus-paulus:vigilia","kind":"vigil","names":{"la":"In Vigilia Ss. Petri et Pauli Apostolorum"},"titulars":["petrus","paulus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:quatuor-coronati","kind":"commemoration-only","names":{"la":"Ss. Quatuor Coronatorum Martyrum"},"titulars":["quatuor-coronati"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:septem-fratres","kind":"feast","names":{"la":"Ss. Septem Fratrum Martyrum ac Rufinae et Secundae Virginum et Martyrum"},"titulars":["septem-fratres"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stephanus","kind":"feast","names":{"la":"S. Stephani Protomartyris"},"titulars":["stephanus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:thomas-aquinas","kind":"feast","names":{"la":"S. Thomae de Aquino Confessoris et Ecclesiae Doctoris"},"titulars":["thomas-aquinas"]}

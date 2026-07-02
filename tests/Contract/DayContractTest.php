@@ -14,6 +14,7 @@ use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Calendar\RoledObservance;
 use Introibo\Core\Contract\DayContract;
 use Introibo\Core\Contract\Provenance;
+use Introibo\Core\Corpus\Corpus;
 use Introibo\Core\Observance\Observance;
 use Introibo\Core\Observance\ObservanceId;
 use Introibo\Core\Observance\ObservanceKind;
@@ -36,7 +37,7 @@ final class DayContractTest extends TestCase
     {
         $expected = [
             'contractVersion' => '1.0.0',
-            'corpusVersion' => '1962-seed-2026-07-02',
+            'corpusVersion' => Corpus::default()->corpusVersion(),
             'engineVersion' => '0.4.0',
             'rite' => 'roman',
             'edition' => 'roman:rubricae-1960',
@@ -74,7 +75,7 @@ final class DayContractTest extends TestCase
 
         $corpus = $day['corpusVersion'];
         self::assertIsString($corpus);
-        self::assertMatchesRegularExpression('/^1962-seed-\d{4}-\d{2}-\d{2}$/', $corpus);
+        self::assertSame(Corpus::default()->corpusVersion(), $corpus);
         // The corpus version names the data build only — never the edition.
         self::assertStringNotContainsString(':', $corpus);
         self::assertStringNotContainsString('roman', $corpus);
