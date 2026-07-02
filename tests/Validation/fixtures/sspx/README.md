@@ -6,19 +6,26 @@ engine's day resolution. The Society of St Pius X (District of the USA) publishe
 operative Rubricae 1960 / 1962 ordo as a free public web app backed by a JSON endpoint,
 so it is a separate witness to the same calendar.
 
-## Role: a witness, not the base authority
+## Role: the SSPX particular-calendar conformance gate
 
-Per the project's oracle-authority policy, **missalemeum is the primary authority for
-the base 1962 edition** (see `../missalemeum/README.md`). SSPX keeps a **particular
-calendar** — the universal 1962 base plus its own observances (St Pius X and the Seven
-Sorrows elevated to first class, tagged `(FSSPX)` upstream) — so it is not an authority
-on the base edition. Its two jobs here are:
+SSPX keeps a **particular calendar** — the universal 1962 base plus the Society's own
+observances (St Pius X and the Seven Sorrows of Sep 15 elevated to first class, tagged
+`(FSSPX)` upstream). As of #80 the engine resolves **under the SSPX overlay** (#76/#78)
+and this fixture is its **authority**: the ordo is the source of truth for the SSPX
+particular calendar. The harness's two jobs are:
 
-1. **Corroboration.** Where SSPX and missalemeum agree on a class the engine does not,
-   two independent sources indict the same base-1962 rank. Those rows also feed the
-   accuracy worklist (#428).
-2. **Overlay discovery.** Where SSPX alone differs, the difference is a candidate entry
-   for the **v0.2 SSPX particular-calendar overlay** — the R2 priority.
+1. **Conformance.** Every FSSPX-tagged particular (`particular:true`) the ordo publishes
+   must match the engine under the overlay — the overlay reproduces the Society's proper
+   calendar exactly. `SspxOracleTest::testOverlayModelsEverySspxParticular` fails if a
+   new proper feast appears upstream or the overlay breaks.
+2. **Tracked residual.** The differences that remain (all `particular:false`) are frozen
+   in a categorised baseline: base-1962 ranks the *base* engine still gets wrong,
+   corroborated by **missalemeum** (the primary base authority — see
+   `../missalemeum/README.md`; the September Ember week #439, the Ascension vigil #440,
+   n. 33 #441; also feeding #428), plus two SSPX divergences the fixed-date overlay does
+   not model — the movable Seven Sorrows (Friday after Passion Sunday, Easter-relative)
+   and the Vigil of the Assumption (third class upstream against a second-class vigil
+   under the 1960 Code of Rubrics n. 91, treated as a feed artifact, not conformed to).
 
 ## What is stored
 
@@ -43,13 +50,15 @@ Only calendar **facts** (uncopyrightable), harvested from the public endpoint
 
 Only **class** is compared: the feed does not expose colour or a commemoration count,
 so those are not checked (a documented allowance). Days whose class is absent upstream
-(e.g. All Saints 2026, which omits its class token) are skipped. The engine ↔ SSPX
-class mismatches are frozen, categorised, into `sspx-differences.ndjson`; the test
-(`SspxOracleTest`) is green when the live mismatches equal that baseline exactly, so a
-regression and a drift both fail until reviewed.
+(e.g. All Saints 2026, which omits its class token) are skipped. The
+engine-under-overlay ↔ SSPX class mismatches are frozen, categorised, into
+`sspx-differences.ndjson`; the test (`SspxOracleTest`) is green when the live mismatches
+equal that baseline exactly, so a regression and a drift both fail until reviewed.
 
-Because SSPX is a particular calendar, **every mismatch is expected** — the baseline is
-a living catalogue of how the base engine relates to SSPX, not a bug list.
+Because the overlay conforms on every FSSPX particular, the baseline holds **no**
+`sspx-particular` rows — it is the tracked residual: base-1962 ranks the base engine
+still gets wrong (a bug list, cross-linked to #428/#439/#440/#441) plus the two
+documented `particular:false` divergences the fixed-date overlay does not model.
 
 ## Range and coverage
 

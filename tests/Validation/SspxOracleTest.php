@@ -7,14 +7,16 @@ namespace Introibo\Core\Tests\Validation;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Validation harness (#45), oracle #3 — engine vs the pinned SSPX 1962 ordo (#49).
+ * Validation harness (#45), oracle #3 — engine under the SSPX overlay vs the pinned
+ * SSPX 1962 ordo (#49 / #80).
  *
- * SSPX is a *second, independent* witness to the 1962 calendar and a *particular*
- * calendar in its own right. This asserts the engine's per-day class matches SSPX
- * except for a tracked baseline of differences, categorised so the file doubles as a
- * worklist: corroboration of base-1962 rank issues (which also feed #428) and the
- * SSPX-particular differences that seed the v0.2 overlay. See {@see SspxOracle} for the
- * comparison shape and the rationale for the baseline (approval-test) design.
+ * This is the SSPX particular-calendar **conformance gate**: the engine resolves under
+ * the SSPX overlay (#76/#78) and must reproduce every FSSPX-tagged particular the ordo
+ * publishes ({@see testOverlayModelsEverySspxParticular}). The differences that remain
+ * are all `particular:false` and tracked in a categorised baseline — corroborated
+ * base-1962 rank issues (which also feed #428) and the two SSPX divergences the
+ * fixed-date overlay does not model. See {@see SspxOracle} for the comparison shape and
+ * the rationale for the baseline (approval-test) design.
  */
 final class SspxOracleTest extends TestCase
 {
@@ -27,9 +29,43 @@ final class SspxOracleTest extends TestCase
     ];
 
     /**
-     * The heart of the harness: the live engine ↔ SSPX class mismatches must equal the
-     * committed baseline exactly. A new mismatch (regression) and a changed one (drift)
-     * both fail, naming the days, so no calendar change slips through unreviewed.
+     * The conformance gate (#80): the engine under the SSPX overlay reproduces every
+     * FSSPX-tagged particular the ordo publishes, so no `particular:true` day differs.
+     * A broken overlay or a newly-published Society proper feast fails here, naming the
+     * days — distinct from the tracked base-rank residual guarded below.
+     */
+    public function testOverlayModelsEverySspxParticular(): void
+    {
+        $unmodelled = array_values(array_filter(
+            SspxOracle::divergences(),
+            static fn (array $row): bool => $row['category'] === 'sspx-particular'
+        ));
+
+        $message = sprintf(
+            "The SSPX overlay leaves %d FSSPX particular(s) unmodelled — the engine under "
+            . "the overlay does not match the SSPX ordo on:\n  %s\n"
+            . "Model them in tools/generator/facts/overlays/sspx.yaml and rebuild the corpus.",
+            count($unmodelled),
+            implode("\n  ", array_map(
+                static fn (array $r): string => sprintf(
+                    '%s %s (SSPX class %d, engine class %d)',
+                    $r['date'],
+                    $r['name'],
+                    $r['sspx'],
+                    $r['engine']
+                ),
+                $unmodelled
+            ))
+        );
+
+        self::assertSame([], $unmodelled, $message);
+    }
+
+    /**
+     * The residual after conformance: the live engine-under-overlay ↔ SSPX class
+     * mismatches must equal the committed baseline exactly. A new mismatch (regression)
+     * and a changed one (drift) both fail, naming the days, so no calendar change slips
+     * through unreviewed.
      */
     public function testLiveDifferencesEqualTheTrackedBaseline(): void
     {
