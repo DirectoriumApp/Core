@@ -6,6 +6,7 @@ namespace Introibo\Core\Calendar;
 
 use DateTimeImmutable;
 use Introibo\Core\Precedence\ConcurrenceOutcome;
+use Introibo\Core\Trace\ResolutionTrace;
 
 /**
  * The resolved liturgical day: the immutable aggregate returned by
@@ -45,6 +46,8 @@ final class LiturgicalDay
 
     private ?ConcurrenceOutcome $secondVespers;
 
+    private ?ResolutionTrace $trace;
+
     /**
      * @param list<RoledObservance> $celebration
      * @param list<RoledObservance> $commemoration
@@ -57,7 +60,8 @@ final class LiturgicalDay
         array $commemoration,
         array $displaced,
         array $tempora,
-        ?ConcurrenceOutcome $secondVespers = null
+        ?ConcurrenceOutcome $secondVespers = null,
+        ?ResolutionTrace $trace = null
     ) {
         $this->date = $date;
         $this->celebration = array_values($celebration);
@@ -65,6 +69,7 @@ final class LiturgicalDay
         $this->displaced = array_values($displaced);
         $this->tempora = array_values($tempora);
         $this->secondVespers = $secondVespers;
+        $this->trace = $trace;
     }
 
     /** An empty placeholder day for the given date: no observances in any role. */
@@ -119,6 +124,12 @@ final class LiturgicalDay
         return $this->secondVespers;
     }
 
+    /** The show-your-work resolution trace (#233), or null unless the day was explained. */
+    public function trace(): ?ResolutionTrace
+    {
+        return $this->trace;
+    }
+
     /** A copy of the day with its evening concurrence resolved. */
     public function withSecondVespers(ConcurrenceOutcome $secondVespers): self
     {
@@ -128,7 +139,22 @@ final class LiturgicalDay
             $this->commemoration,
             $this->displaced,
             $this->tempora,
-            $secondVespers
+            $secondVespers,
+            $this->trace
+        );
+    }
+
+    /** A copy of the day carrying its resolution trace. */
+    public function withTrace(ResolutionTrace $trace): self
+    {
+        return new self(
+            $this->date,
+            $this->celebration,
+            $this->commemoration,
+            $this->displaced,
+            $this->tempora,
+            $this->secondVespers,
+            $trace
         );
     }
 
@@ -157,7 +183,8 @@ final class LiturgicalDay
             $byRole[CelebrationRole::COMMEMORATION],
             $byRole[CelebrationRole::DISPLACED],
             $byRole[CelebrationRole::TEMPORA],
-            $this->secondVespers
+            $this->secondVespers,
+            $this->trace
         );
     }
 

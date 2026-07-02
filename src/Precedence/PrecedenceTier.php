@@ -28,7 +28,11 @@ final class PrecedenceTier
 
     private int $subOrder;
 
-    private function __construct(int $ordinal, int $subOrder)
+    private ?string $selector;
+
+    private ?int $line;
+
+    private function __construct(int $ordinal, int $subOrder, ?string $selector, ?int $line)
     {
         if ($ordinal < 1) {
             throw new InvalidArgumentException(sprintf(
@@ -39,11 +43,18 @@ final class PrecedenceTier
 
         $this->ordinal = $ordinal;
         $this->subOrder = $subOrder;
+        $this->selector = $selector;
+        $this->line = $line;
     }
 
-    public static function of(int $ordinal, int $subOrder = 0): self
+    /**
+     * A tier. The optional `selector` (its name in the edition's table) and `line`
+     * (its line in the Table of Liturgical Days, n. 91) are provenance the resolution
+     * trace (#233) reports; they never affect the sort — only `ordinal`/`subOrder` do.
+     */
+    public static function of(int $ordinal, int $subOrder = 0, ?string $selector = null, ?int $line = null): self
     {
-        return new self($ordinal, $subOrder);
+        return new self($ordinal, $subOrder, $selector, $line);
     }
 
     /** The line in the Table of Liturgical Days: 1 (apex) and up. */
@@ -56,6 +67,18 @@ final class PrecedenceTier
     public function subOrder(): int
     {
         return $this->subOrder;
+    }
+
+    /** The tier's name in the edition's table (e.g. `first-sunday`), or null. */
+    public function selector(): ?string
+    {
+        return $this->selector;
+    }
+
+    /** The tier's line in the n. 91 Table of Liturgical Days, or null. */
+    public function line(): ?int
+    {
+        return $this->line;
     }
 
     public function isHigherThan(self $other): bool

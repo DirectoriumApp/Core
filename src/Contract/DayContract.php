@@ -94,10 +94,24 @@ final class DayContract
             'tempora' => $byRole[CelebrationRole::TEMPORA],
             'secondVespers' => $this->secondVespers(),
             'firstVespers' => null,
-            'resolution' => null,
+            'resolution' => $this->resolution(),
             'fasting' => null,
             'calendar' => null,
         ];
+    }
+
+    /**
+     * The show-your-work resolution trace (#233), or null unless the day was resolved
+     * with explaining on. The default contract keeps this null, so the frozen shape
+     * and the golden digest are unmoved; `explain()` opts in.
+     *
+     * @return array<string, mixed>|null
+     */
+    private function resolution(): ?array
+    {
+        $trace = $this->day->trace();
+
+        return $trace !== null ? $trace->toArray() : null;
     }
 
     /**
