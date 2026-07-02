@@ -6,6 +6,7 @@ namespace Introibo\Core\Precedence;
 
 use DateInterval;
 use DateTimeImmutable;
+use Introibo\Core\Calendar\CommemorationLimit;
 use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Observance\ObservanceKind;
 use Introibo\Core\Temporal\Computus;
@@ -306,7 +307,17 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return $id === 'roman:temporale:christmas:vigil' || $id === self::PENTECOST_VIGIL;
     }
 
-    private function isPrivilegedCommemoration(RealizedObservance $office): bool
+    public function commemorationLimit(RealizedObservance $celebration, PrecedenceContext $context): int
+    {
+        if ($this->admitsNoCommemoration($celebration, $context)) {
+            return 0;
+        }
+
+        // The day takes the class of its celebrated office (n. 111b–d).
+        return CommemorationLimit::forDayClass($celebration->rank());
+    }
+
+    public function isPrivilegedCommemoration(RealizedObservance $office): bool
     {
         $kind = $office->kind()->value();
 

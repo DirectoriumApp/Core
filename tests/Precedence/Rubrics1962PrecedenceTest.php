@@ -307,6 +307,28 @@ final class Rubrics1962PrecedenceTest extends TestCase
         self::assertSame('following-commem-preceding', self::concurrence($preceding, $following));
     }
 
+    public function testCommemorationLimitByDayClass(): void
+    {
+        self::assertSame(1, self::limit(self::build('roman:sanctorale:ioseph', 'feast', 1, 'lent')));
+        self::assertSame(1, self::limit(self::build('roman:sanctorale:stephanus', 'feast', 2, 'christmastide')));
+        self::assertSame(2, self::limit(self::build('roman:sanctorale:thomas-aquinas', 'feast', 3, 'lent')));
+        self::assertSame(2, self::limit(self::build('roman:temporale:epiphany:feria', 'feria', 4, 'epiphany')));
+    }
+
+    public function testZeroCommemorationDaysAdmitNone(): void
+    {
+        $easterOctave = self::build('roman:temporale:paschal:easter-octave', 'within-octave', 1, 'eastertide');
+        self::assertSame(0, self::limit($easterOctave));
+
+        $goodFriday = self::build('roman:temporale:paschal:good-friday', 'feria', 1, 'passiontide');
+        self::assertSame(0, self::limit($goodFriday, true));
+    }
+
+    private static function limit(RealizedObservance $celebration, bool $triduum = false): int
+    {
+        return (new Rubrics1962Precedence())->commemorationLimit($celebration, self::context($triduum));
+    }
+
     private static function concurrence(RealizedObservance $preceding, RealizedObservance $following): string
     {
         return (new Rubrics1962Precedence())
