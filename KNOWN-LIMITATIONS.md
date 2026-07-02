@@ -17,8 +17,12 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
 ## Reckoning & edge cases
 
 - **Year range:** Gregorian Easter (`Computus`) is defined from **1583** onward; earlier (Julian) reckoning
-  is out of scope for now. Each edition is only meaningful within its **historical validity window**;
-  resolving an edition outside its window is anachronistic and will be flagged.
+  is out of scope for now. The **whole-year resolver** (`DayResolver::resolveYear()`) has an effective floor
+  one year higher — **1584** — because it reaches back for the trailing Christmas cycle that bleeds into
+  January (`ChristmasCycle::forYear($year - 1)`), and resolving 1583 would need the 1582 cycle, below the
+  Gregorian floor. The golden-fixture gate (#365) therefore freezes 1584–2200; extending the resolver to
+  cover 1583 is a possible future refinement (tracked in #415). Each edition is only meaningful within its **historical
+  validity window**; resolving an edition outside its window is anachronistic and will be flagged.
 - **Leap-year bissextile:** traditional reckoning doubles 24 February in a leap year (24 Feb "*bis*"),
   shifting St Matthias to 25 Feb and related observances — handled explicitly and tested.
 
