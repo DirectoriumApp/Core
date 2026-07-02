@@ -143,6 +143,23 @@ and a raw precedence `tier` (context-derived, not a stable office property — h
 `rankOrdinal` instead) are not shipped: they are derivable and would be redundant
 surface to keep stable.
 
+## Day boundary & First Vespers
+
+The liturgical office day begins at **First Vespers** the evening before its
+civil date and ends at the following day's First Vespers. The contract expresses
+this so a client renders the right day at the right time:
+
+- **`secondVespers`** reports how this day's Second Vespers concurs with the next
+  day's First Vespers. `favoursFollowing: true` means the evening already belongs
+  to the following office day (e.g. the eve of a first-class feast). Concurrence
+  resolution depends on this boundary.
+- **Vigils** sit on their own (preceding) civil date, with `kind: vigil` and
+  `vigilOf` naming the feast they anticipate. That placement *is* how "a vigil
+  attaches to the morrow" is expressed — the anticipated feast is celebrated on
+  the next day and is **not** duplicated into the vigil day's payload.
+- **`firstVespers`** is a reserved day-level slot the Office layer (v1.1) fills
+  with the First Vespers actually said this evening; it is null in 1.0.
+
 ## Determinism & ordering
 
 Same inputs produce byte-identical JSON. Within each role, offices keep the
