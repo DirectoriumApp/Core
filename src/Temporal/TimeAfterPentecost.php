@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Introibo\Core\Temporal;
 
 use DateTimeImmutable;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 
 /**
@@ -57,6 +53,8 @@ final class TimeAfterPentecost
     /** Sundays after Pentecost this year (Trinity Sunday through the last before Advent). */
     private int $sundayCount;
 
+    private TemporalAttributes $attributes;
+
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
@@ -70,6 +68,7 @@ final class TimeAfterPentecost
             ));
         }
 
+        $this->attributes = TemporalAttributes::default();
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->easter = $skeleton->easter();
@@ -146,30 +145,27 @@ final class TimeAfterPentecost
         $week = intdiv(TemporalCalendar::daysBetween($this->trinitySunday, $date), 7) + 1; // 1 … sundayCount
 
         if (TemporalCalendar::isSunday($date)) {
-            return $this->classifySunday($week);
+            return $this->classifySunday($week, $date);
         }
 
         // The ferial weeks are counted from the octave of Pentecost (Eastertide runs
         // through it); only the Sundays are titled "post Pentecosten".
-        $phrase = 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' post Octavam Pentecostes';
-
         return $this->mint(
             'roman:temporale:paschal:pentecost-time:week-' . $week . ':' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::FERIA,
-            RankClass::classIV(),
-            TemporalCalendar::feriaLatin($date, $phrase)
+            'pentecost-time-feria',
+            $date,
+            $week
         );
     }
 
-    private function classifySunday(int $week): TemporalObservance
+    private function classifySunday(int $week, DateTimeImmutable $date): TemporalObservance
     {
         // The last Sunday before Advent always takes the 24th ("and last") Mass.
         if ($week === $this->sundayCount) {
             return $this->mint(
                 'roman:temporale:paschal:pentecost-time:sunday-ultima',
-                ObservanceKind::SUNDAY,
-                RankClass::classII(),
-                'Dominica ultima post Pentecosten'
+                'pentecost-time-sunday-ultima',
+                $date
             );
         }
 
@@ -178,9 +174,9 @@ final class TimeAfterPentecost
         if ($week <= 23) {
             return $this->mint(
                 'roman:temporale:paschal:pentecost-time:sunday-' . $week,
-                ObservanceKind::SUNDAY,
-                RankClass::classII(),
-                'Dominica ' . TemporalCalendar::roman($week) . ' post Pentecosten'
+                'pentecost-time-sunday',
+                $date,
+                $week
             );
         }
 
@@ -193,21 +189,29 @@ final class TimeAfterPentecost
 
         return $this->mint(
             'roman:temporale:paschal:pentecost-time:resumed-epiphany-' . $epiphanySunday,
-            ObservanceKind::SUNDAY,
-            RankClass::classII(),
-            'Dominica ' . TemporalCalendar::roman($epiphanySunday) . ' quae superfuit post Epiphaniam'
+            'pentecost-time-resumed-epiphany',
+            $date,
+            $epiphanySunday
         );
     }
 
-    private function mint(string $slug, string $kind, RankClass $rank, string $latinName): TemporalObservance
+    /**
+     * Mint the temporal office of a Time-after-Pentecost day: the slug is
+     * structural, the season is always the green Pentecost season, and the kind,
+     * rank, colour, and Latin name come from the corpus archetype overlay,
+     * rendered with the day's `$ord` (Sunday / week number) and weekday.
+     */
+    private function mint(string $slug, string $archetype, DateTimeImmutable $date, int $ord = 0): TemporalObservance
     {
+        $office = $this->attributes->archetype($archetype);
+
         return new TemporalObservance(
             ObservanceId::parse($slug),
-            ObservanceKind::fromString($kind),
+            $office->kind(),
             Season::pentecost(),
-            $rank,
-            ElementColour::of(Colour::green()),
-            $latinName
+            $office->rank(),
+            $office->colour(),
+            $office->renderName($date, $ord)
         );
     }
 }

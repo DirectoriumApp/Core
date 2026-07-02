@@ -1,0 +1,61 @@
+{"archetype":"advent-ember","cites":{"names.la":"mr-1920"},"kind":"ember-day","names":{"la":"{feria} Quatuor Temporum Adventus"}}
+{"archetype":"advent-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} Adventus"}}
+{"archetype":"advent-feria-greater","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} Adventus"}}
+{"archetype":"advent-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
+{"archetype":"advent-sunday-gaudete","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
+{"archetype":"advent-sunday-i","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
+{"archetype":"ascension","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Ascensione Domini"}}
+{"archetype":"ascension-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Ascensionem"}}
+{"archetype":"ash-wednesday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Feria IV Cinerum"}}
+{"archetype":"christ-the-king","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Domini Nostri Iesu Christi Regis"}}
+{"archetype":"christmas-octave-day","cites":{"names.la":"mr-1920"},"kind":"octave-day","names":{"la":"In Circumcisione Domini"}}
+{"archetype":"christmas-post-octave-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Octavam Nativitatis"}}
+{"archetype":"christmas-sunday-after-octave","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica post Octavam Nativitatis"}}
+{"archetype":"christmas-sunday-within-octave","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica infra Octavam Nativitatis"}}
+{"archetype":"christmas-vigil","cites":{"names.la":"mr-1920"},"kind":"vigil","names":{"la":"In Vigilia Nativitatis Domini"}}
+{"archetype":"christmas-within-octave","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"De {ord} die infra Octavam Nativitatis"}}
+{"archetype":"corpus-christi","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sanctissimi Corporis Christi"}}
+{"archetype":"easter","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica Resurrectionis"}}
+{"archetype":"easter-octave-feria","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"{feria} infra Octavam Paschae"}}
+{"archetype":"easter-octave-saturday","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"Sabbato in Albis"}}
+{"archetype":"epiphany","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Epiphania Domini"}}
+{"archetype":"epiphany-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Epiphaniam"}}
+{"archetype":"epiphany-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} post Epiphaniam"}}
+{"archetype":"epiphany-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} post Epiphaniam"}}
+{"archetype":"good-friday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Feria VI in Passione et Morte Domini"}}
+{"archetype":"holy-family","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sanctae Familiae Iesu, Mariae, Ioseph"}}
+{"archetype":"holy-name","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sanctissimi Nominis Iesu"}}
+{"archetype":"holy-saturday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Sabbato Sancto"}}
+{"archetype":"holy-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} Majoris Hebdomadae"}}
+{"archetype":"lent-ember","cites":{"names.la":"mr-1920"},"kind":"ember-day","names":{"la":"{feria} Quatuor Temporum Quadragesimae"}}
+{"archetype":"lent-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} in Quadragesima"}}
+{"archetype":"lent-sunday-laetare","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} in Quadragesima"}}
+{"archetype":"lent-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} in Quadragesima"}}
+{"archetype":"low-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Albis"}}
+{"archetype":"maundy-thursday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Feria V in Cena Domini"}}
+{"archetype":"nativity","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Nativitate Domini"}}
+{"archetype":"palm-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica II Passionis seu in Palmis"}}
+{"archetype":"paschaltide-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} post Pascha"}}
+{"archetype":"paschaltide-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} post Octavam Paschae"}}
+{"archetype":"passion-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica I Passionis"}}
+{"archetype":"passion-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Passionis"}}
+{"archetype":"pentecost","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica Pentecostes"}}
+{"archetype":"pentecost-ember","cites":{"names.la":"mr-1920"},"kind":"ember-day","names":{"la":"{feria} Quatuor Temporum Pentecostes"}}
+{"archetype":"pentecost-octave-feria","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"{feria} infra Octavam Pentecostes"}}
+{"archetype":"pentecost-time-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} post Octavam Pentecostes"}}
+{"archetype":"pentecost-time-resumed-epiphany","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} quae superfuit post Epiphaniam"}}
+{"archetype":"pentecost-time-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} post Pentecosten"}}
+{"archetype":"pentecost-time-sunday-ultima","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica ultima post Pentecosten"}}
+{"archetype":"pentecost-vigil","cites":{"names.la":"mr-1920"},"kind":"vigil","names":{"la":"Sabbato in Vigilia Pentecostes"}}
+{"archetype":"post-ascension-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Ascensionem"}}
+{"archetype":"post-cineres-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Cineres"}}
+{"archetype":"quinquagesima-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Quinquagesimae"}}
+{"archetype":"quinquagesima-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Quinquagesima"}}
+{"archetype":"rogation","cites":{"names.la":"mr-1920"},"kind":"rogation-day","names":{"la":"{feria} in Rogationibus"}}
+{"archetype":"sacred-heart","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sacratissimi Cordis Iesu"}}
+{"archetype":"septuagesima-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Septuagesimae"}}
+{"archetype":"septuagesima-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Septuagesima"}}
+{"archetype":"sexagesima-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Sexagesimae"}}
+{"archetype":"sexagesima-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Sexagesima"}}
+{"archetype":"sunday-after-ascension","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica post Ascensionem"}}
+{"archetype":"trinity-sunday","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sanctissimae Trinitatis"}}

@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadYaml } from './facts.mjs';
 import { makeValidators, validateAll } from './validate.mjs';
-import { transformSanctorale, transformTemporalSkeleton } from './transform.mjs';
+import { transformSanctorale, transformTemporalSkeleton, transformTemporale } from './transform.mjs';
 import { checkProvenance, usedSources } from './provenance.mjs';
 import { toNdjson, toPretty, sha256 } from './canonical.mjs';
 
@@ -54,6 +54,11 @@ export function build(outDir = DEFAULT_OUT) {
     loadYaml(join(FACTS_DIR, 'temporal-skeleton.yaml')),
   );
 
+  const temporale = transformTemporale(
+    loadYaml(join(FACTS_DIR, 'temporale.yaml')).archetypes,
+    edition,
+  );
+
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),
@@ -61,6 +66,8 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['placement.sanctorale'], placement, 'placement.sanctorale'),
     ...validateAll(validators['temporal-skeleton'], offsets, 'temporal-skeleton'),
     ...validateAll(validators['temporal-skeleton'], blockSeasons, 'temporal-skeleton'),
+    ...validateAll(validators['identity.temporale'], temporale.identity, 'identity.temporale'),
+    ...validateAll(validators['attributes.temporale'], temporale.attributes, 'attributes.temporale'),
     ...validateAll(validators['source'], sources, 'source'),
   ];
   if (errors.length > 0) {
@@ -74,6 +81,8 @@ export function build(outDir = DEFAULT_OUT) {
       { shape: 'identity.sanctorale', records: identity },
       { shape: 'attributes.sanctorale', records: attributes },
       { shape: 'placement.sanctorale', records: placement },
+      { shape: 'identity.temporale', records: temporale.identity },
+      { shape: 'attributes.temporale', records: temporale.attributes },
     ],
     sources,
   );
@@ -112,6 +121,16 @@ export function build(outDir = DEFAULT_OUT) {
       text: toNdjson(blockSeasons),
       records: blockSeasons.length,
       primaryKey: 'block',
+    },
+    'identity/temporale.ndjson': {
+      text: toNdjson(temporale.identity),
+      records: temporale.identity.length,
+      primaryKey: 'archetype',
+    },
+    [`editions/${edition}/attributes.temporale.ndjson`]: {
+      text: toNdjson(temporale.attributes),
+      records: temporale.attributes.length,
+      primaryKey: 'archetype',
     },
     'sources.ndjson': { text: toNdjson(sources), records: sources.length, primaryKey: 'key' },
   };

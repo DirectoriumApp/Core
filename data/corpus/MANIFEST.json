@@ -9,6 +9,11 @@
       "records": 297,
       "sha256": "726ad4e4f7663cb427a5e3173bf84e273bc78c1b81fdbcd7d453f7045e4cb577"
     },
+    "editions/roman-rubricae-1960/attributes.temporale.ndjson": {
+      "primaryKey": "archetype",
+      "records": 61,
+      "sha256": "af5af6dea88ead15aec839638e21a98fba2c80c06c1b0240df5729b1a9fbf62f"
+    },
     "editions/roman-rubricae-1960/placement.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 297,
@@ -18,6 +23,11 @@
       "primaryKey": "id",
       "records": 297,
       "sha256": "0d2a4bef2ec42dd753f7040de991f8408b3a00e5cd8f4231c75d82c609827e76"
+    },
+    "identity/temporale.ndjson": {
+      "primaryKey": "archetype",
+      "records": 61,
+      "sha256": "8f1b5d79c66b17fe17b44c6618cbe76c20d9ccf0c14c1a2383a086eb3f3b4477"
     },
     "sources.ndjson": {
       "primaryKey": "key",
@@ -44,7 +54,7 @@
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
       "urn": "introibo:source:mr-1920",
-      "uses": 297
+      "uses": 358
     },
     {
       "key": "rg-1960",
@@ -52,7 +62,7 @@
       "rights": "reference",
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "introibo:source:rg-1960",
-      "uses": 1227
+      "uses": 1349
     }
   ]
 }

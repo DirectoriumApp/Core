@@ -30,6 +30,7 @@ export function checkProvenance(shapes, sources) {
   for (const { shape, records } of shapes) {
     for (const record of records) {
       const cites = record.cites || {};
+      const rowId = record.id ?? record.archetype ?? '?';
 
       // Every citation must resolve; a name citation must be a PD text source.
       for (const [field, ref] of Object.entries(cites)) {
@@ -37,13 +38,13 @@ export function checkProvenance(shapes, sources) {
         usage.set(key, (usage.get(key) || 0) + 1);
         const source = byKey.get(key);
         if (!source) {
-          problems.push(`${shape} ${record.id}: field "${field}" cites unknown source "${key}"`);
+          problems.push(`${shape} ${rowId}: field "${field}" cites unknown source "${key}"`);
           continue;
         }
         const isName = field.startsWith('names.') || field.startsWith('nameOverride.');
         if (isName && (source.kind !== 'text' || source.rights !== 'public-domain')) {
           problems.push(
-            `${shape} ${record.id}: "${field}" transcribes from "${key}" ` +
+            `${shape} ${rowId}: "${field}" transcribes from "${key}" ` +
               `(kind=${source.kind}, rights=${source.rights}); a title must cite a public-domain text source`,
           );
         }
@@ -57,7 +58,7 @@ export function checkProvenance(shapes, sources) {
         }
         for (const locale of Object.keys(strings)) {
           if (cites[prefix + locale] === undefined) {
-            problems.push(`${shape} ${record.id}: string "${prefix}${locale}" has no citation`);
+            problems.push(`${shape} ${rowId}: string "${prefix}${locale}" has no citation`);
           }
         }
       }

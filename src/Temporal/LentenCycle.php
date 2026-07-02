@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Introibo\Core\Temporal;
 
 use DateTimeImmutable;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 use LogicException;
 
@@ -47,6 +43,8 @@ final class LentenCycle
 
     private DateTimeImmutable $palmSunday;
 
+    private TemporalAttributes $attributes;
+
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
@@ -60,6 +58,7 @@ final class LentenCycle
             ));
         }
 
+        $this->attributes = TemporalAttributes::default();
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->easter = $skeleton->easter();
@@ -133,74 +132,56 @@ final class LentenCycle
 
         // Pre-Lenten Sundays (Septuagesima season) — second class, violet.
         if ($offset === -63) {
-            return $this->preLentSunday('septuagesima', 'in Septuagesima');
+            return $this->preLentSunday($date, 'septuagesima');
         }
         if ($offset === -56) {
-            return $this->preLentSunday('sexagesima', 'in Sexagesima');
+            return $this->preLentSunday($date, 'sexagesima');
         }
         if ($offset === -49) {
-            return $this->preLentSunday('quinquagesima', 'in Quinquagesima');
+            return $this->preLentSunday($date, 'quinquagesima');
         }
 
         // Ash Wednesday — the first-class feria that opens Lent.
         if ($offset === -46) {
-            return $this->mint(
-                'roman:temporale:paschal:ash-wednesday',
-                ObservanceKind::FERIA,
-                Season::lent(),
-                RankClass::classI(),
-                ElementColour::of(Colour::violet()),
-                'Feria IV Cinerum'
-            );
+            return $this->mint('roman:temporale:paschal:ash-wednesday', Season::lent(), 'ash-wednesday', $date);
         }
 
         // Sundays of Lent — first class, violet (Laetare permits rose).
         if ($offset === -42 || $offset === -35 || $offset === -28 || $offset === -21) {
             $n = intdiv($offset + 49, 7); // -42 => 1 … -21 => 4
-            $colour = $offset === -21 ? ElementColour::violetWithRose() : ElementColour::of(Colour::violet());
+            $archetype = $offset === -21 ? 'lent-sunday-laetare' : 'lent-sunday';
 
-            return $this->mint(
-                'roman:temporale:paschal:lent-' . $n,
-                ObservanceKind::SUNDAY,
-                Season::lent(),
-                RankClass::classI(),
-                $colour,
-                'Dominica ' . TemporalCalendar::roman($n) . ' in Quadragesima'
-            );
+            return $this->mint('roman:temporale:paschal:lent-' . $n, Season::lent(), $archetype, $date, $n);
         }
 
         // Passion Sunday — first class, opens Passiontide.
         if ($offset === -14) {
             return $this->mint(
                 'roman:temporale:paschal:passion-sunday',
-                ObservanceKind::SUNDAY,
                 Season::passiontide(),
-                RankClass::classI(),
-                ElementColour::of(Colour::violet()),
-                'Dominica I Passionis'
+                'passion-sunday',
+                $date
             );
         }
 
         // Ferias.
         if ($offset >= -62 && $offset <= -57) {
-            return $this->preLentFeria($date, 'septuagesima', 'Septuagesimae');
+            return $this->preLentFeria($date, 'septuagesima');
         }
         if ($offset >= -55 && $offset <= -50) {
-            return $this->preLentFeria($date, 'sexagesima', 'Sexagesimae');
+            return $this->preLentFeria($date, 'sexagesima');
         }
         if ($offset >= -48 && $offset <= -47) {
-            return $this->preLentFeria($date, 'quinquagesima', 'Quinquagesimae');
+            return $this->preLentFeria($date, 'quinquagesima');
         }
 
         // Thursday–Saturday after Ash Wednesday — third-class Lenten ferias.
         if ($offset >= -45 && $offset <= -43) {
             return $this->mint(
                 'roman:temporale:paschal:post-cineres:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
                 Season::lent(),
-                RankClass::classIII(),
-                ElementColour::of(Colour::violet()),
-                TemporalCalendar::feriaLatin($date, 'post Cineres')
+                'post-cineres-feria',
+                $date
             );
         }
 
@@ -212,38 +193,27 @@ final class LentenCycle
         if ($offset >= -13 && $offset <= -8) {
             return $this->mint(
                 'roman:temporale:paschal:passion-week:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::FERIA,
                 Season::passiontide(),
-                RankClass::classIII(),
-                ElementColour::of(Colour::violet()),
-                TemporalCalendar::feriaLatin($date, 'infra Hebdomadam Passionis')
+                'passion-week-feria',
+                $date
             );
         }
 
         throw new LogicException(sprintf('Unclassified Lenten-cycle day at Easter offset %d.', $offset));
     }
 
-    private function preLentSunday(string $slug, string $latinSuffix): TemporalObservance
+    private function preLentSunday(DateTimeImmutable $date, string $slug): TemporalObservance
     {
-        return $this->mint(
-            'roman:temporale:paschal:' . $slug,
-            ObservanceKind::SUNDAY,
-            Season::septuagesima(),
-            RankClass::classII(),
-            ElementColour::of(Colour::violet()),
-            'Dominica ' . $latinSuffix
-        );
+        return $this->mint('roman:temporale:paschal:' . $slug, Season::septuagesima(), $slug . '-sunday', $date);
     }
 
-    private function preLentFeria(DateTimeImmutable $date, string $slug, string $latinWeek): TemporalObservance
+    private function preLentFeria(DateTimeImmutable $date, string $slug): TemporalObservance
     {
         return $this->mint(
             'roman:temporale:paschal:' . $slug . ':' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::FERIA,
             Season::septuagesima(),
-            RankClass::classIV(),
-            ElementColour::of(Colour::violet()),
-            TemporalCalendar::feriaLatin($date, 'infra Hebdomadam ' . $latinWeek)
+            $slug . '-feria',
+            $date
         );
     }
 
@@ -253,42 +223,44 @@ final class LentenCycle
         if ($offset === -39 || $offset === -37 || $offset === -36) {
             return $this->mint(
                 'roman:temporale:paschal:quattuor-temporum-quadragesimae:' . TemporalCalendar::feriaToken($date),
-                ObservanceKind::EMBER_DAY,
                 Season::lent(),
-                RankClass::classII(),
-                ElementColour::of(Colour::violet()),
-                TemporalCalendar::feriaLatin($date, 'Quatuor Temporum Quadragesimae')
+                'lent-ember',
+                $date
             );
         }
 
         $week = 1 + intdiv($offset + 42, 7); // ferias of Lenten weeks I–IV
-        $phrase = 'infra Hebdomadam ' . TemporalCalendar::roman($week) . ' in Quadragesima';
 
         return $this->mint(
             'roman:temporale:paschal:lent-week-' . $week . ':' . TemporalCalendar::feriaToken($date),
-            ObservanceKind::FERIA,
             Season::lent(),
-            RankClass::classIII(),
-            ElementColour::of(Colour::violet()),
-            TemporalCalendar::feriaLatin($date, $phrase)
+            'lent-week-feria',
+            $date,
+            $week
         );
     }
 
+    /**
+     * Mint the temporal office of a day: the slug and season are structural, the
+     * kind, rank, colour, and Latin name come from the corpus archetype overlay,
+     * rendered with the day's `$ord` (week number) and weekday.
+     */
     private function mint(
         string $slug,
-        string $kind,
         Season $season,
-        RankClass $rank,
-        ElementColour $colour,
-        string $latinName
+        string $archetype,
+        DateTimeImmutable $date,
+        int $ord = 0
     ): TemporalObservance {
+        $office = $this->attributes->archetype($archetype);
+
         return new TemporalObservance(
             ObservanceId::parse($slug),
-            ObservanceKind::fromString($kind),
+            $office->kind(),
             $season,
-            $rank,
-            $colour,
-            $latinName
+            $office->rank(),
+            $office->colour(),
+            $office->renderName($date, $ord)
         );
     }
 }
