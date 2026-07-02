@@ -97,13 +97,26 @@ fared this day.
 | `chant` | null | Reserved (GABC). |
 | `audio` | null | Reserved. |
 
-### id versus urn
+### Stable identifiers (a compatibility surface)
 
-`id` is the bare `ObservanceId` slug — identity only, edition-invariant, and the
-stable key other systems join on. `urn` is the same id under the platform URN
-scheme (`introibo:observance:<id>`). Neither ever changes or is re-homed; a
-renamed *display* name never moves the id (lineage will live in the reserved
-`aliases` slot).
+`id` is the bare `ObservanceId` slug — identity only, edition-invariant, and
+independent of date or rank. It **is** the stable cross-system feast id: the
+"mapping from observance id to stable feast id" is the identity function, so no
+separate registry is needed. `urn` is the same id under the platform URN scheme
+(`introibo:observance:<id>`), and round-trips: stripping the prefix and parsing
+yields the identical id.
+
+These identifiers are a **compatibility surface** and are guaranteed stable:
+
+- An id, once published, is never renamed or re-homed. Later editions
+  (1954/1955, monastic) reuse the same ids for the same feast.
+- A renamed *display* name never moves the id (names are separate, i18n-keyed).
+- Identity lineage — a feast split into two, or two merged — is expressed in the
+  reserved `aliases` slot, never by changing an existing id.
+
+A golden-list test (`tests/Contract/StableIdentifierTest.php`) pins a
+representative set (temporal Sunday and feria, a sanctoral feast, a sanctoral
+vigil) so any accidental change to a published identifier fails loudly.
 
 ### Transfer links
 
