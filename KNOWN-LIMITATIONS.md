@@ -22,6 +22,20 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
 - **Leap-year bissextile:** traditional reckoning doubles 24 February in a leap year (24 Feb "*bis*"),
   shifting St Matthias to 25 Feb and related observances — handled explicitly and tested.
 
+## Deliberately out of scope
+
+Conscious decisions to *not* build something — recorded so the boundary is a choice, not an oversight.
+
+- **Solar / sunset times:** the exact clock time of sunset (for First Vespers timing, or the end of a
+  fast) is **out of scope**. Computing it requires the observer's geolocation, which would break the pure
+  `(date, edition)` cache key that makes the engine reproducible and its output byte-identical. The engine
+  stays location-independent; if solar times are ever wanted they belong on the **client**, computed from
+  the day the engine already returns, not in the resolver.
+- **Commercial billing / paid tiers:** metered billing and paid feature tiers are **out of scope**. The
+  platform is **AGPL-3.0** and privacy-first; plain **API quotas** are sufficient to protect the service
+  without accounts, payment, or usage tracking. Revisit only if hosting costs demand it — a change to
+  policy, not to the engine.
+
 ## Confidence
 
 - Days corroborated by **≥2 independent oracles** are **high** confidence; single-oracle days are

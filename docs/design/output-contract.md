@@ -52,9 +52,9 @@ additive (see bump rules):
     `following-commem-preceding` · `full-of-following`
   - `colour.base` — `white` · `red` · `green` · `violet` · `black` (rose is never
     a base — see [Colour & rose](#colour--rose))
-  - `season` — `advent` · `christmastide` · `epiphany` · `septuagesima` · `lent` ·
-    `passiontide` · `eastertide` · `pentecost`
 - **Open** (a new member is a *minor* change):
+  - `season` — **reclassified from closed to open** before the 1.0 freeze (see
+    [`season`: open, edition-scoped vocabulary](#season-open-edition-scoped-vocabulary)).
   - office `kind` — the `ObservanceKind` set (`feast`, `feria`, `sunday`, `vigil`,
     `octave-day`, `within-octave`, `ember-day`, `rogation-day`, `special-movable`,
     `lady-on-saturday`, `commemoration-only`, `office-of-the-dead`), extensible as
@@ -78,6 +78,29 @@ additive (see bump rules):
 - Within each role, offices are ordered deterministically (precedence tier, then
   canonical id) and pinned by snapshot.
 
+### `season`: open, edition-scoped vocabulary
+
+`season` is being **reclassified from a closed 8-member enum to an open,
+edition-scoped vocabulary** before the 1.0 contract freeze (tracking issue #364,
+which blocks the contract-promotion issue #90). The closed set could not admit
+the Novus Ordo's `ordinary-time` without a major bump, and freezing it would
+force exactly the breaking change v1 exists to avoid.
+
+The rule keeps cross-edition comparison honest:
+
+- **Tokens stay bare and shared where the concept is shared.** `advent`, `lent`,
+  and `eastertide` mean the same liturgical thing across editions, so the token
+  is identical and the diff engine aligns by token — no per-edition remapping.
+- **Each edition declares its valid subset.** The Novus Ordo adds
+  `ordinary-time`; the 1962 subset (`advent` · `christmastide` · `epiphany` ·
+  `septuagesima` · `lent` · `passiontide` · `eastertide` · `pentecost`) is
+  **unchanged** — the reclassification is source-compatible for the only edition
+  shipped today.
+- **Adding a vocabulary entry is a minor bump**, per the open-enum rule above.
+
+Per-edition subsets live in a forthcoming `season-vocabulary.md`; this contract
+fixes only that the field is open and that shared concepts share a token.
+
 ## The day shape
 
 | Field | Type | Source | Notes |
@@ -88,7 +111,7 @@ additive (see bump rules):
 | `rite` | string | edition head | `roman`. |
 | `edition` | string | `Provenance` | `roman:rubricae-1960`. |
 | `date` | string | resolved date | ISO-8601 `Y-m-d`. |
-| `season` | string \| null | the temporal office | Closed `season` enum; null on a placeholder. |
+| `season` | string \| null | the temporal office | Open, edition-scoped `season` vocabulary; null on a placeholder. See [`season`: open, edition-scoped vocabulary](#season-open-edition-scoped-vocabulary). |
 | `commemorationLimit` | int | `CommemorationLimit::forDayClass` | Commemorations admitted by the day's class (I/II: 1, III/IV: 2); 0 when nothing is celebrated. |
 | `celebration` | office[] | `LiturgicalDay` | The office celebrated (normally one). |
 | `commemoration` | office[] | `LiturgicalDay` | Offices commemorated within it. |
@@ -98,7 +121,7 @@ additive (see bump rules):
 | `firstVespers` | null | reserved | Office layer. |
 | `resolution` | null | reserved | The "why-this-won" trace. |
 | `fasting` | null | reserved | Fasting/abstinence layer. |
-| `calendar` | null | reserved | Calendrical/astronomical block. |
+| `calendar` | null | reserved | Calendrical/astronomical block; planned sub-shape below. |
 
 The **`secondVespers`** object is `{ outcome, favoursFollowing, holder,
 commemorated }`: `outcome` is the closed `ConcurrenceOutcome` value,
@@ -118,8 +141,8 @@ fared this day.
 | `kind` | string | `ObservanceKind` | Open enum. |
 | `rank` | string | `RankClass` | `I`–`IV`. |
 | `rankOrdinal` | int | `RankClass` | 1 (highest) – 4. |
-| `season` | string \| null | `TemporalObservance` | Set on temporal offices; null on sanctoral. |
-| `colour` | object | `ElementColour` | `{ base, roseAllowed }` (below). |
+| `season` | string \| null | `TemporalObservance` | Open, edition-scoped vocabulary; set on temporal offices, null on sanctoral. |
+| `colour` | object | `ElementColour` | `{ base, roseAllowed, alternates? }` (below). |
 | `names` | object | `Observance::names()` | Locale → name; `la` always present. |
 | `titulars` | string[] | `Observance::titulars()` | Titular subjects (sanctoral); `[]` for temporal. |
 | `outcome` | string \| null | `OccurrenceOutcome` | Closed enum; null on a celebration or the tempora. |
@@ -129,8 +152,9 @@ fared this day.
 | `octaveOf` | null | reserved | Octave layer. |
 | `aliases` | null | reserved | `IdentityAliases` lineage. |
 | `citations` | null | reserved | Provenance/authority. |
-| `text` | null | reserved | Missal proper texts. |
-| `chant` | null | reserved | GABC. |
+| `optionality` | null | reserved | Choice-day additive key (below); null unless the day offers alternatives. |
+| `text` | null | reserved | Missal proper texts; availability-aware fill-shape (below). |
+| `chant` | null | reserved | GABC; same availability-aware fill-shape as `text`. |
 | `audio` | null | reserved | Audio. |
 
 ### i18n & content hooks
@@ -142,6 +166,71 @@ further keys without reshaping anything. The proper-text pipelines attach throug
 reserved, nullable office hooks — `text` (Missal propers), `chant` (GABC), `audio`
 — alongside `citations`. The engine hard-codes no language text: every name comes
 from the corpus data.
+
+### Text & chant fill-shape (availability-aware)
+
+The `text` and `chant` slots ship `null` in 1.0, but the **shape they fill with**
+is fixed now, because the first fill (the v1.2 text layer) must not lock a
+structure that copyrighted post-1962 texts cannot inhabit. A copyrighted proper
+can be shipped only as an incipit or a citation, so the shape has to carry the
+string's availability as a first-class field rather than assuming a full body is
+always present.
+
+When filled, each slot is keyed **per role and per locale**; every leaf string is
+an object of the shape:
+
+```json
+{ "value": "…", "availability": "full", "source": "introibo:source:…", "rights": "…" }
+```
+
+- `value` **or** `incipit` — the full text (`availability: full`) or the opening
+  words only; never both. A citation-only or licence-required leaf carries
+  `incipit` (or neither) but no `value`.
+- `availability` ∈ `full` · `incipit` · `citation-only` · `licence-required` —
+  what the reader and the comparison tool may render for this leaf.
+- `source` — the provenance URN (`introibo:source:<key>`), tying the leaf to the
+  source registry.
+- `rights` — the licence/PD status governing the leaf.
+
+`availability` and the CC0-vs-copyright rule that drives it are specified in
+[`text-licensing-model.md`](text-licensing-model.md); the diff renderer keys its
+per-side degradation off this field.
+
+### Choice-days & optionality (Novus Ordo)
+
+Some days legitimately offer the celebrant a choice — a Novus Ordo weekday may be
+kept as the feria **or** as an optional memorial. This is modelled **additively,
+never by widening a closed enum**:
+
+- The alternatives are **multiple `celebration` entries** (the feria *and* each
+  optional memorial), each a normal, self-describing office.
+- An additive, reserved **`optionality`** key on each such office marks it as one
+  arm of a choice and how the arms relate (e.g. free choice among memorials, or
+  memorial-over-feria). It is `null` on ordinary days.
+
+The closed `role` and `outcome` enums are **untouched**: a chosen-or-not office is
+still a `celebration`, and no new `role`/`outcome` member is minted. A 1962-only
+consumer that ignores `optionality` still reads a coherent (feria-first) day.
+
+### The `calendar` sub-shape
+
+The reserved day-level `calendar` block (filled at v0.4) carries the
+astronomical fields **and**, alongside them, an edition-conditional lectionary
+sub-block, documented now so v0.4 fills it with the nesting already in place:
+
+```json
+"calendar": {
+  "lectionary": { "sundayCycle": "A", "weekdayCycle": "II" }
+}
+```
+
+- `lectionary.sundayCycle` ∈ `A` · `B` · `C` (nullable).
+- `lectionary.weekdayCycle` ∈ `I` · `II` (nullable).
+
+Both are **nullable and edition-conditional**: the 1962 edition has no cycle
+lectionary, so the whole `lectionary` block is null there; a Novus Ordo snapshot
+fills it. Nesting it under `calendar` (rather than at the day root) keeps the
+day-level key count stable and groups it with the other calendrical facts.
 
 ### Stable identifiers (a compatibility surface)
 
@@ -178,6 +267,17 @@ Laetare are violet days on which rose vestments are *permitted*, expressed as
 `roseAllowed: true` on a violet base. Whether rose is actually worn is a
 celebrant's choice, not calendar data, so no single "effective" colour is
 derived.
+
+**Colour alternates.** `colour` carries an additive, **open** `alternates` list
+that generalises the rose/`roseAllowed` pattern to any permitted-alternate colour
+— for instance the Spanish/Latin-American **blue privilege** on the Immaculate
+Conception, a genuine liturgical alternate that the five-colour base set cannot
+express. `colour.base` stays a **closed** 5-member enum; `alternates` is an open
+list of additional permitted colours (with the same "a celebrant may, not must"
+force as rose). Because it is additive and open, adding an alternate — or adding
+the list to a colour that previously lacked it — is never a major bump. `alternates`
+is absent/empty where no alternate applies; `roseAllowed` is retained as the named,
+rubric-specific case rather than folded into the list.
 
 ### Derived fields deliberately dropped
 
@@ -217,9 +317,13 @@ adding it is additive (a patch bump):
 | `octaveOf` | office | Octave modelling |
 | `aliases` | office | `IdentityAliases` lineage |
 | `citations` | office | Provenance/authority subsystem |
-| `text` | office | Missal proper texts (v1.2) |
-| `chant` | office | Gregorian chant / GABC |
+| `optionality` | office | Choice-day marker (Novus Ordo optional memorials) |
+| `text` | office | Missal proper texts (v1.2), availability-aware fill-shape |
+| `chant` | office | Gregorian chant / GABC, availability-aware fill-shape |
 | `audio` | office | Audio |
+
+The day-level `calendar` slot's planned sub-shape (`lectionary`) is documented
+under [The `calendar` sub-shape](#the-calendar-sub-shape).
 
 ## Determinism & ordering
 
