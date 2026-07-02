@@ -23,6 +23,7 @@ use Introibo\Core\Temporal\MovableFeasts;
 use Introibo\Core\Temporal\TemporalCalendar;
 use Introibo\Core\Temporal\TemporalObservance;
 use Introibo\Core\Temporal\TimeAfterPentecost;
+use Introibo\Core\Trace\ResolutionTrace;
 
 /**
  * The resolver: it composes the temporal skeleton and the sanctoral overlay into
@@ -48,12 +49,19 @@ final class DayResolver
 
     private SanctoralData $sanctoralData;
 
-    private function __construct(PrecedenceRules $rules, string $edition, SanctoralData $sanctoralData)
-    {
+    private bool $tracing;
+
+    private function __construct(
+        PrecedenceRules $rules,
+        string $edition,
+        SanctoralData $sanctoralData,
+        bool $tracing = false
+    ) {
         $this->rules = $rules;
         $this->commemorations = new CommemorationSelector($rules);
         $this->edition = $edition;
         $this->sanctoralData = $sanctoralData;
+        $this->tracing = $tracing;
     }
 
     public static function for1962(?SanctoralData $sanctoralData = null): self
@@ -63,6 +71,16 @@ final class DayResolver
             'roman:rubricae-1960',
             $sanctoralData ?? new CorpusSanctoralData()
         );
+    }
+
+    /**
+     * A copy of this resolver that records a {@see ResolutionTrace} on each resolved
+     * day (#233). Kept a distinct instance so the default resolution — and the golden
+     * digest that hashes it — is never perturbed; explaining a day opts in here.
+     */
+    public function explaining(): self
+    {
+        return new self($this->rules, $this->edition, $this->sanctoralData, true);
     }
 
     /** The edition, corpus, and engine versions this resolver stamps onto a year. */
@@ -206,8 +224,18 @@ final class DayResolver
         /** @var list<RoledObservance> $displaced */
         $displaced = [];
 
+        /** @var list<array{id: string, outcome: string, reason: \Introibo\Core\Trace\ResolutionReason}> $traceLosers */
+        $traceLosers = [];
+
         foreach (array_slice($candidates, 1) as $loser) {
             $outcome = $this->rules->occurrenceOutcome($celebration, $loser, $context);
+            if ($this->tracing) {
+                $traceLosers[] = [
+                    'id' => $loser->id()->toString(),
+                    'outcome' => $outcome->value(),
+                    'reason' => $this->rules->explainOccurrence($celebration, $loser, $context),
+                ];
+            }
             if ($outcome->isTransfer()) {
                 $this->scheduleTransfer($loser, $date, $context, $ledger, $forced);
                 $displaced[] = new RoledObservance($loser, CelebrationRole::displaced(), $outcome);
@@ -242,12 +270,60 @@ final class DayResolver
             ? [new RoledObservance($temporalOffice, CelebrationRole::tempora())]
             : [];
 
-        return new LiturgicalDay(
+        $day = new LiturgicalDay(
             $date,
             [new RoledObservance($celebration, CelebrationRole::celebration())],
             $commemorations,
             $displaced,
             $tempora
+        );
+
+        if (!$this->tracing) {
+            return $day;
+        }
+
+        return $day->withTrace($this->buildTrace($candidates, $celebration, $traceLosers, $context));
+    }
+
+    /**
+     * The show-your-work trace of one day's resolution (#233): the sorted field of
+     * candidates with their tiers, the celebrated winner and why it won, each loser's
+     * occurrence outcome and cited reason, and the day's commemoration limit.
+     *
+     * @param list<RealizedObservance> $candidates
+     * @param list<array{id: string, outcome: string, reason: \Introibo\Core\Trace\ResolutionReason}> $losers
+     */
+    private function buildTrace(
+        array $candidates,
+        RealizedObservance $celebration,
+        array $losers,
+        PrecedenceContext $context
+    ): ResolutionTrace {
+        $candidateRows = [];
+        foreach ($candidates as $candidate) {
+            $tier = $this->rules->tierOf($candidate, $context);
+            $candidateRows[] = [
+                'id' => $candidate->id()->toString(),
+                'rank' => $candidate->rank()->ordinal(),
+                'kind' => $candidate->kind()->value(),
+                'tier' => [
+                    'ordinal' => $tier->ordinal(),
+                    'line' => $tier->line(),
+                    'selector' => $tier->selector(),
+                ],
+            ];
+        }
+
+        return new ResolutionTrace(
+            [
+                'id' => $celebration->id()->toString(),
+                'line' => $this->rules->tierOf($celebration, $context)->line(),
+                'reason' => $this->rules->explainPrecedence($celebration, $context),
+            ],
+            $candidateRows,
+            $losers,
+            $this->rules->commemorationLimit($celebration, $context),
+            $this->rules->explainCommemorationLimit($celebration, $context)
         );
     }
 

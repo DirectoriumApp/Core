@@ -11,6 +11,7 @@ use Introibo\Core\Observance\ObservanceKind;
 use Introibo\Core\Temporal\Computus;
 use Introibo\Core\Temporal\Season;
 use Introibo\Core\Temporal\TemporalObservance;
+use Introibo\Core\Trace\ResolutionReason;
 
 /**
  * Precedence under the 1962 rubrics (Rubricae 1960 / editio typica 1962).
@@ -168,42 +169,139 @@ final class Rubrics1962Precedence implements PrecedenceRules
         RealizedObservance $loser,
         PrecedenceContext $context
     ): OccurrenceOutcome {
+        return $this->decideOccurrence($winner, $loser, $context)[0];
+    }
+
+    public function explainOccurrence(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): ResolutionReason {
+        return $this->decideOccurrence($winner, $loser, $context)[1];
+    }
+
+    /**
+     * The single occurrence decision: the loser's fate AND the cited reason for it,
+     * produced together so {@see occurrenceOutcome()} and {@see explainOccurrence()}
+     * can never disagree. The branch order is the rubrics' own order of precedence.
+     *
+     * @return array{0: OccurrenceOutcome, 1: ResolutionReason}
+     */
+    private function decideOccurrence(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): array {
         // n. 95: only first-class feasts (and, n. 96b, All Souls) are transferred;
         // every other impeded office is commemorated or omitted.
         if ($this->isTransferable($loser)) {
-            return OccurrenceOutcome::transfer();
+            if ($loser->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
+                return [OccurrenceOutcome::transfer(), ResolutionReason::cited(
+                    'n96-all-souls-transfer',
+                    'transferred: All Souls is kept on the next free day when impeded',
+                    'rg-1960:96'
+                )];
+            }
+
+            return [OccurrenceOutcome::transfer(), ResolutionReason::cited(
+                'n95-first-class-transfer',
+                'transferred: only a first-class feast is moved to another day when impeded',
+                'rg-1960:95'
+            )];
         }
 
         // n. 23 / 30 / 66: the Triduum, the days within the Easter and Pentecost
         // octaves, and the first-class vigils admit no commemoration at all.
         if ($this->admitsNoCommemoration($winner, $context)) {
-            return OccurrenceOutcome::omit();
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'no-commemoration-admitted',
+                'omitted: this day admits no commemoration (the Triduum, a privileged octave, or a first-class vigil)',
+                'rg-1960:23'
+            )];
         }
 
         // n. 15 / n. 112(b): a feast of the Lord and a Sunday do not commemorate
         // each other — the loser is omitted rather than commemorated. (A feast of
         // Our Lady or a saint on a Sunday still commemorates it.)
         if ($this->lordSundayExclusion($winner, $loser)) {
-            return OccurrenceOutcome::omit();
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'n112-lord-sunday-exclusion',
+                'omitted: a feast of the Lord and a Sunday do not commemorate each other',
+                'rg-1960:15'
+            )];
         }
 
         // An ordinary feria (not of Advent, Lent, or Passiontide) carries no
         // commemoration when impeded — only privileged ferias are commemorated
         // (n. 108e); the ferial office simply yields to the feast.
         if ($this->isOrdinaryFeria($loser)) {
-            return OccurrenceOutcome::omit();
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'n108-ordinary-feria',
+                'omitted: an ordinary feria yields to the feast without a commemoration',
+                'rg-1960:108'
+            )];
         }
 
         // n. 111(a): a first-class day admits only a privileged commemoration.
         if ($winner->rank()->ordinal() === 1) {
             return $this->isPrivilegedCommemoration($loser)
-                ? OccurrenceOutcome::commemorate()
-                : OccurrenceOutcome::omit();
+                ? [OccurrenceOutcome::commemorate(), ResolutionReason::cited(
+                    'n111-first-class-privileged',
+                    'commemorated: a first-class day admits a privileged commemoration',
+                    'rg-1960:111'
+                )]
+                : [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                    'n111-first-class-privileged-only',
+                    'omitted: a first-class day admits only a privileged commemoration',
+                    'rg-1960:111'
+                )];
         }
 
         // Second- to fourth-class days admit the loser as a commemoration; the
         // per-day count limit (n. 111b–d / 114) is applied by the resolver (#36).
-        return OccurrenceOutcome::commemorate();
+        return [OccurrenceOutcome::commemorate(), ResolutionReason::cited(
+            'commemoration-admitted',
+            'commemorated: an impeded office is kept as a commemoration within the celebrated office',
+            'rg-1960:112'
+        )];
+    }
+
+    public function explainPrecedence(RealizedObservance $winner, PrecedenceContext $context): ResolutionReason
+    {
+        $tier = $this->tierOf($winner, $context);
+        $line = $tier->line();
+        $selector = $tier->selector();
+        $where = $line !== null
+            ? sprintf('line %d of the Table of Liturgical Days', $line)
+            : 'the Table of Liturgical Days';
+        $named = $selector !== null ? sprintf(' (%s)', str_replace('-', ' ', $selector)) : '';
+
+        return ResolutionReason::cited(
+            'n91-table-of-liturgical-days',
+            sprintf('celebrated as the day\'s highest office, %s%s', $where, $named),
+            'rg-1960:91'
+        );
+    }
+
+    public function explainCommemorationLimit(
+        RealizedObservance $celebration,
+        PrecedenceContext $context
+    ): ResolutionReason {
+        if ($this->admitsNoCommemoration($celebration, $context)) {
+            return ResolutionReason::cited(
+                'no-commemoration-admitted',
+                'no commemoration is admitted (the Triduum, a privileged octave, or a first-class vigil)',
+                'rg-1960:23'
+            );
+        }
+
+        $class = $celebration->rank()->ordinal();
+
+        return ResolutionReason::cited(
+            'n111-commemoration-limit',
+            sprintf('a class %d day admits %d commemoration(s)', $class, $this->table->commemorationLimit($class)),
+            'rg-1960:111'
+        );
     }
 
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable

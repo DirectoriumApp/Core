@@ -119,7 +119,7 @@ fixes only that the field is open and that shared concepts share a token.
 | `tempora` | office[] | `LiturgicalDay` | The temporal office of the season, always reported. |
 | `secondVespers` | object \| null | `ConcurrenceOutcome` | The evening concurrence (below); null when unresolved. |
 | `firstVespers` | null | reserved | Office layer. |
-| `resolution` | null | reserved | The "why-this-won" trace. |
+| `resolution` | object \| null | opt-in | The "why-this-won" trace (#233); null by default, filled by `explain()` / `contract($d, true)`. See resolution-trace-model.md. |
 | `fasting` | null | reserved | Fasting/abstinence layer. |
 | `calendar` | null | reserved | Calendrical/astronomical block; planned sub-shape below. |
 

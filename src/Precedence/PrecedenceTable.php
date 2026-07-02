@@ -115,9 +115,12 @@ final class PrecedenceTable
 
         $tiers = [];
         foreach ($this->corpus->precedenceTiers(self::EDITION_DIR) as $row) {
-            $tiers[$this->requireString($row, 'selector')] = PrecedenceTier::of(
+            $selector = $this->requireString($row, 'selector');
+            $tiers[$selector] = PrecedenceTier::of(
                 $this->requireInt($row, 'ordinal'),
-                $this->requireInt($row, 'subOrder')
+                $this->requireInt($row, 'subOrder'),
+                $selector,
+                $this->requireInt($row, 'line')
             );
         }
 

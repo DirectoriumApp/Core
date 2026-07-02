@@ -6,6 +6,7 @@ namespace Introibo\Core\Precedence;
 
 use DateTimeImmutable;
 use Introibo\Core\Calendar\RealizedObservance;
+use Introibo\Core\Trace\ResolutionReason;
 
 /**
  * The precedence rules of one rubric edition.
@@ -66,4 +67,26 @@ interface PrecedenceRules
 
     /** Whether $office, when commemorated, ranks as a privileged commemoration (n. 108). */
     public function isPrivilegedCommemoration(RealizedObservance $office): bool;
+
+    /**
+     * Why $winner is the office of the day — the cited reason the resolution trace
+     * (#233) reports for the celebration (its line in the Table of Liturgical Days).
+     */
+    public function explainPrecedence(RealizedObservance $winner, PrecedenceContext $context): ResolutionReason;
+
+    /**
+     * The cited reason $loser met its {@see occurrenceOutcome()} — produced from the
+     * same decision, so the explanation can never disagree with the outcome.
+     */
+    public function explainOccurrence(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): ResolutionReason;
+
+    /** The cited reason the day admits the number of commemorations it does. */
+    public function explainCommemorationLimit(
+        RealizedObservance $celebration,
+        PrecedenceContext $context
+    ): ResolutionReason;
 }

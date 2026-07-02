@@ -33,11 +33,25 @@ function day(DateTimeImmutable $date): LiturgicalDay
  *
  * @return array<string, mixed>
  */
-function contract(DateTimeImmutable $date): array
+function contract(DateTimeImmutable $date, bool $explain = false): array
 {
-    $year = resolvedYear((int) $date->format('Y'));
+    $year = $explain ? explainedYear((int) $date->format('Y')) : resolvedYear((int) $date->format('Y'));
 
     return DayContract::from($year->day($date), $year->provenance())->toArray();
+}
+
+/**
+ * The output contract for a civil date with its show-your-work resolution trace
+ * (#233) filled in: the `resolution` slot explains why the office was chosen, what
+ * became of every office it beat, and how the day's commemoration limit was reached,
+ * each step cited to the governing rubric. This is what the API's `?explain` surface
+ * calls. A convenience for {@see contract()} with explaining on.
+ *
+ * @return array<string, mixed>
+ */
+function explain(DateTimeImmutable $date): array
+{
+    return contract($date, true);
 }
 
 /**
@@ -58,4 +72,23 @@ function resolvedYear(int $year): ResolvedYear
     }
 
     return $resolved[$year];
+}
+
+/**
+ * The resolved civil year with resolution tracing on, memoised separately from
+ * {@see resolvedYear()} so explaining a day never perturbs the default resolution
+ * (or the golden digest that hashes it).
+ *
+ * @internal Not part of the public contract; the stable API is explain()/contract().
+ */
+function explainedYear(int $year): ResolvedYear
+{
+    /** @var array<int, ResolvedYear> $explained */
+    static $explained = [];
+
+    if (!isset($explained[$year])) {
+        $explained[$year] = DayResolver::for1962()->explaining()->resolveYear($year);
+    }
+
+    return $explained[$year];
 }
