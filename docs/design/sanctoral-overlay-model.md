@@ -108,6 +108,19 @@ edition-invariant key, so the order is deterministic and reproducible run to run
 deciding which office is actually celebrated, and which are commemorated or
 displaced, is the resolver's work (#29).
 
+## Roles and commemoration limits (#26)
+
+Once resolution runs, each office plays a role on the day. `Calendar\CelebrationRole`
+names the four (celebration | commemoration | displaced | tempora), and
+`Calendar\RoledObservance` pairs a realized office with its role — so a displaced
+office keeps its full data for the transfer queue (#34) and a commemoration keeps
+everything needed to render it. `Calendar\CommemorationLimit` makes the 1960
+counts representable (class I: 1, privileged only; II: 1; III/IV: 2; some days 0).
+
+#26 only makes roles and limits **representable**. Assigning a role to each
+office and enforcing the limits (including the class-I "privileged only"
+restriction and the zero-commemoration days) is the resolver's work (#29 / #36).
+
 ## Scope boundaries (deferred, on purpose)
 
 - **Precedence, commemoration, transfer** — Epic #29. The overlay never decides
