@@ -16,6 +16,22 @@
 # suppressed by the 1955 and 1960 reforms are absent. Confidence: authored and
 # cross-verified against the 1962 calendar; multi-oracle re-proving is issue #45.
 
+# The Commemoration of the Baptism of the Lord (Jan 13), a II-class feast of the Lord
+# instituted by the 1960 reform in place of the abolished Octave Day of the Epiphany.
+- id: roman:sanctorale:baptisma-domini
+  kind: feast
+  titulars: [dominus-noster-iesus-christus-baptisma]
+  names:
+    la: "Commemoratio Baptismatis Domini Nostri Iesu Christi"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 2
+    colour: white
+    month: 1
+    day: 13
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
 - id: roman:sanctorale:telesphorus
   kind: commemoration-only
   titulars: [telesphorus]

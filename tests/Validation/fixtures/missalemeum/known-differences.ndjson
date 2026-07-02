@@ -3,8 +3,6 @@
 {"date":"2024-01-10","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2024-01-11","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2024-01-12","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
-{"date":"2024-01-13","field":"class","oracle":"2","engine":"4","category":"corpus-rank-underranked"}
-{"date":"2024-01-13","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2024-01-14","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2024-01-21","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2024-01-28","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
@@ -111,8 +109,6 @@
 {"date":"2025-01-09","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2025-01-10","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2025-01-11","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
-{"date":"2025-01-13","field":"class","oracle":"2","engine":"4","category":"corpus-rank-underranked"}
-{"date":"2025-01-13","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2025-01-18","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2025-01-19","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2025-01-26","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
@@ -210,8 +206,6 @@
 {"date":"2026-01-10","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2026-01-11","field":"commemorations","oracle":"0","engine":"1","category":"commem-feast"}
 {"date":"2026-01-12","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
-{"date":"2026-01-13","field":"class","oracle":"2","engine":"4","category":"corpus-rank-underranked"}
-{"date":"2026-01-13","field":"colour","oracle":"white","engine":"green","category":"colour-christmas-epiphany-tide"}
 {"date":"2026-01-18","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2026-01-25","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2026-01-28","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
