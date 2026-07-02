@@ -1,10 +1,11 @@
 name: project-status-rollup
 
 # Rolls the org Project board's Status field for every issue in the project, so
-# the board reflects real progress without manual nudging:
-#   - closed issue                         -> Done
-#   - open epic with a completed sub-issue  -> In Progress   (else Todo)
-#   - open issue with an open linked PR     -> In Progress   (else Todo)
+# the board reflects real progress the moment work begins, without manual nudging:
+#   - closed issue                          -> Done
+#   - open epic with any started sub-issue  -> In Progress   (else Todo)
+#       ("started" = a sub-issue that is closed OR has an open linked PR)
+#   - open issue with an open linked PR      -> In Progress   (else Todo)
 #
 # The whole project is read each run, so a single copy of this workflow (in Core)
 # keeps every repo's items current via the hourly schedule; Core's own issue/PR
@@ -100,6 +101,14 @@ jobs:
                               repository { name }
                               labels(first:20) { nodes { name } }
                               subIssuesSummary { total completed }
+                              subIssues(first:100) {
+                                nodes {
+                                  state
+                                  closedByPullRequestsReferences(first:1, includeClosedPrs:false) {
+                                    totalCount
+                                  }
+                                }
+                              }
                               closedByPullRequestsReferences(first:5, includeClosedPrs:false) {
                                 totalCount
                               }
@@ -133,7 +142,15 @@ jobs:
               if (c.state === 'CLOSED') {
                 want = 'Done';
               } else if (isEpic) {
-                want = (c.subIssuesSummary?.completed || 0) > 0 ? 'In Progress' : 'Todo';
+                // An epic is "in progress" the moment ANY sub-issue has started:
+                // a sub-issue that is closed, or one with an open linked PR. This
+                // catches active work before the first child is fully completed.
+                const kids = c.subIssues?.nodes || [];
+                const started = kids.some(k =>
+                  k.state === 'CLOSED' ||
+                  (k.closedByPullRequestsReferences?.totalCount || 0) > 0
+                );
+                want = started ? 'In Progress' : 'Todo';
               } else {
                 want = (c.closedByPullRequestsReferences?.totalCount || 0) > 0 ? 'In Progress' : 'Todo';
               }
