@@ -136,11 +136,23 @@ reassignment, n. 96b, via the ordinary next-free-day placement) is the
 resolver's assembly step (#37); this issue delivers the queue and the fixed
 target rule.
 
+## Concurrence (#35)
+
+The evening between two adjacent days is resolved by
+`concurrenceOutcome()` into a `ConcurrenceOutcome`: the more dignified office (by
+tier) holds Vespers, an equal-rank concurrence goes to the following day's First
+Vespers, and the yielding office is commemorated unless it is a fourth-class
+feria. v0.1.0 is calendar-level (no Divine Office), so this reports which office
+holds the evening and which is commemorated; the finer Table of Concurrence
+rulings (and the Triduum's proper Vespers) arrive with the Office layer. The
+`LiturgicalDay::secondVespers()` accessor that surfaces it is added with the
+assembly step (#37).
+
 ## Still to come in this epic
 
-- **Concurrence (#35)**, **commemoration limits (#36)**, and **assembly + `day()`
-  wiring (#37)** — the whole-year sweep that gathers candidates, drives the
-  transfer queue, and builds the `LiturgicalDay`.
+- **Commemoration limits (#36)** and **assembly + `day()` wiring (#37)** — the
+  whole-year sweep that gathers candidates, drives the transfer queue, applies
+  the limits, and builds the `LiturgicalDay`.
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.
