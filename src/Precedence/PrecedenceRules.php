@@ -56,4 +56,14 @@ interface PrecedenceRules
         RealizedObservance $following,
         PrecedenceContext $context
     ): ConcurrenceOutcome;
+
+    /**
+     * How many commemorations the day of $celebration admits — the celebrated
+     * office's class count (n. 111b–d), reduced to zero on the days that admit
+     * none at all (the Triduum, the privileged octaves, the first-class vigils).
+     */
+    public function commemorationLimit(RealizedObservance $celebration, PrecedenceContext $context): int;
+
+    /** Whether $office, when commemorated, ranks as a privileged commemoration (n. 108). */
+    public function isPrivilegedCommemoration(RealizedObservance $office): bool;
 }

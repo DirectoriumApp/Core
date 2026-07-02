@@ -148,11 +148,21 @@ rulings (and the Triduum's proper Vespers) arrive with the Office layer. The
 `LiturgicalDay::secondVespers()` accessor that surfaces it is added with the
 assembly step (#37).
 
+## Commemoration limits & ordering (#36)
+
+`commemorationLimit()` gives the day's admitted count — the celebrated office's
+class count from `Calendar\CommemorationLimit` (I: 1, II: 1, III/IV: 2), reduced
+to **0** on days that admit none (the Triduum, the privileged octaves, the
+first-class vigils). `Precedence\CommemorationSelector` then orders the day's
+commemoration candidates — **privileged first** (n. 108, so a tight count keeps
+them), then by tier, then by id — and trims to the limit, dropping the rest
+(n. 114).
+
 ## Still to come in this epic
 
-- **Commemoration limits (#36)** and **assembly + `day()` wiring (#37)** — the
-  whole-year sweep that gathers candidates, drives the transfer queue, applies
-  the limits, and builds the `LiturgicalDay`.
+- **Assembly + `day()` wiring (#37)** — the whole-year sweep that gathers
+  candidates, runs occurrence, drives the transfer queue, applies the limits,
+  and builds the `LiturgicalDay` behind `day()`.
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.
