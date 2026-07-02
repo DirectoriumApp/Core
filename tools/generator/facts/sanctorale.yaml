@@ -339,14 +339,14 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:martina
-  kind: commemoration-only
+  kind: feast
   titulars: [martina]
   names:
     la: "S. Martinae Virginis et Martyris"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 1
     day: 30
@@ -1053,14 +1053,14 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:cletus-marcellinus
-  kind: commemoration-only
+  kind: feast
   titulars: [cletus, marcellinus]
   names:
     la: "Ss. Cleti et Marcellini Paparum et Martyrum"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 4
     day: 26
@@ -2632,7 +2632,7 @@
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 3
+    rank: 2
     colour: white
     month: 8
     day: 16
@@ -2947,14 +2947,14 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:laurentius-iustinianus
-  kind: commemoration-only
+  kind: feast
   titulars: [laurentius-iustinianus]
   names:
     la: "S. Laurentii Iustiniani Episcopi et Confessoris"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: white
     month: 9
     day: 5
@@ -3017,14 +3017,14 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:nomen-mariae
-  kind: commemoration-only
+  kind: feast
   titulars: [beata-maria-virgo]
   names:
     la: "Ss. Nominis Mariae"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: white
     month: 9
     day: 12
@@ -3052,21 +3052,21 @@
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 3
+    rank: 2
     colour: white
     month: 9
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:cornelius-et-cyprianus
-  kind: commemoration-only
+  kind: feast
   titulars: [cornelius, cyprianus]
   names:
     la: "Ss. Cornelii Papae et Cypriani Episcopi Martyrum"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 9
     day: 16
@@ -3101,14 +3101,14 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:ianuarius-et-socii
-  kind: commemoration-only
+  kind: feast
   titulars: [ianuarius]
   names:
     la: "S. Ianuarii Episcopi et Sociorum Martyrum"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 9
     day: 19
@@ -3143,56 +3143,56 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:thomas-a-villanova
-  kind: commemoration-only
+  kind: feast
   titulars: [thomas-a-villanova]
   names:
     la: "S. Thomae de Villanova Episcopi et Confessoris"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: white
     month: 9
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:linus
-  kind: commemoration-only
+  kind: feast
   titulars: [linus]
   names:
     la: "S. Lini Papae et Martyris"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 9
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:cosmas-et-damianus
-  kind: commemoration-only
+  kind: feast
   titulars: [cosmas, damianus]
   names:
     la: "Ss. Cosmae et Damiani Martyrum"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 9
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:wenceslaus
-  kind: commemoration-only
+  kind: feast
   titulars: [wenceslaus]
   names:
     la: "S. Wenceslai Ducis et Martyris"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: red
     month: 9
     day: 28
@@ -3381,14 +3381,14 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:eduardus
-  kind: commemoration-only
+  kind: feast
   titulars: [eduardus]
   names:
     la: "S. Eduardi Regis et Confessoris"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 4
+    rank: 3
     colour: white
     month: 10
     day: 13
@@ -3493,15 +3493,73 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 - id: roman:sanctorale:hilarion
-  kind: feast
-  titulars: [hilarion, ursula]
+  kind: commemoration-only
+  titulars: [hilarion]
   names:
     la: "S. Hilarionis Abbatis"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
-    rank: 3
+    rank: 4
     colour: white
+    month: 10
+    day: 21
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+# Co-occurring commemorations kept alongside the III-class feasts above (surfaced by
+# correcting those feasts' ranks): each is printed in the 1962 Missal as a commemoration.
+- id: roman:sanctorale:euphemia-lucia-geminianus
+  kind: commemoration-only
+  titulars: [euphemia, lucia, geminianus]
+  names:
+    la: "Ss. Euphemiae Virginis et Martyris, ac Luciae et Geminiani Martyrum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 4
+    colour: red
+    month: 9
+    day: 16
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:mauritius-et-socii
+  kind: commemoration-only
+  titulars: [mauritius]
+  names:
+    la: "Ss. Mauritii et Sociorum Martyrum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 4
+    colour: red
+    month: 9
+    day: 22
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:thecla
+  kind: commemoration-only
+  titulars: [thecla]
+  names:
+    la: "S. Theclae Virginis et Martyris"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 4
+    colour: red
+    month: 9
+    day: 23
+    cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+- id: roman:sanctorale:ursula-et-socii
+  kind: commemoration-only
+  titulars: [ursula]
+  names:
+    la: "Ss. Ursulae et Sociarum Virginum et Martyrum"
+  cites:
+    names.la: mr-1920
+  roman-rubricae-1960:
+    rank: 4
+    colour: red
     month: 10
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
