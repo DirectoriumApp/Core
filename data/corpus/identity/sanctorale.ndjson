@@ -1,0 +1,5 @@
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioseph","kind":"feast","names":{"la":"S. Ioseph Sponsi B.M.V. Confessoris"},"titulars":["ioseph"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius","kind":"feast","names":{"la":"S. Laurentii Martyris"},"titulars":["laurentius"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Laurentii Martyris"},"titulars":["laurentius"]}
+{"cites":{"names.en":"mr-1920","names.la":"mr-1920"},"id":"roman:sanctorale:petrus-paulus","kind":"feast","names":{"en":"Ss. Peter and Paul, Apostles","la":"Ss. Petri et Pauli Apostolorum"},"titulars":["petrus","paulus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:quatuor-coronati","kind":"commemoration-only","names":{"la":"Ss. Quatuor Coronatorum Martyrum"},"titulars":["quatuor-coronati"]}
