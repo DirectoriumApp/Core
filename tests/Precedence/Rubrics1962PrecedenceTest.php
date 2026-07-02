@@ -229,6 +229,36 @@ final class Rubrics1962PrecedenceTest extends TestCase
         self::assertSame('omit', self::outcome($firstClassSunday, $saintFeastII));
     }
 
+    public function testAFeastOfTheLordDoesNotCommemorateTheSundayItDisplaces(): void
+    {
+        // n. 15 / n. 112(b): the Holy Name (II feast of the Lord) over a II-class
+        // Sunday → the Sunday is omitted, not commemorated.
+        $holyName = self::build('roman:temporale:christmas:holy-name', 'feast', 2, 'christmastide');
+        $secondSunday = self::build('roman:temporale:epiphany:sunday-2', 'sunday', 2, 'epiphany');
+
+        self::assertSame('omit', self::outcome($holyName, $secondSunday));
+    }
+
+    public function testAMarianFeastStillCommemoratesTheSundayItDisplaces(): void
+    {
+        // Contrast: the Immaculate Conception is a feast of Our Lady, not of the
+        // Lord, so the exclusion does not apply — the Sunday is commemorated.
+        $immaculata = self::build('roman:sanctorale:immaculata-conceptio', 'feast', 1, 'advent');
+        $secondSunday = self::build('roman:temporale:advent:sunday-2', 'sunday', 2, 'advent');
+
+        self::assertSame('commemorate', self::outcome($immaculata, $secondSunday));
+    }
+
+    public function testASundayDoesNotCommemorateAnImpededFeastOfTheLord(): void
+    {
+        // The exclusion is symmetric: a first-class Sunday impeding a second-class
+        // feast of the Lord omits it rather than commemorating it.
+        $firstClassSunday = self::build('roman:temporale:advent:sunday-1', 'sunday', 1, 'advent');
+        $lordFeastII = self::build('roman:temporale:christmas:holy-name', 'feast', 2, 'christmastide');
+
+        self::assertSame('omit', self::outcome($firstClassSunday, $lordFeastII));
+    }
+
     private static function outcome(
         RealizedObservance $winner,
         RealizedObservance $loser,

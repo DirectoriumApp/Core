@@ -111,10 +111,23 @@ occurrence-boundary this fixes is n. 95: a **second-class feast is never
 transferred** — impeded by a first-class day it is *omitted* (a first-class day
 admits only privileged commemorations, n. 111a), not moved. Verified by tests.
 
+## Sunday vs feast (#33)
+
+`occurrenceOutcome()` applies the Sunday/feast-of-the-Lord exclusion (nn. 15,
+112b): a feast **of the Lord** and a Sunday do **not** commemorate each other —
+when a feast of the Lord takes a Sunday's place the Sunday is *omitted*, and a
+Sunday impeding a feast of the Lord omits it. A feast of **Our Lady** or a saint
+is not barred, so it still commemorates the Sunday (the Immaculate Conception
+commemorates its Advent Sunday; the Holy Name does not). "Feast of the Lord" is
+recognised by the same identity sets that place lines 1/3/14 of the tier table.
+
 ## Still to come in this epic
 
-- **Sunday vs feast of the Lord (#33)** — the exclusion that a Sunday and a
-  feast/mystery of the Lord do not commemorate each other (nn. 15, 112b).
+- **The transfer queue (#34)** — a displaced first-class feast to the next free
+  day (the Annunciation to the Monday after Low Sunday), via a deterministic
+  whole-year forward sweep.
+- **Concurrence (#35)**, **commemoration limits (#36)**, and **assembly + `day()`
+  wiring (#37)**.
 - **The transfer queue (#34)** — a displaced first-class feast is transferred to
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.
