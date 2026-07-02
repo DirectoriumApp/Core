@@ -211,16 +211,16 @@ final class ChristmasCycleTest extends TestCase
         return [
             'Advent I — first class, violet' =>
                 ['2024-12-01', 'advent:sunday-1', 'sunday', 'advent', 'I', 'violet', false],
-            'Advent feria — fourth class, violet' =>
-                ['2024-12-03', 'advent:week-1:feria-3', 'feria', 'advent', 'IV', 'violet', false],
-            'Gaudete — second class, violet with rose' =>
-                ['2024-12-15', 'advent:sunday-3', 'sunday', 'advent', 'II', 'violet', true],
+            'Advent feria — third class, violet' =>
+                ['2024-12-03', 'advent:week-1:feria-3', 'feria', 'advent', 'III', 'violet', false],
+            'Gaudete — first class, violet with rose' =>
+                ['2024-12-15', 'advent:sunday-3', 'sunday', 'advent', 'I', 'violet', true],
             'Advent Ember Wednesday — second class' =>
                 ['2024-12-18', 'advent:quattuor-temporum:feria-4', 'ember-day', 'advent', 'II', 'violet', false],
             'Greater feria (19 Dec) — second class' =>
                 ['2024-12-19', 'advent:week-3:feria-5', 'feria', 'advent', 'II', 'violet', false],
-            'Advent IV — second class' =>
-                ['2024-12-22', 'advent:sunday-4', 'sunday', 'advent', 'II', 'violet', false],
+            'Advent IV — first class' =>
+                ['2024-12-22', 'advent:sunday-4', 'sunday', 'advent', 'I', 'violet', false],
             'Vigil of the Nativity — first class, still violet' =>
                 ['2024-12-24', 'christmas:vigil', 'vigil', 'advent', 'I', 'violet', false],
             'The Nativity — first class, white' =>

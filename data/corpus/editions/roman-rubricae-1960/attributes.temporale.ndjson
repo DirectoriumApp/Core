@@ -1,8 +1,8 @@
 {"archetype":"advent-ember","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":2}
-{"archetype":"advent-feria","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":4}
+{"archetype":"advent-feria","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":3}
 {"archetype":"advent-feria-greater","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":2}
-{"archetype":"advent-sunday","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":2}
-{"archetype":"advent-sunday-gaudete","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet","roseAllowed":true},"rank":2}
+{"archetype":"advent-sunday","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":1}
+{"archetype":"advent-sunday-gaudete","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet","roseAllowed":true},"rank":1}
 {"archetype":"advent-sunday-i","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":1}
 {"archetype":"ascension","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"rank":1}
 {"archetype":"ascension-week-feria","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"rank":4}
