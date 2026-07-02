@@ -11,7 +11,12 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadYaml } from './facts.mjs';
 import { makeValidators, validateAll } from './validate.mjs';
-import { transformSanctorale, transformTemporalSkeleton, transformTemporale } from './transform.mjs';
+import {
+  transformSanctorale,
+  transformTemporalSkeleton,
+  transformTemporale,
+  transformPrecedence,
+} from './transform.mjs';
 import { checkProvenance, usedSources } from './provenance.mjs';
 import { toNdjson, toPretty, sha256 } from './canonical.mjs';
 
@@ -59,6 +64,8 @@ export function build(outDir = DEFAULT_OUT) {
     edition,
   );
 
+  const precedence = transformPrecedence(loadYaml(join(FACTS_DIR, 'precedence.yaml')), edition);
+
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),
@@ -68,6 +75,8 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['temporal-skeleton'], blockSeasons, 'temporal-skeleton'),
     ...validateAll(validators['identity.temporale'], temporale.identity, 'identity.temporale'),
     ...validateAll(validators['attributes.temporale'], temporale.attributes, 'attributes.temporale'),
+    ...validateAll(validators['precedence-tier'], precedence.tiers, 'precedence-tier'),
+    ...validateAll(validators['precedence-rules'], precedence.rules, 'precedence-rules'),
     ...validateAll(validators['source'], sources, 'source'),
   ];
   if (errors.length > 0) {
@@ -87,15 +96,16 @@ export function build(outDir = DEFAULT_OUT) {
     sources,
   );
 
-  // The temporal-skeleton rows carry no human-readable strings, only a single
-  // `cite` per structural fact — still every cite must resolve to a registered
-  // source (the clean-room rule), and its use is counted for the manifest report.
+  // The temporal-skeleton and precedence rows carry no human-readable strings,
+  // only a single `cite` per structural fact — still every cite must resolve to a
+  // registered source (the clean-room rule), and its use is counted for the report.
   const sourceKeys = new Set(sources.map((source) => source.key));
-  for (const row of [...offsets, ...blockSeasons]) {
+  for (const row of [...offsets, ...blockSeasons, ...precedence.tiers, ...precedence.rules]) {
     const key = String(row.cite).split(':')[0];
     usage.set(key, (usage.get(key) || 0) + 1);
     if (!sourceKeys.has(key)) {
-      problems.push(`temporal-skeleton ${row.slot || row.block}: cites unknown source "${key}"`);
+      const id = row.slot ?? row.block ?? row.selector ?? row.name ?? row.dayClass;
+      problems.push(`fact row ${id}: cites unknown source "${key}"`);
     }
   }
 
@@ -131,6 +141,16 @@ export function build(outDir = DEFAULT_OUT) {
       text: toNdjson(temporale.attributes),
       records: temporale.attributes.length,
       primaryKey: 'archetype',
+    },
+    [`editions/${edition}/precedence-tiers.ndjson`]: {
+      text: toNdjson(precedence.tiers),
+      records: precedence.tiers.length,
+      primaryKey: 'selector',
+    },
+    [`editions/${edition}/precedence-rules.ndjson`]: {
+      text: toNdjson(precedence.rules),
+      records: precedence.rules.length,
+      primaryKey: 'rule',
     },
     'sources.ndjson': { text: toNdjson(sources), records: sources.length, primaryKey: 'key' },
   };

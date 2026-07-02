@@ -19,6 +19,16 @@
       "records": 297,
       "sha256": "fb91feb5910262cd483ef8c8946c451c60aa806945a6760ee9f294eeebdf2588"
     },
+    "editions/roman-rubricae-1960/precedence-rules.ndjson": {
+      "primaryKey": "rule",
+      "records": 10,
+      "sha256": "4ee75bf99c596be2693537a47e110ab10455f1016e31ba231f4b8830fc370b39"
+    },
+    "editions/roman-rubricae-1960/precedence-tiers.ndjson": {
+      "primaryKey": "selector",
+      "records": 23,
+      "sha256": "acaea2167367454112320c204569f70d7859e154fcfe170829a8e9f72fdc1864"
+    },
     "identity/sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 297,
@@ -62,7 +72,7 @@
       "rights": "reference",
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "introibo:source:rg-1960",
-      "uses": 1349
+      "uses": 1382
     }
   ]
 }

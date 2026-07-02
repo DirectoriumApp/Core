@@ -124,6 +124,45 @@ export function transformTemporale(archetypes, edition) {
 }
 
 /**
+ * Fan the precedence facts into the two frozen shapes for one edition: the
+ * Table-of-Liturgical-Days tiers (`{ selector, line, ordinal, subOrder, cite }`,
+ * sorted by ordinal) and the rules — the membership id-sets and the commemoration
+ * limits, both variants of the precedence-rules oneOf, in a stable order.
+ */
+export function transformPrecedence(facts, edition) {
+  const tiers = (facts.tiers || [])
+    .map((t) => ({
+      selector: t.selector,
+      line: t.line,
+      ordinal: t.ordinal,
+      subOrder: t.subOrder,
+      cite: t.cite,
+    }))
+    .sort((a, b) => a.ordinal - b.ordinal);
+
+  const membership = (facts.membership || []).map((m) => ({
+    rule: 'membership',
+    name: m.name,
+    ids: m.ids,
+    cite: m.cite,
+  }));
+  const limits = (facts.commemorationLimits || []).map((c) => ({
+    rule: 'commemoration-limit',
+    dayClass: c.dayClass,
+    limit: c.limit,
+    cite: c.cite,
+  }));
+  const ruleKey = (r) => r.rule + ':' + (r.name ?? r.dayClass);
+  const rules = [...limits, ...membership].sort((a, b) => {
+    const ka = ruleKey(a);
+    const kb = ruleKey(b);
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
+
+  return { tiers, rules, edition };
+}
+
+/**
  * Fan the temporal-skeleton facts into the two edition-invariant NDJSON shapes:
  * the Easter offsets (`{ slot, offset, cite }`) and the block->season assignments
  * (`{ block, season, cite }`). Both validate against the temporal-skeleton schema.

@@ -1,0 +1,10 @@
+{"cite":"rg-1960","dayClass":1,"limit":1,"rule":"commemoration-limit"}
+{"cite":"rg-1960","dayClass":2,"limit":1,"rule":"commemoration-limit"}
+{"cite":"rg-1960","dayClass":3,"limit":2,"rule":"commemoration-limit"}
+{"cite":"rg-1960","dayClass":4,"limit":2,"rule":"commemoration-limit"}
+{"cite":"rg-1960","ids":["roman:temporale:christmas:vigil","roman:temporale:christmas:octave-day"],"name":"christmas-vigil-octave","rule":"membership"}
+{"cite":"rg-1960","ids":["roman:sanctorale:immaculata-conceptio","roman:sanctorale:assumptio"],"name":"great-lady","rule":"membership"}
+{"cite":"rg-1960","ids":["roman:temporale:epiphany:domini","roman:temporale:paschal:ascension","roman:temporale:paschal:trinity-sunday","roman:temporale:paschal:corpus-christi","roman:temporale:paschal:sacred-heart","roman:temporale:month-computed:christ-the-king"],"name":"great-lord","rule":"membership"}
+{"cite":"rg-1960","ids":["roman:temporale:christmas:nativity","roman:temporale:paschal:easter","roman:temporale:paschal:pentecost"],"name":"greatest","rule":"membership"}
+{"cite":"rg-1960","ids":["roman:temporale:paschal:pentecost-vigil"],"name":"pentecost-vigil","rule":"membership"}
+{"cite":"rg-1960","ids":["roman:temporale:christmas:holy-name","roman:temporale:epiphany:holy-family"],"name":"second-lord-feasts","rule":"membership"}
