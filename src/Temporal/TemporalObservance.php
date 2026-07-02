@@ -6,6 +6,7 @@ namespace Introibo\Core\Temporal;
 
 use Introibo\Core\Attribute\ElementColour;
 use Introibo\Core\Attribute\RankClass;
+use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Observance\ObservanceId;
 use Introibo\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
@@ -29,7 +30,7 @@ use InvalidArgumentException;
  *
  * Immutable: it holds only value objects and an invariant string name.
  */
-final class TemporalObservance
+final class TemporalObservance implements RealizedObservance
 {
     private ObservanceId $id;
 
