@@ -2,7 +2,8 @@
 <ruleset name="introibo-core">
     <description>Coding standard for introibo/core: PSR-12.</description>
 
-    <!-- Scan the library source and the test suite. -->
+    <!-- Scan the library source, the test suite, and maintainer scripts. -->
+    <file>bin</file>
     <file>src</file>
     <file>tests</file>
 
