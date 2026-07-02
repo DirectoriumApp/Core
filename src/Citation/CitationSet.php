@@ -48,6 +48,17 @@ final class CitationSet
         return new self([]);
     }
 
+    /**
+     * A new set with the other set's citations layered over this one — the other
+     * set's fields win on collision. Used when a particular-calendar overlay
+     * re-cites a field it changes (a re-ranked feast's `rank` now cites the
+     * overlay's source, not the universal edition's).
+     */
+    public function merge(self $other): self
+    {
+        return new self(array_merge($this->byField, $other->byField));
+    }
+
     /** The citation justifying a field, or null when the field is uncited. */
     public function for(string $field): ?Citation
     {
