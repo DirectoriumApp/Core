@@ -259,6 +259,30 @@ final class Rubrics1962PrecedenceTest extends TestCase
         self::assertSame('omit', self::outcome($firstClassSunday, $lordFeastII));
     }
 
+    public function testAnnunciationHasAForcedTransferToTheMondayAfterLowSunday(): void
+    {
+        // Easter 2025 is 20 April; Low Sunday 27 April; the Monday after is 28 April.
+        $annunciation = self::build('roman:sanctorale:annuntiatio', 'feast', 1, 'lent');
+        $target = (new Rubrics1962Precedence())->forcedTransferDate(
+            $annunciation,
+            PrecedenceContext::of(new DateTimeImmutable('2025-03-25', new DateTimeZone('UTC')), false)
+        );
+
+        self::assertNotNull($target);
+        self::assertSame('2025-04-28', $target->format('Y-m-d'));
+    }
+
+    public function testMostFeastsHaveNoForcedTransferDate(): void
+    {
+        $stJoseph = self::build('roman:sanctorale:ioseph', 'feast', 1, 'lent');
+        $target = (new Rubrics1962Precedence())->forcedTransferDate(
+            $stJoseph,
+            PrecedenceContext::of(new DateTimeImmutable('2025-03-19', new DateTimeZone('UTC')), false)
+        );
+
+        self::assertNull($target);
+    }
+
     private static function outcome(
         RealizedObservance $winner,
         RealizedObservance $loser,
