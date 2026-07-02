@@ -86,7 +86,7 @@ it includes. Ranks/colours verified against the 1960/1962 General Calendar.
 | 12-28 | `innocentes` | II | red | Christmas octave — red under the 1962 books (1960 moved the red Mass onto the day) |
 
 St Lawrence's feast (08-10) and the four surviving vigils are listed under
-**Vigils (#27)** below; the bissextile shift is added in #333.
+**Vigils (#27)** below; the leap-year shift under **Bissextile (#333)**.
 
 ## What #24 establishes
 
@@ -154,6 +154,17 @@ feast, commemorate the octave) and transferring or omitting feasts impeded by
 the Easter and Pentecost octaves is the resolver's work (#29). #28 only
 establishes that the overlay adds no octaves and that the co-occurrence is
 available to resolve.
+
+## Bissextile (#333)
+
+In a leap year the traditional calendar doubles the *sexto Kalendas Martii* — the
+sixth day before the Kalends of March, civil 24 February — so every feast on
+**24–28 February is kept one day later**: St Matthias 24 Feb → 25 Feb, St Gabriel
+of Our Lady of Sorrows 27 Feb → 28 Feb, and a 28 Feb feast → 29 Feb. 24 February
+itself becomes the *bis-sextus* feria. The loader applies this from the date
+alone (`month === 2 && 24 ≤ day ≤ 28` in a leap year) — no per-entry flag. A
+1583–2200 sweep verifies the shift never collides (one office per realized date)
+and that St Matthias lands on its leap-dependent day every year.
 
 ## Scope boundaries (deferred, on purpose)
 

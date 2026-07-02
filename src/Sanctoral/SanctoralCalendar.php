@@ -136,17 +136,25 @@ final class SanctoralCalendar
      * The civil date an entry is realized on this year, or null if the entry
      * does not occur (a feast fixed to 29 February in a common year).
      *
-     * The bissextile shift that moves the 24–28 February feasts in a leap year
-     * is applied in #333; this method places each entry on its own civil date
-     * and only guards the one date that need not exist.
+     * Bissextile handling: in a leap year the sixth day before the Kalends of
+     * March is doubled, so every feast on 24–28 February is kept one day later —
+     * St Matthias 24 Feb → 25 Feb, St Gabriel of Our Lady of Sorrows 27 Feb →
+     * 28 Feb, and a 28 Feb feast → 29 Feb. 24 February itself becomes the
+     * bis-sextus feria.
      */
     private function placementDate(SanctoralEntry $entry): ?DateTimeImmutable
     {
         $month = $entry->month();
         $day = $entry->day();
 
-        if ($month === 2 && $day === 29 && !$this->isLeapYear()) {
-            return null;
+        if ($month === 2) {
+            $leapYear = $this->isLeapYear();
+            if ($day === 29 && !$leapYear) {
+                return null;
+            }
+            if ($leapYear && $day >= 24 && $day <= 28) {
+                $day++;
+            }
         }
 
         return TemporalCalendar::utcDate($this->year, $month, $day);
