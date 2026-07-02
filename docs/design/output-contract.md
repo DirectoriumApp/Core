@@ -97,6 +97,16 @@ fared this day.
 | `chant` | null | Reserved (GABC). |
 | `audio` | null | Reserved. |
 
+### i18n & content hooks
+
+Human-readable text is i18n-shaped, never baked: `names` is a locale-keyed map
+with the invariant `la` (the liturgical Latin, not a "translation") always
+present. v1.0 ships Latin only; the text layer (v1.1) adds vernacular locales as
+further keys without reshaping anything. The proper-text pipelines attach through
+reserved, nullable office hooks — `text` (Missal propers), `chant` (GABC), `audio`
+— alongside `citations`; all are null in 1.0 and only ever filled. The engine
+hard-codes no language text: every name comes from the corpus data.
+
 ### Stable identifiers (a compatibility surface)
 
 `id` is the bare `ObservanceId` slug — identity only, edition-invariant, and
