@@ -6,8 +6,8 @@
   "files": {
     "editions/roman-rubricae-1960/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 301,
-      "sha256": "8fb64995afa53047f91e7350b31c0d92a99f9cc5c71ee283b2952ac48fc87d67"
+      "records": 302,
+      "sha256": "f11a882840845ecf67a5975e0414e6cabc8bc4e0be840868f30871ba678b6135"
     },
     "editions/roman-rubricae-1960/attributes.temporale.ndjson": {
       "primaryKey": "archetype",
@@ -16,8 +16,8 @@
     },
     "editions/roman-rubricae-1960/placement.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 301,
-      "sha256": "52760f7c71676761e095ab071c65a887dfcfb003143cd6985d4ab8631347c5b9"
+      "records": 302,
+      "sha256": "3e2667eca77d6878e2e696d81fe62a12bd4c8db0a508fbebc5aff5145155207b"
     },
     "editions/roman-rubricae-1960/precedence-rules.ndjson": {
       "primaryKey": "rule",
@@ -31,8 +31,8 @@
     },
     "identity/sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 301,
-      "sha256": "db313cfd6e23b5b6b5b6b7c5aa9fbe1befb13a0e748cb1553144af926b96b9da"
+      "records": 302,
+      "sha256": "d4d38838edc947b815aba5a79621941b8978cc002410df002053a6c9d4b59c1b"
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
@@ -64,7 +64,7 @@
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
       "urn": "introibo:source:mr-1920",
-      "uses": 362
+      "uses": 363
     },
     {
       "key": "rg-1960",
@@ -72,7 +72,7 @@
       "rights": "reference",
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "introibo:source:rg-1960",
-      "uses": 1399
+      "uses": 1403
     }
   ]
 }

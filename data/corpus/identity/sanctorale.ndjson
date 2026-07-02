@@ -30,6 +30,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:athanasius","kind":"feast","names":{"la":"S. Athanasii Episcopi, Confessoris et Ecclesiae Doctoris"},"titulars":["athanasius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:augustinus","kind":"feast","names":{"la":"S. Augustini Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["augustinus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:augustinus-cantuariensis","kind":"feast","names":{"la":"S. Augustini Episcopi et Confessoris"},"titulars":["augustinus-cantuariensis"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:baptisma-domini","kind":"feast","names":{"la":"Commemoratio Baptismatis Domini Nostri Iesu Christi"},"titulars":["dominus-noster-iesus-christus-baptisma"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:barbara","kind":"commemoration-only","names":{"la":"S. Barbarae Virginis et Martyris"},"titulars":["barbara"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:barnabas","kind":"feast","names":{"la":"S. Barnabae Apostoli"},"titulars":["barnabas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bartholomaeus","kind":"feast","names":{"la":"S. Bartholomaei Apostoli"},"titulars":["bartholomaeus"]}
