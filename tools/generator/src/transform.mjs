@@ -83,3 +83,24 @@ export function transformSanctorale(entries, edition) {
 
   return { identity, attributes, placement };
 }
+
+/** Sort a list of rows by a string key in code-unit order (stable, explicit). */
+function byKey(key) {
+  return (a, b) => (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);
+}
+
+/**
+ * Fan the temporal-skeleton facts into the two edition-invariant NDJSON shapes:
+ * the Easter offsets (`{ slot, offset, cite }`) and the block->season assignments
+ * (`{ block, season, cite }`). Both validate against the temporal-skeleton schema.
+ */
+export function transformTemporalSkeleton(facts) {
+  const offsets = (facts.easterOffsets || [])
+    .map((r) => ({ slot: r.slot, offset: r.offset, cite: r.cite }))
+    .sort(byKey('slot'));
+  const blockSeasons = (facts.blockSeasons || [])
+    .map((r) => ({ block: r.block, season: r.season, cite: r.cite }))
+    .sort(byKey('block'));
+
+  return { offsets, blockSeasons };
+}
