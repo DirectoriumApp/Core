@@ -85,9 +85,8 @@ it includes. Ranks/colours verified against the 1960/1962 General Calendar.
 | 12-27 | `ioannes-evangelista` | II | white | Christmas octave |
 | 12-28 | `innocentes` | II | red | Christmas octave — red under the 1962 books (1960 moved the red Mass onto the day) |
 
-The **surviving vigils** (Jun 23 St John Baptist II, Jun 28 Ss Peter & Paul II,
-Aug 9 St Lawrence III, Aug 14 Assumption II — all violet) are added in #27; the
-bissextile shift in #333.
+St Lawrence's feast (08-10) and the four surviving vigils are listed under
+**Vigils (#27)** below; the bissextile shift is added in #333.
 
 ## What #24 establishes
 
@@ -120,6 +119,24 @@ counts representable (class I: 1, privileged only; II: 1; III/IV: 2; some days 0
 #26 only makes roles and limits **representable**. Assigning a role to each
 office and enforcing the limits (including the class-I "privileged only"
 restriction and the zero-commemoration days) is the resolver's work (#29 / #36).
+
+## Vigils (#27)
+
+Four sanctoral vigils survive the 1960 reform. Each is kept on the day before its
+feast, is violet, and links to its feast by `vigilOfId` (carried through to the
+realized `SanctoralObservance`, so the resolver can handle the vigil boundary):
+
+| Vigil (`roman:sanctorale:…:vigilia`) | Date | Of feast | Class |
+|------|------|------|------|
+| `ioannes-baptista:vigilia` | 06-23 | Nativity of St John Baptist (06-24) | II |
+| `petrus-paulus:vigilia` | 06-28 | Ss Peter & Paul (06-29) | II |
+| `laurentius:vigilia` | 08-09 | St Lawrence (08-10) | III |
+| `assumptio:vigilia` | 08-14 | Assumption (08-15) | II |
+
+Rank is **per-vigil** — St Lawrence's is the one III-class vigil, the rest are
+II. St Lawrence's feast (08-10, II, red) is seeded alongside its vigil. Every
+other historical vigil was suppressed under the 1960 rubrics and is simply
+absent from the data, so it is never emitted.
 
 ## Scope boundaries (deferred, on purpose)
 

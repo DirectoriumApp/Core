@@ -95,6 +95,43 @@ final class SeedSanctoralData implements SanctoralData
                 ['ioannes-evangelista']
             ),
             $this->entry(12, 28, 'innocentes', 2, 'red', 'Ss. Innocentium Martyrum', ['innocentes']),
+            $this->entry(8, 10, 'laurentius', 2, 'red', 'S. Laurentii Martyris', ['laurentius']),
+            $this->vigil(
+                6,
+                23,
+                'ioannes-baptista:vigilia',
+                2,
+                'In Vigilia S. Ioannis Baptistae',
+                ['ioannes-baptista'],
+                'nativitas-ioannis-baptistae'
+            ),
+            $this->vigil(
+                6,
+                28,
+                'petrus-paulus:vigilia',
+                2,
+                'In Vigilia Ss. Petri et Pauli Apostolorum',
+                ['petrus', 'paulus'],
+                'petrus-paulus'
+            ),
+            $this->vigil(
+                8,
+                9,
+                'laurentius:vigilia',
+                3,
+                'In Vigilia S. Laurentii Martyris',
+                ['laurentius'],
+                'laurentius'
+            ),
+            $this->vigil(
+                8,
+                14,
+                'assumptio:vigilia',
+                2,
+                'In Vigilia Assumptionis B.M.V.',
+                ['maria'],
+                'assumptio'
+            ),
         ];
     }
 
@@ -131,6 +168,39 @@ final class SeedSanctoralData implements SanctoralData
             $identity,
             RankClass::fromOrdinal($rankOrdinal),
             ElementColour::of(Colour::fromString($colour))
+        );
+    }
+
+    /**
+     * Build one surviving sanctoral vigil, kept on the day before its feast and
+     * carrying the feast's id as its parent link. Vigils are violet under the
+     * 1960 rubrics.
+     *
+     * @param list<string> $titulars
+     */
+    private function vigil(
+        int $month,
+        int $day,
+        string $slug,
+        int $rankOrdinal,
+        string $latinName,
+        array $titulars,
+        string $ofSlug
+    ): SanctoralEntry {
+        $identity = new Observance(
+            ObservanceId::parse('roman:sanctorale:' . $slug),
+            ObservanceKind::fromString(ObservanceKind::VIGIL),
+            $titulars,
+            ['la' => $latinName]
+        );
+
+        return new SanctoralEntry(
+            $month,
+            $day,
+            $identity,
+            RankClass::fromOrdinal($rankOrdinal),
+            ElementColour::of(Colour::violet()),
+            ObservanceId::parse('roman:sanctorale:' . $ofSlug)
         );
     }
 }

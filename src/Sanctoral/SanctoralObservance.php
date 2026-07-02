@@ -31,17 +31,35 @@ final class SanctoralObservance implements RealizedObservance
 
     private ElementColour $colour;
 
-    public function __construct(Observance $identity, RankClass $rank, ElementColour $colour)
-    {
+    private ?ObservanceId $vigilOfId;
+
+    public function __construct(
+        Observance $identity,
+        RankClass $rank,
+        ElementColour $colour,
+        ?ObservanceId $vigilOfId = null
+    ) {
         $this->identity = $identity;
         $this->rank = $rank;
         $this->colour = $colour;
+        $this->vigilOfId = $vigilOfId;
     }
 
     /** The Layer-1 identity shell: id, kind, titulars, and names. */
     public function identity(): Observance
     {
         return $this->identity;
+    }
+
+    /** The id of the feast this office is the vigil of, or null when it is not a vigil. */
+    public function vigilOfId(): ?ObservanceId
+    {
+        return $this->vigilOfId;
+    }
+
+    public function isVigil(): bool
+    {
+        return $this->vigilOfId !== null;
     }
 
     public function id(): ObservanceId
@@ -75,6 +93,16 @@ final class SanctoralObservance implements RealizedObservance
             && $this->identity->kind()->equals($other->identity->kind())
             && $this->rank->equals($other->rank)
             && $this->colour->equals($other->colour)
-            && $this->identity->latinName() === $other->identity->latinName();
+            && $this->identity->latinName() === $other->identity->latinName()
+            && $this->vigilOfMatches($other);
+    }
+
+    private function vigilOfMatches(self $other): bool
+    {
+        if ($this->vigilOfId === null || $other->vigilOfId === null) {
+            return $this->vigilOfId === $other->vigilOfId;
+        }
+
+        return $this->vigilOfId->equals($other->vigilOfId);
     }
 }
