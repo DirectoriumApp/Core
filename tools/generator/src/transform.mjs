@@ -84,6 +84,74 @@ export function transformSanctorale(entries, edition) {
   return { identity, attributes, placement };
 }
 
+/**
+ * Fan a particular-calendar overlay's YAML into its NDJSON operation rows, the
+ * metadata singleton, and the born-cited provenance shadow records (Core #76).
+ *
+ * Each operation is one row; the three kinds mirror the PHP {@see OverlayOperation}
+ * value objects — `rerank` (change an existing feast's rank, optionally its colour),
+ * `add` (a proper feast the universal calendar lacks, carrying a full entry), and
+ * `suppress` (drop a universal feast). Rows are sorted by their target observance id,
+ * so the file is deterministic and the order it is written in matches the
+ * order-independent order the decorator applies them. The `provenance` records feed
+ * the same born-cited gate the sanctoral uses: every cite must resolve to a registered
+ * source, and an added feast's title must cite a public-domain text source.
+ */
+export function transformOverlay(overlay) {
+  const rows = [];
+  const provenance = [];
+
+  for (const op of overlay.operations || []) {
+    if (op.op === 'rerank') {
+      const cites = op.cites || {};
+      const row = { op: 'rerank', target: op.target, rank: op.rank, cites };
+      if (op.colour !== undefined) {
+        row.colour = colourOf(op.colour);
+      }
+      rows.push(row);
+      provenance.push({ id: op.target, cites });
+    } else if (op.op === 'suppress') {
+      const cites = op.cites || {};
+      rows.push({ op: 'suppress', target: op.target, cites });
+      provenance.push({ id: op.target, cites });
+    } else if (op.op === 'add') {
+      const e = op.entry;
+      const cites = e.cites || {};
+      const entry = {
+        id: e.id,
+        kind: e.kind,
+        titulars: e.titulars,
+        names: e.names,
+        rank: e.rank,
+        colour: colourOf(e.colour),
+        month: e.month,
+        day: e.day,
+        cites,
+      };
+      if (e.vigilOf) {
+        entry.vigilOf = e.vigilOf;
+      }
+      rows.push({ op: 'add', entry });
+      provenance.push({ id: e.id, cites, names: e.names });
+    } else {
+      throw new Error(`overlay ${overlay.id}: unknown operation "${String(op.op)}"`);
+    }
+  }
+
+  const targetOf = (row) => (row.op === 'add' ? row.entry.id : row.target);
+  rows.sort((a, b) => {
+    const ka = targetOf(a);
+    const kb = targetOf(b);
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
+
+  return {
+    meta: { id: overlay.id, name: overlay.name, rite: overlay.rite, operations: rows.length },
+    rows,
+    provenance,
+  };
+}
+
 /** Sort a list of rows by a string key in code-unit order (stable, explicit). */
 function byKey(key) {
   return (a, b) => (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);

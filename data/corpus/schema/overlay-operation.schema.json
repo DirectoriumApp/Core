@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/overlay-operation.schema.json",
+  "title": "Particular-calendar overlay operation",
+  "description": "One line of an overlay's operations.ndjson (Core #76): a single add / suppress / rerank applied to the universal sanctoral by feast id. Mirrors the PHP OverlayOperation value objects. Exactly one operation may target a given feast; the file is sorted by target id.",
+  "type": "object",
+  "oneOf": [
+    {
+      "title": "rerank",
+      "description": "Keep a universal feast but change its rank (and optionally its colour) to the particular calendar's; the changed fields re-cite the calendar's authority.",
+      "additionalProperties": false,
+      "required": ["op", "target", "rank", "cites"],
+      "properties": {
+        "op": { "const": "rerank" },
+        "target": { "$ref": "#/$defs/sanctoralId" },
+        "rank": { "$ref": "#/$defs/rank" },
+        "colour": { "$ref": "#/$defs/colour" },
+        "cites": {
+          "allOf": [
+            { "$ref": "#/$defs/cites" },
+            { "required": ["rank"] }
+          ]
+        }
+      }
+    },
+    {
+      "title": "suppress",
+      "description": "Drop a universal feast the particular calendar does not keep; the cite is the calendar's authority for the omission.",
+      "additionalProperties": false,
+      "required": ["op", "target", "cites"],
+      "properties": {
+        "op": { "const": "suppress" },
+        "target": { "$ref": "#/$defs/sanctoralId" },
+        "cites": {
+          "allOf": [
+            { "$ref": "#/$defs/cites" },
+            { "required": ["suppressed"] }
+          ]
+        }
+      }
+    },
+    {
+      "title": "add",
+      "description": "A proper feast the universal calendar lacks, carried as a complete, self-contained entry (identity + attributes + placement). Its title must cite a public-domain text source, exactly as a universal identity row does.",
+      "additionalProperties": false,
+      "required": ["op", "entry"],
+      "properties": {
+        "op": { "const": "add" },
+        "entry": { "$ref": "#/$defs/entry" }
+      }
+    }
+  ],
+  "$defs": {
+    "sanctoralId": {
+      "description": "An ObservanceId slug in the sanctorale cycle.",
+      "type": "string",
+      "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "rank": {
+      "description": "Liturgical class 1 (highest) .. 4 (commemoration-grade).",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "colour": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base"],
+      "properties": {
+        "base": { "enum": ["white", "red", "green", "violet", "black", "rose"] },
+        "roseAllowed": { "const": true }
+      }
+    },
+    "observanceKind": {
+      "enum": [
+        "sunday", "feria", "feast", "special-movable", "vigil",
+        "octave-day", "within-octave", "ember-day", "rogation-day",
+        "lady-on-saturday", "commemoration-only", "office-of-the-dead"
+      ]
+    },
+    "names": {
+      "type": "object",
+      "required": ["la"],
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "sourceRef": {
+      "description": "A source key, optionally suffixed with a :locator.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "titulars", "names", "rank", "colour", "month", "day", "cites"],
+      "properties": {
+        "id": { "$ref": "#/$defs/sanctoralId" },
+        "kind": { "$ref": "#/$defs/observanceKind" },
+        "titulars": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/slug" }
+        },
+        "names": { "$ref": "#/$defs/names" },
+        "rank": { "$ref": "#/$defs/rank" },
+        "colour": { "$ref": "#/$defs/colour" },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "day": { "type": "integer", "minimum": 1, "maximum": 31 },
+        "vigilOf": { "$ref": "#/$defs/sanctoralId" },
+        "cites": {
+          "allOf": [
+            { "$ref": "#/$defs/cites" },
+            { "required": ["names.la"] }
+          ]
+        }
+      }
+    }
+  }
+}

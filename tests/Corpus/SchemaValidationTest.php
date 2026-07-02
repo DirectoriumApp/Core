@@ -35,6 +35,8 @@ final class SchemaValidationTest extends TestCase
         'placement.sanctorale',
         'precedence-tier',
         'precedence-rules',
+        'overlay-operation',
+        'overlay',
     ];
 
     /**

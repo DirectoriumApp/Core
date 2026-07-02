@@ -1,0 +1,9 @@
+{"op":"bogus","target":"roman:sanctorale:foo","rank":1,"cites":{"rank":"sspx-ordo"}}
+{"op":"rerank","target":"roman:sanctorale:foo","cites":{"rank":"sspx-ordo"}}
+{"op":"rerank","target":"roman:sanctorale:foo","rank":5,"cites":{"rank":"sspx-ordo"}}
+{"op":"rerank","target":"roman:sanctorale:foo","rank":1,"cites":{"colour":"sspx-ordo"}}
+{"op":"rerank","target":"sanctorale:foo","rank":1,"cites":{"rank":"sspx-ordo"}}
+{"op":"rerank","target":"roman:sanctorale:foo","rank":1,"cites":{"rank":"sspx-ordo"},"bogus":true}
+{"op":"suppress","target":"roman:sanctorale:baz","cites":{"rank":"sspx-ordo"}}
+{"op":"add","entry":{"id":"roman:sanctorale:bar","kind":"feast","titulars":["bar"],"names":{"la":"S. Bar"},"rank":3,"colour":{"base":"red"},"month":6,"day":12,"cites":{"rank":"sspx-ordo","colour":"sspx-ordo","month":"sspx-ordo","day":"sspx-ordo"}}}
+{"op":"add","entry":{"id":"roman:sanctorale:bar","kind":"feast","titulars":["bar"],"names":{"la":"S. Bar"},"rank":3,"colour":{"base":"red"},"month":6,"day":12,"bogus":true,"cites":{"names.la":"mr-1920","rank":"sspx-ordo","colour":"sspx-ordo","month":"sspx-ordo","day":"sspx-ordo"}}}

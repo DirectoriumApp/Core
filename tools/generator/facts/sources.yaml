@@ -28,3 +28,13 @@
   year: 1960
   rights: reference
   note: "Consult-only. Cited for uncopyrightable facts (rank, colour, date); never transcribed."
+
+- key: sspx-ordo
+  urn: introibo:source:sspx-ordo
+  kind: reference
+  title: "Society of St Pius X — Ordo (Rubricae 1960 / 1962), District of the USA"
+  year: 2024
+  rights: reference
+  note: "Consult-only. The authority for the SSPX particular-calendar overlay's rank
+    facts (uncopyrightable). A witness to the 1962 calendar, never transcribed. Also
+    pinned as a validation oracle — see tests/Validation/fixtures/sspx."

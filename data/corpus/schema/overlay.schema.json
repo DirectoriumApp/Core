@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.introibo.app/corpus/overlay.schema.json",
+  "title": "Particular-calendar overlay metadata",
+  "description": "The overlay.json singleton for one particular calendar (Core #76): its platform URN, display name, rite, and operation count. The operations themselves live in the sibling operations.ndjson (validated by overlay-operation.schema.json).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "rite", "operations"],
+  "properties": {
+    "id": {
+      "description": "The overlay's platform URN; must be introibo:overlay:<rite>:<slug>.",
+      "type": "string",
+      "pattern": "^introibo:overlay:[a-z0-9]+(-[a-z0-9]+)*:[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rite": {
+      "description": "The rite the overlay layers over (v0.2: only roman).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "operations": {
+      "description": "The number of operations in the sibling operations.ndjson.",
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

@@ -39,10 +39,20 @@
       "records": 61,
       "sha256": "8f1b5d79c66b17fe17b44c6618cbe76c20d9ccf0c14c1a2383a086eb3f3b4477"
     },
+    "overlays/sspx/operations.ndjson": {
+      "primaryKey": "target",
+      "records": 2,
+      "sha256": "0291eae1cf60a446de17aa98681588c2b57c2b65730ccaeb9a2d0f3463341354"
+    },
+    "overlays/sspx/overlay.json": {
+      "primaryKey": "id",
+      "records": 1,
+      "sha256": "6a25b3b7d7f4f42f8f2503ecdf9237ccb603e21180925ddc915ddbc97f579277"
+    },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 2,
-      "sha256": "b5d72463b5672d5723db245db26f26c1d82c1fde399becf09c3e513d2b521f41"
+      "records": 3,
+      "sha256": "1e8a341d6c754e469c53eaa541e28cff3452a5338490d7932c7be18d760dc64e"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -57,6 +67,9 @@
   },
   "generator": "@introibo/corpus-generator",
   "license": "CC0-1.0",
+  "overlays": [
+    "sspx"
+  ],
   "sources": [
     {
       "key": "mr-1920",
@@ -73,6 +86,14 @@
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "introibo:source:rg-1960",
       "uses": 1403
+    },
+    {
+      "key": "sspx-ordo",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Society of St Pius X — Ordo (Rubricae 1960 / 1962), District of the USA",
+      "urn": "introibo:source:sspx-ordo",
+      "uses": 2
     }
   ]
 }
