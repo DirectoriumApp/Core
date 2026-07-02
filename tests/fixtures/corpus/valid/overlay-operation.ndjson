@@ -1,0 +1,4 @@
+{"op":"rerank","target":"roman:sanctorale:pius-x","rank":1,"cites":{"rank":"sspx-ordo"}}
+{"op":"rerank","target":"roman:sanctorale:septem-dolorum-bmv","rank":1,"colour":{"base":"red"},"cites":{"rank":"sspx-ordo","colour":"sspx-ordo"}}
+{"op":"suppress","target":"roman:sanctorale:baz","cites":{"suppressed":"sspx-ordo"}}
+{"op":"add","entry":{"id":"roman:sanctorale:bar","kind":"feast","titulars":["bar"],"names":{"la":"S. Bar Martyris"},"rank":3,"colour":{"base":"red"},"month":6,"day":12,"cites":{"names.la":"mr-1920","rank":"sspx-ordo","colour":"sspx-ordo","month":"sspx-ordo","day":"sspx-ordo"}}}

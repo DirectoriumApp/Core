@@ -27,6 +27,12 @@ facts/*.yaml  →  transform  →  validate (data/corpus/schema, draft 2020-12)
 - **facts/** — the clean-room boundary. A human asserts each fact together with a
   citation (`cites: { field: source-key }`); the generator never scrapes.
   `facts/sources.yaml` is the source registry every citation resolves into.
+  `facts/overlays/<slug>.yaml` describes a particular calendar (e.g. SSPX) as a
+  declarative set of add / suppress / rerank operations over the universal sanctoral;
+  each compiles to `data/corpus/overlays/<slug>/` (operations.ndjson + overlay.json)
+  and is read into the engine by `CorpusOverlayData` (#76). An overlay's rank facts
+  cite the particular calendar's authority; an added feast's title still cites a
+  public-domain text source, so the same born-cited gate applies.
 - **src/canonical.mjs** — byte-stable serialization: keys sorted by code unit,
   compact NDJSON with a trailing LF, no wall clock, no randomness, no floats. The
   corpus version comes from `facts/meta.yaml`, never the clock.
@@ -50,4 +56,5 @@ are AGPL-3.0-or-later, the corpus is CC0.
 The pipeline skeleton (#40), born-cited provenance + CC0 (#44), and the full 1962
 sanctoral dataset (#41 — the fixed-date universal calendar, read into the engine
 by `CorpusSanctoralData`) are in place. The temporal definitions (#42) and
-precedence table (#43) build on the same shapes.
+precedence table (#43) build on the same shapes. Particular-calendar overlays (#76)
+add the `facts/overlays/` layer over that base, starting with the SSPX calendar.

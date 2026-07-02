@@ -6,7 +6,7 @@
 // The output is committed to the repository. Consumers (the PHP engine) load the
 // committed files and never run this generator — Node is build-time only.
 
-import { mkdirSync, writeFileSync, copyFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, copyFileSync, readdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadYaml } from './facts.mjs';
@@ -16,6 +16,7 @@ import {
   transformTemporalSkeleton,
   transformTemporale,
   transformPrecedence,
+  transformOverlay,
 } from './transform.mjs';
 import { checkProvenance, usedSources } from './provenance.mjs';
 import { toNdjson, toPretty, sha256 } from './canonical.mjs';
@@ -34,6 +35,25 @@ function byId(a, b) {
     return -1;
   }
   return a.id > b.id ? 1 : 0;
+}
+
+/**
+ * Discover and transform every particular-calendar overlay in facts/overlays
+ * (Core #76), one per `<slug>.yaml`, slug-sorted for a deterministic build. Returns
+ * `{ slug, meta, rows, provenance }` per overlay; an empty list when the directory
+ * is absent, so the base corpus builds unchanged before any overlay exists.
+ */
+function loadOverlays() {
+  const dir = join(FACTS_DIR, 'overlays');
+  if (!existsSync(dir)) {
+    return [];
+  }
+  const slugs = readdirSync(dir)
+    .filter((file) => file.endsWith('.yaml'))
+    .map((file) => file.replace(/\.yaml$/, ''))
+    .sort();
+
+  return slugs.map((slug) => ({ slug, ...transformOverlay(loadYaml(join(dir, slug + '.yaml'))) }));
 }
 
 /**
@@ -66,6 +86,8 @@ export function build(outDir = DEFAULT_OUT) {
 
   const precedence = transformPrecedence(loadYaml(join(FACTS_DIR, 'precedence.yaml')), edition);
 
+  const overlays = loadOverlays();
+
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),
@@ -78,6 +100,8 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['precedence-tier'], precedence.tiers, 'precedence-tier'),
     ...validateAll(validators['precedence-rules'], precedence.rules, 'precedence-rules'),
     ...validateAll(validators['source'], sources, 'source'),
+    ...overlays.flatMap((o) => validateAll(validators['overlay-operation'], o.rows, `overlay:${o.slug}`)),
+    ...overlays.flatMap((o) => validateAll(validators['overlay'], [o.meta], `overlay-meta:${o.slug}`)),
   ];
   if (errors.length > 0) {
     throw new Error('Corpus schema validation failed:\n  ' + errors.join('\n  '));
@@ -92,6 +116,10 @@ export function build(outDir = DEFAULT_OUT) {
       { shape: 'placement.sanctorale', records: placement },
       { shape: 'identity.temporale', records: temporale.identity },
       { shape: 'attributes.temporale', records: temporale.attributes },
+      // Overlay operations carry their own cites: a rerank/suppress cites the
+      // particular calendar's authority for the changed fact, an add carries a full
+      // entry whose title must cite a public-domain text source. Same born-cited gate.
+      ...overlays.map((o) => ({ shape: `overlay:${o.slug}`, records: o.provenance })),
     ],
     sources,
   );
@@ -155,6 +183,21 @@ export function build(outDir = DEFAULT_OUT) {
     'sources.ndjson': { text: toNdjson(sources), records: sources.length, primaryKey: 'key' },
   };
 
+  // Each particular-calendar overlay contributes its operations (one NDJSON row per
+  // operation, sorted by target) plus a metadata singleton naming its URN and rite.
+  for (const o of overlays) {
+    outputs[`overlays/${o.slug}/operations.ndjson`] = {
+      text: toNdjson(o.rows),
+      records: o.rows.length,
+      primaryKey: 'target',
+    };
+    outputs[`overlays/${o.slug}/overlay.json`] = {
+      text: toPretty(o.meta),
+      records: 1,
+      primaryKey: 'id',
+    };
+  }
+
   const relPaths = Object.keys(outputs).sort();
   for (const rel of relPaths) {
     const dest = join(outDir, rel);
@@ -180,6 +223,7 @@ export function build(outDir = DEFAULT_OUT) {
     generator: meta.generator || '@introibo/corpus-generator',
     license: 'CC0-1.0',
     editions: [edition],
+    overlays: overlays.map((o) => o.slug),
     sources: usedSources(sources, usage),
     files,
   };

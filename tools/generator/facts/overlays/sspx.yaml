@@ -1,0 +1,42 @@
+# The Society of Saint Pius X particular calendar, as a declarative overlay over the
+# universal 1962 sanctoral (Core #76/#80). An overlay never changes engine code: it
+# is a set of add/suppress/rerank operations on stable feast ids, layered onto the
+# base sanctoral before precedence runs (see docs/design/platform-urn-scheme.md — an
+# overlay is NOT an edition; it adds/removes/reranks over one).
+#
+# Every rank fact cites `sspx-ordo`, the Society's published 1962 ordo (a consult-only
+# reference source; a witness to the calendar, never transcribed). Because these two
+# feasts already exist in the universal calendar with their Latin titles cited to the
+# public-domain Missale Romanum 1920, the overlay carries no new transcribed strings —
+# it only re-ranks, so the born-cited gate is satisfied by the base identity rows.
+#
+# SCOPE (v0.2): the SSPX particular calendar's two headline fixed-date elevations. Two
+# further SSPX differences are deliberately NOT modelled here and are documented in the
+# conformance baseline (tests/Validation/fixtures/sspx) rather than silently dropped:
+#   - The movable Seven Sorrows (Friday after Passion Sunday) is an Easter-relative
+#     office, not a fixed-date sanctoral entry, so it is beyond a SanctoralData overlay
+#     and awaits movable-overlay support in a later version.
+#   - The Vigil of the Assumption (Aug 14) reads third class in the SSPX feed against a
+#     second-class vigil under the 1960 Code of Rubrics (n. 91); treated as a feed
+#     artifact, not conformed to — see the SSPX oracle notes (cf. the didacus/ubaldus
+#     precedent: we verify against the real 1962 calendar, not an oracle blindly).
+
+id: introibo:overlay:roman:sspx
+name: "Society of Saint Pius X"
+rite: roman
+
+operations:
+  # St Pius X — patron of the traditional movement — is elevated from a third-class
+  # feast in the universal calendar to first class in the SSPX particular calendar.
+  - op: rerank
+    target: roman:sanctorale:pius-x
+    rank: 1
+    cites:
+      rank: sspx-ordo
+
+  # The Seven Sorrows of the BVM (Sep 15) is elevated from second to first class.
+  - op: rerank
+    target: roman:sanctorale:septem-dolorum-bmv
+    rank: 1
+    cites:
+      rank: sspx-ordo

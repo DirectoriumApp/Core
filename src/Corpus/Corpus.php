@@ -28,6 +28,9 @@ final class Corpus
     /** @var array<string, array<string, mixed>> Parsed manifests, keyed by base directory. */
     private static array $manifests = [];
 
+    /** @var array<string, array<string, mixed>> Parsed JSON singletons, keyed by absolute file path. */
+    private static array $singletons = [];
+
     private string $baseDir;
 
     private function __construct(string $baseDir)
@@ -204,6 +207,75 @@ final class Corpus
     public function precedenceRules(string $editionDir): array
     {
         return $this->records('editions/' . $editionDir . '/precedence-rules.ndjson');
+    }
+
+    /**
+     * The particular-calendar overlay slugs the corpus ships, from the manifest
+     * (Core #76). Empty when the corpus carries no overlays.
+     *
+     * @return list<string>
+     */
+    public function overlaySlugs(): array
+    {
+        $overlays = $this->manifest()['overlays'] ?? [];
+        if (!is_array($overlays)) {
+            throw new RuntimeException('Corpus manifest "overlays" is not a list.');
+        }
+
+        $out = [];
+        foreach ($overlays as $slug) {
+            if (!is_string($slug)) {
+                throw new RuntimeException('Corpus manifest "overlays" has a non-string entry.');
+            }
+            $out[] = $slug;
+        }
+
+        return $out;
+    }
+
+    /**
+     * An overlay's metadata singleton (`overlays/<slug>/overlay.json`): its URN,
+     * display name, rite, and operation count.
+     *
+     * @return array<string, mixed>
+     */
+    public function overlayMeta(string $slug): array
+    {
+        return $this->singleton('overlays/' . $slug . '/overlay.json');
+    }
+
+    /**
+     * An overlay's operation rows (`overlays/<slug>/operations.ndjson`), sorted by
+     * target id — one add / suppress / rerank per row.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function overlayOperations(string $slug): array
+    {
+        return $this->records('overlays/' . $slug . '/operations.ndjson');
+    }
+
+    /**
+     * A decoded JSON-object singleton file, addressed by its path relative to the
+     * corpus root, parsed once and cached for the life of the process.
+     *
+     * @return array<string, mixed>
+     */
+    private function singleton(string $relativePath): array
+    {
+        $path = $this->baseDir . '/' . $relativePath;
+        if (isset(self::$singletons[$path])) {
+            return self::$singletons[$path];
+        }
+
+        $decoded = json_decode($this->read($path), true, 512, JSON_THROW_ON_ERROR);
+        if (!is_array($decoded)) {
+            throw new RuntimeException(sprintf('Corpus file %s is not a JSON object.', $path));
+        }
+        /** @var array<string, mixed> $decoded */
+        self::$singletons[$path] = $decoded;
+
+        return $decoded;
     }
 
     private function read(string $path): string
