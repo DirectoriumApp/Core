@@ -23,6 +23,8 @@ namespace Introibo\Core\Trace;
  * @phpstan-type TraceCandidate array{id: string, rank: int, kind: string, tier: TraceTier}
  * @phpstan-type TraceLoser array{id: string, outcome: string, reason: ResolutionReason}
  * @phpstan-type TraceWinner array{id: string, line: int|null, reason: ResolutionReason}
+ * @phpstan-type TraceColour array{base: string, roseAllowed: bool, reason: ResolutionReason}
+ * @phpstan-type TraceSeason array{value: string|null, reason: ResolutionReason}
  */
 final class ResolutionTrace
 {
@@ -39,23 +41,35 @@ final class ResolutionTrace
 
     private ResolutionReason $commemorationLimitReason;
 
+    /** @var TraceColour */
+    private array $colour;
+
+    /** @var TraceSeason */
+    private array $season;
+
     /**
      * @param TraceWinner          $winner
      * @param list<TraceCandidate> $candidates
      * @param list<TraceLoser>     $losers
+     * @param TraceColour          $colour
+     * @param TraceSeason          $season
      */
     public function __construct(
         array $winner,
         array $candidates,
         array $losers,
         int $commemorationLimit,
-        ResolutionReason $commemorationLimitReason
+        ResolutionReason $commemorationLimitReason,
+        array $colour,
+        array $season
     ) {
         $this->winner = $winner;
         $this->candidates = $candidates;
         $this->losers = $losers;
         $this->commemorationLimit = $commemorationLimit;
         $this->commemorationLimitReason = $commemorationLimitReason;
+        $this->colour = $colour;
+        $this->season = $season;
     }
 
     /**
@@ -88,6 +102,10 @@ final class ResolutionTrace
             ),
             'commemorationLimit' => ['value' => $this->commemorationLimit]
                 + $this->commemorationLimitReason->toArray(),
+            'colour' => ['base' => $this->colour['base'], 'roseAllowed' => $this->colour['roseAllowed']]
+                + $this->colour['reason']->toArray(),
+            'season' => ['value' => $this->season['value']]
+                + $this->season['reason']->toArray(),
         ];
     }
 }
