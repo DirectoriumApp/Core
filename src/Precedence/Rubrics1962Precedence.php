@@ -55,7 +55,13 @@ final class Rubrics1962Precedence implements PrecedenceRules
         if ($this->table->isMember('greatest', $id)) {
             return $this->table->tier('greatest');
         }
-        if ($context->isTriduum()) {
+        // The apex 'triduum' tier belongs to the Triduum's own office — a feria of
+        // Holy Thursday, Good Friday, or Holy Saturday — not to every observance
+        // that merely falls on those dates. A coincident saint keeps its own (far
+        // lower) tier so the sacred feria always wins and the saint is omitted
+        // (n. 23). Without this kind guard the two shared the apex tier, and the
+        // equal-tier tie-break (by id) let a III-class saint displace Holy Thursday.
+        if ($context->isTriduum() && $observance->kind()->value() === ObservanceKind::FERIA) {
             return $this->table->tier('triduum');
         }
         if ($this->table->isMember('great-lord', $id)) {
