@@ -50,6 +50,15 @@ final class Rubrics1962Precedence implements PrecedenceRules
     {
         $id = $observance->id()->toString();
 
+        // A commemoration has no proper office (nn. 106-114): it never celebrates,
+        // always yielding the day to a real office (feria, Sunday, feast) and being
+        // merely commemorated — or omitted where the day admits none. It therefore
+        // takes the lowest tier, below the whole Table of Liturgical Days, so it can
+        // never win an occurrence. (Checked first: nothing lifts a commemoration.)
+        if ($observance->kind()->value() === ObservanceKind::COMMEMORATION_ONLY) {
+            return $this->table->tier('commemoration');
+        }
+
         // Named great feasts, by identity — checked first because Easter and
         // Pentecost are kind=sunday and must not fall into the Sunday line.
         if ($this->table->isMember('greatest', $id)) {
