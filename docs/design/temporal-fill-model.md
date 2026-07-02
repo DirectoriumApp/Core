@@ -1,8 +1,8 @@
 # Temporal fill model — the whole Proper of Time
 
 _Design record for Core #17 (Advent → Epiphany), #18 (Septuagesima → Passiontide), #19 (Holy Week &
-the Paschal Triduum), #20 (Eastertide → Pentecost), and #21 (Time after Pentecost). Status: accepted.
-Baseline edition: **Rubricae Generales 1960 (= 1962)**._
+the Paschal Triduum), #20 (Eastertide → Pentecost), #21 (Time after Pentecost), and #22 (the special
+movable feasts). Status: accepted. Baseline edition: **Rubricae Generales 1960 (= 1962)**._
 
 ## What a temporal fill produces
 
@@ -217,6 +217,30 @@ the Sundays are *post Pentecosten*. The first Sunday's slot (`…pentecost-time:
 skeleton: the Easter-anchored feasts of the early weeks (**Trinity, Corpus Christi, the Sacred Heart**)
 and the month-computed **September Ember days** are deferred to the movable-feast (#22) and later passes,
 which overlay them on the green Sundays and ferias here.
+
+## The special movable feasts
+
+`MovableFeasts::forYear($year)` places the six movable feasts of the Lord that are not filled as part of
+a block — each emitted as a white `FEAST` {@see TemporalObservance} on its own date. Unlike the block
+fillers it yields a sparse set (`feasts()` / `on()`), not a contiguous day-map.
+
+| Feast | Identity | Placement | Class |
+|-------|----------|-----------|:-----:|
+| Most Holy Name of Jesus | `…christmas:holy-name` | Sunday of 2–5 Jan, else 2 Jan | II |
+| Holy Family | `…epiphany:holy-family` | Sunday of 7–13 Jan (first after Epiphany) | II |
+| Most Holy Trinity | `…paschal:trinity-sunday` | Easter+56 | **I** |
+| Corpus Christi | `…paschal:corpus-christi` | Easter+60 | **I** |
+| Most Sacred Heart | `…paschal:sacred-heart` | Easter+68 | **I** |
+| Christ the King | `…month-computed:christ-the-king` | last Sunday of October | **I** |
+
+Issue #22 is framed around the three **civil-anchored** feasts (Holy Name, Holy Family, Christ the King),
+which need the dedicated Sunday-placement rules — including the edge case the Holy Name has when no
+Sunday falls in 2–5 January (it is kept on 2 January). The three **Easter-anchored** feasts are trivial
+`PaschalSkeleton` offsets, included here so the movable temporal cycle is complete. All six are feasts of
+the Lord, so they sit in the `temporale` cycle under the anchor family that computes them. They **overlay**
+the temporal skeleton the block-fillers emit (Trinity, for instance, occupies the first-Sunday-after-Pentecost
+slot); composing them by precedence and commemoration is the resolver's job (#29). The month-computed
+**September Ember days** remain the one deferred temporal fixture.
 
 ## Shared helpers
 

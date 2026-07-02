@@ -1,0 +1,233 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Introibo\Core\Temporal;
+
+use DateInterval;
+use DateTimeImmutable;
+use Introibo\Core\Attribute\Colour;
+use Introibo\Core\Attribute\ElementColour;
+use Introibo\Core\Attribute\RankClass;
+use Introibo\Core\Observance\ObservanceId;
+use Introibo\Core\Observance\ObservanceKind;
+use InvalidArgumentException;
+use LogicException;
+
+/**
+ * The special movable feasts of the Lord — the ones placed by a Sunday rule
+ * rather than filled as part of a contiguous block.
+ *
+ * `forYear($year)` computes the six for a civil year under the 1962 calendar and
+ * emits each as a white {@see TemporalObservance} on its own date:
+ *
+ *  - **Easter-anchored** (signed offsets from Easter, via the {@see PaschalSkeleton}):
+ *    the Most Holy Trinity (Easter+56), Corpus Christi (Easter+60), and the Most
+ *    Sacred Heart (Easter+68) — all first class.
+ *  - **Civil-anchored** (a Sunday rule, the placement logic this class exists for):
+ *    the Most Holy Name of Jesus (the Sunday between 2 and 5 January, or 2 January
+ *    when no Sunday falls there), the Holy Family (the Sunday between 7 and 13
+ *    January, the first after the Epiphany), and Christ the King (the last Sunday
+ *    of October) — the first two second class, Christ the King first class.
+ *
+ * These feasts overlay the temporal skeleton the block-fillers emit — the Most
+ * Holy Trinity, for instance, occupies the first-Sunday-after-Pentecost slot —
+ * so this class places them; composing them onto the skeleton by precedence and
+ * commemoration is the resolver's job (#29). See docs/design/temporal-fill-model.md.
+ */
+final class MovableFeasts
+{
+    private int $year;
+
+    private DateTimeImmutable $trinitySunday;
+
+    private DateTimeImmutable $corpusChristi;
+
+    private DateTimeImmutable $sacredHeart;
+
+    private DateTimeImmutable $holyName;
+
+    private DateTimeImmutable $holyFamily;
+
+    private DateTimeImmutable $christTheKing;
+
+    /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
+    private array $feasts;
+
+    private function __construct(int $year)
+    {
+        if ($year < Computus::GREGORIAN_REFORM_YEAR) {
+            throw new InvalidArgumentException(sprintf(
+                'The movable feasts are defined from %d onward; got %d.',
+                Computus::GREGORIAN_REFORM_YEAR,
+                $year
+            ));
+        }
+
+        $skeleton = PaschalSkeleton::forYear($year);
+        $this->year = $year;
+        $this->trinitySunday = $skeleton->date('trinity-sunday');
+        $this->corpusChristi = $skeleton->date('corpus-christi');
+        $this->sacredHeart = $skeleton->date('sacred-heart');
+        $this->holyName = $this->computeHolyName();
+        $this->holyFamily = $this->computeHolyFamily();
+        $this->christTheKing = $this->computeChristTheKing();
+
+        $this->feasts = $this->build();
+    }
+
+    public static function forYear(int $year): self
+    {
+        return new self($year);
+    }
+
+    public function year(): int
+    {
+        return $this->year;
+    }
+
+    /** The Most Holy Name of Jesus — the Sunday of 2–5 January, or 2 January if none. */
+    public function holyName(): DateTimeImmutable
+    {
+        return $this->holyName;
+    }
+
+    /** The Holy Family — the Sunday of 7–13 January (the first after the Epiphany). */
+    public function holyFamily(): DateTimeImmutable
+    {
+        return $this->holyFamily;
+    }
+
+    /** Christ the King — the last Sunday of October. */
+    public function christTheKing(): DateTimeImmutable
+    {
+        return $this->christTheKing;
+    }
+
+    public function trinitySunday(): DateTimeImmutable
+    {
+        return $this->trinitySunday;
+    }
+
+    public function corpusChristi(): DateTimeImmutable
+    {
+        return $this->corpusChristi;
+    }
+
+    public function sacredHeart(): DateTimeImmutable
+    {
+        return $this->sacredHeart;
+    }
+
+    /**
+     * The six movable feasts, keyed by 'Y-m-d', in chronological order.
+     *
+     * @return array<string, TemporalObservance>
+     */
+    public function feasts(): array
+    {
+        return $this->feasts;
+    }
+
+    /** The movable feast on a date, or null if none falls there. */
+    public function on(DateTimeImmutable $date): ?TemporalObservance
+    {
+        return $this->feasts[$date->format('Y-m-d')] ?? null;
+    }
+
+    /**
+     * @return array<string, TemporalObservance>
+     */
+    private function build(): array
+    {
+        $feasts = [
+            $this->holyName->format('Y-m-d') => $this->feast(
+                'roman:temporale:christmas:holy-name',
+                Season::christmastide(),
+                RankClass::classII(),
+                'In Festo Sanctissimi Nominis Iesu'
+            ),
+            $this->holyFamily->format('Y-m-d') => $this->feast(
+                'roman:temporale:epiphany:holy-family',
+                Season::epiphany(),
+                RankClass::classII(),
+                'In Festo Sanctae Familiae Iesu, Mariae, Ioseph'
+            ),
+            $this->trinitySunday->format('Y-m-d') => $this->feast(
+                'roman:temporale:paschal:trinity-sunday',
+                Season::pentecost(),
+                RankClass::classI(),
+                'In Festo Sanctissimae Trinitatis'
+            ),
+            $this->corpusChristi->format('Y-m-d') => $this->feast(
+                'roman:temporale:paschal:corpus-christi',
+                Season::pentecost(),
+                RankClass::classI(),
+                'In Festo Sanctissimi Corporis Christi'
+            ),
+            $this->sacredHeart->format('Y-m-d') => $this->feast(
+                'roman:temporale:paschal:sacred-heart',
+                Season::pentecost(),
+                RankClass::classI(),
+                'In Festo Sacratissimi Cordis Iesu'
+            ),
+            $this->christTheKing->format('Y-m-d') => $this->feast(
+                'roman:temporale:month-computed:christ-the-king',
+                Season::pentecost(),
+                RankClass::classI(),
+                'In Festo Domini Nostri Iesu Christi Regis'
+            ),
+        ];
+
+        ksort($feasts);
+
+        return $feasts;
+    }
+
+    private function computeHolyName(): DateTimeImmutable
+    {
+        // The Sunday falling 2–5 January; if none, the feast is kept on 2 January.
+        for ($day = 2; $day <= 5; $day++) {
+            $date = TemporalCalendar::utcDate($this->year, 1, $day);
+            if (TemporalCalendar::isSunday($date)) {
+                return $date;
+            }
+        }
+
+        return TemporalCalendar::utcDate($this->year, 1, 2);
+    }
+
+    private function computeHolyFamily(): DateTimeImmutable
+    {
+        // The first Sunday after the Epiphany always falls within 7–13 January.
+        for ($day = 7; $day <= 13; $day++) {
+            $date = TemporalCalendar::utcDate($this->year, 1, $day);
+            if (TemporalCalendar::isSunday($date)) {
+                return $date;
+            }
+        }
+
+        throw new LogicException('Unreachable: a seven-day span always contains a Sunday.');
+    }
+
+    private function computeChristTheKing(): DateTimeImmutable
+    {
+        // The last Sunday of October: the latest Sunday on or before 31 October.
+        $lastOfOctober = TemporalCalendar::utcDate($this->year, 10, 31);
+        $weekday = (int) $lastOfOctober->format('w'); // 0 = Sunday … 6 = Saturday
+
+        return $lastOfOctober->sub(new DateInterval('P' . $weekday . 'D'));
+    }
+
+    private function feast(string $slug, Season $season, RankClass $rank, string $latinName): TemporalObservance
+    {
+        return new TemporalObservance(
+            ObservanceId::parse($slug),
+            ObservanceKind::fromString(ObservanceKind::FEAST),
+            $season,
+            $rank,
+            ElementColour::of(Colour::white()),
+            $latinName
+        );
+    }
+}
