@@ -132,6 +132,69 @@ final class Rubrics1962PrecedenceTest extends TestCase
         self::assertTrue(self::tier($thirdFeast)->isHigherThan(self::tier($adventFeria)));
     }
 
+    public function testFirstClassFeastImpededByAHigherDayIsTransferred(): void
+    {
+        // St Joseph (I, 19 Mar) on a first-class Sunday of Lent → transferred (n. 95).
+        $lentenSunday = self::build('roman:temporale:paschal:lent-sunday-3', 'sunday', 1, 'lent');
+        $stJoseph = self::build('roman:sanctorale:ioseph', 'feast', 1, 'lent');
+
+        self::assertSame('transfer', self::outcome($lentenSunday, $stJoseph));
+    }
+
+    public function testImpededSundayIsCommemoratedUnderAFirstClassFeast(): void
+    {
+        // Immaculate Conception (I) over a II-class Advent Sunday → Sunday commemorated (n. 108a).
+        $immaculata = self::build('roman:sanctorale:immaculata-conceptio', 'feast', 1, 'advent');
+        $adventSunday = self::build('roman:temporale:advent:sunday-2', 'sunday', 2, 'advent');
+
+        self::assertSame('commemorate', self::outcome($immaculata, $adventSunday));
+    }
+
+    public function testOrdinaryFeastOnAFirstClassDayIsOmitted(): void
+    {
+        // A first-class day admits only a privileged commemoration (n. 111a).
+        $firstClassSunday = self::build('roman:temporale:advent:sunday-1', 'sunday', 1, 'advent');
+        $thirdClassSaint = self::build('roman:sanctorale:thomas-aquinas', 'feast', 3, 'advent');
+
+        self::assertSame('omit', self::outcome($firstClassSunday, $thirdClassSaint));
+    }
+
+    public function testFirstClassFeastInAPrivilegedOctaveIsTransferred(): void
+    {
+        // Transfer (n. 95) is decided before the octave's no-commemoration rule.
+        $easterOctave = self::build('roman:temporale:paschal:easter-octave', 'within-octave', 1, 'eastertide');
+        $annunciation = self::build('roman:sanctorale:annuntiatio', 'feast', 1, 'eastertide');
+
+        self::assertSame('transfer', self::outcome($easterOctave, $annunciation));
+    }
+
+    public function testLowerFeastInAPrivilegedOctaveIsOmitted(): void
+    {
+        // The Easter octave days admit no commemoration (n. 66); a II/III/IV feast is dropped.
+        $easterOctave = self::build('roman:temporale:paschal:easter-octave', 'within-octave', 1, 'eastertide');
+        $thirdClassSaint = self::build('roman:sanctorale:georgius', 'feast', 3, 'eastertide');
+
+        self::assertSame('omit', self::outcome($easterOctave, $thirdClassSaint));
+    }
+
+    public function testTheTriduumAdmitsNoCommemoration(): void
+    {
+        $goodFriday = self::build('roman:temporale:paschal:good-friday', 'feria', 1, 'passiontide');
+        $saint = self::build('roman:sanctorale:test-saint', 'feast', 3, 'passiontide');
+
+        self::assertSame('omit', self::outcome($goodFriday, $saint, true));
+    }
+
+    private static function outcome(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        bool $triduum = false
+    ): string {
+        return (new Rubrics1962Precedence())
+            ->occurrenceOutcome($winner, $loser, self::context($triduum))
+            ->value();
+    }
+
     private static function tier(RealizedObservance $office): PrecedenceTier
     {
         return (new Rubrics1962Precedence())->tierOf($office, self::context(false));
