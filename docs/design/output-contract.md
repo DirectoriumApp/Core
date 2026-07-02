@@ -121,7 +121,7 @@ fixes only that the field is open and that shared concepts share a token.
 | `firstVespers` | null | reserved | Office layer. |
 | `resolution` | object \| null | opt-in | The "why-this-won" trace (#233); null by default, filled by `explain()` / `contract($d, true)`. See resolution-trace-model.md. |
 | `fasting` | null | reserved | Fasting/abstinence layer. |
-| `calendar` | null | reserved | Calendrical/astronomical block; planned sub-shape below. |
+| `calendar` | object \| null | partly filled | `particular` names the selected particular calendar (#78); null under the universal 1962 calendar. Reserved astronomical/lectionary fields join it at v0.4. Sub-shape below. |
 
 The **`secondVespers`** object is `{ outcome, favoursFollowing, holder,
 commemorated }`: `outcome` is the closed `ConcurrenceOutcome` value,
@@ -214,12 +214,31 @@ consumer that ignores `optionality` still reads a coherent (feria-first) day.
 
 ### The `calendar` sub-shape
 
-The reserved day-level `calendar` block (filled at v0.4) carries the
-astronomical fields **and**, alongside them, an edition-conditional lectionary
-sub-block, documented now so v0.4 fills it with the nesting already in place:
+The day-level `calendar` block groups calendar-scoped facts, filled progressively.
+It is `null` under the universal 1962 calendar (so the default shape and its golden
+digest are unmoved) and non-null once a fact applies.
+
+**`particular` — the selected particular calendar (#78, filled now).** When a caller
+resolves under a particular calendar (an `overlay`: SSPX, FSSP, a diocese), the block
+names it:
 
 ```json
 "calendar": {
+  "particular": { "id": "introibo:overlay:roman:sspx", "name": "Society of Saint Pius X" }
+}
+```
+
+- `particular.id` is the overlay's platform URN; `particular.name` its display name.
+- It is `null` (the whole `calendar` block is `null`) under the universal 1962
+  calendar. The overlay is *also* reflected in `corpusVersion` (`base+overlayId`, the
+  cache-key axis); `particular` is the structured, human-readable counterpart.
+
+**`lectionary` — reserved, filled at v0.4** — the astronomical fields join it then,
+alongside `particular`:
+
+```json
+"calendar": {
+  "particular": null,
   "lectionary": { "sundayCycle": "A", "weekdayCycle": "II" }
 }
 ```
@@ -229,8 +248,8 @@ sub-block, documented now so v0.4 fills it with the nesting already in place:
 
 Both are **nullable and edition-conditional**: the 1962 edition has no cycle
 lectionary, so the whole `lectionary` block is null there; a Novus Ordo snapshot
-fills it. Nesting it under `calendar` (rather than at the day root) keeps the
-day-level key count stable and groups it with the other calendrical facts.
+fills it. Nesting these under `calendar` (rather than at the day root) keeps the
+day-level key count stable and groups them with the other calendrical facts.
 
 ### Stable identifiers (a compatibility surface)
 
