@@ -254,6 +254,33 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return null;
     }
 
+    public function concurrenceOutcome(
+        RealizedObservance $preceding,
+        RealizedObservance $following,
+        PrecedenceContext $context
+    ): ConcurrenceOutcome {
+        $precedingTier = $this->tierOf($preceding, $context);
+        $followingTier = $this->tierOf($following, $context);
+
+        // The more dignified office holds the evening; an equal-rank concurrence
+        // goes to the following day's First Vespers (a capitulo de sequenti).
+        if (!$precedingTier->isHigherThan($followingTier)) {
+            return $this->ratesVespersCommemoration($preceding)
+                ? ConcurrenceOutcome::followingWithCommemorationOfPreceding()
+                : ConcurrenceOutcome::fullOfFollowing();
+        }
+
+        return $this->ratesVespersCommemoration($following)
+            ? ConcurrenceOutcome::precedingWithCommemorationOfFollowing()
+            : ConcurrenceOutcome::fullOfPreceding();
+    }
+
+    private function ratesVespersCommemoration(RealizedObservance $office): bool
+    {
+        // A fourth-class feria carries no Vespers commemoration; higher days do.
+        return $office->rank()->ordinal() < 4 || $office->kind()->value() === ObservanceKind::SUNDAY;
+    }
+
     private function isTransferable(RealizedObservance $office): bool
     {
         // All Souls is reassigned to the next day when impeded (n. 96b).

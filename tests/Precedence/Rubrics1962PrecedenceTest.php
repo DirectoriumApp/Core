@@ -283,6 +283,37 @@ final class Rubrics1962PrecedenceTest extends TestCase
         self::assertNull($target);
     }
 
+    public function testHigherFollowingDayTakesFirstVespersWithCommemoration(): void
+    {
+        $precedingFeastII = self::build('roman:sanctorale:stephanus', 'feast', 2, 'christmastide');
+        $followingFeastI = self::build('roman:sanctorale:ioseph', 'feast', 1, 'lent');
+
+        self::assertSame('following-commem-preceding', self::concurrence($precedingFeastII, $followingFeastI));
+    }
+
+    public function testHigherPrecedingDayKeepsSecondVespersOverAFeria(): void
+    {
+        $precedingFeastI = self::build('roman:sanctorale:ioseph', 'feast', 1, 'lent');
+        $followingFeria = self::build('roman:temporale:epiphany:feria', 'feria', 4, 'epiphany');
+
+        self::assertSame('full-of-preceding', self::concurrence($precedingFeastI, $followingFeria));
+    }
+
+    public function testEqualConcurrenceGoesToTheFollowingDay(): void
+    {
+        $preceding = self::build('roman:sanctorale:stephanus', 'feast', 2, 'christmastide');
+        $following = self::build('roman:sanctorale:ioannes-evangelista', 'feast', 2, 'christmastide');
+
+        self::assertSame('following-commem-preceding', self::concurrence($preceding, $following));
+    }
+
+    private static function concurrence(RealizedObservance $preceding, RealizedObservance $following): string
+    {
+        return (new Rubrics1962Precedence())
+            ->concurrenceOutcome($preceding, $following, self::context(false))
+            ->value();
+    }
+
     private static function outcome(
         RealizedObservance $winner,
         RealizedObservance $loser,

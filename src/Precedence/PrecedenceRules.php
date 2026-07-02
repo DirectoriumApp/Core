@@ -45,4 +45,15 @@ interface PrecedenceRules
      * Low Sunday (n. 96a).
      */
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable;
+
+    /**
+     * How the evening between the office of the preceding day and the office of
+     * the following day is resolved — whose Vespers is said and whether the other
+     * is commemorated.
+     */
+    public function concurrenceOutcome(
+        RealizedObservance $preceding,
+        RealizedObservance $following,
+        PrecedenceContext $context
+    ): ConcurrenceOutcome;
 }
