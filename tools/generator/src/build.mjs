@@ -13,6 +13,7 @@ import { loadYaml } from './facts.mjs';
 import { makeValidators, validateAll } from './validate.mjs';
 import {
   transformSanctorale,
+  transformSanctoraleEdition,
   transformTemporalSkeleton,
   transformTemporale,
   transformPrecedence,
@@ -88,6 +89,18 @@ export function build(outDir = DEFAULT_OUT) {
 
   const overlays = loadOverlays();
 
+  // Additional editions (Core v0.3.0: 1954, later 1955), each authored as a diff from a
+  // base edition and materialised into its own dir. Only the per-edition Layer-2 and
+  // placement shapes differ; identity and the temporal skeleton are edition-invariant and
+  // emitted once above. The base pass is left untouched, so no additional edition can move
+  // the base (1962) corpus — the golden fixture proves it.
+  const extraEditions = (meta.editions || []).map((e) => {
+    const { attributes, placement } = transformSanctoraleEdition(entries, e.dir);
+    attributes.sort(byId);
+    placement.sort(byId);
+    return { dir: e.dir, base: e.base, attributes, placement };
+  });
+
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),
@@ -102,6 +115,10 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['source'], sources, 'source'),
     ...overlays.flatMap((o) => validateAll(validators['overlay-operation'], o.rows, `overlay:${o.slug}`)),
     ...overlays.flatMap((o) => validateAll(validators['overlay'], [o.meta], `overlay-meta:${o.slug}`)),
+    ...extraEditions.flatMap((ed) => [
+      ...validateAll(validators['attributes.sanctorale'], ed.attributes, `attributes.sanctorale:${ed.dir}`),
+      ...validateAll(validators['placement.sanctorale'], ed.placement, `placement.sanctorale:${ed.dir}`),
+    ]),
   ];
   if (errors.length > 0) {
     throw new Error('Corpus schema validation failed:\n  ' + errors.join('\n  '));
@@ -120,6 +137,10 @@ export function build(outDir = DEFAULT_OUT) {
       // particular calendar's authority for the changed fact, an add carries a full
       // entry whose title must cite a public-domain text source. Same born-cited gate.
       ...overlays.map((o) => ({ shape: `overlay:${o.slug}`, records: o.provenance })),
+      ...extraEditions.flatMap((ed) => [
+        { shape: `attributes.sanctorale:${ed.dir}`, records: ed.attributes },
+        { shape: `placement.sanctorale:${ed.dir}`, records: ed.placement },
+      ]),
     ],
     sources,
   );
@@ -198,6 +219,21 @@ export function build(outDir = DEFAULT_OUT) {
     };
   }
 
+  // Each additional edition contributes its diff — the per-edition Layer-2 attributes and
+  // the placement — into its own dir. Identity and the temporal skeleton are shared.
+  for (const ed of extraEditions) {
+    outputs[`editions/${ed.dir}/attributes.sanctorale.ndjson`] = {
+      text: toNdjson(ed.attributes),
+      records: ed.attributes.length,
+      primaryKey: 'id',
+    };
+    outputs[`editions/${ed.dir}/placement.sanctorale.ndjson`] = {
+      text: toNdjson(ed.placement),
+      records: ed.placement.length,
+      primaryKey: 'id',
+    };
+  }
+
   const relPaths = Object.keys(outputs).sort();
   for (const rel of relPaths) {
     const dest = join(outDir, rel);
@@ -222,7 +258,7 @@ export function build(outDir = DEFAULT_OUT) {
     corpusVersion: meta.corpusVersion,
     generator: meta.generator || '@introibo/corpus-generator',
     license: 'CC0-1.0',
-    editions: [edition],
+    editions: [edition, ...extraEditions.map((ed) => ed.dir)],
     overlays: overlays.map((o) => o.slug),
     sources: usedSources(sources, usage),
     files,

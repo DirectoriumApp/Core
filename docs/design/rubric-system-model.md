@@ -91,7 +91,12 @@ are edition-invariant and reused unchanged (the physical 3-layer model — `corp
 - **Rank scheme.** `RankClass` (I–IV) is the normalised sort key; `LegacyRank` already models the pre-1960
   tokens (`duplex-i-classis`, `duplex-maius`, `semiduplex`, `simplex`, `dominica-maior`, …). 1954/1955
   attributes carry the `LegacyRank` token **and** a normalised `RankClass` for the tier sort; the mapping is
-  data (§ "Rank mapping" below), not code.
+  data (§ "Rank mapping" below), not code. **Built (#64):** `attributes.sanctorale.ndjson` carries an optional
+  `legacyRank` token — the author states both the token and its normalised numeric class, each cited to the
+  1954 oracle (`ordo-1954`); `CorpusSanctoralData` reads it and threads it through `SanctoralEntry` →
+  `SanctoralObservance`, ready for `Rubrics1954Precedence` (#67) to order the fine grades the four classes
+  collapse. The generator materialises each non-base edition as a **diff** into its own dir (`meta.editions`
+  + `transformSanctoraleEdition`), leaving the base 1962 pass — and its corpus bytes — untouched.
 - **Commemoration limits.** Already per-edition data (`{rule:"commemoration-limit", dayClass, limit}`);
   1954 admits more than 1962. #332 is therefore mostly *data* + making `commemorationLimit()` read it per
   edition (it already does for 1962).
@@ -101,28 +106,35 @@ are edition-invariant and reused unchanged (the physical 3-layer model — `corp
   hard-coded in the fillers, #61 moves them into `attributes.temporale.ndjson` (a refactor guarded by the
   1962 golden fixture).
 
-## Seam 4 — the octave subsystem (NEW — #65, the crux)
+## Seam 4 — the octave subsystem (SAFER SPLIT — #65)
 
-1962 has essentially one octave (Christmas), handled today by id-substring + table-membership checks. 1954
-has a **full octave system** (privileged 1st/2nd/3rd-order, common, simple). This needs a real subsystem:
+The 5-agent code mapping (2026-07-04) showed "octaves" are **two different mechanisms**, so a single generic
+generator is the wrong shape:
 
-- **Data (schema extension).** A new per-edition `octaves.ndjson`:
-  `{"feastId": "...", "class": "privileged-1|privileged-2|privileged-3|common|simple", "days": 8, "cite": "..."}`.
-  The bearing feast may be temporal (Epiphany, Corpus Christi, Ascension, Pentecost) or sanctoral. A new
-  JSON Schema `octaves.schema.json` + a validation sample.
-- **Generation.** An `OctaveGenerator` (`src/Octave/`) that, given the octave declarations and the placed
-  bearing feasts, emits the `WITHIN_OCTAVE` days (2–7) and the `OCTAVE_DAY` (day 8) as `RealizedObservance`s
-  with rank/colour derived from the octave class — the same shape as vigil placement (a decorator over the
-  realised calendar), so they flow through the resolver untouched.
-- **Rules.** `Rubrics1954Precedence` places days-within-octave and octave-days on their **pre-1955 occurrence
-  tiers**, decides how an occurring feast interacts with an octave (celebrated-and-octave-commemorated, or
-  octave-day-transferred, etc.), and handles octave-vs-octave overlap and the "privileged octave admits no
-  commemoration" rule.
-- **1962 regression.** The generator must reproduce today's Christmas-octave behaviour exactly when fed
-  1962's octave data, so the **1583–2200 golden fixture stays byte-identical** (#72). Design choice to
-  confirm: *unify* 1962 onto the new generator (one code path, higher regression risk, caught by the
-  fixture) **vs.** leave 1962's existing path and use the generator only for 1954/1955 (two paths, safer
-  now). Recommendation: **unify**, with the golden fixture as the gate — but flagged for sign-off.
+- **Temporal octaves** — Christmas, Easter, Pentecost (and, for 1954, Epiphany, Corpus Christi, Ascension,
+  Sacred Heart) are **movable**, minted at runtime by the temporal fillers (`ChristmasCycle`, `Eastertide`)
+  as they walk the season blocks, with real quirks (the Pentecost **Ember Days** sit *inside* the octave with
+  their own ids; Easter's "Sabbato in Albis"). 1962 already produces its three this way.
+- **Sanctoral octaves** — Assumption, All Saints, Peter & Paul, Immaculate Conception, John Baptist, Joseph
+  (+ the simple octaves Stephen/John-Ev/Innocents/Lawrence/Nativity-BVM) are **fixed-date, feast-anchored**
+  windows that behave exactly like **vigils** — which in this corpus are pure placement DATA, no engine.
+
+**Decision (user-approved 2026-07-04): the safer split.** Do NOT refactor 1962's temporal-octave fillers —
+the golden fixture is protected *by construction*, not merely gated. Sanctoral octaves are **materialised
+DATA**: a compact per-edition `octaves.ndjson` (`{bearingId, class, days:8, octaveDay:{…}, withinOctave?:{…},
+cites}`) that the NODE generator expands into full identity + placement + attributes records (within-octave
+days 2–7 + octave day 8), each linked back with `octaveOf` (mirroring `vigilOf`), plus an `octaves.schema.json`.
+Runtime reads them via `CorpusSanctoralData` with ~zero new code. 1954's extra **temporal** octaves extend the
+existing fillers — the same code path 1962 uses, so no cross-edition drift. There is **no** PHP runtime
+`OctaveGenerator` decorator, and 1962 ships **no** `octaves.ndjson`.
+
+- **Rules.** `Rubrics1954Precedence` reads each octave's `class` from `octaves.ndjson` and places its
+  within-octave/octave-day observances on the pre-1955 occurrence tiers, deciding the five per-class
+  behaviours (privileged admits no commemoration; common omitted under a I/II-class feast; simple keeps only
+  the octave day; …) and octave-vs-octave overlap.
+- **Guardrails.** The 1583–2200 golden fixture stays byte-identical (1962 untouched) **and** explicit named
+  octave-day tests pin the outcomes (Jan 1 = Octave Day of the Nativity, I class, white; the Easter/Pentecost
+  octave days).
 
 ## Seam 5 — pre-1955 vigils (#66)
 

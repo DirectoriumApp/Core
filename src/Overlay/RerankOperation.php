@@ -68,7 +68,8 @@ final class RerankOperation implements OverlayOperation
             $this->rank,
             $this->colour ?? $base->colour(),
             $base->vigilOfId(),
-            $base->citations()->merge($this->citations)
+            $base->citations()->merge($this->citations),
+            $base->legacyRank()
         );
 
         return $byId;

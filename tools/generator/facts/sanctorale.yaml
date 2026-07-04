@@ -409,6 +409,13 @@
     month: 2
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    rank: 2
+    colour: white
+    month: 2
+    day: 2
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:blasius
   kind: commemoration-only
@@ -801,6 +808,13 @@
     month: 3
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    rank: 1
+    colour: white
+    month: 3
+    day: 19
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:benedictus
   kind: feast
@@ -843,6 +857,13 @@
     month: 3
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    rank: 1
+    colour: white
+    month: 3
+    day: 25
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:ioannes-damascenus
   kind: feast
@@ -1866,6 +1887,13 @@
     month: 6
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    rank: 1
+    colour: white
+    month: 6
+    day: 24
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:guilielmus
   kind: feast
@@ -1923,6 +1951,13 @@
     month: 6
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    rank: 1
+    colour: red
+    month: 6
+    day: 29
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:commemoratio-pauli
   kind: feast
@@ -2554,6 +2589,13 @@
     month: 8
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    rank: 2
+    colour: red
+    month: 8
+    day: 10
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:tiburtius-et-susanna
   kind: commemoration-only
@@ -2639,6 +2681,13 @@
     month: 8
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    rank: 1
+    colour: white
+    month: 8
+    day: 15
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:ioachim
   kind: feast
@@ -2989,6 +3038,13 @@
     month: 9
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    rank: 2
+    colour: white
+    month: 9
+    day: 8
+    cites: { legacyRank: ordo-1954, rank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:gorgonius
   kind: commemoration-only

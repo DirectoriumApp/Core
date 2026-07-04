@@ -13,6 +13,7 @@
       "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
     },
     "rank": { "$ref": "#/$defs/rank" },
+    "legacyRank": { "$ref": "#/$defs/legacyRank" },
     "colour": { "$ref": "#/$defs/colour" },
     "nameOverride": { "$ref": "#/$defs/names" },
     "cites": {
@@ -22,14 +23,30 @@
       ]
     }
   },
-  "if": { "required": ["nameOverride"] },
-  "then": { "properties": { "cites": { "required": ["nameOverride.la"] } } },
+  "allOf": [
+    {
+      "if": { "required": ["nameOverride"] },
+      "then": { "properties": { "cites": { "required": ["nameOverride.la"] } } }
+    },
+    {
+      "if": { "required": ["legacyRank"] },
+      "then": { "properties": { "cites": { "required": ["legacyRank"] } } }
+    }
+  ],
   "$defs": {
     "rank": {
-      "description": "RankClass ordinal (1 = class I, highest ... 4 = class IV).",
+      "description": "RankClass ordinal (1 = class I, highest ... 4 = class IV). For a legacy (pre-1960) edition this is the NORMALIZED class of the legacyRank grade.",
       "type": "integer",
       "minimum": 1,
       "maximum": 4
+    },
+    "legacyRank": {
+      "description": "The native pre-1960 grade token, retained verbatim for fidelity (the numeric rank is its normalized RankClass). Absent for the 1960 edition; present for 1954/1955. See LegacyRank.",
+      "enum": [
+        "duplex-i-classis", "duplex-ii-classis", "duplex-maius", "duplex",
+        "semiduplex", "simplex", "feria-maior", "dominica-maior",
+        "dominica-minor", "commemoratio"
+      ]
     },
     "colour": {
       "type": "object",
@@ -57,7 +74,7 @@
     "cites": {
       "type": "object",
       "minProperties": 1,
-      "propertyNames": { "pattern": "^(rank|colour)$|^nameOverride\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "propertyNames": { "pattern": "^(rank|colour|legacyRank)$|^nameOverride\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
       "additionalProperties": { "$ref": "#/$defs/sourceRef" }
     }
   }
