@@ -20,11 +20,15 @@ use InvalidArgumentException;
  * the Layer-1 {@see Observance} identity, and the 1962 {@see RankClass} and
  * {@see ElementColour} it wears. A vigil additionally records the id of the
  * feast it is the vigil OF ({@see vigilOfId}); the loader then places it on the
- * preceding day. Trailing optionals let later issues add data, not constructor
- * churn: {@see vigilOfId} arrived with #27 vigils, and {@see citations} arrives
- * with the cited corpus (#41) — the {@see CitationSet} the corpus generator (#38)
- * attaches per datum, carried here ready for the output contract's reserved
- * `citations` slot to surface in a later issue. See
+ * preceding day. A day within an octave, or an octave day, likewise records the
+ * feast whose octave it belongs to ({@see octaveOfId}); pre-1955 editions
+ * materialize those days as placement data exactly as vigils are (Core v0.3.0,
+ * #65 — the 1960 edition has no sanctoral octaves, so it carries none). Trailing
+ * optionals let later issues add data, not constructor churn: {@see vigilOfId}
+ * arrived with #27 vigils, {@see citations} with the cited corpus (#41) — the
+ * {@see CitationSet} the corpus generator (#38) attaches per datum, carried here
+ * ready for the output contract's reserved `citations` slot — {@see legacyRank}
+ * with the 1954 engine (#64), and {@see octaveOfId} with its octaves (#65). See
  * docs/design/sanctoral-overlay-model.md.
  *
  * Immutable: it holds only value objects and two integers.
@@ -47,6 +51,8 @@ final class SanctoralEntry
 
     private ?LegacyRank $legacyRank;
 
+    private ?ObservanceId $octaveOfId;
+
     public function __construct(
         int $month,
         int $day,
@@ -55,7 +61,8 @@ final class SanctoralEntry
         ElementColour $colour,
         ?ObservanceId $vigilOfId = null,
         ?CitationSet $citations = null,
-        ?LegacyRank $legacyRank = null
+        ?LegacyRank $legacyRank = null,
+        ?ObservanceId $octaveOfId = null
     ) {
         if ($month < 1 || $month > 12) {
             throw new InvalidArgumentException(sprintf('Month must be 1-12, got %d.', $month));
@@ -72,6 +79,7 @@ final class SanctoralEntry
         $this->vigilOfId = $vigilOfId;
         $this->citations = $citations ?? CitationSet::empty();
         $this->legacyRank = $legacyRank;
+        $this->octaveOfId = $octaveOfId;
     }
 
     public function month(): int
@@ -121,8 +129,23 @@ final class SanctoralEntry
         return $this->legacyRank;
     }
 
+    /**
+     * The id of the feast whose octave this entry belongs to — a day within the
+     * octave or the octave day — or null when it is not part of an octave. The
+     * {@see Observance} kind (within-octave vs octave-day) distinguishes the two.
+     */
+    public function octaveOfId(): ?ObservanceId
+    {
+        return $this->octaveOfId;
+    }
+
     public function isVigil(): bool
     {
         return $this->vigilOfId !== null;
+    }
+
+    public function isOctave(): bool
+    {
+        return $this->octaveOfId !== null;
     }
 }

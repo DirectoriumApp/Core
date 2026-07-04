@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { transformSanctoraleEdition } from '../src/transform.mjs';
+import { transformSanctoraleEdition, transformOctaves } from '../src/transform.mjs';
 
 const DA = 'roman-divino-afflatu';
 
@@ -138,4 +138,177 @@ test('placement carries month/day and a vigilOf link', () => {
   assert.equal(placement.length, 1);
   assert.equal(placement[0].month, 8);
   assert.equal(placement[0].vigilOf, 'roman:sanctorale:assumptio');
+});
+
+// --- Octave materialisation (#65) --------------------------------------------------
+
+/** A bearing feast carrying the edition colour + date the octave derives from. */
+function feast(id, block) {
+  return {
+    id,
+    kind: 'feast',
+    titulars: ['x'],
+    names: { la: 'X' },
+    cites: { 'names.la': 'mr-1920' },
+    [DA]: { colour: block.colour, month: block.month, day: block.day, cites: { colour: 'ordo-1954' } },
+  };
+}
+
+const OCT_CITES = { class: 'ordo-1954', name: 'mr-1920' };
+
+test('a common octave materialises six days within (semidouble) plus the octave day (greater double)', () => {
+  const bearing = feast('roman:sanctorale:assumptio', { colour: 'white', month: 8, day: 15 });
+  const { identity, attributes, placement } = transformOctaves(
+    [bearing],
+    DA,
+    [{ bearingFeast: 'roman:sanctorale:assumptio', class: 'common', genitive: 'Assumptionis', cites: OCT_CITES }],
+  );
+
+  // Six within-days (dies secunda..septima) + the octave day = 7 observances.
+  assert.equal(identity.length, 7);
+  assert.equal(attributes.length, 7);
+  assert.equal(placement.length, 7);
+
+  const within = attributes.filter((a) => a.legacyRank === 'semiduplex');
+  const octaveDay = attributes.filter((a) => a.legacyRank === 'duplex-maius');
+  assert.equal(within.length, 6);
+  assert.equal(octaveDay.length, 1);
+  // Grades derive to their RankClass (semidouble and greater-double both collapse to III).
+  assert.ok(within.every((a) => a.rank === 3));
+  assert.equal(octaveDay[0].rank, 3);
+});
+
+test('the octave day falls on the eighth day and the days within on the 2nd..7th, with month rollover', () => {
+  // Nativity of St John Baptist, June 24: octave day is July 1 (24 + 7, crossing the month).
+  const bearing = feast('roman:sanctorale:nativitas-ioannis-baptistae', { colour: 'white', month: 6, day: 24 });
+  const { identity, placement } = transformOctaves(
+    [bearing],
+    DA,
+    [
+      {
+        bearingFeast: 'roman:sanctorale:nativitas-ioannis-baptistae',
+        class: 'common',
+        genitive: 'Nativitatis S. Ioannis Baptistae',
+        cites: OCT_CITES,
+      },
+    ],
+  );
+
+  const octaveDay = placement.find((p) => p.id.endsWith(':in-octava'));
+  assert.equal(octaveDay.month, 7);
+  assert.equal(octaveDay.day, 1);
+
+  // dies secunda = June 25 … dies septima = June 30.
+  const second = placement.find((p) => p.id.endsWith(':infra-octavam:2'));
+  const seventh = placement.find((p) => p.id.endsWith(':infra-octavam:7'));
+  assert.deepEqual([second.month, second.day], [6, 25]);
+  assert.deepEqual([seventh.month, seventh.day], [6, 30]);
+
+  // Every octave record links back to the bearing feast, and names decline correctly.
+  assert.ok(placement.every((p) => p.octaveOf === 'roman:sanctorale:nativitas-ioannis-baptistae'));
+  const octaveDayId = octaveDay.id;
+  assert.equal(
+    identity.find((i) => i.id === octaveDayId).names.la,
+    'In Octava Nativitatis S. Ioannis Baptistae',
+  );
+  assert.equal(
+    identity.find((i) => i.id.endsWith(':infra-octavam:4')).names.la,
+    'Dies quarta infra Octavam Nativitatis S. Ioannis Baptistae',
+  );
+});
+
+test('a simple octave materialises only the octave day (simple), with no days within', () => {
+  const bearing = feast('roman:sanctorale:laurentius', { colour: 'red', month: 8, day: 10 });
+  const { identity, attributes, placement } = transformOctaves(
+    [bearing],
+    DA,
+    [{ bearingFeast: 'roman:sanctorale:laurentius', class: 'simple', genitive: 'S. Laurentii Martyris', cites: OCT_CITES }],
+  );
+
+  assert.equal(identity.length, 1);
+  assert.equal(placement.length, 1);
+  assert.equal(identity[0].kind, 'octave-day');
+  assert.equal(attributes[0].legacyRank, 'simplex');
+  assert.equal(attributes[0].rank, 4);
+  assert.deepEqual([placement[0].month, placement[0].day], [8, 17]);
+});
+
+test('octaveDay:false emits the days within but defers the octave day', () => {
+  const bearing = feast('roman:sanctorale:assumptio', { colour: 'white', month: 8, day: 15 });
+  const { identity, placement } = transformOctaves(
+    [bearing],
+    DA,
+    [
+      {
+        bearingFeast: 'roman:sanctorale:assumptio',
+        class: 'common',
+        genitive: 'Assumptionis',
+        octaveDay: false,
+        cites: OCT_CITES,
+      },
+    ],
+  );
+
+  // Six days within (Aug 16..21), and NO octave day on Aug 22.
+  assert.equal(identity.length, 6);
+  assert.ok(identity.every((i) => i.kind === 'within-octave'));
+  assert.ok(!placement.some((p) => p.id.endsWith(':in-octava')));
+  assert.ok(!placement.some((p) => p.month === 8 && p.day === 22));
+});
+
+test('the octave inherits (derives) the bearing feast colour and its citation', () => {
+  const bearing = feast('roman:sanctorale:petrus-paulus', { colour: 'red', month: 6, day: 29 });
+  const { attributes } = transformOctaves(
+    [bearing],
+    DA,
+    [{ bearingFeast: 'roman:sanctorale:petrus-paulus', class: 'common', genitive: 'Ss. Petri et Pauli', cites: OCT_CITES }],
+  );
+
+  assert.ok(attributes.every((a) => a.colour.base === 'red'));
+  assert.ok(attributes.every((a) => a.cites.colour === 'ordo-1954'));
+  // The title cites the public-domain text; the grade/class facts cite the ordo.
+  assert.ok(attributes.every((a) => a.cites.legacyRank === 'ordo-1954' && a.cites.rank === 'ordo-1954'));
+});
+
+test('an unknown octave class is a fail-closed error', () => {
+  const bearing = feast('roman:sanctorale:x', { colour: 'white', month: 5, day: 5 });
+  assert.throws(
+    () => transformOctaves([bearing], DA, [{ bearingFeast: 'roman:sanctorale:x', class: 'privileged', genitive: 'X', cites: OCT_CITES }]),
+    /unknown class "privileged"/,
+  );
+});
+
+test('an octave whose bearing feast is absent is a fail-closed error', () => {
+  assert.throws(
+    () => transformOctaves([], DA, [{ bearingFeast: 'roman:sanctorale:ghost', class: 'common', genitive: 'X', cites: OCT_CITES }]),
+    /bearing feast "roman:sanctorale:ghost" is not a sanctoral entry/,
+  );
+});
+
+test('an octave missing its class/name citation or genitive is a fail-closed error', () => {
+  const bearing = feast('roman:sanctorale:x', { colour: 'white', month: 5, day: 5 });
+  assert.throws(
+    () => transformOctaves([bearing], DA, [{ bearingFeast: 'roman:sanctorale:x', class: 'common', genitive: 'X', cites: { class: 'ordo-1954' } }]),
+    /cites must carry both "class" and "name"/,
+  );
+  assert.throws(
+    () => transformOctaves([bearing], DA, [{ bearingFeast: 'roman:sanctorale:x', class: 'common', cites: OCT_CITES }]),
+    /a Latin "genitive" title phrase is required/,
+  );
+});
+
+test('a simple octave with octaveDay:false (which materialises nothing) is a fail-closed error', () => {
+  const bearing = feast('roman:sanctorale:x', { colour: 'white', month: 5, day: 5 });
+  assert.throws(
+    () => transformOctaves([bearing], DA, [{ bearingFeast: 'roman:sanctorale:x', class: 'simple', genitive: 'X', octaveDay: false, cites: OCT_CITES }]),
+    /materialises nothing/,
+  );
+});
+
+test('a late-February octave that would cross the bissextile doubling is a fail-closed error', () => {
+  const bearing = feast('roman:sanctorale:x', { colour: 'white', month: 2, day: 24 });
+  assert.throws(
+    () => transformOctaves([bearing], DA, [{ bearingFeast: 'roman:sanctorale:x', class: 'common', genitive: 'X', cites: OCT_CITES }]),
+    /bissextile/,
+  );
 });

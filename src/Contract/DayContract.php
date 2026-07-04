@@ -209,6 +209,9 @@ final class DayContract
             $shape['vigilOf'] = $observance->vigilOfId() !== null
                 ? $observance->vigilOfId()->toString()
                 : null;
+            $shape['octaveOf'] = $observance->octaveOfId() !== null
+                ? $observance->octaveOfId()->toString()
+                : null;
 
             return $shape;
         }

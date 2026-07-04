@@ -66,6 +66,7 @@ final class CorpusSanctoralData implements SanctoralData
             }
 
             $vigilOf = CorpusRecord::optionalString($placement, 'vigilOf');
+            $octaveOf = CorpusRecord::optionalString($placement, 'octaveOf');
             $legacyRank = CorpusRecord::optionalString($attributes, 'legacyRank');
 
             $entries[] = new SanctoralEntry(
@@ -85,7 +86,8 @@ final class CorpusSanctoralData implements SanctoralData
                     CorpusRecord::cites($attributes),
                     CorpusRecord::cites($placement)
                 )),
-                $legacyRank !== null ? LegacyRank::fromString($legacyRank) : null
+                $legacyRank !== null ? LegacyRank::fromString($legacyRank) : null,
+                $octaveOf !== null ? ObservanceId::parse($octaveOf) : null
             );
         }
 

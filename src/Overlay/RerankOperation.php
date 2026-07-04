@@ -17,7 +17,7 @@ use Introibo\Core\Sanctoral\SanctoralEntry;
  *
  * It replaces the base entry's {@see RankClass} (and its {@see ElementColour}, when
  * the higher rank changes the colour) while preserving the feast's identity, date,
- * and vigil link. The overlay's own citation is layered over the base entry's, so
+ * and its vigil/octave links. The overlay's own citation is layered over the base entry's, so
  * the changed field now cites the particular calendar's source, not the universal
  * edition's.
  */
@@ -69,7 +69,8 @@ final class RerankOperation implements OverlayOperation
             $this->colour ?? $base->colour(),
             $base->vigilOfId(),
             $base->citations()->merge($this->citations),
-            $base->legacyRank()
+            $base->legacyRank(),
+            $base->octaveOfId()
         );
 
         return $byId;

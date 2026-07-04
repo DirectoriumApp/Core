@@ -14,6 +14,7 @@ import { makeValidators, validateAll } from './validate.mjs';
 import {
   transformSanctorale,
   transformSanctoraleEdition,
+  transformOctaves,
   transformTemporalSkeleton,
   transformTemporale,
   transformPrecedence,
@@ -94,12 +95,46 @@ export function build(outDir = DEFAULT_OUT) {
   // placement shapes differ; identity and the temporal skeleton are edition-invariant and
   // emitted once above. The base pass is left untouched, so no additional edition can move
   // the base (1962) corpus — the golden fixture proves it.
+  //
+  // Each edition also materialises its SANCTORAL OCTAVES (#65) — declared per edition in
+  // octaves.yaml, expanded into the same three shapes exactly as vigils are (the safer-split
+  // design). Their attributes and placement join the edition's diff; their identity is
+  // edition-invariant and is merged, deduped, into the shared identity below.
+  const octavesByEdition = existsSync(join(FACTS_DIR, 'octaves.yaml'))
+    ? loadYaml(join(FACTS_DIR, 'octaves.yaml'))
+    : {};
   const extraEditions = (meta.editions || []).map((e) => {
-    const { attributes, placement } = transformSanctoraleEdition(entries, e.dir);
-    attributes.sort(byId);
-    placement.sort(byId);
-    return { dir: e.dir, base: e.base, attributes, placement };
+    const base = transformSanctoraleEdition(entries, e.dir);
+    const octaves = transformOctaves(entries, e.dir, octavesByEdition[e.dir] || []);
+    const attributes = [...base.attributes, ...octaves.attributes].sort(byId);
+    const placement = [...base.placement, ...octaves.placement].sort(byId);
+    return { dir: e.dir, base: e.base, attributes, placement, octaveIdentity: octaves.identity };
   });
+
+  // Octave identities are edition-invariant (the Octave Day of the Assumption is the same
+  // observance in whichever edition keeps octaves), so the shared identity becomes the
+  // cross-edition UNION of observances — each edition selecting what it observes via its own
+  // placement. The 1960 edition places no octave, so the union grows but 1960 resolution
+  // (and the golden fixture) is unmoved. Deduped by id so a later edition adding the same
+  // octave does not double-list it — and if two editions declare the SAME octave id with a
+  // DIFFERENT identity (e.g. a diverging title), that is an authoring error, not a silent
+  // first-wins: fail closed.
+  const identityById = new Map(identity.map((record) => [record.id, record]));
+  for (const ed of extraEditions) {
+    for (const record of ed.octaveIdentity) {
+      const existing = identityById.get(record.id);
+      if (existing === undefined) {
+        identityById.set(record.id, record);
+        identity.push(record);
+      } else if (JSON.stringify(existing) !== JSON.stringify(record)) {
+        throw new Error(
+          `octave identity "${record.id}" differs between editions; a shared octave identity must be ` +
+            'identical across editions (it is edition-invariant)',
+        );
+      }
+    }
+  }
+  identity.sort(byId);
 
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [

@@ -97,7 +97,8 @@ final class SanctoralCalendar
                 $entry->rank(),
                 $entry->colour(),
                 $entry->vigilOfId(),
-                $entry->legacyRank()
+                $entry->legacyRank(),
+                $entry->octaveOfId()
             );
         }
 
