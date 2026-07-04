@@ -25,29 +25,34 @@ use RuntimeException;
  */
 final class PrecedenceTable
 {
-    /** The path-safe directory key for the 1962 edition inside the corpus tree. */
-    private const EDITION_DIR = 'roman-rubricae-1960';
+    /** The path-safe directory key for the default (1962) edition inside the corpus tree. */
+    public const DEFAULT_EDITION_DIR = 'roman-rubricae-1960';
 
     /**
      * @var array<string, array{
      *     tiers: array<string, PrecedenceTier>,
      *     members: array<string, array<string, true>>,
      *     limits: array<int, int>
-     * }> Parsed tables, keyed by corpus base.
+     * }> Parsed tables, keyed by corpus base + edition dir.
      */
     private static array $tables = [];
 
     private Corpus $corpus;
 
+    /** The edition subdirectory whose tiers and rules this reads. */
+    private string $editionDir;
+
     private string $cacheKey;
 
-    public function __construct(?Corpus $corpus = null)
+    public function __construct(?Corpus $corpus = null, string $editionDir = self::DEFAULT_EDITION_DIR)
     {
         $this->corpus = $corpus ?? Corpus::default();
-        // Keyed by the corpus root, not object identity: the table is a pure function
-        // of the data on disk, so two readers over the same tree share the parse and a
-        // fixture tree never collides with the shipped one.
-        $this->cacheKey = $this->corpus->baseDir();
+        $this->editionDir = $editionDir;
+        // Keyed by the corpus root AND the edition dir, not object identity: the table is a
+        // pure function of the data on disk, so two readers over the same edition share the
+        // parse, a fixture tree never collides with the shipped one, and two editions in the
+        // same corpus tree keep distinct tables.
+        $this->cacheKey = $this->corpus->baseDir() . '|' . $editionDir;
     }
 
     public static function default(): self
@@ -114,7 +119,7 @@ final class PrecedenceTable
         }
 
         $tiers = [];
-        foreach ($this->corpus->precedenceTiers(self::EDITION_DIR) as $row) {
+        foreach ($this->corpus->precedenceTiers($this->editionDir) as $row) {
             $selector = $this->requireString($row, 'selector');
             $tiers[$selector] = PrecedenceTier::of(
                 $this->requireInt($row, 'ordinal'),
@@ -126,7 +131,7 @@ final class PrecedenceTable
 
         $members = [];
         $limits = [];
-        foreach ($this->corpus->precedenceRules(self::EDITION_DIR) as $row) {
+        foreach ($this->corpus->precedenceRules($this->editionDir) as $row) {
             $rule = $this->requireString($row, 'rule');
             if ($rule === 'membership') {
                 $members[$this->requireString($row, 'name')] = $this->idSet($row);

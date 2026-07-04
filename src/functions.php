@@ -14,20 +14,22 @@ use Introibo\Core\Precedence\ResolvedYear;
  * The engine entry point: the liturgical day for a civil date.
  *
  * Returns the resolved {@see LiturgicalDay} — its celebration, commemorations,
- * displaced offices, and tempora under the 1962 rubrics. Because a transferred
- * feast makes any day depend on earlier ones, the whole civil year is resolved
- * once and memoised for the life of the process, so repeated calls within a year
- * are cheap. A {@see DateTimeImmutable} is required so the returned day cannot be
- * changed out from under the caller.
+ * displaced offices, and tempora. Because a transferred feast makes any day depend
+ * on earlier ones, the whole civil year is resolved once and memoised for the life
+ * of the process, so repeated calls within a year are cheap. A {@see DateTimeImmutable}
+ * is required so the returned day cannot be changed out from under the caller.
  *
- * `$calendar` selects the calendar to resolve under (#78): null for the universal
- * 1962 calendar, or a particular calendar named by its slug (`sspx`) or overlay URN
- * (`introibo:overlay:roman:sspx`). A particular calendar layers its own observances
- * over the universal base without changing the engine.
+ * `$calendar` selects the particular calendar to resolve under (#78): null for the
+ * universal calendar, or a calendar named by its slug (`sspx`) or overlay URN
+ * (`introibo:overlay:roman:sspx`). `$rubricSystem` selects the edition (rules-family):
+ * null for the default 1962 (Rubricae 1960), or `roman:divino-afflatu` (1954) /
+ * `roman:rubricae-1955` (1955), or a friendly alias (`1954`, `1955`, `1962`). The two
+ * selectors are orthogonal (an overlay is layered over an edition), and both default so
+ * `day($date)` resolves the universal 1962 calendar exactly as before.
  */
-function day(DateTimeImmutable $date, ?string $calendar = null): LiturgicalDay
+function day(DateTimeImmutable $date, ?string $calendar = null, ?string $rubricSystem = null): LiturgicalDay
 {
-    return resolvedYear((int) $date->format('Y'), $calendar)->day($date);
+    return resolvedYear((int) $date->format('Y'), $calendar, $rubricSystem)->day($date);
 }
 
 /**
@@ -36,16 +38,21 @@ function day(DateTimeImmutable $date, ?string $calendar = null): LiturgicalDay
  * Introibo repos build on (see {@see DayContract} and
  * docs/design/output-contract.md).
  *
- * `$calendar` selects the calendar as for {@see day()}; when a particular calendar
- * is chosen it is stamped into the contract's `calendar` block.
+ * `$calendar` selects the particular calendar as for {@see day()} (stamped into the
+ * contract's `calendar` block); `$rubricSystem` selects the edition (stamped as the
+ * contract's `edition` provenance axis).
  *
  * @return array<string, mixed>
  */
-function contract(DateTimeImmutable $date, bool $explain = false, ?string $calendar = null): array
-{
+function contract(
+    DateTimeImmutable $date,
+    bool $explain = false,
+    ?string $calendar = null,
+    ?string $rubricSystem = null
+): array {
     $year = $explain
-        ? explainedYear((int) $date->format('Y'), $calendar)
-        : resolvedYear((int) $date->format('Y'), $calendar);
+        ? explainedYear((int) $date->format('Y'), $calendar, $rubricSystem)
+        : resolvedYear((int) $date->format('Y'), $calendar, $rubricSystem);
 
     return DayContract::from(
         $year->day($date),
@@ -63,27 +70,27 @@ function contract(DateTimeImmutable $date, bool $explain = false, ?string $calen
  *
  * @return array<string, mixed>
  */
-function explain(DateTimeImmutable $date, ?string $calendar = null): array
+function explain(DateTimeImmutable $date, ?string $calendar = null, ?string $rubricSystem = null): array
 {
-    return contract($date, true, $calendar);
+    return contract($date, true, $calendar, $rubricSystem);
 }
 
 /**
  * The resolved civil year, memoised for the life of the process.
  *
- * Shared by {@see day()} and {@see contract()} so a (year, calendar) pair is
- * resolved at most once regardless of which entry point is called.
+ * Shared by {@see day()} and {@see contract()} so a (year, calendar, rubric-system)
+ * triple is resolved at most once regardless of which entry point is called.
  *
  * @internal Not part of the public contract; the stable API is day()/contract().
  */
-function resolvedYear(int $year, ?string $calendar = null): ResolvedYear
+function resolvedYear(int $year, ?string $calendar = null, ?string $rubricSystem = null): ResolvedYear
 {
     /** @var array<string, ResolvedYear> $resolved */
     static $resolved = [];
 
-    $key = $year . '|' . ($calendar ?? '');
+    $key = $year . '|' . ($calendar ?? '') . '|' . ($rubricSystem ?? '');
     if (!isset($resolved[$key])) {
-        $resolved[$key] = (new CalendarCatalog())->resolver($calendar)->resolveYear($year);
+        $resolved[$key] = (new CalendarCatalog())->resolver($calendar, $rubricSystem)->resolveYear($year);
     }
 
     return $resolved[$key];
@@ -96,14 +103,17 @@ function resolvedYear(int $year, ?string $calendar = null): ResolvedYear
  *
  * @internal Not part of the public contract; the stable API is explain()/contract().
  */
-function explainedYear(int $year, ?string $calendar = null): ResolvedYear
+function explainedYear(int $year, ?string $calendar = null, ?string $rubricSystem = null): ResolvedYear
 {
     /** @var array<string, ResolvedYear> $explained */
     static $explained = [];
 
-    $key = $year . '|' . ($calendar ?? '');
+    $key = $year . '|' . ($calendar ?? '') . '|' . ($rubricSystem ?? '');
     if (!isset($explained[$key])) {
-        $explained[$key] = (new CalendarCatalog())->resolver($calendar)->explaining()->resolveYear($year);
+        $explained[$key] = (new CalendarCatalog())
+            ->resolver($calendar, $rubricSystem)
+            ->explaining()
+            ->resolveYear($year);
     }
 
     return $explained[$key];

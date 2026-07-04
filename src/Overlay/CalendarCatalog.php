@@ -6,6 +6,7 @@ namespace Introibo\Core\Overlay;
 
 use Introibo\Core\Contract\CalendarDescriptor;
 use Introibo\Core\Corpus\Corpus;
+use Introibo\Core\Edition\RubricSystem;
 use Introibo\Core\Precedence\DayResolver;
 use Introibo\Core\Sanctoral\CorpusSanctoralData;
 use InvalidArgumentException;
@@ -35,17 +36,23 @@ final class CalendarCatalog
     }
 
     /**
-     * The resolver for the selected calendar: the universal 1962 engine when
-     * `$calendar` is null, or the engine under that particular-calendar overlay.
+     * The resolver for the selected calendar and rubric system: the universal base when
+     * `$calendar` is null, or the engine under that particular-calendar overlay, resolved
+     * under `$rubricSystem` (null = the default 1962 edition).
+     *
+     * The two selectors are orthogonal: `$rubricSystem` chooses the rules-family and its
+     * edition data; `$calendar` layers a particular calendar over it. When `$rubricSystem`
+     * is null the engine resolves under 1962 exactly as before.
      */
-    public function resolver(?string $calendar): DayResolver
+    public function resolver(?string $calendar, ?string $rubricSystem = null): DayResolver
     {
-        $base = new CorpusSanctoralData($this->corpus);
+        $system = RubricSystem::fromString($rubricSystem);
+        $base = new CorpusSanctoralData($this->corpus, $system->corpusDir());
         if ($calendar === null) {
-            return DayResolver::for1962($base);
+            return DayResolver::forEdition($system, $base);
         }
 
-        return DayResolver::for1962(new OverlaidSanctoralData($base, $this->overlay($calendar)));
+        return DayResolver::forEdition($system, new OverlaidSanctoralData($base, $this->overlay($calendar)));
     }
 
     /**
