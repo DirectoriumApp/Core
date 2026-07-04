@@ -37,11 +37,11 @@ export function transformSanctorale(entries, edition) {
   const placement = [];
 
   for (const entry of entries) {
-    const ed = entry[edition];
-    if (!ed) {
-      throw new Error(`entry ${entry.id} has no data for edition "${edition}"`);
-    }
-
+    // Identity is edition-invariant, so emit it for EVERY entry — including one the base
+    // edition does not contain (a pre-1955 observance a later reform suppressed, e.g. an
+    // apostle's vigil kept only in 1954). The shared identity is the cross-edition UNION;
+    // each edition selects what it observes via its own attributes and placement, and the
+    // build's orphan gate proves every identity is placed by at least one edition.
     const identityRecord = {
       id: entry.id,
       kind: entry.kind,
@@ -53,6 +53,20 @@ export function transformSanctorale(entries, edition) {
       identityRecord.aliases = entry.aliases;
     }
     identity.push(identityRecord);
+
+    const ed = entry[edition];
+    if (!ed) {
+      // Legitimately absent from the base edition — but only when the entry SAYS SO
+      // explicitly (notInBaseEdition). A missing base block without that marker is an
+      // authoring slip (a forgotten or mistyped edition key), so it still fails closed.
+      if (entry.notInBaseEdition) {
+        continue;
+      }
+      throw new Error(
+        `entry ${entry.id} has no data for edition "${edition}" ` +
+          `(set notInBaseEdition: true if it is intentionally absent from the base edition)`,
+      );
+    }
 
     const edCites = ed.cites || {};
     const attributeRecord = {
@@ -93,7 +107,9 @@ export function transformSanctorale(entries, edition) {
  * default. That makes `rank` a single derived fact instead of a second hand-typed one that
  * could silently disagree with the grade (a typo like `duplex-ii-classis` + `rank: 1` used
  * to pass every gate). Only the sanctoral grades are mapped; a Sunday/feria token
- * (`dominica-*`, `feria-maior`) in a sanctoral block is a fail-closed error.
+ * (`dominica-*`, `feria-maior`) in a sanctoral block is a fail-closed error. `vigilia` is
+ * a vigil's own grade (the `kind: vigil` already carries the category) — a floor-tier office
+ * that collapses to class IV; #67's precedence tiers order the fine `simplex`↔`vigilia` seam.
  */
 const DEFAULT_RANK_BY_LEGACY = {
   'duplex-i-classis': 1,
@@ -102,6 +118,7 @@ const DEFAULT_RANK_BY_LEGACY = {
   duplex: 3,
   semiduplex: 3,
   simplex: 4,
+  vigilia: 4,
   commemoratio: 4,
 };
 

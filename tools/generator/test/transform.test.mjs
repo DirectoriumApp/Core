@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { transformSanctoraleEdition, transformOctaves } from '../src/transform.mjs';
+import { transformSanctorale, transformSanctoraleEdition, transformOctaves } from '../src/transform.mjs';
 
 const DA = 'roman-divino-afflatu';
 
@@ -46,6 +46,7 @@ test('maps each sanctoral grade to its default class', () => {
     duplex: 3,
     semiduplex: 3,
     simplex: 4,
+    vigilia: 4,
     commemoratio: 4,
   };
   for (const [grade, expected] of Object.entries(grades)) {
@@ -138,6 +139,63 @@ test('placement carries month/day and a vigilOf link', () => {
   assert.equal(placement.length, 1);
   assert.equal(placement[0].month, 8);
   assert.equal(placement[0].vigilOf, 'roman:sanctorale:assumptio');
+});
+
+// --- Base-edition fan-out + edition-only entries (notInBaseEdition, #66) ------------
+
+const BASE = 'roman-rubricae-1960';
+const BASE_BLOCK = {
+  rank: 3,
+  colour: 'white',
+  month: 5,
+  day: 5,
+  cites: { rank: 'rg-1960', colour: 'rg-1960', month: 'rg-1960', day: 'rg-1960' },
+};
+
+test('the base pass emits identity, attributes, and placement for a base entry', () => {
+  const { identity, attributes, placement } = transformSanctorale(
+    [{ id: 'roman:sanctorale:x', kind: 'feast', titulars: ['x'], names: { la: 'X' }, cites: { 'names.la': 'mr-1920' }, [BASE]: BASE_BLOCK }],
+    BASE,
+  );
+
+  assert.equal(identity.length, 1);
+  assert.equal(attributes.length, 1);
+  assert.equal(placement.length, 1);
+});
+
+test('an entry absent from the base edition (notInBaseEdition) contributes identity only', () => {
+  // A pre-1955 vigil the 1960 reform suppressed: it carries only a 1954 block, but its
+  // identity is edition-invariant and must still join the shared union (the 1962 edition
+  // simply does not place it).
+  const vigil = {
+    id: 'roman:sanctorale:andreas:vigilia',
+    kind: 'vigil',
+    titulars: ['andreas'],
+    names: { la: 'In Vigilia S. Andreae Apostoli' },
+    cites: { 'names.la': 'mr-1920' },
+    notInBaseEdition: true,
+    [DA]: { legacyRank: 'simplex', colour: 'violet', month: 11, day: 29, vigilOf: 'roman:sanctorale:andreas', cites: CITED },
+  };
+  const { identity, attributes, placement } = transformSanctorale([vigil], BASE);
+
+  assert.equal(identity.length, 1);
+  assert.equal(identity[0].id, 'roman:sanctorale:andreas:vigilia');
+  assert.equal(identity[0].kind, 'vigil');
+  // The base edition places nothing for it.
+  assert.equal(attributes.length, 0);
+  assert.equal(placement.length, 0);
+});
+
+test('an entry missing the base block WITHOUT the marker is a fail-closed error', () => {
+  const stray = {
+    id: 'roman:sanctorale:oops',
+    kind: 'feast',
+    titulars: ['x'],
+    names: { la: 'X' },
+    cites: { 'names.la': 'mr-1920' },
+    [DA]: { legacyRank: 'simplex', colour: 'white', month: 5, day: 5, cites: CITED },
+  };
+  assert.throws(() => transformSanctorale([stray], BASE), /has no data for edition "roman-rubricae-1960"/);
 });
 
 // --- Octave materialisation (#65) --------------------------------------------------

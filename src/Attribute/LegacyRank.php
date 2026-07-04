@@ -24,6 +24,7 @@ final class LegacyRank
     public const DUPLEX = 'duplex';
     public const SEMIDUPLEX = 'semiduplex';
     public const SIMPLEX = 'simplex';
+    public const VIGILIA = 'vigilia';
     public const FERIA_MAIOR = 'feria-maior';
     public const DOMINICA_MAIOR = 'dominica-maior';
     public const DOMINICA_MINOR = 'dominica-minor';
@@ -37,6 +38,7 @@ final class LegacyRank
         self::DUPLEX,
         self::SEMIDUPLEX,
         self::SIMPLEX,
+        self::VIGILIA,
         self::FERIA_MAIOR,
         self::DOMINICA_MAIOR,
         self::DOMINICA_MINOR,
