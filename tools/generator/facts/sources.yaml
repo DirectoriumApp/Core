@@ -38,3 +38,14 @@
   note: "Consult-only. The authority for the SSPX particular-calendar overlay's rank
     facts (uncopyrightable). A witness to the 1962 calendar, never transcribed. Also
     pinned as a validation oracle — see tests/Validation/fixtures/sspx."
+
+- key: ordo-1954
+  urn: introibo:source:ordo-1954
+  kind: reference
+  title: "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)"
+  year: 1954
+  rights: reference
+  note: "Consult-only. The authority for the 1954 (Divino Afflatu) edition's legacy grade
+    (duplex/semiduplex/simplex), octave, and vigil facts (uncopyrightable). The native
+    annual Ordo of the pre-1955 rubrics, still printed with a day-by-day companion. Pinned
+    as the 1954 validation oracle — see docs/design/rubric-system-model.md."

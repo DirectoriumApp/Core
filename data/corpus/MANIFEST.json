@@ -1,9 +1,20 @@
 {
   "corpusVersion": "1962-2026-07-02.1",
   "editions": [
-    "roman-rubricae-1960"
+    "roman-rubricae-1960",
+    "roman-divino-afflatu"
   ],
   "files": {
+    "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
+      "primaryKey": "id",
+      "records": 8,
+      "sha256": "7d14d6e196ef2c99e6d8ffb0c8a6297dd1c13007ef5276cddfb4c9e35926c2c3"
+    },
+    "editions/roman-divino-afflatu/placement.sanctorale.ndjson": {
+      "primaryKey": "id",
+      "records": 8,
+      "sha256": "394c76e72fc8cfb6915cf1053e74858c7d40f9b11d9ad2b5d9fd63173447b1f2"
+    },
     "editions/roman-rubricae-1960/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 302,
@@ -51,8 +62,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 3,
-      "sha256": "1e8a341d6c754e469c53eaa541e28cff3452a5338490d7932c7be18d760dc64e"
+      "records": 4,
+      "sha256": "4019df5d74427b23ed847c5062af87451bb65adf010902ac77a28d60e6490feb"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -78,6 +89,14 @@
       "title": "Missale Romanum, editio typica",
       "urn": "introibo:source:mr-1920",
       "uses": 363
+    },
+    {
+      "key": "ordo-1954",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
+      "urn": "introibo:source:ordo-1954",
+      "uses": 40
     },
     {
       "key": "rg-1960",

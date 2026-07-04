@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Introibo\Core\Sanctoral;
 
 use Introibo\Core\Attribute\ElementColour;
+use Introibo\Core\Attribute\LegacyRank;
 use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Citation\CitationSet;
 use Introibo\Core\Observance\Observance;
@@ -44,6 +45,8 @@ final class SanctoralEntry
 
     private CitationSet $citations;
 
+    private ?LegacyRank $legacyRank;
+
     public function __construct(
         int $month,
         int $day,
@@ -51,7 +54,8 @@ final class SanctoralEntry
         RankClass $rank,
         ElementColour $colour,
         ?ObservanceId $vigilOfId = null,
-        ?CitationSet $citations = null
+        ?CitationSet $citations = null,
+        ?LegacyRank $legacyRank = null
     ) {
         if ($month < 1 || $month > 12) {
             throw new InvalidArgumentException(sprintf('Month must be 1-12, got %d.', $month));
@@ -67,6 +71,7 @@ final class SanctoralEntry
         $this->colour = $colour;
         $this->vigilOfId = $vigilOfId;
         $this->citations = $citations ?? CitationSet::empty();
+        $this->legacyRank = $legacyRank;
     }
 
     public function month(): int
@@ -104,6 +109,16 @@ final class SanctoralEntry
     public function citations(): CitationSet
     {
         return $this->citations;
+    }
+
+    /**
+     * The native pre-1960 grade token (duplex/semiduplex/simplex…) for a legacy edition,
+     * or null under the 1960 rank scheme. Carried alongside the normalized {@see RankClass}
+     * so the 1954/1955 precedence engines can order the fine grades the four classes collapse.
+     */
+    public function legacyRank(): ?LegacyRank
+    {
+        return $this->legacyRank;
     }
 
     public function isVigil(): bool

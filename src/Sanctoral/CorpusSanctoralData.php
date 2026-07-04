@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Introibo\Core\Sanctoral;
 
+use Introibo\Core\Attribute\LegacyRank;
 use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Citation\CitationSet;
 use Introibo\Core\Corpus\Corpus;
@@ -65,6 +66,7 @@ final class CorpusSanctoralData implements SanctoralData
             }
 
             $vigilOf = CorpusRecord::optionalString($placement, 'vigilOf');
+            $legacyRank = CorpusRecord::optionalString($attributes, 'legacyRank');
 
             $entries[] = new SanctoralEntry(
                 CorpusRecord::requireInt($placement, 'month'),
@@ -82,7 +84,8 @@ final class CorpusSanctoralData implements SanctoralData
                     CorpusRecord::cites($identity),
                     CorpusRecord::cites($attributes),
                     CorpusRecord::cites($placement)
-                ))
+                )),
+                $legacyRank !== null ? LegacyRank::fromString($legacyRank) : null
             );
         }
 

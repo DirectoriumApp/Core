@@ -85,6 +85,63 @@ export function transformSanctorale(entries, edition) {
 }
 
 /**
+ * Fan a NON-BASE edition (Core v0.3.0: 1954 / 1955) out into its `{ attributes,
+ * placement }` arrays — its diff from the base edition. Identity is edition-invariant
+ * and already emitted by the base pass, so this emits only the per-edition Layer-2 and
+ * placement shapes.
+ *
+ * An entry belongs to this edition iff it carries a block under `editionDir`; entries
+ * without one are simply absent from the edition (a feast the reform instituted later, or
+ * one this slice has not yet authored). The block states the edition's realization
+ * explicitly and cited: its `rank` is the normalized {@see RankClass} ordinal and
+ * `legacyRank` its native pre-1960 grade token (duplex/semiduplex/simplex…), both carried
+ * so the 1954/1955 precedence engines can order the fine grades the four classes collapse.
+ */
+export function transformSanctoraleEdition(entries, editionDir) {
+  const attributes = [];
+  const placement = [];
+
+  for (const entry of entries) {
+    const ed = entry[editionDir];
+    if (!ed) {
+      continue;
+    }
+
+    const edCites = ed.cites || {};
+    const attributeRecord = {
+      id: entry.id,
+      rank: ed.rank,
+      colour: colourOf(ed.colour),
+      cites: citesFor(
+        edCites,
+        (key) =>
+          key === 'rank' || key === 'colour' || key === 'legacyRank' || key.startsWith('nameOverride.'),
+      ),
+    };
+    if (ed.legacyRank) {
+      attributeRecord.legacyRank = ed.legacyRank;
+    }
+    if (ed.nameOverride) {
+      attributeRecord.nameOverride = ed.nameOverride;
+    }
+    attributes.push(attributeRecord);
+
+    const placementRecord = {
+      id: entry.id,
+      month: ed.month,
+      day: ed.day,
+      cites: citesFor(edCites, (key) => key === 'month' || key === 'day'),
+    };
+    if (ed.vigilOf) {
+      placementRecord.vigilOf = ed.vigilOf;
+    }
+    placement.push(placementRecord);
+  }
+
+  return { attributes, placement };
+}
+
+/**
  * Fan a particular-calendar overlay's YAML into its NDJSON operation rows, the
  * metadata singleton, and the born-cited provenance shadow records (Core #76).
  *

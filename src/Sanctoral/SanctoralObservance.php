@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Introibo\Core\Sanctoral;
 
 use Introibo\Core\Attribute\ElementColour;
+use Introibo\Core\Attribute\LegacyRank;
 use Introibo\Core\Attribute\RankClass;
 use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Observance\Observance;
@@ -33,16 +34,20 @@ final class SanctoralObservance implements RealizedObservance
 
     private ?ObservanceId $vigilOfId;
 
+    private ?LegacyRank $legacyRank;
+
     public function __construct(
         Observance $identity,
         RankClass $rank,
         ElementColour $colour,
-        ?ObservanceId $vigilOfId = null
+        ?ObservanceId $vigilOfId = null,
+        ?LegacyRank $legacyRank = null
     ) {
         $this->identity = $identity;
         $this->rank = $rank;
         $this->colour = $colour;
         $this->vigilOfId = $vigilOfId;
+        $this->legacyRank = $legacyRank;
     }
 
     /** The Layer-1 identity shell: id, kind, titulars, and names. */
@@ -60,6 +65,12 @@ final class SanctoralObservance implements RealizedObservance
     public function isVigil(): bool
     {
         return $this->vigilOfId !== null;
+    }
+
+    /** The native pre-1960 grade token for a legacy edition, or null under the 1960 rank scheme. */
+    public function legacyRank(): ?LegacyRank
+    {
+        return $this->legacyRank;
     }
 
     public function id(): ObservanceId
@@ -94,7 +105,17 @@ final class SanctoralObservance implements RealizedObservance
             && $this->rank->equals($other->rank)
             && $this->colour->equals($other->colour)
             && $this->identity->latinName() === $other->identity->latinName()
-            && $this->vigilOfMatches($other);
+            && $this->vigilOfMatches($other)
+            && $this->legacyRankMatches($other);
+    }
+
+    private function legacyRankMatches(self $other): bool
+    {
+        if ($this->legacyRank === null || $other->legacyRank === null) {
+            return $this->legacyRank === $other->legacyRank;
+        }
+
+        return $this->legacyRank->equals($other->legacyRank);
     }
 
     private function vigilOfMatches(self $other): bool
