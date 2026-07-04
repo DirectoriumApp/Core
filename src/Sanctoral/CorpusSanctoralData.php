@@ -27,14 +27,18 @@ use RuntimeException;
  */
 final class CorpusSanctoralData implements SanctoralData
 {
-    /** The path-safe directory key for the 1962 edition inside the corpus tree. */
-    private const EDITION_DIR = 'roman-rubricae-1960';
+    /** The path-safe directory key for the default (1962) edition inside the corpus tree. */
+    public const DEFAULT_EDITION_DIR = 'roman-rubricae-1960';
 
     private Corpus $corpus;
 
-    public function __construct(?Corpus $corpus = null)
+    /** The edition subdirectory whose per-edition attributes and placement this reads. */
+    private string $editionDir;
+
+    public function __construct(?Corpus $corpus = null, string $editionDir = self::DEFAULT_EDITION_DIR)
     {
         $this->corpus = $corpus ?? Corpus::default();
+        $this->editionDir = $editionDir;
     }
 
     public function version(): string
@@ -46,10 +50,10 @@ final class CorpusSanctoralData implements SanctoralData
     public function entries(): array
     {
         $identityById = $this->indexById($this->corpus->identitySanctorale());
-        $attributesById = $this->indexById($this->corpus->attributesSanctorale(self::EDITION_DIR));
+        $attributesById = $this->indexById($this->corpus->attributesSanctorale($this->editionDir));
 
         $entries = [];
-        foreach ($this->corpus->placementSanctorale(self::EDITION_DIR) as $placement) {
+        foreach ($this->corpus->placementSanctorale($this->editionDir) as $placement) {
             $id = CorpusRecord::requireString($placement, 'id');
             $identity = $identityById[$id] ?? null;
             $attributes = $attributesById[$id] ?? null;

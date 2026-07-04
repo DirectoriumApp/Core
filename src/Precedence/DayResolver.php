@@ -11,6 +11,8 @@ use Introibo\Core\Calendar\LiturgicalDay;
 use Introibo\Core\Calendar\RealizedObservance;
 use Introibo\Core\Calendar\RoledObservance;
 use Introibo\Core\Contract\Provenance;
+use Introibo\Core\Corpus\Corpus;
+use Introibo\Core\Edition\RubricSystem;
 use Introibo\Core\Introibo;
 use Introibo\Core\Sanctoral\CorpusSanctoralData;
 use Introibo\Core\Sanctoral\SanctoralCalendar;
@@ -64,13 +66,49 @@ final class DayResolver
         $this->tracing = $tracing;
     }
 
+    /**
+     * The resolver for a rubric system (edition): its precedence rules, its edition URN
+     * stamped into the contract, and — unless a sanctoral source is supplied (e.g. one
+     * wrapped in a particular-calendar overlay) — its own edition data.
+     *
+     * Only 1962 is built today; selecting 1954 or 1955 throws until Epics #63 / #68 land
+     * their rules and data. The default system reproduces {@see for1962()} exactly.
+     */
+    public static function forEdition(
+        RubricSystem $system,
+        ?SanctoralData $sanctoralData = null,
+        ?Corpus $corpus = null
+    ): self {
+        $corpus = $corpus ?? Corpus::default();
+
+        return new self(
+            self::rulesFor($system, $corpus),
+            $system->urn(),
+            $sanctoralData ?? new CorpusSanctoralData($corpus, $system->corpusDir())
+        );
+    }
+
+    /**
+     * The precedence rules for a rubric system, reading the system's own edition tables.
+     */
+    private static function rulesFor(RubricSystem $system, Corpus $corpus): PrecedenceRules
+    {
+        $table = new PrecedenceTable($corpus, $system->corpusDir());
+        switch ($system->urn()) {
+            case RubricSystem::RUBRICAE_1960:
+                return new Rubrics1962Precedence($table);
+        }
+
+        throw new \RuntimeException(sprintf(
+            'The %s rubric system is declared on the edition axis but its engine is not yet built.',
+            $system->label()
+        ));
+    }
+
+    /** The 1962 resolver (Rubricae 1960): a convenience for {@see forEdition()} with the default system. */
     public static function for1962(?SanctoralData $sanctoralData = null): self
     {
-        return new self(
-            new Rubrics1962Precedence(),
-            'roman:rubricae-1960',
-            $sanctoralData ?? new CorpusSanctoralData()
-        );
+        return self::forEdition(RubricSystem::rubricae1960(), $sanctoralData);
     }
 
     /**

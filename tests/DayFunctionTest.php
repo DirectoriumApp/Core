@@ -7,6 +7,7 @@ namespace Introibo\Core\Tests;
 use DateTimeImmutable;
 use DateTimeZone;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 use function Introibo\Core\contract;
 use function Introibo\Core\day;
@@ -66,5 +67,29 @@ final class DayFunctionTest extends TestCase
         self::assertSame(1, $sspx['celebration'][0]['rankOrdinal']);
         // The overlay also travels on the corpus-version axis.
         self::assertStringContainsString('+introibo:overlay:roman:sspx', $sspx['corpusVersion']);
+    }
+
+    public function testDayDefaultsToTheNineteenSixtyEdition(): void
+    {
+        $date = new DateTimeImmutable('2026-06-29', new DateTimeZone('UTC'));
+        $default = day($date)->celebration()[0]->id()->toString();
+
+        // Naming the 1962 edition explicitly (by alias or URN) resolves identically to the default.
+        self::assertSame($default, day($date, null, '1962')->celebration()[0]->id()->toString());
+        self::assertSame($default, day($date, null, 'roman:rubricae-1960')->celebration()[0]->id()->toString());
+    }
+
+    public function testContractStampsTheEditionProvenance(): void
+    {
+        $date = new DateTimeImmutable('2026-06-29', new DateTimeZone('UTC'));
+
+        self::assertSame('roman:rubricae-1960', contract($date)['edition']);
+        self::assertSame('roman:rubricae-1960', contract($date, false, null, '1962')['edition']);
+    }
+
+    public function testSelectingAnUnbuiltEditionThrows(): void
+    {
+        $this->expectException(RuntimeException::class);
+        day(new DateTimeImmutable('2026-06-29', new DateTimeZone('UTC')), null, '1954');
     }
 }
