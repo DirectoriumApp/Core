@@ -140,22 +140,45 @@ generator is the wrong shape:
   (+ the simple octaves Stephen/John-Ev/Innocents/Lawrence/Nativity-BVM) are **fixed-date, feast-anchored**
   windows that behave exactly like **vigils** — which in this corpus are pure placement DATA, no engine.
 
-**Decision (user-approved 2026-07-04): the safer split.** Do NOT refactor 1962's temporal-octave fillers —
-the golden fixture is protected *by construction*, not merely gated. Sanctoral octaves are **materialised
-DATA**: a compact per-edition `octaves.ndjson` (`{bearingId, class, days:8, octaveDay:{…}, withinOctave?:{…},
-cites}`) that the NODE generator expands into full identity + placement + attributes records (within-octave
-days 2–7 + octave day 8), each linked back with `octaveOf` (mirroring `vigilOf`), plus an `octaves.schema.json`.
-Runtime reads them via `CorpusSanctoralData` with ~zero new code. 1954's extra **temporal** octaves extend the
-existing fillers — the same code path 1962 uses, so no cross-edition drift. There is **no** PHP runtime
-`OctaveGenerator` decorator, and 1962 ships **no** `octaves.ndjson`.
+**Decision (user-approved 2026-07-04): the safer split. Built — #65.** Do NOT refactor 1962's temporal-octave
+fillers — the golden fixture is protected *by construction*, not merely gated. Sanctoral octaves are
+**materialised DATA**: a per-edition `facts/octaves.yaml` (each entry `{bearingFeast, class: common|simple,
+genitive, cites:{class,name}, octaveDay?}`) that the NODE generator's `transformOctaves` expands into full
+identity + attributes + placement records — the six days within (dies secunda..septima) for a common octave,
+and the octave day (dies octava, +7) for both classes — each linked back with `octaveOf` (mirroring `vigilOf`).
+Runtime reads them via `CorpusSanctoralData` with the same trailing-optional `octaveOf` plumbing vigils use; no
+PHP runtime `OctaveGenerator` decorator, and the 1960 edition declares **no** octaves. As-built notes:
 
-- **Rules.** `Rubrics1954Precedence` reads each octave's `class` from `octaves.ndjson` and places its
-  within-octave/octave-day observances on the pre-1955 occurrence tiers, deciding the five per-class
-  behaviours (privileged admits no commemoration; common omitted under a I/II-class feast; simple keeps only
-  the octave day; …) and octave-vs-octave overlap.
-- **Guardrails.** The 1583–2200 golden fixture stays byte-identical (1962 untouched) **and** explicit named
-  octave-day tests pin the outcomes (Jan 1 = Octave Day of the Nativity, I class, white; the Easter/Pentecost
-  octave days).
+- **Derived, not authored twice.** The octave's **date** (day-offset) and **colour** are derived from the
+  bearing feast's own edition block; its **numeric rank** is derived from the office-grade exactly as a feast's
+  is (PR #448) — common: days-within `semiduplex`→III, octave day `duplex-maius`→III; simple: octave day
+  `simplex`→IV, no days-within. So `octaves.yaml` authors only class + the Latin genitive + two cites.
+- **No new corpus schema.** The identity schema already reserved the `within-octave` / `octave-day` kinds; the
+  only schema change is a `octaveOf` field on `placement.sanctorale` (mirroring `vigilOf`). `octaves.yaml`
+  itself is validated in-code, fail-closed (unknown class, absent bearing feast, missing genitive/cites).
+- **Shared identity = the cross-edition UNION.** An octave day is edition-invariant identity but exists only in
+  editions that keep octaves; its identity is merged (deduped) into the shared `identity/sanctorale.ndjson`,
+  which thus becomes the union of observances across editions — each edition selects what it observes via its
+  own placement. The 1960 edition places none, so its resolution (golden fixture) and its edition dir stay
+  byte-identical; the whole octave delta lands in `editions/roman-divino-afflatu/` + the shared identity.
+- **Emit-what-is-confirmed, defer-what-is-not (100%-accuracy discipline).** The octave-facts research pass
+  (adversarially verified) authored: **John Baptist** (Jun 24) + **Peter & Paul** (Jun 29) as full common
+  octaves, **Lawrence** (Aug 10) as a simple octave (its Aug 17 octave day survives as a commemoration —
+  confirmed), and the **Assumption** (Aug 15) common octave's six days within (Aug 16–21). **St Joseph** (Mar
+  19) has **no** octave — the octave belonged to the *moveable* Solemnity of St Joseph, abolished 1955.
+  **Deferred** (to #64 + #67, flagged HOLD by the research — the office is displaced but survival as a
+  commemoration is unconfirmed): the **Assumption octave day** (Aug 22, occupied by the Immaculate Heart of the
+  BVM, duplex II, 1944 — expressed as `octaveDay: false`) and the whole **Nativity-BVM simple octave** (its
+  Sep 15 octave day replaced by the Seven Sorrows, duplex II).
+
+- **Rules (next — #67).** `Rubrics1954Precedence` places the materialised within-octave/octave-day observances
+  on the pre-1955 occurrence tiers, deciding the per-class behaviours (common omitted under a I/II-class feast
+  but commemorated; simple keeps only the octave day; octave-vs-octave overlap) and resolving the deferred
+  octave days above once #64 adds their displacing feasts (Immaculate Heart, Seven Sorrows).
+- **Guardrails.** The 1583–2200 golden fixture stays byte-identical (1962 untouched — proven) **and** named
+  octave tests pin the 1954 data outcomes (`OctaveEditionTest`: Jul 1 = Octave Day of St John Baptist, greater
+  double, white, `octaveOf` the feast; Aug 18 = 4th day within the Octave of the Assumption, semidouble; Aug 17
+  = simple Octave Day of St Lawrence with no days within; the deferred days absent; 1960 places no octave).
 
 ## Seam 5 — pre-1955 vigils (#66)
 

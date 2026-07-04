@@ -137,6 +137,10 @@ final class CorpusOverlayData
 
         $id = CorpusRecord::requireString($entry, 'id');
         $vigilOf = CorpusRecord::optionalString($entry, 'vigilOf');
+        // Forwarded for symmetry with vigilOf so an overlay-added observance can carry its
+        // octave link too; the overlay-operation schema does not yet expose octaveOf, so this
+        // is null in practice today (a particular calendar adds feasts, not octaves).
+        $octaveOf = CorpusRecord::optionalString($entry, 'octaveOf');
 
         return new AddOperation(new SanctoralEntry(
             CorpusRecord::requireInt($entry, 'month'),
@@ -150,7 +154,9 @@ final class CorpusOverlayData
             RankClass::fromOrdinal(CorpusRecord::requireInt($entry, 'rank')),
             CorpusRecord::elementColour($entry),
             $vigilOf !== null ? ObservanceId::parse($vigilOf) : null,
-            CitationSet::fromMarkers(CorpusRecord::cites($entry))
+            CitationSet::fromMarkers(CorpusRecord::cites($entry)),
+            null,
+            $octaveOf !== null ? ObservanceId::parse($octaveOf) : null
         ));
     }
 }

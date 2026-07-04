@@ -1,0 +1,61 @@
+# Sanctoral octaves, per edition (Core v0.3.0, #65 — the SAFER-SPLIT design).
+#
+# The generator (transformOctaves) expands each declaration into the identity / attributes
+# / placement records the corpus already understands: a sanctoral octave is a fixed-date,
+# feast-anchored window that behaves exactly like a VIGIL, so it is pure DATA — no runtime
+# engine. A COMMON octave yields the six days within (dies secunda..septima, semidouble)
+# plus the octave day (dies octava, greater double); a SIMPLE octave yields the octave day
+# only (simple), with no proper days within. Date and colour are DERIVED from the bearing
+# feast; the numeric rank is DERIVED from the office-grade (as feasts are, PR #448).
+#
+# NOT here: the privileged/temporal octaves (Christmas, Easter, Pentecost, and 1954's
+# Epiphany/Corpus Christi/Ascension/Sacred Heart) — the temporal season-fillers mint those,
+# the same code path 1962 uses, so 1962's golden fixture is untouched by construction. The
+# 1960 (roman-rubricae-1960) edition keeps no sanctoral octaves, so it declares none.
+#
+# Provenance: the class/grade/date facts cite ordo-1954 (St. Lawrence Press Ordo, the 1954
+# oracle; uncopyrightable facts). The Latin office titles cite mr-1920 (Missale Romanum,
+# editio typica 1920 — the public-domain text this set transcribes titles from).
+#
+# Octave facts established + adversarially verified by the octave-facts-1954 research pass
+# (see docs/design/rubric-system-model.md, "octave subsystem"). St Joseph (Mar 19) is NOT
+# here: its octave belonged to the *moveable* Solemnity of St Joseph (abolished 1955), never
+# to the fixed March feast.
+#
+# DEFERRED octave days — authored later with #64 (their displacing feasts) + #67 (the
+# precedence + commemoration rules), because the research left their survival-as-a-
+# commemoration UNCONFIRMED (the office is certainly displaced; whether a commemoration
+# remains is the open question). Emitting octave observances confirmed to exist, and holding
+# those that are not, keeps the corpus to the 100%-accuracy bar:
+#   * Assumption octave day (Aug 22): occupied by the Immaculate Heart of the BVM (duplex II
+#     cl., instituted 1944). Its days within (Aug 16-21) ARE observed and are emitted; only
+#     the octave day is held (octaveDay: false).
+#   * Nativity BVM octave (Sep 8): a SIMPLE octave whose only observance — the Sep 15 octave
+#     day — was replaced by the Seven Sorrows of the BVM (duplex II cl.). The whole octave is
+#     held; it is intentionally absent below (a simple octave with no octave day is nothing).
+
+roman-divino-afflatu:
+  # --- Common octaves: days within (semidouble) + octave day (greater double). ---
+  - bearingFeast: roman:sanctorale:nativitas-ioannis-baptistae
+    class: common
+    # "Nativitatis" is required: the octave is of the NATIVITY (Jun 24), distinct from the
+    # Decollation (Aug 29) — and every bearer keeps its full feast descriptor in the genitive.
+    genitive: "Nativitatis S. Ioannis Baptistae"
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  - bearingFeast: roman:sanctorale:petrus-paulus
+    class: common
+    genitive: "Ss. Petri et Pauli Apostolorum"
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  - bearingFeast: roman:sanctorale:assumptio
+    class: common
+    genitive: "Assumptionis B.M.V."
+    octaveDay: false   # Aug 22 displaced by the Immaculate Heart — octave day DEFERRED (see header)
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  # --- Simple octaves: octave day only (simple); no proper days within. ---
+  - bearingFeast: roman:sanctorale:laurentius
+    class: simple
+    genitive: "S. Laurentii Martyris"
+    cites: { class: ordo-1954, name: mr-1920 }

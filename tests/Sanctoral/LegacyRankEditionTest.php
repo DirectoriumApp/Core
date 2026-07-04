@@ -28,8 +28,11 @@ final class LegacyRankEditionTest extends TestCase
     {
         $entries = (new CorpusSanctoralData(null, self::DIVINO_AFFLATU))->entries();
 
-        // The authored 1954 slice — the great octave/vigil-bearing feasts, re-graded.
-        self::assertCount(8, $entries);
+        // The authored 1954 slice: the 8 octave/vigil-bearing feasts, re-graded, plus their
+        // materialised sanctoral octaves (#65 — 21 octave observances: John Baptist and Peter
+        // & Paul each 6 days within + octave day; Assumption 6 days within; Lawrence 1 octave
+        // day). Every one carries a native legacy grade.
+        self::assertCount(8 + 21, $entries);
         foreach ($entries as $entry) {
             self::assertNotNull(
                 $entry->legacyRank(),

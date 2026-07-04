@@ -36,18 +36,22 @@ final class SanctoralObservance implements RealizedObservance
 
     private ?LegacyRank $legacyRank;
 
+    private ?ObservanceId $octaveOfId;
+
     public function __construct(
         Observance $identity,
         RankClass $rank,
         ElementColour $colour,
         ?ObservanceId $vigilOfId = null,
-        ?LegacyRank $legacyRank = null
+        ?LegacyRank $legacyRank = null,
+        ?ObservanceId $octaveOfId = null
     ) {
         $this->identity = $identity;
         $this->rank = $rank;
         $this->colour = $colour;
         $this->vigilOfId = $vigilOfId;
         $this->legacyRank = $legacyRank;
+        $this->octaveOfId = $octaveOfId;
     }
 
     /** The Layer-1 identity shell: id, kind, titulars, and names. */
@@ -71,6 +75,16 @@ final class SanctoralObservance implements RealizedObservance
     public function legacyRank(): ?LegacyRank
     {
         return $this->legacyRank;
+    }
+
+    /**
+     * The id of the feast whose octave this office belongs to — a day within the
+     * octave or the octave day — or null when it is not part of an octave. The
+     * {@see kind()} (within-octave vs octave-day) distinguishes the two.
+     */
+    public function octaveOfId(): ?ObservanceId
+    {
+        return $this->octaveOfId;
     }
 
     public function id(): ObservanceId
@@ -106,7 +120,17 @@ final class SanctoralObservance implements RealizedObservance
             && $this->colour->equals($other->colour)
             && $this->identity->latinName() === $other->identity->latinName()
             && $this->vigilOfMatches($other)
-            && $this->legacyRankMatches($other);
+            && $this->legacyRankMatches($other)
+            && $this->octaveOfMatches($other);
+    }
+
+    private function octaveOfMatches(self $other): bool
+    {
+        if ($this->octaveOfId === null || $other->octaveOfId === null) {
+            return $this->octaveOfId === $other->octaveOfId;
+        }
+
+        return $this->octaveOfId->equals($other->octaveOfId);
     }
 
     private function legacyRankMatches(self $other): bool

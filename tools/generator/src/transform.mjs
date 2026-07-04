@@ -189,6 +189,175 @@ export function transformSanctoraleEdition(entries, editionDir) {
   return { attributes, placement };
 }
 
+/** Latin ordinal (feminine, agreeing with dies) for the 2nd..7th day within an octave. */
+const OCTAVE_WITHIN_ORDINAL = {
+  2: 'secunda',
+  3: 'tertia',
+  4: 'quarta',
+  5: 'quinta',
+  6: 'sexta',
+  7: 'septima',
+};
+
+/**
+ * The legacy office-grade the OCTAVE DAY (dies octava, the 8th day) carries, by octave
+ * class under the pre-1955 rubrics: a common octave day is a greater double, a simple
+ * octave day is a simple. Privileged (temporal) octaves are not materialised here.
+ */
+const OCTAVE_DAY_GRADE = { common: 'duplex-maius', simple: 'simplex' };
+
+/**
+ * The legacy office-grade a day WITHIN the octave (dies infra octavam) carries. Only a
+ * COMMON octave has proper days within (each a semidouble); a SIMPLE octave keeps only
+ * its octave day, with no office on the intervening days.
+ */
+const WITHIN_OCTAVE_GRADE = 'semiduplex';
+
+/** Days in each civil month; February as 28 (see {@see addDays}). */
+const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+/**
+ * The civil `{ month, day }` that falls `offset` days after (month, day), rolling over
+ * month and (for a December octave) year boundaries. February is treated as 28 days:
+ * no octave-bearing feast of the Roman calendar sits in late February, so an octave
+ * window never spans the 28→29 bissextile doubling — the octave day is a fixed civil
+ * date, year-independent. Pure arithmetic, so the build stays deterministic (no clock).
+ */
+function addDays(month, day, offset) {
+  let m = month;
+  let d = day + offset;
+  while (d > DAYS_IN_MONTH[m - 1]) {
+    d -= DAYS_IN_MONTH[m - 1];
+    m = m === 12 ? 1 : m + 1;
+  }
+  return { month: m, day: d };
+}
+
+/**
+ * Fan the SANCTORAL octaves declared for one edition into the identity / attributes /
+ * placement records the corpus already understands — the safer-split design: a sanctoral
+ * octave is a fixed-date, feast-anchored window that behaves exactly like a VIGIL, so it
+ * is pure DATA, not a runtime engine (docs/design/rubric-system-model.md). Only COMMON
+ * and SIMPLE octaves are materialised here; the privileged (temporal) octaves — Christmas,
+ * Easter, Pentecost, and the 1954 additions — are minted by the temporal season-fillers,
+ * the SAME code path 1962 uses, so 1962's golden fixture is untouched by construction.
+ *
+ * Each `decl` is `{ bearingFeast, class: common|simple, genitive, cites: { class, name },
+ * octaveDay? }`. A COMMON octave yields six days within (dies secunda..septima, each a
+ * semidouble) plus the octave day (dies octava, a greater double); a SIMPLE octave yields
+ * the octave day only (a simple). Set `octaveDay: false` to emit the days within but SKIP
+ * the octave day — for an octave whose eighth day is perpetually displaced by a higher
+ * fixed feast in this edition and whose survival as a commemoration is not yet confirmed
+ * (e.g. in 1954 the Assumption octave day is occupied by the Immaculate Heart; deferred to
+ * the precedence engine + dataset burndown). The octave's DATE and COLOUR are DERIVED from the bearing feast's own
+ * edition block (offset by day count; the feast's colour by rubric) so they can never
+ * disagree, and its numeric `rank` is DERIVED from the office-grade exactly as a feast's
+ * is ({@see DEFAULT_RANK_BY_LEGACY}). The octave day's Latin title comes from the Missal
+ * ("In Octava <genitive>"); each within-day is "Dies <ordinal> infra Octavam <genitive>".
+ *
+ * Returns `{ identity, attributes, placement }`. Identity is edition-INVARIANT (the Octave
+ * Day of the Assumption is the same observance in whichever edition keeps octaves), so the
+ * caller merges it, deduped, into the shared identity; attributes and placement are the
+ * edition's own diff. `octaveOf` names the bearing feast, mirroring `vigilOf`.
+ */
+export function transformOctaves(entries, editionDir, decls) {
+  const byId = new Map(entries.map((entry) => [entry.id, entry]));
+  const identity = [];
+  const attributes = [];
+  const placement = [];
+
+  for (const decl of decls) {
+    const bearing = byId.get(decl.bearingFeast);
+    if (!bearing) {
+      throw new Error(`octave: bearing feast "${decl.bearingFeast}" is not a sanctoral entry`);
+    }
+    if (decl.class !== 'common' && decl.class !== 'simple') {
+      throw new Error(
+        `octave of "${decl.bearingFeast}": unknown class "${decl.class}" (expected "common" or "simple"; ` +
+          `privileged/temporal octaves are minted by the temporal fillers, not materialised here)`,
+      );
+    }
+    if (decl.class === 'simple' && decl.octaveDay === false) {
+      throw new Error(
+        `octave of "${decl.bearingFeast}": a simple octave with octaveDay:false materialises nothing ` +
+          `(no days within, no octave day) — omit the declaration instead`,
+      );
+    }
+    const feast = bearing[editionDir];
+    if (!feast) {
+      throw new Error(
+        `octave of "${decl.bearingFeast}": the feast has no "${editionDir}" block, so the octave ` +
+          `cannot inherit its date and colour`,
+      );
+    }
+    if (feast.month === 2 && feast.day + 7 > 28) {
+      throw new Error(
+        `octave of "${decl.bearingFeast}": a late-February octave window would cross the 28→29 bissextile ` +
+          `doubling, which the fixed-civil-date octave model cannot represent (see addDays)`,
+      );
+    }
+    const declCites = decl.cites || {};
+    if (declCites.class === undefined || declCites.name === undefined) {
+      throw new Error(`octave of "${decl.bearingFeast}": cites must carry both "class" and "name"`);
+    }
+    if (typeof decl.genitive !== 'string' || decl.genitive.length === 0) {
+      throw new Error(`octave of "${decl.bearingFeast}": a Latin "genitive" title phrase is required`);
+    }
+    const colourCite = (feast.cites || {}).colour;
+    if (colourCite === undefined) {
+      throw new Error(
+        `octave of "${decl.bearingFeast}": the feast's colour is uncited, so the octave's colour cannot be derived`,
+      );
+    }
+
+    const emit = (idSuffix, kind, dayOffset, name, grade) => {
+      const id = `${decl.bearingFeast}:${idSuffix}`;
+      const { month, day } = addDays(feast.month, feast.day, dayOffset);
+      identity.push({
+        id,
+        kind,
+        titulars: bearing.titulars,
+        names: { la: name },
+        cites: { 'names.la': declCites.name },
+      });
+      attributes.push({
+        id,
+        rank: DEFAULT_RANK_BY_LEGACY[grade],
+        legacyRank: grade,
+        colour: colourOf(feast.colour),
+        cites: { colour: colourCite, legacyRank: declCites.class, rank: declCites.class },
+      });
+      placement.push({
+        id,
+        month,
+        day,
+        octaveOf: decl.bearingFeast,
+        cites: { month: declCites.class, day: declCites.class },
+      });
+    };
+
+    // A common octave keeps the six days within (dies secunda..septima); a simple octave
+    // keeps only the octave day. Then, for both, the octave day (dies octava, +7 days) —
+    // unless it is explicitly deferred (octaveDay: false) as perpetually displaced.
+    if (decl.class === 'common') {
+      for (let n = 2; n <= 7; n += 1) {
+        emit(
+          `infra-octavam:${n}`,
+          'within-octave',
+          n - 1,
+          `Dies ${OCTAVE_WITHIN_ORDINAL[n]} infra Octavam ${decl.genitive}`,
+          WITHIN_OCTAVE_GRADE,
+        );
+      }
+    }
+    if (decl.octaveDay !== false) {
+      emit('in-octava', 'octave-day', 7, `In Octava ${decl.genitive}`, OCTAVE_DAY_GRADE[decl.class]);
+    }
+  }
+
+  return { identity, attributes, placement };
+}
+
 /**
  * Fan a particular-calendar overlay's YAML into its NDJSON operation rows, the
  * metadata singleton, and the born-cited provenance shadow records (Core #76).
