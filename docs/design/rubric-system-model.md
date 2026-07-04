@@ -112,11 +112,13 @@ are edition-invariant and reused unchanged (the physical 3-layer model — `corp
   against the **shared** `identity/sanctorale.ndjson`. So an edition can re-grade / re-date / re-colour a feast
   but **cannot re-title it** at this layer — which keeps the clean-room title-provenance rule intact (a 1954
   block adds no name, so it cites a reference source, never transcribes a title from one).
-- **`rank` ⟂ `legacyRank` consistency is author-upheld today.** Both are hand-authored and independently cited,
-  so a typo could pair `duplex-ii-classis` with `rank: 1` and pass every gate. **Planned hardening (before the
-  #67 engine relies on the pairing):** a cited `LegacyRank → default RankClass` table in the generator that
-  **derives** `rank`, with an explicit `rankOverride` (self-cited) only where the calendar genuinely diverges —
-  collapsing two authored facts to one authored + one derived, and making every re-grade a visible, cited exception.
+- **`rank` is DERIVED from `legacyRank` (built).** A legacy edition block authors only the grade; the generator
+  (`DEFAULT_RANK_BY_LEGACY` in `transform.mjs`) derives the numeric `RankClass`, cited to the grade's own source,
+  with an explicit self-cited `rankOverride` only where the 1960 revision re-graded a feast off the default. So
+  `rank` and `legacyRank` can no longer silently disagree — a typo like `duplex-ii-classis` + a wrong numeric is
+  impossible because the numeric is not authored. A sanctoral block using an unmapped grade (`dominica-*`,
+  `feria-maior`) or a `rankOverride` missing its cite fails the build closed. Generator unit tests
+  (`tools/generator/test/`, the new `npm test` gate in CI) cover the derivation + every fail-closed path.
 - **Edition-diff report** (the epic AC) is not emitted yet — the "diff" is an authoring convention. When it lands
   it should flag diff-blocks byte-identical to the base realization (pure duplication, the thing most likely to rot).
 - **MANIFEST caveat.** The per-edition `.ndjson` are byte-isolated by construction, but `MANIFEST.json`'s global

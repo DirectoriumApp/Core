@@ -85,6 +85,51 @@ export function transformSanctorale(entries, edition) {
 }
 
 /**
+ * The default normalization of a native pre-1960 grade token onto its {@see RankClass}
+ * ordinal (1 = class I … 4 = class IV / commemoration). Lossy-upward — several grades
+ * collapse to one class — so the generator DERIVES a legacy edition's numeric `rank` from
+ * its `legacyRank` by this table, and a block supplies an explicit, self-cited
+ * `rankOverride` only where the 1960 revision genuinely re-graded the feast off the
+ * default. That makes `rank` a single derived fact instead of a second hand-typed one that
+ * could silently disagree with the grade (a typo like `duplex-ii-classis` + `rank: 1` used
+ * to pass every gate). Only the sanctoral grades are mapped; a Sunday/feria token
+ * (`dominica-*`, `feria-maior`) in a sanctoral block is a fail-closed error.
+ */
+const DEFAULT_RANK_BY_LEGACY = {
+  'duplex-i-classis': 1,
+  'duplex-ii-classis': 2,
+  'duplex-maius': 3,
+  duplex: 3,
+  semiduplex: 3,
+  simplex: 4,
+  commemoratio: 4,
+};
+
+/**
+ * Derive `{ rank, rankCite }` for a legacy edition block: the default-table class cited to
+ * the same source as the grade, or an explicit `rankOverride` carrying its own citation.
+ */
+function deriveLegacyRank(entryId, editionDir, ed, edCites) {
+  if (!ed.legacyRank) {
+    throw new Error(`entry ${entryId}: the "${editionDir}" block must declare a legacyRank grade`);
+  }
+  if (ed.rankOverride !== undefined) {
+    if (edCites.rankOverride === undefined) {
+      throw new Error(`entry ${entryId}: rankOverride must carry cites.rankOverride`);
+    }
+    return { rank: ed.rankOverride, rankCite: edCites.rankOverride };
+  }
+  const rank = DEFAULT_RANK_BY_LEGACY[ed.legacyRank];
+  if (rank === undefined) {
+    throw new Error(
+      `entry ${entryId}: no default RankClass for legacy grade "${ed.legacyRank}" in a sanctoral ` +
+        `block (map it in DEFAULT_RANK_BY_LEGACY, or author a self-cited rankOverride)`,
+    );
+  }
+  return { rank, rankCite: edCites.legacyRank };
+}
+
+/**
  * Fan a NON-BASE edition (Core v0.3.0: 1954 / 1955) out into its `{ attributes,
  * placement }` arrays — its diff from the base edition. Identity is edition-invariant
  * and already emitted by the base pass, so this emits only the per-edition Layer-2 and
@@ -92,10 +137,10 @@ export function transformSanctorale(entries, edition) {
  *
  * An entry belongs to this edition iff it carries a block under `editionDir`; entries
  * without one are simply absent from the edition (a feast the reform instituted later, or
- * one this slice has not yet authored). The block states the edition's realization
- * explicitly and cited: its `rank` is the normalized {@see RankClass} ordinal and
- * `legacyRank` its native pre-1960 grade token (duplex/semiduplex/simplex…), both carried
- * so the 1954/1955 precedence engines can order the fine grades the four classes collapse.
+ * one this slice has not yet authored). The block states the edition's native grade
+ * (`legacyRank`, cited); the numeric {@see RankClass} `rank` is DERIVED from it (see
+ * {@see deriveLegacyRank}) so the two can never silently disagree, and both are carried so
+ * the 1954/1955 precedence engines can order the fine grades the four classes collapse.
  */
 export function transformSanctoraleEdition(entries, editionDir) {
   const attributes = [];
@@ -108,19 +153,22 @@ export function transformSanctoraleEdition(entries, editionDir) {
     }
 
     const edCites = ed.cites || {};
+    const { rank, rankCite } = deriveLegacyRank(entry.id, editionDir, ed, edCites);
+
+    const cites = { colour: edCites.colour, legacyRank: edCites.legacyRank, rank: rankCite };
+    for (const key of Object.keys(edCites)) {
+      if (key.startsWith('nameOverride.')) {
+        cites[key] = edCites[key];
+      }
+    }
+
     const attributeRecord = {
       id: entry.id,
-      rank: ed.rank,
+      rank,
+      legacyRank: ed.legacyRank,
       colour: colourOf(ed.colour),
-      cites: citesFor(
-        edCites,
-        (key) =>
-          key === 'rank' || key === 'colour' || key === 'legacyRank' || key.startsWith('nameOverride.'),
-      ),
+      cites,
     };
-    if (ed.legacyRank) {
-      attributeRecord.legacyRank = ed.legacyRank;
-    }
     if (ed.nameOverride) {
       attributeRecord.nameOverride = ed.nameOverride;
     }

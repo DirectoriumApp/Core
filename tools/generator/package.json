@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "node src/build.mjs",
-    "verify": "node src/verify.mjs"
+    "verify": "node src/verify.mjs",
+    "test": "node --test"
   },
   "devDependencies": {
     "ajv": "8.17.1",

@@ -81,6 +81,9 @@ jobs:
       - name: Install generator dependencies
         run: npm ci
         working-directory: tools/generator
+      - name: Generator unit tests
+        run: npm test
+        working-directory: tools/generator
       - name: Verify corpus is reproducible and the committed copy is fresh
         run: npm run verify
         working-directory: tools/generator
