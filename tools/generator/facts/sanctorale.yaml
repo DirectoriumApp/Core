@@ -12,9 +12,17 @@
 # Names are Latin-first (`la`), the invariant fallback the engine requires;
 # vernacular locales are added progressively in later work, each still cited.
 # Ranks: 1 = class I (highest) … 4 = the commemoration tier. Vigils are violet
-# under the 1960 rubrics and carry `vigilOf` linking to their feast. Feasts
-# suppressed by the 1955 and 1960 reforms are absent. Confidence: authored and
-# cross-verified against the 1962 calendar; multi-oracle re-proving is issue #45.
+# under the 1960 rubrics and carry `vigilOf` linking to their feast. Confidence:
+# authored and cross-verified against the 1962 calendar; multi-oracle re-proving is issue #45.
+#
+# Editions are authored as DIFFS: an entry realises a non-base edition by adding a block
+# under that edition's key (e.g. `roman-divino-afflatu` for 1954, carrying its `legacyRank`
+# grade). An entry with a base (`roman-rubricae-1960`) block is in 1962; an observance the
+# 1955/1960 reforms SUPPRESSED (a pre-1955 vigil, an earlier feast) carries NO base block and
+# marks itself `notInBaseEdition: true` — its identity still joins the shared, edition-invariant
+# `identity/sanctorale.ndjson` (the cross-edition UNION), but the base edition places nothing for
+# it. A missing base block WITHOUT that marker is a fail-closed authoring error, and the build's
+# orphan gate proves every identity is placed by at least one edition (see build.mjs).
 
 # The Commemoration of the Baptism of the Lord (Jan 13), a II-class feast of the Lord
 # instituted by the 1960 reform in place of the abolished Octave Day of the Epiphany.
@@ -639,6 +647,26 @@
     month: 2
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+# Vigil of St Matthias — 1954-only (the 1955 simplification suppressed it), so no
+# roman-rubricae-1960 block: notInBaseEdition marks it intentionally absent from 1962.
+# Anchor is Feb 23 (1954, a common year); the leap-year shift to Feb 24 — St Matthias is
+# a.d. VI Kal. Mart., doubled in bissextile years — is a resolution rule deferred to #67.
+- id: roman:sanctorale:matthias:vigilia
+  kind: vigil
+  titulars: [matthias]
+  names:
+    la: "In Vigilia S. Matthiae Apostoli"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 2
+    day: 23
+    vigilOf: roman:sanctorale:matthias
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:gabriel-a-virgine-perdolente
   kind: feast
@@ -1870,6 +1898,13 @@
     day: 23
     vigilOf: roman:sanctorale:nativitas-ioannis-baptistae
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 6
+    day: 23
+    vigilOf: roman:sanctorale:nativitas-ioannis-baptistae
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:nativitas-ioannis-baptistae
   kind: feast
@@ -1933,6 +1968,13 @@
     day: 28
     vigilOf: roman:sanctorale:petrus-paulus
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 6
+    day: 28
+    vigilOf: roman:sanctorale:petrus-paulus
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:petrus-paulus
   kind: feast
@@ -2304,6 +2346,23 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+# Vigil of St James the Greater — 1954-only (suppressed 1955); no 1962 block.
+- id: roman:sanctorale:iacobus:vigilia
+  kind: vigil
+  titulars: [iacobus-maior]
+  names:
+    la: "In Vigilia S. Iacobi Apostoli"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 7
+    day: 24
+    vigilOf: roman:sanctorale:iacobus
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
 - id: roman:sanctorale:anna
   kind: feast
   titulars: [anna]
@@ -2556,6 +2615,13 @@
     day: 9
     vigilOf: roman:sanctorale:laurentius
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 8
+    day: 9
+    vigilOf: roman:sanctorale:laurentius
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:romanus
   kind: commemoration-only
@@ -2647,6 +2713,13 @@
     day: 14
     vigilOf: roman:sanctorale:assumptio
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 8
+    day: 14
+    vigilOf: roman:sanctorale:assumptio
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:eusebius-confessor
   kind: commemoration-only
@@ -2821,6 +2894,23 @@
     month: 8
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+# Vigil of St Bartholomew — 1954-only (suppressed 1955); no 1962 block.
+- id: roman:sanctorale:bartholomaeus:vigilia
+  kind: vigil
+  titulars: [bartholomaeus]
+  names:
+    la: "In Vigilia S. Bartholomaei Apostoli"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 8
+    day: 23
+    vigilOf: roman:sanctorale:bartholomaeus
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:ludovicus
   kind: feast
@@ -3205,6 +3295,24 @@
     month: 9
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+# Vigil of St Matthew — 1954-only (suppressed 1955); no 1962 block. Title keeps
+# "Apostoli et Evangelistae", mirroring the feast heading.
+- id: roman:sanctorale:matthaeus:vigilia
+  kind: vigil
+  titulars: [matthaeus]
+  names:
+    la: "In Vigilia S. Matthaei Apostoli et Evangelistae"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 9
+    day: 20
+    vigilOf: roman:sanctorale:matthaeus
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:thomas-a-villanova
   kind: feast
@@ -3698,6 +3806,24 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+# Vigil of Ss. Simon & Jude — 1954-only (suppressed 1955); no 1962 block. Plural
+# "Apostolorum" (Ss.), one vigil for two apostles.
+- id: roman:sanctorale:simon-et-iudas:vigilia
+  kind: vigil
+  titulars: [simon, iudas-thaddaeus]
+  names:
+    la: "In Vigilia Ss. Simonis et Iudae Apostolorum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 10
+    day: 27
+    vigilOf: roman:sanctorale:simon-et-iudas
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
 - id: roman:sanctorale:omnes-sancti
   kind: feast
   titulars: [omnes-sancti]
@@ -3711,6 +3837,26 @@
     month: 11
     day: 1
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+# Vigil of All Saints — 1954-only (suppressed 1955); no 1962 block. vigilOf points at
+# the canonical All Saints id (roman:sanctorale:omnes-sancti — the Nov 1 winner in the
+# golden trace); the roman:sanctorale:omnium-sanctorum duplicate is a pre-existing dataset
+# issue for the #64 burndown, not this issue.
+- id: roman:sanctorale:omnes-sancti:vigilia
+  kind: vigil
+  titulars: [omnes-sancti]
+  names:
+    la: "In Vigilia Omnium Sanctorum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 10
+    day: 31
+    vigilOf: roman:sanctorale:omnes-sancti
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:omnium-sanctorum
   kind: feast
@@ -4034,6 +4180,23 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+# Vigil of St Andrew — 1954-only (suppressed 1955); no 1962 block.
+- id: roman:sanctorale:andreas:vigilia
+  kind: vigil
+  titulars: [andreas]
+  names:
+    la: "In Vigilia S. Andreae Apostoli"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 11
+    day: 29
+    vigilOf: roman:sanctorale:andreas
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
 - id: roman:sanctorale:eligius
   kind: commemoration-only
   titulars: [eligius]
@@ -4160,6 +4323,25 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+# Vigil of the Immaculate Conception — 1954-only (suppressed 1955); no 1962 block. Title
+# is the Missal's vigil heading "In Vigilia Immaculatae Conceptionis B.M.V." (adjective-
+# first), distinct from the feast's ablative form "In Conceptione Immaculata B.M.V.".
+- id: roman:sanctorale:immaculata-conceptio:vigilia
+  kind: vigil
+  titulars: [maria]
+  names:
+    la: "In Vigilia Immaculatae Conceptionis B.M.V."
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 12
+    day: 7
+    vigilOf: roman:sanctorale:immaculata-conceptio
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
 - id: roman:sanctorale:melchiades
   kind: commemoration-only
   titulars: [melchiades]
@@ -4229,6 +4411,23 @@
     month: 12
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+# Vigil of St Thomas — 1954-only (suppressed 1955); no 1962 block.
+- id: roman:sanctorale:thomas-apostolus:vigilia
+  kind: vigil
+  titulars: [thomas-apostolus]
+  names:
+    la: "In Vigilia S. Thomae Apostoli"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: vigilia
+    colour: violet
+    month: 12
+    day: 20
+    vigilOf: roman:sanctorale:thomas-apostolus
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:stephanus
   kind: feast

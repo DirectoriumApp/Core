@@ -180,13 +180,53 @@ PHP runtime `OctaveGenerator` decorator, and the 1960 edition declares **no** oc
   double, white, `octaveOf` the feast; Aug 18 = 4th day within the Octave of the Assumption, semidouble; Aug 17
   = simple Octave Day of St Lawrence with no days within; the deferred days absent; 1960 places no octave).
 
-## Seam 5 — pre-1955 vigils (#66)
+## Seam 5 — pre-1955 vigils (Built — #66)
 
-Vigil infrastructure is complete (identity → `placement.vigilOf` → `SanctoralCalendar` day-before placement
-→ contract `vigilOf`). Reintroducing pre-1955 vigils is therefore **data** in the 1954 edition dir (identity
-records for any new vigils + placement records with `vigilOf` + attribute rank/colour), plus a
-`Rubrics1954Precedence` vigil tier and the "commemorated when impeded, suppressed on a Sunday/higher feast"
-rule. 1955 (#70) omits the vigils *Cum nostra* suppressed simply by not emitting them in the 1955 dir.
+The vigil infrastructure was already complete (identity → `placement.vigilOf` → `SanctoralCalendar`
+day-before placement → contract `vigilOf`), so reintroducing the pre-1955 vigils is pure **DATA** in the 1954
+edition — no new engine, exactly as the octaves. A vigil is one record (the day before its feast, at the vigil
+grade); it needs none of the octave expander's machinery, so all 13 are authored as ordinary `kind: vigil`
+entries in `sanctorale.yaml`, and edition membership is simply which blocks each carries. As-built notes:
+
+- **Edition-only entries (the one generator change #64 also needs).** Nine of the 13 vigils the 1955 reform
+  suppressed do not exist in 1962, so they carry **no `roman-rubricae-1960` block**. The base pass now emits
+  **identity for every entry** (it is edition-invariant, joining the cross-edition union), while base
+  attributes/placement stay gated on the base block; an entry legitimately absent from 1962 marks itself
+  `notInBaseEdition: true`. A *missing* base block without that marker still fails closed (a forgotten/mistyped
+  key), and a new **orphan-identity build gate** proves every identity is placed by ≥1 edition. This is the
+  same capability the #64 burndown needs for every feast 1962 dropped.
+- **The `vigilia` grade.** A vigil's office is its own floor-tier grade (`kind: vigil` already carries the
+  category), added as a distinct `legacyRank: vigilia` → **RankClass IV** in `DEFAULT_RANK_BY_LEGACY` + the
+  schema enum + the PHP `LegacyRank` allowlist — not overloaded onto `simplex`, so #67 can order the fine
+  `simplex`↔`vigilia` seam. Colour **violet** for all 13, derived from the authored block.
+- **Roster (research-verified, adversarial pass — count corrected 12→13).** The pre-1955 sanctoral vigils are
+  the **eight Apostles' vigils** (Andrew Nov 29, Thomas Dec 20, **Matthias Feb 23**, James Jul 24, Bartholomew
+  Aug 23, Matthew Sep 20, Simon & Jude Oct 27, and Peter & Paul Jun 28), plus **John the Baptist** (Jun 23),
+  **Lawrence** (Aug 9), the **Assumption** (Aug 14), **All Saints** (Oct 31), and the **Immaculate Conception**
+  (Dec 7). The four 1962 kept (John Baptist, Peter & Paul, Lawrence, Assumption) take a 1954 diff block — the
+  *same* shared identity, but graded `vigilia`/IV in 1954 vs II/III class in 1960 (a real per-edition
+  difference). The nine 1955 suppressed are 1954-only. (No vigil for Philip & James or John the Evangelist.)
+- **Emit / defer (100%-accuracy discipline).** All 13 placement/identity/attribute rows are CONFIRMED and
+  authored. **Deferred to #67** (resolution, not data): the **Sunday → Saturday anticipation** of a vigil
+  (pre-1955 anticipated, which 1955 changed to omitted) and the **Matthias bissextile** shift — the vigil is
+  anchored at its nominal civil date (Feb 23), and the leap-year move to Feb 24 (the doubled *bis sextum*) is a
+  Kalends-relative occurrence rule, never a second stored date. The Immaculate Conception vigil title
+  (`In Vigilia Immaculatae Conceptionis B.M.V.`) was source-verified against the Missal heading.
+- **Known-limitation flagged for #64.** `sanctorale.yaml` carries a pre-existing **duplicate All Saints feast**
+  (`omnes-sancti` and `omnium-sanctorum`, both Nov 1); the vigil's `vigilOf` points at `omnes-sancti` (the Nov 1
+  winner in the golden trace). Resolving the duplicate is the #64 burndown's job (it would move the frozen
+  golden traces), not this issue's.
+- **Guardrails.** The 1583–2200 golden fixture stays byte-identical (the 1960 edition dir places none of the
+  1954-only vigils — proven) **and** `VigilEditionTest` pins the 1954 outcomes (Nov 29 = Vigil of St Andrew,
+  `vigilia`/IV, violet, `vigilOf` the feast; Dec 7 = Vigil of the Immaculate Conception; the John Baptist vigil
+  wears `vigilia`/IV in 1954 but II class in 1960; the suppressed St Andrew vigil is absent from 1960).
+
+## Seam 5a — pre-1955 vigil precedence (next — #67)
+
+The materialised vigils await `Rubrics1954Precedence` for their occurrence behaviour: a `Rubrics1954Precedence`
+vigil tier, the "commemorated when impeded, omitted under a Sunday/higher feast" rule, the Sunday-anticipation
+and Matthias-bissextile resolution deferred above. 1955 (#70) omits the vigils *Cum nostra* suppressed simply
+by not emitting them in the 1955 dir.
 
 ## Seam 6 — pre-1955 & 1955 precedence rules (#67, #70)
 

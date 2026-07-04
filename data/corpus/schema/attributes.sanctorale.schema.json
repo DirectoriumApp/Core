@@ -44,7 +44,7 @@
       "description": "The native pre-1960 grade token, retained verbatim for fidelity (the numeric rank is its normalized RankClass). Absent for the 1960 edition; present for 1954/1955. See LegacyRank.",
       "enum": [
         "duplex-i-classis", "duplex-ii-classis", "duplex-maius", "duplex",
-        "semiduplex", "simplex", "feria-maior", "dominica-maior",
+        "semiduplex", "simplex", "vigilia", "feria-maior", "dominica-maior",
         "dominica-minor", "commemoratio"
       ]
     },

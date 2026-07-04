@@ -136,6 +136,25 @@ export function build(outDir = DEFAULT_OUT) {
   }
   identity.sort(byId);
 
+  // Orphan-identity gate: the shared identity is the cross-edition UNION, but every identity
+  // must be PLACED by at least one edition. An identity no edition places is a dangling record
+  // — a notInBaseEdition entry whose extra-edition block was mistyped, or a stray identity —
+  // which would silently pass per-edition referential integrity. Fail closed.
+  const placedIds = new Set(placement.map((record) => record.id));
+  for (const ed of extraEditions) {
+    for (const record of ed.placement) {
+      placedIds.add(record.id);
+    }
+  }
+  const orphans = identity.map((record) => record.id).filter((id) => !placedIds.has(id));
+  if (orphans.length > 0) {
+    throw new Error(
+      'Sanctoral identity records placed by no edition (orphans): ' +
+        orphans.join(', ') +
+        '. Every identity must be placed by at least one edition — check for a mistyped edition block key.',
+    );
+  }
+
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [
     ...validateAll(validators['identity.sanctorale'], identity, 'identity.sanctorale'),

@@ -1,3 +1,4 @@
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:andreas:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:annuntiatio","legacyRank":"duplex-i-classis","rank":1}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:assumptio","legacyRank":"duplex-i-classis","rank":1}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:assumptio:infra-octavam:2","legacyRank":"semiduplex","rank":3}
@@ -6,9 +7,17 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:assumptio:infra-octavam:5","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:assumptio:infra-octavam:6","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:assumptio:infra-octavam:7","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:assumptio:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:bartholomaeus:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:iacobus:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:immaculata-conceptio:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:ioannes-baptista:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioseph","legacyRank":"duplex-i-classis","rank":1}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:laurentius","legacyRank":"duplex-ii-classis","rank":2}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:laurentius:in-octava","legacyRank":"simplex","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:laurentius:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:matthaeus:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:matthias:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nativitas-ioannis-baptistae","legacyRank":"duplex-i-classis","rank":1}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nativitas-ioannis-baptistae:in-octava","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nativitas-ioannis-baptistae:infra-octavam:2","legacyRank":"semiduplex","rank":3}
@@ -18,6 +27,7 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nativitas-ioannis-baptistae:infra-octavam:6","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nativitas-ioannis-baptistae:infra-octavam:7","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nativitas-mariae","legacyRank":"duplex-ii-classis","rank":2}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:omnes-sancti:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:petrus-paulus","legacyRank":"duplex-i-classis","rank":1}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:petrus-paulus:in-octava","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:petrus-paulus:infra-octavam:2","legacyRank":"semiduplex","rank":3}
@@ -26,4 +36,7 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:petrus-paulus:infra-octavam:5","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:petrus-paulus:infra-octavam:6","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:petrus-paulus:infra-octavam:7","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:petrus-paulus:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:purificatio","legacyRank":"duplex-ii-classis","rank":2}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:simon-et-iudas:vigilia","legacyRank":"vigilia","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:thomas-apostolus:vigilia","legacyRank":"vigilia","rank":4}
