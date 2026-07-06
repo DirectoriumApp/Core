@@ -97,9 +97,13 @@ are edition-invariant and reused unchanged (the physical 3-layer model — `corp
   `SanctoralObservance`, ready for `Rubrics1954Precedence` (#67) to order the fine grades the four classes
   collapse. The generator materialises each non-base edition as a **diff** into its own dir (`meta.editions`
   + `transformSanctoraleEdition`), leaving the base 1962 pass — and its corpus bytes — untouched.
-- **Commemoration limits.** Already per-edition data (`{rule:"commemoration-limit", dayClass, limit}`);
-  1954 admits more than 1962. #332 is therefore mostly *data* + making `commemorationLimit()` read it per
-  edition (it already does for 1962).
+- **Commemoration limits.** Per-edition data (`{rule:"commemoration-limit", dayClass, limit}`): 1962 caps at
+  1/1/2/2, 1954 admits three per class, 1955 zeroes a first-class day. **Done (#332):** the output contract's
+  `commemorationLimit` reads the active edition's cap through `PrecedenceRules::commemorationClassLimit()` (the
+  unguarded class figure, distinct from the day-specific `commemorationLimit()` the selector and trace use); the
+  resolver stamps it onto `LiturgicalDay`. The 1960 data equals the retired `Calendar\CommemorationLimit` static,
+  so the 1962 golden is byte-identical while 1954/1955 report their own caps. Locked by `MultiSystemContractTest`
+  (the 1/3/0 class-I caps side by side) and the per-edition `PrecedenceTableTest`.
 - **Temporal attributes per edition.** `attributes.temporale.ndjson` assigns rank/colour by **archetype**
   per edition, so the same procedural fillers yield edition-correct Sunday/feria ranks without branching —
   *provided the fillers read the archetype attributes rather than baking ranks.* If any ranks are currently
@@ -360,18 +364,26 @@ deferred temporal / Office-of-the-Dead categories are shared with the 1954 engin
 the public `CalendarCatalog` boundary refuses `day('1955')` until the deferred casuistry lands. The 1962
 golden fixture is byte-identical throughout.
 
-## Seam 7 — stamp the active rubric system into the contract (#74)
+## Seam 7 — stamp the active rubric system into the contract (#74) — DONE
 
-`Provenance.edition` already carries the edition URN and the contract already serialises it; the only work is
-ensuring it is set from the selected `RubricSystem`, and advertising the available systems (+ validity
-windows) on the Api's `/meta`. No contract-shape change — the frozen 1.0.0 contract already reserved this.
+`Provenance.edition` already carries the edition URN and the contract serialises it as the top-level `edition`
+field, set from the selected `RubricSystem` via `DayResolver::forEdition()` and defaulting to
+`roman:rubricae-1960`. **No contract-shape change** — the frozen 1.0.0 contract already carried this, so no
+redundant field was added; `edition` *is* the active-system stamp (`output-contract.md`). Locked by
+`MultiSystemContractTest` (the stamp asserted across 1962/1954/1955, the safe default, and the public
+boundary's refusal of an unbuilt edition). The human labels + validity windows are advertised on the Api's
+`/meta`, keyed by this URN.
 
-## Seam 8 — regression safety & the multi-system matrix (#72, #73)
+## Seam 8 — regression safety & the multi-system matrix (#72, #73, #332) — DONE
 
-- The 1962 **golden fixture (1583–2200)** must stay byte-identical after every seam change — the proof the
-  abstraction did not regress 1962.
-- #73 adds a **rubric-system matrix** to the CI validation job: the harness runs each built system against
-  its **≥2 pinned oracles** (the #59 AC), and the golden fixture runs per system once each is built.
+- The 1962 **golden fixture (1584–2200)** stays byte-identical after every seam change — the proof the
+  abstraction did not regress 1962; unmoved by this wrap.
+- **#73** turned the CI `validate` job into a **matrix over `1962/1954/1955`** (`fail-fast: false`), each leg
+  running only its `@group edition-<system>` oracles as an independent gate, so a regression in one edition
+  fails only its leg and never masks another. 1962 = Computus + missalemeum + SSPX; 1954/1955 = the Divinum
+  Officium agreement fixtures. (Full-year DO sweeps stay the maintainer's live cross-check.)
+- **#332** made the contract's `commemorationLimit` the active edition's class cap (Seam 3), retiring the
+  hardcoded `Calendar\CommemorationLimit` static — the last universal-1960 assumption in the contract.
 
 ## Data authoring — editions as diffs (#64, #69)
 
