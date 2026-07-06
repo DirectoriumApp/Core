@@ -53,7 +53,7 @@ jobs:
         with:
           github-token: ${{ secrets.PROJECTS_PAT }}
           script: |
-            const OWNER = 'Introibo-App';
+            const OWNER = 'DirectoriumApp';
             const PROJECT_NUMBER = 1;
 
             // Resolve the project and its Status single-select field (by name, so

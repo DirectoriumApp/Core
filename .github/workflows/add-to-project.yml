@@ -13,5 +13,5 @@ jobs:
         if: ${{ env.TOKEN != '' }}
         uses: actions/add-to-project@v2
         with:
-          project-url: https://github.com/orgs/Introibo-App/projects/1
+          project-url: https://github.com/orgs/DirectoriumApp/projects/1
           github-token: ${{ env.TOKEN }}
