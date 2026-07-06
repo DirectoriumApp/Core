@@ -147,6 +147,35 @@ function deriveLegacyRank(entryId, editionDir, ed, edCites) {
 }
 
 /**
+ * Co-placement referential-integrity gate (#64). A vigil's or octave's placement names
+ * its bearing feast via `vigilOf` / `octaveOf`; that feast MUST be placed in the SAME
+ * edition. The runtime never dereferences the link (it is a provenance pointer, not a
+ * lookup), so a vigil placed in an edition whose feast it names is absent would pass every
+ * other gate silently — this is the only guard. It was premature while the 1954 sanctoral
+ * was a sparse diff (the suppressed apostles' vigils named feasts not yet authored for
+ * 1954); now that the full sanctoral lands, co-placement is the intended state.
+ *
+ * @param {Array<{ dir: string, placement: Array<{ id: string, vigilOf?: string, octaveOf?: string }> }>} editions
+ * @throws if any vigilOf/octaveOf target is not placed in the same edition
+ */
+export function checkCoPlacement(editions) {
+  for (const ed of editions) {
+    const placedHere = new Set(ed.placement.map((record) => record.id));
+    for (const record of ed.placement) {
+      for (const link of ['vigilOf', 'octaveOf']) {
+        const target = record[link];
+        if (target !== undefined && !placedHere.has(target)) {
+          throw new Error(
+            `co-placement violation in edition "${ed.dir}": "${record.id}" names ${link}="${target}", but ` +
+              'that feast is not placed in this edition — a vigil/octave must be co-placed with its feast.',
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
  * Fan a NON-BASE edition (Core v0.3.0: 1954 / 1955) out into its `{ attributes,
  * placement }` arrays — its diff from the base edition. Identity is edition-invariant
  * and already emitted by the base pass, so this emits only the per-edition Layer-2 and

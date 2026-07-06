@@ -69,10 +69,17 @@ final class Rubrics1954Precedence implements PrecedenceRules
         $id = $observance->id()->toString();
         $kind = $observance->kind()->value();
 
-        // A commemoration never celebrates (nn. 106-114): it takes the floor tier so it
-        // can never win an occurrence. Checked first — nothing lifts a commemoration.
+        // The COMMEMORATION_ONLY kind is a 1962 attribute: a saint the 1960 reform reduced
+        // to a bare commemoration was, under the pre-1955 rubrics, usually still a real
+        // (simplex or higher) office that IS the day on a free feria. So classify a 1954
+        // observance by its native grade; only a genuine commemoration — one carrying no
+        // grade, or the explicit `commemoratio` grade — takes the floor tier so it can
+        // never win an occurrence.
         if ($kind === ObservanceKind::COMMEMORATION_ONLY) {
-            return $this->table->tier('commemoration');
+            $grade = $this->legacyGradeOf($observance);
+            if ($grade === null || $grade === LegacyRank::COMMEMORATIO) {
+                return $this->table->tier('commemoration');
+            }
         }
 
         // The three greatest feasts, by identity — Easter and Pentecost are kind=sunday
@@ -532,7 +539,11 @@ final class Rubrics1954Precedence implements PrecedenceRules
             return true;
         }
 
-        return $office->rank()->ordinal() <= 2;
+        // The greater ferias are EXACTLY the Advent/Lent/Passiontide ferias plus the Ember
+        // and Rogation days handled above; every other feria (Christmastide, Eastertide,
+        // per-annum) is ordinary and omitted when impeded. No rank-based fallback, so a
+        // future privileged feria cannot be silently commemorated by rank alone (#64).
+        return false;
     }
 
     private function isFeriaLike(string $kind): bool

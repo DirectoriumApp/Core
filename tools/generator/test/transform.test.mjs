@@ -11,9 +11,36 @@ import {
   transformSanctoraleEdition,
   transformOctaves,
   transformPrecedence,
+  checkCoPlacement,
 } from '../src/transform.mjs';
 
 const DA = 'roman-divino-afflatu';
+
+test('checkCoPlacement passes when every vigilOf/octaveOf target is placed in its edition', () => {
+  assert.doesNotThrow(() => checkCoPlacement([
+    {
+      dir: DA,
+      placement: [
+        { id: 'roman:sanctorale:matthias' },
+        { id: 'roman:sanctorale:matthias:vigilia', vigilOf: 'roman:sanctorale:matthias' },
+        { id: 'roman:sanctorale:assumptio' },
+        { id: 'roman:sanctorale:assumptio:in-octava', octaveOf: 'roman:sanctorale:assumptio' },
+      ],
+    },
+  ]));
+});
+
+test('checkCoPlacement fails closed when a vigil names a feast absent from its edition', () => {
+  assert.throws(
+    () => checkCoPlacement([
+      {
+        dir: DA,
+        placement: [{ id: 'roman:sanctorale:iacobus:vigilia', vigilOf: 'roman:sanctorale:iacobus' }],
+      },
+    ]),
+    /co-placement violation.*iacobus:vigilia.*vigilOf/,
+  );
+});
 
 test('transformPrecedence fans an edition table into sorted tiers and both rule variants', () => {
   const { tiers, rules } = transformPrecedence(

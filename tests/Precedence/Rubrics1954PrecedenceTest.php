@@ -61,6 +61,19 @@ final class Rubrics1954PrecedenceTest extends TestCase
         ];
     }
 
+    public function testACommemorationOnlySaintIsRankedByItsGradeUnlessTrulyACommemoration(): void
+    {
+        // The COMMEMORATION_ONLY kind is a 1962 attribute. A saint the 1960 reform reduced to
+        // a bare commemoration but that kept a real (simplex+) office in 1954 is ranked by that
+        // grade — so it can be the day on a free feria (#64). Only a genuine commemoration (the
+        // `commemoratio` grade) takes the floor tier.
+        $simplexOffice = self::sanctoral('probe-comm-simplex', 'commemoration-only', 4, LegacyRank::SIMPLEX);
+        self::assertSame(24, self::tierOrdinal($simplexOffice), 'a simplex-graded commemoration takes the simple tier');
+
+        $trueCommemoration = self::sanctoral('probe-comm', 'commemoration-only', 4, LegacyRank::COMMEMORATIO);
+        self::assertSame(29, self::tierOrdinal($trueCommemoration), 'a commemoratio-graded office takes the floor');
+    }
+
     public function testTheLesserSundayOutranksEveryOrdinaryDoubleAndBelow(): void
     {
         // The Divino Afflatu elevation: a green Sunday keeps the day and the ordinary double
