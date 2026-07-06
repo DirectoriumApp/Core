@@ -24,17 +24,17 @@ use LogicException;
  * {@see SHAPE_VERSION} 1.0.0: a day carries its three provenance axes
  * ({@see Provenance}) and the four office roles, each office a self-describing
  * record of identity, per-edition attributes, occurrence outcome, and transfer
- * links. The `calendar` block carries the calendrical/astronomical figures (#242);
- * the remaining reserved slots (`firstVespers`, `resolution`, `fasting`, and the
- * office-level `octaveOf`/`aliases`/`citations`/`text`/`chant`/`audio`) are emitted
- * as null now and only ever filled later, so the contract grows additively.
- * Serialisation is deterministic: same inputs, byte-identical JSON.
- * See docs/design/output-contract.md.
+ * links. The `calendar` block carries the calendrical/astronomical figures (#242) and
+ * `fasting` the penitential obligation (#250); the remaining reserved slots
+ * (`firstVespers`, `resolution`, and the office-level
+ * `octaveOf`/`aliases`/`citations`/`text`/`chant`/`audio`) are emitted as null now and
+ * only ever filled later, so the contract grows additively. Serialisation is
+ * deterministic: same inputs, byte-identical JSON. See docs/design/output-contract.md.
  */
 final class DayContract
 {
     /** SemVer of the contract *shape* (distinct from the corpus and engine versions). */
-    public const SHAPE_VERSION = '1.0.1';
+    public const SHAPE_VERSION = '1.0.2';
 
     private LiturgicalDay $day;
 
@@ -107,8 +107,33 @@ final class DayContract
             'secondVespers' => $this->secondVespers(),
             'firstVespers' => null,
             'resolution' => $this->resolution(),
-            'fasting' => null,
+            'fasting' => $this->fasting(),
             'calendar' => $this->calendar(),
+        ];
+    }
+
+    /**
+     * The day's fast/abstinence obligation under the active penitential discipline (#250),
+     * or null on a day that carries none. The resolver stamps it onto the day
+     * ({@see LiturgicalDay::fasting()}) by reading the resolved calendar, so it follows the
+     * edition automatically. `reason` names the cited rule that applied; `discipline` and
+     * `citation` trace it to the governing law.
+     *
+     * @return array<string, mixed>|null
+     */
+    private function fasting(): ?array
+    {
+        $obligation = $this->day->fasting();
+        if ($obligation === null) {
+            return null;
+        }
+
+        return [
+            'fast' => $obligation->fast(),
+            'abstinence' => $obligation->abstinence()->value(),
+            'discipline' => $obligation->disciplineUrn(),
+            'reason' => $obligation->reason(),
+            'citation' => $obligation->citation(),
         ];
     }
 

@@ -1,0 +1,6 @@
+{"abstinence":"full","cite":"cic-1917:c1252","fast":true,"rule":"ash-wednesday"}
+{"abstinence":"full","cite":"cic-1917:c1252","fast":true,"rule":"ember-day"}
+{"abstinence":"full","cite":"cic-1917:c1252","fast":false,"rule":"friday"}
+{"abstinence":"full","cite":"cic-1917:c1252","fast":true,"rule":"lent-major"}
+{"abstinence":"partial","cite":"cic-1917:c1252","fast":true,"rule":"lent-minor"}
+{"abstinence":"full","cite":"cic-1917:c1252","fast":true,"rule":"vigil","vigils":["roman:sanctorale:assumptio:vigilia","roman:sanctorale:omnium-sanctorum:vigilia","roman:temporale:christmas:vigil","roman:temporale:paschal:pentecost-vigil"]}

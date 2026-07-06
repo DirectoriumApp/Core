@@ -29,6 +29,7 @@ each datum (see `docs/design/platform-urn-scheme.md`, URN `directorium:source:<k
 | `mr-1920` | *Missale Romanum*, editio typica 1920 (post–Divino Afflatu, pre-1955). | text | Public domain (pre-1930). |
 | `mr-1570` | *Missale Romanum* of Pius V, editio princeps 1570 (Tridentine). | text | Public domain. Establishes the Tridentine baseline. |
 | `mart-rom` | *Martyrologium Romanum* (editio typica; pre-1930 printings). | text | Public domain printings; later reprints are `reference`. |
+| `cic-1917` | *Codex Iuris Canonici* (1917), the law of fast and abstinence (cann. 1250–1254). | reference | The traditional penitential discipline in force across the 1954/1955/1962 editions (until *Paenitemini*, 1966). Facts (which days are fast/abstinence) may be cited; the canons' text is never transcribed. Governs the `roman:cic-1917` discipline (#248). |
 
 ## Oracles — independent cross-checks (validation only)
 

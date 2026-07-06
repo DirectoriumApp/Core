@@ -1,0 +1,48 @@
+# The penitential discipline of the 1917 Code of Canon Law (cann. 1250–1254) —
+# fast and abstinence as data, on its OWN axis, distinct from the rubric editions.
+#
+# Fasting is canon law, not rubric: the same 1917 discipline governed the 1954, 1955,
+# and 1962 rites alike (until Paenitemini, 1966), so it is modelled once here and every
+# rubric edition points at it (RubricSystem::penitentialDiscipline). Per-edition
+# correctness is then EMERGENT, not duplicated: a rule fires on the resolved day's own
+# properties (its weekday, season, kind, or the feast it is the vigil of), so a vigil the
+# 1955 reform suppressed simply is not a vigil day in that calendar and carries no fast.
+#
+# Fanned out by the generator into:
+#   disciplines/cic-1917/discipline.json    the meta singleton (urn, name)
+#   disciplines/cic-1917/fasting-rules.ndjson  one obligation per named condition
+#
+# Each rule names a condition the resolver detects and the obligation it carries:
+#   fast        — the day is a day of fast (one full meal, c.1251 §2)
+#   abstinence  — full (no flesh meat), partial (flesh at the principal meal only), or none
+# A day may match more than one rule; the resolver keeps the strictest. Sundays are exempt.
+#
+# Every rule cites canon 1252 of the 1917 Code (cic-1917).
+
+urn: roman:cic-1917
+name: "1917 Code of Canon Law"
+cite: cic-1917
+
+rules:
+  # Ash Wednesday — fast and complete abstinence (c.1252 §2).
+  - { rule: ash-wednesday, fast: true, abstinence: full, cite: "cic-1917:c1252" }
+  # The Ember days of the four seasons — fast and complete abstinence (c.1252 §2).
+  - { rule: ember-day, fast: true, abstinence: full, cite: "cic-1917:c1252" }
+  # Every Friday of the year — complete abstinence (c.1252 §1); fast only where another rule adds it.
+  - { rule: friday, fast: false, abstinence: full, cite: "cic-1917:c1252" }
+  # The Fridays and Saturdays of Lent — fast and complete abstinence (c.1252 §2).
+  - { rule: lent-major, fast: true, abstinence: full, cite: "cic-1917:c1252" }
+  # The other weekdays of Lent — fast, with partial abstinence (c.1252 §3, c.1251 §2).
+  - { rule: lent-minor, fast: true, abstinence: partial, cite: "cic-1917:c1252" }
+  # The vigils of Christmas, Pentecost, the Assumption, and All Saints — fast and complete
+  # abstinence (c.1252 §2). Named by the vigil day's id; a vigil absent from the resolving
+  # edition's calendar never matches, so the fast follows the calendar automatically.
+  - rule: vigil
+    fast: true
+    abstinence: full
+    cite: "cic-1917:c1252"
+    vigils:
+      - roman:sanctorale:assumptio:vigilia
+      - roman:sanctorale:omnium-sanctorum:vigilia
+      - roman:temporale:christmas:vigil
+      - roman:temporale:paschal:pentecost-vigil

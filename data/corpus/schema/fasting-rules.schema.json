@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.directorium.app/corpus/fasting-rules.schema.json",
+  "title": "Fasting rule row",
+  "description": "One obligation of a penitential discipline (#248), keyed by the named condition the resolver detects. The vigil rule additionally lists the vigil-day ids that carry a fast.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["rule", "fast", "abstinence", "cite"],
+  "properties": {
+    "rule": {
+      "description": "The named condition (ash-wednesday, ember-day, friday, lent-major, lent-minor, vigil).",
+      "$ref": "#/$defs/slug"
+    },
+    "fast": {
+      "description": "Whether the day is a day of fast (one full meal).",
+      "type": "boolean"
+    },
+    "abstinence": {
+      "description": "The abstinence from flesh meat the day carries.",
+      "type": "string",
+      "enum": ["full", "partial", "none"]
+    },
+    "vigils": {
+      "description": "For the vigil rule: the vigil-day ids that carry a fast. A vigil absent from an edition's calendar never matches.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/observanceId" }
+    },
+    "cite": { "$ref": "#/$defs/sourceRef" }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "observanceId": {
+      "type": "string",
+      "pattern": "^roman:(?:(?:sanctorale|votive):[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)*|temporale:(?:paschal|advent|christmas|epiphany|civil-fixed|month-computed)(?::[a-z0-9]+(?:-[a-z0-9]+)*)*)$"
+    },
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    }
+  }
+}

@@ -85,3 +85,17 @@
     1955 (Cum nostra hac aetate) rubrics, run headless as a day-by-day witness to the resolved
     1955 office — the independent oracle for the roman-rubricae-1955 edition (issue #71), never
     a data source and never transcribed. Cf. ordo-1954 for the 1954 edition."
+
+- key: cic-1917
+  urn: directorium:source:cic-1917
+  kind: reference
+  title: "Codex Iuris Canonici (1917) — the law of fast and abstinence (cann. 1250–1254)"
+  year: 1917
+  rights: reference
+  note: "Consult-only. The 1917 Code of Canon Law governs the traditional penitential discipline
+    in force across the 1954/1955/1962 editions (until Paenitemini, 1966). Cann. 1250–1254 fix the
+    days of fast, abstinence, and partial abstinence: abstinence on all Fridays (c.1252 §1); fast
+    and abstinence on Ash Wednesday, the Fridays and Saturdays of Lent, the Ember days, and the
+    vigils of Christmas, Pentecost, the Assumption, and All Saints (c.1252 §2); fast alone on the
+    other weekdays of Lent (c.1252 §3). Cited for the uncopyrightable discipline facts the
+    roman:cic-1917 penitential rules encode; the canons' text is never transcribed."
