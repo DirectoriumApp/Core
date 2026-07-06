@@ -13,6 +13,8 @@ use PHPUnit\Framework\TestCase;
  * across the fixture, field by field (class, colour, commemoration count), except
  * for the tracked known-differences baseline. See {@see MissalemeumOracle} for the
  * comparison shape and the rationale for the baseline (approval-test) design.
+ *
+ * @group edition-1962
  */
 final class MissalemeumOracleTest extends TestCase
 {

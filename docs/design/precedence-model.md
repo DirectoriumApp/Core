@@ -150,10 +150,12 @@ assembly step (#37).
 
 ## Commemoration limits & ordering (#36)
 
-`commemorationLimit()` gives the day's admitted count — the celebrated office's
-class count from `Calendar\CommemorationLimit` (I: 1, II: 1, III/IV: 2), reduced
-to **0** on days that admit none (the Triduum, the privileged octaves, the
-first-class vigils). `Precedence\CommemorationSelector` then orders the day's
+`PrecedenceRules::commemorationLimit()` gives the day's admitted count — the
+celebrated office's per-edition class cap (`commemorationClassLimit()`; under 1962
+I/II 1, III/IV 2 — but 1954 admits three per class and 1955 caps a first-class day
+at zero, #332), reduced to **0** on days that admit none (the Triduum, the
+privileged octaves, the first-class vigils). The class cap is data, read from the
+edition's precedence table, not a coded constant. `Precedence\CommemorationSelector` then orders the day's
 commemoration candidates — **privileged first** (n. 108, so a tight count keeps
 them), then by tier, then by id — and trims to the limit, dropping the rest
 (n. 114).
@@ -183,7 +185,8 @@ they are composed, and the whole edition-specific policy lives behind
   the next free day (the Annunciation has a fixed target, the Monday after Low
   Sunday); resolved by a deterministic whole-year forward sweep.
 - **Concurrence (#35)** — First vs Second Vespers of adjacent days.
-- **Commemoration limits (#36)** — applying `Calendar\CommemorationLimit` with
-  the class-I "privileged only" restriction and the zero-commemoration days.
+- **Commemoration limits (#36)** — applying the edition's class cap
+  (`PrecedenceRules::commemorationClassLimit()`, #332) with the class-I "privileged
+  only" restriction and the zero-commemoration days.
 - **Assembly (#37)** — building the `LiturgicalDay` (its four role-arrays become
   `list<RoledObservance>`) and wiring `day()`.

@@ -17,6 +17,8 @@ use PHPUnit\Framework\TestCase;
  * base-1962 rank issues (which also feed #428) and the two SSPX divergences the
  * fixed-date overlay does not model. See {@see SspxOracle} for the comparison shape and
  * the rationale for the baseline (approval-test) design.
+ *
+ * @group edition-1962
  */
 final class SspxOracleTest extends TestCase
 {

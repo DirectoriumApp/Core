@@ -22,6 +22,11 @@ use PHPUnit\Framework\TestCase;
  * in CI without a Perl or Divinum Officium checkout; the live full-year sweep is the
  * maintainer's {@see DivinumOfficiumOracle}.
  *
+ * Each edition is its own CI gate (#73): the 1954 rows carry `@group edition-1954` and the
+ * 1955 rows `@group edition-1955`, so the per-system validation matrix runs and fails them
+ * independently. The cross-edition witnesses (the semidouble reduction, the catalogue of known
+ * differences) belong to both groups.
+ *
  * The rows deliberately span the reform's signature outcomes — the semidouble reduction (the
  * SAME saint, St Alexius, graded `semiduplex` on the 1954 fixture and `simplex` on the 1955
  * one), a mystery of the Lord taking a per-annum Sunday's place (the Exaltation of the Cross),
@@ -42,9 +47,36 @@ final class HistoricalEditionOracleTest extends TestCase
     ];
 
     /**
-     * @dataProvider agreementRows
+     * @dataProvider divinoAfflatu1954Rows
+     *
+     * @group edition-1954
      */
-    public function testEngineMatchesTheDivinumOfficiumOracle(
+    public function testEngineMatchesTheDivinoAfflatuOracle(
+        string $editionUrn,
+        string $date,
+        string $expectedId,
+        string $expectedGrade,
+        string $doOffice
+    ): void {
+        $this->assertOracleRow($editionUrn, $date, $expectedId, $expectedGrade, $doOffice);
+    }
+
+    /**
+     * @dataProvider reduced1955Rows
+     *
+     * @group edition-1955
+     */
+    public function testEngineMatchesTheReduced1955Oracle(
+        string $editionUrn,
+        string $date,
+        string $expectedId,
+        string $expectedGrade,
+        string $doOffice
+    ): void {
+        $this->assertOracleRow($editionUrn, $date, $expectedId, $expectedGrade, $doOffice);
+    }
+
+    private function assertOracleRow(
         string $editionUrn,
         string $date,
         string $expectedId,
@@ -76,33 +108,46 @@ final class HistoricalEditionOracleTest extends TestCase
     /**
      * @return array<string, array{string, string, string, string, string}>
      */
-    public function agreementRows(): array
+    public function divinoAfflatu1954Rows(): array
     {
-        $files = [
-            RubricSystem::DIVINO_AFFLATU => 'divino-afflatu-1954.ndjson',
-            RubricSystem::RUBRICAE_1955 => 'reduced-1955.ndjson',
-        ];
+        return $this->rowsFor(RubricSystem::DIVINO_AFFLATU, 'divino-afflatu-1954.ndjson');
+    }
 
+    /**
+     * @return array<string, array{string, string, string, string, string}>
+     */
+    public function reduced1955Rows(): array
+    {
+        return $this->rowsFor(RubricSystem::RUBRICAE_1955, 'reduced-1955.ndjson');
+    }
+
+    /**
+     * @return array<string, array{string, string, string, string, string}>
+     */
+    private function rowsFor(string $urn, string $file): array
+    {
         $cases = [];
-        foreach ($files as $urn => $file) {
-            foreach ($this->readNdjson($file) as $row) {
-                /** @var array{date: string, id: string, grade: string, do: string} $row */
-                $cases[$urn . ' ' . $row['date'] . ' ' . $row['id']] = [
-                    $urn,
-                    $row['date'],
-                    $row['id'],
-                    $row['grade'],
-                    $row['do'],
-                ];
-            }
+        foreach ($this->readNdjson($file) as $row) {
+            /** @var array{date: string, id: string, grade: string, do: string} $row */
+            $cases[$urn . ' ' . $row['date'] . ' ' . $row['id']] = [
+                $urn,
+                $row['date'],
+                $row['id'],
+                $row['grade'],
+                $row['do'],
+            ];
         }
 
         return $cases;
     }
 
+    /**
+     * @group edition-1954
+     * @group edition-1955
+     */
     public function testTheAgreementFixturesAreNonEmptyAndCoverBothEditions(): void
     {
-        $rows = $this->agreementRows();
+        $rows = $this->divinoAfflatu1954Rows() + $this->reduced1955Rows();
         $editions = [];
         foreach ($rows as $case) {
             $editions[$case[0]] = true;
@@ -113,6 +158,10 @@ final class HistoricalEditionOracleTest extends TestCase
         self::assertArrayHasKey(RubricSystem::RUBRICAE_1955, $editions, '1955 rows missing.');
     }
 
+    /**
+     * @group edition-1954
+     * @group edition-1955
+     */
     public function testTheSemidoubleReductionShowsInTheSameSaintAcrossEditions(): void
     {
         // St Alexius (17 Jul) is the paired witness to Title II.20: a semidouble under 1954,
@@ -127,6 +176,10 @@ final class HistoricalEditionOracleTest extends TestCase
         self::assertSame('simplex', self::gradeOf($cn), 'Alexius is a simple under 1955');
     }
 
+    /**
+     * @group edition-1954
+     * @group edition-1955
+     */
     public function testKnownDifferencesAreWellFormed(): void
     {
         $rows = $this->readNdjson('known-differences.ndjson');

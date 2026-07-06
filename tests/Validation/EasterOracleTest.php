@@ -30,6 +30,8 @@ use PHPUnit\Framework\TestCase;
  * because Easter itself is well-defined there) through {@see LAST_YEAR} (2200, the
  * same horizon the golden fixture freezes). That is 618 consecutive years proven
  * on every run.
+ *
+ * @group edition-1962
  */
 final class EasterOracleTest extends TestCase
 {

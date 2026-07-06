@@ -40,6 +40,17 @@ resolution, and **rite** (`roman`) is its leading segment. The same corpus can
 be resolved under different editions, which is why corpus and edition are
 separate axes.
 
+`edition` **is the active rubric-system stamp** (#74): it names, per result,
+which of the platform's rubric systems — 1962 (`roman:rubricae-1960`), 1954
+(`roman:divino-afflatu`), or 1955 (`roman:rubricae-1955`) — produced the day, so
+a consumer never has to guess. It is a stable identifier (the `RubricSystem`
+URN), not a display label; the human label lives on the Api's `/meta` discovery,
+keyed by this URN. When a caller names no rubric system the field is
+`roman:rubricae-1960`, so an existing 1962 consumer is unaffected — the stamp is
+additive and backward-compatible. (Only 1962 is resolvable through the public
+`day()`/`contract()` boundary today; 1954/1955 are stamped the same way when
+resolved through `DayResolver::forEdition()`.)
+
 ### Closed vs open enums
 
 A value's enum being **closed** or **open** is what makes a change breaking or
@@ -109,10 +120,10 @@ fixes only that the field is open and that shared concepts share a token.
 | `corpusVersion` | string | `SanctoralData::version()` | e.g. `1962-seed-2026-07-02`. |
 | `engineVersion` | string | `Directorium::VERSION` | e.g. `0.4.0`. |
 | `rite` | string | edition head | `roman`. |
-| `edition` | string | `Provenance` | `roman:rubricae-1960`. |
+| `edition` | string | `Provenance` | The **active rubric system** (#74): `roman:rubricae-1960` (1962), `roman:divino-afflatu` (1954), or `roman:rubricae-1955` (1955). Defaults to `roman:rubricae-1960`. |
 | `date` | string | resolved date | ISO-8601 `Y-m-d`. |
 | `season` | string \| null | the temporal office | Open, edition-scoped `season` vocabulary; null on a placeholder. See [`season`: open, edition-scoped vocabulary](#season-open-edition-scoped-vocabulary). |
-| `commemorationLimit` | int | `CommemorationLimit::forDayClass` | Commemorations admitted by the day's class (I/II: 1, III/IV: 2); 0 when nothing is celebrated. |
+| `commemorationLimit` | int | `PrecedenceRules::commemorationClassLimit` (per edition) | Commemorations admitted by the day's **class under the active edition** (#332) — 1962: I/II 1, III/IV 2; 1954: 3 for every class; 1955: 0/1/2 by class. 0 when nothing is celebrated. This is the class-level cap; the days that admit no commemoration at all (Triduum, privileged octaves, first-class vigils) are distinguished only in the [`resolution` trace](#reserved-slots), so the field stays a stable property of the day's class. |
 | `celebration` | office[] | `LiturgicalDay` | The office celebrated (normally one). |
 | `commemoration` | office[] | `LiturgicalDay` | Offices commemorated within it. |
 | `displaced` | office[] | `LiturgicalDay` | Offices impeded this day (transferred or omitted). |

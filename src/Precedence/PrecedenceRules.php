@@ -62,8 +62,24 @@ interface PrecedenceRules
      * How many commemorations the day of $celebration admits — the celebrated
      * office's class count (n. 111b–d), reduced to zero on the days that admit
      * none at all (the Triduum, the privileged octaves, the first-class vigils).
+     *
+     * This is the day-specific *admitted* count the commemoration selector and the
+     * resolution trace use; {@see commemorationClassLimit()} is the class-level cap
+     * before the zero-commemoration special-casing.
      */
     public function commemorationLimit(RealizedObservance $celebration, PrecedenceContext $context): int;
+
+    /**
+     * The commemoration cap for the celebrated office's day-class alone — the
+     * per-edition class count (1962: I/II 1, III/IV 2; 1954: 3 for every class;
+     * 1955: 0/1/2 by class, with the Sunday elevation folded into the class), before
+     * the day-specific reductions {@see commemorationLimit()} applies. This is the
+     * class-level figure the output contract reports (see docs/design/output-contract.md);
+     * the days that admit no commemoration at all are distinguished only in the
+     * resolution trace, so the contract's `commemorationLimit` stays a stable
+     * property of the day's class across editions.
+     */
+    public function commemorationClassLimit(RealizedObservance $celebration): int;
 
     /** Whether $office, when commemorated, ranks as a privileged commemoration (n. 108). */
     public function isPrivilegedCommemoration(RealizedObservance $office): bool;

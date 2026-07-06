@@ -113,8 +113,9 @@ Once resolution runs, each office plays a role on the day. `Calendar\Celebration
 names the four (celebration | commemoration | displaced | tempora), and
 `Calendar\RoledObservance` pairs a realized office with its role — so a displaced
 office keeps its full data for the transfer queue (#34) and a commemoration keeps
-everything needed to render it. `Calendar\CommemorationLimit` makes the 1960
-counts representable (class I: 1, privileged only; II: 1; III/IV: 2; some days 0).
+everything needed to render it. The commemoration cap is a per-edition figure the
+rules object supplies (`PrecedenceRules::commemorationClassLimit()`, #332): under
+1960 class I admits one (privileged only), II one, III/IV two, some days none.
 
 #26 only makes roles and limits **representable**. Assigning a role to each
 office and enforcing the limits (including the class-I "privileged only"
