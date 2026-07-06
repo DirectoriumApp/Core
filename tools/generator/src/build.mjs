@@ -19,6 +19,7 @@ import {
   transformTemporale,
   transformPrecedence,
   transformOverlay,
+  checkCoPlacement,
 } from './transform.mjs';
 import { checkProvenance, usedSources } from './provenance.mjs';
 import { toNdjson, toPretty, sha256 } from './canonical.mjs';
@@ -163,6 +164,12 @@ export function build(outDir = DEFAULT_OUT) {
         '. Every identity must be placed by at least one edition — check for a mistyped edition block key.',
     );
   }
+
+  // Co-placement gate (#64): every vigilOf/octaveOf target is placed in its own edition.
+  checkCoPlacement([
+    { dir: edition, placement },
+    ...extraEditions.map((ed) => ({ dir: ed.dir, placement: ed.placement })),
+  ]);
 
   const validators = makeValidators(SCHEMA_DIR);
   const errors = [

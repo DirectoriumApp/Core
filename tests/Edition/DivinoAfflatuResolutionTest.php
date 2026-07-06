@@ -21,10 +21,14 @@ use PHPUnit\Framework\TestCase;
  * pre-1955 Ordo (ordo-1954) — the Candlemas asymmetry, the Matthias bissextile, and the
  * common-vigil Saturday-anticipation — and that the whole year resolves cleanly.
  *
- * The dataset is intentionally partial (the full 1954 sanctoral burndown is Epic #64), so
- * the edition is not yet advertised as built: it is exercised here through
- * {@see DayResolver::forEdition()}, and the public {@see CalendarCatalog} boundary refuses
- * it until #64 completes the calendar.
+ * The full fixed-date sanctoral now lands (Epic #64) — every feast at its cited pre-1955
+ * grade, validated day-by-day across 1954 and 1956 against the Divinum Officium Divino
+ * Afflatu engine at zero grade discrepancies. The edition is STILL not advertised as built,
+ * because the pre-1955 calendar has components beyond the fixed sanctoral that remain
+ * deferred (the privileged temporal octaves, the moveable feasts of the Lord and of the
+ * BVM, the Office of the Dead, the Saturday Office of Our Lady). So it is exercised here
+ * through {@see DayResolver::forEdition()}, and the public {@see CalendarCatalog} boundary
+ * refuses it until those land (see docs/design/rubric-system-model.md).
  */
 final class DivinoAfflatuResolutionTest extends TestCase
 {
@@ -140,6 +144,52 @@ final class DivinoAfflatuResolutionTest extends TestCase
 
         self::assertTrue(self::hasOffice(self::on($year, '1955-08-13'), $vigil), 'anticipated to Saturday 13 Aug');
         self::assertFalse(self::hasOffice(self::on($year, '1955-08-14'), $vigil), 'not on the Sunday 14 Aug');
+    }
+
+    public function testASaintReducedToACommemorationInNineteenSixtyIsAFullOfficeInFiftyFour(): void
+    {
+        // St Blaise (3 Feb) is a COMMEMORATION-ONLY entry in the 1962 base, but under the
+        // pre-1955 rubrics he is a Simplex office that IS the day on a free feria. The 1954
+        // engine must classify him by his native grade, not floor him by the 1962 kind
+        // (verified vs the DA engine; the burndown's largest class of correction).
+        $day = self::on(self::resolver()->resolveYear(1954), '1954-02-03');
+
+        self::assertSame('roman:sanctorale:blasius', self::celebrationId($day));
+    }
+
+    public function testAFeastMovedByTheReformSitsAtItsPreNineteenFiftyFivePlace(): void
+    {
+        // Ss. Philip & James are 11 May in 1962 (displaced when 1 May became St Joseph the
+        // Worker in 1955), but 1 May under the pre-1955 calendar — a Double of the II class.
+        $year = self::resolver()->resolveYear(1954);
+
+        self::assertSame('roman:sanctorale:philippus-iacobus', self::celebrationId(self::on($year, '1954-05-01')));
+        self::assertFalse(
+            self::hasOffice(self::on($year, '1954-05-11'), 'roman:sanctorale:philippus-iacobus'),
+            'the apostles are not at their 1962 date in 1954'
+        );
+    }
+
+    public function testASuppressedFeastIsCelebratedInFiftyFour(): void
+    {
+        // Feasts the 1955/1960 reforms abolished are restored for 1954: the Finding of the
+        // Holy Cross (3 May, Double II class) and the Apparition of St Michael (8 May, greater
+        // double) are the office of their day.
+        $year = self::resolver()->resolveYear(1954);
+
+        self::assertSame('roman:sanctorale:inventio-crucis', self::celebrationId(self::on($year, '1954-05-03')));
+        self::assertSame('roman:sanctorale:apparitio-michaelis', self::celebrationId(self::on($year, '1954-05-08')));
+    }
+
+    public function testAPostNineteenFiftyFourFeastIsAbsentAndItsPredecessorHoldsTheDay(): void
+    {
+        // St Lawrence of Brindisi's universal feast (21 Jul) postdates the Divino Afflatu
+        // period (he was declared a Doctor in 1959), so 1954 keeps S. Praxedis on 21 July.
+        $day = self::on(self::resolver()->resolveYear(1954), '1954-07-21');
+
+        self::assertSame('roman:sanctorale:praxedes', self::celebrationId($day));
+        $brindisi = 'roman:sanctorale:laurentius-a-brundusio';
+        self::assertFalse(self::hasOffice($day, $brindisi), 'Lawrence of Brindisi is absent');
     }
 
     /**

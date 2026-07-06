@@ -54,6 +54,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hyginus
   kind: commemoration-only
   titulars: [hyginus]
@@ -68,6 +74,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:felix-nolanus
   kind: commemoration-only
   titulars: [felix-nolanus]
@@ -82,6 +94,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hilarius
   kind: feast
   titulars: [hilarius-pictaviensis]
@@ -96,6 +114,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:maurus
   kind: commemoration-only
   titulars: [maurus]
@@ -110,6 +134,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 1
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:paulus-primus-eremita
   kind: feast
   titulars: [paulus-primus-eremita]
@@ -124,6 +154,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:marcellus-i
   kind: feast
   titulars: [marcellus-i]
@@ -138,6 +174,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 1
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:antonius-abbas
   kind: feast
   titulars: [antonius-abbas]
@@ -152,6 +194,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:prisca
   kind: commemoration-only
   titulars: [prisca]
@@ -166,6 +214,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:canutus
   kind: commemoration-only
   titulars: [canutus]
@@ -180,6 +234,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:marius-et-socii
   kind: commemoration-only
   titulars: [marius, martha, audifax, abachum]
@@ -194,6 +254,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:fabianus-et-sebastianus
   kind: feast
   titulars: [fabianus, sebastianus]
@@ -208,6 +274,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 1
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:agnes
   kind: feast
   titulars: [agnes]
@@ -222,6 +294,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 1
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:vincentius-et-anastasius
   kind: feast
   titulars: [vincentius, anastasius]
@@ -236,6 +314,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 1
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:emerentiana
   kind: commemoration-only
   titulars: [emerentiana]
@@ -250,6 +334,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 1
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:raymundus-de-penafort
   kind: feast
   titulars: [raymundus-de-penafort]
@@ -264,6 +354,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 1
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:timotheus
   kind: feast
   titulars: [timotheus]
@@ -278,6 +374,12 @@
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 1
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:conversio-pauli
   kind: feast
   titulars: [conversio-s-pauli]
@@ -292,6 +394,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 1
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus
   kind: commemoration-only
   titulars: [petrus]
@@ -306,6 +414,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: commemoratio
+    colour: red
+    month: 1
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:polycarpus
   kind: feast
   titulars: [polycarpus]
@@ -320,6 +434,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 1
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-chrysostomus
   kind: feast
   titulars: [ioannes-chrysostomus]
@@ -334,6 +454,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-nolascus
   kind: feast
   titulars: [petrus-nolascus]
@@ -348,6 +474,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:franciscus-salesius
   kind: feast
   titulars: [franciscus-salesius]
@@ -362,6 +494,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:martina
   kind: feast
   titulars: [martina]
@@ -376,6 +514,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 1
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-bosco
   kind: feast
   titulars: [ioannes-bosco]
@@ -390,6 +534,12 @@
     day: 31
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 1
+    day: 31
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ignatius-antiochenus
   kind: feast
   titulars: [ignatius-antiochenus]
@@ -404,6 +554,12 @@
     day: 1
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 2
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:purificatio
   kind: feast
   titulars: [beata-maria-virgo]
@@ -438,6 +594,12 @@
     day: 3
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 2
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:andreas-corsini
   kind: feast
   titulars: [andreas-corsini]
@@ -452,6 +614,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:agatha
   kind: feast
   titulars: [agatha]
@@ -466,6 +634,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 2
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:titus
   kind: feast
   titulars: [titus, dorothea]
@@ -480,6 +654,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:romualdus
   kind: feast
   titulars: [romualdus]
@@ -494,6 +674,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-de-matha
   kind: feast
   titulars: [ioannes-de-matha]
@@ -508,6 +694,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cyrillus-alexandrinus
   kind: feast
   titulars: [cyrillus-alexandrinus, apollonia]
@@ -522,6 +714,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:scholastica
   kind: feast
   titulars: [scholastica]
@@ -536,6 +734,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:apparitio-immaculatae
   kind: feast
   titulars: [beata-maria-virgo]
@@ -550,6 +754,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 2
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:septem-fundatores
   kind: feast
   titulars: [septem-fundatores-ordinis-servorum-b-m-v]
@@ -564,6 +774,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:valentinus
   kind: commemoration-only
   titulars: [valentinus]
@@ -578,6 +794,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 2
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:faustinus-et-iovita
   kind: commemoration-only
   titulars: [faustinus, iovita]
@@ -592,6 +814,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 2
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:simeon
   kind: commemoration-only
   titulars: [simeon]
@@ -606,6 +834,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 2
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cathedra-petri
   kind: feast
   titulars: [petrus]
@@ -620,6 +854,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 2
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-damiani
   kind: feast
   titulars: [petrus-damianus]
@@ -634,6 +874,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:matthias
   kind: feast
   titulars: [matthias]
@@ -652,6 +898,12 @@
 # roman-rubricae-1960 block: notInBaseEdition marks it intentionally absent from 1962.
 # Anchor is Feb 23 (1954, a common year); the leap-year shift to Feb 24 — St Matthias is
 # a.d. VI Kal. Mart., doubled in bissextile years — is a resolution rule deferred to #67.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 2
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:matthias:vigilia
   kind: vigil
   titulars: [matthias]
@@ -682,6 +934,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 2
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:casimirus
   kind: feast
   titulars: [casimirus]
@@ -696,6 +954,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 3
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:lucius-i
   kind: commemoration-only
   titulars: [lucius-i]
@@ -710,6 +974,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 3
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:perpetua-felicitas
   kind: feast
   titulars: [perpetua, felicitas]
@@ -724,6 +994,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 3
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:thomas-aquinas
   kind: feast
   titulars: [thomas-aquinas]
@@ -738,6 +1014,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-de-deo
   kind: feast
   titulars: [ioannes-de-deo]
@@ -752,6 +1034,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:francisca-romana
   kind: feast
   titulars: [francisca-romana]
@@ -766,6 +1054,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:quadraginta-martyres
   kind: feast
   titulars: [quadraginta-martyres-sebastenses]
@@ -780,6 +1074,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 3
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gregorius-magnus
   kind: feast
   titulars: [gregorius-magnus]
@@ -794,6 +1094,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:patricius
   kind: feast
   titulars: [patricius]
@@ -808,6 +1114,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cyrillus-hierosolymitanus
   kind: feast
   titulars: [cyrillus-hierosolymitanus]
@@ -822,6 +1134,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioseph
   kind: feast
   titulars: [ioseph]
@@ -856,6 +1174,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 3
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gabriel-archangelus
   kind: feast
   titulars: [gabriel-archangelus]
@@ -870,6 +1194,12 @@
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 3
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:annuntiatio
   kind: feast
   titulars: [maria]
@@ -904,6 +1234,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 3
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-a-capistrano
   kind: feast
   titulars: [ioannes-a-capistrano]
@@ -918,6 +1254,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 3
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:franciscus-de-paula
   kind: feast
   titulars: [franciscus-de-paula]
@@ -932,6 +1274,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:isidorus
   kind: feast
   titulars: [isidorus]
@@ -946,6 +1294,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:vincentius-ferrer
   kind: feast
   titulars: [vincentius-ferrer]
@@ -960,6 +1314,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:leo-magnus
   kind: feast
   titulars: [leo-magnus]
@@ -974,6 +1334,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hermenegildus
   kind: feast
   titulars: [hermenegildus]
@@ -988,6 +1354,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 4
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:iustinus
   kind: feast
   titulars: [iustinus]
@@ -1002,6 +1374,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 4
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:tiburtius-valerianus-maximus
   kind: commemoration-only
   titulars: [tiburtius, valerianus, maximus]
@@ -1016,6 +1394,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 4
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:benedictus-ioseph-labre
   kind: commemoration-only
   titulars: [benedictus-ioseph-labre]
@@ -1044,6 +1428,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 4
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:anselmus
   kind: feast
   titulars: [anselmus]
@@ -1058,6 +1448,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:soter-caius
   kind: feast
   titulars: [soter, caius]
@@ -1072,6 +1468,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 4
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:georgius
   kind: commemoration-only
   titulars: [georgius]
@@ -1086,6 +1488,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 4
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:fidelis-a-sigmaringa
   kind: feast
   titulars: [fidelis-a-sigmaringa]
@@ -1100,6 +1508,12 @@
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 4
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:marcus
   kind: feast
   titulars: [marcus]
@@ -1114,6 +1528,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 4
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cletus-marcellinus
   kind: feast
   titulars: [cletus, marcellinus]
@@ -1128,6 +1548,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 4
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-canisius
   kind: feast
   titulars: [petrus-canisius]
@@ -1142,6 +1568,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:paulus-a-cruce
   kind: feast
   titulars: [paulus-a-cruce]
@@ -1156,6 +1588,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:vitalis
   kind: commemoration-only
   titulars: [vitalis]
@@ -1170,6 +1608,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 4
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-de-verona
   kind: feast
   titulars: [petrus-de-verona]
@@ -1184,6 +1628,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 4
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:catharina-senensis
   kind: feast
   titulars: [catharina-senensis]
@@ -1198,6 +1648,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 4
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioseph-opifex
   kind: feast
   titulars: [ioseph]
@@ -1226,6 +1682,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:alexander-eventius-theodulus-iuvenalis
   kind: commemoration-only
   titulars: [alexander, eventius, theodulus, iuvenalis]
@@ -1240,6 +1702,12 @@
     day: 3
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:monica
   kind: feast
   titulars: [monica]
@@ -1254,6 +1722,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:pius-v
   kind: feast
   titulars: [pius-v]
@@ -1268,6 +1742,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:stanislaus
   kind: feast
   titulars: [stanislaus]
@@ -1282,6 +1762,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 5
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gregorius-nazianzenus
   kind: feast
   titulars: [gregorius-nazianzenus]
@@ -1296,6 +1782,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:antoninus
   kind: feast
   titulars: [antoninus]
@@ -1310,6 +1802,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gordianus-epimachus
   kind: commemoration-only
   titulars: [gordianus, epimachus]
@@ -1324,6 +1822,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:philippus-iacobus
   kind: feast
   titulars: [philippus, iacobus]
@@ -1338,6 +1842,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 5
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nereus-achilleus-domitilla-pancratius
   kind: feast
   titulars: [nereus, achilleus, domitilla, pancratius]
@@ -1352,6 +1862,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 5
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:robertus-bellarminus
   kind: feast
   titulars: [robertus-bellarminus]
@@ -1366,6 +1882,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bonifatius-tarsensis
   kind: commemoration-only
   titulars: [bonifatius]
@@ -1380,6 +1902,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-baptista-de-la-salle
   kind: feast
   titulars: [ioannes-baptista-de-la-salle]
@@ -1394,6 +1922,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ubaldus
   kind: feast
   titulars: [ubaldus]
@@ -1408,6 +1942,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 5
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:paschalis-baylon
   kind: feast
   titulars: [paschalis-baylon]
@@ -1422,6 +1962,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:venantius
   kind: feast
   titulars: [venantius]
@@ -1436,6 +1982,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 5
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-caelestinus
   kind: feast
   titulars: [petrus-caelestinus]
@@ -1450,6 +2002,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:pudentiana
   kind: commemoration-only
   titulars: [pudentiana]
@@ -1464,6 +2022,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 5
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bernardinus-senensis
   kind: feast
   titulars: [bernardinus-senensis]
@@ -1478,6 +2042,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 5
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gregorius-vii
   kind: feast
   titulars: [gregorius-vii]
@@ -1492,6 +2062,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:urbanus-i
   kind: commemoration-only
   titulars: [urbanus-i]
@@ -1506,6 +2082,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:eleutherius
   kind: commemoration-only
   titulars: [eleutherius]
@@ -1520,6 +2102,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:philippus-nerius
   kind: feast
   titulars: [philippus-nerius]
@@ -1534,6 +2122,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:beda-venerabilis
   kind: feast
   titulars: [beda-venerabilis]
@@ -1548,6 +2142,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-i
   kind: commemoration-only
   titulars: [ioannes-i]
@@ -1562,6 +2162,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:augustinus-cantuariensis
   kind: feast
   titulars: [augustinus-cantuariensis]
@@ -1576,6 +2182,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 5
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:maria-magdalena-de-pazzis
   kind: feast
   titulars: [maria-magdalena-de-pazzis]
@@ -1590,6 +2202,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 5
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:felix-i
   kind: commemoration-only
   titulars: [felix-i]
@@ -1604,6 +2222,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 5
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:maria-regina
   kind: feast
   titulars: [maria]
@@ -1618,6 +2242,12 @@
     day: 31
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 5
+    day: 31
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petronilla
   kind: commemoration-only
   titulars: [petronilla]
@@ -1632,6 +2262,12 @@
     day: 31
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 5
+    day: 31
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:angela-mericia
   kind: feast
   titulars: [angela-mericia]
@@ -1646,6 +2282,12 @@
     day: 1
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:marcellinus-petrus-erasmus
   kind: commemoration-only
   titulars: [marcellinus, petrus, erasmus]
@@ -1660,6 +2302,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 6
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:francisci-caracciolo
   kind: feast
   titulars: [franciscus-caracciolo]
@@ -1674,6 +2322,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bonifatius
   kind: feast
   titulars: [bonifatius]
@@ -1688,6 +2342,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 6
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:norbertus
   kind: feast
   titulars: [norbertus]
@@ -1702,6 +2362,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:primus-felicianus
   kind: commemoration-only
   titulars: [primus, felicianus]
@@ -1716,6 +2382,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 6
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:margarita-scotiae
   kind: feast
   titulars: [margarita-reginae-scotiae]
@@ -1730,6 +2402,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 6
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:barnabas
   kind: feast
   titulars: [barnabas]
@@ -1744,6 +2422,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: red
+    month: 6
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-a-sancto-facundo
   kind: feast
   titulars: [ioannes-a-sancto-facundo]
@@ -1758,6 +2442,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:antonius-patavinus
   kind: feast
   titulars: [antonius-patavinus]
@@ -1772,6 +2462,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:basilius-magnus
   kind: feast
   titulars: [basilius-magnus]
@@ -1786,6 +2482,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:viti-modesti-crescentiae
   kind: commemoration-only
   titulars: [vitus, modestus, crescentia]
@@ -1800,6 +2502,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 6
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gregorius-barbadicus
   kind: feast
   titulars: [gregorius-barbadicus]
@@ -1828,6 +2536,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:iuliana-de-falconeriis
   kind: feast
   titulars: [iuliana-de-falconeriis]
@@ -1842,6 +2556,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:silverius
   kind: commemoration-only
   titulars: [silverius]
@@ -1856,6 +2576,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 6
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:aloysius-gonzaga
   kind: feast
   titulars: [aloysius-gonzaga]
@@ -1870,6 +2596,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:paulinus-nolanus
   kind: feast
   titulars: [paulinus-nolanus]
@@ -1884,6 +2616,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-baptista:vigilia
   kind: vigil
   titulars: [ioannes-baptista]
@@ -1940,6 +2678,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 6
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-paulus
   kind: feast
   titulars: [ioannes, paulus]
@@ -1954,6 +2698,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 6
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-paulus:vigilia
   kind: vigil
   titulars: [petrus, paulus]
@@ -2010,6 +2760,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: red
+    month: 6
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:pretiosissimi-sanguinis
   kind: feast
   titulars: [pretiosissimus-sanguis-d-n-i-c]
@@ -2024,6 +2780,12 @@
     day: 1
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    colour: red
+    month: 7
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:processus-martinianus
   kind: commemoration-only
   titulars: [processus, martinianus]
@@ -2038,6 +2800,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:visitatio
   kind: feast
   titulars: [beata-maria-virgo]
@@ -2052,6 +2820,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 7
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:irenaeus
   kind: feast
   titulars: [irenaeus-lugdunensis]
@@ -2066,6 +2840,12 @@
     day: 3
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 6
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:antonius-maria-zaccaria
   kind: feast
   titulars: [antonius-maria-zaccaria]
@@ -2080,6 +2860,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cyrillus-methodius
   kind: feast
   titulars: [cyrillus, methodius]
@@ -2094,6 +2880,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:elisabeth-reginae
   kind: feast
   titulars: [elisabeth-lusitaniae]
@@ -2108,6 +2900,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 7
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:septem-fratres
   kind: feast
   titulars: [septem-fratres]
@@ -2122,6 +2920,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 7
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-gualbertus
   kind: feast
   titulars: [ioannes-gualbertus]
@@ -2136,6 +2940,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nabor-felix
   kind: commemoration-only
   titulars: [nabor, felix]
@@ -2150,6 +2960,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bonaventura
   kind: feast
   titulars: [bonaventura]
@@ -2164,6 +2980,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:henricus
   kind: feast
   titulars: [henricus-imperator]
@@ -2178,6 +3000,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 7
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:beatae-mariae-de-monte-carmelo
   kind: commemoration-only
   titulars: [beata-maria-virgo-de-monte-carmelo]
@@ -2192,6 +3020,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 7
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:alexius
   kind: commemoration-only
   titulars: [alexius]
@@ -2206,6 +3040,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 7
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:camillus-de-lellis
   kind: feast
   titulars: [camillus-de-lellis]
@@ -2220,6 +3060,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:vincentius-a-paulo
   kind: feast
   titulars: [vincentius-a-paulo]
@@ -2234,6 +3080,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hieronymus-aemilianus
   kind: feast
   titulars: [hieronymus-aemilianus]
@@ -2248,6 +3100,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:laurentius-a-brundusio
   kind: feast
   titulars: [laurentius-a-brundusio]
@@ -2255,13 +3113,16 @@
     la: "S. Laurentii a Brundusio Confessoris et Ecclesiae Doctoris"
   cites:
     names.la: mr-1920
+  # No roman-divino-afflatu block: St Lawrence of Brindisi's universal feast (Jul 21) was
+  # extended to the whole Church only when he was declared a Doctor (1959), so he is absent
+  # from the 1954 edition — Jul 21 is S. Praxedis (below). Confirmed against the Divinum
+  # Officium Divino-Afflatu engine, which places Praxedes, not Lawrence, on that day in 1954.
   roman-rubricae-1960:
     rank: 3
     colour: white
     month: 7
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
-
 - id: roman:sanctorale:praxedes
   kind: commemoration-only
   titulars: [praxedes]
@@ -2276,6 +3137,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 7
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:maria-magdalena
   kind: feast
   titulars: [maria-magdalena]
@@ -2290,6 +3157,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 7
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:apollinaris
   kind: feast
   titulars: [apollinaris]
@@ -2304,6 +3177,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 7
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:christina
   kind: commemoration-only
   titulars: [christina]
@@ -2318,6 +3197,12 @@
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:christophorus
   kind: commemoration-only
   titulars: [christophorus]
@@ -2332,6 +3217,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:iacobus
   kind: feast
   titulars: [iacobus-maior]
@@ -2347,6 +3238,12 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 # Vigil of St James the Greater — 1954-only (suppressed 1955); no 1962 block.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 7
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:iacobus:vigilia
   kind: vigil
   titulars: [iacobus-maior]
@@ -2377,6 +3274,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 7
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:pantaleon
   kind: commemoration-only
   titulars: [pantaleon]
@@ -2391,6 +3294,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nazarius-celsus-victor-innocentius
   kind: feast
   titulars: [nazarius, celsus, victor-i, innocentius-i]
@@ -2405,6 +3314,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 7
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:felix-simplicius-faustinus-beatrix
   kind: commemoration-only
   titulars: [felix, simplicius, faustinus, beatrix]
@@ -2419,6 +3334,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:martha
   kind: feast
   titulars: [martha]
@@ -2433,6 +3354,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 7
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:abdon-sennen
   kind: commemoration-only
   titulars: [abdon, sennen]
@@ -2447,6 +3374,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ignatius-de-loyola
   kind: feast
   titulars: [ignatius-de-loyola]
@@ -2461,6 +3394,12 @@
     day: 31
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 7
+    day: 31
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:alphonsus-maria-de-ligorio
   kind: feast
   titulars: [alphonsus-maria-de-ligorio]
@@ -2475,6 +3414,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:stephanus-papa
   kind: commemoration-only
   titulars: [stephanus-i-papa]
@@ -2489,6 +3434,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:dominicus
   kind: feast
   titulars: [dominicus]
@@ -2503,6 +3454,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 8
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:dedicatio-basilicae-sanctae-mariae
   kind: feast
   titulars: [beata-maria-virgo-dedicatio-basilicae-s-mariae-ad-nives]
@@ -2517,6 +3474,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 8
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:sixtus-ii
   kind: commemoration-only
   titulars: [sixtus-ii-papa, felicissimus, agapitus]
@@ -2531,6 +3494,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:transfiguratio-domini
   kind: feast
   titulars: [dominus-noster-iesus-christus-transfiguratio]
@@ -2545,6 +3514,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 8
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:caietanus
   kind: feast
   titulars: [caietanus]
@@ -2559,6 +3534,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:donatus
   kind: commemoration-only
   titulars: [donatus]
@@ -2573,6 +3554,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cyriacus
   kind: commemoration-only
   titulars: [cyriacus, largus, smaragdus]
@@ -2587,6 +3574,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 8
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-maria-vianney
   kind: feast
   titulars: [ioannes-maria-vianney]
@@ -2601,6 +3594,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:laurentius:vigilia
   kind: vigil
   titulars: [laurentius]
@@ -2637,6 +3636,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:laurentius
   kind: feast
   titulars: [laurentius]
@@ -2671,6 +3676,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:clara
   kind: feast
   titulars: [clara]
@@ -2685,6 +3696,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hippolytus-et-cassianus
   kind: commemoration-only
   titulars: [hippolytus, cassianus]
@@ -2699,6 +3716,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:assumptio:vigilia
   kind: vigil
   titulars: [maria]
@@ -2735,6 +3758,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 8
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:assumptio
   kind: feast
   titulars: [maria]
@@ -2769,6 +3798,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 8
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hyacinthus
   kind: feast
   titulars: [hyacinthus]
@@ -2783,6 +3818,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:agapitus
   kind: commemoration-only
   titulars: [agapitus]
@@ -2797,6 +3838,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-eudes
   kind: feast
   titulars: [ioannes-eudes]
@@ -2811,6 +3858,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bernardus
   kind: feast
   titulars: [bernardus]
@@ -2825,6 +3878,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioanna-francisca-fremiot-de-chantal
   kind: feast
   titulars: [ioanna-francisca-fremiot-de-chantal]
@@ -2839,6 +3898,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:immaculatum-cor-mariae
   kind: feast
   titulars: [immaculatum-cor-beatae-mariae-virginis]
@@ -2853,6 +3918,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 8
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:timotheus-et-socii
   kind: commemoration-only
   titulars: [timotheus, hippolytus, symphorianus]
@@ -2867,6 +3938,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:philippus-benitius
   kind: feast
   titulars: [philippus-benitius]
@@ -2881,6 +3958,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bartholomaeus
   kind: feast
   titulars: [bartholomaeus]
@@ -2896,6 +3979,12 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 # Vigil of St Bartholomew — 1954-only (suppressed 1955); no 1962 block.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 8
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bartholomaeus:vigilia
   kind: vigil
   titulars: [bartholomaeus]
@@ -2926,6 +4015,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 8
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:zephyrinus
   kind: commemoration-only
   titulars: [zephyrinus]
@@ -2940,6 +4035,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioseph-calasanctius
   kind: feast
   titulars: [ioseph-calasanctius]
@@ -2954,6 +4055,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:augustinus
   kind: feast
   titulars: [augustinus]
@@ -2968,6 +4075,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hermes
   kind: commemoration-only
   titulars: [hermes]
@@ -2982,6 +4095,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:decollatio-ioannis-baptistae
   kind: feast
   titulars: [ioannes-baptista-decollatio]
@@ -2996,6 +4115,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: red
+    month: 8
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:sabina
   kind: commemoration-only
   titulars: [sabina]
@@ -3010,6 +4135,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:felix-et-adauctus
   kind: commemoration-only
   titulars: [felix, adauctus]
@@ -3024,6 +4155,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:rosa-limana
   kind: feast
   titulars: [rosa-de-lima]
@@ -3038,6 +4175,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:raymundus-nonnatus
   kind: feast
   titulars: [raymundus-nonnatus]
@@ -3052,6 +4195,12 @@
     day: 31
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 8
+    day: 31
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:aegidius
   kind: commemoration-only
   titulars: [aegidius]
@@ -3066,6 +4215,12 @@
     day: 1
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 9
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:stephanus-hungariae
   kind: feast
   titulars: [stephanus-hungariae]
@@ -3080,6 +4235,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 9
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:pius-x
   kind: feast
   titulars: [pius-x]
@@ -3094,6 +4255,12 @@
     day: 3
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 9
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:laurentius-iustinianus
   kind: feast
   titulars: [laurentius-iustinianus]
@@ -3108,6 +4275,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 9
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nativitas-mariae
   kind: feast
   titulars: [beata-maria-virgo]
@@ -3142,6 +4315,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 9
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nicolaus-tolentinas
   kind: feast
   titulars: [nicolaus-tolentinas]
@@ -3156,6 +4335,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 9
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:protus-et-hyacinthus
   kind: commemoration-only
   titulars: [protus, hyacinthus]
@@ -3170,6 +4355,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 9
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nomen-mariae
   kind: feast
   titulars: [beata-maria-virgo]
@@ -3184,6 +4375,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 9
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:exaltatio-crucis
   kind: feast
   titulars: [sancta-crux]
@@ -3198,6 +4395,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: red
+    month: 9
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:septem-dolorum-bmv
   kind: feast
   titulars: [beata-maria-virgo]
@@ -3212,6 +4415,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 9
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cornelius-et-cyprianus
   kind: feast
   titulars: [cornelius, cyprianus]
@@ -3226,6 +4435,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 9
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:stigmata-francisci
   kind: commemoration-only
   titulars: [franciscus-assisiensis]
@@ -3240,6 +4455,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 9
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioseph-a-cupertino
   kind: feast
   titulars: [ioseph-a-cupertino]
@@ -3254,6 +4475,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 9
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ianuarius-et-socii
   kind: feast
   titulars: [ianuarius]
@@ -3268,6 +4495,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 9
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:eustachius-et-socii
   kind: commemoration-only
   titulars: [eustachius]
@@ -3282,6 +4515,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 9
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:matthaeus
   kind: feast
   titulars: [matthaeus]
@@ -3298,6 +4537,12 @@
 
 # Vigil of St Matthew — 1954-only (suppressed 1955); no 1962 block. Title keeps
 # "Apostoli et Evangelistae", mirroring the feast heading.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 9
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:matthaeus:vigilia
   kind: vigil
   titulars: [matthaeus]
@@ -3328,6 +4573,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 9
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:linus
   kind: feast
   titulars: [linus]
@@ -3342,6 +4593,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 9
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:cosmas-et-damianus
   kind: feast
   titulars: [cosmas, damianus]
@@ -3356,6 +4613,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 9
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:wenceslaus
   kind: feast
   titulars: [wenceslaus]
@@ -3370,6 +4633,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 9
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:michael-archangelus
   kind: feast
   titulars: [michael-archangelus]
@@ -3384,6 +4653,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    colour: white
+    month: 9
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hieronymus
   kind: feast
   titulars: [hieronymus]
@@ -3398,6 +4673,12 @@
     day: 30
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 9
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:remigius
   kind: commemoration-only
   titulars: [remigius]
@@ -3412,6 +4693,12 @@
     day: 1
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 10
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:angeli-custodes
   kind: feast
   titulars: [angeli-custodes]
@@ -3426,6 +4713,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 10
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:teresia-a-iesu-infante
   kind: feast
   titulars: [teresia-a-iesu-infante]
@@ -3440,6 +4733,12 @@
     day: 3
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:franciscus-assisiensis
   kind: feast
   titulars: [franciscus-assisiensis]
@@ -3454,6 +4753,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 10
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:placidus-et-socii
   kind: commemoration-only
   titulars: [placidus, mauritius, eutychius, victorinus, flavia]
@@ -3468,6 +4773,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 10
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:bruno
   kind: feast
   titulars: [bruno]
@@ -3482,6 +4793,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:rosarium
   kind: feast
   titulars: [beata-maria-virgo-a-rosario]
@@ -3496,6 +4813,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 10
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:birgitta
   kind: feast
   titulars: [birgitta]
@@ -3510,6 +4833,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-leonardi
   kind: feast
   titulars: [ioannes-leonardi, dionysius, rusticus, eleutherius]
@@ -3524,6 +4853,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:franciscus-borgia
   kind: feast
   titulars: [franciscus-borgia]
@@ -3538,6 +4873,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 10
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:maternitas-bmv
   kind: feast
   titulars: [maternitas-beatae-mariae-virginis]
@@ -3552,6 +4893,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 10
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:eduardus
   kind: feast
   titulars: [eduardus]
@@ -3566,6 +4913,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 10
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:callistus
   kind: feast
   titulars: [callistus]
@@ -3580,6 +4933,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 10
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:teresia-a-iesu
   kind: feast
   titulars: [teresia-a-iesu]
@@ -3594,6 +4953,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hedwigis
   kind: feast
   titulars: [hedwigis]
@@ -3608,6 +4973,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 10
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:margarita-maria-alacoque
   kind: feast
   titulars: [margarita-maria-alacoque]
@@ -3622,6 +4993,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:lucas
   kind: feast
   titulars: [lucas]
@@ -3636,6 +5013,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 10
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-de-alcantara
   kind: feast
   titulars: [petrus-de-alcantara]
@@ -3650,6 +5033,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-cantius
   kind: feast
   titulars: [ioannes-cantius]
@@ -3664,6 +5053,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 10
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:hilarion
   kind: commemoration-only
   titulars: [hilarion]
@@ -3680,6 +5075,12 @@
 
 # Co-occurring commemorations kept alongside the III-class feasts above (surfaced by
 # correcting those feasts' ranks): each is printed in the 1962 Missal as a commemoration.
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 10
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:euphemia-lucia-geminianus
   kind: commemoration-only
   titulars: [euphemia, lucia, geminianus]
@@ -3694,6 +5095,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 9
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:mauritius-et-socii
   kind: commemoration-only
   titulars: [mauritius]
@@ -3708,6 +5115,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 9
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:thecla
   kind: commemoration-only
   titulars: [thecla]
@@ -3722,6 +5135,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 9
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ursula-et-socii
   kind: commemoration-only
   titulars: [ursula]
@@ -3736,6 +5155,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 10
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:antonius-maria-claret
   kind: feast
   titulars: [antonius-maria-claret]
@@ -3764,6 +5189,12 @@
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 10
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:chrysanthus-et-daria
   kind: commemoration-only
   titulars: [chrysanthus, daria]
@@ -3778,6 +5209,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 10
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:evaristus
   kind: commemoration-only
   titulars: [evaristus]
@@ -3792,6 +5229,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 10
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:simon-et-iudas
   kind: feast
   titulars: [simon, iudas-thaddaeus]
@@ -3808,6 +5251,12 @@
 
 # Vigil of Ss. Simon & Jude — 1954-only (suppressed 1955); no 1962 block. Plural
 # "Apostolorum" (Ss.), one vigil for two apostles.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 10
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:simon-et-iudas:vigilia
   kind: vigil
   titulars: [simon, iudas-thaddaeus]
@@ -3842,6 +5291,12 @@
 # the canonical All Saints id (roman:sanctorale:omnes-sancti — the Nov 1 winner in the
 # golden trace); the roman:sanctorale:omnium-sanctorum duplicate is a pre-existing dataset
 # issue for the #64 burndown, not this issue.
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    colour: white
+    month: 11
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:omnes-sancti:vigilia
   kind: vigil
   titulars: [omnes-sancti]
@@ -3858,6 +5313,13 @@
     vigilOf: roman:sanctorale:omnes-sancti
     cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
+# NOTE (#64): roman:sanctorale:omnium-sanctorum below is a pre-existing DUPLICATE of
+# roman:sanctorale:omnes-sancti (both Nov 1, I class, white). Resolving it is deferred:
+# removing it exposes that All Souls (Nov 2, the Office of the Dead) is unimplemented in
+# EVERY edition — the phantom duplicate currently transfers onto Nov 2 and coincidentally
+# supplies a class-1 that the SSPX/missalemeum oracle matches. The duplicate and the
+# Office of the Dead must therefore land together in a dedicated follow-up (see #64
+# comment), not here. It carries no roman-divino-afflatu block, so it is absent from 1954.
 - id: roman:sanctorale:omnium-sanctorum
   kind: feast
   titulars: [omnes-sancti]
@@ -3886,6 +5348,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:quatuor-coronati
   kind: commemoration-only
   titulars: [quatuor-coronati]
@@ -3900,6 +5368,12 @@
     day: 8
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:dedicatio-basilicae-salvatoris
   kind: feast
   titulars: [basilica-sanctissimi-salvatoris]
@@ -3914,6 +5388,12 @@
     day: 9
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 11
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:andreas-avellinus
   kind: feast
   titulars: [andreas-avellinus]
@@ -3928,6 +5408,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:martinus-turonensis
   kind: feast
   titulars: [martinus-turonensis]
@@ -3942,6 +5428,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:martinus-papa
   kind: feast
   titulars: [martinus-i-papa]
@@ -3956,6 +5448,12 @@
     day: 12
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 11
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:didacus
   kind: feast
   titulars: [didacus]
@@ -3970,6 +5468,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 11
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:iosaphat
   kind: feast
   titulars: [iosaphat]
@@ -3984,6 +5488,12 @@
     day: 14
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 11
+    day: 14
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:albertus-magnus
   kind: feast
   titulars: [albertus-magnus]
@@ -3998,6 +5508,12 @@
     day: 15
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 15
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gertrudis
   kind: feast
   titulars: [gertrudis]
@@ -4012,6 +5528,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:gregorius-thaumaturgus
   kind: feast
   titulars: [gregorius-thaumaturgus]
@@ -4026,6 +5548,12 @@
     day: 17
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 11
+    day: 17
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:dedicatio-basilicarum-petri-et-pauli
   kind: feast
   titulars: [basilica-s-petri, basilica-s-pauli]
@@ -4040,6 +5568,12 @@
     day: 18
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 11
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:elisabeth
   kind: feast
   titulars: [elisabeth]
@@ -4054,6 +5588,12 @@
     day: 19
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:felix-valois
   kind: feast
   titulars: [felix-de-valois]
@@ -4068,6 +5608,12 @@
     day: 20
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:praesentatio-bmv
   kind: feast
   titulars: [beata-maria-virgo]
@@ -4082,6 +5628,12 @@
     day: 21
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 11
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:caecilia
   kind: feast
   titulars: [caecilia]
@@ -4096,6 +5648,12 @@
     day: 22
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 11
+    day: 22
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:clemens
   kind: feast
   titulars: [clemens-i]
@@ -4110,6 +5668,12 @@
     day: 23
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 11
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-a-cruce
   kind: feast
   titulars: [ioannes-a-cruce]
@@ -4124,6 +5688,12 @@
     day: 24
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:catharina
   kind: feast
   titulars: [catharina]
@@ -4138,6 +5708,12 @@
     day: 25
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 11
+    day: 25
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:sylvester-abbas
   kind: feast
   titulars: [sylvester-abbas]
@@ -4152,6 +5728,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 11
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:saturninus
   kind: commemoration-only
   titulars: [saturninus]
@@ -4166,6 +5748,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:andreas
   kind: feast
   titulars: [andreas]
@@ -4181,6 +5769,12 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 # Vigil of St Andrew — 1954-only (suppressed 1955); no 1962 block.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 11
+    day: 30
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:andreas:vigilia
   kind: vigil
   titulars: [andreas]
@@ -4225,6 +5819,12 @@
     day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 12
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:franciscus-xaverius
   kind: feast
   titulars: [franciscus-xaverius]
@@ -4239,6 +5839,12 @@
     day: 3
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 12
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:barbara
   kind: commemoration-only
   titulars: [barbara]
@@ -4253,6 +5859,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 12
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:petrus-chrysologus
   kind: feast
   titulars: [petrus-chrysologus]
@@ -4267,6 +5879,12 @@
     day: 4
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 12
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:sabbas
   kind: commemoration-only
   titulars: [sabbas]
@@ -4281,6 +5899,12 @@
     day: 5
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: white
+    month: 12
+    day: 5
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:nicolaus
   kind: feast
   titulars: [nicolaus]
@@ -4295,6 +5919,12 @@
     day: 6
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 12
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ambrosius
   kind: feast
   titulars: [ambrosius]
@@ -4309,6 +5939,12 @@
     day: 7
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 12
+    day: 7
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:immaculata-conceptio
   kind: feast
   titulars: [maria]
@@ -4326,6 +5962,12 @@
 # Vigil of the Immaculate Conception — 1954-only (suppressed 1955); no 1962 block. Title
 # is the Missal's vigil heading "In Vigilia Immaculatae Conceptionis B.M.V." (adjective-
 # first), distinct from the feast's ablative form "In Conceptione Immaculata B.M.V.".
+  roman-divino-afflatu:
+    legacyRank: duplex-i-classis
+    colour: white
+    month: 12
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:immaculata-conceptio:vigilia
   kind: vigil
   titulars: [maria]
@@ -4356,6 +5998,12 @@
     day: 10
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 12
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:damasus
   kind: feast
   titulars: [damasus]
@@ -4370,6 +6018,12 @@
     day: 11
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 12
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:lucia
   kind: feast
   titulars: [lucia]
@@ -4384,6 +6038,12 @@
     day: 13
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 12
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:eusebius
   kind: commemoration-only
   titulars: [eusebius]
@@ -4398,6 +6058,12 @@
     day: 16
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 12
+    day: 16
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:thomas-apostolus
   kind: feast
   titulars: [thomas-apostolus]
@@ -4413,6 +6079,12 @@
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
 # Vigil of St Thomas — 1954-only (suppressed 1955); no 1962 block.
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 12
+    day: 21
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:thomas-apostolus:vigilia
   kind: vigil
   titulars: [thomas-apostolus]
@@ -4443,6 +6115,12 @@
     day: 26
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 12
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:ioannes-evangelista
   kind: feast
   titulars: [ioannes-evangelista]
@@ -4457,6 +6135,12 @@
     day: 27
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: white
+    month: 12
+    day: 27
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:innocentes
   kind: feast
   titulars: [innocentes]
@@ -4471,6 +6155,12 @@
     day: 28
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 12
+    day: 28
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:thomas-becket
   kind: feast
   titulars: [thomas-becket]
@@ -4485,6 +6175,12 @@
     day: 29
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
 
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: red
+    month: 12
+    day: 29
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 - id: roman:sanctorale:silvester
   kind: feast
   titulars: [silvester]
@@ -4498,3 +6194,396 @@
     month: 12
     day: 31
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: white
+    month: 12
+    day: 31
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+# --- 1954-only sanctoral feasts (Core v0.3.0, #64) ------------------------------------
+# Feasts of the Divino Afflatu (pre-1955) GENERAL (universal) Roman Calendar that the
+# 1955/1960 reforms SUPPRESSED, so they carry no base (roman-rubricae-1960) block — only a
+# roman-divino-afflatu realization, and notInBaseEdition marks that their identity joins the
+# shared union while the 1960 edition places nothing for them. Grades/colours are the
+# pre-1955 facts (ordo-1954); Latin titles are mr-1920. MEMBERSHIP is universal-calendar
+# only, confirmed against the Divinum Officium Divino-Afflatu engine — a saint the engine
+# never places (principal or commemoration) across the sample years is *pro aliquibus locis*
+# (local), not general, and is excluded: e.g. St John Baptist de Rossi (extended to the
+# universal calendar only in 1960), St Liborius (Paderborn), the Twelve Holy Brothers.
+
+- id: roman:sanctorale:cathedra-petri-romae
+  kind: feast
+  titulars: [petrus]
+  names:
+    la: "Cathedrae S. Petri Apostoli Romae"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 1
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:dorothea
+  kind: feast
+  titulars: [dorothea]
+  names:
+    la: "S. Dorotheae Virginis et Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 2
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:apollonia
+  kind: feast
+  titulars: [apollonia]
+  names:
+    la: "S. Apolloniae Virginis et Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 2
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:inventio-crucis
+  kind: feast
+  titulars: [sancta-crux]
+  names:
+    la: "In Inventione Sanctae Crucis"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: duplex-ii-classis
+    colour: red
+    month: 5
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:ioannes-ante-portam-latinam
+  kind: feast
+  titulars: [ioannes-evangelista]
+  names:
+    la: "S. Ioannis Ante Portam Latinam"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: red
+    month: 5
+    day: 6
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:apparitio-michaelis
+  kind: feast
+  titulars: [michael-archangelus]
+  names:
+    la: "In Apparitione S. Michaelis Archangeli"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 5
+    day: 8
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:basilides-cyrinus-nabor-nazarius
+  kind: feast
+  titulars: [basilides]
+  names:
+    la: "Ss. Basilidis, Cyrini, Naboris et Nazarii Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 6
+    day: 12
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:gervasius-protasius
+  kind: feast
+  titulars: [gervasius]
+  names:
+    la: "Ss. Gervasii et Protasii Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 6
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:leo-secundus
+  kind: feast
+  titulars: [leo-secundus]
+  names:
+    la: "S. Leonis II Papae et Confessoris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: white
+    month: 7
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:pius-primus
+  kind: feast
+  titulars: [pius-primus]
+  names:
+    la: "S. Pii I Papae et Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:anacletus
+  kind: feast
+  titulars: [anacletus]
+  names:
+    la: "S. Anacleti Papae et Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 7
+    day: 13
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:symphorosa
+  kind: feast
+  titulars: [symphorosa]
+  names:
+    la: "Ss. Symphorosae et Septem Filiorum eius Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 18
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:margarita-antiochena
+  kind: feast
+  titulars: [margarita-antiochena]
+  names:
+    la: "S. Margaritae Virginis et Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 7
+    day: 20
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:petrus-ad-vincula
+  kind: feast
+  titulars: [petrus]
+  names:
+    la: "S. Petri ad Vincula"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 8
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:machabaei
+  kind: feast
+  titulars: [machabaei]
+  names:
+    la: "Ss. Machabaeorum Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 8
+    day: 1
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:inventio-stephani
+  kind: feast
+  titulars: [stephanus]
+  names:
+    la: "In Inventione S. Stephani Protomartyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: semiduplex
+    colour: red
+    month: 8
+    day: 3
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:bmv-de-mercede
+  kind: feast
+  titulars: [beata-maria-virgo]
+  names:
+    la: "Beatae Mariae Virginis de Mercede"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: duplex-maius
+    colour: white
+    month: 9
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:cyprianus-iustina
+  kind: feast
+  titulars: [cyprianus-antiochenus]
+  names:
+    la: "Ss. Cypriani et Iustinae Virginis et Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 9
+    day: 26
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:vitalis-agricola
+  kind: feast
+  titulars: [vitalis-bononiensis]
+  names:
+    la: "Ss. Vitalis et Agricolae Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 4
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:theodorus
+  kind: feast
+  titulars: [theodorus]
+  names:
+    la: "S. Theodori Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 9
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:tryphon-respicius-nympha
+  kind: feast
+  titulars: [tryphon]
+  names:
+    la: "Ss. Tryphonis, Respicii et Nymphae Martyrum"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 10
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:menna
+  kind: feast
+  titulars: [menna]
+  names:
+    la: "S. Mennae Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 11
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:pontianus
+  kind: feast
+  titulars: [pontianus]
+  names:
+    la: "S. Pontiani Papae et Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 19
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:felicitas
+  kind: feast
+  titulars: [felicitas-romana]
+  names:
+    la: "S. Felicitatis Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 23
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
+
+- id: roman:sanctorale:chrysogonus
+  kind: feast
+  titulars: [chrysogonus]
+  names:
+    la: "S. Chrysogoni Martyris"
+  cites:
+    names.la: mr-1920
+  notInBaseEdition: true
+  roman-divino-afflatu:
+    legacyRank: simplex
+    colour: red
+    month: 11
+    day: 24
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }

@@ -33,6 +33,12 @@
 #   * Nativity BVM octave (Sep 8): a SIMPLE octave whose only observance — the Sep 15 octave
 #     day — was replaced by the Seven Sorrows of the BVM (duplex II cl.). The whole octave is
 #     held; it is intentionally absent below (a simple octave with no octave day is nothing).
+#   * Immaculate Conception octave (Dec 8): a COMMON octave (days within Dec 9-15, octave day
+#     Dec 15) abolished by Cum nostra hac aetate (1955). Held with the other 1954 octave DAYS
+#     (comites-Christi Jan 2-4, Octave of All Saints Nov 8) pending the octave-day burndown —
+#     its days within are NOT trivial (St Damasus I Dec 11 and St Lucy Dec 13 are graded
+#     feasts falling inside the window, so the days-within need real precedence resolution,
+#     not a bare emit). Its Dec 8 feast and Dec 7 vigil are already present.
 
 roman-divino-afflatu:
   # --- Common octaves: days within (semidouble) + octave day (greater double). ---

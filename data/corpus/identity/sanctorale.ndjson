@@ -9,6 +9,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:aloysius-gonzaga","kind":"feast","names":{"la":"S. Aloisii Gonzagae Confessoris"},"titulars":["aloysius-gonzaga"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:alphonsus-maria-de-ligorio","kind":"feast","names":{"la":"S. Alphonsi Mariae de Ligorio Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["alphonsus-maria-de-ligorio"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ambrosius","kind":"feast","names":{"la":"S. Ambrosii Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["ambrosius"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:anacletus","kind":"feast","names":{"la":"S. Anacleti Papae et Martyris"},"titulars":["anacletus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:andreas","kind":"feast","names":{"la":"S. Andreae Apostoli"},"titulars":["andreas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:andreas-avellinus","kind":"feast","names":{"la":"S. Andreae Avellini Confessoris"},"titulars":["andreas-avellinus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:andreas-corsini","kind":"feast","names":{"la":"S. Andreae Corsini Episcopi et Confessoris"},"titulars":["andreas-corsini"]}
@@ -25,7 +26,9 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:antonius-maria-zaccaria","kind":"feast","names":{"la":"S. Antonii Mariae Zaccaria Confessoris"},"titulars":["antonius-maria-zaccaria"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:antonius-patavinus","kind":"feast","names":{"la":"S. Antonii de Padua Confessoris et Ecclesiae Doctoris"},"titulars":["antonius-patavinus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:apollinaris","kind":"feast","names":{"la":"S. Apollinaris Episcopi et Martyris"},"titulars":["apollinaris"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:apollonia","kind":"feast","names":{"la":"S. Apolloniae Virginis et Martyris"},"titulars":["apollonia"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:apparitio-immaculatae","kind":"feast","names":{"la":"In Apparitione B. Mariae Virginis Immaculatae"},"titulars":["beata-maria-virgo"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:apparitio-michaelis","kind":"feast","names":{"la":"In Apparitione S. Michaelis Archangeli"},"titulars":["michael-archangelus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:assumptio","kind":"feast","names":{"la":"In Assumptione B.M.V."},"titulars":["maria"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:assumptio:infra-octavam:2","kind":"within-octave","names":{"la":"Dies secunda infra Octavam Assumptionis B.M.V."},"titulars":["maria"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:assumptio:infra-octavam:3","kind":"within-octave","names":{"la":"Dies tertia infra Octavam Assumptionis B.M.V."},"titulars":["maria"]}
@@ -42,6 +45,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:barnabas","kind":"feast","names":{"la":"S. Barnabae Apostoli"},"titulars":["barnabas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bartholomaeus","kind":"feast","names":{"la":"S. Bartholomaei Apostoli"},"titulars":["bartholomaeus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bartholomaeus:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Bartholomaei Apostoli"},"titulars":["bartholomaeus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:basilides-cyrinus-nabor-nazarius","kind":"feast","names":{"la":"Ss. Basilidis, Cyrini, Naboris et Nazarii Martyrum"},"titulars":["basilides"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:basilius-magnus","kind":"feast","names":{"la":"S. Basilii Magni Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["basilius-magnus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:beatae-mariae-de-monte-carmelo","kind":"commemoration-only","names":{"la":"Commemoratio B. Mariae Virginis de Monte Carmelo"},"titulars":["beata-maria-virgo-de-monte-carmelo"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:beda-venerabilis","kind":"feast","names":{"la":"S. Bedae Venerabilis Confessoris et Ecclesiae Doctoris"},"titulars":["beda-venerabilis"]}
@@ -52,6 +56,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bibiana","kind":"feast","names":{"la":"S. Bibianae Virginis et Martyris"},"titulars":["bibiana"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:birgitta","kind":"feast","names":{"la":"S. Birgittae Viduae"},"titulars":["birgitta"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:blasius","kind":"commemoration-only","names":{"la":"S. Blasii Episcopi et Martyris"},"titulars":["blasius"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bmv-de-mercede","kind":"feast","names":{"la":"Beatae Mariae Virginis de Mercede"},"titulars":["beata-maria-virgo"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bonaventura","kind":"feast","names":{"la":"S. Bonaventurae Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["bonaventura"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bonifatius","kind":"feast","names":{"la":"S. Bonifatii Episcopi et Martyris"},"titulars":["bonifatius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:bonifatius-tarsensis","kind":"commemoration-only","names":{"la":"S. Bonifatii Martyris"},"titulars":["bonifatius"]}
@@ -66,9 +71,11 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:catharina","kind":"feast","names":{"la":"S. Catharinae Virginis et Martyris"},"titulars":["catharina"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:catharina-senensis","kind":"feast","names":{"la":"S. Catharinae Senensis Virginis"},"titulars":["catharina-senensis"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cathedra-petri","kind":"feast","names":{"la":"Cathedra S. Petri Apostoli"},"titulars":["petrus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cathedra-petri-romae","kind":"feast","names":{"la":"Cathedrae S. Petri Apostoli Romae"},"titulars":["petrus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:christina","kind":"commemoration-only","names":{"la":"S. Christinae Virginis et Martyris"},"titulars":["christina"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:christophorus","kind":"commemoration-only","names":{"la":"S. Christophori Martyris"},"titulars":["christophorus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:chrysanthus-et-daria","kind":"commemoration-only","names":{"la":"Ss. Chrysanthi et Dariae Martyrum"},"titulars":["chrysanthus","daria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:chrysogonus","kind":"feast","names":{"la":"S. Chrysogoni Martyris"},"titulars":["chrysogonus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:clara","kind":"feast","names":{"la":"S. Clarae Virginis"},"titulars":["clara"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:clemens","kind":"feast","names":{"la":"S. Clementis I Papae et Martyris"},"titulars":["clemens-i"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cletus-marcellinus","kind":"feast","names":{"la":"Ss. Cleti et Marcellini Paparum et Martyrum"},"titulars":["cletus","marcellinus"]}
@@ -76,6 +83,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:conversio-pauli","kind":"feast","names":{"la":"In Conversione S. Pauli Apostoli"},"titulars":["conversio-s-pauli"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cornelius-et-cyprianus","kind":"feast","names":{"la":"Ss. Cornelii Papae et Cypriani Episcopi Martyrum"},"titulars":["cornelius","cyprianus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cosmas-et-damianus","kind":"feast","names":{"la":"Ss. Cosmae et Damiani Martyrum"},"titulars":["cosmas","damianus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cyprianus-iustina","kind":"feast","names":{"la":"Ss. Cypriani et Iustinae Virginis et Martyrum"},"titulars":["cyprianus-antiochenus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cyriacus","kind":"commemoration-only","names":{"la":"Ss. Cyriaci, Largi et Smaragdi Martyrum"},"titulars":["cyriacus","largus","smaragdus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cyrillus-alexandrinus","kind":"feast","names":{"la":"S. Cyrilli Alexandrini Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["cyrillus-alexandrinus","apollonia"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:cyrillus-hierosolymitanus","kind":"feast","names":{"la":"S. Cyrilli Hierosolymitani Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["cyrillus-hierosolymitanus"]}
@@ -88,6 +96,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:didacus","kind":"feast","names":{"la":"S. Didaci Confessoris"},"titulars":["didacus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:dominicus","kind":"feast","names":{"la":"S. Dominici Confessoris"},"titulars":["dominicus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:donatus","kind":"commemoration-only","names":{"la":"S. Donati Episcopi et Martyris"},"titulars":["donatus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:dorothea","kind":"feast","names":{"la":"S. Dorotheae Virginis et Martyris"},"titulars":["dorothea"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:eduardus","kind":"feast","names":{"la":"S. Eduardi Regis et Confessoris"},"titulars":["eduardus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:eleutherius","kind":"commemoration-only","names":{"la":"S. Eleutherii Papae et Martyris"},"titulars":["eleutherius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:eligius","kind":"commemoration-only","names":{"la":"S. Eligii Episcopi et Confessoris"},"titulars":["eligius"]}
@@ -103,6 +112,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:exaltatio-crucis","kind":"feast","names":{"la":"In Exaltatione Sanctae Crucis"},"titulars":["sancta-crux"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:fabianus-et-sebastianus","kind":"feast","names":{"la":"Ss. Fabiani Papae et Sebastiani Martyrum"},"titulars":["fabianus","sebastianus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:faustinus-et-iovita","kind":"commemoration-only","names":{"la":"Ss. Faustini et Iovitae Martyrum"},"titulars":["faustinus","iovita"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:felicitas","kind":"feast","names":{"la":"S. Felicitatis Martyris"},"titulars":["felicitas-romana"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:felix-et-adauctus","kind":"commemoration-only","names":{"la":"Ss. Felicis et Adaucti Martyrum"},"titulars":["felix","adauctus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:felix-i","kind":"commemoration-only","names":{"la":"S. Felicis I Papae et Martyris"},"titulars":["felix-i"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:felix-nolanus","kind":"commemoration-only","names":{"la":"S. Felicis Presbyteri et Martyris"},"titulars":["felix-nolanus"]}
@@ -120,6 +130,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gabriel-archangelus","kind":"feast","names":{"la":"S. Gabrielis Archangeli"},"titulars":["gabriel-archangelus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:georgius","kind":"commemoration-only","names":{"la":"S. Georgii Martyris"},"titulars":["georgius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gertrudis","kind":"feast","names":{"la":"S. Gertrudis Virginis"},"titulars":["gertrudis"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gervasius-protasius","kind":"feast","names":{"la":"Ss. Gervasii et Protasii Martyrum"},"titulars":["gervasius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gordianus-epimachus","kind":"commemoration-only","names":{"la":"Ss. Gordiani et Epimachi Martyrum"},"titulars":["gordianus","epimachus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gorgonius","kind":"commemoration-only","names":{"la":"S. Gorgonii Martyris"},"titulars":["gorgonius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:gregorius-barbadicus","kind":"feast","names":{"la":"S. Gregorii Barbadici Episcopi et Confessoris"},"titulars":["gregorius-barbadicus"]}
@@ -148,11 +159,14 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:vigilia","kind":"vigil","names":{"la":"In Vigilia Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculatum-cor-mariae","kind":"feast","names":{"la":"Immaculati Cordis B.M.V."},"titulars":["immaculatum-cor-beatae-mariae-virginis"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:innocentes","kind":"feast","names":{"la":"Ss. Innocentium Martyrum"},"titulars":["innocentes"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:inventio-crucis","kind":"feast","names":{"la":"In Inventione Sanctae Crucis"},"titulars":["sancta-crux"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:inventio-stephani","kind":"feast","names":{"la":"In Inventione S. Stephani Protomartyris"},"titulars":["stephanus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioachim","kind":"feast","names":{"la":"S. Ioachim Confessoris, Patris B.M.V."},"titulars":["ioachim"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioanna-francisca-fremiot-de-chantal","kind":"feast","names":{"la":"S. Ioannae Franciscae Fremiot de Chantal Viduae"},"titulars":["ioanna-francisca-fremiot-de-chantal"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-a-capistrano","kind":"feast","names":{"la":"S. Ioannis a Capistrano Confessoris"},"titulars":["ioannes-a-capistrano"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-a-cruce","kind":"feast","names":{"la":"S. Ioannis a Cruce Confessoris et Ecclesiae Doctoris"},"titulars":["ioannes-a-cruce"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-a-sancto-facundo","kind":"feast","names":{"la":"S. Ioannis a S. Facundo Confessoris"},"titulars":["ioannes-a-sancto-facundo"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-ante-portam-latinam","kind":"feast","names":{"la":"S. Ioannis Ante Portam Latinam"},"titulars":["ioannes-evangelista"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-baptista-de-la-salle","kind":"feast","names":{"la":"S. Ioannis Baptistae de la Salle Confessoris"},"titulars":["ioannes-baptista-de-la-salle"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-baptista:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Ioannis Baptistae"},"titulars":["ioannes-baptista"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-bosco","kind":"feast","names":{"la":"S. Ioannis Bosco Confessoris"},"titulars":["ioannes-bosco"]}
@@ -183,14 +197,17 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius:in-octava","kind":"octave-day","names":{"la":"In Octava S. Laurentii Martyris"},"titulars":["laurentius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Laurentii Martyris"},"titulars":["laurentius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:leo-magnus","kind":"feast","names":{"la":"S. Leonis I Papae Confessoris et Ecclesiae Doctoris"},"titulars":["leo-magnus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:leo-secundus","kind":"feast","names":{"la":"S. Leonis II Papae et Confessoris"},"titulars":["leo-secundus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:linus","kind":"feast","names":{"la":"S. Lini Papae et Martyris"},"titulars":["linus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:lucas","kind":"feast","names":{"la":"S. Lucae Evangelistae"},"titulars":["lucas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:lucia","kind":"feast","names":{"la":"S. Luciae Virginis et Martyris"},"titulars":["lucia"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:lucius-i","kind":"commemoration-only","names":{"la":"S. Lucii I Papae et Martyris"},"titulars":["lucius-i"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ludovicus","kind":"feast","names":{"la":"S. Ludovici Regis et Confessoris"},"titulars":["ludovicus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:machabaei","kind":"feast","names":{"la":"Ss. Machabaeorum Martyrum"},"titulars":["machabaei"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:marcellinus-petrus-erasmus","kind":"commemoration-only","names":{"la":"Ss. Marcellini, Petri et Erasmi Martyrum"},"titulars":["marcellinus","petrus","erasmus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:marcellus-i","kind":"feast","names":{"la":"S. Marcelli Papae et Martyris"},"titulars":["marcellus-i"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:marcus","kind":"feast","names":{"la":"S. Marci Evangelistae"},"titulars":["marcus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:margarita-antiochena","kind":"feast","names":{"la":"S. Margaritae Virginis et Martyris"},"titulars":["margarita-antiochena"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:margarita-maria-alacoque","kind":"feast","names":{"la":"S. Margaritae Mariae Alacoque Virginis"},"titulars":["margarita-maria-alacoque"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:margarita-scotiae","kind":"feast","names":{"la":"S. Margaritae Reginae Viduae"},"titulars":["margarita-reginae-scotiae"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:maria-magdalena","kind":"feast","names":{"la":"S. Mariae Magdalenae Poenitentis"},"titulars":["maria-magdalena"]}
@@ -209,6 +226,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:mauritius-et-socii","kind":"commemoration-only","names":{"la":"Ss. Mauritii et Sociorum Martyrum"},"titulars":["mauritius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:maurus","kind":"commemoration-only","names":{"la":"S. Mauri Abbatis"},"titulars":["maurus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:melchiades","kind":"commemoration-only","names":{"la":"S. Melchiadis Papae et Martyris"},"titulars":["melchiades"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:menna","kind":"feast","names":{"la":"S. Mennae Martyris"},"titulars":["menna"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:michael-archangelus","kind":"feast","names":{"la":"In Dedicatione S. Michaelis Archangeli"},"titulars":["michael-archangelus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:monica","kind":"feast","names":{"la":"S. Monicae Viduae"},"titulars":["monica"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:nabor-felix","kind":"commemoration-only","names":{"la":"Ss. Naboris et Felicis Martyrum"},"titulars":["nabor","felix"]}
@@ -239,6 +257,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:perpetua-felicitas","kind":"feast","names":{"la":"Ss. Perpetuae et Felicitatis Martyrum"},"titulars":["perpetua","felicitas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petronilla","kind":"commemoration-only","names":{"la":"S. Petronillae Virginis"},"titulars":["petronilla"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus","kind":"commemoration-only","names":{"la":"S. Petri Apostoli"},"titulars":["petrus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus-ad-vincula","kind":"feast","names":{"la":"S. Petri ad Vincula"},"titulars":["petrus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus-caelestinus","kind":"feast","names":{"la":"S. Petri Caelestini Papae et Confessoris"},"titulars":["petrus-caelestinus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus-canisius","kind":"feast","names":{"la":"S. Petri Canisii Confessoris et Ecclesiae Doctoris"},"titulars":["petrus-canisius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:petrus-chrysologus","kind":"feast","names":{"la":"S. Petri Chrysologi Episcopi Confessoris et Ecclesiae Doctoris"},"titulars":["petrus-chrysologus"]}
@@ -258,10 +277,12 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:philippus-benitius","kind":"feast","names":{"la":"S. Philippi Benitii Confessoris"},"titulars":["philippus-benitius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:philippus-iacobus","kind":"feast","names":{"la":"Ss. Philippi et Iacobi Apostolorum"},"titulars":["philippus","iacobus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:philippus-nerius","kind":"feast","names":{"la":"S. Philippi Nerii Confessoris"},"titulars":["philippus-nerius"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pius-primus","kind":"feast","names":{"la":"S. Pii I Papae et Martyris"},"titulars":["pius-primus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pius-v","kind":"feast","names":{"la":"S. Pii V Papae et Confessoris"},"titulars":["pius-v"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pius-x","kind":"feast","names":{"la":"S. Pii X Papae Confessoris"},"titulars":["pius-x"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:placidus-et-socii","kind":"commemoration-only","names":{"la":"Ss. Placidi et Sociorum Martyrum"},"titulars":["placidus","mauritius","eutychius","victorinus","flavia"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:polycarpus","kind":"feast","names":{"la":"S. Polycarpi Episcopi et Martyris"},"titulars":["polycarpus"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pontianus","kind":"feast","names":{"la":"S. Pontiani Papae et Martyris"},"titulars":["pontianus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:praesentatio-bmv","kind":"feast","names":{"la":"In Praesentatione B. Mariae Virginis"},"titulars":["beata-maria-virgo"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:praxedes","kind":"commemoration-only","names":{"la":"S. Praxedis Virginis"},"titulars":["praxedes"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pretiosissimi-sanguinis","kind":"feast","names":{"la":"Festum Pretiosissimi Sanguinis D.N. Iesu Christi"},"titulars":["pretiosissimus-sanguis-d-n-i-c"]}
@@ -302,10 +323,12 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stephanus-papa","kind":"commemoration-only","names":{"la":"S. Stephani I Papae et Martyris"},"titulars":["stephanus-i-papa"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stigmata-francisci","kind":"commemoration-only","names":{"la":"Impressionis Ss. Stigmatum S. Francisci Confessoris"},"titulars":["franciscus-assisiensis"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:sylvester-abbas","kind":"feast","names":{"la":"S. Silvestri Abbatis"},"titulars":["sylvester-abbas"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:symphorosa","kind":"feast","names":{"la":"Ss. Symphorosae et Septem Filiorum eius Martyrum"},"titulars":["symphorosa"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:telesphorus","kind":"commemoration-only","names":{"la":"S. Telesphori Papae et Martyris"},"titulars":["telesphorus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:teresia-a-iesu","kind":"feast","names":{"la":"S. Teresiae Virginis"},"titulars":["teresia-a-iesu"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:teresia-a-iesu-infante","kind":"feast","names":{"la":"S. Teresiae a Iesu Infante Virginis"},"titulars":["teresia-a-iesu-infante"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:thecla","kind":"commemoration-only","names":{"la":"S. Theclae Virginis et Martyris"},"titulars":["thecla"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:theodorus","kind":"feast","names":{"la":"S. Theodori Martyris"},"titulars":["theodorus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:thomas-a-villanova","kind":"feast","names":{"la":"S. Thomae de Villanova Episcopi et Confessoris"},"titulars":["thomas-a-villanova"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:thomas-apostolus","kind":"feast","names":{"la":"S. Thomae Apostoli"},"titulars":["thomas-apostolus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:thomas-apostolus:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Thomae Apostoli"},"titulars":["thomas-apostolus"]}
@@ -317,6 +340,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:timotheus-et-socii","kind":"commemoration-only","names":{"la":"Ss. Timothei, Hippolyti et Symphoriani Martyrum"},"titulars":["timotheus","hippolytus","symphorianus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:titus","kind":"feast","names":{"la":"S. Titi Episcopi et Confessoris"},"titulars":["titus","dorothea"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:transfiguratio-domini","kind":"feast","names":{"la":"In Transfiguratione Domini Nostri Iesu Christi"},"titulars":["dominus-noster-iesus-christus-transfiguratio"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:tryphon-respicius-nympha","kind":"feast","names":{"la":"Ss. Tryphonis, Respicii et Nymphae Martyrum"},"titulars":["tryphon"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ubaldus","kind":"feast","names":{"la":"S. Ubaldi Episcopi et Confessoris"},"titulars":["ubaldus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:urbanus-i","kind":"commemoration-only","names":{"la":"S. Urbani I Papae et Martyris"},"titulars":["urbanus-i"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ursula-et-socii","kind":"commemoration-only","names":{"la":"Ss. Ursulae et Sociarum Virginum et Martyrum"},"titulars":["ursula"]}
@@ -327,6 +351,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:vincentius-ferrer","kind":"feast","names":{"la":"S. Vincentii Ferrerii Confessoris"},"titulars":["vincentius-ferrer"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:visitatio","kind":"feast","names":{"la":"In Visitatione B. Mariae Virginis"},"titulars":["beata-maria-virgo"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:vitalis","kind":"commemoration-only","names":{"la":"S. Vitalis Martyris"},"titulars":["vitalis"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:vitalis-agricola","kind":"feast","names":{"la":"Ss. Vitalis et Agricolae Martyrum"},"titulars":["vitalis-bononiensis"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:viti-modesti-crescentiae","kind":"commemoration-only","names":{"la":"Ss. Viti, Modesti et Crescentiae Martyrum"},"titulars":["vitus","modestus","crescentia"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:wenceslaus","kind":"feast","names":{"la":"S. Wenceslai Ducis et Martyris"},"titulars":["wenceslaus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:zephyrinus","kind":"commemoration-only","names":{"la":"S. Zephyrini Papae et Martyris"},"titulars":["zephyrinus"]}

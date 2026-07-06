@@ -273,6 +273,51 @@ and `DivinoAfflatuResolutionTest` (dated outcomes over the real corpus). As-buil
   precedence is correct via the tier order), and the full-year oracle sweep (#64 + the #73 CI matrix). The
   1952-Matthias-on-Quinquagesima edge the research flagged UNVERIFIED is deliberately not frozen as a test.
 
+## Seam 6b — the full 1954 sanctoral (Built — #64)
+
+The sparse 1954 diff is now the **full fixed-date sanctoral** (bar the octave DAYS, still deferred
+below). "The 1954 edition" means the **Divino Afflatu rubric-system as it stood 1955–1960** — the
+pre-1955 rite carrying the additions made under it up to the 1955 reform, NOT an AD-1954 snapshot. So
+it keeps the Queenship of the BVM (May 31, instituted *Ad Caeli Reginam* Oct 1954, first kept 1955 —
+which is also why St Angela Merici moves to Jun 1) and St Pius X (Sep 3, canonised 1954), both carried
+by the DO Divino-Afflatu oracle; but it holds out the 1955/1960 *reform* additions.
+
+Every 1962-base feast that existed under the Divino Afflatu rubrics carries a cited
+`roman-divino-afflatu` block with its pre-1955 grade (290 re-graded), and the **25 general-calendar
+feasts the 1955/1960 reforms suppressed** are authored as `notInBaseEdition` entries (the Finding of
+the Holy Cross, St John before the Latin Gate, the Apparition of St Michael, St Peter in Chains, the
+ancient simplex martyrs, …). Membership is **general-calendar only, engine-confirmed**: a feast the
+DO Divino-Afflatu engine never places (principal or commemoration) is *pro aliquibus locis* (local),
+not general, and is excluded (St John Baptist de Rossi — universal only from 1960; St Liborius; the
+Twelve Holy Brothers). Grades/colours cite `ordo-1954`; a per-id date override carries the feasts the
+reform *moved* (Ss. Philip & James, 1954 May 1 → 1962 May 11; St Irenaeus; the Curé of Ars). Held out:
+St Joseph the Worker (1955 — its exclusion is *forced*, since it displaced Ss. Philip & James whom the
+dataset restores to May 1), Ss. Gregory Barbarigo and Anthony Mary Claret (1960), and St Lawrence of
+Brindisi's universal feast (so 1954 keeps St Praxedes on 21 July).
+
+- **The largest correction** the burndown found is not data but engine: a saint the 1960 reform
+  reduced to a bare `commemoration-only` was, under the pre-1955 rubrics, usually still a real
+  (simplex+) office that IS the day on a free feria. `Rubrics1954Precedence::tierOf` now classifies a
+  1954 observance by its native grade and floors only a genuine `commemoratio`.
+- **Validated day-by-day against Divinum Officium** (the DA-1954 engine, an independent Perl
+  implementation) across 1954 and 1956 — **zero grade discrepancies** on every day both engines
+  celebrate a fixed sanctoral feast. Locked in CI by `DivinoAfflatuResolutionTest` (no DO needed);
+  the full-year DO sweep is a maintainer cross-check formalised with the #73 matrix. The
+  `vigilOf`/`octaveOf` **co-placement gate** (`checkCoPlacement`) is now on: every vigil/octave is
+  co-placed with its feast in its edition.
+- **`isBuilt` stays false — deliberately.** #64 completes the *fixed sanctoral*, but the pre-1955
+  calendar has components beyond it that remain deferred, so the edition is still not advertised (the
+  `CalendarCatalog` boundary refuses `day('1954')`): the **privileged temporal octaves** (Epiphany,
+  Corpus Christi, Ascension, Sacred Heart — the residual DO diffs, e.g. a transfer that must skip the
+  Corpus Christi octave, all trace to these), the **moveable feasts** (the Friday-in-Passion-Week
+  Seven Sorrows; the Solemnity/Patronage of St Joseph), the **Office of the Dead** (All Souls, Nov 2 —
+  unimplemented in *every* edition today, and coupled to resolving the pre-existing All-Saints
+  duplicate `omnium-sanctorum`, which currently masks it), the **sanctoral octave DAYS** not yet
+  materialised (the comites-Christi octaves Jan 2–4; the Octave of All Saints Nov 8; and the
+  **Immaculate Conception** common octave Dec 9–15, whose days-within are impeded by St Damasus I and
+  St Lucy — see the `octaves.yaml` deferred header), and the **Saturday Office of Our Lady**. Each is
+  a tracked follow-up (#453); the 1962 golden fixture stays byte-identical throughout.
+
 ## Seam 6a — 1955 precedence rules (next — #70)
 
 `Rubrics1955Precedence` will apply the *Cum nostra hac aetate* reductions on the 1954 base: the Semiduplex
