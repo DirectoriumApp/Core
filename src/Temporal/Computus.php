@@ -65,4 +65,50 @@ final class Computus
         return (new DateTimeImmutable('1970-01-01 00:00:00', new DateTimeZone('UTC')))
             ->setDate($year, $month, $day);
     }
+
+    /**
+     * The ecclesiastical Paschal Full Moon: the fourteenth day of the paschal
+     * lunation (Luna 14), the full moon on or after 21 March from which Easter is
+     * reckoned — Easter is the first Sunday strictly after this date.
+     *
+     * This is the same Gregorian computus as {@see gregorianEaster()}: the moon's
+     * offset from 21 March, with the two Clavian corrections that cap the paschal
+     * moon at 18 April (and at 17 April for the higher golden numbers). It anchors
+     * the ecclesiastical moon's age (see {@see \Directorium\Core\Calendrical\LunarAge}),
+     * and the "Easter follows it" invariant is asserted in the tests.
+     */
+    public static function paschalFullMoon(int $year): DateTimeImmutable
+    {
+        if ($year < self::GREGORIAN_REFORM_YEAR) {
+            throw new InvalidArgumentException(sprintf(
+                'The Gregorian paschal moon is defined from %d onward; got %d '
+                . '(the pre-reform Julian computus is a later concern).',
+                self::GREGORIAN_REFORM_YEAR,
+                $year
+            ));
+        }
+
+        $a = $year % 19;
+        $b = intdiv($year, 100);
+        $d = intdiv($b, 4);
+        $f = intdiv($b + 8, 25);
+        $g = intdiv($b - $f + 1, 3);
+        // Days from 21 March to the (uncorrected) ecclesiastical full moon, 0–29.
+        $h = (19 * $a + $b - $d - $g + 15) % 30;
+
+        // The paschal moon may not fall later than 18 April; the second rule keeps
+        // the higher golden numbers off 18 April too. These are the corrections
+        // folded into the Easter formula's `m` term, applied here to the moon itself.
+        $offset = $h;
+        if ($offset === 29) {
+            $offset = 28;
+        } elseif ($offset === 28 && $a >= 11) {
+            $offset = 27;
+        }
+
+        // 21 March + offset, expressed as a date (offset 0 = 21 March).
+        return (new DateTimeImmutable('1970-01-01 00:00:00', new DateTimeZone('UTC')))
+            ->setDate($year, 3, 21)
+            ->modify(sprintf('+%d days', $offset));
+    }
 }

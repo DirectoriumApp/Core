@@ -6,9 +6,9 @@ The versioned, serialisable shape that `Directorium\Core\contract()` emits — t
 The engine resolves a civil date to a `Calendar\LiturgicalDay` (Epic #29). That
 aggregate is kept pure: it holds value objects and knows nothing about JSON. A
 separate serialiser, `Contract\DayContract`, turns it into a stable, JSON-ready
-structure. The shape is **frozen at contract version 1.0.0** and only ever grows
-additively (reserved slots fill; keys are added, never removed or repurposed).
-This document is the spec downstream teams build against.
+structure. The shape is **frozen on the 1.0 line** (currently `1.0.1`) and only
+ever grows additively (reserved slots fill as patch bumps; keys are added, never
+removed or repurposed). This document is the spec downstream teams build against.
 
 ## Where it lives
 
@@ -31,7 +31,7 @@ cache on all three — any one moving means the resolved output may differ:
 
 | Field | Source | Meaning |
 | --- | --- | --- |
-| `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.0). |
+| `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.1). |
 | `corpusVersion` | `SanctoralData::version()` (seed: `1962-seed-<date>`) | The **calendar data** build; carries no edition token. |
 | `engineVersion` | `Directorium::VERSION` | The **resolver** version; hand-bumped when output changes. |
 
@@ -116,7 +116,7 @@ fixes only that the field is open and that shared concepts share a token.
 
 | Field | Type | Source | Notes |
 | --- | --- | --- | --- |
-| `contractVersion` | string | `SHAPE_VERSION` | `1.0.0`. |
+| `contractVersion` | string | `SHAPE_VERSION` | `1.0.1`. |
 | `corpusVersion` | string | `SanctoralData::version()` | e.g. `1962-seed-2026-07-02`. |
 | `engineVersion` | string | `Directorium::VERSION` | e.g. `0.4.0`. |
 | `rite` | string | edition head | `roman`. |
@@ -132,7 +132,7 @@ fixes only that the field is open and that shared concepts share a token.
 | `firstVespers` | null | reserved | Office layer. |
 | `resolution` | object \| null | opt-in | The "why-this-won" trace (#233); null by default, filled by `explain()` / `contract($d, true)`. See resolution-trace-model.md. |
 | `fasting` | null | reserved | Fasting/abstinence layer. |
-| `calendar` | object \| null | partly filled | `particular` names the selected particular calendar (#78); null under the universal 1962 calendar. Reserved astronomical/lectionary fields join it at v0.4. Sub-shape below. |
+| `calendar` | object | filled | Always carries `astronomical` — the day's calendrical/astronomical block (#242/#245). Also carries `particular` when resolved under a particular calendar (#78), and the reserved `lectionary`. Sub-shape below. |
 
 The **`secondVespers`** object is `{ outcome, favoursFollowing, holder,
 commemorated }`: `outcome` is the closed `ConcurrenceOutcome` value,
@@ -225,31 +225,54 @@ consumer that ignores `optionality` still reads a coherent (feria-first) day.
 
 ### The `calendar` sub-shape
 
-The day-level `calendar` block groups calendar-scoped facts, filled progressively.
-It is `null` under the universal 1962 calendar (so the default shape and its golden
-digest are unmoved) and non-null once a fact applies.
+The day-level `calendar` block groups calendar-scoped facts. It is **always an
+object** — every day carries the `astronomical` block — with `particular` and the
+reserved `lectionary` appearing when they apply.
 
-**`particular` — the selected particular calendar (#78, filled now).** When a caller
-resolves under a particular calendar (an `overlay`: SSPX, FSSP, a diocese), the block
+**`astronomical` — the calendrical block (#242/#245, filled now).** The cyclic
+figures printed at the head of an ordo or in the front matter of the martyrology,
+with the day's ecclesiastical lunar age. Edition-invariant — a pure function of the
+date, computed from `Calendrical\CalendricalYear` and `Calendrical\LunarAge`:
+
+```json
+"calendar": {
+  "astronomical": {
+    "goldenNumber": 12, "epact": 0, "solarCycle": 18,
+    "dominicalLetter": "E", "romanIndiction": 3, "lunarAge": 18
+  }
+}
+```
+
+- `goldenNumber` 1–19 · `epact` 0–29 (the moon's age at the head of the year; 0 is
+  printed as `*`) · `solarCycle` 1–28 · `romanIndiction` 1–15.
+- `dominicalLetter` — one letter `A`–`G`, or two in a leap year (e.g. `GF`), the
+  second governing March onward.
+- `lunarAge` — the ecclesiastical (schematic) moon's age, 1–30; `14` is the full
+  moon. It is anchored to the paschal lunation, so Luna 14 falls on the
+  ecclesiastical paschal full moon exactly, every year; see `Calendrical\LunarAge`
+  and KNOWN-LIMITATIONS for the civil-year-boundary caveat.
+
+**`particular` — the selected particular calendar (#78).** When a caller resolves
+under a particular calendar (an `overlay`: SSPX, FSSP, a diocese), the block also
 names it:
 
 ```json
 "calendar": {
-  "particular": { "id": "directorium:overlay:roman:sspx", "name": "Society of Saint Pius X" }
+  "particular": { "id": "directorium:overlay:roman:sspx", "name": "Society of Saint Pius X" },
+  "astronomical": { "…": "as above" }
 }
 ```
 
 - `particular.id` is the overlay's platform URN; `particular.name` its display name.
-- It is `null` (the whole `calendar` block is `null`) under the universal 1962
-  calendar. The overlay is *also* reflected in `corpusVersion` (`base+overlayId`, the
-  cache-key axis); `particular` is the structured, human-readable counterpart.
+- The key is **absent** under the universal 1962 calendar (the `calendar` block
+  itself is never null now — it still carries `astronomical`). The overlay is *also*
+  reflected in `corpusVersion` (`base+overlayId`, the cache-key axis); `particular`
+  is the structured, human-readable counterpart.
 
-**`lectionary` — reserved, filled at v0.4** — the astronomical fields join it then,
-alongside `particular`:
+**`lectionary` — reserved.** Joins the block alongside `astronomical`:
 
 ```json
 "calendar": {
-  "particular": null,
   "lectionary": { "sundayCycle": "A", "weekdayCycle": "II" }
 }
 ```
@@ -343,7 +366,7 @@ adding it is additive (a patch bump):
 | `firstVespers` | day | Office layer (v1.1) |
 | `resolution` | day | Show-your-work resolution trace |
 | `fasting` | day | Fasting & abstinence layer |
-| `calendar` | day | Calendrical/astronomical block |
+| `calendar.lectionary` | day | Lectionary cycles (Novus Ordo) — `calendar.astronomical` is filled (#242) |
 | `octaveOf` | office | Octave modelling |
 | `aliases` | office | `IdentityAliases` lineage |
 | `citations` | office | Provenance/authority subsystem |
@@ -369,7 +392,7 @@ Pentecost; the feria is both the celebration and the tempora):
 
 ```json
 {
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.0.1",
   "corpusVersion": "1962-seed-2026-07-02",
   "engineVersion": "0.4.0",
   "rite": "roman",
@@ -409,7 +432,16 @@ Pentecost; the feria is both the celebration and the tempora):
   "firstVespers": null,
   "resolution": null,
   "fasting": null,
-  "calendar": null
+  "calendar": {
+    "astronomical": {
+      "goldenNumber": 12,
+      "epact": 0,
+      "solarCycle": 18,
+      "dominicalLetter": "E",
+      "romanIndiction": 3,
+      "lunarAge": 18
+    }
+  }
 }
 ```
 

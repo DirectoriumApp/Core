@@ -38,6 +38,7 @@ against them day-by-day to prove correctness (see `ERRATA.md` for documented, le
 | Key | Source | Use | Notes |
 |-----|--------|-----|-------|
 | `computus-easter-days` | PHP `easter_days()` (Meeus/Jones/Butcher via the C runtime). | oracle | Independent Easter computation, cross-checked against `Computus`. |
+| `calendrical-tables` | Published Gregorian computus tables — Golden Number, Epact, Solar Cycle, Dominical Letter, Roman Indiction — as printed in the *Martyrologium Romanum* front matter and standard ecclesiastical almanacs. | oracle | Public-domain mathematical facts of the Gregorian reckoning; cross-checks the calendrical block (#246). |
 | `divinum-officium` | Divinum Officium reference implementation (divinumofficium.com). | oracle | Open-source; broad edition coverage. |
 | `missalemeum` | Missale Meum calendar/ordo (missalemeum.com). | oracle | 1962 calendar cross-check. |
 | `sspx-ordo` | SSPX ordo feed. | oracle | 1962 calendar cross-check; some particular-calendar differences (allowlisted). |

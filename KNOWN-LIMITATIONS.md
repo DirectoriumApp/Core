@@ -30,6 +30,14 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   validity window**; resolving an edition outside its window is anachronistic and will be flagged.
 - **Leap-year bissextile:** traditional reckoning doubles 24 February in a leap year (24 Feb "*bis*"),
   shifting St Matthias to 25 Feb and related observances — handled explicitly and tested.
+- **Ecclesiastical lunar age (Luna):** the moon's age in the `calendar.astronomical` block (#244) is the
+  schematic computus moon anchored to each year's paschal lunation, so **Luna 14 falls on the ecclesiastical
+  paschal full moon exactly, every year**, and the age is continuous with proper hollow/full lunations
+  through the whole liturgical year. What is **not** yet reconciled is the last lunation across the
+  **civil-year boundary** — the embolismic (13th) month and the once-in-nineteen-years *saltus lunae* that
+  the full Metonic lunar calendar carries — so the day-by-day `Luna` in late December / early January may
+  differ by a day from the martyrology's tabular value. A full Metonic reconstruction is a possible future
+  refinement; the year-level cyclic numbers (Golden Number, Epact, etc.) are exact.
 
 ## Deliberately out of scope
 
