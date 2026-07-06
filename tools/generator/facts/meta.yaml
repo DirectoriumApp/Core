@@ -16,5 +16,12 @@ edition: roman-rubricae-1960
 editions:
   - dir: roman-divino-afflatu   # 1954 (Divino Afflatu)
     base: roman-rubricae-1960
+  # 1955 (interim / Cum nostra hac aetate): a DERIVED edition — not authored block-by-block
+  # but computed from the 1954 data by the reform's mechanical transform (deriveCumNostra1955:
+  # semidouble→simple, simple→commemoration, doubles unchanged; nine vigils + all sanctoral
+  # octaves suppressed). `derive` names the transform; `base` records what it is a diff of.
+  - dir: roman-rubricae-1955    # 1955 (Cum nostra hac aetate)
+    base: roman-divino-afflatu
+    derive: cum-nostra-1955
 
 generator: "@directorium/corpus-generator"

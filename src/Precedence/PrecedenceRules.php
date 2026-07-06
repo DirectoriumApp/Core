@@ -69,6 +69,15 @@ interface PrecedenceRules
     public function isPrivilegedCommemoration(RealizedObservance $office): bool;
 
     /**
+     * Whether the privileged commemorations are exempt from the per-day count limit —
+     * kept even when {@see commemorationLimit()} is spent (or zero). True under the 1955
+     * rubrics ({@see Rubrics1955Precedence}: Cum nostra Title III.2 makes them "in
+     * addition to" the Title III.4 caps); false under 1954 and 1962, whose caps bound
+     * every commemoration alike.
+     */
+    public function privilegedCommemorationsExemptFromLimit(): bool;
+
+    /**
      * Why $winner is the office of the day — the cited reason the resolution trace
      * (#233) reports for the celebration (its line in the Table of Liturgical Days).
      */

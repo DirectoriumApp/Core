@@ -61,3 +61,27 @@
     uncopyrightable precedence facts (the occurrence tier order, transfer, Sunday classes, and
     commemoration rules) of the roman-divino-afflatu edition. Public domain by age; the dated
     outcomes it governs are cross-checked against ordo-1954."
+
+- key: cn-1955
+  urn: directorium:source:cn-1955
+  kind: reference
+  title: "Cum nostra hac aetate — General Decree of the S.R.C. reducing the rubrics (23 March 1955)"
+  year: 1955
+  rights: reference
+  note: "Consult-only. The decree of the Sacred Congregation of Rites (in force 1 Jan 1956) that
+    governs the roman-rubricae-1955 edition: it suppressed the semidouble grade (Title II.1-2,
+    II.20 — semidoubles kept as simples), reduced simples to a commemoration (II.21), retained
+    only the Easter/Christmas/Pentecost octaves (II.11) and seven vigils (II.8-9), and set the
+    0/1/2 commemoration caps (Title III.4). Cited for the uncopyrightable 1955 grade, suppression,
+    and precedence facts, all derived from the 1954 data by this rule."
+
+- key: do-1955
+  urn: directorium:source:do-1955
+  kind: oracle
+  title: "Divinum Officium — 'Reduced - 1955' rubric set"
+  year: 2024
+  rights: oracle
+  note: "Validation only. The Divinum Officium project's independent Perl implementation of the
+    1955 (Cum nostra hac aetate) rubrics, run headless as a day-by-day witness to the resolved
+    1955 office — the independent oracle for the roman-rubricae-1955 edition (issue #71), never
+    a data source and never transcribed. Cf. ordo-1954 for the 1954 edition."

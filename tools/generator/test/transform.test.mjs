@@ -9,12 +9,47 @@ import assert from 'node:assert/strict';
 import {
   transformSanctorale,
   transformSanctoraleEdition,
+  deriveCumNostra1955,
   transformOctaves,
   transformPrecedence,
   checkCoPlacement,
 } from '../src/transform.mjs';
 
 const DA = 'roman-divino-afflatu';
+
+// The four sanctoral vigils Cum nostra retained (Title II.9); the derive's count guard
+// requires exactly these, so a focused vigil test must include all four.
+const RETAINED_VIGIL_IDS = [
+  'roman:sanctorale:assumptio:vigilia',
+  'roman:sanctorale:ioannes-baptista:vigilia',
+  'roman:sanctorale:petrus-paulus:vigilia',
+  'roman:sanctorale:laurentius:vigilia',
+];
+
+function daBlock(legacyRank, extra = {}) {
+  return {
+    legacyRank,
+    colour: { base: 'white' },
+    month: 1,
+    day: 1,
+    cites: { colour: 'ordo-1954', legacyRank: 'ordo-1954' },
+    ...extra,
+  };
+}
+
+function retainedVigilEntries() {
+  return RETAINED_VIGIL_IDS.map((id) => ({
+    id,
+    kind: 'vigil',
+    [DA]: daBlock('vigilia', { vigilOf: id.replace(':vigilia', '') }),
+  }));
+}
+
+function derived1955(entries) {
+  const out = deriveCumNostra1955(entries);
+  const byId = new Map(out.map((e) => [e.id, e]));
+  return (id) => (byId.get(id) || {})['roman-rubricae-1955'];
+}
 
 test('checkCoPlacement passes when every vigilOf/octaveOf target is placed in its edition', () => {
   assert.doesNotThrow(() => checkCoPlacement([
@@ -426,4 +461,62 @@ test('a late-February octave that would cross the bissextile doubling is a fail-
     () => transformOctaves([bearing], DA, [{ bearingFeast: 'roman:sanctorale:x', class: 'common', genitive: 'X', cites: OCT_CITES }]),
     /bissextile/,
   );
+});
+
+// --- deriveCumNostra1955: the 1955 grade reduction + vigil suppression (#69/#71) ----------
+// The reduction itself lives here in the transform, NOT in the PHP engine (whose tierOf only
+// maps already-reduced grades), so these are its only direct unit coverage.
+
+test('deriveCumNostra1955 reduces the grade ladder per Cum nostra Title II.20-21', () => {
+  const block = derived1955([
+    ...retainedVigilEntries(),
+    { id: 'roman:sanctorale:probe-semi', kind: 'feast', [DA]: daBlock('semiduplex') },
+    { id: 'roman:sanctorale:probe-simple', kind: 'feast', [DA]: daBlock('simplex') },
+    { id: 'roman:sanctorale:probe-double', kind: 'feast', [DA]: daBlock('duplex') },
+    { id: 'roman:sanctorale:probe-dxi', kind: 'feast', [DA]: daBlock('duplex-i-classis') },
+  ]);
+  assert.equal(block('roman:sanctorale:probe-semi').legacyRank, 'simplex', 'semidouble -> simple (II.20)');
+  assert.equal(block('roman:sanctorale:probe-simple').legacyRank, 'commemoratio', 'simple -> commemoration (II.21)');
+  assert.equal(block('roman:sanctorale:probe-double').legacyRank, 'duplex', 'doubles unchanged');
+  assert.equal(block('roman:sanctorale:probe-dxi').legacyRank, 'duplex-i-classis', 'first-class doubles unchanged');
+  assert.equal(block('roman:sanctorale:probe-semi').cites.legacyRank, 'cn-1955', 'the reduced grade cites the decree');
+  assert.equal(block('roman:sanctorale:probe-semi').cites.colour, 'ordo-1954', 'unchanged facts keep their 1954 cite');
+});
+
+test('deriveCumNostra1955 suppresses non-retained vigils and keeps the four retained ones', () => {
+  const block = derived1955([
+    ...retainedVigilEntries(),
+    { id: 'roman:sanctorale:matthias:vigilia', kind: 'vigil', [DA]: daBlock('vigilia', { vigilOf: 'roman:sanctorale:matthias' }) },
+  ]);
+  assert.equal(block('roman:sanctorale:matthias:vigilia'), undefined, 'a suppressed vigil gets no 1955 block');
+  assert.ok(block('roman:sanctorale:assumptio:vigilia'), 'a retained vigil keeps its 1955 block');
+});
+
+test('deriveCumNostra1955 fails closed when the retained-vigil roster changed', () => {
+  assert.throws(() => deriveCumNostra1955(retainedVigilEntries().slice(0, 3)), /retained sanctoral vigils/);
+});
+
+test('deriveCumNostra1955 refuses a 1954 rankOverride rather than silently dropping it', () => {
+  // The base transform enforces override integrity; the derive must not strip the value while
+  // keeping its stale cite (which would ship a default rank under a false citation).
+  const entries = [
+    ...retainedVigilEntries(),
+    {
+      id: 'roman:sanctorale:probe-override',
+      kind: 'feast',
+      [DA]: daBlock('duplex', {
+        rankOverride: 1,
+        cites: { colour: 'ordo-1954', legacyRank: 'ordo-1954', rankOverride: 'ordo-1954' },
+      }),
+    },
+  ];
+  assert.throws(() => deriveCumNostra1955(entries), /rankOverride/);
+});
+
+test('deriveCumNostra1955 leaves an entry absent from 1954 untouched', () => {
+  const block = derived1955([
+    ...retainedVigilEntries(),
+    { id: 'roman:sanctorale:probe-1962only', kind: 'feast', 'roman-rubricae-1960': daBlock('duplex') },
+  ]);
+  assert.equal(block('roman:sanctorale:probe-1962only'), undefined, 'no 1954 block -> no 1955 block');
 });

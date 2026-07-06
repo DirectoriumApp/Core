@@ -2,7 +2,8 @@
   "corpusVersion": "1962-2026-07-02.1",
   "editions": [
     "roman-rubricae-1960",
-    "roman-divino-afflatu"
+    "roman-divino-afflatu",
+    "roman-rubricae-1955"
   ],
   "files": {
     "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
@@ -24,6 +25,26 @@
       "primaryKey": "selector",
       "records": 22,
       "sha256": "f338d934c5fa7f8767b13cec3f035f5c091f66050731b526298af394eb4834d1"
+    },
+    "editions/roman-rubricae-1955/attributes.sanctorale.ndjson": {
+      "primaryKey": "id",
+      "records": 319,
+      "sha256": "524c8b76d8e071478123b06a728b34fc426a88d2ca0711463774a08f831e3308"
+    },
+    "editions/roman-rubricae-1955/placement.sanctorale.ndjson": {
+      "primaryKey": "id",
+      "records": 319,
+      "sha256": "2e0d124f3b13e1b1e0d2186b59697792e33fb258c89449c5179a15c3c802c113"
+    },
+    "editions/roman-rubricae-1955/precedence-rules.ndjson": {
+      "primaryKey": "rule",
+      "records": 11,
+      "sha256": "702e9010e353cd7d46ea2190d4b643c4957b48c159bd12888162ea18215a7c23"
+    },
+    "editions/roman-rubricae-1955/precedence-tiers.ndjson": {
+      "primaryKey": "selector",
+      "records": 22,
+      "sha256": "ad1a23c3e74ee5b65f1d4071c1442e6264b75b0b76f82b77ed6cd08c2e7b5e67"
     },
     "editions/roman-rubricae-1960/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -72,8 +93,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 5,
-      "sha256": "633b914858861b6a1633c9bfafed360d3c07f77d31b871613b15bc339ba7b9ca"
+      "records": 7,
+      "sha256": "3417a25c9b38dd58657247b976fb026da162dda5c2d1f41c904cdf07fd0f0b88"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -93,6 +114,14 @@
   ],
   "sources": [
     {
+      "key": "cn-1955",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Cum nostra hac aetate — General Decree of the S.R.C. reducing the rubrics (23 March 1955)",
+      "urn": "directorium:source:cn-1955",
+      "uses": 651
+    },
+    {
       "key": "mr-1920",
       "kind": "text",
       "rights": "public-domain",
@@ -106,7 +135,7 @@
       "rights": "reference",
       "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
       "urn": "directorium:source:ordo-1954",
-      "uses": 1745
+      "uses": 2702
     },
     {
       "key": "rg-1960",
@@ -122,7 +151,7 @@
       "rights": "reference",
       "title": "Rubricae Generales Missalis et Breviarii Romani (Divino Afflatu, pre-1955)",
       "urn": "directorium:source:rg-da",
-      "uses": 32
+      "uses": 52
     },
     {
       "key": "sspx-ordo",
