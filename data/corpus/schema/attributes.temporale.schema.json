@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/attributes.temporale.schema.json",
+  "$id": "https://schema.directorium.app/corpus/attributes.temporale.schema.json",
   "title": "Temporal edition attributes (Layer 2, per archetype)",
   "description": "Per-edition rank/colour keyed by temporal archetype (Decision C), not per day. roseAllowed carries Gaudete/Laetare. rank and colour are always cited.",
   "type": "object",

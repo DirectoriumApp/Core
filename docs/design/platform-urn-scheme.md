@@ -7,7 +7,7 @@ their own. `ObservanceId` is its first citizen._
 ## Pattern
 
 ```
-introibo:<entity-type>:<entity-native-id>
+directorium:<entity-type>:<entity-native-id>
 ```
 
 The **entity-native-id** already carries the rite as its own leading segment (as `ObservanceId` does),
@@ -19,27 +19,27 @@ segments.
 
 | Entity type | Native id shape | Example URN |
 |-------------|-----------------|-------------|
-| `observance` | `<rite>:<cycle>:<body>` | `introibo:observance:roman:sanctorale:laurentius` |
-| `text` | `<rite>:<role>:<observance-body>` | `introibo:text:roman:collect:sanctorale:laurentius` |
-| `rite-unit` | `<rite>:<book>:<structure-path>` | `introibo:rite-unit:roman:mass:ordo:kyrie` |
-| `chant` | `<rite>:<genre>:<observance-body>` | `introibo:chant:roman:introit:sanctorale:laurentius` |
-| `martyrology` | `<rite>:<entry-key>` | `introibo:martyrology:roman:08-10:laurentius` |
-| `edition` | `<rite>:<rules-family>` | `introibo:edition:roman:rubricae-1960` |
-| `source` | `<key>` | `introibo:source:mr-1962` |
-| `lectionary` | `<rite>:<scheme>:<occasion-body>:<slot>` | `introibo:lectionary:roman:1970-sunday-a:advent:sunday-1:gospel` |
-| `audio` | `<rite>:<genre>:<observance-body>` | `introibo:audio:roman:introit:sanctorale:laurentius` |
-| `devotion` | `<rite>:<subject-slug>` | `introibo:devotion:roman:rosarium` |
-| `overlay` | `<rite>:<overlay-slug>` | `introibo:overlay:roman:sspx` |
+| `observance` | `<rite>:<cycle>:<body>` | `directorium:observance:roman:sanctorale:laurentius` |
+| `text` | `<rite>:<role>:<observance-body>` | `directorium:text:roman:collect:sanctorale:laurentius` |
+| `rite-unit` | `<rite>:<book>:<structure-path>` | `directorium:rite-unit:roman:mass:ordo:kyrie` |
+| `chant` | `<rite>:<genre>:<observance-body>` | `directorium:chant:roman:introit:sanctorale:laurentius` |
+| `martyrology` | `<rite>:<entry-key>` | `directorium:martyrology:roman:08-10:laurentius` |
+| `edition` | `<rite>:<rules-family>` | `directorium:edition:roman:rubricae-1960` |
+| `source` | `<key>` | `directorium:source:mr-1962` |
+| `lectionary` | `<rite>:<scheme>:<occasion-body>:<slot>` | `directorium:lectionary:roman:1970-sunday-a:advent:sunday-1:gospel` |
+| `audio` | `<rite>:<genre>:<observance-body>` | `directorium:audio:roman:introit:sanctorale:laurentius` |
+| `devotion` | `<rite>:<subject-slug>` | `directorium:devotion:roman:rosarium` |
+| `overlay` | `<rite>:<overlay-slug>` | `directorium:overlay:roman:sspx` |
 
 The `rite-unit` type is what the **comparison tool's rite mode** diffs: the Order of Mass modeled as an
 ordered tree of URN'd parts, each with per-edition presence/text/rubric/chant.
 
-- **`source`** was already minted by [`corpus-schema.md`](corpus-schema.md) (`introibo:source:<key>`,
+- **`source`** was already minted by [`corpus-schema.md`](corpus-schema.md) (`directorium:source:<key>`,
   the provenance registry). Reserving it here fixes a live inconsistency — the type was in use before it
   was reserved — and adopts that document's grammar unchanged: the native id is the bare source key, with
   no rite segment (a source is not rite-scoped).
 - **`lectionary`** addresses a single reading slot. Grammar:
-  `introibo:lectionary:<rite>:<scheme>:<occasion-body>:<slot>`, where the **scheme** ∈ `1962` ·
+  `directorium:lectionary:<rite>:<scheme>:<occasion-body>:<slot>`, where the **scheme** ∈ `1962` ·
   `1970-sunday-a` · `1970-sunday-b` · `1970-sunday-c` · `1970-weekday-1` · `1970-weekday-2` ·
   `1970-oor-1` · `1970-oor-2` (the Novus Ordo Sunday A/B/C and weekday I/II cycles, plus the
   two-year Office of Readings cycle); `<occasion-body>` is the occasion the reading serves, and `<slot>`
@@ -58,7 +58,7 @@ ordered tree of URN'd parts, each with per-edition presence/text/rubric/chant.
 
 A translation is **never a separate entity**. Vernacular renderings are **locale keys on the `text`
 entity** (the `names`/text i18n map, `la` invariant), exactly as in the output contract. There is no
-`introibo:translation:…` type and no per-locale URN: `introibo:text:roman:collect:sanctorale:laurentius`
+`directorium:translation:…` type and no per-locale URN: `directorium:text:roman:collect:sanctorale:laurentius`
 is one identity whose `en`, `de`, … values are keyed inside it. This keeps a text's identity stable as
 translations are added and keeps the diff engine aligning by identity, not by language.
 
@@ -75,7 +75,7 @@ URN — they are realization.
 
 - URNs are immutable and never reused; lineage (split/merge) is recorded in `IdentityAliases`, never by
   mutating an id.
-- `introibo:observance:` + an `ObservanceId` round-trips to that same `ObservanceId`.
+- `directorium:observance:` + an `ObservanceId` round-trips to that same `ObservanceId`.
 - External-system identifiers map in via `IdentityAliases::externalUrns()` (for the stable cross-system
   export, #55) — they are recorded, not adopted as the platform id.
 

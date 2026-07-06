@@ -7,11 +7,11 @@ version = 1
 [[annotations]]
 path = "data/corpus/**"
 precedence = "aggregate"
-SPDX-FileCopyrightText = "Introibo"
+SPDX-FileCopyrightText = "Directorium"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
 path = "tools/generator/**"
 precedence = "aggregate"
-SPDX-FileCopyrightText = "Introibo"
+SPDX-FileCopyrightText = "Directorium"
 SPDX-License-Identifier = "AGPL-3.0-or-later"

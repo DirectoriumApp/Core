@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Edition;
+namespace Directorium\Core\Edition;
 
 use InvalidArgumentException;
 use RuntimeException;
@@ -12,7 +12,7 @@ use RuntimeException;
  * resolves under — the 1954 (Divino Afflatu), 1955 (interim / Cum nostra hac aetate),
  * or 1962 (Rubricae 1960) system.
  *
- * This is the edition axis of {@see \Introibo\Core\day()} / {@see \Introibo\Core\contract()},
+ * This is the edition axis of {@see \Directorium\Core\day()} / {@see \Directorium\Core\contract()},
  * and it is **orthogonal to the particular-calendar overlay axis** ($calendar): an edition
  * names *which rubrics* govern (its precedence rules + its `data/corpus/editions/<dir>/`
  * data), while an overlay (SSPX, FSSP) is a layer resolved *over* an edition
@@ -21,7 +21,7 @@ use RuntimeException;
  * as before.
  *
  * A system carries its stable **edition URN** (stamped into the output contract's
- * {@see \Introibo\Core\Contract\Provenance}), its **corpus directory**, a display **label**,
+ * {@see \Directorium\Core\Contract\Provenance}), its **corpus directory**, a display **label**,
  * and its historical **validity window**. Only 1962 is built today; 1954 and 1955 are declared
  * on the axis so their eventual arrival (Epics #63 / #68) is additive, and are marked
  * {@see isBuilt()} = false until then. See docs/design/rubric-system-model.md.

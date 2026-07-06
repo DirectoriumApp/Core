@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/precedence-tier.schema.json",
+  "$id": "https://schema.directorium.app/corpus/precedence-tier.schema.json",
   "title": "Precedence tier row (n.91 Table of Liturgical Days)",
   "description": "One row of the n.91 table as data: a tier selector mapped to its ordinal (= the n.91 line number) and sub-order.",
   "type": "object",

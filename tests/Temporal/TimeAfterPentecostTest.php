@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Temporal\ChristmasCycle;
-use Introibo\Core\Temporal\PaschalSkeleton;
-use Introibo\Core\Temporal\TimeAfterPentecost;
+use Directorium\Core\Temporal\ChristmasCycle;
+use Directorium\Core\Temporal\PaschalSkeleton;
+use Directorium\Core\Temporal\TimeAfterPentecost;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

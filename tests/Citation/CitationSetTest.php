@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Citation;
+namespace Directorium\Core\Tests\Citation;
 
-use Introibo\Core\Citation\CitationSet;
+use Directorium\Core\Citation\CitationSet;
 use PHPUnit\Framework\TestCase;
 
 final class CitationSetTest extends TestCase

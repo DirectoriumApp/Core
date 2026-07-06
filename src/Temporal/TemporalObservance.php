@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Temporal;
+namespace Directorium\Core\Temporal;
 
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 
 /**
@@ -22,10 +22,10 @@ use InvalidArgumentException;
  * and the {@see ElementColour} — plus the Latin display name (the invariant `la`
  * label, as required of every observance).
  *
- * It is deliberately not the sanctoral {@see \Introibo\Core\Observance\Observance}
+ * It is deliberately not the sanctoral {@see \Directorium\Core\Observance\Observance}
  * shell: a temporal day has no titular in the sanctoral sense, so its identity is
  * carried structurally by the id alone. Bridging temporal observances into the
- * {@see \Introibo\Core\Calendar\LiturgicalDay} aggregate is a later concern
+ * {@see \Directorium\Core\Calendar\LiturgicalDay} aggregate is a later concern
  * (precedence #29 / output contract #52). See docs/design/temporal-fill-model.md.
  *
  * Immutable: it holds only value objects and an invariant string name.

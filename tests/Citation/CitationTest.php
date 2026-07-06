@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Citation;
+namespace Directorium\Core\Tests\Citation;
 
-use Introibo\Core\Citation\Citation;
+use Directorium\Core\Citation\Citation;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,7 @@ final class CitationTest extends TestCase
 
         self::assertSame('mr-1920', $citation->sourceKey());
         self::assertNull($citation->locator());
-        self::assertSame('introibo:source:mr-1920', $citation->sourceUrn());
+        self::assertSame('directorium:source:mr-1920', $citation->sourceUrn());
         self::assertSame('mr-1920', $citation->toString());
     }
 
@@ -26,7 +26,7 @@ final class CitationTest extends TestCase
 
         self::assertSame('mr-1920', $citation->sourceKey());
         self::assertSame('p.42', $citation->locator());
-        self::assertSame('introibo:source:mr-1920', $citation->sourceUrn());
+        self::assertSame('directorium:source:mr-1920', $citation->sourceUrn());
         self::assertSame('mr-1920:p.42', $citation->toString());
     }
 

@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Sanctoral;
+namespace Directorium\Core\Tests\Sanctoral;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Sanctoral\SanctoralCalendar;
-use Introibo\Core\Sanctoral\SanctoralData;
-use Introibo\Core\Sanctoral\SanctoralEntry;
-use Introibo\Core\Temporal\TemporalObservance;
-use Introibo\Core\Tests\Fixture\SeedSanctoralData;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Sanctoral\SanctoralCalendar;
+use Directorium\Core\Sanctoral\SanctoralData;
+use Directorium\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Temporal\TemporalObservance;
+use Directorium\Core\Tests\Fixture\SeedSanctoralData;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -142,7 +142,7 @@ final class SanctoralCalendarTest extends TestCase
         SanctoralCalendar::forYear(1582);
     }
 
-    private function soleOn(SanctoralCalendar $calendar, string $ymd): \Introibo\Core\Sanctoral\SanctoralObservance
+    private function soleOn(SanctoralCalendar $calendar, string $ymd): \Directorium\Core\Sanctoral\SanctoralObservance
     {
         $offices = $calendar->on(self::utc($ymd));
         self::assertCount(1, $offices, $ymd);

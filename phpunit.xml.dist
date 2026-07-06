@@ -6,12 +6,12 @@
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>
-        <testsuite name="introibo-core">
+        <testsuite name="directorium-core">
             <directory>tests</directory>
         </testsuite>
         <!-- The validation harness (#45): the oracle re-proving suite, isolated so CI
              can run it as an explicit, named gate (#51). It is a subset of the tree
-             above, so `test` targets introibo-core to avoid running it twice. -->
+             above, so `test` targets directorium-core to avoid running it twice. -->
         <testsuite name="validation">
             <directory>tests/Validation</directory>
         </testsuite>

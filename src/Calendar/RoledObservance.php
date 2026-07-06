@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Calendar;
+namespace Directorium\Core\Calendar;
 
 use DateTimeImmutable;
-use Introibo\Core\Precedence\OccurrenceOutcome;
+use Directorium\Core\Precedence\OccurrenceOutcome;
 
 /**
  * A realized office paired with the role it plays on a resolved day, plus the

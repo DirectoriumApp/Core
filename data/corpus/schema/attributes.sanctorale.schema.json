@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/attributes.sanctorale.schema.json",
+  "$id": "https://schema.directorium.app/corpus/attributes.sanctorale.schema.json",
   "title": "Sanctoral edition attributes (Layer 2)",
   "description": "Per-edition rank/colour for a sanctoral observance, keyed by id within the edition directory. rank and colour are always cited; a nameOverride, when present, must cite nameOverride.la.",
   "type": "object",

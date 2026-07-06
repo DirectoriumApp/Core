@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Sanctoral;
+namespace Directorium\Core\Sanctoral;
 
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\LegacyRank;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Citation\CitationSet;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\LegacyRank;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Citation\CitationSet;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 
 /**

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Trace;
+namespace Directorium\Core\Tests\Trace;
 
 use DateTimeImmutable;
 
-use function Introibo\Core\explain;
+use function Directorium\Core\explain;
 
 /**
  * Golden-master resolution traces for the hardest days (#233/#240).

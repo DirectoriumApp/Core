@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Trace;
+namespace Directorium\Core\Tests\Trace;
 
-use Introibo\Core\Trace\ResolutionReason;
+use Directorium\Core\Trace\ResolutionReason;
 use PHPUnit\Framework\TestCase;
 
 final class ResolutionReasonTest extends TestCase

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Temporal\Eastertide;
-use Introibo\Core\Temporal\PaschalSkeleton;
+use Directorium\Core\Temporal\Eastertide;
+use Directorium\Core\Temporal\PaschalSkeleton;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

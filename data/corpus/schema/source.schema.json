@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/source.schema.json",
+  "$id": "https://schema.directorium.app/corpus/source.schema.json",
   "title": "Source registry row",
   "description": "One row of sources.ndjson: a citable source and its rights. A cite/cites marker elsewhere in the corpus resolves to one of these by `key`.",
   "type": "object",
@@ -13,9 +13,9 @@
       "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*$"
     },
     "urn": {
-      "description": "Stable platform URN; must be introibo:source:<key>.",
+      "description": "Stable platform URN; must be directorium:source:<key>.",
       "type": "string",
-      "pattern": "^introibo:source:[a-z0-9]+(-[a-z0-9.]+)*$"
+      "pattern": "^directorium:source:[a-z0-9]+(-[a-z0-9.]+)*$"
     },
     "kind": {
       "description": "text = a transcribable work; reference = consult-only; oracle = validation input (#45).",

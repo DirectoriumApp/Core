@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Contract;
+namespace Directorium\Core\Tests\Contract;
 
 use DateTimeImmutable;
 use DateTimeZone;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\contract;
+use function Directorium\Core\contract;
 
 /**
  * The liturgical day begins at First Vespers the evening before and vigils

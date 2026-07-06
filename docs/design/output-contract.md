@@ -1,6 +1,6 @@
 # The output contract
 
-The versioned, serialisable shape that `Introibo\Core\contract()` emits — the
+The versioned, serialisable shape that `Directorium\Core\contract()` emits — the
 **public contract** the Api, Site, and Ordo repos build on. Epic #52.
 
 The engine resolves a civil date to a `Calendar\LiturgicalDay` (Epic #29). That
@@ -16,7 +16,7 @@ This document is the spec downstream teams build against.
   `toArray(): array` (JSON-ready) or `toJson(): string`. `const SHAPE_VERSION`
   is the contract shape's SemVer.
 - **`Contract\Provenance`** — the three provenance axes (below).
-- **`Introibo\Core\contract(DateTimeImmutable): array`** — the public entry
+- **`Directorium\Core\contract(DateTimeImmutable): array`** — the public entry
   point, beside `day()`. It resolves and memoises the civil year once (shared
   with `day()`), then serialises. `day()` remains the value-object entry point,
   untouched.
@@ -33,7 +33,7 @@ cache on all three — any one moving means the resolved output may differ:
 | --- | --- | --- |
 | `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.0). |
 | `corpusVersion` | `SanctoralData::version()` (seed: `1962-seed-<date>`) | The **calendar data** build; carries no edition token. |
-| `engineVersion` | `Introibo::VERSION` | The **resolver** version; hand-bumped when output changes. |
+| `engineVersion` | `Directorium::VERSION` | The **resolver** version; hand-bumped when output changes. |
 
 The **edition** (`roman:rubricae-1960`) is the rules-family that governed the
 resolution, and **rite** (`roman`) is its leading segment. The same corpus can
@@ -107,7 +107,7 @@ fixes only that the field is open and that shared concepts share a token.
 | --- | --- | --- | --- |
 | `contractVersion` | string | `SHAPE_VERSION` | `1.0.0`. |
 | `corpusVersion` | string | `SanctoralData::version()` | e.g. `1962-seed-2026-07-02`. |
-| `engineVersion` | string | `Introibo::VERSION` | e.g. `0.4.0`. |
+| `engineVersion` | string | `Directorium::VERSION` | e.g. `0.4.0`. |
 | `rite` | string | edition head | `roman`. |
 | `edition` | string | `Provenance` | `roman:rubricae-1960`. |
 | `date` | string | resolved date | ISO-8601 `Y-m-d`. |
@@ -136,7 +136,7 @@ fared this day.
 | Field | Type | Source | Notes |
 | --- | --- | --- | --- |
 | `id` | string | `ObservanceId` | The **stable** cross-system id. |
-| `urn` | string | id | `introibo:observance:<id>`. |
+| `urn` | string | id | `directorium:observance:<id>`. |
 | `role` | string | `CelebrationRole` | Closed enum. |
 | `kind` | string | `ObservanceKind` | Open enum. |
 | `rank` | string | `RankClass` | `I`–`IV`. |
@@ -180,7 +180,7 @@ When filled, each slot is keyed **per role and per locale**; every leaf string i
 an object of the shape:
 
 ```json
-{ "value": "…", "availability": "full", "source": "introibo:source:…", "rights": "…" }
+{ "value": "…", "availability": "full", "source": "directorium:source:…", "rights": "…" }
 ```
 
 - `value` **or** `incipit` — the full text (`availability: full`) or the opening
@@ -188,7 +188,7 @@ an object of the shape:
   `incipit` (or neither) but no `value`.
 - `availability` ∈ `full` · `incipit` · `citation-only` · `licence-required` —
   what the reader and the comparison tool may render for this leaf.
-- `source` — the provenance URN (`introibo:source:<key>`), tying the leaf to the
+- `source` — the provenance URN (`directorium:source:<key>`), tying the leaf to the
   source registry.
 - `rights` — the licence/PD status governing the leaf.
 
@@ -224,7 +224,7 @@ names it:
 
 ```json
 "calendar": {
-  "particular": { "id": "introibo:overlay:roman:sspx", "name": "Society of Saint Pius X" }
+  "particular": { "id": "directorium:overlay:roman:sspx", "name": "Society of Saint Pius X" }
 }
 ```
 
@@ -257,7 +257,7 @@ day-level key count stable and groups them with the other calendrical facts.
 independent of date or rank. It **is** the stable cross-system feast id: the
 "mapping from observance id to stable feast id" is the identity function, so no
 separate registry is needed. `urn` is the same id under the platform URN scheme
-(`introibo:observance:<id>`), and round-trips: stripping the prefix and parsing
+(`directorium:observance:<id>`), and round-trips: stripping the prefix and parsing
 yields the identical id.
 
 These identifiers are a **compatibility surface** and are guaranteed stable: an
@@ -369,7 +369,7 @@ Pentecost; the feria is both the celebration and the tempora):
   "celebration": [
     {
       "id": "roman:temporale:paschal:pentecost-time:week-5:feria-3",
-      "urn": "introibo:observance:roman:temporale:paschal:pentecost-time:week-5:feria-3",
+      "urn": "directorium:observance:roman:temporale:paschal:pentecost-time:week-5:feria-3",
       "role": "celebration",
       "kind": "feria",
       "rank": "IV",

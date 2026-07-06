@@ -16,7 +16,7 @@
 
 declare(strict_types=1);
 
-use Introibo\Core\Tests\Golden\GoldenYear;
+use Directorium\Core\Tests\Golden\GoldenYear;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

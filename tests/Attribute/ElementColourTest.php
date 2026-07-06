@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Attribute;
+namespace Directorium\Core\Tests\Attribute;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
 use PHPUnit\Framework\TestCase;
 
 final class ElementColourTest extends TestCase

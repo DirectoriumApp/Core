@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Calendar;
+namespace Directorium\Core\Tests\Calendar;
 
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\CommemorationLimit;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\CommemorationLimit;
 use PHPUnit\Framework\TestCase;
 
 final class CommemorationLimitTest extends TestCase

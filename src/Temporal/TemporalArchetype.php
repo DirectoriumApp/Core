@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Temporal;
+namespace Directorium\Core\Temporal;
 
 use DateTimeImmutable;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Observance\ObservanceKind;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Observance\ObservanceKind;
 
 /**
  * The edition-varying office facts of one temporal archetype (#42): its intrinsic

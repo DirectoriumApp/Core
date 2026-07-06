@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Citation;
+namespace Directorium\Core\Citation;
 
 /**
  * The citations attached to one corpus datum, keyed by the field they justify.

@@ -9,7 +9,7 @@ jobs:
       TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
     steps:
       # No-op until the ADD_TO_PROJECT_PAT org secret exists (a PAT with project write).
-      - name: Add issue to the Introibo Platform board
+      - name: Add issue to the Directorium Platform board
         if: ${{ env.TOKEN != '' }}
         uses: actions/add-to-project@v2
         with:

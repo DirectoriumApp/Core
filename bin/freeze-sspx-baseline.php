@@ -18,7 +18,7 @@
 
 declare(strict_types=1);
 
-use Introibo\Core\Tests\Validation\SspxOracle;
+use Directorium\Core\Tests\Validation\SspxOracle;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

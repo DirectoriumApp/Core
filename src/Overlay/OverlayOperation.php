@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 
 /**
  * One operation a particular-calendar overlay applies to the universal sanctoral.

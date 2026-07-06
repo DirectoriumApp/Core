@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Sanctoral;
+namespace Directorium\Core\Tests\Sanctoral;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Sanctoral\SanctoralCalendar;
-use Introibo\Core\Sanctoral\SanctoralData;
-use Introibo\Core\Sanctoral\SanctoralEntry;
-use Introibo\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Sanctoral\SanctoralCalendar;
+use Directorium\Core\Sanctoral\SanctoralData;
+use Directorium\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Sanctoral\SanctoralObservance;
 use PHPUnit\Framework\TestCase;
 
 /**

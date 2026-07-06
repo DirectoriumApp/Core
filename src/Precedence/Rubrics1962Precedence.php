@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Temporal\Computus;
-use Introibo\Core\Temporal\Season;
-use Introibo\Core\Temporal\TemporalObservance;
-use Introibo\Core\Trace\ResolutionReason;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Temporal\Computus;
+use Directorium\Core\Temporal\Season;
+use Directorium\Core\Temporal\TemporalObservance;
+use Directorium\Core\Trace\ResolutionReason;
 
 /**
  * Precedence under the 1962 rubrics (Rubricae 1960 / editio typica 1962).
@@ -28,7 +28,7 @@ use Introibo\Core\Trace\ResolutionReason;
  * can detect, and are refined when the corpus (#38) carries that provenance.
  *
  * The named great feasts (lines 1, 3, 4, 5) are recognised by their canonical
- * {@see \Introibo\Core\Observance\ObservanceId} — Easter and Pentecost are
+ * {@see \Directorium\Core\Observance\ObservanceId} — Easter and Pentecost are
  * `kind=sunday` yet must not fall into the first-class-Sunday line, so identity
  * is checked before the structural branches. Everything else is derived from
  * kind, class, and (for temporal offices) season. No accessor is added to

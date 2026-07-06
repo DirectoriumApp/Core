@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Contract;
+namespace Directorium\Core\Tests\Contract;
 
 use DateTimeImmutable;
 use DateTimeZone;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\contract;
+use function Directorium\Core\contract;
 
 /**
  * The office's human-readable text is i18n-shaped — a locale-keyed `names` map

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Corpus;
+namespace Directorium\Core\Tests\Corpus;
 
 use Opis\JsonSchema\Errors\ErrorFormatter;
 use Opis\JsonSchema\Errors\ValidationError;

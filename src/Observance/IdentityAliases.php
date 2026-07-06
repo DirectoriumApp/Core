@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Observance;
+namespace Directorium\Core\Observance;
 
 /**
  * Non-identity relationships an observance's ID participates in.

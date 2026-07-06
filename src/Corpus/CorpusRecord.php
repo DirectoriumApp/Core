@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Corpus;
+namespace Directorium\Core\Corpus;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
 use RuntimeException;
 
 /**
@@ -15,7 +15,7 @@ use RuntimeException;
  * the same shape defensively and fail loud on any drift — a corpus that does not match
  * the loader is a build/version mismatch, never something to paper over. Shared by the
  * data sources that rebuild value objects from corpus rows ({@see CorpusSanctoralData},
- * {@see \Introibo\Core\Overlay\CorpusOverlayData}) so the parsing lives in one place.
+ * {@see \Directorium\Core\Overlay\CorpusOverlayData}) so the parsing lives in one place.
  */
 final class CorpusRecord
 {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Overlay;
+namespace Directorium\Core\Tests\Overlay;
 
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Overlay\CalendarOverlay;
-use Introibo\Core\Overlay\OverlayConflict;
-use Introibo\Core\Overlay\RerankOperation;
-use Introibo\Core\Overlay\SuppressOperation;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Overlay\CalendarOverlay;
+use Directorium\Core\Overlay\OverlayConflict;
+use Directorium\Core\Overlay\RerankOperation;
+use Directorium\Core\Overlay\SuppressOperation;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +23,7 @@ final class CalendarOverlayTest extends TestCase
         $target = ObservanceId::parse('roman:sanctorale:laurentius');
 
         $this->expectException(OverlayConflict::class);
-        new CalendarOverlay('introibo:overlay:roman:test', 'Test', [
+        new CalendarOverlay('directorium:overlay:roman:test', 'Test', [
             new RerankOperation($target, RankClass::classI()),
             new SuppressOperation($target),
         ]);
@@ -37,11 +37,11 @@ final class CalendarOverlayTest extends TestCase
 
     public function testKeepsItsIdNameAndOperations(): void
     {
-        $overlay = new CalendarOverlay('introibo:overlay:roman:sspx', 'SSPX', [
+        $overlay = new CalendarOverlay('directorium:overlay:roman:sspx', 'SSPX', [
             new SuppressOperation(ObservanceId::parse('roman:sanctorale:laurentius')),
         ]);
 
-        self::assertSame('introibo:overlay:roman:sspx', $overlay->id());
+        self::assertSame('directorium:overlay:roman:sspx', $overlay->id());
         self::assertSame('SSPX', $overlay->name());
         self::assertCount(1, $overlay->operations());
     }

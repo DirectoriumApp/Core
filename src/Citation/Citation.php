@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Citation;
+namespace Directorium\Core\Citation;
 
 use InvalidArgumentException;
 
@@ -66,7 +66,7 @@ final class Citation
     /** The URN of the cited source — the stable identifier used across the platform. */
     public function sourceUrn(): string
     {
-        return 'introibo:source:' . $this->sourceKey;
+        return 'directorium:source:' . $this->sourceKey;
     }
 
     /** The canonical reference form: `key`, or `key:locator` when a locator is present. */

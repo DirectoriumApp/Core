@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Sanctoral;
+namespace Directorium\Core\Sanctoral;
 
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\LegacyRank;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\LegacyRank;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
 
 /**
  * A sanctoral office as it is realized on one day of one edition.
  *
- * The sanctoral analogue of {@see \Introibo\Core\Temporal\TemporalObservance}:
+ * The sanctoral analogue of {@see \Directorium\Core\Temporal\TemporalObservance}:
  * it pairs the Layer-1 {@see Observance} identity shell — which, unlike a
  * temporal day, carries titular subjects and localized names — with the Layer-2
  * per-edition attributes it wears, the 1960 {@see RankClass} and the

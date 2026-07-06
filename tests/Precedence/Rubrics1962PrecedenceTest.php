@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Precedence;
+namespace Directorium\Core\Tests\Precedence;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Precedence\PrecedenceContext;
-use Introibo\Core\Precedence\PrecedenceTier;
-use Introibo\Core\Precedence\Rubrics1962Precedence;
-use Introibo\Core\Sanctoral\SanctoralObservance;
-use Introibo\Core\Temporal\Season;
-use Introibo\Core\Temporal\TemporalObservance;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Precedence\PrecedenceContext;
+use Directorium\Core\Precedence\PrecedenceTier;
+use Directorium\Core\Precedence\Rubrics1962Precedence;
+use Directorium\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Temporal\Season;
+use Directorium\Core\Temporal\TemporalObservance;
 use PHPUnit\Framework\TestCase;
 
 /**

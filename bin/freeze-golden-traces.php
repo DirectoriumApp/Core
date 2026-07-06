@@ -16,7 +16,7 @@
 
 declare(strict_types=1);
 
-use Introibo\Core\Tests\Trace\GoldenTrace;
+use Directorium\Core\Tests\Trace\GoldenTrace;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

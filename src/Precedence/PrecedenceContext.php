@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateTimeImmutable;
 

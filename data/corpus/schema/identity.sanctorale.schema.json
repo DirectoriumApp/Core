@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/identity.sanctorale.schema.json",
+  "$id": "https://schema.directorium.app/corpus/identity.sanctorale.schema.json",
   "title": "Sanctoral identity record (Layer 1)",
   "description": "Edition-invariant identity for a sanctoral observance. Carries identity ONLY: never rank, colour, octave, month, or day (those are per-edition attributes or per-year realization). additionalProperties:false enforces the exclusion.",
   "type": "object",

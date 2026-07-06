@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Fixture;
+namespace Directorium\Core\Tests\Fixture;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Sanctoral\SanctoralData;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Sanctoral\SanctoralData;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 
 /**
  * A small, representative, 100%-correct slice of the 1962 sanctoral — the test
  * fixture the engine was proven against before the cited corpus existed.
  *
  * It was the engine's provisional {@see SanctoralData} through the overlay,
- * precedence, and contract epics; the cited {@see \Introibo\Core\Sanctoral\CorpusSanctoralData}
+ * precedence, and contract epics; the cited {@see \Directorium\Core\Sanctoral\CorpusSanctoralData}
  * (issue #41) is now the production source, and this seed is retained here as a
  * controlled fixture. Its 21 entries are the verified anchors the corpus must
  * reproduce byte for byte (see the CorpusSanctoralData test), and they exercise

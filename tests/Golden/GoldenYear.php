@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Golden;
+namespace Directorium\Core\Tests\Golden;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Contract\DayContract;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Temporal\TemporalCalendar;
 
 /**
  * The golden-fixture safety gate (#365): a byte-stable digest of the engine's
@@ -42,7 +42,7 @@ final class GoldenYear
      *
      * The engine's Gregorian floor is 1583 (the first Gregorian Easter), but
      * {@see DayResolver::resolveYear()} reaches back one year for the trailing
-     * Christmas cycle that bleeds into January ({@see \Introibo\Core\Temporal\ChristmasCycle}
+     * Christmas cycle that bleeds into January ({@see \Directorium\Core\Temporal\ChristmasCycle}
      * `forYear($year - 1)`). Resolving 1583 would therefore need the 1582 cycle,
      * below the floor, so the first fully resolvable civil year is 1584.
      */

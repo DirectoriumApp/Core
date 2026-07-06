@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Overlay;
+namespace Directorium\Core\Tests\Overlay;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Citation\CitationSet;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Overlay\AddOperation;
-use Introibo\Core\Overlay\CalendarOverlay;
-use Introibo\Core\Overlay\OverlaidSanctoralData;
-use Introibo\Core\Overlay\OverlayConflict;
-use Introibo\Core\Overlay\RerankOperation;
-use Introibo\Core\Overlay\SuppressOperation;
-use Introibo\Core\Sanctoral\SanctoralEntry;
-use Introibo\Core\Tests\Fixture\SeedSanctoralData;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Citation\CitationSet;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Overlay\AddOperation;
+use Directorium\Core\Overlay\CalendarOverlay;
+use Directorium\Core\Overlay\OverlaidSanctoralData;
+use Directorium\Core\Overlay\OverlayConflict;
+use Directorium\Core\Overlay\RerankOperation;
+use Directorium\Core\Overlay\SuppressOperation;
+use Directorium\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -63,18 +63,18 @@ final class OverlaidSanctoralDataTest extends TestCase
     {
         $overlaid = new OverlaidSanctoralData(new SeedSanctoralData(), $this->sampleOverlay());
 
-        self::assertSame('1962-seed-2026-07-02+introibo:overlay:roman:test', $overlaid->version());
+        self::assertSame('1962-seed-2026-07-02+directorium:overlay:roman:test', $overlaid->version());
     }
 
     public function testApplicationIsOrderIndependent(): void
     {
         $forward = new OverlaidSanctoralData(new SeedSanctoralData(), new CalendarOverlay(
-            'introibo:overlay:roman:test',
+            'directorium:overlay:roman:test',
             'Test',
             [$this->rerankLaurence(), $this->addPiusX(), $this->suppressCoronati()]
         ));
         $reversed = new OverlaidSanctoralData(new SeedSanctoralData(), new CalendarOverlay(
-            'introibo:overlay:roman:test',
+            'directorium:overlay:roman:test',
             'Test',
             [$this->suppressCoronati(), $this->addPiusX(), $this->rerankLaurence()]
         ));
@@ -84,7 +84,7 @@ final class OverlaidSanctoralDataTest extends TestCase
 
     public function testRerankingAFeastAbsentFromTheBaseIsAConflict(): void
     {
-        $overlay = new CalendarOverlay('introibo:overlay:roman:test', 'Test', [
+        $overlay = new CalendarOverlay('directorium:overlay:roman:test', 'Test', [
             new RerankOperation(ObservanceId::parse('roman:sanctorale:nonexistent'), RankClass::classI()),
         ]);
 
@@ -94,7 +94,7 @@ final class OverlaidSanctoralDataTest extends TestCase
 
     public function testAddingAFeastAlreadyInTheBaseIsAConflict(): void
     {
-        $overlay = new CalendarOverlay('introibo:overlay:roman:test', 'Test', [
+        $overlay = new CalendarOverlay('directorium:overlay:roman:test', 'Test', [
             new AddOperation($this->entry('laurentius', 8, 10, 1, 'red', 'S. Laurentii Martyris', ['laurentius'])),
         ]);
 
@@ -104,7 +104,7 @@ final class OverlaidSanctoralDataTest extends TestCase
 
     public function testSuppressingAFeastAbsentFromTheBaseIsAConflict(): void
     {
-        $overlay = new CalendarOverlay('introibo:overlay:roman:test', 'Test', [
+        $overlay = new CalendarOverlay('directorium:overlay:roman:test', 'Test', [
             new SuppressOperation(ObservanceId::parse('roman:sanctorale:nonexistent')),
         ]);
 
@@ -114,7 +114,7 @@ final class OverlaidSanctoralDataTest extends TestCase
 
     private function sampleOverlay(): CalendarOverlay
     {
-        return new CalendarOverlay('introibo:overlay:roman:test', 'Test', [
+        return new CalendarOverlay('directorium:overlay:roman:test', 'Test', [
             $this->rerankLaurence(),
             $this->addPiusX(),
             $this->suppressCoronati(),

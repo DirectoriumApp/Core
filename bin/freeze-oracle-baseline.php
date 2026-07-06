@@ -16,7 +16,7 @@
 
 declare(strict_types=1);
 
-use Introibo\Core\Tests\Validation\MissalemeumOracle;
+use Directorium\Core\Tests\Validation\MissalemeumOracle;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

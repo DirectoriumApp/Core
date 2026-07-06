@@ -43,7 +43,7 @@ Core/
       temporal-skeleton.schema.json
       precedence-tier.schema.json
       precedence-rules.schema.json
-    sources.ndjson                 #   source registry -> introibo:source:<key>
+    sources.ndjson                 #   source registry -> directorium:source:<key>
     identity/
       sanctorale.ndjson            #   Layer-1 identity (sanctoral): NO rank/colour/date
       temporale.ndjson             #   Layer-1 identity (temporal archetypes): structural only
@@ -87,7 +87,7 @@ Every **asserted datum** carries provenance. Two granularities:
   different sources — `{ "&lt;field&gt;": "&lt;sourceKey&gt;" }`.
 
 A `sourceKey` is the local key of a row in `sources.ndjson`; its stable URN is
-`introibo:source:&lt;key&gt;` (the platform URN scheme). The generator fails closed
+`directorium:source:&lt;key&gt;` (the platform URN scheme). The generator fails closed
 if any required datum lacks a citation or names a key absent from the registry
 (#44). This satisfies #39's "each text string carries a CC0 provenance marker":
 every shipped string is traceable to a source, and the dataset as a whole is CC0.
@@ -95,7 +95,7 @@ every shipped string is traceable to a source, and the dataset as a whole is CC0
 ### `sources.ndjson` — a source registry row
 
 ```json
-{"key":"mr-1962","urn":"introibo:source:mr-1962","kind":"text","title":"Missale Romanum, editio typica 1962","publisher":"Typis Polyglottis Vaticanis","year":1962,"rights":"reference","note":"Rank/colour facts; titles only where public-domain."}
+{"key":"mr-1962","urn":"directorium:source:mr-1962","kind":"text","title":"Missale Romanum, editio typica 1962","publisher":"Typis Polyglottis Vaticanis","year":1962,"rights":"reference","note":"Rank/colour facts; titles only where public-domain."}
 ```
 
 `kind` ∈ `text` | `reference` | `oracle`. `rights` ∈ `public-domain` |

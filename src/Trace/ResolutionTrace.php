@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Trace;
+namespace Directorium\Core\Trace;
 
 /**
  * The show-your-work trace for one resolved day (#233): the whole field of offices
@@ -11,7 +11,7 @@ namespace Introibo\Core\Trace;
  * a rubric governs it, cited.
  *
  * The trace is built by the resolver from the *actual* sorted candidates and the
- * *actual* outcomes ({@see \Introibo\Core\Precedence\DayResolver}), so it reports the
+ * *actual* outcomes ({@see \Directorium\Core\Precedence\DayResolver}), so it reports the
  * resolution as it was decided, not a reconstruction. It is opt-in: it fills the
  * output contract's reserved day-level `resolution` slot only when a caller asks to
  * explain a day, so the default contract stays lean and byte-stable. Tier positions

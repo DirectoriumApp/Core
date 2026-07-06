@@ -1,19 +1,19 @@
 # Sources
 
-Introibo is accurate **because it cites its sources**. This ledger is the master register of the
+Directorium is accurate **because it cites its sources**. This ledger is the master register of the
 authoritative works the calendar and corpus are built from. Every liturgical datum in the corpus (a
 feast's date/rank/colour, a rubric, a text) carries a **source key** that points at an entry here, so any
 value can be traced back to the printed book that establishes it.
 
 This is a living document: entries are added as each edition and corpus lands. The structured citation on
-each datum (see `docs/design/platform-urn-scheme.md`, URN `introibo:source:<key>`) foreign-keys into the
+each datum (see `docs/design/platform-urn-scheme.md`, URN `directorium:source:<key>`) foreign-keys into the
 **Key** column below.
 
 ## How to read an entry
 
 | Field | Meaning |
 |-------|---------|
-| **Key** | Stable identifier used by data records and the API (`introibo:source:<key>`). |
+| **Key** | Stable identifier used by data records and the API (`directorium:source:<key>`). |
 | **Work / edition** | The authoritative book and its edition. |
 | **Use** | `text` = we may transcribe public-domain/freely-licensed text; `reference` = consulted to establish facts only, **never transcribed**; `oracle` = used to cross-check generated output in validation. |
 | **Licence / status** | Copyright status, and what we may do with it under the clean-room policy. |
@@ -32,7 +32,7 @@ each datum (see `docs/design/platform-urn-scheme.md`, URN `introibo:source:<key>
 
 ## Oracles — independent cross-checks (validation only)
 
-These are **not** transcribed into the corpus; the validation harness compares Introibo's generated output
+These are **not** transcribed into the corpus; the validation harness compares Directorium's generated output
 against them day-by-day to prove correctness (see `ERRATA.md` for documented, legitimate differences).
 
 | Key | Source | Use | Notes |
@@ -44,9 +44,9 @@ against them day-by-day to prove correctness (see `ERRATA.md` for documented, le
 
 ## Clean-room policy
 
-Introibo's engine and data are written from **published rubrics and liturgical fact**, never ported from
+Directorium's engine and data are written from **published rubrics and liturgical fact**, never ported from
 another engine's source code. **Copyright-restricted** editions and translations (e.g. modern hand-missal
 translations) may be **consulted as reference** to establish facts — that a feast is I class in a given
 edition, that a rubric reads a certain way — but their **text is never copied**. Public-domain and
 freely-licensed sources may be transcribed. When a source's status is uncertain, it is treated as
-`reference` until confirmed. See [CONTRIBUTING](https://github.com/Introibo-App/.github/blob/main/CONTRIBUTING.md).
+`reference` until confirmed. See [CONTRIBUTING](https://github.com/Directorium/.github/blob/main/CONTRIBUTING.md).

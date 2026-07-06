@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/precedence-rules.schema.json",
+  "$id": "https://schema.directorium.app/corpus/precedence-rules.schema.json",
   "title": "Precedence rule row",
   "description": "One membership id-list or one commemoration-limit fact the rules engine reads (replacing the private consts in Rubrics1962Precedence). Each row is one variant.",
   "oneOf": [

@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Contract;
+namespace Directorium\Core\Tests\Contract;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\CelebrationRole;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Calendar\RoledObservance;
-use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Contract\Provenance;
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\CelebrationRole;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Calendar\RoledObservance;
+use Directorium\Core\Contract\DayContract;
+use Directorium\Core\Contract\Provenance;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Sanctoral\SanctoralObservance;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\contract;
+use function Directorium\Core\contract;
 
 /**
  * Golden snapshots for the frozen output contract (v1.0.0): a simple day pins
@@ -92,7 +92,7 @@ final class DayContractTest extends TestCase
 
         $celebration = $day['celebration'][0];
         self::assertSame('roman:sanctorale:petrus-paulus', $celebration['id']);
-        self::assertSame('introibo:observance:roman:sanctorale:petrus-paulus', $celebration['urn']);
+        self::assertSame('directorium:observance:roman:sanctorale:petrus-paulus', $celebration['urn']);
         self::assertSame('feast', $celebration['kind']);
         self::assertSame('I', $celebration['rank']);
         self::assertSame(1, $celebration['rankOrdinal']);
@@ -192,7 +192,7 @@ final class DayContractTest extends TestCase
     {
         return [
             'id' => 'roman:temporale:paschal:pentecost-time:week-4:feria-6',
-            'urn' => 'introibo:observance:roman:temporale:paschal:pentecost-time:week-4:feria-6',
+            'urn' => 'directorium:observance:roman:temporale:paschal:pentecost-time:week-4:feria-6',
             'role' => $role,
             'kind' => 'feria',
             'rank' => 'IV',

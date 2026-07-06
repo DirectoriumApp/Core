@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Sanctoral;
+namespace Directorium\Core\Tests\Sanctoral;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Sanctoral\SanctoralObservance;
 use PHPUnit\Framework\TestCase;
 
 final class SanctoralObservanceTest extends TestCase

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use InvalidArgumentException;
 
@@ -11,7 +11,7 @@ use InvalidArgumentException;
  * occurrence.
  *
  * The 1962 Table of Liturgical Days (Codex Rubricarum n. 91) is NOT a total
- * order on {@see \Introibo\Core\Attribute\RankClass} alone: a first-class Sunday
+ * order on {@see \Directorium\Core\Attribute\RankClass} alone: a first-class Sunday
  * of Lent and a first-class saint's feast are both class I yet resolve
  * oppositely (the Sunday wins). So precedence sorts on this derived tier, which
  * an edition's {@see PrecedenceRules} computes from a day's kind, class, season,

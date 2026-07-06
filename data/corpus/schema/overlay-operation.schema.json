@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/overlay-operation.schema.json",
+  "$id": "https://schema.directorium.app/corpus/overlay-operation.schema.json",
   "title": "Particular-calendar overlay operation",
   "description": "One line of an overlay's operations.ndjson (Core #76): a single add / suppress / rerank applied to the universal sanctoral by feast id. Mirrors the PHP OverlayOperation value objects. Exactly one operation may target a given feast; the file is sorted by target id.",
   "type": "object",

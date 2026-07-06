@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Attribute\LegacyRank;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Sanctoral\SanctoralObservance;
-use Introibo\Core\Temporal\Computus;
-use Introibo\Core\Temporal\Season;
-use Introibo\Core\Temporal\TemporalObservance;
-use Introibo\Core\Trace\ResolutionReason;
+use Directorium\Core\Attribute\LegacyRank;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Temporal\Computus;
+use Directorium\Core\Temporal\Season;
+use Directorium\Core\Temporal\TemporalObservance;
+use Directorium\Core\Trace\ResolutionReason;
 
 /**
  * Precedence under the pre-1955 rubrics — the 1954 Divino Afflatu edition

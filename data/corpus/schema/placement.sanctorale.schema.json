@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/placement.sanctorale.schema.json",
+  "$id": "https://schema.directorium.app/corpus/placement.sanctorale.schema.json",
   "title": "Sanctoral edition placement",
   "description": "Edition-varying fixed-date placement for a sanctoral observance (a feast can move between editions). month and day are always cited; vigilOf, when present, names the feast a vigil anticipates; octaveOf, when present, names the feast whose octave this day (a day within the octave, or the octave day) belongs to.",
   "type": "object",

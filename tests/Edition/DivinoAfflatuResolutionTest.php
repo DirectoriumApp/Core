@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Edition;
+namespace Directorium\Core\Tests\Edition;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Edition\RubricSystem;
-use Introibo\Core\Overlay\CalendarCatalog;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Precedence\ResolvedYear;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Edition\RubricSystem;
+use Directorium\Core\Overlay\CalendarCatalog;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Precedence\ResolvedYear;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

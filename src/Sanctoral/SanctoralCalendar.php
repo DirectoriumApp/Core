@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Sanctoral;
+namespace Directorium\Core\Sanctoral;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Temporal\Computus;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Temporal\Computus;
+use Directorium\Core\Temporal\TemporalCalendar;
 use InvalidArgumentException;
 
 /**
@@ -34,7 +34,7 @@ final class SanctoralCalendar
      * Whether a common vigil that falls on a Sunday is anticipated to the preceding Saturday
      * (the pre-1955 rule) rather than kept on its nominal date. Off by default so the 1962
      * placement — and its golden fixture — is unchanged; the resolver turns it on for the
-     * Divino Afflatu edition (from {@see \Introibo\Core\Precedence\PrecedenceRules::anticipatesSundayVigils()}).
+     * Divino Afflatu edition (from {@see \Directorium\Core\Precedence\PrecedenceRules::anticipatesSundayVigils()}).
      */
     private bool $anticipateSundayVigils;
 

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Precedence;
+namespace Directorium\Core\Tests\Precedence;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Precedence\ResolvedYear;
-use Introibo\Core\Tests\Fixture\SeedSanctoralData;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Precedence\ResolvedYear;
+use Directorium\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 /**

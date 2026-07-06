@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Temporal\ChristmasCycle;
+use Directorium\Core\Temporal\ChristmasCycle;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

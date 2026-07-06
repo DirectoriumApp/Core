@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Temporal;
+namespace Directorium\Core\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 use LogicException;
 

@@ -17,4 +17,4 @@ editions:
   - dir: roman-divino-afflatu   # 1954 (Divino Afflatu)
     base: roman-rubricae-1960
 
-generator: "@introibo/corpus-generator"
+generator: "@directorium/corpus-generator"

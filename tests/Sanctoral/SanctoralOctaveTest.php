@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Sanctoral;
+namespace Directorium\Core\Tests\Sanctoral;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Temporal\ChristmasCycle;
-use Introibo\Core\Temporal\Eastertide;
-use Introibo\Core\Temporal\TemporalObservance;
-use Introibo\Core\Sanctoral\SanctoralCalendar;
-use Introibo\Core\Tests\Fixture\SeedSanctoralData;
+use Directorium\Core\Temporal\ChristmasCycle;
+use Directorium\Core\Temporal\Eastertide;
+use Directorium\Core\Temporal\TemporalObservance;
+use Directorium\Core\Sanctoral\SanctoralCalendar;
+use Directorium\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Citation\CitationSet;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Citation\CitationSet;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 
 /**
  * Re-rank a universal feast the particular calendar keeps but ranks differently —

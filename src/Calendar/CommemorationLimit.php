@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Calendar;
+namespace Directorium\Core\Calendar;
 
-use Introibo\Core\Attribute\RankClass;
+use Directorium\Core\Attribute\RankClass;
 use LogicException;
 
 /**

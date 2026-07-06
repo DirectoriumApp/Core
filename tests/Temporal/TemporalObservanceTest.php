@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Temporal\Season;
-use Introibo\Core\Temporal\TemporalObservance;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Temporal\Season;
+use Directorium\Core\Temporal\TemporalObservance;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

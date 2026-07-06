@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Trace;
+namespace Directorium\Core\Tests\Trace;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\contract;
-use function Introibo\Core\explain;
+use function Directorium\Core\contract;
+use function Directorium\Core\explain;
 
 /**
  * The show-your-work resolution trace (#233/#234), exercised through the public
