@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Sanctoral;
+namespace Directorium\Core\Tests\Sanctoral;
 
 use DateTimeImmutable;
-use Introibo\Core\Sanctoral\SanctoralCalendar;
-use Introibo\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Sanctoral\SanctoralCalendar;
+use Directorium\Core\Sanctoral\SanctoralObservance;
 use PHPUnit\Framework\TestCase;
 
 /**

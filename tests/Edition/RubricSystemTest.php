@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Edition;
+namespace Directorium\Core\Tests\Edition;
 
-use Introibo\Core\Edition\RubricSystem;
+use Directorium\Core\Edition\RubricSystem;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

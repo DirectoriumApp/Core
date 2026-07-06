@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Validation;
+namespace Directorium\Core\Tests\Validation;
 
-use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Overlay\CalendarCatalog;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Contract\DayContract;
+use Directorium\Core\Overlay\CalendarCatalog;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Temporal\TemporalCalendar;
 use RuntimeException;
 
 /**

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core;
+namespace Directorium\Core;
 
 use DateTimeImmutable;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Overlay\CalendarCatalog;
-use Introibo\Core\Precedence\ResolvedYear;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Contract\DayContract;
+use Directorium\Core\Overlay\CalendarCatalog;
+use Directorium\Core\Precedence\ResolvedYear;
 
 /**
  * The engine entry point: the liturgical day for a civil date.
@@ -21,7 +21,7 @@ use Introibo\Core\Precedence\ResolvedYear;
  *
  * `$calendar` selects the particular calendar to resolve under (#78): null for the
  * universal calendar, or a calendar named by its slug (`sspx`) or overlay URN
- * (`introibo:overlay:roman:sspx`). `$rubricSystem` selects the edition (rules-family):
+ * (`directorium:overlay:roman:sspx`). `$rubricSystem` selects the edition (rules-family):
  * null for the default 1962 (Rubricae 1960), or `roman:divino-afflatu` (1954) /
  * `roman:rubricae-1955` (1955), or a friendly alias (`1954`, `1955`, `1962`). The two
  * selectors are orthogonal (an overlay is layered over an edition), and both default so
@@ -35,7 +35,7 @@ function day(DateTimeImmutable $date, ?string $calendar = null, ?string $rubricS
 /**
  * The public output contract for a civil date: the same resolved day as
  * {@see day()}, serialised to the versioned, JSON-ready structure the other
- * Introibo repos build on (see {@see DayContract} and
+ * Directorium repos build on (see {@see DayContract} and
  * docs/design/output-contract.md).
  *
  * `$calendar` selects the particular calendar as for {@see day()} (stamped into the

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Attribute;
+namespace Directorium\Core\Tests\Attribute;
 
-use Introibo\Core\Attribute\RankClass;
+use Directorium\Core\Attribute\RankClass;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

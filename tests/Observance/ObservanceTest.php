@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Observance;
+namespace Directorium\Core\Tests\Observance;
 
-use Introibo\Core\Observance\IdentityAliases;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
+use Directorium\Core\Observance\IdentityAliases;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

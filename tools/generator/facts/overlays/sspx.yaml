@@ -21,7 +21,7 @@
 #     artifact, not conformed to — see the SSPX oracle notes (cf. the didacus/ubaldus
 #     precedent: we verify against the real 1962 calendar, not an oracle blindly).
 
-id: introibo:overlay:roman:sspx
+id: directorium:overlay:roman:sspx
 name: "Society of Saint Pius X"
 rite: roman
 

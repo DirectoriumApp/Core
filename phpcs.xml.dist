@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="introibo-core">
-    <description>Coding standard for introibo/core: PSR-12.</description>
+<ruleset name="directorium-core">
+    <description>Coding standard for directorium/core: PSR-12.</description>
 
     <!-- Scan the library source, the test suite, and maintainer scripts. -->
     <file>bin</file>

@@ -66,7 +66,7 @@ A **particular calendar** — SSPX, FSSP, a diocese — and a **conference prope
 set are **`overlay`-type layers** ([`platform-urn-scheme.md`](platform-urn-scheme.md)),
 applied *atop* an edition or a snapshot. They add, remove, or re-rank observances;
 they do **not** restate the rubric family. An overlay is therefore **never an
-edition**: `roman:rubricae-1960` is an edition, `introibo:overlay:roman:sspx` is a
+edition**: `roman:rubricae-1960` is an edition, `directorium:overlay:roman:sspx` is a
 layer resolved over it. The same overlay engine that applies a diocesan calendar
 applies a decree — they are the same mechanism at different cadences.
 

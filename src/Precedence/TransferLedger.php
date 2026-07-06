@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateTimeImmutable;
-use Introibo\Core\Calendar\RealizedObservance;
+use Directorium\Core\Calendar\RealizedObservance;
 use LogicException;
 
 /**

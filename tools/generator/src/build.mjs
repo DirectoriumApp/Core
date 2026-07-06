@@ -347,7 +347,7 @@ export function build(outDir = DEFAULT_OUT) {
   }
   const manifest = {
     corpusVersion: meta.corpusVersion,
-    generator: meta.generator || '@introibo/corpus-generator',
+    generator: meta.generator || '@directorium/corpus-generator',
     license: 'CC0-1.0',
     editions: [edition, ...extraEditions.map((ed) => ed.dir)],
     overlays: overlays.map((o) => o.slug),

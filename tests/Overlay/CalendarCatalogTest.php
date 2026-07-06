@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Overlay;
+namespace Directorium\Core\Tests\Overlay;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Overlay\CalendarCatalog;
+use Directorium\Core\Overlay\CalendarCatalog;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -43,14 +43,14 @@ final class CalendarCatalogTest extends TestCase
         $descriptor = (new CalendarCatalog())->descriptor('sspx');
 
         self::assertNotNull($descriptor);
-        self::assertSame('introibo:overlay:roman:sspx', $descriptor->id());
+        self::assertSame('directorium:overlay:roman:sspx', $descriptor->id());
         self::assertSame('Society of Saint Pius X', $descriptor->name());
     }
 
     public function testAcceptsTheFullOverlayUrnAsASelector(): void
     {
         $bySlug = (new CalendarCatalog())->descriptor('sspx');
-        $byUrn = (new CalendarCatalog())->descriptor('introibo:overlay:roman:sspx');
+        $byUrn = (new CalendarCatalog())->descriptor('directorium:overlay:roman:sspx');
 
         self::assertNotNull($bySlug);
         self::assertNotNull($byUrn);

@@ -1,6 +1,6 @@
 # Known limitations
 
-An honest register of what Introibo does **not** yet cover, or covers with lower confidence. Trust comes
+An honest register of what Directorium does **not** yet cover, or covers with lower confidence. Trust comes
 from disclosing gaps, not hiding them. Items here are candidates for the roadmap and are surfaced (where
 relevant) as `confidence` flags in the data and in the API's coverage report.
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Contract;
+namespace Directorium\Core\Tests\Contract;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceId;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\contract;
+use function Directorium\Core\contract;
 
 /**
  * The published `id`/`urn` are the stable cross-system compatibility surface
@@ -20,7 +20,7 @@ use function Introibo\Core\contract;
  */
 final class StableIdentifierTest extends TestCase
 {
-    private const URN_PREFIX = 'introibo:observance:';
+    private const URN_PREFIX = 'directorium:observance:';
 
     /**
      * @dataProvider stableIdentifiers

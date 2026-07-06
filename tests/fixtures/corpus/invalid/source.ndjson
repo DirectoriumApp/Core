@@ -1,4 +1,4 @@
-{"key":"x","urn":"introibo:source:x","kind":"book","title":"t","rights":"public-domain"}
-{"key":"y","urn":"introibo:source:y","kind":"text","title":"t"}
-{"key":"z","urn":"introibo:source:Z","kind":"text","title":"t","rights":"public-domain"}
-{"key":"w","urn":"introibo:source:w","kind":"text","title":"t","rights":"public-domain","rank":1}
+{"key":"x","urn":"directorium:source:x","kind":"book","title":"t","rights":"public-domain"}
+{"key":"y","urn":"directorium:source:y","kind":"text","title":"t"}
+{"key":"z","urn":"directorium:source:Z","kind":"text","title":"t","rights":"public-domain"}
+{"key":"w","urn":"directorium:source:w","kind":"text","title":"t","rights":"public-domain","rank":1}

@@ -1,12 +1,12 @@
-# Introibo Core
+# Directorium Core
 
 > Liturgical-calendar engine for the traditional Roman rite — *Introíbo ad altáre Dei.*
 
-Introibo **Core** is a clean-room PHP library that computes the traditional Roman liturgical
+Directorium **Core** is a clean-room PHP library that computes the traditional Roman liturgical
 calendar. For any date it resolves the office of the day, its rank/class, liturgical colour,
 season, commemorations, and the occurrence/concurrence between them — beginning with the
 **1962 Roman** rubrics (= 1960) and growing to the other traditional systems. It is the
-authoritative engine behind the Introibo API, the introibo.org website, and the Ordo WordPress
+authoritative engine behind the Directorium API, the directorium.app website, and the Ordo WordPress
 plugin.
 
 The engine is **independently validated** day-by-day against external oracles (the missalemeum
@@ -20,7 +20,7 @@ Pre-release — **v0.1.0 in progress**. See the [roadmap](ROADMAP.md).
 ## Install
 
 ```bash
-composer require introibo/core
+composer require directorium/core
 ```
 
 Requires PHP 7.4+. No runtime dependencies.
@@ -28,7 +28,7 @@ Requires PHP 7.4+. No runtime dependencies.
 ## Usage (target API)
 
 ```php
-use Introibo\Core\LiturgicalCalendar;
+use Directorium\Core\LiturgicalCalendar;
 
 $day = (new LiturgicalCalendar())->day(new DateTimeImmutable('2026-06-30'));
 echo $day->title;        // the office of the day
@@ -38,7 +38,7 @@ print_r($day->colors);   // liturgical colour(s)
 
 ## Output contract
 
-`Introibo\Core\contract(new DateTimeImmutable('2026-06-30'))` returns the
+`Directorium\Core\contract(new DateTimeImmutable('2026-06-30'))` returns the
 versioned, JSON-ready **output contract** — the public shape the Api, Site, and
 Ordo repos build on. It is frozen at contract version 1.0.0 and grows only
 additively. Every field, the three-version provenance scheme, the stability
@@ -59,5 +59,5 @@ php tests/validate-oracle.php tests/fixtures/oracle.json   # day-by-day regressi
 
 ## Licence
 
-© 2026 Introibo. Licensed under **AGPL-3.0-or-later** (see [LICENSE](LICENSE)). The compiled
+© 2026 Directorium. Licensed under **AGPL-3.0-or-later** (see [LICENSE](LICENSE)). The compiled
 calendar dataset is released under **CC0**.

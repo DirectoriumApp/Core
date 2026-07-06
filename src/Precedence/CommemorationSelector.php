@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
-use Introibo\Core\Calendar\RealizedObservance;
+use Directorium\Core\Calendar\RealizedObservance;
 
 /**
  * Selects and orders the commemorations admitted on a day.

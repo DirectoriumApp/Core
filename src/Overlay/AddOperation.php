@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 
 /**
  * Add a proper feast the particular calendar celebrates but the universal calendar

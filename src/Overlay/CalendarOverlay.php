@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
 /**
  * A particular calendar as a thin, declarative layer over the universal one: an
@@ -11,7 +11,7 @@ namespace Introibo\Core\Overlay;
  * calendars are each one of these; the engine stays universal and only the data is
  * layered.
  *
- * The overlay is identified by its platform URN (`introibo:overlay:roman:sspx`) —
+ * The overlay is identified by its platform URN (`directorium:overlay:roman:sspx`) —
  * stamped onto the output contract so consumers know which calendar produced a day.
  * At most one operation may target a given feast: two operations on the same id is
  * an authoring error, so the constructor rejects it up front and application is
@@ -51,7 +51,7 @@ final class CalendarOverlay
         $this->operations = $operations;
     }
 
-    /** The overlay's platform URN, e.g. `introibo:overlay:roman:sspx`. */
+    /** The overlay's platform URN, e.g. `directorium:overlay:roman:sspx`. */
     public function id(): string
     {
         return $this->id;

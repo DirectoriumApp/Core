@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Trace;
+namespace Directorium\Core\Trace;
 
-use Introibo\Core\Citation\Citation;
+use Directorium\Core\Citation\Citation;
 
 /**
  * One reasoned step of a {@see ResolutionTrace} (#233): why the engine did what it
@@ -17,7 +17,7 @@ use Introibo\Core\Citation\Citation;
  * only where no single rubric governs a step; it is left null rather than invented.
  *
  * Reasons are produced at the exact point the decision is made (see
- * {@see \Introibo\Core\Precedence\PrecedenceRules}), so the explanation can never
+ * {@see \Directorium\Core\Precedence\PrecedenceRules}), so the explanation can never
  * drift from the resolution it explains.
  */
 final class ResolutionReason

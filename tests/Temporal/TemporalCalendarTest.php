@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Temporal\TemporalCalendar;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

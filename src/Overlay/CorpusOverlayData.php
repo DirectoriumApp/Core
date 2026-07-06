@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Citation\CitationSet;
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Corpus\CorpusRecord;
-use Introibo\Core\Observance\Observance;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Citation\CitationSet;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Corpus\CorpusRecord;
+use Directorium\Core\Observance\Observance;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 use RuntimeException;
 
 /**
@@ -24,7 +24,7 @@ use RuntimeException;
  * Layer it over the base sanctoral with {@see OverlaidSanctoralData} and the resolver
  * produces the particular calendar — the engine stays universal, only the data changes.
  *
- * It is to overlays what {@see \Introibo\Core\Sanctoral\CorpusSanctoralData} is to the
+ * It is to overlays what {@see \Directorium\Core\Sanctoral\CorpusSanctoralData} is to the
  * base sanctoral, and shares the same typed row readers ({@see CorpusRecord}).
  */
 final class CorpusOverlayData

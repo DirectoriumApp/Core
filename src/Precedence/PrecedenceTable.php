@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
-use Introibo\Core\Corpus\Corpus;
+use Directorium\Core\Corpus\Corpus;
 use RuntimeException;
 
 /**

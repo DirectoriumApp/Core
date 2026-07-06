@@ -2,35 +2,35 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Calendar\CelebrationRole;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Calendar\RoledObservance;
-use Introibo\Core\Contract\Provenance;
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Edition\RubricSystem;
-use Introibo\Core\Introibo;
-use Introibo\Core\Sanctoral\CorpusSanctoralData;
-use Introibo\Core\Sanctoral\SanctoralCalendar;
-use Introibo\Core\Sanctoral\SanctoralData;
-use Introibo\Core\Temporal\ChristmasCycle;
-use Introibo\Core\Temporal\Eastertide;
-use Introibo\Core\Temporal\HolyWeek;
-use Introibo\Core\Temporal\LentenCycle;
-use Introibo\Core\Temporal\MovableFeasts;
-use Introibo\Core\Temporal\TemporalCalendar;
-use Introibo\Core\Temporal\TemporalObservance;
-use Introibo\Core\Temporal\TimeAfterPentecost;
-use Introibo\Core\Trace\ResolutionTrace;
+use Directorium\Core\Calendar\CelebrationRole;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Calendar\RoledObservance;
+use Directorium\Core\Contract\Provenance;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Edition\RubricSystem;
+use Directorium\Core\Directorium;
+use Directorium\Core\Sanctoral\CorpusSanctoralData;
+use Directorium\Core\Sanctoral\SanctoralCalendar;
+use Directorium\Core\Sanctoral\SanctoralData;
+use Directorium\Core\Temporal\ChristmasCycle;
+use Directorium\Core\Temporal\Eastertide;
+use Directorium\Core\Temporal\HolyWeek;
+use Directorium\Core\Temporal\LentenCycle;
+use Directorium\Core\Temporal\MovableFeasts;
+use Directorium\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Temporal\TemporalObservance;
+use Directorium\Core\Temporal\TimeAfterPentecost;
+use Directorium\Core\Trace\ResolutionTrace;
 
 /**
  * The resolver: it composes the temporal skeleton and the sanctoral overlay into
  * one celebrated office per day and assembles the {@see LiturgicalDay}s that back
- * {@see \Introibo\Core\day()}.
+ * {@see \Directorium\Core\day()}.
  *
  * Because a transferred feast lands on a later free day, the resolution of any
  * one day depends on what was displaced from earlier days, so a whole civil year
@@ -126,7 +126,7 @@ final class DayResolver
     /** The edition, corpus, and engine versions this resolver stamps onto a year. */
     public function provenance(): Provenance
     {
-        return new Provenance($this->edition, $this->sanctoralData->version(), Introibo::VERSION);
+        return new Provenance($this->edition, $this->sanctoralData->version(), Directorium::VERSION);
     }
 
     public function resolveDay(DateTimeImmutable $date): LiturgicalDay
@@ -268,7 +268,7 @@ final class DayResolver
         /** @var list<RoledObservance> $displaced */
         $displaced = [];
 
-        /** @var list<array{id: string, outcome: string, reason: \Introibo\Core\Trace\ResolutionReason}> $traceLosers */
+        /** @var list<array{id: string, outcome: string, reason: \Directorium\Core\Trace\ResolutionReason}> $traceLosers */
         $traceLosers = [];
 
         foreach (array_slice($candidates, 1) as $loser) {
@@ -336,7 +336,7 @@ final class DayResolver
      * colour and season were derived (#235).
      *
      * @param list<RealizedObservance> $candidates
-     * @param list<array{id: string, outcome: string, reason: \Introibo\Core\Trace\ResolutionReason}> $losers
+     * @param list<array{id: string, outcome: string, reason: \Directorium\Core\Trace\ResolutionReason}> $losers
      */
     private function buildTrace(
         array $candidates,

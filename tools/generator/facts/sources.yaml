@@ -13,7 +13,7 @@
 # (rank, colour, month, day) may cite any registered source.
 
 - key: mr-1920
-  urn: introibo:source:mr-1920
+  urn: directorium:source:mr-1920
   kind: text
   title: "Missale Romanum, editio typica"
   publisher: "Typis Polyglottis Vaticanis"
@@ -22,7 +22,7 @@
   note: "Public domain by age. The source for transcribed Latin titles in this set."
 
 - key: rg-1960
-  urn: introibo:source:rg-1960
+  urn: directorium:source:rg-1960
   kind: reference
   title: "Rubricae Generales / Codex Rubricarum (1960)"
   year: 1960
@@ -30,7 +30,7 @@
   note: "Consult-only. Cited for uncopyrightable facts (rank, colour, date); never transcribed."
 
 - key: sspx-ordo
-  urn: introibo:source:sspx-ordo
+  urn: directorium:source:sspx-ordo
   kind: reference
   title: "Society of St Pius X — Ordo (Rubricae 1960 / 1962), District of the USA"
   year: 2024
@@ -40,7 +40,7 @@
     pinned as a validation oracle — see tests/Validation/fixtures/sspx."
 
 - key: ordo-1954
-  urn: introibo:source:ordo-1954
+  urn: directorium:source:ordo-1954
   kind: reference
   title: "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)"
   year: 1954
@@ -51,7 +51,7 @@
     as the 1954 validation oracle — see docs/design/rubric-system-model.md."
 
 - key: rg-da
-  urn: introibo:source:rg-da
+  urn: directorium:source:rg-da
   kind: reference
   title: "Rubricae Generales Missalis et Breviarii Romani (Divino Afflatu, pre-1955)"
   year: 1920

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Calendar;
+namespace Directorium\Core\Tests\Calendar;
 
-use Introibo\Core\Calendar\CelebrationRole;
+use Directorium\Core\Calendar\CelebrationRole;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

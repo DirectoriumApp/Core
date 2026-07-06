@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateTimeImmutable;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Trace\ResolutionReason;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Trace\ResolutionReason;
 
 /**
  * The precedence rules of one rubric edition.

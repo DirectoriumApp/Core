@@ -68,12 +68,12 @@
     "overlays/sspx/overlay.json": {
       "primaryKey": "id",
       "records": 1,
-      "sha256": "6a25b3b7d7f4f42f8f2503ecdf9237ccb603e21180925ddc915ddbc97f579277"
+      "sha256": "b8aecd917fa790e7d292608c77f4fc7d1d354594f4754f9a41b35dd4de2ac583"
     },
     "sources.ndjson": {
       "primaryKey": "key",
       "records": 5,
-      "sha256": "fd66a00f21962d1daedebe265aa8ac1df3c0da12f678ae5f9cb5b0ff7553b949"
+      "sha256": "633b914858861b6a1633c9bfafed360d3c07f77d31b871613b15bc339ba7b9ca"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -86,7 +86,7 @@
       "sha256": "47b672d23649d479af21e20ff72a6b156f43ad604d660c8c18e0365bd1a722bd"
     }
   },
-  "generator": "@introibo/corpus-generator",
+  "generator": "@directorium/corpus-generator",
   "license": "CC0-1.0",
   "overlays": [
     "sspx"
@@ -97,7 +97,7 @@
       "kind": "text",
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
-      "urn": "introibo:source:mr-1920",
+      "urn": "directorium:source:mr-1920",
       "uses": 418
     },
     {
@@ -105,7 +105,7 @@
       "kind": "reference",
       "rights": "reference",
       "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
-      "urn": "introibo:source:ordo-1954",
+      "urn": "directorium:source:ordo-1954",
       "uses": 1745
     },
     {
@@ -113,7 +113,7 @@
       "kind": "reference",
       "rights": "reference",
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
-      "urn": "introibo:source:rg-1960",
+      "urn": "directorium:source:rg-1960",
       "uses": 1403
     },
     {
@@ -121,7 +121,7 @@
       "kind": "reference",
       "rights": "reference",
       "title": "Rubricae Generales Missalis et Breviarii Romani (Divino Afflatu, pre-1955)",
-      "urn": "introibo:source:rg-da",
+      "urn": "directorium:source:rg-da",
       "uses": 32
     },
     {
@@ -129,7 +129,7 @@
       "kind": "reference",
       "rights": "reference",
       "title": "Society of St Pius X — Ordo (Rubricae 1960 / 1962), District of the USA",
-      "urn": "introibo:source:sspx-ordo",
+      "urn": "directorium:source:sspx-ordo",
       "uses": 2
     }
   ]

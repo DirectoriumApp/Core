@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Temporal;
+namespace Directorium\Core\Temporal;
 
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Observance\ObservanceKind;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Observance\ObservanceKind;
 use RuntimeException;
 
 /**

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Corpus;
+namespace Directorium\Core\Tests\Corpus;
 
-use Introibo\Core\Corpus\Corpus;
+use Directorium\Core\Corpus\Corpus;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

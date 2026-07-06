@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Citation\CitationSet;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Citation\CitationSet;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 
 /**
  * Suppress a universal feast a particular calendar does not keep — removing it from

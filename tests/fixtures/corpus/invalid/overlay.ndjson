@@ -1,4 +1,4 @@
 {"id":"overlay:roman:sspx","name":"Society of Saint Pius X","rite":"roman","operations":2}
-{"id":"introibo:overlay:roman:sspx","rite":"roman","operations":2}
-{"id":"introibo:overlay:roman:sspx","name":"Society of Saint Pius X","rite":"roman","operations":2,"bogus":true}
-{"id":"introibo:overlay:roman:sspx","name":"Society of Saint Pius X","rite":"roman","operations":-1}
+{"id":"directorium:overlay:roman:sspx","rite":"roman","operations":2}
+{"id":"directorium:overlay:roman:sspx","name":"Society of Saint Pius X","rite":"roman","operations":2,"bogus":true}
+{"id":"directorium:overlay:roman:sspx","name":"Society of Saint Pius X","rite":"roman","operations":-1}

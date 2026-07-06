@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Corpus;
+namespace Directorium\Core\Corpus;
 
 use RuntimeException;
 
@@ -14,7 +14,7 @@ use RuntimeException;
  * ever *reads* it, never regenerates it. This class is that read seam: it locates
  * the corpus tree, parses its manifest and NDJSON shapes, and hands typed rows to
  * the data sources that overlay them onto the calendar (starting with
- * {@see \Introibo\Core\Sanctoral\CorpusSanctoralData}).
+ * {@see \Directorium\Core\Sanctoral\CorpusSanctoralData}).
  *
  * Records are parsed once per file and cached for the life of the process — the
  * corpus is immutable at runtime — so constructing a data source per resolved

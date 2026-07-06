@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Trace;
+namespace Directorium\Core\Tests\Trace;
 
 use PHPUnit\Framework\TestCase;
 

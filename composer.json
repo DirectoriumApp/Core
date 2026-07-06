@@ -1,6 +1,6 @@
 {
-    "name": "introibo/core",
-    "description": "The Introibo liturgical engine: a clean-room PHP library computing the traditional Roman calendar.",
+    "name": "directorium/core",
+    "description": "The Directorium liturgical engine: a clean-room PHP library computing the traditional Roman calendar.",
     "type": "library",
     "license": "AGPL-3.0-or-later",
     "keywords": [
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Introibo\\Core\\": "src/"
+            "Directorium\\Core\\": "src/"
         },
         "files": [
             "src/functions.php"
@@ -30,14 +30,14 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Introibo\\Core\\Tests\\": "tests/"
+            "Directorium\\Core\\Tests\\": "tests/"
         }
     },
     "scripts": {
         "lint": "phpcs",
         "lint:fix": "phpcbf",
         "analyse": "phpstan analyse",
-        "test": "phpunit --testsuite introibo-core",
+        "test": "phpunit --testsuite directorium-core",
         "validate-oracles": "phpunit --testsuite validation",
         "check": [
             "@lint",

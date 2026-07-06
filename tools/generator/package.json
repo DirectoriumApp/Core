@@ -1,9 +1,9 @@
 {
-  "name": "@introibo/corpus-generator",
+  "name": "@directorium/corpus-generator",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Build-time generator for the Introibo CC0 liturgical corpus. Node is build-time only; the runtime engine is PHP and never runs this.",
+  "description": "Build-time generator for the Directorium CC0 liturgical corpus. Node is build-time only; the runtime engine is PHP and never runs this.",
   "license": "AGPL-3.0-or-later",
   "engines": {
     "node": ">=20"

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Contract;
+namespace Directorium\Core\Contract;
 
 /**
  * The three provenance axes stamped on every serialised day: which rubric
@@ -13,7 +13,7 @@ namespace Introibo\Core\Contract;
  * governs precedence and ranks (v0.1.0: only `roman:rubricae-1960`). The
  * **corpus version** identifies the body of dated feast data, and carries no
  * edition token — the same 1962 corpus can be resolved under different editions.
- * The **engine version** ({@see \Introibo\Core\Introibo::VERSION}) tracks the
+ * The **engine version** ({@see \Directorium\Core\Directorium::VERSION}) tracks the
  * resolver's behaviour. A consumer keys a cache on all three: any one moving
  * means the resolved output may differ. See docs/design/output-contract.md.
  *

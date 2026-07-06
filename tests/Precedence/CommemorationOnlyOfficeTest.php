@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Precedence;
+namespace Directorium\Core\Tests\Precedence;
 
 use DateInterval;
-use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Contract\DayContract;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Temporal\TemporalCalendar;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * A commemoration has no proper office (1960 rubrics, nn. 106-114): the feria or
  * Sunday is celebrated and the saint is merely commemorated. The engine now awards
- * an observance of {@see \Introibo\Core\Observance\ObservanceKind::COMMEMORATION_ONLY}
+ * an observance of {@see \Directorium\Core\Observance\ObservanceKind::COMMEMORATION_ONLY}
  * the lowest precedence tier (below the whole Table of Liturgical Days), so it can
  * never win an occurrence.
  */

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Precedence;
+namespace Directorium\Core\Tests\Precedence;
 
 use DateInterval;
-use Introibo\Core\Contract\DayContract;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Temporal\Computus;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Contract\DayContract;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Temporal\Computus;
+use Directorium\Core\Temporal\TemporalCalendar;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Regression guard for the Sacred Triduum precedence bug surfaced by the
  * validation harness (#45): a III-class saint could displace Holy Thursday.
  *
- * The apex "triduum" tier is awarded by {@see \Introibo\Core\Precedence\Rubrics1962Precedence}
+ * The apex "triduum" tier is awarded by {@see \Directorium\Core\Precedence\Rubrics1962Precedence}
  * to the day's own liturgical office — a feria of Holy Thursday, Good Friday, or
  * Holy Saturday. Before the fix the tier was awarded to *every* observance falling
  * on those dates, so a coincident saint (e.g. St John of Capistrano on 28 March,

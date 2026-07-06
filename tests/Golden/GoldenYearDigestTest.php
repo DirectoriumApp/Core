@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Golden;
+namespace Directorium\Core\Tests\Golden;
 
 use PHPUnit\Framework\TestCase;
 

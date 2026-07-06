@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Observance;
+namespace Directorium\Core\Tests\Observance;
 
-use Introibo\Core\Observance\AnchorFamily;
-use Introibo\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\AnchorFamily;
+use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

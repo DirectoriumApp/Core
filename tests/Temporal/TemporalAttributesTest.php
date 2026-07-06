@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
-use Introibo\Core\Temporal\TemporalArchetype;
-use Introibo\Core\Temporal\TemporalAttributes;
-use Introibo\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Temporal\TemporalArchetype;
+use Directorium\Core\Temporal\TemporalAttributes;
+use Directorium\Core\Temporal\TemporalCalendar;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Precedence;
+namespace Directorium\Core\Tests\Precedence;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Attribute\Colour;
-use Introibo\Core\Attribute\ElementColour;
-use Introibo\Core\Attribute\RankClass;
-use Introibo\Core\Calendar\CommemorationLimit;
-use Introibo\Core\Calendar\RealizedObservance;
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Observance\ObservanceId;
-use Introibo\Core\Observance\ObservanceKind;
-use Introibo\Core\Precedence\PrecedenceContext;
-use Introibo\Core\Precedence\PrecedenceTable;
-use Introibo\Core\Precedence\Rubrics1962Precedence;
-use Introibo\Core\Temporal\Season;
-use Introibo\Core\Temporal\TemporalObservance;
+use Directorium\Core\Attribute\Colour;
+use Directorium\Core\Attribute\ElementColour;
+use Directorium\Core\Attribute\RankClass;
+use Directorium\Core\Calendar\CommemorationLimit;
+use Directorium\Core\Calendar\RealizedObservance;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Observance\ObservanceId;
+use Directorium\Core\Observance\ObservanceKind;
+use Directorium\Core\Precedence\PrecedenceContext;
+use Directorium\Core\Precedence\PrecedenceTable;
+use Directorium\Core\Precedence\Rubrics1962Precedence;
+use Directorium\Core\Temporal\Season;
+use Directorium\Core\Temporal\TemporalObservance;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -127,7 +127,7 @@ final class PrecedenceTableTest extends TestCase
     private function fixtureWithSundayOrdinal(int $ordinal): string
     {
         $realEdDir = dirname(__DIR__, 2) . '/data/corpus/editions/roman-rubricae-1960';
-        $root = sys_get_temp_dir() . '/introibo-precedence-' . uniqid('', true);
+        $root = sys_get_temp_dir() . '/directorium-precedence-' . uniqid('', true);
         $edDir = $root . '/editions/roman-rubricae-1960';
         mkdir($edDir, 0777, true);
         $this->tempRoots[] = $root;

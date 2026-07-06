@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Precedence;
+namespace Directorium\Core\Tests\Precedence;
 
-use Introibo\Core\Precedence\PrecedenceTier;
+use Directorium\Core\Precedence\PrecedenceTier;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

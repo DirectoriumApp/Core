@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Temporal;
+namespace Directorium\Core\Tests\Temporal;
 
-use Introibo\Core\Temporal\TemporalDefinitions;
+use Directorium\Core\Temporal\TemporalDefinitions;
 use PHPUnit\Framework\TestCase;
 
 /**

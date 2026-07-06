@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Validation;
+namespace Directorium\Core\Tests\Validation;
 
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Temporal\Computus;
+use Directorium\Core\Temporal\Computus;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class EasterOracleTest extends TestCase
 {
-    /** The upper horizon, matching the golden fixture's {@see \Introibo\Core\Tests\Golden\GoldenYear::LAST_YEAR}. */
+    /** The upper horizon, matching the golden fixture's {@see \Directorium\Core\Tests\Golden\GoldenYear::LAST_YEAR}. */
     private const LAST_YEAR = 2200;
 
     /**

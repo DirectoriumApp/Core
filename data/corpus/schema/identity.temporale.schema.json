@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/identity.temporale.schema.json",
+  "$id": "https://schema.directorium.app/corpus/identity.temporale.schema.json",
   "title": "Temporal identity record (Layer 1, archetypal)",
   "description": "Edition-invariant identity for a temporal ARCHETYPE (not a per-day slug; the fillers mint concrete day slugs algorithmically). names.la is a Latin template with {ord}/{wk}-style placeholders the filler fills. No rank, colour, or date.",
   "type": "object",

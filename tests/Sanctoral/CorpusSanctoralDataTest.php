@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Sanctoral;
+namespace Directorium\Core\Tests\Sanctoral;
 
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Sanctoral\CorpusSanctoralData;
-use Introibo\Core\Sanctoral\SanctoralEntry;
-use Introibo\Core\Tests\Fixture\SeedSanctoralData;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Sanctoral\CorpusSanctoralData;
+use Directorium\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Tests\Fixture\SeedSanctoralData;
 use PHPUnit\Framework\TestCase;
 
 final class CorpusSanctoralDataTest extends TestCase

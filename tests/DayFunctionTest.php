@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests;
+namespace Directorium\Core\Tests;
 
 use DateTimeImmutable;
 use DateTimeZone;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\contract;
-use function Introibo\Core\day;
+use function Directorium\Core\contract;
+use function Directorium\Core\day;
 
 final class DayFunctionTest extends TestCase
 {
@@ -61,12 +61,12 @@ final class DayFunctionTest extends TestCase
 
         $sspx = contract($date, false, 'sspx');
         self::assertSame(
-            ['particular' => ['id' => 'introibo:overlay:roman:sspx', 'name' => 'Society of Saint Pius X']],
+            ['particular' => ['id' => 'directorium:overlay:roman:sspx', 'name' => 'Society of Saint Pius X']],
             $sspx['calendar']
         );
         self::assertSame(1, $sspx['celebration'][0]['rankOrdinal']);
         // The overlay also travels on the corpus-version axis.
-        self::assertStringContainsString('+introibo:overlay:roman:sspx', $sspx['corpusVersion']);
+        self::assertStringContainsString('+directorium:overlay:roman:sspx', $sspx['corpusVersion']);
     }
 
     public function testDayDefaultsToTheNineteenSixtyEdition(): void

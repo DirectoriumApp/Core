@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Calendar;
+namespace Directorium\Core\Calendar;
 
 use DateTimeImmutable;
-use Introibo\Core\Precedence\ConcurrenceOutcome;
-use Introibo\Core\Trace\ResolutionTrace;
+use Directorium\Core\Precedence\ConcurrenceOutcome;
+use Directorium\Core\Trace\ResolutionTrace;
 
 /**
  * The resolved liturgical day: the immutable aggregate returned by
- * {@see \Introibo\Core\day()}.
+ * {@see \Directorium\Core\day()}.
  *
  * A day groups the offices in play into four roles:
  *  - **celebration** — the office actually celebrated (normally one principal);

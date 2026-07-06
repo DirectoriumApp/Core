@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Validation;
+namespace Directorium\Core\Tests\Validation;
 
 use RuntimeException;
 

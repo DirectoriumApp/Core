@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schema.introibo.app/corpus/temporal-skeleton.schema.json",
+  "$id": "https://schema.directorium.app/corpus/temporal-skeleton.schema.json",
   "title": "Temporal skeleton row",
   "description": "One structural fact the Paschal computation consumes: either an Easter-offset for a slot, or a block->season mapping. No rank/colour (those are the edition's attributes.temporale). Each row is one variant.",
   "oneOf": [

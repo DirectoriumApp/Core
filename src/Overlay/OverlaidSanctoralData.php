@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Sanctoral\SanctoralData;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Sanctoral\SanctoralData;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 
 /**
  * The universal 1962 sanctoral with a particular-calendar overlay applied — a

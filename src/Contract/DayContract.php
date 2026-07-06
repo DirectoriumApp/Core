@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Contract;
+namespace Directorium\Core\Contract;
 
 use DateTimeImmutable;
-use Introibo\Core\Calendar\CelebrationRole;
-use Introibo\Core\Calendar\CommemorationLimit;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Calendar\RoledObservance;
-use Introibo\Core\Precedence\ConcurrenceOutcome;
-use Introibo\Core\Sanctoral\SanctoralObservance;
-use Introibo\Core\Temporal\TemporalObservance;
+use Directorium\Core\Calendar\CelebrationRole;
+use Directorium\Core\Calendar\CommemorationLimit;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Calendar\RoledObservance;
+use Directorium\Core\Precedence\ConcurrenceOutcome;
+use Directorium\Core\Sanctoral\SanctoralObservance;
+use Directorium\Core\Temporal\TemporalObservance;
 use LogicException;
 
 /**
  * The versioned, serialisable shape of a resolved {@see LiturgicalDay} — the
- * public output contract every other Introibo repo (Api/Site/Ordo) builds on.
+ * public output contract every other Directorium repo (Api/Site/Ordo) builds on.
  *
  * {@see LiturgicalDay} is kept a pure aggregate; this class is the seam that
  * turns it into a stable JSON-ready structure. The shape is frozen at
@@ -172,7 +172,7 @@ final class DayContract
 
         $shape = [
             'id' => $id,
-            'urn' => 'introibo:observance:' . $id,
+            'urn' => 'directorium:observance:' . $id,
             'role' => $office->role()->value(),
             'kind' => $observance->kind()->value(),
             'rank' => $observance->rank()->label(),

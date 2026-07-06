@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Trace;
+namespace Directorium\Core\Tests\Trace;
 
 use DateInterval;
 use DateTimeImmutable;
-use Introibo\Core\Corpus\Corpus;
+use Directorium\Core\Corpus\Corpus;
 use PHPUnit\Framework\TestCase;
 
-use function Introibo\Core\explain;
+use function Directorium\Core\explain;
 
 /**
  * Citation integrity for the resolution trace (#233/#236): a reason is only

@@ -1,14 +1,14 @@
 cff-version: 1.2.0
-message: "If you use Introibo or its dataset, please cite it as below."
-title: "Introibo Core — traditional Roman liturgical-calendar engine"
+message: "If you use Directorium or its dataset, please cite it as below."
+title: "Directorium Core — traditional Roman liturgical-calendar engine"
 abstract: >-
   A clean-room PHP engine that computes the traditional Roman liturgical
   calendar and generates a cited, independently-validated corpus.
 type: software
 authors:
-  - name: "Introibo"
-repository-code: "https://github.com/Introibo-App/Core"
-url: "https://introibo.org"
+  - name: "Directorium"
+repository-code: "https://github.com/Directorium/Core"
+url: "https://directorium.org"
 license: AGPL-3.0-or-later
 keywords:
   - liturgical calendar

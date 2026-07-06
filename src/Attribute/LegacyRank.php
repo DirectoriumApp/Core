@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Attribute;
+namespace Directorium\Core\Attribute;
 
 use InvalidArgumentException;
 

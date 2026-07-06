@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Precedence;
+namespace Directorium\Core\Precedence;
 
 use DateTimeImmutable;
-use Introibo\Core\Calendar\LiturgicalDay;
-use Introibo\Core\Contract\Provenance;
+use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Contract\Provenance;
 
 /**
  * A whole civil year resolved to a {@see LiturgicalDay} per date.

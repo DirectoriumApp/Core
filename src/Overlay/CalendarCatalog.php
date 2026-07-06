@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Overlay;
+namespace Directorium\Core\Overlay;
 
-use Introibo\Core\Contract\CalendarDescriptor;
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Edition\RubricSystem;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Sanctoral\CorpusSanctoralData;
+use Directorium\Core\Contract\CalendarDescriptor;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Edition\RubricSystem;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Sanctoral\CorpusSanctoralData;
 use InvalidArgumentException;
 
 /**
  * The calendar the engine resolves under: the universal 1962 base, or one of the
  * particular calendars the corpus ships as overlays (#78).
  *
- * This is the seam behind the `$calendar` selector on {@see \Introibo\Core\day()} and
- * {@see \Introibo\Core\contract()}. Given a selector — `null` for the universal 1962
+ * This is the seam behind the `$calendar` selector on {@see \Directorium\Core\day()} and
+ * {@see \Directorium\Core\contract()}. Given a selector — `null` for the universal 1962
  * calendar, or a particular calendar named by its slug (`sspx`) or full overlay URN
- * (`introibo:overlay:roman:sspx`) — it builds the right {@see DayResolver} (layering
+ * (`directorium:overlay:roman:sspx`) — it builds the right {@see DayResolver} (layering
  * the overlay onto the base sanctoral via {@see OverlaidSanctoralData}) and the
  * {@see CalendarDescriptor} the output contract stamps. The engine itself is
  * unchanged: selecting a calendar only chooses which sanctoral data the resolver reads.
@@ -96,7 +96,7 @@ final class CalendarCatalog
 
     /**
      * The overlay for a selector accepted as either its slug (`sspx`) or its full
-     * platform URN (`introibo:overlay:roman:sspx`).
+     * platform URN (`directorium:overlay:roman:sspx`).
      */
     private function overlay(string $calendar): CalendarOverlay
     {

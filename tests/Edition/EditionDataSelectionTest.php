@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Edition;
+namespace Directorium\Core\Tests\Edition;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Introibo\Core\Edition\RubricSystem;
-use Introibo\Core\Precedence\DayResolver;
-use Introibo\Core\Precedence\PrecedenceTable;
-use Introibo\Core\Sanctoral\CorpusSanctoralData;
+use Directorium\Core\Edition\RubricSystem;
+use Directorium\Core\Precedence\DayResolver;
+use Directorium\Core\Precedence\PrecedenceTable;
+use Directorium\Core\Sanctoral\CorpusSanctoralData;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

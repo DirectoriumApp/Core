@@ -27,8 +27,8 @@ function diff(expectedRoot, actualRoot, paths) {
   return problems;
 }
 
-const tmpA = mkdtempSync(join(tmpdir(), 'introibo-corpus-a-'));
-const tmpB = mkdtempSync(join(tmpdir(), 'introibo-corpus-b-'));
+const tmpA = mkdtempSync(join(tmpdir(), 'directorium-corpus-a-'));
+const tmpB = mkdtempSync(join(tmpdir(), 'directorium-corpus-b-'));
 try {
   const pathsA = build(tmpA);
   const pathsB = build(tmpB);

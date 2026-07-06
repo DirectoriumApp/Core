@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Calendar;
+namespace Directorium\Core\Calendar;
 
 use InvalidArgumentException;
 

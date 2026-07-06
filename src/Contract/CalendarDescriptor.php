@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Contract;
+namespace Directorium\Core\Contract;
 
 /**
  * The particular calendar a day was resolved under, as it appears in the output
@@ -29,7 +29,7 @@ final class CalendarDescriptor
         $this->name = $name;
     }
 
-    /** The overlay's platform URN, e.g. `introibo:overlay:roman:sspx`. */
+    /** The overlay's platform URN, e.g. `directorium:overlay:roman:sspx`. */
     public function id(): string
     {
         return $this->id;

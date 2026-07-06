@@ -1,6 +1,6 @@
 # Errata
 
-Confirmed corrections to Introibo's liturgical data, published openly. Authority comes from owning our
+Confirmed corrections to Directorium's liturgical data, published openly. Authority comes from owning our
 mistakes: when a datum is found to be wrong and fixed, it is recorded here and the dataset's **data-version**
 is bumped, so consumers can tell whether their cached data predates a fix.
 

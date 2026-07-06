@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Introibo\Core\Tests\Overlay;
+namespace Directorium\Core\Tests\Overlay;
 
-use Introibo\Core\Corpus\Corpus;
-use Introibo\Core\Overlay\AddOperation;
-use Introibo\Core\Overlay\CalendarOverlay;
-use Introibo\Core\Overlay\CorpusOverlayData;
-use Introibo\Core\Overlay\OverlaidSanctoralData;
-use Introibo\Core\Overlay\RerankOperation;
-use Introibo\Core\Overlay\SuppressOperation;
-use Introibo\Core\Sanctoral\CorpusSanctoralData;
-use Introibo\Core\Sanctoral\SanctoralEntry;
+use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Overlay\AddOperation;
+use Directorium\Core\Overlay\CalendarOverlay;
+use Directorium\Core\Overlay\CorpusOverlayData;
+use Directorium\Core\Overlay\OverlaidSanctoralData;
+use Directorium\Core\Overlay\RerankOperation;
+use Directorium\Core\Overlay\SuppressOperation;
+use Directorium\Core\Sanctoral\CorpusSanctoralData;
+use Directorium\Core\Sanctoral\SanctoralEntry;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -48,7 +48,7 @@ final class CorpusOverlayDataTest extends TestCase
     {
         $overlay = (new CorpusOverlayData())->overlay('sspx');
 
-        self::assertSame('introibo:overlay:roman:sspx', $overlay->id());
+        self::assertSame('directorium:overlay:roman:sspx', $overlay->id());
         self::assertSame('Society of Saint Pius X', $overlay->name());
         self::assertCount(2, $overlay->operations());
         foreach ($overlay->operations() as $operation) {
@@ -91,7 +91,7 @@ final class CorpusOverlayDataTest extends TestCase
         );
 
         self::assertSame(
-            Corpus::default()->corpusVersion() . '+introibo:overlay:roman:sspx',
+            Corpus::default()->corpusVersion() . '+directorium:overlay:roman:sspx',
             $overlaid->version()
         );
     }
@@ -107,7 +107,7 @@ final class CorpusOverlayDataTest extends TestCase
         $data = new CorpusOverlayData(Corpus::at($this->fixtureCorpusWithAllOpKinds()));
         $overlay = $data->overlay('test');
 
-        self::assertSame('introibo:overlay:roman:test', $overlay->id());
+        self::assertSame('directorium:overlay:roman:test', $overlay->id());
         self::assertCount(3, $overlay->operations());
 
         $byTarget = [];
@@ -136,7 +136,7 @@ final class CorpusOverlayDataTest extends TestCase
      */
     private function fixtureCorpusWithAllOpKinds(): string
     {
-        $root = sys_get_temp_dir() . '/introibo-overlay-' . uniqid('', true);
+        $root = sys_get_temp_dir() . '/directorium-overlay-' . uniqid('', true);
         $overlayDir = $root . '/overlays/test';
         mkdir($overlayDir, 0777, true);
         $this->tempRoots[] = $root;
@@ -147,7 +147,7 @@ final class CorpusOverlayDataTest extends TestCase
         ], JSON_THROW_ON_ERROR));
 
         file_put_contents($overlayDir . '/overlay.json', json_encode([
-            'id' => 'introibo:overlay:roman:test',
+            'id' => 'directorium:overlay:roman:test',
             'name' => 'Test overlay',
             'rite' => 'roman',
             'operations' => 3,
