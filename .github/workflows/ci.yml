@@ -39,14 +39,21 @@ jobs:
       # The full suite above already includes the validation harness across every PHP
       # version; the dedicated `validate` job below runs it as an explicit, named gate.
 
-  # Validation harness gate (#45 / #51): re-prove the engine against the pinned
-  # oracles on every PR — Computus vs easter_days(), the missalemeum fixture, and the
-  # SSPX feed — so any divergence from the committed baselines fails the build. This is
-  # an explicit, named check (distinct from the matrix's full run) so it can be required
-  # to merge. The oracle fixtures are committed (no network at test time), so only the
-  # Composer dependencies are cached to keep the job fast.
+  # Per-system validation gate (#45 / #51 / #73): re-prove each rubric system against
+  # its own pinned oracles on every PR, as a MATRIX so a regression in one edition fails
+  # only its leg and can never mask another (fail-fast is off). 1962 runs Computus vs
+  # easter_days(), the missalemeum fixture, and the SSPX conformance feed; 1954 and 1955
+  # run their Divinum Officium agreement fixtures. Each leg is an explicit, named check
+  # (`validate (<system>)`) that can be required to merge. The oracle fixtures are
+  # committed (no network at test time) and each leg runs only its `edition-<system>`
+  # group, so only the Composer dependencies are cached to keep every leg fast.
   validate:
+    name: validate (${{ matrix.system }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        system: ['1962', '1954', '1955']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -66,8 +73,8 @@ jobs:
           restore-keys: composer-${{ runner.os }}-
       - name: Install dependencies
         run: composer install --no-interaction --no-progress
-      - name: Validation harness (oracles)
-        run: composer run-script validate-oracles
+      - name: Oracle gate — ${{ matrix.system }}
+        run: composer run-script validate-oracles -- --group edition-${{ matrix.system }}
 
   # Build-time corpus generator (Node only; the runtime engine never runs it).
   # Asserts the committed corpus is reproducible and matches a fresh build.

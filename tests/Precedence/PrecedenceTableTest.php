@@ -9,7 +9,6 @@ use DateTimeZone;
 use Directorium\Core\Attribute\Colour;
 use Directorium\Core\Attribute\ElementColour;
 use Directorium\Core\Attribute\RankClass;
-use Directorium\Core\Calendar\CommemorationLimit;
 use Directorium\Core\Calendar\RealizedObservance;
 use Directorium\Core\Corpus\Corpus;
 use Directorium\Core\Observance\ObservanceId;
@@ -78,19 +77,39 @@ final class PrecedenceTableTest extends TestCase
         self::assertSame(2, $table->commemorationLimit(4));
     }
 
-    public function testCommemorationLimitDataMatchesTheCodedBaseline(): void
+    /**
+     * The commemoration limits are per-edition data, not a universal constant (#332): the
+     * 1960 reform cut them to 1/1/2/2, the pre-1955 rite allowed three for every class, and
+     * Cum nostra caps a first-class day at zero. The contract reports whichever the resolving
+     * edition declares, so this pins the three tables the engine reads.
+     *
+     * @dataProvider editionCommemorationLimits
+     *
+     * @param array<int, int> $expected day-class => limit
+     */
+    public function testCommemorationLimitsArePerEditionData(string $editionDir, array $expected): void
     {
-        $table = PrecedenceTable::default();
+        $table = new PrecedenceTable(Corpus::default(), $editionDir);
 
-        // The DayContract computes the same limit through the coded CommemorationLimit
-        // helper; the data must never diverge from that baseline.
-        for ($class = 1; $class <= 4; $class++) {
+        foreach ($expected as $class => $limit) {
             self::assertSame(
-                CommemorationLimit::forDayClass(RankClass::fromOrdinal($class)),
+                $limit,
                 $table->commemorationLimit($class),
-                sprintf('commemoration limit for class %d', $class)
+                sprintf('%s commemoration limit for class %d', $editionDir, $class)
             );
         }
+    }
+
+    /**
+     * @return array<string, array{string, array<int, int>}>
+     */
+    public function editionCommemorationLimits(): array
+    {
+        return [
+            '1962 (Rubricae 1960)' => ['roman-rubricae-1960', [1 => 1, 2 => 1, 3 => 2, 4 => 2]],
+            '1954 (Divino Afflatu)' => ['roman-divino-afflatu', [1 => 3, 2 => 3, 3 => 3, 4 => 3]],
+            '1955 (Cum nostra)' => ['roman-rubricae-1955', [1 => 0, 2 => 1, 3 => 2, 4 => 2]],
+        ];
     }
 
     public function testUnknownSelectorThrows(): void

@@ -17,8 +17,8 @@ use InvalidArgumentException;
  *
  * This value object names those roles so an office can be *marked* with one.
  * Deciding which office takes which role — running precedence, applying the
- * commemoration limits ({@see CommemorationLimit}), queueing transfers — is the
- * resolver's work (#29); this type only makes the roles representable.
+ * per-edition commemoration limits ({@see \Directorium\Core\Precedence\PrecedenceRules::commemorationLimit()}),
+ * queueing transfers — is the resolver's work (#29); this type only makes the roles representable.
  */
 final class CelebrationRole
 {

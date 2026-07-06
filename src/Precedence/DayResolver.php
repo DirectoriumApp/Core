@@ -321,7 +321,10 @@ final class DayResolver
             [new RoledObservance($celebration, CelebrationRole::celebration())],
             $commemorations,
             $displaced,
-            $tempora
+            $tempora,
+            null,
+            null,
+            $this->rules->commemorationClassLimit($celebration)
         );
 
         if (!$this->tracing) {

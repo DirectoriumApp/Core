@@ -6,7 +6,6 @@ namespace Directorium\Core\Contract;
 
 use DateTimeImmutable;
 use Directorium\Core\Calendar\CelebrationRole;
-use Directorium\Core\Calendar\CommemorationLimit;
 use Directorium\Core\Calendar\LiturgicalDay;
 use Directorium\Core\Calendar\RoledObservance;
 use Directorium\Core\Precedence\ConcurrenceOutcome;
@@ -240,15 +239,19 @@ final class DayContract
         return null;
     }
 
-    /** The commemorations the day admits by its class, or 0 when nothing is celebrated. */
+    /**
+     * The commemorations the day admits by its class under the resolving edition (#332), or 0
+     * when nothing is celebrated. The resolver stamps the per-edition class cap onto the day
+     * ({@see LiturgicalDay::commemorationLimit()}); a day built without one (a synthetic
+     * fixture) reports 0.
+     */
     private function commemorationLimit(): int
     {
-        $celebration = $this->day->celebration();
-        if ($celebration === []) {
+        if ($this->day->celebration() === []) {
             return 0;
         }
 
-        return CommemorationLimit::forDayClass($celebration[0]->rank());
+        return $this->day->commemorationLimit() ?? 0;
     }
 
     /**

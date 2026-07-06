@@ -48,11 +48,16 @@ final class LiturgicalDay
 
     private ?ResolutionTrace $trace;
 
+    private ?int $commemorationLimit;
+
     /**
      * @param list<RoledObservance> $celebration
      * @param list<RoledObservance> $commemoration
      * @param list<RoledObservance> $displaced
      * @param list<RoledObservance> $tempora
+     * @param int|null              $commemorationLimit the commemorations the day admits by
+     *        its class under the resolving edition ({@see commemorationLimit()}), or null on a
+     *        day the resolver did not stamp (a placeholder or a synthetically built day)
      */
     public function __construct(
         DateTimeImmutable $date,
@@ -61,7 +66,8 @@ final class LiturgicalDay
         array $displaced,
         array $tempora,
         ?ConcurrenceOutcome $secondVespers = null,
-        ?ResolutionTrace $trace = null
+        ?ResolutionTrace $trace = null,
+        ?int $commemorationLimit = null
     ) {
         $this->date = $date;
         $this->celebration = array_values($celebration);
@@ -70,6 +76,7 @@ final class LiturgicalDay
         $this->tempora = array_values($tempora);
         $this->secondVespers = $secondVespers;
         $this->trace = $trace;
+        $this->commemorationLimit = $commemorationLimit;
     }
 
     /** An empty placeholder day for the given date: no observances in any role. */
@@ -130,6 +137,16 @@ final class LiturgicalDay
         return $this->trace;
     }
 
+    /**
+     * How many commemorations the day admits by the class of its celebrated office, under the
+     * edition that resolved it — the per-edition class cap the output contract reports (#332).
+     * Null on a day the resolver did not stamp (a placeholder or a synthetically built day).
+     */
+    public function commemorationLimit(): ?int
+    {
+        return $this->commemorationLimit;
+    }
+
     /** A copy of the day with its evening concurrence resolved. */
     public function withSecondVespers(ConcurrenceOutcome $secondVespers): self
     {
@@ -140,7 +157,8 @@ final class LiturgicalDay
             $this->displaced,
             $this->tempora,
             $secondVespers,
-            $this->trace
+            $this->trace,
+            $this->commemorationLimit
         );
     }
 
@@ -154,7 +172,8 @@ final class LiturgicalDay
             $this->displaced,
             $this->tempora,
             $this->secondVespers,
-            $trace
+            $trace,
+            $this->commemorationLimit
         );
     }
 
@@ -184,7 +203,8 @@ final class LiturgicalDay
             $byRole[CelebrationRole::DISPLACED],
             $byRole[CelebrationRole::TEMPORA],
             $this->secondVespers,
-            $this->trace
+            $this->trace,
+            $this->commemorationLimit
         );
     }
 

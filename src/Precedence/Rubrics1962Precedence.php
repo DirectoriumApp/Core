@@ -416,7 +416,12 @@ final class Rubrics1962Precedence implements PrecedenceRules
             return 0;
         }
 
-        // The day takes the class of its celebrated office (n. 111b–d).
+        return $this->commemorationClassLimit($celebration);
+    }
+
+    public function commemorationClassLimit(RealizedObservance $celebration): int
+    {
+        // The day takes the class of its celebrated office (n. 111b–d): I/II admit one, III/IV two.
         return $this->table->commemorationLimit($celebration->rank()->ordinal());
     }
 

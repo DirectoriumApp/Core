@@ -443,11 +443,18 @@ final class Rubrics1955Precedence implements PrecedenceRules
             return 0;
         }
 
+        return $this->commemorationClassLimit($celebration);
+    }
+
+    public function commemorationClassLimit(RealizedObservance $celebration): int
+    {
         return $this->limitFor($celebration);
     }
 
     private function limitFor(RealizedObservance $celebration): int
     {
+        // Title III.4: 0/1/2 additional commemorations by the day's class, the Sunday
+        // elevation (Title II.3) folded into the class via dayClassFor().
         return $this->table->commemorationLimit($this->dayClassFor($celebration));
     }
 

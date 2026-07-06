@@ -401,11 +401,17 @@ final class Rubrics1954Precedence implements PrecedenceRules
             return 0;
         }
 
+        return $this->commemorationClassLimit($celebration);
+    }
+
+    public function commemorationClassLimit(RealizedObservance $celebration): int
+    {
         return $this->limitFor($celebration);
     }
 
     private function limitFor(RealizedObservance $celebration): int
     {
+        // The pre-1955 odd-orations bound: three admitted commemorations for every class.
         return $this->table->commemorationLimit($celebration->rank()->ordinal());
     }
 
