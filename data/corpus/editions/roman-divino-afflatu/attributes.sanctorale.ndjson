@@ -94,7 +94,6 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:dominicus","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:donatus","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:dorothea","legacyRank":"simplex","rank":4}
-{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:duodecim-fratres","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:eduardus","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:eleutherius","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:elisabeth","legacyRank":"duplex","rank":3}
@@ -164,7 +163,6 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-a-sancto-facundo","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:ioannes-ante-portam-latinam","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-baptista-de-la-salle","legacyRank":"duplex","rank":3}
-{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-baptista-de-rossi","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:ioannes-baptista:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-bosco","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-cantius","legacyRank":"duplex","rank":3}
@@ -193,7 +191,6 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:laurentius:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:leo-magnus","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:leo-secundus","legacyRank":"semiduplex","rank":3}
-{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:liborius","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:linus","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:lucas","legacyRank":"duplex-ii-classis","rank":2}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:lucia","legacyRank":"duplex","rank":3}

@@ -275,15 +275,25 @@ and `DivinoAfflatuResolutionTest` (dated outcomes over the real corpus). As-buil
 
 ## Seam 6b — the full 1954 sanctoral (Built — #64)
 
-The sparse 1954 diff is now the **complete fixed-date sanctoral**. Every 1962-base feast that
-existed under the Divino Afflatu rubrics carries a cited `roman-divino-afflatu` block with its
-pre-1955 grade (290 re-graded), and the **28 feasts the 1955/1960 reforms suppressed** are authored
-as `notInBaseEdition` entries (the Finding of the Holy Cross, St John before the Latin Gate, the
-Apparition of St Michael, St Peter in Chains, the ancient simplex martyrs, …). Grades/colours cite
-`ordo-1954`; a per-id date override carries the feasts the reform *moved* (Ss. Philip & James, 1954
-May 1 → 1962 May 11; St Irenaeus; the Curé of Ars). Post-1954 additions are held out (St Joseph the
-Worker 1955; Ss. Gregory Barbarigo and Anthony Mary Claret 1960; St Lawrence of Brindisi's universal
-feast, so 1954 keeps St Praxedes on 21 July).
+The sparse 1954 diff is now the **full fixed-date sanctoral** (bar the octave DAYS, still deferred
+below). "The 1954 edition" means the **Divino Afflatu rubric-system as it stood 1955–1960** — the
+pre-1955 rite carrying the additions made under it up to the 1955 reform, NOT an AD-1954 snapshot. So
+it keeps the Queenship of the BVM (May 31, instituted *Ad Caeli Reginam* Oct 1954, first kept 1955 —
+which is also why St Angela Merici moves to Jun 1) and St Pius X (Sep 3, canonised 1954), both carried
+by the DO Divino-Afflatu oracle; but it holds out the 1955/1960 *reform* additions.
+
+Every 1962-base feast that existed under the Divino Afflatu rubrics carries a cited
+`roman-divino-afflatu` block with its pre-1955 grade (290 re-graded), and the **25 general-calendar
+feasts the 1955/1960 reforms suppressed** are authored as `notInBaseEdition` entries (the Finding of
+the Holy Cross, St John before the Latin Gate, the Apparition of St Michael, St Peter in Chains, the
+ancient simplex martyrs, …). Membership is **general-calendar only, engine-confirmed**: a feast the
+DO Divino-Afflatu engine never places (principal or commemoration) is *pro aliquibus locis* (local),
+not general, and is excluded (St John Baptist de Rossi — universal only from 1960; St Liborius; the
+Twelve Holy Brothers). Grades/colours cite `ordo-1954`; a per-id date override carries the feasts the
+reform *moved* (Ss. Philip & James, 1954 May 1 → 1962 May 11; St Irenaeus; the Curé of Ars). Held out:
+St Joseph the Worker (1955 — its exclusion is *forced*, since it displaced Ss. Philip & James whom the
+dataset restores to May 1), Ss. Gregory Barbarigo and Anthony Mary Claret (1960), and St Lawrence of
+Brindisi's universal feast (so 1954 keeps St Praxedes on 21 July).
 
 - **The largest correction** the burndown found is not data but engine: a saint the 1960 reform
   reduced to a bare `commemoration-only` was, under the pre-1955 rubrics, usually still a real
@@ -303,8 +313,10 @@ feast, so 1954 keeps St Praxedes on 21 July).
   Seven Sorrows; the Solemnity/Patronage of St Joseph), the **Office of the Dead** (All Souls, Nov 2 —
   unimplemented in *every* edition today, and coupled to resolving the pre-existing All-Saints
   duplicate `omnium-sanctorum`, which currently masks it), the **sanctoral octave DAYS** not yet
-  materialised (the comites-Christi octaves; the Octave of All Saints), and the **Saturday Office of
-  Our Lady**. Each is a tracked follow-up; the 1962 golden fixture stays byte-identical throughout.
+  materialised (the comites-Christi octaves Jan 2–4; the Octave of All Saints Nov 8; and the
+  **Immaculate Conception** common octave Dec 9–15, whose days-within are impeded by St Damasus I and
+  St Lucy — see the `octaves.yaml` deferred header), and the **Saturday Office of Our Lady**. Each is
+  a tracked follow-up (#453); the 1962 golden fixture stays byte-identical throughout.
 
 ## Seam 6a — 1955 precedence rules (next — #70)
 

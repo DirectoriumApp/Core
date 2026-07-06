@@ -6203,11 +6203,15 @@
     cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 # --- 1954-only sanctoral feasts (Core v0.3.0, #64) ------------------------------------
-# Feasts of the Divino Afflatu (pre-1955) General Roman Calendar that the 1955/1960 reforms
-# SUPPRESSED, so they carry no base (roman-rubricae-1960) block — only a roman-divino-afflatu
-# realization, and notInBaseEdition marks that their identity joins the shared union while the
-# 1960 edition places nothing for them. Grades/colours are the pre-1955 facts (ordo-1954,
-# cross-checked against the Divinum Officium Divino-Afflatu engine); Latin titles are mr-1920.
+# Feasts of the Divino Afflatu (pre-1955) GENERAL (universal) Roman Calendar that the
+# 1955/1960 reforms SUPPRESSED, so they carry no base (roman-rubricae-1960) block — only a
+# roman-divino-afflatu realization, and notInBaseEdition marks that their identity joins the
+# shared union while the 1960 edition places nothing for them. Grades/colours are the
+# pre-1955 facts (ordo-1954); Latin titles are mr-1920. MEMBERSHIP is universal-calendar
+# only, confirmed against the Divinum Officium Divino-Afflatu engine — a saint the engine
+# never places (principal or commemoration) across the sample years is *pro aliquibus locis*
+# (local), not general, and is excluded: e.g. St John Baptist de Rossi (extended to the
+# universal calendar only in 1960), St Liborius (Paderborn), the Twelve Holy Brothers.
 
 - id: roman:sanctorale:cathedra-petri-romae
   kind: feast
@@ -6297,21 +6301,6 @@
     colour: white
     month: 5
     day: 8
-    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
-
-- id: roman:sanctorale:ioannes-baptista-de-rossi
-  kind: feast
-  titulars: [ioannes-baptista-de-rossi]
-  names:
-    la: "S. Ioannis Baptistae de Rossi Confessoris"
-  cites:
-    names.la: mr-1920
-  notInBaseEdition: true
-  roman-divino-afflatu:
-    legacyRank: duplex
-    colour: white
-    month: 5
-    day: 23
     cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:basilides-cyrinus-nabor-nazarius
@@ -6419,21 +6408,6 @@
     day: 20
     cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
-- id: roman:sanctorale:liborius
-  kind: feast
-  titulars: [liborius]
-  names:
-    la: "S. Liborii Episcopi et Confessoris"
-  cites:
-    names.la: mr-1920
-  notInBaseEdition: true
-  roman-divino-afflatu:
-    legacyRank: simplex
-    colour: white
-    month: 7
-    day: 23
-    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
-
 - id: roman:sanctorale:petrus-ad-vincula
   kind: feast
   titulars: [petrus]
@@ -6477,21 +6451,6 @@
     colour: red
     month: 8
     day: 3
-    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
-
-- id: roman:sanctorale:duodecim-fratres
-  kind: feast
-  titulars: [duodecim-fratres]
-  names:
-    la: "Ss. Duodecim Fratrum Martyrum"
-  cites:
-    names.la: mr-1920
-  notInBaseEdition: true
-  roman-divino-afflatu:
-    legacyRank: simplex
-    colour: red
-    month: 9
-    day: 1
     cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:bmv-de-mercede

@@ -94,7 +94,6 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":4,"id":"roman:sanctorale:dominicus","month":8}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":7,"id":"roman:sanctorale:donatus","month":8}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":6,"id":"roman:sanctorale:dorothea","month":2}
-{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":1,"id":"roman:sanctorale:duodecim-fratres","month":9}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":13,"id":"roman:sanctorale:eduardus","month":10}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":26,"id":"roman:sanctorale:eleutherius","month":5}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":19,"id":"roman:sanctorale:elisabeth","month":11}
@@ -164,7 +163,6 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":12,"id":"roman:sanctorale:ioannes-a-sancto-facundo","month":6}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":6,"id":"roman:sanctorale:ioannes-ante-portam-latinam","month":5}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":15,"id":"roman:sanctorale:ioannes-baptista-de-la-salle","month":5}
-{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":23,"id":"roman:sanctorale:ioannes-baptista-de-rossi","month":5}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":23,"id":"roman:sanctorale:ioannes-baptista:vigilia","month":6,"vigilOf":"roman:sanctorale:nativitas-ioannis-baptistae"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":31,"id":"roman:sanctorale:ioannes-bosco","month":1}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":20,"id":"roman:sanctorale:ioannes-cantius","month":10}
@@ -193,7 +191,6 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":9,"id":"roman:sanctorale:laurentius:vigilia","month":8,"vigilOf":"roman:sanctorale:laurentius"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":11,"id":"roman:sanctorale:leo-magnus","month":4}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":3,"id":"roman:sanctorale:leo-secundus","month":7}
-{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":23,"id":"roman:sanctorale:liborius","month":7}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":23,"id":"roman:sanctorale:linus","month":9}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":18,"id":"roman:sanctorale:lucas","month":10}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":13,"id":"roman:sanctorale:lucia","month":12}

@@ -97,7 +97,6 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:dominicus","kind":"feast","names":{"la":"S. Dominici Confessoris"},"titulars":["dominicus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:donatus","kind":"commemoration-only","names":{"la":"S. Donati Episcopi et Martyris"},"titulars":["donatus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:dorothea","kind":"feast","names":{"la":"S. Dorotheae Virginis et Martyris"},"titulars":["dorothea"]}
-{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:duodecim-fratres","kind":"feast","names":{"la":"Ss. Duodecim Fratrum Martyrum"},"titulars":["duodecim-fratres"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:eduardus","kind":"feast","names":{"la":"S. Eduardi Regis et Confessoris"},"titulars":["eduardus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:eleutherius","kind":"commemoration-only","names":{"la":"S. Eleutherii Papae et Martyris"},"titulars":["eleutherius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:eligius","kind":"commemoration-only","names":{"la":"S. Eligii Episcopi et Confessoris"},"titulars":["eligius"]}
@@ -169,7 +168,6 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-a-sancto-facundo","kind":"feast","names":{"la":"S. Ioannis a S. Facundo Confessoris"},"titulars":["ioannes-a-sancto-facundo"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-ante-portam-latinam","kind":"feast","names":{"la":"S. Ioannis Ante Portam Latinam"},"titulars":["ioannes-evangelista"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-baptista-de-la-salle","kind":"feast","names":{"la":"S. Ioannis Baptistae de la Salle Confessoris"},"titulars":["ioannes-baptista-de-la-salle"]}
-{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-baptista-de-rossi","kind":"feast","names":{"la":"S. Ioannis Baptistae de Rossi Confessoris"},"titulars":["ioannes-baptista-de-rossi"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-baptista:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Ioannis Baptistae"},"titulars":["ioannes-baptista"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-bosco","kind":"feast","names":{"la":"S. Ioannis Bosco Confessoris"},"titulars":["ioannes-bosco"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-cantius","kind":"feast","names":{"la":"S. Ioannis Cantii Confessoris"},"titulars":["ioannes-cantius"]}
@@ -200,7 +198,6 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:laurentius:vigilia","kind":"vigil","names":{"la":"In Vigilia S. Laurentii Martyris"},"titulars":["laurentius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:leo-magnus","kind":"feast","names":{"la":"S. Leonis I Papae Confessoris et Ecclesiae Doctoris"},"titulars":["leo-magnus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:leo-secundus","kind":"feast","names":{"la":"S. Leonis II Papae et Confessoris"},"titulars":["leo-secundus"]}
-{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:liborius","kind":"feast","names":{"la":"S. Liborii Episcopi et Confessoris"},"titulars":["liborius"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:linus","kind":"feast","names":{"la":"S. Lini Papae et Martyris"},"titulars":["linus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:lucas","kind":"feast","names":{"la":"S. Lucae Evangelistae"},"titulars":["lucas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:lucia","kind":"feast","names":{"la":"S. Luciae Virginis et Martyris"},"titulars":["lucia"]}

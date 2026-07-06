@@ -29,10 +29,10 @@ final class LegacyRankEditionTest extends TestCase
         $entries = (new CorpusSanctoralData(null, self::DIVINO_AFFLATU))->entries();
 
         // The full 1954 sanctoral (#64): 290 feasts of the 1962 base re-graded into the
-        // pre-1955 double scheme; 28 feasts the 1955/1960 reforms SUPPRESSED, authored as
-        // notInBaseEdition; the materialised sanctoral octaves (#65 — 21 octave observances);
-        // and the pre-1955 vigils (#66 — 13). Every one carries a native legacy grade.
-        self::assertCount(290 + 28 + 21 + 13, $entries);
+        // pre-1955 double scheme; 25 general-calendar feasts the 1955/1960 reforms SUPPRESSED,
+        // authored as notInBaseEdition; the materialised sanctoral octaves (#65 — 21 octave
+        // observances); and the pre-1955 vigils (#66 — 13). Every one carries a legacy grade.
+        self::assertCount(290 + 25 + 21 + 13, $entries);
         foreach ($entries as $entry) {
             self::assertNotNull(
                 $entry->legacyRank(),
