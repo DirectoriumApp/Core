@@ -56,12 +56,25 @@ final class DayFunctionTest extends TestCase
     {
         $date = new DateTimeImmutable('2026-09-03', new DateTimeZone('UTC'));
 
-        // The universal calendar keeps the reserved block null (the frozen shape).
-        self::assertNull(contract($date)['calendar']);
+        // The astronomical block (#242) is present on every day, edition-invariant.
+        $astronomical = [
+            'goldenNumber' => 13,
+            'epact' => 11,
+            'solarCycle' => 19,
+            'dominicalLetter' => 'D',
+            'romanIndiction' => 4,
+            'lunarAge' => 20,
+        ];
+
+        // Under the universal calendar the block carries astronomical only — no particular.
+        self::assertSame(['astronomical' => $astronomical], contract($date)['calendar']);
 
         $sspx = contract($date, false, 'sspx');
         self::assertSame(
-            ['particular' => ['id' => 'directorium:overlay:roman:sspx', 'name' => 'Society of Saint Pius X']],
+            [
+                'particular' => ['id' => 'directorium:overlay:roman:sspx', 'name' => 'Society of Saint Pius X'],
+                'astronomical' => $astronomical,
+            ],
             $sspx['calendar']
         );
         self::assertSame(1, $sspx['celebration'][0]['rankOrdinal']);

@@ -78,4 +78,50 @@ final class ComputusTest extends TestCase
             self::assertLessThanOrEqual('04-25', $monthDay, "Easter $year is after 25 April");
         }
     }
+
+    /**
+     * @dataProvider knownPaschalFullMoons
+     */
+    public function testReturnsKnownPaschalFullMoon(int $year, string $expected): void
+    {
+        self::assertSame($expected, Computus::paschalFullMoon($year)->format('Y-m-d'));
+    }
+
+    /**
+     * The paschal moon sits thirteen days before its Easter, off a Sunday: e.g.
+     * 2024 Easter is 31 Mar, moon 25 Mar; 2025 Easter 20 Apr, moon 13 Apr (itself
+     * a Sunday, so Easter is the following Sunday).
+     *
+     * @return array<string, array{int, string}>
+     */
+    public function knownPaschalFullMoons(): array
+    {
+        return [
+            '2024' => [2024, '2024-03-25'],
+            '2025' => [2025, '2025-04-13'],
+            '1962 (capped at 18 Apr by the Clavian correction)' => [1962, '1962-04-18'],
+        ];
+    }
+
+    /**
+     * The defining relation, proven against the independently-computed Easter:
+     * the paschal full moon is always on or after 21 March, never later than
+     * 18 April, and Easter is the first Sunday strictly after it.
+     */
+    public function testEasterIsAlwaysTheFirstSundayAfterThePaschalFullMoon(): void
+    {
+        for ($year = Computus::GREGORIAN_REFORM_YEAR; $year <= 4099; $year++) {
+            $moon = Computus::paschalFullMoon($year);
+            $easter = Computus::gregorianEaster($year);
+
+            $monthDay = $moon->format('m-d');
+            self::assertGreaterThanOrEqual('03-21', $monthDay, "Paschal moon $year is before 21 March");
+            self::assertLessThanOrEqual('04-18', $monthDay, "Paschal moon $year is after 18 April");
+
+            self::assertGreaterThan($moon, $easter, "Easter $year is not after its paschal moon");
+            $diff = (int) $easter->diff($moon)->format('%a');
+            self::assertGreaterThanOrEqual(1, $diff, "Easter $year is not after its paschal moon");
+            self::assertLessThanOrEqual(7, $diff, "Easter $year is more than a week after its paschal moon");
+        }
+    }
 }

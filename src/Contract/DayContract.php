@@ -8,6 +8,8 @@ use DateTimeImmutable;
 use Directorium\Core\Calendar\CelebrationRole;
 use Directorium\Core\Calendar\LiturgicalDay;
 use Directorium\Core\Calendar\RoledObservance;
+use Directorium\Core\Calendrical\CalendricalYear;
+use Directorium\Core\Calendrical\LunarAge;
 use Directorium\Core\Precedence\ConcurrenceOutcome;
 use Directorium\Core\Sanctoral\SanctoralObservance;
 use Directorium\Core\Temporal\TemporalObservance;
@@ -22,16 +24,17 @@ use LogicException;
  * {@see SHAPE_VERSION} 1.0.0: a day carries its three provenance axes
  * ({@see Provenance}) and the four office roles, each office a self-describing
  * record of identity, per-edition attributes, occurrence outcome, and transfer
- * links. Reserved slots (`firstVespers`, `resolution`, `fasting`, `calendar`,
- * and the office-level `octaveOf`/`aliases`/`citations`/`text`/`chant`/`audio`)
- * are emitted as null now and only ever filled later, so the contract grows
- * additively. Serialisation is deterministic: same inputs, byte-identical JSON.
+ * links. The `calendar` block carries the calendrical/astronomical figures (#242);
+ * the remaining reserved slots (`firstVespers`, `resolution`, `fasting`, and the
+ * office-level `octaveOf`/`aliases`/`citations`/`text`/`chant`/`audio`) are emitted
+ * as null now and only ever filled later, so the contract grows additively.
+ * Serialisation is deterministic: same inputs, byte-identical JSON.
  * See docs/design/output-contract.md.
  */
 final class DayContract
 {
     /** SemVer of the contract *shape* (distinct from the corpus and engine versions). */
-    public const SHAPE_VERSION = '1.0.0';
+    public const SHAPE_VERSION = '1.0.1';
 
     private LiturgicalDay $day;
 
@@ -110,20 +113,46 @@ final class DayContract
     }
 
     /**
-     * The `calendar` block. Under the universal 1962 calendar it stays null (the
-     * frozen default shape); when the day was resolved under a particular calendar
-     * (#78) it names that calendar under a `particular` key — additive, leaving room
-     * for the reserved astronomical/lectionary fields (v0.4). See output-contract.md.
+     * The `calendar` block: the day's calendrical setting. It always carries the
+     * `astronomical` sub-block (#242 — the year's cyclic numbers and the day's
+     * lunar age, a pure function of the date); when the day was resolved under a
+     * particular calendar (#78) it also names that calendar under `particular`.
+     * The reserved `lectionary` field joins it later. See output-contract.md.
      *
-     * @return array<string, mixed>|null
+     * @return array<string, mixed>
      */
-    private function calendar(): ?array
+    private function calendar(): array
     {
-        if ($this->calendar === null) {
-            return null;
+        $block = [];
+        if ($this->calendar !== null) {
+            $block['particular'] = $this->calendar->toArray();
         }
+        $block['astronomical'] = $this->astronomical();
 
-        return ['particular' => $this->calendar->toArray()];
+        return $block;
+    }
+
+    /**
+     * The calendrical/astronomical block (#242/#245): the year's Golden Number,
+     * Epact, Solar Cycle, Dominical Letter(s) and Roman Indiction, with the day's
+     * ecclesiastical lunar age — the figures printed at the head of an ordo or in
+     * the martyrology. Edition-invariant, derived from the date alone.
+     *
+     * @return array<string, int|string>
+     */
+    private function astronomical(): array
+    {
+        $date = $this->day->date();
+        $calendrical = CalendricalYear::forYear((int) $date->format('Y'));
+
+        return [
+            'goldenNumber' => $calendrical->goldenNumber(),
+            'epact' => $calendrical->epact(),
+            'solarCycle' => $calendrical->solarCycle(),
+            'dominicalLetter' => $calendrical->dominicalLetter(),
+            'romanIndiction' => $calendrical->romanIndiction(),
+            'lunarAge' => LunarAge::onDate($date)->age(),
+        ];
     }
 
     /**
