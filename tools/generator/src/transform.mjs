@@ -235,6 +235,101 @@ export function transformSanctoraleEdition(entries, editionDir) {
   return { attributes, placement };
 }
 
+/**
+ * The Cum nostra hac aetate (1955) grade reduction: the office-grade a 1954 (Divino Afflatu)
+ * feast carries under the 1955 interim rubrics. The S.R.C. General Decree of 23 March 1955
+ * (in force 1 Jan 1956) abolished the semidouble grade (Title II.1); semidouble feasts are
+ * kept as SIMPLES (II.20), and simple feasts are reduced to a bare COMMEMORATION without
+ * historical lesson (II.21). Doubles of every class are unchanged, and a retained vigil keeps
+ * its vigil grade. So the 1955 sanctoral is a pure function of the 1954 grades.
+ */
+const CUM_NOSTRA_1955_GRADE = {
+  'duplex-i-classis': 'duplex-i-classis',
+  'duplex-ii-classis': 'duplex-ii-classis',
+  'duplex-maius': 'duplex-maius',
+  duplex: 'duplex',
+  semiduplex: 'simplex', // II.20 — the semidouble grade is suppressed
+  simplex: 'commemoratio', // II.21 — simples reduced to a commemoration
+  vigilia: 'vigilia',
+  commemoratio: 'commemoratio',
+};
+
+/**
+ * The four SANCTORAL vigils the 1955 reform retained (Title II.9, the "common vigils" on
+ * fixed sanctoral dates): the Assumption, St John the Baptist, Ss Peter & Paul, and St
+ * Lawrence. The reform's other retained vigils — Christmas and Pentecost (privileged, II.8)
+ * and the Ascension (common) — are TEMPORAL, minted by the season-fillers, not carried here.
+ * Every other vigil, including the nine 1954 apostles'/feast vigils and any in particular
+ * calendars, is suppressed (they are exactly the `notInBaseEdition` 1954-only vigils).
+ */
+const CUM_NOSTRA_1955_RETAINED_VIGILS = new Set([
+  'roman:sanctorale:assumptio:vigilia',
+  'roman:sanctorale:ioannes-baptista:vigilia',
+  'roman:sanctorale:petrus-paulus:vigilia',
+  'roman:sanctorale:laurentius:vigilia',
+]);
+
+/**
+ * Derive the 1955 (interim / Cum nostra hac aetate) edition from the 1954 (Divino Afflatu)
+ * data: return the entries with a synthesised `roman-rubricae-1955` block on every entry the
+ * 1955 rite keeps, so {@see transformSanctoraleEdition} fans it out exactly as an authored
+ * diff would. The 1955 edition is a DERIVED delta — the reform is a mechanical transform of
+ * the 1954 grades plus vigil suppression — so it is computed, never authored twice (issue
+ * #69's "express as deltas to keep datasets maintainable"). Sanctoral OCTAVES are suppressed
+ * wholesale (Title II.11) simply by the edition declaring none in octaves.yaml, so they need
+ * no handling here.
+ *
+ * For each entry that realises 1954: the 1955 grade is the {@see CUM_NOSTRA_1955_GRADE} image
+ * of the 1954 grade; colour, month, day, vigilOf, and any nameOverride are unchanged (the
+ * reform moved no feast and changed no colour); the grade fact cites the 1955 decree
+ * (`cn-1955`), the unchanged facts keep their 1954 cites. A suppressed vigil gets no block —
+ * it is absent from 1955, exactly as it is authored absent from 1962.
+ */
+export function deriveCumNostra1955(entries) {
+  const base = 'roman-divino-afflatu';
+  const derived = 'roman-rubricae-1955';
+  let retainedVigils = 0;
+  const out = entries.map((entry) => {
+    const ed = entry[base];
+    if (!ed) {
+      return entry; // not in 1954 → not in 1955
+    }
+    if (entry.kind === 'vigil') {
+      if (!CUM_NOSTRA_1955_RETAINED_VIGILS.has(entry.id)) {
+        return entry; // suppressed vigil → absent from 1955
+      }
+      retainedVigils += 1;
+    }
+    const grade = CUM_NOSTRA_1955_GRADE[ed.legacyRank];
+    if (grade === undefined) {
+      throw new Error(
+        `deriveCumNostra1955: no 1955 grade for 1954 legacyRank "${ed.legacyRank}" on ${entry.id}`,
+      );
+    }
+    const block = {
+      legacyRank: grade,
+      colour: ed.colour,
+      month: ed.month,
+      day: ed.day,
+      cites: { ...(ed.cites || {}), legacyRank: 'cn-1955' },
+    };
+    if (ed.vigilOf) {
+      block.vigilOf = ed.vigilOf;
+    }
+    if (ed.nameOverride) {
+      block.nameOverride = ed.nameOverride;
+    }
+    return { ...entry, [derived]: block };
+  });
+  if (retainedVigils !== CUM_NOSTRA_1955_RETAINED_VIGILS.size) {
+    throw new Error(
+      `deriveCumNostra1955: expected ${CUM_NOSTRA_1955_RETAINED_VIGILS.size} retained sanctoral vigils, ` +
+        `found ${retainedVigils} — the 1954 vigil roster changed; re-verify against Cum nostra Title II.9`,
+    );
+  }
+  return out;
+}
+
 /** Latin ordinal (feminine, agreeing with dies) for the 2nd..7th day within an octave. */
 const OCTAVE_WITHIN_ORDINAL = {
   2: 'secunda',

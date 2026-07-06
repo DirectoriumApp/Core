@@ -14,6 +14,7 @@ import { makeValidators, validateAll } from './validate.mjs';
 import {
   transformSanctorale,
   transformSanctoraleEdition,
+  deriveCumNostra1955,
   transformOctaves,
   transformTemporalSkeleton,
   transformTemporale,
@@ -105,8 +106,13 @@ export function build(outDir = DEFAULT_OUT) {
     ? loadYaml(join(FACTS_DIR, 'octaves.yaml'))
     : {};
   const extraEditions = (meta.editions || []).map((e) => {
-    const base = transformSanctoraleEdition(entries, e.dir);
-    const octaves = transformOctaves(entries, e.dir, octavesByEdition[e.dir] || []);
+    // A DERIVED edition (Core v0.3.0: 1955) is computed from another edition's data by a
+    // reform transform rather than authored block-by-block. deriveCumNostra1955 injects a
+    // `roman-rubricae-1955` block onto every entry the 1955 rite keeps, so the rest of the
+    // pipeline treats it exactly as an authored diff. Non-derived editions pass entries through.
+    const edEntries = e.derive === 'cum-nostra-1955' ? deriveCumNostra1955(entries) : entries;
+    const base = transformSanctoraleEdition(edEntries, e.dir);
+    const octaves = transformOctaves(edEntries, e.dir, octavesByEdition[e.dir] || []);
     const attributes = [...base.attributes, ...octaves.attributes].sort(byId);
     const placement = [...base.placement, ...octaves.placement].sort(byId);
     // A non-base edition may carry its OWN precedence table (Core v0.3.0: the pre-1955
