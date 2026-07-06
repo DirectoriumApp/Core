@@ -448,6 +448,13 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return false;
     }
 
+    public function privilegedCommemorationsExemptFromLimit(): bool
+    {
+        // The 1960 counts (n. 111b–d) bound every commemoration alike — a privileged
+        // commemoration occupies a slot rather than sitting outside the cap.
+        return false;
+    }
+
     private function lordSundayExclusion(RealizedObservance $winner, RealizedObservance $loser): bool
     {
         $winnerSunday = $winner->kind()->value() === ObservanceKind::SUNDAY;

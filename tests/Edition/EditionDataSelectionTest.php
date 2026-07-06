@@ -11,7 +11,6 @@ use Directorium\Core\Precedence\DayResolver;
 use Directorium\Core\Precedence\PrecedenceTable;
 use Directorium\Core\Sanctoral\CorpusSanctoralData;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 /**
  * The per-edition data seam (#62): the sanctoral loader and the precedence table now
@@ -50,13 +49,15 @@ final class EditionDataSelectionTest extends TestCase
         self::assertSame('roman:rubricae-1960', $resolver->provenance()->edition());
     }
 
-    public function testForEditionRejectsASystemWithoutAnEngine(): void
+    public function testForEditionBuildsTheInterimNineteenFiftyFiveResolver(): void
     {
-        // The 1954 engine is now wired (#67), so forEdition() builds it. The 1955 interim
-        // system still has no precedence engine (#68), so forEdition() rejects it — the
-        // resolver refuses to build an edition whose rules do not exist.
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageMatches('/its engine is not yet built/');
-        DayResolver::forEdition(RubricSystem::rubricae1955());
+        // The 1955 (Cum nostra) engine is now wired (#70), so forEdition() builds it and it
+        // reads its own edition data — every registered system now has an engine, and the
+        // resolver's remaining throw guards only a future, not-yet-implemented edition.
+        $resolver = DayResolver::forEdition(RubricSystem::rubricae1955());
+        $day = $resolver->resolveDay(new DateTimeImmutable('1958-12-25', new DateTimeZone('UTC')));
+
+        self::assertSame('roman:temporale:christmas:nativity', $day->celebration()[0]->id()->toString());
+        self::assertSame('roman:rubricae-1955', $resolver->provenance()->edition());
     }
 }

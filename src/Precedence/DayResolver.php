@@ -71,8 +71,8 @@ final class DayResolver
      * stamped into the contract, and — unless a sanctoral source is supplied (e.g. one
      * wrapped in a particular-calendar overlay) — its own edition data.
      *
-     * Only 1962 is built today; selecting 1954 or 1955 throws until Epics #63 / #68 land
-     * their rules and data. The default system reproduces {@see for1962()} exactly.
+     * 1962, 1954 (Divino Afflatu), and 1955 (Cum nostra) resolve today; a system with no
+     * engine throws. The default system reproduces {@see for1962()} exactly.
      */
     public static function forEdition(
         RubricSystem $system,
@@ -99,6 +99,8 @@ final class DayResolver
                 return new Rubrics1962Precedence($table);
             case RubricSystem::DIVINO_AFFLATU:
                 return new Rubrics1954Precedence($table);
+            case RubricSystem::RUBRICAE_1955:
+                return new Rubrics1955Precedence($table);
         }
 
         throw new \RuntimeException(sprintf(

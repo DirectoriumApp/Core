@@ -34,8 +34,13 @@ final class CommemorationSelector
         array $candidates,
         PrecedenceContext $context
     ): array {
+        if ($candidates === []) {
+            return [];
+        }
+
         $limit = $this->rules->commemorationLimit($celebration, $context);
-        if ($limit === 0 || $candidates === []) {
+        $exemptPrivileged = $this->rules->privilegedCommemorationsExemptFromLimit();
+        if ($limit === 0 && !$exemptPrivileged) {
             return [];
         }
 
@@ -46,7 +51,26 @@ final class CommemorationSelector
             }
         );
 
-        return array_slice($candidates, 0, $limit);
+        if (!$exemptPrivileged) {
+            return array_slice($candidates, 0, $limit);
+        }
+
+        // The privileged commemorations are never omitted (1955 Title III.2): keep them all,
+        // and spend the numeric limit only on the ordinary (non-privileged) commemorations
+        // that are made "in addition" (Title III.4). Candidates are already privileged-first,
+        // so the kept set preserves that order.
+        $kept = [];
+        $ordinaryAllowance = $limit;
+        foreach ($candidates as $candidate) {
+            if ($this->rules->isPrivilegedCommemoration($candidate)) {
+                $kept[] = $candidate;
+            } elseif ($ordinaryAllowance > 0) {
+                $kept[] = $candidate;
+                $ordinaryAllowance--;
+            }
+        }
+
+        return $kept;
     }
 
     private function compare(RealizedObservance $a, RealizedObservance $b, PrecedenceContext $context): int
