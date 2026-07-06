@@ -50,10 +50,13 @@ final class EditionDataSelectionTest extends TestCase
         self::assertSame('roman:rubricae-1960', $resolver->provenance()->edition());
     }
 
-    public function testForEditionRejectsAnUnbuiltSystem(): void
+    public function testForEditionRejectsASystemWithoutAnEngine(): void
     {
+        // The 1954 engine is now wired (#67), so forEdition() builds it. The 1955 interim
+        // system still has no precedence engine (#68), so forEdition() rejects it — the
+        // resolver refuses to build an edition whose rules do not exist.
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageMatches('/not yet built/');
-        DayResolver::forEdition(RubricSystem::divinoAfflatu());
+        $this->expectExceptionMessageMatches('/its engine is not yet built/');
+        DayResolver::forEdition(RubricSystem::rubricae1955());
     }
 }

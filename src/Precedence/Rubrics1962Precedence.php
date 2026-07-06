@@ -332,6 +332,13 @@ final class Rubrics1962Precedence implements PrecedenceRules
         );
     }
 
+    public function anticipatesSundayVigils(): bool
+    {
+        // The 1960 rubrics omit a vigil that falls on a Sunday (n. 33); they do not
+        // anticipate it to the preceding Saturday.
+        return false;
+    }
+
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
     {
         // n. 96(a): the Annunciation, impeded into Holy Week or the Easter octave,

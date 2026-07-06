@@ -15,6 +15,16 @@
       "records": 42,
       "sha256": "0051b6f245878cd61177943f42be29a67002bed4350460bc170570de5c7c387b"
     },
+    "editions/roman-divino-afflatu/precedence-rules.ndjson": {
+      "primaryKey": "rule",
+      "records": 10,
+      "sha256": "eb347c70a24fb802ca8c83d074a9db0deeffd2fdf96deef24a9973282eb87f4c"
+    },
+    "editions/roman-divino-afflatu/precedence-tiers.ndjson": {
+      "primaryKey": "selector",
+      "records": 22,
+      "sha256": "f338d934c5fa7f8767b13cec3f035f5c091f66050731b526298af394eb4834d1"
+    },
     "editions/roman-rubricae-1960/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 302,
@@ -62,8 +72,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 4,
-      "sha256": "4019df5d74427b23ed847c5062af87451bb65adf010902ac77a28d60e6490feb"
+      "records": 5,
+      "sha256": "fd66a00f21962d1daedebe265aa8ac1df3c0da12f678ae5f9cb5b0ff7553b949"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -105,6 +115,14 @@
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "introibo:source:rg-1960",
       "uses": 1403
+    },
+    {
+      "key": "rg-da",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Rubricae Generales Missalis et Breviarii Romani (Divino Afflatu, pre-1955)",
+      "urn": "introibo:source:rg-da",
+      "uses": 32
     },
     {
       "key": "sspx-ordo",
