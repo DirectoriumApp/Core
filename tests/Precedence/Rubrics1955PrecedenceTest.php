@@ -65,22 +65,29 @@ final class Rubrics1955PrecedenceTest extends TestCase
         ];
     }
 
-    public function testTheSemidoubleTierIsGone(): void
+    public function testTheSemidoubleTierIsGoneFromTheNineteenFiftyFiveTableButNotNineteenFiftyFour(): void
     {
-        // Title II.1 abolished the semidouble grade: the derived 1955 data carries no
-        // `semiduplex` token, and the table has no semidouble tier to receive one.
+        // Title II.1 abolished the semidouble grade AND its tier. Asserted as a contrast so it is
+        // not a tautology (tier() echoes the selector into its error): the 1954 table still HAS a
+        // semidouble tier (line 17), the 1955 table has removed it.
+        self::assertSame(
+            17,
+            (new PrecedenceTable(null, 'roman-divino-afflatu'))->tier('semidouble')->ordinal(),
+            '1954 keeps the semidouble tier'
+        );
+
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('semidouble');
         (new PrecedenceTable(null, 'roman-rubricae-1955'))->tier('semidouble');
     }
 
-    public function testAFormerSemidoubleResolvesAsASimpleAndAFormerSimpleAsACommemoration(): void
+    public function testAFormerSemidoubleMapsToTheSimpleTierAndAFormerSimpleToTheCommemorationFloor(): void
     {
-        // The two-step reduction (Title II.20-21): a former semidouble is celebrated as a
-        // simple (it can still be the day on a free feria), while a former simple is only ever
-        // commemorated (it takes the floor tier and never wins an occurrence).
-        self::assertSame(24, self::tierOrdinal(self::formerSemidouble()), 'former semidouble -> simple tier');
-        self::assertSame(29, self::tierOrdinal(self::formerSimple()), 'former simple -> commemoration floor');
+        // The ENGINE's grade -> tier mapping of the two ALREADY-REDUCED grades (the reduction
+        // itself — semiduplex -> simplex, simplex -> commemoratio — is the generator transform's
+        // job, covered by deriveCumNostra1955's Node tests and the oracle fixture). A simple can
+        // still be the day on a free feria; a commemoration takes the floor and never wins.
+        self::assertSame(24, self::tierOrdinal(self::formerSemidouble()), 'a simplex grade -> simple tier');
+        self::assertSame(29, self::tierOrdinal(self::formerSimple()), 'a commemoratio grade -> commemoration floor');
         self::assertTrue(self::outranks(self::duplex(), self::formerSimple()), 'a double outranks a commemoration');
         self::assertSame('commemorate', self::outcome(self::duplex(), self::formerSimple()));
     }

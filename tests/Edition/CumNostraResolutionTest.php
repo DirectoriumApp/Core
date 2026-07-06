@@ -134,6 +134,12 @@ final class CumNostraResolutionTest extends TestCase
             self::hasOffice(self::on($year, '1960-08-13'), 'roman:sanctorale:assumptio:vigilia'),
             'the vigil is not anticipated onto Saturday 13 Aug'
         );
+        // Positive counterpart, so the test cannot pass vacuously if the vigil vanished: it stays
+        // on its own date (the Sunday), commemorated under the Sunday office rather than moved.
+        self::assertTrue(
+            self::hasOffice(self::on($year, '1960-08-14'), 'roman:sanctorale:assumptio:vigilia'),
+            'the vigil stays on its own date (the Sunday 14 Aug), not anticipated away'
+        );
     }
 
     public function testAFirstClassFeastCommemoratesAPrivilegedLentenFeria(): void

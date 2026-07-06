@@ -300,6 +300,17 @@ export function deriveCumNostra1955(entries) {
       }
       retainedVigils += 1;
     }
+    // Fail closed on a 1954 numeric-rank override: the derive carries the grade forward, but a
+    // rankOverride pins the numeric RankClass off the default-for-grade — and the reform may
+    // CHANGE the grade (semiduplex → simplex), so the 1954 override cannot be blindly forwarded.
+    // Rather than silently drop the value (which would ship the default rank while a stale
+    // cites.rankOverride mislabels its provenance), refuse until a maintainer handles it.
+    if (ed.rankOverride !== undefined) {
+      throw new Error(
+        `deriveCumNostra1955: ${entry.id} carries a 1954 rankOverride; the 1955 derive does not forward ` +
+          'it (the reform may change its grade). Author its 1955 numeric rank deliberately here.',
+      );
+    }
     const grade = CUM_NOSTRA_1955_GRADE[ed.legacyRank];
     if (grade === undefined) {
       throw new Error(
