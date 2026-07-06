@@ -318,13 +318,47 @@ Brindisi's universal feast (so 1954 keeps St Praxedes on 21 July).
   St Lucy — see the `octaves.yaml` deferred header), and the **Saturday Office of Our Lady**. Each is
   a tracked follow-up (#453); the 1962 golden fixture stays byte-identical throughout.
 
-## Seam 6a — 1955 precedence rules (next — #70)
+## Seam 6a — 1955 precedence rules (Built — #70; validated — #71)
 
-`Rubrics1955Precedence` will apply the *Cum nostra hac aetate* reductions on the 1954 base: the Semiduplex
-grade suppressed, octaves → 3, vigils → 7, the commemoration caps 0/1/2 that 1962 keeps, first-Vespers
-restricted to I/II-class feasts + Sundays, and the vigil-on-Sunday rule changed from anticipation to omission
-(`anticipatesSundayVigils()` → false). The octave/vigil inventory is identical between 1955 and 1962, so the
-two share that data and differ chiefly in the precedence tiers and rank scheme.
+`Rubrics1955Precedence` applies the *Cum nostra hac aetate* reductions over the 1954 base. The **dataset**
+is a generator-**derived** edition, not authored block-by-block: `deriveCumNostra1955` computes the
+`roman-rubricae-1955` blocks from the 1954 (`roman-divino-afflatu`) data by the reform's mechanical
+transform — semidouble → simple (II.20), simple → commemoration (II.21), the doubles unchanged; the nine
+1954-only vigils suppressed to the surviving four (II.8-9), and all sanctoral octaves suppressed (II.11, so
+`octaves.yaml` declares none for 1955 and the octave pass emits nothing). The grades cite `cn-1955`, colours
+inherit `ordo-1954`.
+
+The **engine** holds only what Cum nostra changed, each cross-checked against the DO `Reduced - 1955`
+oracle (#71):
+
+- **No semidouble tier** (II.1): the grade ladder drops the semidouble branch; a former semidouble (now
+  `simplex`) resolves on the `simple` tier, a former simple (`commemoratio`) on the floor `commemoration`
+  tier and can never win an occurrence.
+- **Commemoration caps 0/1/2 by day class** (III.4), read from the table by a tier-aware `dayClassFor()` so
+  an Advent Sunday *elevated* to the first class (II.3) takes the zero cap even though its shared 1962 rank
+  attribute is still second class. The never-omitted privileged commemorations (III.2) are kept **over** the
+  cap — an edition-scoped `privilegedCommemorationsExemptFromLimit()` (true only for 1955) honoured by
+  `CommemorationSelector`, so St Joseph on a Lenten weekday still commemorates the feria on a zero-cap day.
+- **Vigil-on-Sunday omitted, not anticipated** (II.10): `anticipatesSundayVigils()` → false, as 1962.
+- **Translation restricted to the first class** (a departure the #71 sweep surfaced): an impeded *second*-class
+  feast is commemorated in place, not moved — where the pre-1955 rite also translated Doubles of the II class
+  (verified: Candlemas on Septuagesima and St Andrew on Advent I are commemorated, not transferred).
+- **A mystery of the Lord takes a per-annum Sunday's place** (II.7): the `lord-mystery` set (the Exaltation
+  of the Cross, whose greater-double grade would otherwise cede to the minor Sunday) is lifted above the
+  lesser Sunday it commemorates.
+
+**Deferred (tracked against the oracle, not guessed):** the finer 1955 Tabella that ranks an *apostle's*
+second-class feast above a per-annum Sunday while a *martyr's* cedes to it (Bartholomew wins, Lawrence would
+be commemorated) is per-day-type casuistry the grade-level engine does not encode — it treats every
+second-class feast alike; the **1955-instituted feasts** the grade-only derive does not carry (St Joseph the
+Worker, 1 May, which also moves Ss. Philip & James to 11 May) await a per-edition placement-override; the
+Lateran dedication is a single-feast grade disagreement (`ordo-1954` duplex-ii vs DO duplex-maius); and the
+deferred temporal / Office-of-the-Dead categories are shared with the 1954 engine. All are catalogued in
+`tests/Validation/fixtures/divinum-officium/known-differences.ndjson`.
+
+**`isBuilt` stays false** (like 1954): 1955 resolves through `DayResolver::forEdition()` for validation, and
+the public `CalendarCatalog` boundary refuses `day('1955')` until the deferred casuistry lands. The 1962
+golden fixture is byte-identical throughout.
 
 ## Seam 7 — stamp the active rubric system into the contract (#74)
 
@@ -470,7 +504,12 @@ precedence tiers + rank scheme — a small, well-scoped diff.
   printed, with a day-by-day companion blog (`ordorecitandi.blogspot.com`); the gold oracle. (2) Wikipedia
   "General Roman Calendar of 1954" (secondary, spot-verify). (3) a period diocesan/order *Ordo* for 1954
   (WorldCat).
-- **1955:** (1) a printed diocesan *Ordo Recitandi* for any year **1956–1960** (native to the interim
-  rubrics). (2) the decree *Cum nostra hac aetate* (AAS 47) as the normative spec. (3) *divinumofficium.com*
-  "Rubrics 1955" mode — **cross-implementation check only**, never a data source (clean-room).
+- **1955:** (1) the decree *Cum nostra hac aetate* (AAS 47) as the normative spec — the `cn-1955` source the
+  reform facts cite. (2) *divinumofficium.com* **`Reduced - 1955`** mode — the independent Perl
+  implementation, run day-by-day as a **cross-implementation check only**, never a data source (clean-room);
+  the derive + engine were validated against it across 1957 and 1958 (#71). A representative cross-section is
+  pinned in `tests/Validation/fixtures/divinum-officium/reduced-1955.ndjson` and asserted in CI by
+  `HistoricalEditionOracleTest` (no Perl/DO checkout needed), with the tracked deferrals in the sibling
+  `known-differences.ndjson`. (3) a printed diocesan *Ordo Recitandi* for any year **1956–1960** (a maintainer
+  cross-check where obtainable).
 - **1962** (baseline, already validated): Codex Rubricarum (AAS 52) + a current FSSP/ICKSP/SSPX printed Ordo.

@@ -148,17 +148,33 @@ final class Rubrics1955PrecedenceTest extends TestCase
         self::assertFalse(self::rules()->anticipatesSundayVigils());
     }
 
-    public function testOnlyDoublesOfTheFirstAndSecondClassAreTransferred(): void
+    public function testOnlyFirstClassFeastsAreTransferred(): void
     {
-        // The pre-1955 transfer discipline Cum nostra left in place: only a Double of the I or
-        // II class is translated; every lower grade is commemorated in place.
+        // Cum nostra restricts translation to feasts of the FIRST class: a first-class feast
+        // impeded by a first-class Sunday is moved, but a SECOND-class feast is now commemorated
+        // in place (verified vs DO Reduced-1955: Candlemas on Septuagesima, St Andrew on Advent I
+        // — both commemorated, not transferred, where the pre-1955 rite moved them).
         $sunday = self::firstClassSunday();
 
         self::assertSame('transfer', self::outcome($sunday, self::dxi()));
-        self::assertSame('transfer', self::outcome($sunday, self::dxii()));
+        self::assertSame('commemorate', self::outcome($sunday, self::dxii()));
         self::assertSame('commemorate', self::outcome($sunday, self::maius()));
         self::assertSame('commemorate', self::outcome($sunday, self::duplex()));
         self::assertSame('commemorate', self::outcome($sunday, self::simple()));
+    }
+
+    public function testASanctoralMysteryOfTheLordTakesAPerAnnumSundaysPlace(): void
+    {
+        // Title II.7: a feast or mystery of the Lord takes a per-annum Sunday's place. The
+        // Exaltation of the Cross, a greater double that would otherwise cede to the (higher)
+        // lesser Sunday, is lifted above it and commemorates it (verified vs DO Reduced-1955,
+        // 14 Sep 1958). An ordinary greater double still yields to the Sunday.
+        $exaltation = self::sanctoral('exaltatio-crucis', 'feast', 3, LegacyRank::DUPLEX_MAIUS);
+        $sunday = self::lesserSunday();
+
+        self::assertTrue(self::outranks($exaltation, $sunday), 'the mystery of the Lord outranks the lesser Sunday');
+        self::assertSame('commemorate', self::outcome($exaltation, $sunday));
+        self::assertTrue(self::outranks($sunday, self::maius()), 'an ordinary greater double yields to the Sunday');
     }
 
     public function testAnOrdinaryFeriaIsOmittedButAGreaterFeriaIsCommemorated(): void

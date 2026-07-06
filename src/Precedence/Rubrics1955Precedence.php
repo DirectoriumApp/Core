@@ -43,9 +43,18 @@ use Directorium\Core\Trace\ResolutionReason;
  *  2. The Sundays of Advent, of Lent up to Low Sunday, and Pentecost are ALL of the
  *     first class (Title II.3), outranking every feast — the `first-class-sunday`
  *     membership set, read from the table, elevates Advent II-IV that were second
- *     class under 1954. An impeded Sunday is neither anticipated nor resumed (II.6),
- *     which the resolver already does (a lesser Sunday impeded is commemorated in
- *     place, never revived).
+ *     class under 1954. A feast or mystery of the Lord below the first class (the
+ *     Exaltation of the Cross) takes a per-annum Sunday's place (Title II.7 — the
+ *     `lord-mystery` set). An impeded Sunday is neither anticipated nor resumed (II.6).
+ *  2a. Translation is restricted to feasts of the FIRST class (with All Souls): an
+ *     impeded second-class feast is commemorated in place, not moved — where the
+ *     pre-1955 rite also translated Doubles of the II class.
+ *
+ * The finer 1955 Tabella distinctions among second-class feasts (an APOSTLE's feast
+ * outranks a per-annum Sunday where a martyr's cedes to it; the named Christmastide
+ * ferias; the moveable feasts of the Lord and BVM the temporal layer does not yet
+ * carry) are deferred per-day-type casuistry, tracked against the DO "Reduced - 1955"
+ * oracle (see docs/design/rubric-system-model.md, Seam 6a, and the validation baseline).
  *  3. A common vigil that falls on a Sunday is OMITTED, not anticipated to the
  *     preceding Saturday (Title II.10) — {@see anticipatesSundayVigils()} is false,
  *     as under 1962.
@@ -56,7 +65,7 @@ use Directorium\Core\Trace\ResolutionReason;
  *     {@see privilegedCommemorationsExemptFromLimit()} is true, so the selector keeps
  *     them even on a zero-cap day.
  *
- * Scope is calendar-level (docs/design/rubric-system-model.md, Seam 7): the office of
+ * Scope is calendar-level (docs/design/rubric-system-model.md, Seam 6a): the office of
  * the day, its rank/colour/season, its commemorations, and the displaced/transferred
  * offices — not the Divine Office casuistry. The privileged commemorations of the
  * September Ember days (III.2d) and the Major Litanies (III.2e) are not enumerated
@@ -139,6 +148,13 @@ final class Rubrics1955Precedence implements PrecedenceRules
         // I class tier.
         if ($this->table->isMember('great-lord', $id)) {
             return $this->table->tier('double-i-class');
+        }
+        // A sanctoral feast or mystery of the Lord below the first class (the Transfiguration,
+        // the Exaltation and Finding of the Cross, the Dedication of the Saviour's basilica):
+        // Title II.7 lifts it above the per-annum Sunday it commemorates, where an ordinary
+        // saint's feast of the same grade yields to that Sunday instead.
+        if ($this->table->isMember('lord-mystery', $id)) {
+            return $this->table->tier('lord-mystery');
         }
 
         // The sanctoral grade ladder, by legacy token. Cum nostra suppressed all sanctoral
@@ -248,9 +264,9 @@ final class Rubrics1955Precedence implements PrecedenceRules
         RealizedObservance $loser,
         PrecedenceContext $context
     ): array {
-        // ONLY a Double of the I or II class (and All Souls) is translated to the next free
-        // day; every other impeded office is commemorated or omitted in place — the pre-1955
-        // transfer discipline Cum nostra left in place.
+        // ONLY a feast of the first class (and All Souls) is translated to the next free day;
+        // Cum nostra dropped the pre-1955 translation of second-class feasts, which are now
+        // commemorated or omitted in place.
         if ($this->isTransferable($loser)) {
             if ($loser->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
                 return [OccurrenceOutcome::transfer(), ResolutionReason::cited(
@@ -262,8 +278,8 @@ final class Rubrics1955Precedence implements PrecedenceRules
 
             return [OccurrenceOutcome::transfer(), ResolutionReason::cited(
                 'cn-double-transfer',
-                'transferred: a Double of the I or II class is moved to the next free day when impeded',
-                'rg-da'
+                'transferred: a feast of the first class is moved to the next free day when impeded',
+                'cn-1955'
             )];
         }
 
@@ -500,15 +516,15 @@ final class Rubrics1955Precedence implements PrecedenceRules
             return true;
         }
 
-        // Only a Double of the I or II class is translated. A great feast of the Lord (a
-        // temporal Double I class) is likewise transferred if ever impeded.
+        // A great feast of the Lord (a temporal Double I class) is transferred if impeded.
         if ($this->table->isMember('great-lord', $office->id()->toString())) {
             return true;
         }
 
-        $grade = $this->legacyGradeOf($office);
-
-        return ($grade === LegacyRank::DUPLEX_I_CLASSIS || $grade === LegacyRank::DUPLEX_II_CLASSIS)
+        // Cum nostra restricts translation to feasts of the FIRST class. An impeded feast of
+        // the second class is commemorated (or omitted) in place, never translated — the
+        // sharpest departure from the pre-1955 rite, which also moved Doubles of the II class.
+        return $this->legacyGradeOf($office) === LegacyRank::DUPLEX_I_CLASSIS
             && $office->kind()->value() === ObservanceKind::FEAST;
     }
 

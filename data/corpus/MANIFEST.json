@@ -38,13 +38,13 @@
     },
     "editions/roman-rubricae-1955/precedence-rules.ndjson": {
       "primaryKey": "rule",
-      "records": 10,
-      "sha256": "52ccde1f091f790f3c5ee904e15792823af1d99e93b9109be80e7a8fc18fe714"
+      "records": 11,
+      "sha256": "702e9010e353cd7d46ea2190d4b643c4957b48c159bd12888162ea18215a7c23"
     },
     "editions/roman-rubricae-1955/precedence-tiers.ndjson": {
       "primaryKey": "selector",
-      "records": 21,
-      "sha256": "93a0aa375276c4c19c5cadfa7467e765eba0f2d1d85bdc11d4c0f65dd75ba5c2"
+      "records": 22,
+      "sha256": "ad1a23c3e74ee5b65f1d4071c1442e6264b75b0b76f82b77ed6cd08c2e7b5e67"
     },
     "editions/roman-rubricae-1960/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -119,7 +119,7 @@
       "rights": "reference",
       "title": "Cum nostra hac aetate — General Decree of the S.R.C. reducing the rubrics (23 March 1955)",
       "urn": "directorium:source:cn-1955",
-      "uses": 649
+      "uses": 651
     },
     {
       "key": "mr-1920",

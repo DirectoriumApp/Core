@@ -21,7 +21,7 @@
 # PROVENANCE. The reform facts cite cn-1955 (the decree); the unchanged tier order and Sunday
 # elevation inherit the Divino-Afflatu Rubricae Generales (rg-da). The dated outcomes are
 # cross-checked against the Divinum Officium "Reduced - 1955" engine (do-1955), the independent
-# 1955 oracle (#71). See docs/design/rubric-system-model.md (Seam 7).
+# 1955 oracle (#71). See docs/design/rubric-system-model.md (Seam 6a).
 #
 # THE TIER ORDER (lower ordinal wins occurrence). Ordinals mirror the 1954 table so the two
 # editions read the same shape; the semidouble line (17) is intentionally absent.
@@ -38,7 +38,17 @@ tiers:
   - { selector: all-souls, line: 8, ordinal: 8, subOrder: 0, cite: rg-da }
   - { selector: second-class-sunday, line: 9, ordinal: 9, subOrder: 0, cite: cn-1955 }
   - { selector: double-ii-class, line: 10, ordinal: 10, subOrder: 0, cite: rg-da }
+  # A sanctoral feast or mystery of the Lord below the first class (chiefly the Exaltation of
+  # the Cross, whose greater-double grade would otherwise cede to the per-annum Sunday): by
+  # Title II.7 "a feast or title or any mystery of our Lord takes the place of the Sunday", so
+  # it is lifted above the lesser Sunday it commemorates.
+  - { selector: lord-mystery, line: 11, ordinal: 11, subOrder: 0, cite: cn-1955 }
   - { selector: feast-of-the-lord, line: 12, ordinal: 12, subOrder: 0, cite: rg-da }
+  # The lesser (per-annum) Sunday, raised to the double rite (Title II.5): it keeps the pre-1955
+  # order, ceding to a feast of the second class and above (celebrated over it) and outranking
+  # the ordinary and greater doubles below. The finer 1955 Tabella that lifts an APOSTLE's
+  # second-class feast above this Sunday while a martyr's cedes to it is deferred per-day-type
+  # casuistry (design doc, Seam 6a): the grade-level engine treats every second-class feast alike.
   - { selector: lesser-sunday, line: 13, ordinal: 13, subOrder: 0, cite: cn-1955 }
   - { selector: greater-double, line: 14, ordinal: 14, subOrder: 0, cite: rg-da }
   - { selector: double, line: 16, ordinal: 16, subOrder: 0, cite: rg-da }
@@ -109,6 +119,18 @@ membership:
     ids:
       - roman:temporale:christmas:holy-name
       - roman:temporale:epiphany:holy-family
+  # Sanctoral feasts and mysteries of the Lord below the first class. Title II.7 ("a feast or
+  # title or any mystery of our Lord takes the place of the Sunday") lifts these above the
+  # per-annum Sunday, which they commemorate — where an ordinary saint's feast of the same
+  # grade yields to the Sunday instead. (The Most Precious Blood is a Double of the I class and
+  # is carried by its grade, so it is not listed here.)
+  - name: lord-mystery
+    cite: cn-1955
+    ids:
+      - roman:sanctorale:transfiguratio-domini
+      - roman:sanctorale:exaltatio-crucis
+      - roman:sanctorale:inventio-crucis
+      - roman:sanctorale:dedicatio-basilicae-salvatoris
 
 # Commemorations admitted per day-class (Title III.4): a I-class day admits none, a II-class
 # day one, and any day at most two. The never-omitted privileged commemorations (Title III.2)
