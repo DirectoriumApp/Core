@@ -49,3 +49,15 @@
     (duplex/semiduplex/simplex), octave, and vigil facts (uncopyrightable). The native
     annual Ordo of the pre-1955 rubrics, still printed with a day-by-day companion. Pinned
     as the 1954 validation oracle — see docs/design/rubric-system-model.md."
+
+- key: rg-da
+  urn: introibo:source:rg-da
+  kind: reference
+  title: "Rubricae Generales Missalis et Breviarii Romani (Divino Afflatu, pre-1955)"
+  year: 1920
+  rights: reference
+  note: "Consult-only. The general rubrics of the pre-1955 (Divino Afflatu) rite — the Tabellae
+    Occurrentiae/Concurrentiae of the Missal and Titt. IV-VII of the Breviary — cited for the
+    uncopyrightable precedence facts (the occurrence tier order, transfer, Sunday classes, and
+    commemoration rules) of the roman-divino-afflatu edition. Public domain by age; the dated
+    outcomes it governs are cross-checked against ordo-1954."

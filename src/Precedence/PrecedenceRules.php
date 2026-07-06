@@ -95,4 +95,13 @@ interface PrecedenceRules
 
     /** The cited reason the day is in the season it is — the season of its temporal office, or none. */
     public function explainSeason(?string $season): ResolutionReason;
+
+    /**
+     * Whether a common sanctoral vigil that falls on a Sunday is anticipated to the
+     * preceding Saturday (the pre-1955 rule) rather than omitted (1955 and 1962). This is a
+     * placement-time question the resolver hands to the sanctoral layer, so it is answered
+     * by the edition's rules — false for {@see Rubrics1962Precedence}, true for the pre-1955
+     * {@see Rubrics1954Precedence}.
+     */
+    public function anticipatesSundayVigils(): bool;
 }

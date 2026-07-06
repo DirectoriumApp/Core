@@ -1,0 +1,143 @@
+# Cited precedence rules of the 1954 (Divino Afflatu) edition — the pre-1955 order of
+# occurrence, as data. Companion to the base edition's tools/generator/facts/precedence.yaml
+# (1962). Fanned out by the generator into editions/roman-divino-afflatu/precedence-tiers.ndjson
+# and precedence-rules.ndjson, and read at runtime by Rubrics1954Precedence (#67).
+#
+# WHY A SEPARATE FILE, NOT A DIFF. The pre-1955 system is not a re-ranking of the 1962
+# Table of Liturgical Days: it is the older Tabella Occurrentiae, a wholly different order
+# built on the live six-rung grade ladder (Duplex I classis > Duplex II classis > Duplex
+# maius > Duplex > Semiduplex > Simplex — the Semiduplex grade the 1955 reform abolished).
+# So it is authored whole, not as a diff.
+#
+# PROVENANCE. The tier order, the Sunday classes, the transfer set, and the commemoration
+# model are the calendar-level facts of the Divino-Afflatu-era Rubricae Generales (rg-da:
+# the Tabellae Occurrentiae/Concurrentiae of the Missal and Titt. IV-VII of the Breviary),
+# adversarially verified against the primary text and cross-checked, date by date, against
+# the St. Lawrence Press pre-1955 Ordo Recitandi (ordo-1954). See docs/design/rubric-system-model.md
+# (Seam 6) for the research trail and the CONFIRMED-vs-DEFERRED boundary.
+#
+# THE TIER ORDER (lower ordinal wins occurrence). `line` mirrors `ordinal` — unlike 1962's
+# n.91 there is no numbered pre-1955 table, so no independent line number exists. Ordinals
+# carry gaps so the DEFERRED privileged temporal octaves (Epiphany/Corpus Christi 2nd order,
+# Christmas/Ascension/Sacred-Heart 3rd order — movable offices not yet minted for 1954) can
+# slot in later without a renumber. Sundays sit high, per the Divino Afflatu elevation: a
+# lesser (per-annum) Sunday yields ONLY to a Double of the I/II class and to a feast of the
+# Lord, and outranks every ordinary double, semidouble, simple, octave, vigil, and feria
+# below it (Rubr. Gen. Brev. Tit. IV, dated-proven by ordo-1954: the green Sunday keeps the
+# day and the double is commemorated).
+tiers:
+  # --- Above the whole calendar: the Triduum and the three greatest feasts. ---
+  - { selector: triduum, line: 1, ordinal: 1, subOrder: 0, cite: rg-da }
+  - { selector: greatest, line: 2, ordinal: 2, subOrder: 0, cite: rg-da }
+  # --- First-class greater Sundays: yield to nothing below the greatest feasts (Tit. IV §1;
+  #     ordo-1954 "Palm Sunday ... no feast can take its place"). Above even a Double I class,
+  #     which is only commemorated. ---
+  - { selector: first-class-sunday, line: 3, ordinal: 3, subOrder: 0, cite: rg-da }
+  - { selector: privileged-vigil, line: 4, ordinal: 4, subOrder: 0, cite: rg-da }
+  - { selector: paschal-octave, line: 5, ordinal: 5, subOrder: 0, cite: rg-da }
+  - { selector: privileged-feria, line: 6, ordinal: 6, subOrder: 0, cite: rg-da }
+  # --- Double of the I class, then the II-class greater Sundays (which yield ONLY to a
+  #     Double I class — Tit. IV §1), then the Double of the II class. ---
+  - { selector: double-i-class, line: 7, ordinal: 7, subOrder: 0, cite: rg-da }
+  - { selector: all-souls, line: 8, ordinal: 8, subOrder: 0, cite: rg-da }
+  - { selector: second-class-sunday, line: 9, ordinal: 9, subOrder: 0, cite: rg-da }
+  - { selector: double-ii-class, line: 10, ordinal: 10, subOrder: 0, cite: rg-da }
+  # (gap 11 reserved: DEFERRED privileged 2nd-order octave days-within — Epiphany/Corpus
+  #  Christi, "displaced only by a Double I class" — authored when those temporal octaves
+  #  are minted for 1954.)
+  # --- A feast OF THE LORD below Double II (an ordinary or greater double of the Lord)
+  #     takes a lesser Sunday's place (Tit. IV §2). It sits ABOVE the lesser Sunday but
+  #     below the II-class Sunday, which yields only to a Double I class. ---
+  - { selector: feast-of-the-lord, line: 12, ordinal: 12, subOrder: 0, cite: rg-da }
+  - { selector: lesser-sunday, line: 13, ordinal: 13, subOrder: 0, cite: rg-da }
+  # --- Below the lesser Sunday: the ordinary festal grades and the common octave. ---
+  - { selector: greater-double, line: 14, ordinal: 14, subOrder: 0, cite: rg-da }
+  - { selector: double, line: 16, ordinal: 16, subOrder: 0, cite: rg-da }
+  - { selector: semidouble, line: 17, ordinal: 17, subOrder: 0, cite: rg-da }
+  - { selector: christmas-octave-within, line: 18, ordinal: 18, subOrder: 0, cite: rg-da }
+  - { selector: greater-feria, line: 20, ordinal: 20, subOrder: 0, cite: rg-da }
+  - { selector: common-vigil, line: 22, ordinal: 22, subOrder: 0, cite: rg-da }
+  - { selector: simple, line: 24, ordinal: 24, subOrder: 0, cite: rg-da }
+  - { selector: lady-on-saturday, line: 26, ordinal: 26, subOrder: 0, cite: rg-da }
+  - { selector: ordinary-feria, line: 27, ordinal: 27, subOrder: 0, cite: rg-da }
+  # Below the table: a commemoration never celebrates (yields the day, is merely commemorated).
+  - { selector: commemoration, line: 29, ordinal: 29, subOrder: 0, cite: rg-da }
+
+# The named id-sets the tier derivation branches on. The temporal great feasts and Sundays
+# are recognised by identity (they are minted by the temporal fillers, not carried in the
+# sanctoral data), exactly as the 1962 table recognises its great feasts.
+membership:
+  # Easter, Pentecost, and Christmas — above the whole calendar (they are kind=sunday /
+  # kind=feast yet must not fall into a Sunday or feast tier).
+  - name: greatest
+    cite: rg-da
+    ids:
+      - roman:temporale:christmas:nativity
+      - roman:temporale:paschal:easter
+      - roman:temporale:paschal:pentecost
+  # First-class greater Sundays (Tit. IV §1): Advent I; Lent I-IV; Passion; Palm; Low.
+  # (Easter and Pentecost are in `greatest`.)
+  - name: first-class-sunday
+    cite: rg-da
+    ids:
+      - roman:temporale:advent:sunday-1
+      - roman:temporale:paschal:lent-1
+      - roman:temporale:paschal:lent-2
+      - roman:temporale:paschal:lent-3
+      - roman:temporale:paschal:lent-4
+      - roman:temporale:paschal:passion-sunday
+      - roman:temporale:paschal:palm-sunday
+      - roman:temporale:paschal:low-sunday
+  # Second-class greater Sundays (Tit. IV §1): Advent II-IV; Septuagesima, Sexagesima,
+  # Quinquagesima. Yield ONLY to a Double of the I class.
+  - name: second-class-sunday
+    cite: rg-da
+    ids:
+      - roman:temporale:advent:sunday-2
+      - roman:temporale:advent:sunday-3
+      - roman:temporale:advent:sunday-4
+      - roman:temporale:paschal:septuagesima
+      - roman:temporale:paschal:sexagesima
+      - roman:temporale:paschal:quinquagesima
+  # First-class (privileged) vigils with their own proper office: Christmas and Pentecost.
+  # (The common sanctoral vigils are recognised by their `vigilia` grade, not here.)
+  - name: privileged-vigil
+    cite: rg-da
+    ids:
+      - roman:temporale:christmas:vigil
+      - roman:temporale:paschal:pentecost-vigil
+  # Feasts of the Lord that are themselves Doubles of the I class — they take a Sunday's
+  # place up to and including a II-class Sunday (which yields to a Double I class). Mapped to
+  # the double-i-class tier.
+  - name: great-lord
+    cite: rg-da
+    ids:
+      - roman:temporale:epiphany:domini
+      - roman:temporale:christmas:octave-day
+      - roman:temporale:paschal:ascension
+      - roman:temporale:paschal:trinity-sunday
+      - roman:temporale:paschal:corpus-christi
+      - roman:temporale:paschal:sacred-heart
+      - roman:temporale:month-computed:christ-the-king
+  # Feasts of the Lord below the Double I class (an ordinary or greater double of the Lord)
+  # that still take a LESSER Sunday's place — the Holy Name and the Holy Family. Mapped to
+  # the feast-of-the-lord tier, above the lesser Sunday but below the II-class Sunday.
+  - name: feasts-of-the-lord
+    cite: rg-da
+    ids:
+      - roman:temporale:christmas:holy-name
+      - roman:temporale:epiphany:holy-family
+
+# Commemorations admitted per day-type. The pre-1955 rite imposes no flat integer cap the
+# way 1962 does (I=1/II=1/III=2/IV=2): multiple commemorations are normal and the practical
+# bound is the odd-orations limit of the Missal (1, 3, 5, or 7 collects). We model that bound
+# uniformly as three admitted commemorations, ordered privileged-first (privileged
+# commemorations are made even on a Double I class — Tit. VII §1, the sharpest 1954-vs-1962
+# contrast). Days that admit NONE (the Triduum, the privileged first-order octaves, Easter
+# and Pentecost themselves) are handled in code, not by this limit. The fine per-day-type
+# membership of the commemoration set is DEFERRED (rubric-system-model.md, Seam 6).
+commemorationLimits:
+  - { dayClass: 1, limit: 3, cite: rg-da }
+  - { dayClass: 2, limit: 3, cite: rg-da }
+  - { dayClass: 3, limit: 3, cite: rg-da }
+  - { dayClass: 4, limit: 3, cite: rg-da }

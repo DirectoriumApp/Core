@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Introibo\Core\Sanctoral;
 
+use DateInterval;
 use DateTimeImmutable;
 use Introibo\Core\Temporal\Computus;
 use Introibo\Core\Temporal\TemporalCalendar;
@@ -29,10 +30,18 @@ final class SanctoralCalendar
 {
     private int $year;
 
+    /**
+     * Whether a common vigil that falls on a Sunday is anticipated to the preceding Saturday
+     * (the pre-1955 rule) rather than kept on its nominal date. Off by default so the 1962
+     * placement — and its golden fixture — is unchanged; the resolver turns it on for the
+     * Divino Afflatu edition (from {@see \Introibo\Core\Precedence\PrecedenceRules::anticipatesSundayVigils()}).
+     */
+    private bool $anticipateSundayVigils;
+
     /** @var array<string, list<SanctoralObservance>> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
-    private function __construct(int $year, SanctoralData $data)
+    private function __construct(int $year, SanctoralData $data, bool $anticipateSundayVigils)
     {
         if ($year < Computus::GREGORIAN_REFORM_YEAR) {
             throw new InvalidArgumentException(sprintf(
@@ -43,12 +52,16 @@ final class SanctoralCalendar
         }
 
         $this->year = $year;
+        $this->anticipateSundayVigils = $anticipateSundayVigils;
         $this->days = $this->build($data);
     }
 
-    public static function forYear(int $year, ?SanctoralData $data = null): self
-    {
-        return new self($year, $data ?? new CorpusSanctoralData());
+    public static function forYear(
+        int $year,
+        ?SanctoralData $data = null,
+        bool $anticipateSundayVigils = false
+    ): self {
+        return new self($year, $data ?? new CorpusSanctoralData(), $anticipateSundayVigils);
     }
 
     public function year(): int
@@ -142,7 +155,10 @@ final class SanctoralCalendar
      * March is doubled, so every feast on 24–28 February is kept one day later —
      * St Matthias 24 Feb → 25 Feb, St Gabriel of Our Lady of Sorrows 27 Feb →
      * 28 Feb, and a 28 Feb feast → 29 Feb. 24 February itself becomes the
-     * bis-sextus feria.
+     * bis-sextus feria. A VIGIL on 23 February is the eve of St Matthias, so it
+     * tracks its doubled feast: as the feast moves 24 → 25 Feb, its vigil moves
+     * 23 → 24 Feb (the pre-1955 Matthias vigil restored for the 1954 edition, #66).
+     * A non-vigil 23 Feb feast, being septimo Kalendas, is not doubled and stays.
      */
     private function placementDate(SanctoralEntry $entry): ?DateTimeImmutable
     {
@@ -154,12 +170,25 @@ final class SanctoralCalendar
             if ($day === 29 && !$leapYear) {
                 return null;
             }
-            if ($leapYear && $day >= 24 && $day <= 28) {
-                $day++;
+            if ($leapYear) {
+                if ($day >= 24 && $day <= 28) {
+                    $day++;
+                } elseif ($day === 23 && $entry->isVigil()) {
+                    $day++;
+                }
             }
         }
 
-        return TemporalCalendar::utcDate($this->year, $month, $day);
+        $date = TemporalCalendar::utcDate($this->year, $month, $day);
+
+        // Pre-1955: a common vigil that falls on a Sunday is anticipated to the preceding
+        // Saturday (1955/1962 omit it instead). Edition-gated — off by default, so the 1962
+        // placement is untouched; the resolver enables it for the Divino Afflatu edition.
+        if ($this->anticipateSundayVigils && $entry->isVigil() && (int) $date->format('w') === 0) {
+            $date = $date->sub(new DateInterval('P1D'));
+        }
+
+        return $date;
     }
 
     private function isLeapYear(): bool

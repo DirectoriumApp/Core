@@ -6,8 +6,8 @@ namespace Introibo\Core\Tests;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 use function Introibo\Core\contract;
 use function Introibo\Core\day;
@@ -89,7 +89,11 @@ final class DayFunctionTest extends TestCase
 
     public function testSelectingAnUnbuiltEditionThrows(): void
     {
-        $this->expectException(RuntimeException::class);
+        // 1954's precedence engine is wired (#67), but its calendar is incomplete pending the
+        // dataset burndown (#64), so it is not yet marked built: the public boundary refuses
+        // it. (1955 has no engine at all and is likewise refused.)
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageMatches('/not yet built/');
         day(new DateTimeImmutable('2026-06-29', new DateTimeZone('UTC')), null, '1954');
     }
 }

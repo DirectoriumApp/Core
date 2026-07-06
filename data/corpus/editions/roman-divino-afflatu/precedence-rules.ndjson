@@ -1,0 +1,10 @@
+{"cite":"rg-da","dayClass":1,"limit":3,"rule":"commemoration-limit"}
+{"cite":"rg-da","dayClass":2,"limit":3,"rule":"commemoration-limit"}
+{"cite":"rg-da","dayClass":3,"limit":3,"rule":"commemoration-limit"}
+{"cite":"rg-da","dayClass":4,"limit":3,"rule":"commemoration-limit"}
+{"cite":"rg-da","ids":["roman:temporale:christmas:holy-name","roman:temporale:epiphany:holy-family"],"name":"feasts-of-the-lord","rule":"membership"}
+{"cite":"rg-da","ids":["roman:temporale:advent:sunday-1","roman:temporale:paschal:lent-1","roman:temporale:paschal:lent-2","roman:temporale:paschal:lent-3","roman:temporale:paschal:lent-4","roman:temporale:paschal:passion-sunday","roman:temporale:paschal:palm-sunday","roman:temporale:paschal:low-sunday"],"name":"first-class-sunday","rule":"membership"}
+{"cite":"rg-da","ids":["roman:temporale:epiphany:domini","roman:temporale:christmas:octave-day","roman:temporale:paschal:ascension","roman:temporale:paschal:trinity-sunday","roman:temporale:paschal:corpus-christi","roman:temporale:paschal:sacred-heart","roman:temporale:month-computed:christ-the-king"],"name":"great-lord","rule":"membership"}
+{"cite":"rg-da","ids":["roman:temporale:christmas:nativity","roman:temporale:paschal:easter","roman:temporale:paschal:pentecost"],"name":"greatest","rule":"membership"}
+{"cite":"rg-da","ids":["roman:temporale:christmas:vigil","roman:temporale:paschal:pentecost-vigil"],"name":"privileged-vigil","rule":"membership"}
+{"cite":"rg-da","ids":["roman:temporale:advent:sunday-2","roman:temporale:advent:sunday-3","roman:temporale:advent:sunday-4","roman:temporale:paschal:septuagesima","roman:temporale:paschal:sexagesima","roman:temporale:paschal:quinquagesima"],"name":"second-class-sunday","rule":"membership"}

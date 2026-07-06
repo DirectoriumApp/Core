@@ -221,23 +221,65 @@ entries in `sanctorale.yaml`, and edition membership is simply which blocks each
   `vigilia`/IV, violet, `vigilOf` the feast; Dec 7 = Vigil of the Immaculate Conception; the John Baptist vigil
   wears `vigilia`/IV in 1954 but II class in 1960; the suppressed St Andrew vigil is absent from 1960).
 
-## Seam 5a — pre-1955 vigil precedence (next — #67)
+## Seam 5a — pre-1955 vigil precedence (Built — #67)
 
-The materialised vigils await `Rubrics1954Precedence` for their occurrence behaviour: a `Rubrics1954Precedence`
-vigil tier, the "commemorated when impeded, omitted under a Sunday/higher feast" rule, the Sunday-anticipation
-and Matthias-bissextile resolution deferred above. 1955 (#70) omits the vigils *Cum nostra* suppressed simply
-by not emitting them in the 1955 dir.
+The materialised vigils now resolve under `Rubrics1954Precedence`: they carry the `common-vigil` tier, are
+commemorated when impeded and omitted (dropped) under a Double of the I class, and — the placement rule
+`Rubrics1962Precedence` does **not** have — a common vigil that falls on a Sunday is **anticipated to the
+preceding Saturday** rather than omitted. That anticipation is edition-gated: `PrecedenceRules::anticipatesSundayVigils()`
+is false for 1962 (so its placement, and the golden fixture, are unmoved) and true for 1954, and the resolver
+threads it into `SanctoralCalendar::forYear()`. The **Matthias bissextile** is likewise resolved: in a leap
+year the vigil at 23 Feb tracks its doubled feast (24 → 25 Feb) onto 24 Feb, the bis-sextus day (a non-vigil
+23 Feb feast, being *septimo Kalendas*, is not doubled and stays).
 
-## Seam 6 — pre-1955 & 1955 precedence rules (#67, #70)
+## Seam 6 — pre-1955 precedence rules (Built — #67)
 
-`Rubrics1954Precedence` and `Rubrics1955Precedence` implement `PrecedenceRules` beside `Rubrics1962Precedence`,
-each reading its edition's `precedence.tiers.ndjson` + `precedence.rules.ndjson`:
+`Rubrics1954Precedence implements PrecedenceRules` beside `Rubrics1962Precedence`, reading the 1954 edition's
+`precedence-tiers.ndjson` + `precedence-rules.ndjson` (authored WHOLE — the pre-1955 Tabella Occurrentiae is a
+different order, not a diff of the 1962 n.91 table — in `facts/editions/roman-divino-afflatu/precedence.yaml`,
+fanned out by the generator's now per-edition `transformPrecedence`). It is wired into `DayResolver::rulesFor`
+and validated by `Rubrics1954PrecedenceTest` (the tier ladder + occurrence rules, on constructed observances)
+and `DivinoAfflatuResolutionTest` (dated outcomes over the real corpus). As-built notes:
 
-- **1954** — the pre-1955 Tabella occurrentiae/concurrentiae: the double/semidouble/simple order, octave and
-  vigil tiers, the older Sunday-resumption, and the more generous transfer (a double could be transferred,
-  not only a first-class feast) and commemoration rules.
-- **1955** — the *Cum nostra hac aetate* reductions on the same base: three octaves, the reduced vigil set,
-  fewer commemorations, first-Vespers simplifications.
+- **Facts, adversarially verified.** The tier order, transfer set, Sunday classes, and commemoration model
+  are the calendar-level facts of the Divino-Afflatu-era Rubricae Generales (`rg-da`, a new cited source),
+  cross-checked date by date against the St. Lawrence Press pre-1955 Ordo (`ordo-1954`). A 9-agent research
+  workflow (5 research + 3 adversarial verify + 1 synthesis) obtained the **primary text** (Titt. IV-VII) and
+  forced three load-bearing corrections into the build.
+- **Grade ladder, not four classes.** Tiers branch on the live six-rung `legacyRank` token (Duplex I class >
+  Duplex II class > Duplex maius > Duplex > Semiduplex > Simplex), separate from the normalised `RankClass`.
+- **The Divino Afflatu Sunday elevation.** Three Sunday classes (recognised by identity, id-membership sets):
+  first-class greater Sundays sit **above** a Double of the I class; a II-class greater Sunday yields **only**
+  to a Double of the I class; a lesser (per-annum) Sunday yields only to a Double of the I/II class and to a
+  feast of the Lord, and **outranks** every ordinary double and below. An impeded Sunday is **commemorated,
+  never resumed** (and, unlike 1962, a lesser Sunday under a Lord's feast is commemorated, not omitted).
+- **Transfer restricted to Doubles of the I and II class** (Tit. IV §3-4) — the single biggest correction the
+  verifiers forced (the researchers over-read a pre-Divino-Afflatu source). Greater/ordinary doubles,
+  semidoubles, simples, vigils, and ferias are commemorated or omitted in place, never translated. Proven by
+  the **Candlemas asymmetry** on real data: the Purification (Double II class) *wins and commemorates* a lesser
+  Sunday (1930) but *transfers off* a II-class Sunday (Septuagesima, 1947) — the same feast, opposite outcome.
+- **Octaves per class.** A common octave is omitted under a Double of the I/II class (else commemorated); a
+  simple octave only under a Double of the I class; the temporal Christmas octave (no legacy grade) is always
+  commemorated. **Commemoration is free** — no flat 1962-style cap; the odd-orations bound is modelled as 3,
+  and privileged commemorations are made even on a Double of the I class.
+- **`isBuilt` stays false.** The engine is wired and unit-tested, but the 1954 **calendar is incomplete**
+  (the sparse sanctoral diff is completed by the #64 burndown), so the edition is not advertised: a new
+  `CalendarCatalog` boundary guard refuses `day()/contract('1954')` until #64, while tests exercise the engine
+  directly through `DayResolver::forEdition()`. The 1962 golden fixture (1583–2200) is byte-identical.
+- **Emit / defer (100%-accuracy discipline).** DEFERRED, per the research's CONFIRMED-vs-DEFERRED split, and
+  NOT guessed: the privileged 2nd/3rd-order temporal octaves (Epiphany/Corpus Christi/Ascension/Sacred Heart,
+  not yet minted for 1954), the fine per-day-type commemoration membership, the full concurrence per-cell
+  table, the DA temporal-attribute rank *display* (1954 temporal offices currently carry the 1962-mapped rank;
+  precedence is correct via the tier order), and the full-year oracle sweep (#64 + the #73 CI matrix). The
+  1952-Matthias-on-Quinquagesima edge the research flagged UNVERIFIED is deliberately not frozen as a test.
+
+## Seam 6a — 1955 precedence rules (next — #70)
+
+`Rubrics1955Precedence` will apply the *Cum nostra hac aetate* reductions on the 1954 base: the Semiduplex
+grade suppressed, octaves → 3, vigils → 7, the commemoration caps 0/1/2 that 1962 keeps, first-Vespers
+restricted to I/II-class feasts + Sundays, and the vigil-on-Sunday rule changed from anticipation to omission
+(`anticipatesSundayVigils()` → false). The octave/vigil inventory is identical between 1955 and 1962, so the
+two share that data and differ chiefly in the precedence tiers and rank scheme.
 
 ## Seam 7 — stamp the active rubric system into the contract (#74)
 

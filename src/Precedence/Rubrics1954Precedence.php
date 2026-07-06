@@ -1,0 +1,571 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Introibo\Core\Precedence;
+
+use DateInterval;
+use DateTimeImmutable;
+use Introibo\Core\Attribute\LegacyRank;
+use Introibo\Core\Calendar\RealizedObservance;
+use Introibo\Core\Observance\ObservanceKind;
+use Introibo\Core\Sanctoral\SanctoralObservance;
+use Introibo\Core\Temporal\Computus;
+use Introibo\Core\Temporal\Season;
+use Introibo\Core\Temporal\TemporalObservance;
+use Introibo\Core\Trace\ResolutionReason;
+
+/**
+ * Precedence under the pre-1955 rubrics — the 1954 Divino Afflatu edition
+ * (`roman:divino-afflatu`).
+ *
+ * This is the sibling of {@see Rubrics1962Precedence}: the resolver pipeline is
+ * edition-agnostic and asks the rules object every edition-specific question, and
+ * this class answers them for the older Tabella Occurrentiae. The tier ordinals,
+ * the named membership sets, and the commemoration limits are CORPUS DATA read
+ * through {@see PrecedenceTable} against the `roman-divino-afflatu` edition dir
+ * (facts/editions/roman-divino-afflatu/precedence.yaml); this class holds only the
+ * branching logic (which selector a day maps to) and the occurrence / transfer /
+ * concurrence / commemoration decisions.
+ *
+ * The pre-1955 system differs from 1962 in four load-bearing ways, all verified
+ * against the Divino-Afflatu-era Rubricae Generales (rg-da) and cross-checked to
+ * the St. Lawrence Press pre-1955 Ordo (ordo-1954):
+ *
+ *  1. A live six-rung grade ladder — Duplex I classis > Duplex II classis > Duplex
+ *     maius > Duplex > Semiduplex > Simplex (the Semiduplex grade the 1955 reform
+ *     abolished). Tiers branch on the {@see LegacyRank} token, not the four classes.
+ *  2. The Divino Afflatu Sunday elevation — three Sunday classes; a lesser
+ *     (per-annum) Sunday yields ONLY to a Double of the I/II class and to a feast
+ *     of the Lord, and outranks every ordinary double, semidouble, simple, octave,
+ *     vigil, and feria below it (impeded, it is commemorated, never resumed).
+ *  3. Transfer restricted to Doubles of the I and II class (Tit. IV §3-4) — every
+ *     other impeded office is commemorated or omitted in place, not translated.
+ *  4. Free commemoration — no flat integer cap; a privileged commemoration is made
+ *     even on a Double of the I class (Tit. VII §1), the sharpest 1954-vs-1962
+ *     contrast.
+ *
+ * Scope is calendar-level (see docs/design/rubric-system-model.md, Seam 6): the
+ * office of the day, its rank/colour/season, its commemorations, and the
+ * displaced/transferred offices — not the Divine Office casuistry. The DEFERRED
+ * items the research left genuinely open (the privileged 2nd/3rd-order temporal
+ * octaves, not yet minted for 1954; the fine per-day-type commemoration set; the
+ * full-year oracle sweep) are flagged there and not guessed here.
+ */
+final class Rubrics1954Precedence implements PrecedenceRules
+{
+    /** The path-safe directory key of the 1954 (Divino Afflatu) edition. */
+    private const EDITION_DIR = 'roman-divino-afflatu';
+
+    private PrecedenceTable $table;
+
+    public function __construct(?PrecedenceTable $table = null)
+    {
+        $this->table = $table ?? new PrecedenceTable(null, self::EDITION_DIR);
+    }
+
+    public function tierOf(RealizedObservance $observance, PrecedenceContext $context): PrecedenceTier
+    {
+        $id = $observance->id()->toString();
+        $kind = $observance->kind()->value();
+
+        // A commemoration never celebrates (nn. 106-114): it takes the floor tier so it
+        // can never win an occurrence. Checked first — nothing lifts a commemoration.
+        if ($kind === ObservanceKind::COMMEMORATION_ONLY) {
+            return $this->table->tier('commemoration');
+        }
+
+        // The three greatest feasts, by identity — Easter and Pentecost are kind=sunday
+        // and Christmas is kind=feast, so identity is checked before the structural branches.
+        if ($this->table->isMember('greatest', $id)) {
+            return $this->table->tier('greatest');
+        }
+        // The Sacred Triduum's own office (a feria of Holy Thursday, Good Friday, or Holy
+        // Saturday) holds the apex; a saint merely coincident keeps its far lower tier.
+        if ($context->isTriduum() && $kind === ObservanceKind::FERIA) {
+            return $this->table->tier('triduum');
+        }
+
+        // Sundays: the three Divino Afflatu classes by identity, else the lesser per-annum
+        // Sunday. Handled as a block so a Sunday never falls into a grade tier.
+        if ($kind === ObservanceKind::SUNDAY) {
+            if ($this->table->isMember('first-class-sunday', $id)) {
+                return $this->table->tier('first-class-sunday');
+            }
+            if ($this->table->isMember('second-class-sunday', $id)) {
+                return $this->table->tier('second-class-sunday');
+            }
+
+            return $this->table->tier('lesser-sunday');
+        }
+
+        // The first-class (privileged) vigils with their own proper office — Christmas and
+        // Pentecost — and the days within the privileged Easter/Pentecost octaves.
+        if ($this->table->isMember('privileged-vigil', $id)) {
+            return $this->table->tier('privileged-vigil');
+        }
+        if ($this->isWithinPaschalOctave($id)) {
+            return $this->table->tier('paschal-octave');
+        }
+        // The privileged ferias that admit no feast — Ash Wednesday and Monday/Tuesday/
+        // Wednesday of Holy Week — carry the first-class ferial rank in the temporal data.
+        if ($kind === ObservanceKind::FERIA && $observance->rank()->ordinal() === 1) {
+            return $this->table->tier('privileged-feria');
+        }
+        // All Souls (the Office of the Dead) is kept on 2 November, transferred when impeded.
+        if ($kind === ObservanceKind::OFFICE_OF_THE_DEAD) {
+            return $this->table->tier('all-souls');
+        }
+        // Feasts of the Lord that are themselves Doubles of the I class (Epiphany, the Octave
+        // of Christmas, Ascension, Corpus Christi, ...) — mapped to the Double I class tier.
+        if ($this->table->isMember('great-lord', $id)) {
+            return $this->table->tier('double-i-class');
+        }
+
+        // The sanctoral grade ladder, by legacy token. (Common-octave days-within carry
+        // `semiduplex`, common-octave days `duplex-maius`, simple-octave days `simplex`, and
+        // vigils `vigilia`, so they fall onto the matching grade tier — their special
+        // occurrence behaviour lives in occurrenceOutcome(), not the tier.)
+        $grade = $this->legacyGradeOf($observance);
+        if ($grade === LegacyRank::DUPLEX_I_CLASSIS) {
+            return $this->table->tier('double-i-class');
+        }
+        if ($grade === LegacyRank::DUPLEX_II_CLASSIS) {
+            return $this->table->tier('double-ii-class');
+        }
+        // A feast of the Lord below the Double II class (an ordinary or greater double of the
+        // Lord — the Holy Name, the Holy Family) still takes a LESSER Sunday's place.
+        if ($this->table->isMember('feasts-of-the-lord', $id)) {
+            return $this->table->tier('feast-of-the-lord');
+        }
+        if ($grade === LegacyRank::DUPLEX_MAIUS) {
+            return $this->table->tier('greater-double');
+        }
+        if ($grade === LegacyRank::DUPLEX) {
+            return $this->table->tier('double');
+        }
+        if ($grade === LegacyRank::SEMIDUPLEX) {
+            return $this->table->tier('semidouble');
+        }
+        if ($grade === LegacyRank::VIGILIA) {
+            return $this->table->tier('common-vigil');
+        }
+        if ($grade === LegacyRank::SIMPLEX) {
+            return $this->table->tier('simple');
+        }
+
+        // A day within the (temporal, privileged 3rd-order) Octave of Christmas — always
+        // commemorated, so it sits below the semidouble feasts that displace it.
+        if ($this->isChristmasOctaveWithin($id)) {
+            return $this->table->tier('christmas-octave-within');
+        }
+        if ($kind === ObservanceKind::LADY_ON_SATURDAY) {
+            return $this->table->tier('lady-on-saturday');
+        }
+        if ($this->isFeriaLike($kind)) {
+            return $this->feriaTier($observance);
+        }
+
+        // Safety net: a temporal office without a legacy grade that escaped the membership
+        // sets maps by its normalised class. Every office in the current 1954 data is covered
+        // by a branch above; this keeps tierOf() total against a future addition.
+        return $this->fallbackTier($observance);
+    }
+
+    /**
+     * Ferias by dignity: the greater (major) ferias of Advent, Lent, and Passiontide, the
+     * Ember days, and the Rogation days are commemorated when impeded; the ordinary green
+     * weekdays are omitted.
+     */
+    private function feriaTier(RealizedObservance $observance): PrecedenceTier
+    {
+        return $this->isGreaterFeria($observance)
+            ? $this->table->tier('greater-feria')
+            : $this->table->tier('ordinary-feria');
+    }
+
+    private function fallbackTier(RealizedObservance $observance): PrecedenceTier
+    {
+        switch ($observance->rank()->ordinal()) {
+            case 1:
+                return $this->table->tier('double-i-class');
+            case 2:
+                return $this->table->tier('double-ii-class');
+            case 3:
+                return $this->table->tier('double');
+            default:
+                return $this->table->tier('ordinary-feria');
+        }
+    }
+
+    public function occurrenceOutcome(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): OccurrenceOutcome {
+        return $this->decideOccurrence($winner, $loser, $context)[0];
+    }
+
+    public function explainOccurrence(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): ResolutionReason {
+        return $this->decideOccurrence($winner, $loser, $context)[1];
+    }
+
+    /**
+     * The single occurrence decision — the loser's fate AND the cited reason — produced
+     * together so the outcome and its explanation can never disagree. Branch order is the
+     * pre-1955 order of precedence.
+     *
+     * @return array{0: OccurrenceOutcome, 1: ResolutionReason}
+     */
+    private function decideOccurrence(
+        RealizedObservance $winner,
+        RealizedObservance $loser,
+        PrecedenceContext $context
+    ): array {
+        // Tit. IV §3-4: ONLY a Double of the I or II class (and All Souls) is translated to
+        // the next free day; every other impeded office is commemorated or omitted in place.
+        if ($this->isTransferable($loser)) {
+            if ($loser->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
+                return [OccurrenceOutcome::transfer(), ResolutionReason::cited(
+                    'da-all-souls-transfer',
+                    'transferred: All Souls is kept on the next free day when impeded',
+                    'rg-da'
+                )];
+            }
+
+            return [OccurrenceOutcome::transfer(), ResolutionReason::cited(
+                'da-double-transfer',
+                'transferred: a Double of the I or II class is moved to the next free day when impeded',
+                'rg-da'
+            )];
+        }
+
+        // The Triduum, the privileged (Easter/Pentecost) octaves, and Easter and Pentecost
+        // themselves admit no commemoration at all.
+        if ($this->admitsNoCommemoration($winner, $context)) {
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'da-no-commemoration-admitted',
+                'omitted: this day admits no commemoration (the Triduum or a privileged octave)',
+                'rg-da'
+            )];
+        }
+
+        // A common octave is omitted under a Double of the I or II class; a simple octave is
+        // omitted under a Double of the I class. Otherwise the octave is commemorated.
+        if ($this->isOctaveOmitted($winner, $loser)) {
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'da-octave-omitted',
+                'omitted: the octave is suppressed under a Double of the I/II class',
+                'rg-da'
+            )];
+        }
+
+        // An ordinary (minor) feria yields to the feast with no commemoration; only the
+        // greater ferias (Advent/Lent/Passiontide, Ember, Rogation) are commemorated.
+        if ($this->isOrdinaryFeria($loser)) {
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'da-ordinary-feria',
+                'omitted: an ordinary feria yields to the feast without a commemoration',
+                'rg-da'
+            )];
+        }
+
+        // Everything else impeded is commemorated: the pre-1955 rite commemorates freely, and
+        // a privileged commemoration is kept even on a Double of the I class (Tit. VII §1).
+        return [OccurrenceOutcome::commemorate(), ResolutionReason::cited(
+            'da-commemoration-admitted',
+            'commemorated: an impeded office is kept as a commemoration within the celebrated office',
+            'rg-da'
+        )];
+    }
+
+    public function explainPrecedence(RealizedObservance $winner, PrecedenceContext $context): ResolutionReason
+    {
+        $tier = $this->tierOf($winner, $context);
+        $selector = $tier->selector();
+        $named = $selector !== null ? sprintf(' (%s)', str_replace('-', ' ', $selector)) : '';
+
+        return ResolutionReason::cited(
+            'da-tabella-occurrentiae',
+            sprintf('celebrated as the day\'s highest office in the pre-1955 order of precedence%s', $named),
+            'rg-da'
+        );
+    }
+
+    public function explainCommemorationLimit(
+        RealizedObservance $celebration,
+        PrecedenceContext $context
+    ): ResolutionReason {
+        if ($this->admitsNoCommemoration($celebration, $context)) {
+            return ResolutionReason::cited(
+                'da-no-commemoration-admitted',
+                'no commemoration is admitted (the Triduum or a privileged octave)',
+                'rg-da'
+            );
+        }
+
+        $limit = $this->limitFor($celebration);
+
+        return ResolutionReason::cited(
+            'da-commemoration-limit',
+            sprintf('the pre-1955 rite admits up to %d commemorations (the odd-orations bound)', $limit),
+            'rg-da'
+        );
+    }
+
+    public function explainColour(RealizedObservance $celebration): ResolutionReason
+    {
+        $colour = $celebration->colour();
+        $rose = $colour->roseAllowed() ? ', with rose permitted on Gaudete and Laetare' : '';
+
+        return ResolutionReason::cited(
+            'da-colour-of-celebration',
+            sprintf('%s: the liturgical colour of the celebrated office%s', $colour->base()->value(), $rose),
+            'rg-da'
+        );
+    }
+
+    public function explainSeason(?string $season): ResolutionReason
+    {
+        if ($season === null) {
+            return ResolutionReason::uncited(
+                'da-no-temporal-season',
+                'no temporal office governs the day, so it carries no season'
+            );
+        }
+
+        return ResolutionReason::cited(
+            'da-season-of-temporal-office',
+            sprintf('%s: the season of the day\'s temporal office', $season),
+            'rg-da'
+        );
+    }
+
+    public function anticipatesSundayVigils(): bool
+    {
+        // A common vigil that falls on a Sunday is anticipated to the preceding Saturday
+        // (CE "Eve of a Feast"; ordo-1954) — the pre-1955 rule the 1955 reform changed to
+        // omission.
+        return true;
+    }
+
+    public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
+    {
+        // The Annunciation, impeded into Holy Week or the Easter octave, is kept on the Monday
+        // after Low Sunday (Low Sunday is Easter + 7) — the same fixed landing as 1962.
+        if ($feast->id()->toString() === 'roman:sanctorale:annuntiatio') {
+            $year = (int) $context->date()->format('Y');
+
+            return Computus::gregorianEaster($year)->add(new DateInterval('P8D'));
+        }
+
+        return null;
+    }
+
+    public function concurrenceOutcome(
+        RealizedObservance $preceding,
+        RealizedObservance $following,
+        PrecedenceContext $context
+    ): ConcurrenceOutcome {
+        $precedingTier = $this->tierOf($preceding, $context);
+        $followingTier = $this->tierOf($following, $context);
+
+        // The more dignified office holds the evening; an equal-rank concurrence goes to the
+        // following day's First Vespers "a capitulo de sequenti", commemorating the preceding
+        // (Tit. VI §4). The finer split is deferred to the Office layer.
+        if (!$precedingTier->isHigherThan($followingTier)) {
+            return $this->ratesVespersCommemoration($preceding)
+                ? ConcurrenceOutcome::followingWithCommemorationOfPreceding()
+                : ConcurrenceOutcome::fullOfFollowing();
+        }
+
+        return $this->ratesVespersCommemoration($following)
+            ? ConcurrenceOutcome::precedingWithCommemorationOfFollowing()
+            : ConcurrenceOutcome::fullOfPreceding();
+    }
+
+    public function commemorationLimit(RealizedObservance $celebration, PrecedenceContext $context): int
+    {
+        if ($this->admitsNoCommemoration($celebration, $context)) {
+            return 0;
+        }
+
+        return $this->limitFor($celebration);
+    }
+
+    private function limitFor(RealizedObservance $celebration): int
+    {
+        return $this->table->commemorationLimit($celebration->rank()->ordinal());
+    }
+
+    public function isPrivilegedCommemoration(RealizedObservance $office): bool
+    {
+        $kind = $office->kind()->value();
+
+        // A Sunday, and a Double of the I or II class (incl. the great feasts of the Lord).
+        if ($kind === ObservanceKind::SUNDAY) {
+            return true;
+        }
+        $grade = $this->legacyGradeOf($office);
+        if ($grade === LegacyRank::DUPLEX_I_CLASSIS || $grade === LegacyRank::DUPLEX_II_CLASSIS) {
+            return true;
+        }
+        if ($this->table->isMember('great-lord', $office->id()->toString())) {
+            return true;
+        }
+
+        // A day within the octave of Christmas.
+        if (strpos($office->id()->toString(), 'christmas:within-octave') !== false) {
+            return true;
+        }
+
+        // A greater (privileged) feria of Advent, Lent, or Passiontide.
+        if ($kind === ObservanceKind::FERIA) {
+            return in_array(
+                $this->seasonOf($office),
+                [Season::ADVENT, Season::LENT, Season::PASSIONTIDE],
+                true
+            );
+        }
+
+        return false;
+    }
+
+    private function ratesVespersCommemoration(RealizedObservance $office): bool
+    {
+        // Doubles and semidoubles (and Sundays) have Vespers to commemorate; a fourth-class
+        // feria, a simple, or a vigil does not.
+        return $office->rank()->ordinal() < 4 || $office->kind()->value() === ObservanceKind::SUNDAY;
+    }
+
+    private function isTransferable(RealizedObservance $office): bool
+    {
+        // All Souls is reassigned to the next day when impeded.
+        if ($office->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
+            return true;
+        }
+
+        // Only a Double of the I or II class is translated. A great feast of the Lord (a
+        // temporal Double I class) is likewise transferred if ever impeded.
+        if ($this->table->isMember('great-lord', $office->id()->toString())) {
+            return true;
+        }
+
+        $grade = $this->legacyGradeOf($office);
+
+        return ($grade === LegacyRank::DUPLEX_I_CLASSIS || $grade === LegacyRank::DUPLEX_II_CLASSIS)
+            && $office->kind()->value() === ObservanceKind::FEAST;
+    }
+
+    private function admitsNoCommemoration(RealizedObservance $winner, PrecedenceContext $context): bool
+    {
+        if ($context->isTriduum()) {
+            return true;
+        }
+
+        $id = $winner->id()->toString();
+        if ($this->isWithinPaschalOctave($id)) {
+            return true;
+        }
+
+        // Easter and Pentecost themselves admit no commemoration (until Vespers of Tuesday);
+        // Christmas, by contrast, admits the octave commemorations, so it is not listed here.
+        return $id === 'roman:temporale:paschal:easter' || $id === 'roman:temporale:paschal:pentecost';
+    }
+
+    /**
+     * A sanctoral octave loser omitted (not commemorated) under a higher feast: a common
+     * octave is suppressed under a Double of the I OR II class; a simple octave under a Double
+     * of the I class. The temporal (privileged 3rd-order) Christmas octave carries no legacy
+     * grade, so it is never caught here — it is always commemorated.
+     */
+    private function isOctaveOmitted(RealizedObservance $winner, RealizedObservance $loser): bool
+    {
+        if (!$loser instanceof SanctoralObservance) {
+            return false;
+        }
+        $loserKind = $loser->kind()->value();
+        if ($loserKind !== ObservanceKind::WITHIN_OCTAVE && $loserKind !== ObservanceKind::OCTAVE_DAY) {
+            return false;
+        }
+
+        $winnerIsDoubleI = $this->isDoubleFirstClass($winner);
+        $simpleOctave = $this->legacyGradeOf($loser) === LegacyRank::SIMPLEX;
+
+        // Simple octave: only a Double I class suppresses it. Common octave: a Double I OR II.
+        return $simpleOctave ? $winnerIsDoubleI : ($winnerIsDoubleI || $this->isDoubleSecondClass($winner));
+    }
+
+    private function isDoubleFirstClass(RealizedObservance $office): bool
+    {
+        return $this->legacyGradeOf($office) === LegacyRank::DUPLEX_I_CLASSIS
+            || $this->table->isMember('great-lord', $office->id()->toString());
+    }
+
+    private function isDoubleSecondClass(RealizedObservance $office): bool
+    {
+        return $this->legacyGradeOf($office) === LegacyRank::DUPLEX_II_CLASSIS;
+    }
+
+    private function isOrdinaryFeria(RealizedObservance $office): bool
+    {
+        return $office->kind()->value() === ObservanceKind::FERIA && !$this->isGreaterFeria($office);
+    }
+
+    /**
+     * A greater (major) feria: the ferias of Advent, Lent, and Passiontide, plus the Ember
+     * and Rogation days. These are commemorated when impeded; the ordinary green weekdays are
+     * omitted. (The privileged first-class ferias — Ash Wednesday, Holy Week — are lifted to
+     * their own tier before this is reached.)
+     */
+    private function isGreaterFeria(RealizedObservance $office): bool
+    {
+        $kind = $office->kind()->value();
+        if ($kind === ObservanceKind::EMBER_DAY || $kind === ObservanceKind::ROGATION_DAY) {
+            return true;
+        }
+        if (in_array($this->seasonOf($office), [Season::ADVENT, Season::LENT, Season::PASSIONTIDE], true)) {
+            return true;
+        }
+
+        return $office->rank()->ordinal() <= 2;
+    }
+
+    private function isFeriaLike(string $kind): bool
+    {
+        return $kind === ObservanceKind::FERIA
+            || $kind === ObservanceKind::EMBER_DAY
+            || $kind === ObservanceKind::ROGATION_DAY;
+    }
+
+    private function isWithinPaschalOctave(string $id): bool
+    {
+        return strpos($id, ':easter-octave') !== false
+            || strpos($id, ':pentecost-octave') !== false;
+    }
+
+    private function isChristmasOctaveWithin(string $id): bool
+    {
+        return strpos($id, 'christmas:within-octave') !== false;
+    }
+
+    /** The pre-1960 grade token of a sanctoral office, or null for a temporal office. */
+    private function legacyGradeOf(RealizedObservance $observance): ?string
+    {
+        if (!$observance instanceof SanctoralObservance) {
+            return null;
+        }
+        $legacyRank = $observance->legacyRank();
+
+        return $legacyRank !== null ? $legacyRank->value() : null;
+    }
+
+    private function seasonOf(RealizedObservance $observance): ?string
+    {
+        return $observance instanceof TemporalObservance ? $observance->season()->value() : null;
+    }
+}

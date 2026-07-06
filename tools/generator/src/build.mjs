@@ -108,7 +108,16 @@ export function build(outDir = DEFAULT_OUT) {
     const octaves = transformOctaves(entries, e.dir, octavesByEdition[e.dir] || []);
     const attributes = [...base.attributes, ...octaves.attributes].sort(byId);
     const placement = [...base.placement, ...octaves.placement].sort(byId);
-    return { dir: e.dir, base: e.base, attributes, placement, octaveIdentity: octaves.identity };
+    // A non-base edition may carry its OWN precedence table (Core v0.3.0: the pre-1955
+    // Tabella Occurrentiae is a wholly different order, not a diff of the 1962 n.91 table),
+    // authored whole in facts/editions/<dir>/precedence.yaml and read at runtime by that
+    // edition's Rubrics19XXPrecedence. Absent the file the edition emits no precedence — its
+    // engine must then be a 1962 variant reusing the base table, or it fails closed at load.
+    const precedenceFile = join(FACTS_DIR, 'editions', e.dir, 'precedence.yaml');
+    const precedence = existsSync(precedenceFile)
+      ? transformPrecedence(loadYaml(precedenceFile), e.dir)
+      : null;
+    return { dir: e.dir, base: e.base, attributes, placement, octaveIdentity: octaves.identity, precedence };
   });
 
   // Octave identities are edition-invariant (the Octave Day of the Assumption is the same
@@ -172,6 +181,12 @@ export function build(outDir = DEFAULT_OUT) {
     ...extraEditions.flatMap((ed) => [
       ...validateAll(validators['attributes.sanctorale'], ed.attributes, `attributes.sanctorale:${ed.dir}`),
       ...validateAll(validators['placement.sanctorale'], ed.placement, `placement.sanctorale:${ed.dir}`),
+      ...(ed.precedence
+        ? [
+            ...validateAll(validators['precedence-tier'], ed.precedence.tiers, `precedence-tier:${ed.dir}`),
+            ...validateAll(validators['precedence-rules'], ed.precedence.rules, `precedence-rules:${ed.dir}`),
+          ]
+        : []),
     ]),
   ];
   if (errors.length > 0) {
@@ -203,7 +218,10 @@ export function build(outDir = DEFAULT_OUT) {
   // only a single `cite` per structural fact — still every cite must resolve to a
   // registered source (the clean-room rule), and its use is counted for the report.
   const sourceKeys = new Set(sources.map((source) => source.key));
-  for (const row of [...offsets, ...blockSeasons, ...precedence.tiers, ...precedence.rules]) {
+  const extraPrecedenceRows = extraEditions.flatMap((ed) =>
+    ed.precedence ? [...ed.precedence.tiers, ...ed.precedence.rules] : [],
+  );
+  for (const row of [...offsets, ...blockSeasons, ...precedence.tiers, ...precedence.rules, ...extraPrecedenceRows]) {
     const key = String(row.cite).split(':')[0];
     usage.set(key, (usage.get(key) || 0) + 1);
     if (!sourceKeys.has(key)) {
@@ -286,6 +304,18 @@ export function build(outDir = DEFAULT_OUT) {
       records: ed.placement.length,
       primaryKey: 'id',
     };
+    if (ed.precedence) {
+      outputs[`editions/${ed.dir}/precedence-tiers.ndjson`] = {
+        text: toNdjson(ed.precedence.tiers),
+        records: ed.precedence.tiers.length,
+        primaryKey: 'selector',
+      };
+      outputs[`editions/${ed.dir}/precedence-rules.ndjson`] = {
+        text: toNdjson(ed.precedence.rules),
+        records: ed.precedence.rules.length,
+        primaryKey: 'rule',
+      };
+    }
   }
 
   const relPaths = Object.keys(outputs).sort();

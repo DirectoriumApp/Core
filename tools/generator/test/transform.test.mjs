@@ -6,9 +6,39 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { transformSanctorale, transformSanctoraleEdition, transformOctaves } from '../src/transform.mjs';
+import {
+  transformSanctorale,
+  transformSanctoraleEdition,
+  transformOctaves,
+  transformPrecedence,
+} from '../src/transform.mjs';
 
 const DA = 'roman-divino-afflatu';
+
+test('transformPrecedence fans an edition table into sorted tiers and both rule variants', () => {
+  const { tiers, rules } = transformPrecedence(
+    {
+      tiers: [
+        { selector: 'double', line: 16, ordinal: 16, subOrder: 0, cite: 'rg-da' },
+        { selector: 'greatest', line: 2, ordinal: 2, subOrder: 0, cite: 'rg-da' },
+      ],
+      membership: [{ name: 'greatest', ids: ['roman:temporale:paschal:easter'], cite: 'rg-da' }],
+      commemorationLimits: [{ dayClass: 1, limit: 3, cite: 'rg-da' }],
+    },
+    DA,
+  );
+
+  // Tiers are sorted by ordinal (lower wins first), independent of author order.
+  assert.deepEqual(
+    tiers.map((t) => t.selector),
+    ['greatest', 'double'],
+  );
+  // Both precedence-rules variants are emitted, each tagged with its rule kind.
+  const kinds = rules.map((r) => r.rule).sort();
+  assert.deepEqual(kinds, ['commemoration-limit', 'membership']);
+  const membership = rules.find((r) => r.rule === 'membership');
+  assert.deepEqual(membership.ids, ['roman:temporale:paschal:easter']);
+});
 
 /** A minimal sanctoral entry carrying one Divino-Afflatu edition block. */
 function entry(id, block) {

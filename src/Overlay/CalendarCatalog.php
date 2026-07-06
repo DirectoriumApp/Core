@@ -47,6 +47,19 @@ final class CalendarCatalog
     public function resolver(?string $calendar, ?string $rubricSystem = null): DayResolver
     {
         $system = RubricSystem::fromString($rubricSystem);
+        // A rubric system declared on the edition axis but not yet built — its data or rules
+        // are incomplete (the 1954 dataset burndown is Epic #64; the 1955 engine is #68) — is
+        // refused at this public boundary. Its precedence engine may be wired and unit-tested
+        // through DayResolver::forEdition(), but day()/contract() must never resolve an
+        // incomplete calendar. Built systems are advertised via RubricSystem::isBuilt() (the
+        // Api /meta filter); this is the matching runtime gate.
+        if (!$system->isBuilt()) {
+            throw new InvalidArgumentException(sprintf(
+                'The %s rubric system is declared but not yet built; its calendar is not resolvable. '
+                . 'Select a built edition (the default is 1962 / Rubricae 1960).',
+                $system->label()
+            ));
+        }
         $base = new CorpusSanctoralData($this->corpus, $system->corpusDir());
         if ($calendar === null) {
             return DayResolver::forEdition($system, $base);

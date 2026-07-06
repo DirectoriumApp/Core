@@ -97,6 +97,8 @@ final class DayResolver
         switch ($system->urn()) {
             case RubricSystem::RUBRICAE_1960:
                 return new Rubrics1962Precedence($table);
+            case RubricSystem::DIVINO_AFFLATU:
+                return new Rubrics1954Precedence($table);
         }
 
         throw new \RuntimeException(sprintf(
@@ -144,7 +146,11 @@ final class DayResolver
             ChristmasCycle::forYear($year),
         ];
         $movable = MovableFeasts::forYear($year);
-        $sanctoral = SanctoralCalendar::forYear($year, $this->sanctoralData);
+        $sanctoral = SanctoralCalendar::forYear(
+            $year,
+            $this->sanctoralData,
+            $this->rules->anticipatesSundayVigils()
+        );
 
         $ledger = new TransferLedger();
         /** @var array<string, list<RealizedObservance>> $forced Feasts placed on a fixed target date. */
