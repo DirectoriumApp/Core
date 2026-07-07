@@ -1,9 +1,10 @@
 # The rubric-system (edition) model — Core v0.3 (#59, #63, #68, #72, #332)
 
 _How the engine runs the **1954 (Divino Afflatu)**, **1955 (interim / Cum nostra hac aetate)**, and
-**1962 (Rubricae 1960)** rubric systems from one codebase — 1962 being the only one built today. Builds on
-the reserved edition axis ([`edition-governance.md`](edition-governance.md)), the per-edition precedence
-seam ([`precedence-model.md`](precedence-model.md)), and the 3-layer corpus ([`corpus-schema.md`](corpus-schema.md))._
+**1962 (Rubricae 1960)** rubric systems from one codebase — **all three now built and publicly resolvable**
+(the #453 burndown is closed; see Seam 10). Builds on the reserved edition axis
+([`edition-governance.md`](edition-governance.md)), the per-edition precedence seam
+([`precedence-model.md`](precedence-model.md)), and the 3-layer corpus ([`corpus-schema.md`](corpus-schema.md))._
 
 ## The two orthogonal axes
 
@@ -524,9 +525,9 @@ the project rule: cross-check a derived fact against the validated engine before
 field, set from the selected `RubricSystem` via `DayResolver::forEdition()` and defaulting to
 `roman:rubricae-1960`. **No contract-shape change** — the frozen 1.0.0 contract already carried this, so no
 redundant field was added; `edition` *is* the active-system stamp (`output-contract.md`). Locked by
-`MultiSystemContractTest` (the stamp asserted across 1962/1954/1955, the safe default, and the public
-boundary's refusal of an unbuilt edition). The human labels + validity windows are advertised on the Api's
-`/meta`, keyed by this URN.
+`MultiSystemContractTest` (the stamp asserted across 1962/1954/1955, the safe default, and — since Seam 10 —
+the public boundary resolving all three directly). The human labels + validity windows are advertised on the
+Api's `/meta`, keyed by this URN.
 
 ## Seam 8 — regression safety & the multi-system matrix (#72, #73, #332) — DONE
 
@@ -538,6 +539,37 @@ boundary's refusal of an unbuilt edition). The human labels + validity windows a
   Officium agreement fixtures. (Full-year DO sweeps stay the maintainer's live cross-check.)
 - **#332** made the contract's `commemorationLimit` the active edition's class cap (Seam 3), retiring the
   hardcoded `Calendar\CommemorationLimit` static — the last universal-1960 assumption in the contract.
+
+## Seam 10 — the isBuilt flip (Built — #453)
+
+The burndown's final step: with every calendar-level component of the 1954 and 1955 systems built
+(Seams 4–9 — octaves, vigils, the full sanctoral, the privileged temporal octaves, the moveable feasts,
+the Office of the Dead, the Saturday Office of Our Lady), both editions flip `RubricSystem::isBuilt()` to
+`true`. This makes them **publicly resolvable**: `day()`, `contract()`, and `CalendarCatalog::resolver()`
+serve them by name, where they were previously reachable only through `DayResolver::forEdition()`.
+
+- **The guard stays, its meaning narrows.** `CalendarCatalog` still refuses any declared-but-unbuilt
+  system at the public boundary — but with all three current systems built, it no longer fires for them.
+  It stands for the *next* edition (Tridentine, Novus Ordo) to be declared before its data and rules exist.
+  `isBuilt()` remains the single source of truth, read both by the Api `/meta` advertise-filter and by this
+  runtime gate. The tests that asserted the boundary *refused* 1954/1955 are converted to assert it now
+  *resolves* them (`DayFunctionTest`, `MultiSystemContractTest`, the two edition resolution tests).
+- **The Tabella dignity is complete for the universal fixed calendar.** An offline scan of the 1954
+  fixed-date placements finds exactly two same-day Simple-vs-Simple collisions; both are now in the
+  `dignior-simple` set (19 Jan Marius > Canute; 21 Oct Hilarion > Ursula), so the arbitrary id-string
+  tie-break never decides a two-Simple day. Under 1955 the reform abolished the simple office, so the set
+  is inert there (documented in the 1955 `precedence.yaml`). The resolved calendars are byte-identical to
+  before — the change makes both outcomes rule-driven, not lucky (Oct 21 happened to agree alphabetically).
+- **Full-year structural sweep.** `PreConciliarYearSweepTest` resolves every day of five stress-test years
+  (earliest/latest Easter, two leap years, the 1954 anticipated-Sunday year) under each edition, asserting
+  exactly one principal office, a valid colour, and a clean contract stamp — the offline proof that opening
+  the public boundary exposes no latent crash. This is complementary to the pinned Divinum Officium
+  agreement fixture (`HistoricalEditionOracleTest`); the definitive **live full-year DO oracle sweep**
+  across the whole 1954/1955 corpus remains the maintainer's cross-check (the DO Perl checkout does not run
+  on every platform). One residual is tracked: the temporal engine does not yet mint an *anticipated*
+  Sunday, so a rare Saturday-before-early-Septuagesima shows the Saturday Office instead of yielding to it
+  (`known-differences.ndjson`, category `deferred-anticipated-sunday`; the lady tier is already ranked to
+  yield once that observance is built).
 
 ## Data authoring — editions as diffs (#64, #69)
 

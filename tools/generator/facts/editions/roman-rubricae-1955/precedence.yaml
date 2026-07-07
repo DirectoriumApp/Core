@@ -151,11 +151,13 @@ membership:
       - roman:sanctorale:inventio-crucis
       - roman:sanctorale:dedicatio-basilicae-salvatoris
 
-  # The Simples of higher dignity (the two-simples tie-break, #453) — the same set as the 1954
-  # table, carried for symmetry and for the former-semidouble Simples that CAN still collide under
-  # Cum nostra. (For 19 January itself the contest is moot: a former simple is now a mere
-  # commemoration, so neither Marius nor Canute celebrates — the feria or the Saturday Office is
-  # the day, both commemorated.) The full set is completed against the oracle in the sweep.
+  # The Simples of higher dignity (the two-simples tie-break, #453) — INERT under Cum nostra.
+  # The reform abolished the simple office: a former simple is now a mere commemoration, so the
+  # two saints that collide on the 1954 calendar (Marius/Canute on 19 Jan, Hilarion/Ursula on
+  # 21 Oct) are all `commemoratio` here — never routed to this tier. An offline scan of the 1955
+  # fixed-date placements finds NO surviving Simple-vs-Simple occurrence (the former semidoubles
+  # now graded simplex never share a date). The set is kept non-empty (the loader requires >=1 id)
+  # and parallel with the 1954 table only as a structural placeholder; it decides nothing here.
   - name: dignior-simple
     cite: ordo-1954
     ids:

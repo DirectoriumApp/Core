@@ -11,7 +11,6 @@ use Directorium\Core\Edition\RubricSystem;
 use Directorium\Core\Overlay\CalendarCatalog;
 use Directorium\Core\Precedence\DayResolver;
 use Directorium\Core\Precedence\ResolvedYear;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,14 +20,13 @@ use PHPUnit\Framework\TestCase;
  * pre-1955 Ordo (ordo-1954) — the Candlemas asymmetry, the Matthias bissextile, and the
  * common-vigil Saturday-anticipation — and that the whole year resolves cleanly.
  *
- * The full fixed-date sanctoral now lands (Epic #64) — every feast at its cited pre-1955
- * grade, validated day-by-day across 1954 and 1956 against the Divinum Officium Divino
- * Afflatu engine at zero grade discrepancies. The edition is STILL not advertised as built,
- * because the pre-1955 calendar has components beyond the fixed sanctoral that remain
- * deferred (the privileged temporal octaves, the moveable feasts of the Lord and of the
- * BVM, the Office of the Dead, the Saturday Office of Our Lady). So it is exercised here
- * through {@see DayResolver::forEdition()}, and the public {@see CalendarCatalog} boundary
- * refuses it until those land (see docs/design/rubric-system-model.md).
+ * The full fixed-date sanctoral lands with Epic #64 — every feast at its cited pre-1955
+ * grade, validated day-by-day against the Divinum Officium Divino Afflatu engine at zero grade
+ * discrepancies. With the #453 burndown complete (the privileged temporal octaves, the moveable
+ * feasts of the Lord and of the BVM, the Office of the Dead, and the Saturday Office of Our
+ * Lady all built), the edition is now advertised as built: it resolves through the public
+ * {@see CalendarCatalog} boundary as well as {@see DayResolver::forEdition()}, exercised both
+ * ways here (see docs/design/rubric-system-model.md).
  */
 final class DivinoAfflatuResolutionTest extends TestCase
 {
@@ -269,21 +267,23 @@ final class DivinoAfflatuResolutionTest extends TestCase
     }
 
     /**
-     * @dataProvider unbuiltEditions
+     * @dataProvider builtEditions
      */
-    public function testThePublicBoundaryRefusesAnUnbuiltEdition(string $selector): void
+    public function testThePublicBoundaryNowResolvesTheBuiltEditions(string $selector): void
     {
-        // 1954 is declared but not yet built (its calendar is incomplete pending #64) and 1955
-        // has no engine at all (#68), so the public resolver refuses both — even though the
-        // 1954 engine above resolves it directly through forEdition().
-        $this->expectException(InvalidArgumentException::class);
-        (new CalendarCatalog())->resolver(null, $selector);
+        // Since #453 both historical editions are built, so the public CalendarCatalog boundary
+        // resolves them — where it once refused. Candlemas (2 Feb, first class everywhere) is a
+        // stable probe that a real calendar comes back, not an exception.
+        $day = (new CalendarCatalog())->resolver(null, $selector)
+            ->resolveDay(new DateTimeImmutable('1954-02-02', new DateTimeZone('UTC')));
+
+        self::assertSame('roman:sanctorale:purificatio', $day->celebration()[0]->id()->toString());
     }
 
     /**
      * @return array<string, array{string}>
      */
-    public function unbuiltEditions(): array
+    public function builtEditions(): array
     {
         return ['1954 (Divino Afflatu)' => ['1954'], '1955 (interim)' => ['1955']];
     }

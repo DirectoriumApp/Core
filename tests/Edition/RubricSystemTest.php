@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * The rubric-system (edition) selector (#59/#60). Three systems sit on the edition
- * axis; only 1962 is built today, and the default resolves to it.
+ * axis; all three are now built and resolvable (#453), and the default resolves to 1962.
  */
 final class RubricSystemTest extends TestCase
 {
@@ -38,11 +38,13 @@ final class RubricSystemTest extends TestCase
         RubricSystem::fromString('roman:novus-ordo-2002');
     }
 
-    public function testOnlyNineteenSixtyIsBuilt(): void
+    public function testAllThreeSystemsAreBuilt(): void
     {
+        // The #453 burndown flipped 1954 and 1955 from declared to built; the flag stays on
+        // the axis for a future edition (Tridentine, Novus Ordo) declared before its data lands.
         self::assertTrue(RubricSystem::rubricae1960()->isBuilt());
-        self::assertFalse(RubricSystem::divinoAfflatu()->isBuilt());
-        self::assertFalse(RubricSystem::rubricae1955()->isBuilt());
+        self::assertTrue(RubricSystem::divinoAfflatu()->isBuilt());
+        self::assertTrue(RubricSystem::rubricae1955()->isBuilt());
     }
 
     public function testEachSystemCarriesItsCorpusDirectory(): void

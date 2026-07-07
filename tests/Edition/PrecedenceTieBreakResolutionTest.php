@@ -31,6 +31,8 @@ final class PrecedenceTieBreakResolutionTest extends TestCase
 {
     private const MARIUS = 'roman:sanctorale:marius-et-socii';
     private const CANUTE = 'roman:sanctorale:canutus';
+    private const HILARION = 'roman:sanctorale:hilarion';
+    private const URSULA = 'roman:sanctorale:ursula-et-socii';
     private const DEDICATION = 'roman:sanctorale:dedicatio-basilicarum-petri-et-pauli';
 
     private static function resolve(string $urn, string $date): LiturgicalDay
@@ -67,6 +69,18 @@ final class PrecedenceTieBreakResolutionTest extends TestCase
 
         self::assertSame(self::MARIUS, self::celebrationId($day), 'The more worthy Simple is celebrated.');
         self::assertSame('commemoration', self::roleOf($day, self::CANUTE), 'The lesser Simple is commemorated.');
+    }
+
+    public function testTheSecondTwoSimplesDayResolvesByDignityNotAlphabet(): void
+    {
+        // 21 Oct 1954 is a Thursday carrying the calendar's other two-Simple collision: St Hilarion,
+        // Abbot (the day's historic titular) is celebrated and Ss Ursula & Companions commemorated.
+        // The id string happens to agree here ("hilarion" < "ursula-et-socii"); the `dignior-simple`
+        // membership makes the outcome rule-driven, completing the universal fixed-date dignity set.
+        $day = self::resolve('roman:divino-afflatu', '1954-10-21');
+
+        self::assertSame(self::HILARION, self::celebrationId($day), 'The titular Simple is celebrated.');
+        self::assertSame('commemoration', self::roleOf($day, self::URSULA), 'Ss Ursula & Co. are commemorated.');
     }
 
     // --- 2b: greater double yields to a minor / resumed Sunday (the Divino Afflatu elevation) --

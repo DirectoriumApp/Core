@@ -13,7 +13,6 @@ use Directorium\Core\Overlay\CalendarCatalog;
 use Directorium\Core\Precedence\DayResolver;
 use Directorium\Core\Precedence\ResolvedYear;
 use Directorium\Core\Sanctoral\SanctoralObservance;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,11 +23,11 @@ use PHPUnit\Framework\TestCase;
  * privileged commemoration kept over a first-class day's zero cap — and that the whole year
  * resolves cleanly.
  *
- * Like the 1954 engine, 1955 is exercised through {@see DayResolver::forEdition()} and STILL
- * not advertised as built: the interim calendar has deferred components (the retained temporal
- * octaves' casuistry, the moveable feasts of the Lord and BVM, the Office of the Dead), so the
- * public {@see CalendarCatalog} boundary refuses it. The day-by-day cross-check against the
- * Divinum Officium "Reduced - 1955" engine is issue #71.
+ * Like the 1954 engine, 1955 is exercised through {@see DayResolver::forEdition()}; with the
+ * #453 burndown complete (the retained temporal octaves, the moveable feasts of the Lord and
+ * BVM, the Office of the Dead, the Saturday Office of Our Lady all built), it is now advertised
+ * as built and also resolves through the public {@see CalendarCatalog} boundary. The day-by-day
+ * cross-check against the Divinum Officium "Reduced - 1955" engine is issue #71.
  */
 final class CumNostraResolutionTest extends TestCase
 {
@@ -158,11 +157,14 @@ final class CumNostraResolutionTest extends TestCase
         self::assertNotEmpty($lentenFeria, 'the privileged Lenten feria is commemorated over the zero cap');
     }
 
-    public function testThePublicBoundaryStillRefusesTheInterimEdition(): void
+    public function testThePublicBoundaryNowResolvesTheInterimEdition(): void
     {
-        // The 1955 engine resolves through forEdition() above, but the interim calendar is not
-        // yet advertised as built, so day()/contract() refuse it (see the class docblock).
-        $this->expectException(InvalidArgumentException::class);
-        (new CalendarCatalog())->resolver(null, '1955');
+        // Since #453 the interim calendar is advertised as built, so the public CalendarCatalog
+        // boundary resolves it — where it once refused. The Assumption (15 Aug, first class) is a
+        // stable probe that a real calendar comes back.
+        $day = (new CalendarCatalog())->resolver(null, '1955')
+            ->resolveDay(new DateTimeImmutable('1958-08-15', new DateTimeZone('UTC')));
+
+        self::assertSame('roman:sanctorale:assumptio', $day->celebration()[0]->id()->toString());
     }
 }
