@@ -49,13 +49,17 @@ final class Rubrics1954PrecedenceTest extends TestCase
             'a first-class greater Sunday (Palm Sunday)' => [3, self::firstClassSunday()],
             'Epiphany is a Double I class of the Lord' => [7, self::lordFeastFirstClass()],
             'a Double of the I class' => [7, self::dxi()],
-            'a second-class greater Sunday (Sexagesima)' => [9, self::secondClassSunday()],
-            'a Double of the II class' => [10, self::dxii()],
-            'the Holy Name, a feast of the Lord below Double II' => [12, self::lordFeastLower()],
-            'a lesser (per-annum) Sunday' => [13, self::lesserSunday()],
-            'a greater (major) double' => [14, self::maius()],
+            'a 2nd-order temporal octave day (Corpus Christi)' => [8, self::secondOrderOctaveDay()],
+            'a 2nd-order temporal octave day-within (Epiphany)' => [9, self::secondOrderOctaveWithin()],
+            'a second-class greater Sunday (Sexagesima)' => [11, self::secondClassSunday()],
+            'a Double of the II class' => [12, self::dxii()],
+            'the Holy Name, a feast of the Lord below Double II' => [13, self::lordFeastLower()],
+            'a lesser (per-annum) Sunday' => [14, self::lesserSunday()],
+            'a greater (major) double' => [15, self::maius()],
+            'a 3rd-order temporal octave day (Ascension) is a greater double' => [15, self::thirdOrderOctaveDay()],
             'an ordinary double' => [16, self::duplex()],
             'a semidouble' => [17, self::semidouble()],
+            'a 3rd-order temporal octave day-within (Sacred Heart)' => [19, self::thirdOrderOctaveWithin()],
             'a common vigil' => [22, self::commonVigil()],
             'a simple' => [24, self::simple()],
         ];
@@ -120,6 +124,20 @@ final class Rubrics1954PrecedenceTest extends TestCase
         // Unlike 1962 (where a feast of the Lord and a Sunday do not commemorate each other),
         // the pre-1955 rite commemorates the impeded lesser Sunday under the Lord's feast.
         self::assertSame('commemorate', self::outcome(self::lordFeastLower(), self::lesserSunday()));
+    }
+
+    public function testAFeastOfTheLordOutranksAndTransfersACoincidentFirstClassSaint(): void
+    {
+        // On the I-class line the feast of the Lord outranks a I-class feast of a saint (a lower
+        // subOrder on the same ordinal), so a great-lord feast (here the Epiphany) is celebrated
+        // and the coincident Double I saint is transferred — the pre-1955 dignity order (Lord >
+        // saint), matching 1962. This is what keeps Corpus Christi and the Sacred Heart on their
+        // own day (and their temporal octave attached) when a I-class saint falls with them.
+        $lord = self::lordFeastFirstClass();
+        $saint = self::dxi();
+
+        self::assertTrue(self::outranks($lord, $saint), 'a feast of the Lord outranks a I-class saint');
+        self::assertSame('transfer', self::outcome($lord, $saint), 'the coincident I-class saint is transferred');
     }
 
     public function testACommonOctaveIsOmittedUnderADoubleOfTheFirstOrSecondClass(): void
@@ -254,6 +272,50 @@ final class Rubrics1954PrecedenceTest extends TestCase
             4,
             LegacyRank::SIMPLEX,
             'roman:sanctorale:laurentius'
+        );
+    }
+
+    /** A 2nd-order privileged temporal octave DAY (Corpus Christi) — yields only to a Double I. */
+    private static function secondOrderOctaveDay(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:corpus-christi-octave:octave-day',
+            'octave-day',
+            3,
+            Season::PENTECOST
+        );
+    }
+
+    /** A 2nd-order privileged temporal octave DAY-WITHIN (Epiphany) — yields only to a Double I. */
+    private static function secondOrderOctaveWithin(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:epiphany:within-octave:day-2',
+            'within-octave',
+            3,
+            Season::EPIPHANY
+        );
+    }
+
+    /** A 3rd-order privileged temporal octave DAY (the Ascension) — a plain greater double. */
+    private static function thirdOrderOctaveDay(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:ascension-octave:octave-day',
+            'octave-day',
+            3,
+            Season::EASTERTIDE
+        );
+    }
+
+    /** A 3rd-order privileged temporal octave DAY-WITHIN (the Sacred Heart) — sits low. */
+    private static function thirdOrderOctaveWithin(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:sacred-heart-octave:day-2',
+            'within-octave',
+            3,
+            Season::PENTECOST
         );
     }
 

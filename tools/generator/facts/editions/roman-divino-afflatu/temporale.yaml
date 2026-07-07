@@ -1,0 +1,90 @@
+# The 1954 (Divino Afflatu) edition's ADDITIONAL temporal archetypes — the four
+# privileged temporal octaves the pre-1955 rite keeps that 1962 does not (#453).
+#
+# Companion to the base tools/generator/facts/temporale.yaml (1962). The generator
+# joins these onto the base archetypes for this edition's attributes.temporale.ndjson
+# and merges their (edition-invariant) identities into the shared identity.temporale —
+# exactly as an extra edition's sanctoral diff joins the base sanctoral. The base
+# (roman-rubricae-1960) edition declares NONE of these, so TemporalAttributes::has()
+# is false for 1962 and its season-fillers mint no octave: the 1962 golden fixture is
+# byte-identical by construction.
+#
+# THE FOUR OCTAVES (rubric-system-model.md, "Octave inventory", §440-456):
+#   * Privileged 2nd order — Epiphany (Jan 6), Corpus Christi (Easter+60): days-within
+#     a semidouble, octave day a Duplex maius; the octave ALWAYS commemorated, and it
+#     yields only to a Double of the I class (so it is never a free landing for a
+#     transferred lesser feast — the #453 Corpus-octave-skip correctness case).
+#   * Privileged 3rd order — Ascension (Easter+39), Sacred Heart (Easter+68): any feast
+#     above a simple is celebrated within (the day-within yields to it), octave day a
+#     Duplex maius, the octave ALWAYS commemorated — the same behaviour as the Christmas
+#     octave within (also 3rd order), which 1962 already keeps.
+#
+# The season-fillers (ChristmasCycle for Epiphany, Eastertide for Ascension,
+# TimeAfterPentecost for Corpus Christi + Sacred Heart) compute WHICH day of the octave a
+# date is and read the office here, gated on has(); the Latin ordinal grammar ({ord} ->
+# Roman numeral) and the octave-day/day-within date arithmetic stay in PHP. The feast
+# itself is day 1 (minted elsewhere — Epiphany by ChristmasCycle, the three movable feasts
+# by MovableFeasts), so only days 2..7 (dies infra octavam) and the octave day are here.
+#
+# rank is 3 for both kinds (Duplex maius -> III, semiduplex -> III); precedence is carried
+# by the tier (facts/editions/roman-divino-afflatu/precedence.yaml), NOT the numeric rank,
+# and the 1954 temporal rank *display* is itself deferred to the 1962-mapped value (Seam 6).
+# All four octaves are white. Latin titles are transcribed from the public-domain Missale
+# Romanum (mr-1920); the grade and colour cite the St. Lawrence Press pre-1955 Ordo (ordo-1954).
+
+archetypes:
+  # ---- Epiphany octave (2nd order) — Jan 7-13 ------------------------------
+  - key: epiphany-within-octave
+    kind: within-octave
+    name: "De {ord} die infra Octavam Epiphaniae"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: epiphany-octave-day
+    kind: octave-day
+    name: "In Octava Epiphaniae"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+
+  # ---- Ascension octave (3rd order) — Easter+40 .. +46 ---------------------
+  - key: ascension-within-octave
+    kind: within-octave
+    name: "De {ord} die infra Octavam Ascensionis"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: ascension-octave-day
+    kind: octave-day
+    name: "In Octava Ascensionis"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+
+  # ---- Corpus Christi octave (2nd order) — Easter+61 .. +67 ----------------
+  - key: corpus-christi-within-octave
+    kind: within-octave
+    name: "De {ord} die infra Octavam Corporis Christi"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: corpus-christi-octave-day
+    kind: octave-day
+    name: "In Octava Corporis Christi"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+
+  # ---- Sacred Heart octave (3rd order) — Easter+69 .. +75 ------------------
+  - key: sacred-heart-within-octave
+    kind: within-octave
+    name: "De {ord} die infra Octavam Sacratissimi Cordis Iesu"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: sacred-heart-octave-day
+    kind: octave-day
+    name: "In Octava Sacratissimi Cordis Iesu"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }

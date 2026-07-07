@@ -42,6 +42,14 @@ function byId(a, b) {
   return a.id > b.id ? 1 : 0;
 }
 
+/** Sort temporal records by their `archetype` primary key in code-unit order. */
+function byArchetype(a, b) {
+  if (a.archetype < b.archetype) {
+    return -1;
+  }
+  return a.archetype > b.archetype ? 1 : 0;
+}
+
 /**
  * Discover and transform every particular-calendar overlay in facts/overlays
  * (Core #76), one per `<slug>.yaml`, slug-sorted for a deterministic build. Returns
@@ -145,7 +153,30 @@ export function build(outDir = DEFAULT_OUT) {
     const precedence = existsSync(precedenceFile)
       ? transformPrecedence(loadYaml(precedenceFile), e.dir)
       : null;
-    return { dir: e.dir, base: e.base, attributes, placement, octaveIdentity: octaves.identity, precedence };
+    // The edition's TEMPORAL attributes (Core v0.3.x — the 1954 privileged temporal octaves):
+    // the base archetypes (the deferred "1962-mapped rank" display, Seam 6b) plus any ADDITIONAL
+    // archetypes the edition declares in its own facts/editions/<dir>/temporale.yaml (Epiphany,
+    // Corpus Christi, Ascension, Sacred Heart octaves for 1954). An edition with no such file
+    // reuses the base rows verbatim, so EVERY edition ships its own attributes.temporale.ndjson
+    // and the PHP fillers always read their own edition — 1962/1955 stay byte-identical because
+    // the base pass, and thus the base file, is untouched. The extra archetypes' identity is
+    // edition-invariant and merged into the shared temporal identity below (deduped, like the
+    // sanctoral octaves).
+    const temporaleFile = join(FACTS_DIR, 'editions', e.dir, 'temporale.yaml');
+    const extraTemporale = existsSync(temporaleFile)
+      ? transformTemporale(loadYaml(temporaleFile).archetypes, e.dir)
+      : { identity: [], attributes: [] };
+    const temporaleAttributes = [...temporale.attributes, ...extraTemporale.attributes].sort(byArchetype);
+    return {
+      dir: e.dir,
+      base: e.base,
+      attributes,
+      placement,
+      octaveIdentity: octaves.identity,
+      precedence,
+      temporaleAttributes,
+      temporaleIdentity: extraTemporale.identity,
+    };
   });
 
   // Octave identities are edition-invariant (the Octave Day of the Assumption is the same
@@ -172,6 +203,29 @@ export function build(outDir = DEFAULT_OUT) {
     }
   }
   identity.sort(byId);
+
+  // Per-edition temporal ARCHETYPE identities (the 1954 privileged temporal octaves) are
+  // likewise edition-invariant — the Octave Day of the Epiphany is the same observance in any
+  // edition that keeps it — so they merge, deduped, into the shared temporal identity. The base
+  // (1962) attributes reference none of them, so the union grows but 1962 resolution (and its
+  // golden fixture) is unmoved. A divergent identity for the same archetype key is an authoring
+  // error, not a silent first-wins: fail closed, exactly as the sanctoral octave merge does.
+  const temporaleIdentityByKey = new Map(temporale.identity.map((record) => [record.archetype, record]));
+  for (const ed of extraEditions) {
+    for (const record of ed.temporaleIdentity) {
+      const existing = temporaleIdentityByKey.get(record.archetype);
+      if (existing === undefined) {
+        temporaleIdentityByKey.set(record.archetype, record);
+        temporale.identity.push(record);
+      } else if (JSON.stringify(existing) !== JSON.stringify(record)) {
+        throw new Error(
+          `temporal identity "${record.archetype}" differs between editions; a shared temporal ` +
+            'archetype identity must be identical across editions (it is edition-invariant)',
+        );
+      }
+    }
+  }
+  temporale.identity.sort(byArchetype);
 
   // Orphan-identity gate: the shared identity is the cross-edition UNION, but every identity
   // must be PLACED by at least one edition. An identity no edition places is a dangling record
@@ -215,6 +269,7 @@ export function build(outDir = DEFAULT_OUT) {
     ...disciplines.flatMap((d) => validateAll(validators['fasting-rules'], d.rules, `discipline:${d.key}`)),
     ...extraEditions.flatMap((ed) => [
       ...validateAll(validators['attributes.sanctorale'], ed.attributes, `attributes.sanctorale:${ed.dir}`),
+      ...validateAll(validators['attributes.temporale'], ed.temporaleAttributes, `attributes.temporale:${ed.dir}`),
       ...validateAll(validators['placement.sanctorale'], ed.placement, `placement.sanctorale:${ed.dir}`),
       ...(ed.precedence
         ? [
@@ -243,6 +298,7 @@ export function build(outDir = DEFAULT_OUT) {
       ...overlays.map((o) => ({ shape: `overlay:${o.slug}`, records: o.provenance })),
       ...extraEditions.flatMap((ed) => [
         { shape: `attributes.sanctorale:${ed.dir}`, records: ed.attributes },
+        { shape: `attributes.temporale:${ed.dir}`, records: ed.temporaleAttributes },
         { shape: `placement.sanctorale:${ed.dir}`, records: ed.placement },
       ]),
     ],
@@ -364,6 +420,11 @@ export function build(outDir = DEFAULT_OUT) {
       text: toNdjson(ed.placement),
       records: ed.placement.length,
       primaryKey: 'id',
+    };
+    outputs[`editions/${ed.dir}/attributes.temporale.ndjson`] = {
+      text: toNdjson(ed.temporaleAttributes),
+      records: ed.temporaleAttributes.length,
+      primaryKey: 'archetype',
     };
     if (ed.precedence) {
       outputs[`editions/${ed.dir}/precedence-tiers.ndjson`] = {

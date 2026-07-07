@@ -271,11 +271,12 @@ and `DivinoAfflatuResolutionTest` (dated outcomes over the real corpus). As-buil
   (the sparse sanctoral diff is completed by the #64 burndown), so the edition is not advertised: a new
   `CalendarCatalog` boundary guard refuses `day()/contract('1954')` until #64, while tests exercise the engine
   directly through `DayResolver::forEdition()`. The 1962 golden fixture (1583–2200) is byte-identical.
-- **Emit / defer (100%-accuracy discipline).** DEFERRED, per the research's CONFIRMED-vs-DEFERRED split, and
-  NOT guessed: the privileged 2nd/3rd-order temporal octaves (Epiphany/Corpus Christi/Ascension/Sacred Heart,
-  not yet minted for 1954), the fine per-day-type commemoration membership, the full concurrence per-cell
-  table, the DA temporal-attribute rank *display* (1954 temporal offices currently carry the 1962-mapped rank;
-  precedence is correct via the tier order), and the full-year oracle sweep (#64 + the #73 CI matrix). The
+- **Emit / defer (100%-accuracy discipline).** The privileged 2nd/3rd-order temporal octaves
+  (Epiphany/Corpus Christi/Ascension/Sacred Heart) are now MINTED for 1954 (#453 — see Seam 7). Still
+  DEFERRED, per the research's CONFIRMED-vs-DEFERRED split and NOT guessed: the fine per-day-type
+  commemoration membership, the full concurrence per-cell table, the DA temporal-attribute rank *display*
+  (1954 temporal offices — the octaves included — currently carry the 1962-mapped rank; precedence is
+  correct via the tier order), and the full-year oracle sweep (#64 + the #73 CI matrix). The
   1952-Matthias-on-Quinquagesima edge the research flagged UNVERIFIED is deliberately not frozen as a test.
 
 ## Seam 6b — the full 1954 sanctoral (Built — #64)
@@ -310,18 +311,72 @@ Brindisi's universal feast (so 1954 keeps St Praxedes on 21 July).
   the full-year DO sweep is a maintainer cross-check formalised with the #73 matrix. The
   `vigilOf`/`octaveOf` **co-placement gate** (`checkCoPlacement`) is now on: every vigil/octave is
   co-placed with its feast in its edition.
-- **`isBuilt` stays false — deliberately.** #64 completes the *fixed sanctoral*, but the pre-1955
-  calendar has components beyond it that remain deferred, so the edition is still not advertised (the
-  `CalendarCatalog` boundary refuses `day('1954')`): the **privileged temporal octaves** (Epiphany,
-  Corpus Christi, Ascension, Sacred Heart — the residual DO diffs, e.g. a transfer that must skip the
-  Corpus Christi octave, all trace to these), the **moveable feasts** (the Friday-in-Passion-Week
-  Seven Sorrows; the Solemnity/Patronage of St Joseph), the **sanctoral octave DAYS** not yet
-  materialised (the comites-Christi octaves Jan 2–4; the Octave of All Saints Nov 8; and the
-  **Immaculate Conception** common octave Dec 9–15, whose days-within are impeded by St Damasus I and
-  St Lucy — see the `octaves.yaml` deferred header), and the **Saturday Office of Our Lady**. Each is
-  a tracked follow-up (#453). (The **Office of the Dead** — All Souls, Nov 2 — has since landed in all
-  three editions with #453, retiring the `omnium-sanctorum` duplicate that had masked it; that correction
-  moved the 1962 golden fixture on Nov 1–3, and the remaining deferrals keep it otherwise byte-identical.)
+- **`isBuilt` stays false — deliberately (fewer opens now).** #64 completed the *fixed sanctoral*;
+  the #453 burndown has since landed the **Office of the Dead** (All Souls, Nov 2, all three editions —
+  retiring the `omnium-sanctorum` duplicate that had masked it; that correction moved the 1962 golden on
+  Nov 1–3, the rest byte-identical), the **sanctoral octave DAYS** (the comites-Christi octaves Jan 2–4,
+  the Octave of All Saints Nov 8, the Immaculate Conception octave Dec 9–15), and the four **privileged
+  TEMPORAL octaves** (Epiphany, Corpus Christi, Ascension, Sacred Heart — see Seam 7; the residual DO
+  diffs, e.g. a transfer that must skip the Corpus Christi octave, all traced to these). Still deferred,
+  so the edition is not yet advertised (the `CalendarCatalog` boundary refuses `day('1954')`): the
+  **moveable feasts of the Lord/BVM** (the Friday-in-Passion-Week Seven Sorrows; the Solemnity/Patronage
+  of St Joseph) and the **Saturday Office of Our Lady**. Each is a tracked #453 follow-up; `isBuilt`
+  flips when the last lands.
+
+## Seam 7 — the privileged temporal octaves (Built — #453)
+
+The four octaves the pre-1955 rite keeps that 1962 dropped — **Epiphany** and **Corpus Christi** (2nd
+order), the **Ascension** and the **Sacred Heart** (3rd order) — are minted the SAME way 1962 mints its
+Christmas/Easter/Pentecost octaves: by the temporal season-fillers, not the sanctoral `octaves.yaml` data
+path (that materialises the fixed-date sanctoral octaves — Seam 4). Making the temporal engine edition-aware
+is the one architectural lift of this slice.
+
+- **Data, not edition branches.** The extra archetypes live in `facts/editions/roman-divino-afflatu/temporale.yaml`
+  — eight rows, a within-octave + an octave-day per octave, rank 3, white, the Latin title cited `mr-1920` and
+  the grade/colour cited `ordo-1954`. The generator joins them onto the base rows for the DA edition's own
+  `attributes.temporale.ndjson` and merges their edition-invariant identities into the shared
+  `identity.temporale` (deduped, fail-closed, exactly as the sanctoral octaves merge). Every edition now ships
+  its own `attributes.temporale`, so a filler always reads its own edition.
+- **The `has()` gate = byte-identical by construction.** `TemporalAttributes` gained a `?string $editionDir`
+  and `has($archetype)`; the resolver threads its `corpusDir` into every filler (`forYear($year, $corpus,
+  $editionDir)`). A filler mints an octave office ONLY where `has()` is true, and the base (1962) edition
+  declares none of the eight archetypes — so it mints nothing extra and its golden fixture is unmoved (proven,
+  not merely gated). `ChristmasCycle` mints the Epiphany octave (Jan 7–13), `Eastertide` the Ascension octave
+  (Easter+40..+46), `TimeAfterPentecost` the Corpus Christi (Easter+61..+67) and Sacred Heart (Easter+69..+75)
+  octaves. The feast is day 1 (minted elsewhere), so a filler covers days 2..7 (dies infra octavam, `{ord}` →
+  Roman numeral) + the octave day; a **Sunday within is never overwritten** with a numbered day-within — it
+  keeps its own office (the Holy Family Sunday, the Sunday after the Ascension, the 2nd/3rd Sundays after
+  Pentecost) and the octave is commemorated under it.
+- **Precedence = tier altitude, and it carries the #453 correctness.** Temporal offices have no legacy grade,
+  so `Rubrics1954Precedence::tierOf` routes the octaves by id BEFORE the grade ladder. The **2nd-order** octave
+  (Epiphany, Corpus Christi) yields ONLY to a Double of the I class — octave day just below `double-i-class`,
+  days within just under that — so both sit ABOVE `double-ii-class`. The **3rd-order** octave (Ascension,
+  Sacred Heart) sits low: its days within beside the Christmas octave within (any feast above a simple is
+  celebrated within), its octave day a plain greater double. Every octave is **always commemorated** —
+  emergent, since `isOctaveOmitted` only ever omits a *sanctoral* octave loser, so a temporal-octave loser
+  falls through to `commemorate()`. That 2nd-vs-3rd altitude split is exactly what makes the load-bearing case
+  come out right: a Double II class feast transferred into the Corpus octave (the Queenship of the BVM, 31 May
+  1956, impeded by Corpus) cannot land on any 2nd-order Corpus day (not a free day), floats past 1–7 June and
+  the Sacred Heart (8 June), and lands on **9 June** — the first Sacred Heart 3rd-order day-within, which
+  yields to it. "9 June, not 1 June" (`TemporalOctaveResolutionTest`). This settles the reserved-`gap-11`
+  tension in the DA `precedence.yaml`: the old placeholder put the 2nd-order within *below* Double II, which
+  would have landed the transfer on 1 June (wrong); the days within sit *above* Double II, per the octave
+  inventory (§444).
+- **A coupled fix — the feast of the Lord keeps its own day (dignity subOrder).** A privileged octave is
+  minted from the fixed Easter offset, so if its ANCHOR feast (Corpus Christi / the Sacred Heart) were itself
+  transferred off its natural day, the octave would detach — the feast would commemorate day-2 of its own
+  octave on its own celebration day. That surfaced a pre-existing DA gap: a `great-lord` feast of the Lord and
+  a I-class *saint* shared the `double-i-class` tier, so a coincidence (Corpus Christi ∥ St John the Baptist on
+  24 Jun when Easter is 25 Apr, e.g. 2038; the Sacred Heart ∥ the Precious Blood on 1 Jul, e.g. 2011) fell to
+  an arbitrary id-string tie-break that wrongly transferred the *feast of the Lord*. The pre-1955 Tabella (and
+  1962) rank the I class by dignity — Lord > BVM > saint — so `great-lord` now sits at the I-class ordinal with
+  a lower `subOrder` than `double-i-class` (`PrecedenceTier` already modelled exactly this: "a feast of the Lord
+  before a feast of a saint on the same line"). The saint is transferred, the feast of the Lord keeps its day,
+  and the octave stays attached. 1962 is untouched (DA-only precedence).
+- **Still deferred (not guessed).** A proper `Dominica infra Octavam …` Sunday office for each octave (the
+  Sunday keeps its existing office instead); the rare Jan-13-on-a-Sunday octave-day-vs-Holy-Family occurrence
+  (1952/57/63/74/80); and the DA temporal-attribute rank *display* (the octaves carry the 1962-mapped rank 3;
+  precedence is tier-driven). These fall to the full-year DA oracle sweep (the #453 wrap / #73 matrix).
 
 ## Seam 6a — 1955 precedence rules (Built — #70; validated — #71)
 

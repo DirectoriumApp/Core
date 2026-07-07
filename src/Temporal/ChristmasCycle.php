@@ -6,6 +6,7 @@ namespace Directorium\Core\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
+use Directorium\Core\Corpus\Corpus;
 use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 
@@ -59,7 +60,7 @@ final class ChristmasCycle
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
-    private function __construct(int $year)
+    private function __construct(int $year, ?Corpus $corpus = null, ?string $editionDir = null)
     {
         if ($year < Computus::GREGORIAN_REFORM_YEAR) {
             throw new InvalidArgumentException(sprintf(
@@ -69,7 +70,7 @@ final class ChristmasCycle
             ));
         }
 
-        $this->attributes = TemporalAttributes::default();
+        $this->attributes = new TemporalAttributes($corpus, $editionDir);
         $this->year = $year;
         $this->firstSunday = self::firstSundayOfAdvent($year);
         $this->christmas = TemporalCalendar::utcDate($year, 12, 25);
@@ -92,9 +93,9 @@ final class ChristmasCycle
         }
     }
 
-    public static function forYear(int $year): self
+    public static function forYear(int $year, ?Corpus $corpus = null, ?string $editionDir = null): self
     {
-        return new self($year);
+        return new self($year, $corpus, $editionDir);
     }
 
     /**
@@ -290,6 +291,31 @@ final class ChristmasCycle
 
     private function classifyAfterEpiphany(DateTimeImmutable $date): TemporalObservance
     {
+        // The 1954 privileged octave of the Epiphany (2nd order): Jan 7-13, the octave day on
+        // Jan 13 (Epiphany + 7). The octave day is tested before the day-within so that a year
+        // in which 13 Jan is a Sunday still yields the octave day; a day within is minted only on
+        // a non-Sunday, so the Sunday within keeps its office (the first Sunday after the
+        // Epiphany, over which the Holy Family is laid — MovableFeasts) and the octave is
+        // commemorated. The base (1962) edition declares no such archetype, so has() is false and
+        // the original green Sunday/feria classification below runs unchanged.
+        $dayOfOctave = TemporalCalendar::daysBetween($this->epiphany, $date) + 1; // Epiphany = day 1
+        if ($dayOfOctave === 8 && $this->attributes->has('epiphany-octave-day')) {
+            return $this->mint('roman:temporale:epiphany:octave-day', Season::epiphany(), 'epiphany-octave-day', $date);
+        }
+        if (
+            $dayOfOctave >= 2 && $dayOfOctave <= 7
+            && !TemporalCalendar::isSunday($date)
+            && $this->attributes->has('epiphany-within-octave')
+        ) {
+            return $this->mint(
+                'roman:temporale:epiphany:within-octave:day-' . $dayOfOctave,
+                Season::epiphany(),
+                'epiphany-within-octave',
+                $date,
+                $dayOfOctave
+            );
+        }
+
         if (TemporalCalendar::isSunday($date)) {
             $n = intdiv(TemporalCalendar::daysBetween($this->firstSundayAfterEpiphany, $date), 7) + 1;
 

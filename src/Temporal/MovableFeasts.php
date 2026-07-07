@@ -6,6 +6,7 @@ namespace Directorium\Core\Temporal;
 
 use DateInterval;
 use DateTimeImmutable;
+use Directorium\Core\Corpus\Corpus;
 use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 use LogicException;
@@ -52,7 +53,7 @@ final class MovableFeasts
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $feasts;
 
-    private function __construct(int $year)
+    private function __construct(int $year, ?Corpus $corpus = null, ?string $editionDir = null)
     {
         if ($year < Computus::GREGORIAN_REFORM_YEAR) {
             throw new InvalidArgumentException(sprintf(
@@ -62,7 +63,7 @@ final class MovableFeasts
             ));
         }
 
-        $this->attributes = TemporalAttributes::default();
+        $this->attributes = new TemporalAttributes($corpus, $editionDir);
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->trinitySunday = $skeleton->date('trinity-sunday');
@@ -75,9 +76,9 @@ final class MovableFeasts
         $this->feasts = $this->build();
     }
 
-    public static function forYear(int $year): self
+    public static function forYear(int $year, ?Corpus $corpus = null, ?string $editionDir = null): self
     {
-        return new self($year);
+        return new self($year, $corpus, $editionDir);
     }
 
     public function year(): int
