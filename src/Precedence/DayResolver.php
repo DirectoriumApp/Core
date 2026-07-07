@@ -25,6 +25,7 @@ use Directorium\Core\Temporal\Eastertide;
 use Directorium\Core\Temporal\HolyWeek;
 use Directorium\Core\Temporal\LentenCycle;
 use Directorium\Core\Temporal\MovableFeasts;
+use Directorium\Core\Temporal\SaturdayOfOurLady;
 use Directorium\Core\Temporal\TemporalCalendar;
 use Directorium\Core\Temporal\TemporalObservance;
 use Directorium\Core\Temporal\TimeAfterPentecost;
@@ -176,6 +177,7 @@ final class DayResolver
             ChristmasCycle::forYear($year, $this->corpus, $this->editionDir),
         ];
         $movable = MovableFeasts::forYear($year, $this->corpus, $this->editionDir);
+        $saturdayOfOurLady = SaturdayOfOurLady::forYear($year, $this->corpus, $this->editionDir);
         $sanctoral = SanctoralCalendar::forYear(
             $year,
             $this->sanctoralData,
@@ -197,7 +199,14 @@ final class DayResolver
             $context = PrecedenceContext::of($date, $holyWeek->isTriduum($date));
 
             $temporalOffice = $this->temporalOffice($temporal, $date);
-            $candidates = $this->gather($temporalOffice, $movable, $sanctoral, $forced[$key] ?? [], $date);
+            $candidates = $this->gather(
+                $temporalOffice,
+                $movable,
+                $saturdayOfOurLady,
+                $sanctoral,
+                $forced[$key] ?? [],
+                $date
+            );
             $candidates = $this->sortByTier($candidates, $context);
 
             $candidates = $this->admitTransferClaimant($candidates, $ledger, $context);
@@ -236,6 +245,7 @@ final class DayResolver
     private function gather(
         ?TemporalObservance $temporalOffice,
         MovableFeasts $movable,
+        SaturdayOfOurLady $saturdayOfOurLady,
         SanctoralCalendar $sanctoral,
         array $forcedToday,
         DateTimeImmutable $date
@@ -247,6 +257,13 @@ final class DayResolver
         $movableFeast = $movable->on($date);
         if ($movableFeast !== null) {
             $candidates[] = $movableFeast;
+        }
+        // The votive Office of Our Lady on a free Saturday (#453): an edition-gated overlay
+        // (1954/1955 only), it competes as an ordinary candidate — winning a free Saturday
+        // over a Simple / feria, yielding (dropped) to any Semidouble-or-higher.
+        $ladyOffice = $saturdayOfOurLady->on($date);
+        if ($ladyOffice !== null) {
+            $candidates[] = $ladyOffice;
         }
         foreach ($sanctoral->on($date) as $office) {
             $candidates[] = $office;

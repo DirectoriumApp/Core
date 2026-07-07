@@ -61,6 +61,7 @@
 {"archetype":"sacred-heart","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sacratissimi Cordis Iesu"}}
 {"archetype":"sacred-heart-octave-day","cites":{"names.la":"mr-1920"},"kind":"octave-day","names":{"la":"In Octava Sacratissimi Cordis Iesu"}}
 {"archetype":"sacred-heart-within-octave","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"De {ord} die infra Octavam Sacratissimi Cordis Iesu"}}
+{"archetype":"sancta-maria-sabbato","cites":{"names.la":"mr-1920"},"kind":"lady-on-saturday","names":{"la":"Sanctae Mariae in Sabbato"}}
 {"archetype":"septuagesima-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Septuagesimae"}}
 {"archetype":"septuagesima-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Septuagesima"}}
 {"archetype":"seven-sorrows","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"Septem Dolorum Beatae Mariae Virginis"}}

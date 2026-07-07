@@ -157,6 +157,15 @@ final class Rubrics1955Precedence implements PrecedenceRules
             return $this->table->tier('lord-mystery');
         }
 
+        // The votive Office of Our Lady on a free Saturday (#453), retained by Cum nostra, is
+        // minted on the temporal path (no legacy grade): route it by KIND before the grade ladder,
+        // to its own tier ABOVE the Simple (a coincident Simple — now a commemoration — is
+        // commemorated under it). It yields to every feast above a simple and every privileged
+        // feria / vigil; a displaced lady office is DROPPED, not commemorated (decideOccurrence).
+        if ($kind === ObservanceKind::LADY_ON_SATURDAY) {
+            return $this->table->tier('lady-on-saturday');
+        }
+
         // The sanctoral grade ladder, by legacy token. Cum nostra suppressed all sanctoral
         // octaves, so no `octaveOf` record survives in the 1955 data to reach these tiers; a
         // retained common vigil carries `vigilia`, and the reduced grades resolve as below.
@@ -192,6 +201,13 @@ final class Rubrics1955Precedence implements PrecedenceRules
             return $this->table->tier('common-vigil');
         }
         if ($grade === LegacyRank::SIMPLEX) {
+            // Two Simples on one day: the more worthy by the general Table of Precedence is
+            // celebrated (the `dignior-simple` tier, above a plain Simple) and the other
+            // commemorated — instead of the resolver's arbitrary id-string tie-break (#453).
+            if ($this->table->isMember('dignior-simple', $id)) {
+                return $this->table->tier('dignior-simple');
+            }
+
             return $this->table->tier('simple');
         }
         // A former simple reduced to a bare commemoration (Title II.21): it never celebrates,
@@ -204,9 +220,6 @@ final class Rubrics1955Precedence implements PrecedenceRules
         // it sits below the feasts that displace it.
         if ($this->isChristmasOctaveWithin($id)) {
             return $this->table->tier('christmas-octave-within');
-        }
-        if ($kind === ObservanceKind::LADY_ON_SATURDAY) {
-            return $this->table->tier('lady-on-saturday');
         }
         if ($this->isFeriaLike($kind)) {
             return $this->feriaTier($observance);
@@ -307,6 +320,17 @@ final class Rubrics1955Precedence implements PrecedenceRules
             return [OccurrenceOutcome::omit(), ResolutionReason::cited(
                 'cn-ordinary-feria',
                 'omitted: an ordinary feria yields to the feast without a commemoration',
+                'rg-da'
+            )];
+        }
+
+        // A displaced votive Office of Our Lady on Saturday is DROPPED, not commemorated: it is
+        // not a feast of the saints of the day, so when a feast above a simple — or a privileged
+        // feria / vigil / Ember day — takes the Saturday, the lady office simply yields (#453).
+        if ($loser->kind()->value() === ObservanceKind::LADY_ON_SATURDAY) {
+            return [OccurrenceOutcome::omit(), ResolutionReason::cited(
+                'cn-lady-on-saturday-dropped',
+                'omitted: the votive Office of Our Lady on Saturday yields without a commemoration',
                 'rg-da'
             )];
         }

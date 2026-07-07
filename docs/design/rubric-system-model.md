@@ -464,6 +464,60 @@ deferred temporal / Office-of-the-Dead categories are shared with the 1954 engin
 the public `CalendarCatalog` boundary refuses `day('1955')` until the deferred casuistry lands. The 1962
 golden fixture is byte-identical throughout.
 
+## Seam 9 — the Saturday Office of Our Lady + the two-simples tie-break (Built — #453)
+
+Two pre-1955 items the 1962 rubrics dropped, built together as the last content seam before the `isBuilt`
+flip.
+
+**The Office of Our Lady on a free Saturday** (*Officium Sanctae Mariae in Sabbato*) — a white votive office
+of the *ritus simplex*, the whole ferial Saturday Office said *of Our Lady*. It is NOT the Little Office of
+the BVM (a separate devotional cursus). Modelled exactly like the moveable feasts of Seam 8: an
+edition-gated overlay minted by a new filler `src/Temporal/SaturdayOfOurLady.php`, gated on
+`TemporalAttributes::has('sancta-maria-sabbato')`, so 1962 (which declares no such archetype) is unmoved by
+construction. Id `roman:sanctorale:sancta-maria-sabbato` (Marian, so the sanctoral namespace), archetype in
+`facts/editions/roman-divino-afflatu/temporale.yaml`; 1955 inherits it through `deriveCumNostra1955Temporale`
+(its kind is neither a within-octave nor an octave-day, so it survives the octave filter).
+
+- **Seasonal eligibility is computed by the filler; the per-day contest is left to precedence.** The Office
+  is *said* on any Saturday whose office would otherwise be at most a Simple or the ordinary (non-privileged)
+  feria, EXCLUDING three seasons the filler recognises: **Advent** (the First Sunday of Advent — reusing the
+  engine's own `ChristmasCycle::firstSundayOfAdvent` — through 23 December), the **Christmas-vigil →
+  Epiphany-octave block** (24 December – 13 January, a civil-date gate — the one place precedence cannot help,
+  since the early-January comites-Christi *simple* octave days would otherwise be outranked by the lady
+  office), and **Lent & Passiontide** (Ash Wednesday – Holy Saturday). **Pre-Lent (Septuagesima) Saturdays are
+  NOT excluded** (their ferias are ordinary, not privileged). Ember Saturdays, vigil Saturdays, and
+  semidouble-plus octave-day Saturdays need no seasonal carve-out: their higher office simply beats the lady
+  office at precedence.
+- **Precedence tier (`lady-on-saturday`, ordinal 23 in both editions).** ABOVE the Simple (24) and the
+  ordinary feria (27), BELOW the common vigil (22) and everything above it. So on a free Saturday the Office
+  is the day and a coincident Simple is **commemorated** under it; it yields — **dropped, NOT commemorated**
+  (a votive office is not a feast of the saints of the day) — to any Semidouble-or-higher and to every
+  privileged feria / vigil / Ember day. The kind is routed by identity BEFORE the grade ladder (it is minted
+  on the temporal path, so it carries no legacy grade), and a new branch in `decideOccurrence` omits a losing
+  lady office. **1955 keeps MORE free Saturdays than 1954** — the octaves *Cum nostra* collapsed (Assumption,
+  Corpus, Sacred Heart, All Saints, Ss Peter & Paul, Ascension, the common octaves) free their Saturdays,
+  which the Office then takes; the tier position and rubric are otherwise identical to 1954.
+
+**The two-simples tie-break (2a).** When two Simples occur on one day the *dignior* by the general Table of
+Precedence is celebrated and the other commemorated (Rubr. Gen., *De occurrentia* — *"quod dignius est,
+celebratur; alterum commemoratur"*). The grade-tier engine cannot read that dignity off the grade, and the
+resolver's default same-tier tie-break is the arbitrary id string — which, for 19 January, wrongly preferred
+`canutus` over `marius-et-socii`. Modelled as data: a `dignior-simple` tier (line 24, **subOrder 0**, above the
+plain Simple at **subOrder 1**) selected by a `dignior-simple` membership set, seeded with
+`roman:sanctorale:marius-et-socii` (Ss Marius, Martha, Audifax & Abachum, the older Roman martyrs, over St
+Canute). Only the named collisions change; the full Tabella dignity is completed against the oracle in the
+`isBuilt` sweep. On a free Saturday of 19 January (e.g. 1952) the point is moot — the lady Office is the day
+and both Simples are commemorated.
+
+**The greater-double-vs-Sunday non-change (2b).** A three-scholar fact sheet claimed the Dedication of Ss
+Peter & Paul (a *Duplex maius*, 18 November) should take a coincident Sunday — but that is the Tridentine /
+1960 rule. Under the **Divino Afflatu Sunday elevation** a minor (per-annum) Sunday, *resumed or not*, yields
+only to a Double of the I/II class, so it OUTRANKS a greater double. The existing engine (validated against
+`ordo-1954`) already resolves 18 November 1956 to the resumed Sunday after the Epiphany with the Dedication
+commemorated, in both 1954 and 1955 — so **no code change was made for 2b**; the correct behaviour is locked
+by a regression test. (Resumption changes the Sunday's *texts*, not its rank.) This is a worked example of
+the project rule: cross-check a derived fact against the validated engine before implementing it.
+
 ## Seam 7 — stamp the active rubric system into the contract (#74) — DONE
 
 `Provenance.edition` already carries the edition URN and the contract serialises it as the top-level `edition`

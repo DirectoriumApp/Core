@@ -2,7 +2,7 @@
 # so the build is reproducible: datestamp + serial (bump the serial on a re-cut of
 # the same day). No edition token here — the editions are named below and keyed into
 # the output tree.
-corpusVersion: "1962-2026-07-07.1"
+corpusVersion: "1962-2026-07-07.2"
 
 # `edition` is the BASE edition (the fullest, best-sourced dataset the others are
 # authored as diffs from). It is built exactly as before — its output is byte-stable.

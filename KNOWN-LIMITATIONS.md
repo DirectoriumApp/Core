@@ -67,6 +67,31 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
     display text pinned to the standard pattern, not transcribed from a scanned 1920 *typica*; it does not
     affect grade, date, colour, or precedence. As for the privileged octaves, the Sunday within the octave
     keeps its own office and the octave's *Dominica infra Octavam* commemoration on that Sunday is not modelled.
+- **Pre-1955 Saturday Office of Our Lady + the two-simples tie-break (Divino Afflatu 1954 / Cum nostra 1955,
+  #453):** the votive *Officium Sanctae Mariae in Sabbato* is built on free Saturdays, with a few deliberate
+  simplifications to pin against the full-year Divino-Afflatu oracle sweep before the fixture is frozen:
+  - **Vigil roster drives exclusion by the data, not a list:** a Saturday carrying a real vigil or Ember day
+    excludes the Office because that higher office beats the lady office at precedence — so the exclusion is
+    correct for whatever the corpus marks as a vigil/Ember day, never a hardcoded roster. The precise 1954
+    vigil roster and the *Cum nostra* **retained**-vigil list are inherited from the sanctoral data, not
+    re-asserted here; a residual vigil-set difference would surface a wrong Saturday in the oracle sweep.
+  - **1955 Epiphany-octave suppression:** *Cum nostra* retained only the Christmas/Easter/Pentecost octaves, so
+    the Epiphany octave is gone in 1955 — but the Saturday Office's Christmas → Epiphany exclusion is a single
+    civil-date gate (24 Dec – 13 Jan) shared by both editions, modelling the block as occupied. Whether a
+    specific early-January 1955 Saturday is instead free is not distinguished; to be checked in the sweep.
+  - **Anticipated Sunday (a temporal-engine gap the built office surfaces):** when an early Septuagesima
+    squeezes out a Sunday after the Epiphany, the pre-1955 rite *anticipates* that Sunday onto the free Saturday
+    before Septuagesima (e.g. the VI Sunday after the Epiphany on 13 Feb 1954). The temporal engine does not yet
+    mint an anticipated Sunday, so that Saturday looks free and the lady office — correctly ranked *below* a
+    semidouble — takes it. Rare; deferred to the temporal-engine scope, where an anticipated-Sunday observance
+    will make the lady office yield automatically (no change needed here). Tracked in the oracle known-differences.
+  - **Cosmetic season on a displaced office:** the lady office carries its own `season` (computed from the
+    paschal skeleton) only for completeness — the day's reported season always comes from the temporal filler,
+    never the overlay, so the lady season never drives output.
+  - **Two-simples dignity is seeded, not complete:** the `dignior-simple` set names only the one
+    universal-calendar Simple-vs-Simple collision confirmable offline (19 January, Ss Marius & Co. over St
+    Canute). Any other same-day equal-grade Simple pair still falls back to the arbitrary id-string order until
+    the full Tabella dignity is filled in against the Divinum Officium oracle during the `isBuilt` sweep.
 
 ## Deliberately out of scope
 

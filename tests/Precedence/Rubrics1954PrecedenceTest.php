@@ -65,8 +65,38 @@ final class Rubrics1954PrecedenceTest extends TestCase
             'the Passiontide Seven Sorrows, a moveable greater double' => [15, self::sevenSorrows()],
             'the moveable Solemnity of St Joseph, a Double I class of a saint' => [7, self::solemnityJoseph()],
             'a common vigil' => [22, self::commonVigil()],
+            'the Saturday Office of Our Lady' => [23, self::ladyOnSaturday()],
             'a simple' => [24, self::simple()],
+            'a Simple of higher dignity (Marius)' => [24, self::digniorSimple()],
         ];
+    }
+
+    public function testTheSaturdayOfficeOutranksASimpleButYieldsDroppedToASemidouble(): void
+    {
+        // The votive Office of Our Lady on a free Saturday sits above the Simple and below every
+        // Semidouble-or-higher and the common vigil (#453). A coincident Simple is COMMEMORATED
+        // under it; a displaced lady office is DROPPED (omitted), never commemorated.
+        $lady = self::ladyOnSaturday();
+
+        self::assertTrue(self::outranks($lady, self::simple()), 'the lady office outranks a simple');
+        self::assertSame('commemorate', self::outcome($lady, self::simple()), 'the simple is commemorated');
+
+        self::assertTrue(self::outranks(self::semidouble(), $lady), 'a semidouble outranks the lady office');
+        self::assertSame('omit', self::outcome(self::semidouble(), $lady), 'the displaced lady office is dropped');
+        self::assertTrue(self::outranks(self::commonVigil(), $lady), 'a common vigil outranks the lady office');
+        self::assertSame('omit', self::outcome(self::commonVigil(), $lady), 'the lady office yields to a vigil');
+    }
+
+    public function testAMoreWorthySimpleOutranksAndCommemoratesAPlainSimple(): void
+    {
+        // Two Simples on one day: the dignior (named in the `dignior-simple` set) is celebrated and
+        // the plain Simple commemorated — the two share the Simple's line but the dignior has the
+        // lower subOrder, so the arbitrary id-string tie-break never decides between them (#453).
+        $dignior = self::digniorSimple();
+        $plain = self::simple();
+
+        self::assertTrue(self::outranks($dignior, $plain), 'a dignior simple outranks a plain simple');
+        self::assertSame('commemorate', self::outcome($dignior, $plain), 'the plain simple is commemorated');
     }
 
     public function testACommemorationOnlySaintIsRankedByItsGradeUnlessTrulyACommemoration(): void
@@ -267,6 +297,18 @@ final class Rubrics1954PrecedenceTest extends TestCase
     private static function simple(): RealizedObservance
     {
         return self::sanctoral('probe-simplex', 'feast', 4, LegacyRank::SIMPLEX);
+    }
+
+    /** The votive Office of Our Lady on a free Saturday — a temporal office of kind lady-on-saturday. */
+    private static function ladyOnSaturday(): RealizedObservance
+    {
+        return self::temporal('roman:sanctorale:sancta-maria-sabbato', 'lady-on-saturday', 4, Season::PENTECOST);
+    }
+
+    /** A Simple named in the `dignior-simple` set (Ss Marius & Companions) — the more worthy of two. */
+    private static function digniorSimple(): RealizedObservance
+    {
+        return self::sanctoral('marius-et-socii', 'feast', 4, LegacyRank::SIMPLEX);
     }
 
     private static function commonVigil(): RealizedObservance

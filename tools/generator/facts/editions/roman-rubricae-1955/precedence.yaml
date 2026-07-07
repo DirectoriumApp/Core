@@ -56,8 +56,19 @@ tiers:
   - { selector: christmas-octave-within, line: 18, ordinal: 18, subOrder: 0, cite: rg-da }
   - { selector: greater-feria, line: 20, ordinal: 20, subOrder: 0, cite: rg-da }
   - { selector: common-vigil, line: 22, ordinal: 22, subOrder: 0, cite: cn-1955 }
-  - { selector: simple, line: 24, ordinal: 24, subOrder: 0, cite: rg-da }
-  - { selector: lady-on-saturday, line: 26, ordinal: 26, subOrder: 0, cite: rg-da }
+  # The votive Office of Our Lady on a free Saturday (#453) — retained by Cum nostra (it is not
+  # an octave). Above the Simple (a coincident Simple, now a commemoration, is commemorated
+  # under it) and the ordinary feria; below every feast above a simple and every privileged
+  # feria / vigil. A displaced lady office is DROPPED, not commemorated. 1955 keeps MORE of these
+  # than 1954 (the collapsed octaves free many Saturdays), but the tier position is identical.
+  - { selector: lady-on-saturday, line: 23, ordinal: 23, subOrder: 0, cite: rg-da }
+  # A Simple of higher dignity (the two-simples tie-break, #453) — the same mechanism as the 1954
+  # table: it shares the Simple's line (24) but subOrder 0 (above a plain Simple at subOrder 1), so
+  # the more worthy of two Simples is celebrated rather than the id string deciding. (Under Cum
+  # nostra a former simple is a mere commemoration, but former semidoubles are now Simples and CAN
+  # still collide.) The `dignior-simple` set is below.
+  - { selector: dignior-simple, line: 24, ordinal: 24, subOrder: 0, cite: ordo-1954 }
+  - { selector: simple, line: 24, ordinal: 24, subOrder: 1, cite: rg-da }
   - { selector: ordinary-feria, line: 27, ordinal: 27, subOrder: 0, cite: rg-da }
   - { selector: commemoration, line: 29, ordinal: 29, subOrder: 0, cite: cn-1955 }
 
@@ -139,6 +150,16 @@ membership:
       - roman:sanctorale:exaltatio-crucis
       - roman:sanctorale:inventio-crucis
       - roman:sanctorale:dedicatio-basilicae-salvatoris
+
+  # The Simples of higher dignity (the two-simples tie-break, #453) — the same set as the 1954
+  # table, carried for symmetry and for the former-semidouble Simples that CAN still collide under
+  # Cum nostra. (For 19 January itself the contest is moot: a former simple is now a mere
+  # commemoration, so neither Marius nor Canute celebrates — the feria or the Saturday Office is
+  # the day, both commemorated.) The full set is completed against the oracle in the sweep.
+  - name: dignior-simple
+    cite: ordo-1954
+    ids:
+      - roman:sanctorale:marius-et-socii
 
 # Commemorations admitted per day-class (Title III.4): a I-class day admits none, a II-class
 # day one, and any day at most two. The never-omitted privileged commemorations (Title III.2)

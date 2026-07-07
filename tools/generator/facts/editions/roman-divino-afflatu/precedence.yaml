@@ -83,8 +83,23 @@ tiers:
   - { selector: common-octave-within, line: 20, ordinal: 20, subOrder: 0, cite: ordo-1954 }
   - { selector: greater-feria, line: 21, ordinal: 21, subOrder: 0, cite: rg-da }
   - { selector: common-vigil, line: 22, ordinal: 22, subOrder: 0, cite: rg-da }
-  - { selector: simple, line: 24, ordinal: 24, subOrder: 0, cite: rg-da }
-  - { selector: lady-on-saturday, line: 26, ordinal: 26, subOrder: 0, cite: rg-da }
+  # The votive Office of Our Lady on a free Saturday (#453) sits ABOVE the Simple: on a free
+  # Saturday it is the Office of the day and a coincident Simple is COMMEMORATED (the votive
+  # "of the day" beats the real simple saint — Rubr. Gen., De Officio S. Mariae in Sabbato). It
+  # still yields to every Semidouble-or-higher and to a privileged feria / vigil / Ember day (a
+  # common vigil above it), and a displaced lady office is DROPPED, not commemorated
+  # (decideOccurrence). Minted by SaturdayOfOurLady, so it carries no legacy grade and is routed
+  # by kind (before the grade ladder) in Rubrics1954Precedence.
+  - { selector: lady-on-saturday, line: 23, ordinal: 23, subOrder: 0, cite: rg-da }
+  # A Simple of higher dignity (the two-simples tie-break, #453): among two Simples on one day
+  # the more worthy by the general Table of Precedence is celebrated, the other commemorated
+  # (Rubr. Gen., De occurrentia — "quod dignius est, celebratur; alterum commemoratur"). It
+  # shares the Simple's line (24) but a lower subOrder, so it sorts first — the arbitrary
+  # id-string tie-break never decides between two named Simples. The `dignior-simple` membership
+  # set (below) names the dignified feasts; an unlisted Simple keeps subOrder 1.
+  #   * 19 Jan — Ss Marius, Martha, Audifax & Abachum (the older Roman martyrs) over St Canute.
+  - { selector: dignior-simple, line: 24, ordinal: 24, subOrder: 0, cite: ordo-1954 }
+  - { selector: simple, line: 24, ordinal: 24, subOrder: 1, cite: rg-da }
   - { selector: ordinary-feria, line: 27, ordinal: 27, subOrder: 0, cite: rg-da }
   # Below the table: a commemoration never celebrates (yields the day, is merely commemorated).
   - { selector: commemoration, line: 29, ordinal: 29, subOrder: 0, cite: rg-da }
@@ -161,6 +176,18 @@ membership:
     cite: ordo-1954
     ids:
       - roman:temporale:paschal:passion-week:septem-dolorum
+
+  # The Simples of higher dignity (the two-simples tie-break, #453): named here so tierOf routes
+  # them to the `dignior-simple` tier (subOrder 0), above a plain Simple (subOrder 1), so the more
+  # worthy is celebrated and the other commemorated — instead of the resolver's arbitrary id-string
+  # tie-break. Seeded with the one universal-calendar Simple-vs-Simple collision confirmed offline;
+  # the full set is completed against the Divinum Officium oracle in the isBuilt sweep.
+  #   * 19 January — Ss Marius, Martha, Audifax & Abachum (the older, first-listed Roman martyrs)
+  #     over St Canute (a later addition); without this the id string wrongly prefers "canutus".
+  - name: dignior-simple
+    cite: ordo-1954
+    ids:
+      - roman:sanctorale:marius-et-socii
 
 # Commemorations admitted per day-type. The pre-1955 rite imposes no flat integer cap the
 # way 1962 does (I=1/II=1/III=2/IV=2): multiple commemorations are normal and the practical
