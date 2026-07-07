@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1962-2026-07-06.1",
+  "corpusVersion": "1962-2026-07-06.2",
   "disciplines": [
     "cic-1917"
   ],
@@ -21,13 +21,13 @@
     },
     "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 349,
-      "sha256": "49de6e5213b4a2bcdc5fe4f32ec3eea0c3ab03ea308e6aec8faa0068989033a3"
+      "records": 350,
+      "sha256": "a29e15519016530839afcc6e0566124c6e0ddc0802e7fd6617212cc55ab238c9"
     },
     "editions/roman-divino-afflatu/placement.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 349,
-      "sha256": "12ee31aa67d58a5f5066d6f51848303651cad7bb88d686c37986e93303229c84"
+      "records": 350,
+      "sha256": "f950b902b4559358e164187f52f0e5ad5c6a0a4fb4c43492f1a814f54bafa192"
     },
     "editions/roman-divino-afflatu/precedence-rules.ndjson": {
       "primaryKey": "rule",
@@ -41,13 +41,13 @@
     },
     "editions/roman-rubricae-1955/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 319,
-      "sha256": "524c8b76d8e071478123b06a728b34fc426a88d2ca0711463774a08f831e3308"
+      "records": 320,
+      "sha256": "aed0a73edf137122f5c235ed1b2ed4adb0d4044b3382417e3a95d443e290ea70"
     },
     "editions/roman-rubricae-1955/placement.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 319,
-      "sha256": "2e0d124f3b13e1b1e0d2186b59697792e33fb258c89449c5179a15c3c802c113"
+      "records": 320,
+      "sha256": "f85554e154d2f00bf9a886116f49a90fbe8f7bcd3099832dbc1e80c596978480"
     },
     "editions/roman-rubricae-1955/precedence-rules.ndjson": {
       "primaryKey": "rule",
@@ -62,7 +62,7 @@
     "editions/roman-rubricae-1960/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 302,
-      "sha256": "f11a882840845ecf67a5975e0414e6cabc8bc4e0be840868f30871ba678b6135"
+      "sha256": "61b868b6c016d8d3bfd24b715023166cd09e3203544bcd3421fb98197eb87586"
     },
     "editions/roman-rubricae-1960/attributes.temporale.ndjson": {
       "primaryKey": "archetype",
@@ -72,7 +72,7 @@
     "editions/roman-rubricae-1960/placement.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 302,
-      "sha256": "3e2667eca77d6878e2e696d81fe62a12bd4c8db0a508fbebc5aff5145155207b"
+      "sha256": "43c2bae323911735b63e79e65db738c886f4fc8c5868e70ac25974052ff4e527"
     },
     "editions/roman-rubricae-1960/precedence-rules.ndjson": {
       "primaryKey": "rule",
@@ -87,7 +87,7 @@
     "identity/sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 357,
-      "sha256": "c4be4739daaad34d1b966040e9ce0b934724a7a81a3b47edda503b514e2450b0"
+      "sha256": "2233738a88afdc47425187412ec3460199ff3de82081849b2a809fb75d910587"
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
@@ -140,7 +140,7 @@
       "rights": "reference",
       "title": "Cum nostra hac aetate — General Decree of the S.R.C. reducing the rubrics (23 March 1955)",
       "urn": "directorium:source:cn-1955",
-      "uses": 651
+      "uses": 653
     },
     {
       "key": "mr-1920",
@@ -156,7 +156,7 @@
       "rights": "reference",
       "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
       "urn": "directorium:source:ordo-1954",
-      "uses": 2702
+      "uses": 2710
     },
     {
       "key": "rg-1960",

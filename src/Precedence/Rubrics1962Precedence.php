@@ -339,6 +339,14 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return false;
     }
 
+    public function officeOfTheDeadYieldsToSunday(): bool
+    {
+        // The Commemoration of All Souls is not celebrated on a Sunday (a requiem is never
+        // sung on the day of the Resurrection); its Office and Mass are kept on the next
+        // free day — 3 November when 2 November is a Sunday.
+        return true;
+    }
+
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
     {
         // n. 96(a): the Annunciation, impeded into Holy Week or the Easter octave,
@@ -399,6 +407,12 @@ final class Rubrics1962Precedence implements PrecedenceRules
     private function admitsNoCommemoration(RealizedObservance $winner, PrecedenceContext $context): bool
     {
         if ($context->isTriduum()) {
+            return true;
+        }
+
+        // The Office of the Dead (All Souls) is a Requiem: it admits no commemoration of an
+        // occurring office in any edition.
+        if ($winner->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
             return true;
         }
 

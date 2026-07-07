@@ -5289,8 +5289,8 @@
 
 # Vigil of All Saints — 1954-only (suppressed 1955); no 1962 block. vigilOf points at
 # the canonical All Saints id (roman:sanctorale:omnes-sancti — the Nov 1 winner in the
-# golden trace); the roman:sanctorale:omnium-sanctorum duplicate is a pre-existing dataset
-# issue for the #64 burndown, not this issue.
+# golden trace). (The former roman:sanctorale:omnium-sanctorum duplicate was retired with
+# the new Office of the Dead in #453 — see the note below.)
   roman-divino-afflatu:
     legacyRank: duplex-i-classis
     colour: white
@@ -5313,26 +5313,33 @@
     vigilOf: roman:sanctorale:omnes-sancti
     cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
-# NOTE (#64): roman:sanctorale:omnium-sanctorum below is a pre-existing DUPLICATE of
-# roman:sanctorale:omnes-sancti (both Nov 1, I class, white). Resolving it is deferred:
-# removing it exposes that All Souls (Nov 2, the Office of the Dead) is unimplemented in
-# EVERY edition — the phantom duplicate currently transfers onto Nov 2 and coincidentally
-# supplies a class-1 that the SSPX/missalemeum oracle matches. The duplicate and the
-# Office of the Dead must therefore land together in a dedicated follow-up (see #64
-# comment), not here. It carries no roman-divino-afflatu block, so it is absent from 1954.
-- id: roman:sanctorale:omnium-sanctorum
-  kind: feast
-  titulars: [omnes-sancti]
+# The Commemoration of All Souls (2 November) — the Office of the Dead, kept in every
+# edition (#453). Its `office-of-the-dead` kind maps to the reserved `all-souls` occurrence
+# tier and drives the transfer of the Office and Mass to the next free day when 2 November
+# is a Sunday (a requiem is never sung on a Sunday, so it is kept on 3 November). Black in
+# every edition; a first-class day under the 1960 Codex (n. 91), a Duplex under the pre-1955
+# Divino Afflatu rubrics. Implementing it retired the pre-existing All-Saints duplicate
+# `roman:sanctorale:omnium-sanctorum`, whose phantom transfer onto 2 November had masked the
+# missing Office of the Dead (they had to land together — see #64 / #453).
+- id: roman:sanctorale:omnium-fidelium-defunctorum
+  kind: office-of-the-dead
+  titulars: [fideles-defuncti]
   names:
-    la: "In Festo Omnium Sanctorum"
+    la: "In Commemoratione Omnium Fidelium Defunctorum"
   cites:
     names.la: mr-1920
   roman-rubricae-1960:
     rank: 1
-    colour: white
+    colour: black
     month: 11
-    day: 1
+    day: 2
     cites: { rank: rg-1960, colour: rg-1960, month: rg-1960, day: rg-1960 }
+  roman-divino-afflatu:
+    legacyRank: duplex
+    colour: black
+    month: 11
+    day: 2
+    cites: { legacyRank: ordo-1954, colour: ordo-1954, month: ordo-1954, day: ordo-1954 }
 
 - id: roman:sanctorale:carolus-borromeus
   kind: feast
