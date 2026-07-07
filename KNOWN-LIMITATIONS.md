@@ -8,8 +8,9 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
 
 - **Editions:** three rubric systems are **built and publicly resolvable** — **1962 (Rubricae 1960)**,
   **1954 (Divino Afflatu)**, and **1955 (Cum nostra / interim)** (#453). Tridentine (1570/~1906) and the
-  Novus Ordo are roadmapped, declared on the edition axis but not yet built (they are refused at the
-  public boundary until their data and rules land).
+  Novus Ordo are roadmapped — **not yet declared** on the edition axis, so a selector naming one is refused
+  as an unknown edition. When a future system is declared before its data and rules land, the `isBuilt()`
+  public-boundary guard refuses *it* until they do.
 - **Pillars:** the **calendar** comes first; the **Missal** (Mass propers/ordinary) and **Breviary**
   (Divine Office) text layers are later milestones. The Office psalter is initially the 1962 scheme only;
   the pre-1911 and Divino Afflatu psalters are a later milestone.
