@@ -15,6 +15,7 @@ import {
   transformSanctorale,
   transformSanctoraleEdition,
   deriveCumNostra1955,
+  deriveCumNostra1955Temporale,
   transformOctaves,
   transformTemporalSkeleton,
   transformTemporale,
@@ -153,18 +154,28 @@ export function build(outDir = DEFAULT_OUT) {
     const precedence = existsSync(precedenceFile)
       ? transformPrecedence(loadYaml(precedenceFile), e.dir)
       : null;
-    // The edition's TEMPORAL attributes (Core v0.3.x — the 1954 privileged temporal octaves):
-    // the base archetypes (the deferred "1962-mapped rank" display, Seam 6b) plus any ADDITIONAL
-    // archetypes the edition declares in its own facts/editions/<dir>/temporale.yaml (Epiphany,
-    // Corpus Christi, Ascension, Sacred Heart octaves for 1954). An edition with no such file
-    // reuses the base rows verbatim, so EVERY edition ships its own attributes.temporale.ndjson
-    // and the PHP fillers always read their own edition — 1962/1955 stay byte-identical because
-    // the base pass, and thus the base file, is untouched. The extra archetypes' identity is
-    // edition-invariant and merged into the shared temporal identity below (deduped, like the
-    // sanctoral octaves).
-    const temporaleFile = join(FACTS_DIR, 'editions', e.dir, 'temporale.yaml');
-    const extraTemporale = existsSync(temporaleFile)
-      ? transformTemporale(loadYaml(temporaleFile).archetypes, e.dir)
+    // The edition's TEMPORAL attributes (Core v0.3.x — the 1954 privileged temporal octaves and the
+    // moveable feasts, #453): the base archetypes (the deferred "1962-mapped rank" display, Seam 6b)
+    // plus any ADDITIONAL archetypes. A directly-authored edition (1954) reads its own
+    // facts/editions/<dir>/temporale.yaml (the four octaves; the Seven Sorrows + Solemnity of St
+    // Joseph feasts + that Solemnity's common octave). A DERIVED edition (1955) has no such file, so
+    // it takes its BASE edition's archetypes through the Cum nostra temporal transform, which keeps
+    // the moveable feasts but drops every octave (deriveCumNostra1955Temporale) — the temporal half
+    // of the same reform the sanctoral derive applies. An edition with neither reuses the base rows
+    // verbatim, so EVERY edition ships its own attributes.temporale.ndjson and the PHP fillers always
+    // read their own edition — 1962 stays byte-identical because the base pass, and thus the base
+    // file, is untouched. The extra archetypes' identity is edition-invariant and merged into the
+    // shared temporal identity below (deduped, like the sanctoral octaves).
+    const ownTemporaleFile = join(FACTS_DIR, 'editions', e.dir, 'temporale.yaml');
+    const baseTemporaleFile = join(FACTS_DIR, 'editions', e.base || '', 'temporale.yaml');
+    let extraArchetypes = [];
+    if (existsSync(ownTemporaleFile)) {
+      extraArchetypes = loadYaml(ownTemporaleFile).archetypes;
+    } else if (e.derive === 'cum-nostra-1955' && existsSync(baseTemporaleFile)) {
+      extraArchetypes = deriveCumNostra1955Temporale(loadYaml(baseTemporaleFile).archetypes);
+    }
+    const extraTemporale = extraArchetypes.length
+      ? transformTemporale(extraArchetypes, e.dir)
       : { identity: [], attributes: [] };
     const temporaleAttributes = [...temporale.attributes, ...extraTemporale.attributes].sort(byArchetype);
     return {

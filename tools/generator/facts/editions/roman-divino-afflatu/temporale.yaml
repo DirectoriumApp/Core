@@ -1,5 +1,8 @@
 # The 1954 (Divino Afflatu) edition's ADDITIONAL temporal archetypes — the four
-# privileged temporal octaves the pre-1955 rite keeps that 1962 does not (#453).
+# privileged temporal octaves, plus the two moveable feasts (the Passiontide Seven
+# Sorrows and the Solemnity of St Joseph, with its common octave), that the pre-1955
+# rite keeps and the 1962 rubrics dropped (#453). The octaves and the Seven Sorrows
+# come first; the moveable feasts are at the foot of the file.
 #
 # Companion to the base tools/generator/facts/temporale.yaml (1962). The generator
 # joins these onto the base archetypes for this edition's attributes.temporale.ndjson
@@ -85,6 +88,53 @@ archetypes:
   - key: sacred-heart-octave-day
     kind: octave-day
     name: "In Octava Sacratissimi Cordis Iesu"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+
+  # ---- Moveable feasts the pre-1955 calendar kept and 1962 dropped (#453) ---
+  # Two feasts placed by an Easter rule that the 1960 rubrics removed, minted by MovableFeasts as
+  # dated overlays (the Solemnity's octave by Eastertide, like the Ascension octave above):
+  #
+  #   * The Passiontide SEVEN SORROWS of the BVM — the Friday in Passion Week (Easter-9), a
+  #     Duplex maius (greater double), white; NO octave (it would run into Holy Week). It shares
+  #     its NAME with the fixed 15 September feast (a Duplex II classis in the sanctoral data), so
+  #     the two are disambiguated by SLUG, never by name (roman:temporale:paschal:passion-week:
+  #     septem-dolorum vs roman:sanctorale:septem-dolorum-bmv). It commemorates the greater feria
+  #     of Passion Week (LentenCycle already places that feria band).
+  #   * The moveable SOLEMNITY / Patronage of ST JOSEPH — the Wednesday before the 3rd Sunday after
+  #     Easter (Easter+17), a Duplex I classis of a SAINT (so double-i-class, NOT a feast of the
+  #     Lord), white, with a COMMON octave (days within Easter+18..+23 a semidouble, the octave day
+  #     Easter+24 a greater double). It is distinct from the fixed 19 March feast
+  #     (roman:sanctorale:ioseph) and from St Joseph the Worker (1 May), which this dataset excludes.
+  #
+  # Cum nostra (1955) leaves a double unchanged, so BOTH feasts carry into the derived 1955 edition
+  # — but it suppresses every octave except Christmas/Easter/Pentecost, so the two Solemnity octave
+  # rows below (a within-octave + an octave-day) are 1954-only: the 1955 derive drops every
+  # within-octave/octave-day archetype (deriveCumNostra1955Temporale). rank here is the 1962-mapped
+  # display value (greater double / semidouble -> III, Duplex I classis -> I); the pre-1955
+  # occurrence is carried by the precedence TIER, not this numeric rank.
+  - key: seven-sorrows
+    kind: feast
+    name: "Septem Dolorum Beatae Mariae Virginis"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: solemnitas-ioseph
+    kind: feast
+    name: "Solemnitas Sancti Ioseph Sponsi Beatae Mariae Virginis Confessoris et Ecclesiae Universalis Patroni"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: solemnitas-ioseph-within-octave
+    kind: within-octave
+    name: "De {ord} die infra Octavam Solemnitatis Sancti Ioseph"
+    rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+  - key: solemnitas-ioseph-octave-day
+    kind: octave-day
+    name: "In Octava Solemnitatis Sancti Ioseph"
     rank: 3
     colour: white
     cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }

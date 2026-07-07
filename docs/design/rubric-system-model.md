@@ -317,11 +317,11 @@ Brindisi's universal feast (so 1954 keeps St Praxedes on 21 July).
   Nov 1–3, the rest byte-identical), the **sanctoral octave DAYS** (the comites-Christi octaves Jan 2–4,
   the Octave of All Saints Nov 8, the Immaculate Conception octave Dec 9–15), and the four **privileged
   TEMPORAL octaves** (Epiphany, Corpus Christi, Ascension, Sacred Heart — see Seam 7; the residual DO
-  diffs, e.g. a transfer that must skip the Corpus Christi octave, all traced to these). Still deferred,
-  so the edition is not yet advertised (the `CalendarCatalog` boundary refuses `day('1954')`): the
-  **moveable feasts of the Lord/BVM** (the Friday-in-Passion-Week Seven Sorrows; the Solemnity/Patronage
-  of St Joseph) and the **Saturday Office of Our Lady**. Each is a tracked #453 follow-up; `isBuilt`
-  flips when the last lands.
+  diffs, e.g. a transfer that must skip the Corpus Christi octave, all traced to these), and the two
+  **moveable feasts of the Lord/BVM** (the Friday-in-Passion-Week Seven Sorrows and the Solemnity/Patronage
+  of St Joseph, with its common octave — Seam 8). Still deferred, so the edition is not yet advertised (the
+  `CalendarCatalog` boundary refuses `day('1954')`): the **Saturday Office of Our Lady**. It is the last
+  tracked #453 follow-up; `isBuilt` flips when it lands.
 
 ## Seam 7 — the privileged temporal octaves (Built — #453)
 
@@ -377,6 +377,50 @@ is the one architectural lift of this slice.
   Sunday keeps its existing office instead); the rare Jan-13-on-a-Sunday octave-day-vs-Holy-Family occurrence
   (1952/57/63/74/80); and the DA temporal-attribute rank *display* (the octaves carry the 1962-mapped rank 3;
   precedence is tier-driven). These fall to the full-year DA oracle sweep (the #453 wrap / #73 matrix).
+
+## Seam 8 — the moveable feasts of the Lord/BVM (Built — #453)
+
+Two feasts the pre-1955 calendar places by an Easter rule and the 1960 rubrics dropped, minted the SAME way
+as the great moveable feasts (Corpus Christi, the Sacred Heart): {@see MovableFeasts} lays them on the
+skeleton as dated overlays, gated on the edition. Derived + adversarially reconciled first (a 3-scholar
+derivation, no live oracle), then built + tested. As-built:
+
+- **The two feasts.** The Passiontide **Seven Sorrows of the BVM** — the Friday in Passion Week (Easter−9),
+  a **Duplex maius**, white, NO octave (it would run into Holy Week). The moveable **Solemnity / Patronage of
+  St Joseph** — the Wednesday before the 3rd Sunday after Easter (Easter+17), a **Duplex I classis of a
+  SAINT** (so `double-i-class`, NOT `great-lord` — St Joseph is not the Lord), white, with a **common octave**.
+  Both are `feast` archetypes in `facts/editions/roman-divino-afflatu/temporale.yaml`; the Seven Sorrows shares
+  its *name* with the fixed 15 September feast (a `duplex-ii-classis` in the sanctoral) and is disambiguated by
+  **slug** (`roman:temporale:paschal:passion-week:septem-dolorum` vs `roman:sanctorale:septem-dolorum-bmv`),
+  never by name. Both commemorate what they impede — the Seven Sorrows the greater feria of Passion Week.
+- **The first COMMON octave on the temporal path.** The Solemnity's octave (days within Easter+18..+23 a
+  semidouble; octave day Easter+24 a greater double) is minted by `Eastertide::solemnityJosephOctave`, exactly
+  as the Ascension octave is, `has()`-gated and skipping the Sunday within (the 3rd Sunday after Easter at
+  Easter+21). Unlike the four **privileged** octaves (always commemorated), a **common** octave's day within is
+  **OMITTED — not commemorated — under a Double of the I or II class**. That one new rule is the load-bearing
+  addition: `Rubrics1954Precedence::isOctaveOmitted` now recognises the common temporal octave (by id, since it
+  carries no legacy grade) and omits its day within under a Double I/II, exactly as it does a *sanctoral* common
+  octave. Live-triggered by **Sts Philip & James** (1 May, `duplex-ii-classis`, when Easter ∈ [8, 13] Apr) and
+  the **Finding of the Cross** (3 May, `duplex-ii-classis`, when Easter ∈ [10, 15] Apr — the window is per-feast,
+  each fixed date being a day-within only for its own span): 1 May 2020 → Philip & James celebrated, the
+  octave day-within displaced (omitted). A *plain* Double (St Catherine of Siena, 30 Apr 2020) does NOT omit it
+  — the octave is commemorated. `MoveableFeastResolutionTest`.
+- **Precedence tiers.** A new `common-octave-within` selector (ordinal 20, just below the privileged
+  3rd-order octave within) for the days within; the octave DAY routes to `greater-double`; the Seven Sorrows,
+  a moveable greater double carrying no legacy grade (a numeric rank III cannot tell a greater double from an
+  ordinary double), is named to the `greater-double` tier by a `moveable-greater-double` membership set.
+- **1955 = feasts kept, octave dropped (the same reform, on the temporal axis).** *Cum nostra* leaves a
+  double unchanged but suppresses every octave except Christmas/Easter/Pentecost, so the derived 1955 edition
+  keeps both feasts and drops the octave: the generator runs the 1954 temporale archetypes through
+  `deriveCumNostra1955Temporale` (keep `feast`, drop `within-octave`/`octave-day`) — the temporal twin of the
+  sanctoral `deriveCumNostra1955`. Both editions keep the Solemnity because the dataset models the
+  **pre-1-May-1956** state (St Joseph the Worker held out, Ss Philip & James restored to 1 May); the divergence
+  from the historical 1956 calendar on this one feast is by construction (KNOWN-LIMITATIONS).
+- **Still deferred (pin to oracle before freezing).** The octave DAY (Easter+24) under a Double II is modelled
+  as **commemorated, not omitted** (the days-within-vs-octave-day asymmetry — a greater-double office; 1 May 1996
+  = Philip & James, octave day commemorated); the transfer-with-octave policy for the Solemnity (dormant — Easter+17
+  is unimpeded in practice); the Latin heading orthography (display-only); and, as for the privileged octaves, the
+  Dominica-infra-Octavam commemoration on the Sunday within. See KNOWN-LIMITATIONS.md.
 
 ## Seam 6a — 1955 precedence rules (Built — #70; validated — #71)
 

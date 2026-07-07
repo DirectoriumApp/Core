@@ -10,6 +10,7 @@ import {
   transformSanctorale,
   transformSanctoraleEdition,
   deriveCumNostra1955,
+  deriveCumNostra1955Temporale,
   transformOctaves,
   transformPrecedence,
   transformDiscipline,
@@ -558,4 +559,27 @@ test('deriveCumNostra1955 leaves an entry absent from 1954 untouched', () => {
     { id: 'roman:sanctorale:probe-1962only', kind: 'feast', 'roman-rubricae-1960': daBlock('duplex') },
   ]);
   assert.equal(block('roman:sanctorale:probe-1962only'), undefined, 'no 1954 block -> no 1955 block');
+});
+
+// --- deriveCumNostra1955Temporale: keep the moveable feasts, drop the octaves (#453) -------
+
+test('deriveCumNostra1955Temporale keeps feasts and drops every octave archetype', () => {
+  const archetypes = [
+    { key: 'seven-sorrows', kind: 'feast' },
+    { key: 'solemnitas-ioseph', kind: 'feast' },
+    { key: 'solemnitas-ioseph-within-octave', kind: 'within-octave' },
+    { key: 'solemnitas-ioseph-octave-day', kind: 'octave-day' },
+    { key: 'ascension-within-octave', kind: 'within-octave' },
+    { key: 'corpus-christi-octave-day', kind: 'octave-day' },
+  ];
+  const kept = deriveCumNostra1955Temporale(archetypes).map((a) => a.key);
+
+  // Cum nostra suppressed every octave except Christmas/Easter/Pentecost (minted by the base
+  // fillers), but left the moveable feasts in place — so only the two `feast` archetypes survive.
+  assert.deepEqual(kept, ['seven-sorrows', 'solemnitas-ioseph']);
+});
+
+test('deriveCumNostra1955Temporale is a no-op when there are no octaves', () => {
+  const archetypes = [{ key: 'seven-sorrows', kind: 'feast' }];
+  assert.deepEqual(deriveCumNostra1955Temporale(archetypes), archetypes);
 });

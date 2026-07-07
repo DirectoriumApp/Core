@@ -60,6 +60,10 @@ final class Rubrics1954PrecedenceTest extends TestCase
             'an ordinary double' => [16, self::duplex()],
             'a semidouble' => [17, self::semidouble()],
             'a 3rd-order temporal octave day-within (Sacred Heart)' => [19, self::thirdOrderOctaveWithin()],
+            'a common temporal octave day-within (Solemnity of St Joseph)' => [20, self::josephOctaveWithin()],
+            'a common temporal octave DAY (St Joseph) is a greater double' => [15, self::josephOctaveDay()],
+            'the Passiontide Seven Sorrows, a moveable greater double' => [15, self::sevenSorrows()],
+            'the moveable Solemnity of St Joseph, a Double I class of a saint' => [7, self::solemnityJoseph()],
             'a common vigil' => [22, self::commonVigil()],
             'a simple' => [24, self::simple()],
         ];
@@ -149,6 +153,23 @@ final class Rubrics1954PrecedenceTest extends TestCase
         self::assertSame('omit', self::outcome(self::dxi(), $within));
         self::assertSame('omit', self::outcome(self::dxii(), $within));
         self::assertSame('commemorate', self::outcome(self::maius(), $within));
+    }
+
+    public function testTheCommonTemporalOctaveDayWithinFollowsTheSameOmitRule(): void
+    {
+        // The moveable Solemnity of St Joseph is the one COMMON octave on the temporal path (#453),
+        // so its day-within is a TemporalObservance yet must behave like the sanctoral common octave
+        // above: omitted under a Double of the I or II class, commemorated under anything lower —
+        // NOT always-commemorated like the four privileged temporal octaves.
+        $within = self::josephOctaveWithin();
+
+        self::assertSame('omit', self::outcome(self::dxi(), $within));
+        self::assertSame('omit', self::outcome(self::dxii(), $within));
+        self::assertSame('commemorate', self::outcome(self::maius(), $within));
+
+        // Its octave DAY, a full greater-double office, is commemorated (not omitted) under a Double
+        // of the II class — the days-within-vs-octave-day asymmetry (Seam 8; deferred to oracle).
+        self::assertSame('commemorate', self::outcome(self::dxii(), self::josephOctaveDay()));
     }
 
     public function testASimpleOctaveIsOmittedOnlyUnderADoubleOfTheFirstClass(): void
@@ -316,6 +337,50 @@ final class Rubrics1954PrecedenceTest extends TestCase
             'within-octave',
             3,
             Season::PENTECOST
+        );
+    }
+
+    /** The moveable Solemnity of St Joseph's COMMON octave DAY-WITHIN — omitted under a Double I/II. */
+    private static function josephOctaveWithin(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:solemnitas-ioseph-octave:day-3',
+            'within-octave',
+            3,
+            Season::EASTERTIDE
+        );
+    }
+
+    /** The moveable Solemnity of St Joseph's common octave DAY — a plain greater double. */
+    private static function josephOctaveDay(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:solemnitas-ioseph-octave:octave-day',
+            'octave-day',
+            3,
+            Season::EASTERTIDE
+        );
+    }
+
+    /** The Passiontide Seven Sorrows — a moveable greater double of the BVM (not of the Lord). */
+    private static function sevenSorrows(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:passion-week:septem-dolorum',
+            'feast',
+            3,
+            Season::PASSIONTIDE
+        );
+    }
+
+    /** The moveable Solemnity of St Joseph — a Duplex I classis of a saint (not the Lord). */
+    private static function solemnityJoseph(): RealizedObservance
+    {
+        return self::temporal(
+            'roman:temporale:paschal:solemnitas-ioseph',
+            'feast',
+            1,
+            Season::EASTERTIDE
         );
     }
 

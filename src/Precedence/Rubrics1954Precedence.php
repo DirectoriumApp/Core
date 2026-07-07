@@ -124,6 +124,13 @@ final class Rubrics1954Precedence implements PrecedenceRules
         if ($this->isPrivilegedTemporalOctave($id)) {
             return $this->privilegedTemporalOctaveTier($id);
         }
+        // The 1954 COMMON temporal octave (the moveable Solemnity of St Joseph, #453). Like the
+        // privileged octaves it is a temporal office with no legacy grade, routed by identity: a day
+        // within sits at the common-octave-within altitude (semidouble, but omitted under a Double
+        // I/II — occurrenceOutcome), its octave day is a plain greater double.
+        if ($this->isCommonTemporalOctave($id)) {
+            return $this->commonTemporalOctaveTier($id);
+        }
         // The privileged ferias that admit no feast — Ash Wednesday and Monday/Tuesday/
         // Wednesday of Holy Week — carry the first-class ferial rank in the temporal data.
         if ($kind === ObservanceKind::FERIA && $observance->rank()->ordinal() === 1) {
@@ -158,6 +165,13 @@ final class Rubrics1954Precedence implements PrecedenceRules
         // Lord — the Holy Name, the Holy Family) still takes a LESSER Sunday's place.
         if ($this->table->isMember('feasts-of-the-lord', $id)) {
             return $this->table->tier('feast-of-the-lord');
+        }
+        // A moveable feast that is a greater double of a saint / the BVM, not the Lord — the
+        // Passiontide Seven Sorrows (#453). It is temporal (no legacy grade), and its 1962-mapped
+        // numeric rank (III) cannot tell a greater double from an ordinary double, so it is named
+        // to the greater-double tier by identity.
+        if ($this->table->isMember('moveable-greater-double', $id)) {
+            return $this->table->tier('greater-double');
         }
         if ($grade === LegacyRank::DUPLEX_MAIUS) {
             return $this->table->tier('greater-double');
@@ -538,6 +552,16 @@ final class Rubrics1954Precedence implements PrecedenceRules
      */
     private function isOctaveOmitted(RealizedObservance $winner, RealizedObservance $loser): bool
     {
+        // The moveable Solemnity of St Joseph's octave is minted on the temporal path, so its days
+        // within are TemporalObservances, not SanctoralObservances, yet a COMMON octave's day within
+        // is OMITTED (not commemorated) under a Double of the I or II class — exactly the sanctoral
+        // common-octave rule below. Its octave DAY, a full greater-double office, is commemorated not
+        // omitted (the days-within-vs-octave-day asymmetry; the octave day falls through to the
+        // commemorate outcome). The privileged temporal octaves, by contrast, are never omitted.
+        if ($this->isCommonTemporalOctaveWithin($loser->id()->toString())) {
+            return $this->isDoubleFirstClass($winner) || $this->isDoubleSecondClass($winner);
+        }
+
         if (!$loser instanceof SanctoralObservance) {
             return false;
         }
@@ -651,6 +675,37 @@ final class Rubrics1954Precedence implements PrecedenceRules
         }
 
         return $this->table->tier($isOctaveDay ? 'greater-double' : 'third-order-octave-within');
+    }
+
+    /**
+     * Whether an id is a day of the one 1954 COMMON temporal octave — the moveable Solemnity of St
+     * Joseph (#453). Unlike the four privileged octaves, a common octave's day within is omitted
+     * under a Double of the I/II class ({@see isOctaveOmitted}), so it needs its own routing. A
+     * common octave is minted only on the temporal path (a moveable feast, Easter-anchored); the
+     * fixed-date common octaves (John Baptist, Peter & Paul, the Assumption) are sanctoral DATA.
+     */
+    private function isCommonTemporalOctave(string $id): bool
+    {
+        return strpos($id, ':solemnitas-ioseph-octave:') !== false;
+    }
+
+    /** A day WITHIN the common temporal octave (not its octave day). */
+    private function isCommonTemporalOctaveWithin(string $id): bool
+    {
+        return $this->isCommonTemporalOctave($id) && strpos($id, ':octave-day') === false;
+    }
+
+    /**
+     * The tier of a common temporal-octave day. The octave DAY (Easter+24) is a greater double; a
+     * day WITHIN is a semidouble at the common-octave-within altitude — below the privileged
+     * 3rd-order octave within, because a common octave is the weaker of the two (its days within are
+     * omitted, not commemorated, under a Double I/II).
+     */
+    private function commonTemporalOctaveTier(string $id): PrecedenceTier
+    {
+        return strpos($id, ':octave-day') !== false
+            ? $this->table->tier('greater-double')
+            : $this->table->tier('common-octave-within');
     }
 
     /** The pre-1960 grade token of a sanctoral office, or null for a temporal office. */

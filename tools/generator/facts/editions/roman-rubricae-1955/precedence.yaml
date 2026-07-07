@@ -119,6 +119,14 @@ membership:
     ids:
       - roman:temporale:christmas:holy-name
       - roman:temporale:epiphany:holy-family
+  # The Passiontide Seven Sorrows is a moveable greater double (Duplex maius) of the BVM. Cum nostra
+  # leaves a double unchanged, so it keeps that grade; minted on the temporal path it carries no
+  # legacy grade, and a numeric rank (III) cannot tell a greater double from an ordinary double — so
+  # it is named here to route to the greater-double tier, exactly as in the Divino Afflatu edition.
+  - name: moveable-greater-double
+    cite: ordo-1954
+    ids:
+      - roman:temporale:paschal:passion-week:septem-dolorum
   # Sanctoral feasts and mysteries of the Lord below the first class. Title II.7 ("a feast or
   # title or any mystery of our Lord takes the place of the Sunday") lifts these above the
   # per-annum Sunday, which they commemorate — where an ordinary saint's feast of the same

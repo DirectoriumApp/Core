@@ -31,10 +31,19 @@ use LogicException;
  * Holy Trinity, for instance, occupies the first-Sunday-after-Pentecost slot —
  * so this class places them; composing them onto the skeleton by precedence and
  * commemoration is the resolver's job (#29). See docs/design/temporal-fill-model.md.
+ *
+ * Two further moveable feasts the pre-1955 rite keeps that the 1962 rubrics dropped
+ * are minted only when the edition declares their archetype (1954 and 1955), gated
+ * on {@see TemporalAttributes::has()} so the 1962 calendar is unmoved (#453): the
+ * Passiontide **Seven Sorrows of the BVM** (the Friday in Passion Week, Easter-9)
+ * and the moveable **Solemnity of St Joseph** (the Wednesday before the 3rd Sunday
+ * after Easter, Easter+17). The Solemnity's common octave is minted by {@see Eastertide}.
  */
 final class MovableFeasts
 {
     private int $year;
+
+    private DateTimeImmutable $easter;
 
     private DateTimeImmutable $trinitySunday;
 
@@ -66,6 +75,7 @@ final class MovableFeasts
         $this->attributes = new TemporalAttributes($corpus, $editionDir);
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
+        $this->easter = $skeleton->easter();
         $this->trinitySunday = $skeleton->date('trinity-sunday');
         $this->corpusChristi = $skeleton->date('corpus-christi');
         $this->sacredHeart = $skeleton->date('sacred-heart');
@@ -178,6 +188,32 @@ final class MovableFeasts
                 $this->christTheKing
             ),
         ];
+
+        // The two moveable feasts the pre-1955 rite keeps that the 1962 rubrics dropped (#453),
+        // minted only when the edition declares the archetype (1954 and 1955; never 1962, whose
+        // has() is false — so the base calendar is unmoved). The Passiontide Seven Sorrows of the
+        // BVM falls on the Friday in Passion Week (Easter-9) and the moveable Solemnity of St
+        // Joseph on the Wednesday before the 3rd Sunday after Easter (Easter+17); the Solemnity's
+        // common octave is minted separately by Eastertide. Their seasons match the block they sit
+        // in (the day's own season comes from the temporal filler, not these overlays).
+        if ($this->attributes->has('seven-sorrows')) {
+            $sevenSorrows = $this->easter->sub(new DateInterval('P9D'));
+            $feasts[$sevenSorrows->format('Y-m-d')] = $this->feast(
+                'roman:temporale:paschal:passion-week:septem-dolorum',
+                Season::passiontide(),
+                'seven-sorrows',
+                $sevenSorrows
+            );
+        }
+        if ($this->attributes->has('solemnitas-ioseph')) {
+            $solemnity = TemporalCalendar::addDays($this->easter, 17);
+            $feasts[$solemnity->format('Y-m-d')] = $this->feast(
+                'roman:temporale:paschal:solemnitas-ioseph',
+                Season::eastertide(),
+                'solemnitas-ioseph',
+                $solemnity
+            );
+        }
 
         ksort($feasts);
 

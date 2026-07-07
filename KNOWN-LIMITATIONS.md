@@ -47,6 +47,26 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   the full Metonic lunar calendar carries — so the day-by-day `Luna` in late December / early January may
   differ by a day from the martyrology's tabular value. A full Metonic reconstruction is a possible future
   refinement; the year-level cyclic numbers (Golden Number, Epact, etc.) are exact.
+- **Pre-1955 moveable feasts (Divino Afflatu 1954 / Cum nostra 1955, #453):** the two moveable feasts the
+  1962 rubrics dropped — the Passiontide **Seven Sorrows** (Easter−9) and the moveable **Solemnity of St
+  Joseph** (Easter+17) with its common octave (1954 only) — are modelled with a few deliberate simplifications,
+  each to be pinned against a full-year Divino-Afflatu oracle sweep before the fixture is frozen:
+  - **Octave day under a Double II:** the Solemnity's octave *day* (Easter+24, a greater double) is modelled
+    as **commemorated, not omitted** when it yields to a Double of the II class (e.g. Ss Philip & James when
+    1 May = Easter+24, as in 1996). The omit rule of a *common* octave is applied to its semidouble
+    days-within; the fuller greater-double octave day is treated as commemorated. Not oracle-verified.
+  - **Transfer with octave:** if the Solemnity (Easter+17) were ever impeded and transferred, its octave does
+    **not** move with it (octaves stay anchored / are curtailed). Dormant in practice — Easter+17 is a
+    Wednesday that nothing outranks in paschaltide, so the Solemnity is never impeded.
+  - **1955 keeps the Solemnity:** the derived 1955 edition keeps the Solemnity of St Joseph (octave suppressed)
+    because the dataset models the **pre-1-May-1956** state — St Joseph the Worker is held out and Ss Philip &
+    James are restored to 1 May. This diverges *by construction* from the historical 1956 calendar (which
+    replaced the Solemnity with St Joseph the Worker) on this one feast; it is a documented modelling choice,
+    not a defect.
+  - **Latin heading orthography** (`Solemnitatis Sancti Ioseph`; `Septem Dolorum Beatae Mariae Virginis`) is
+    display text pinned to the standard pattern, not transcribed from a scanned 1920 *typica*; it does not
+    affect grade, date, colour, or precedence. As for the privileged octaves, the Sunday within the octave
+    keeps its own office and the octave's *Dominica infra Octavam* commemoration on that Sunday is not modelled.
 
 ## Deliberately out of scope
 
