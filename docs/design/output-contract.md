@@ -6,7 +6,7 @@ The versioned, serialisable shape that `Directorium\Core\contract()` emits — t
 The engine resolves a civil date to a `Calendar\LiturgicalDay` (Epic #29). That
 aggregate is kept pure: it holds value objects and knows nothing about JSON. A
 separate serialiser, `Contract\DayContract`, turns it into a stable, JSON-ready
-structure. The shape is **frozen on the 1.0 line** (currently `1.0.1`) and only
+structure. The shape is **frozen on the 1.0 line** (currently `1.0.2`) and only
 ever grows additively (reserved slots fill as patch bumps; keys are added, never
 removed or repurposed). This document is the spec downstream teams build against.
 
@@ -31,7 +31,7 @@ cache on all three — any one moving means the resolved output may differ:
 
 | Field | Source | Meaning |
 | --- | --- | --- |
-| `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.1). |
+| `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.2). |
 | `corpusVersion` | `SanctoralData::version()` (seed: `1962-seed-<date>`) | The **calendar data** build; carries no edition token. |
 | `engineVersion` | `Directorium::VERSION` | The **resolver** version; hand-bumped when output changes. |
 
@@ -116,7 +116,7 @@ fixes only that the field is open and that shared concepts share a token.
 
 | Field | Type | Source | Notes |
 | --- | --- | --- | --- |
-| `contractVersion` | string | `SHAPE_VERSION` | `1.0.1`. |
+| `contractVersion` | string | `SHAPE_VERSION` | `1.0.2`. |
 | `corpusVersion` | string | `SanctoralData::version()` | e.g. `1962-seed-2026-07-02`. |
 | `engineVersion` | string | `Directorium::VERSION` | e.g. `0.4.0`. |
 | `rite` | string | edition head | `roman`. |
@@ -131,7 +131,7 @@ fixes only that the field is open and that shared concepts share a token.
 | `secondVespers` | object \| null | `ConcurrenceOutcome` | The evening concurrence (below); null when unresolved. |
 | `firstVespers` | null | reserved | Office layer. |
 | `resolution` | object \| null | opt-in | The "why-this-won" trace (#233); null by default, filled by `explain()` / `contract($d, true)`. See resolution-trace-model.md. |
-| `fasting` | null | reserved | Fasting/abstinence layer. |
+| `fasting` | object \| null | filled | The day's fast/abstinence obligation under the active penitential discipline (#250); null on a day that carries none. Sub-shape below. |
 | `calendar` | object | filled | Always carries `astronomical` — the day's calendrical/astronomical block (#242/#245). Also carries `particular` when resolved under a particular calendar (#78), and the reserved `lectionary`. Sub-shape below. |
 
 The **`secondVespers`** object is `{ outcome, favoursFollowing, holder,
@@ -285,6 +285,38 @@ lectionary, so the whole `lectionary` block is null there; a Novus Ordo snapshot
 fills it. Nesting these under `calendar` (rather than at the day root) keeps the
 day-level key count stable and groups them with the other calendrical facts.
 
+### The `fasting` sub-shape
+
+The day-level `fasting` block (#248/#250) reports the fast/abstinence obligation. It
+is `null` on a day that carries none (most days), and an object when some fast or
+abstinence applies:
+
+```json
+"fasting": {
+  "fast": true,
+  "abstinence": "full",
+  "discipline": "roman:cic-1917",
+  "reason": "lent-major",
+  "citation": "cic-1917:c1252"
+}
+```
+
+- `fast` — whether the day is a day of fast (one full meal).
+- `abstinence` ∈ `full` (no flesh meat) · `partial` (flesh at the principal meal only)
+  · `none`.
+- `discipline` — the governing discipline's URN. Fasting is **canon law, not rubric**,
+  so it sits on its own axis: a single discipline (the 1917 Code, `roman:cic-1917`)
+  governs the 1954/1955/1962 editions alike, mapped from the edition by
+  `RubricSystem::penitentialDiscipline()`. A later era (Paenitemini, the modern norms)
+  is a new discipline, additively.
+- `reason` — the cited rule that applied (`ash-wednesday`, `ember-day`, `vigil`,
+  `lent-major`, `lent-minor`, `friday`); `citation` its authority.
+
+The obligation is a **per-day realization**, computed from the resolved day's own
+properties (weekday, season, an office's `kind`/`id`), so per-edition correctness is
+emergent — a vigil an edition suppressed is not a vigil day and carries no fast; the
+discipline is never duplicated per edition. See `penitential-discipline-model.md`.
+
 ### Stable identifiers (a compatibility surface)
 
 `id` is the bare `ObservanceId` slug — identity only, edition-invariant, and
@@ -365,8 +397,7 @@ adding it is additive (a patch bump):
 | --- | --- | --- |
 | `firstVespers` | day | Office layer (v1.1) |
 | `resolution` | day | Show-your-work resolution trace |
-| `fasting` | day | Fasting & abstinence layer |
-| `calendar.lectionary` | day | Lectionary cycles (Novus Ordo) — `calendar.astronomical` is filled (#242) |
+| `calendar.lectionary` | day | Lectionary cycles (Novus Ordo) — `calendar.astronomical` (#242) and `fasting` (#250) are filled |
 | `octaveOf` | office | Octave modelling |
 | `aliases` | office | `IdentityAliases` lineage |
 | `citations` | office | Provenance/authority subsystem |
@@ -392,7 +423,7 @@ Pentecost; the feria is both the celebration and the tempora):
 
 ```json
 {
-  "contractVersion": "1.0.1",
+  "contractVersion": "1.0.2",
   "corpusVersion": "1962-seed-2026-07-02",
   "engineVersion": "0.4.0",
   "rite": "roman",

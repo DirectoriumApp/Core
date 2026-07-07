@@ -210,6 +210,29 @@ final class Corpus
     }
 
     /**
+     * A penitential discipline's fasting-rule rows (#248): one obligation per named
+     * condition, discriminated by the `rule` field, plus the vigil id-list on the
+     * `vigil` rule. Shared across editions — fasting is its own axis.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function fastingRules(string $disciplineKey): array
+    {
+        return $this->records('disciplines/' . $disciplineKey . '/fasting-rules.ndjson');
+    }
+
+    /**
+     * A penitential discipline's metadata singleton (`disciplines/<key>/discipline.json`):
+     * its id, URN, display name, and cited authority.
+     *
+     * @return array<string, mixed>
+     */
+    public function disciplineMeta(string $disciplineKey): array
+    {
+        return $this->singleton('disciplines/' . $disciplineKey . '/discipline.json');
+    }
+
+    /**
      * The particular-calendar overlay slugs the corpus ships, from the manifest
      * (Core #76). Empty when the corpus carries no overlays.
      *

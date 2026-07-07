@@ -657,6 +657,29 @@ export function transformPrecedence(facts, edition) {
 }
 
 /**
+ * Transform a penitential discipline (#248): its meta singleton and its fasting-rule
+ * rows, sorted by `rule` for a deterministic build. Fasting sits on its own axis, one
+ * discipline shared across the rubric editions — so this mirrors the overlay shape (a
+ * meta + a rows file) rather than any per-edition table. The `vigils` list, when
+ * present, is sorted so the emitted row is byte-stable regardless of authoring order.
+ */
+export function transformDiscipline(facts, key) {
+  const rules = (facts.rules || [])
+    .map((r) => {
+      const row = { rule: r.rule, fast: r.fast, abstinence: r.abstinence, cite: r.cite };
+      if (r.vigils) {
+        row.vigils = [...r.vigils].sort();
+      }
+      return row;
+    })
+    .sort((a, b) => (a.rule < b.rule ? -1 : a.rule > b.rule ? 1 : 0));
+
+  const meta = { id: key, urn: facts.urn, name: facts.name, cite: facts.cite };
+
+  return { key, meta, rules };
+}
+
+/**
  * Fan the temporal-skeleton facts into the two edition-invariant NDJSON shapes:
  * the Easter offsets (`{ slot, offset, cite }`) and the block->season assignments
  * (`{ block, season, cite }`). Both validate against the temporal-skeleton schema.

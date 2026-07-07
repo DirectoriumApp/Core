@@ -49,13 +49,16 @@ final class RubricSystem
 
     private bool $built;
 
+    private string $discipline;
+
     private function __construct(
         string $urn,
         string $corpusDir,
         string $label,
         int $validFrom,
         ?int $validTo,
-        bool $built
+        bool $built,
+        string $discipline
     ) {
         $this->urn = $urn;
         $this->corpusDir = $corpusDir;
@@ -63,13 +66,15 @@ final class RubricSystem
         $this->validFrom = $validFrom;
         $this->validTo = $validTo;
         $this->built = $built;
+        $this->discipline = $discipline;
     }
 
     /**
      * The rubric systems the platform knows, in historical order. 1954 and 1955 are
      * declared but not yet {@see isBuilt()} until Epics #63 / #68 land their data and rules.
      *
-     * @return array<string, array{dir: string, label: string, from: int, to: int|null, built: bool}>
+     * @return array<string, array{dir: string, label: string, from: int, to: int|null,
+     *     built: bool, discipline: string}>
      */
     private static function registry(): array
     {
@@ -80,6 +85,7 @@ final class RubricSystem
                 'from' => 1913,
                 'to' => 1955,
                 'built' => false,
+                'discipline' => 'cic-1917',
             ],
             self::RUBRICAE_1955 => [
                 'dir' => 'roman-rubricae-1955',
@@ -87,6 +93,7 @@ final class RubricSystem
                 'from' => 1956,
                 'to' => 1960,
                 'built' => false,
+                'discipline' => 'cic-1917',
             ],
             self::RUBRICAE_1960 => [
                 'dir' => 'roman-rubricae-1960',
@@ -94,6 +101,7 @@ final class RubricSystem
                 'from' => 1961,
                 'to' => null,
                 'built' => true,
+                'discipline' => 'cic-1917',
             ],
         ];
     }
@@ -177,7 +185,15 @@ final class RubricSystem
             throw new RuntimeException(sprintf('No rubric system registered for "%s".', $urn));
         }
 
-        return new self($urn, $meta['dir'], $meta['label'], $meta['from'], $meta['to'], $meta['built']);
+        return new self(
+            $urn,
+            $meta['dir'],
+            $meta['label'],
+            $meta['from'],
+            $meta['to'],
+            $meta['built'],
+            $meta['discipline']
+        );
     }
 
     /** The stable edition URN stamped into the output contract, e.g. `roman:rubricae-1960`. */
@@ -223,6 +239,17 @@ final class RubricSystem
     public function isBuilt(): bool
     {
         return $this->built;
+    }
+
+    /**
+     * The penitential-discipline key this edition resolves under (#248) — the corpus
+     * `disciplines/<key>/` folder whose fast/abstinence law governs. Fasting is canon
+     * law, not rubric, so every traditional edition (1954/1955/1962) points at the same
+     * 1917 Code (`cic-1917`); a later era on a different discipline changes only this key.
+     */
+    public function penitentialDiscipline(): string
+    {
+        return $this->discipline;
     }
 
     public function equals(self $other): bool

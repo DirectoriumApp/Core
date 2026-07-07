@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Directorium\Core\Calendar;
 
 use DateTimeImmutable;
+use Directorium\Core\Discipline\FastingObligation;
 use Directorium\Core\Precedence\ConcurrenceOutcome;
 use Directorium\Core\Trace\ResolutionTrace;
 
@@ -50,6 +51,8 @@ final class LiturgicalDay
 
     private ?int $commemorationLimit;
 
+    private ?FastingObligation $fasting;
+
     /**
      * @param list<RoledObservance> $celebration
      * @param list<RoledObservance> $commemoration
@@ -58,6 +61,9 @@ final class LiturgicalDay
      * @param int|null              $commemorationLimit the commemorations the day admits by
      *        its class under the resolving edition ({@see commemorationLimit()}), or null on a
      *        day the resolver did not stamp (a placeholder or a synthetically built day)
+     * @param FastingObligation|null $fasting the day's fast/abstinence obligation under the
+     *        active penitential discipline ({@see fasting()}), or null when none applies or the
+     *        day was not stamped
      */
     public function __construct(
         DateTimeImmutable $date,
@@ -67,7 +73,8 @@ final class LiturgicalDay
         array $tempora,
         ?ConcurrenceOutcome $secondVespers = null,
         ?ResolutionTrace $trace = null,
-        ?int $commemorationLimit = null
+        ?int $commemorationLimit = null,
+        ?FastingObligation $fasting = null
     ) {
         $this->date = $date;
         $this->celebration = array_values($celebration);
@@ -77,6 +84,7 @@ final class LiturgicalDay
         $this->secondVespers = $secondVespers;
         $this->trace = $trace;
         $this->commemorationLimit = $commemorationLimit;
+        $this->fasting = $fasting;
     }
 
     /** An empty placeholder day for the given date: no observances in any role. */
@@ -147,6 +155,15 @@ final class LiturgicalDay
         return $this->commemorationLimit;
     }
 
+    /**
+     * The day's fast/abstinence obligation under the active penitential discipline (#249),
+     * or null when the day carries none (an ordinary day) or was not stamped.
+     */
+    public function fasting(): ?FastingObligation
+    {
+        return $this->fasting;
+    }
+
     /** A copy of the day with its evening concurrence resolved. */
     public function withSecondVespers(ConcurrenceOutcome $secondVespers): self
     {
@@ -158,7 +175,8 @@ final class LiturgicalDay
             $this->tempora,
             $secondVespers,
             $this->trace,
-            $this->commemorationLimit
+            $this->commemorationLimit,
+            $this->fasting
         );
     }
 
@@ -173,7 +191,8 @@ final class LiturgicalDay
             $this->tempora,
             $this->secondVespers,
             $trace,
-            $this->commemorationLimit
+            $this->commemorationLimit,
+            $this->fasting
         );
     }
 
@@ -204,7 +223,8 @@ final class LiturgicalDay
             $byRole[CelebrationRole::TEMPORA],
             $this->secondVespers,
             $this->trace,
-            $this->commemorationLimit
+            $this->commemorationLimit,
+            $this->fasting
         );
     }
 

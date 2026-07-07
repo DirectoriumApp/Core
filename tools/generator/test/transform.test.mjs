@@ -12,6 +12,7 @@ import {
   deriveCumNostra1955,
   transformOctaves,
   transformPrecedence,
+  transformDiscipline,
   checkCoPlacement,
 } from '../src/transform.mjs';
 
@@ -100,6 +101,44 @@ test('transformPrecedence fans an edition table into sorted tiers and both rule 
   assert.deepEqual(kinds, ['commemoration-limit', 'membership']);
   const membership = rules.find((r) => r.rule === 'membership');
   assert.deepEqual(membership.ids, ['roman:temporale:paschal:easter']);
+});
+
+test('transformDiscipline sorts rules by name and its vigil list for a byte-stable build', () => {
+  const { key, meta, rules } = transformDiscipline(
+    {
+      urn: 'roman:cic-1917',
+      name: '1917 Code of Canon Law',
+      cite: 'cic-1917',
+      rules: [
+        { rule: 'friday', fast: false, abstinence: 'full', cite: 'cic-1917:c1252' },
+        {
+          rule: 'vigil',
+          fast: true,
+          abstinence: 'full',
+          cite: 'cic-1917:c1252',
+          vigils: ['roman:temporale:christmas:vigil', 'roman:sanctorale:assumptio:vigilia'],
+        },
+        { rule: 'ash-wednesday', fast: true, abstinence: 'full', cite: 'cic-1917:c1252' },
+      ],
+    },
+    'cic-1917',
+  );
+
+  assert.equal(key, 'cic-1917');
+  assert.deepEqual(meta, { id: 'cic-1917', urn: 'roman:cic-1917', name: '1917 Code of Canon Law', cite: 'cic-1917' });
+  // Rules are sorted by rule name, independent of author order.
+  assert.deepEqual(
+    rules.map((r) => r.rule),
+    ['ash-wednesday', 'friday', 'vigil'],
+  );
+  // The vigil list is sorted so the row is byte-stable.
+  const vigil = rules.find((r) => r.rule === 'vigil');
+  assert.deepEqual(vigil.vigils, [
+    'roman:sanctorale:assumptio:vigilia',
+    'roman:temporale:christmas:vigil',
+  ]);
+  // A non-vigil rule carries no vigils key.
+  assert.equal('vigils' in rules.find((r) => r.rule === 'friday'), false);
 });
 
 /** A minimal sanctoral entry carrying one Divino-Afflatu edition block. */

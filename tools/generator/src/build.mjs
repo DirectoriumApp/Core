@@ -20,6 +20,7 @@ import {
   transformTemporale,
   transformPrecedence,
   transformOverlay,
+  transformDiscipline,
   checkCoPlacement,
 } from './transform.mjs';
 import { checkProvenance, usedSources } from './provenance.mjs';
@@ -61,6 +62,25 @@ function loadOverlays() {
 }
 
 /**
+ * Discover and transform every penitential discipline in facts/disciplines (#248),
+ * one per `<key>.yaml`, key-sorted for a deterministic build. Returns `{ key, meta,
+ * rules }` per discipline; an empty list when the directory is absent, so the base
+ * corpus builds unchanged before any discipline exists.
+ */
+function loadDisciplines() {
+  const dir = join(FACTS_DIR, 'disciplines');
+  if (!existsSync(dir)) {
+    return [];
+  }
+  const keys = readdirSync(dir)
+    .filter((file) => file.endsWith('.yaml'))
+    .map((file) => file.replace(/\.yaml$/, ''))
+    .sort();
+
+  return keys.map((key) => transformDiscipline(loadYaml(join(dir, key + '.yaml')), key));
+}
+
+/**
  * Build the corpus into `outDir` (defaults to the engine's data/corpus).
  * Returns the sorted list of generated file paths (relative to `outDir`).
  * Throws if any record fails schema validation — the build fails closed.
@@ -91,6 +111,7 @@ export function build(outDir = DEFAULT_OUT) {
   const precedence = transformPrecedence(loadYaml(join(FACTS_DIR, 'precedence.yaml')), edition);
 
   const overlays = loadOverlays();
+  const disciplines = loadDisciplines();
 
   // Additional editions (Core v0.3.0: 1954, later 1955), each authored as a diff from a
   // base edition and materialised into its own dir. Only the per-edition Layer-2 and
@@ -191,6 +212,7 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['source'], sources, 'source'),
     ...overlays.flatMap((o) => validateAll(validators['overlay-operation'], o.rows, `overlay:${o.slug}`)),
     ...overlays.flatMap((o) => validateAll(validators['overlay'], [o.meta], `overlay-meta:${o.slug}`)),
+    ...disciplines.flatMap((d) => validateAll(validators['fasting-rules'], d.rules, `discipline:${d.key}`)),
     ...extraEditions.flatMap((ed) => [
       ...validateAll(validators['attributes.sanctorale'], ed.attributes, `attributes.sanctorale:${ed.dir}`),
       ...validateAll(validators['placement.sanctorale'], ed.placement, `placement.sanctorale:${ed.dir}`),
@@ -234,11 +256,22 @@ export function build(outDir = DEFAULT_OUT) {
   const extraPrecedenceRows = extraEditions.flatMap((ed) =>
     ed.precedence ? [...ed.precedence.tiers, ...ed.precedence.rules] : [],
   );
-  for (const row of [...offsets, ...blockSeasons, ...precedence.tiers, ...precedence.rules, ...extraPrecedenceRows]) {
+  // A discipline's rule rows and its meta each carry a single `cite` (a canon of the
+  // governing law), cite-checked like the other structural facts; the meta's `name` is
+  // an authored label, not a transcribed title, so it is not run through the PD gate.
+  const disciplineRows = disciplines.flatMap((d) => [...d.rules, { cite: d.meta.cite, rule: d.key }]);
+  for (const row of [
+    ...offsets,
+    ...blockSeasons,
+    ...precedence.tiers,
+    ...precedence.rules,
+    ...extraPrecedenceRows,
+    ...disciplineRows,
+  ]) {
     const key = String(row.cite).split(':')[0];
     usage.set(key, (usage.get(key) || 0) + 1);
     if (!sourceKeys.has(key)) {
-      const id = row.slot ?? row.block ?? row.selector ?? row.name ?? row.dayClass;
+      const id = row.slot ?? row.block ?? row.selector ?? row.name ?? row.dayClass ?? row.rule;
       problems.push(`fact row ${id}: cites unknown source "${key}"`);
     }
   }
@@ -304,6 +337,21 @@ export function build(outDir = DEFAULT_OUT) {
     };
   }
 
+  // Each penitential discipline contributes its fasting rules (one NDJSON row per named
+  // condition, sorted by rule) plus a metadata singleton naming its URN.
+  for (const d of disciplines) {
+    outputs[`disciplines/${d.key}/fasting-rules.ndjson`] = {
+      text: toNdjson(d.rules),
+      records: d.rules.length,
+      primaryKey: 'rule',
+    };
+    outputs[`disciplines/${d.key}/discipline.json`] = {
+      text: toPretty(d.meta),
+      records: 1,
+      primaryKey: 'id',
+    };
+  }
+
   // Each additional edition contributes its diff — the per-edition Layer-2 attributes and
   // the placement — into its own dir. Identity and the temporal skeleton are shared.
   for (const ed of extraEditions) {
@@ -357,6 +405,7 @@ export function build(outDir = DEFAULT_OUT) {
     license: 'CC0-1.0',
     editions: [edition, ...extraEditions.map((ed) => ed.dir)],
     overlays: overlays.map((o) => o.slug),
+    disciplines: disciplines.map((d) => d.key),
     sources: usedSources(sources, usage),
     files,
   };

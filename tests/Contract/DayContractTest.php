@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
 use function Directorium\Core\contract;
 
 /**
- * Golden snapshots for the frozen output contract (v1.0.0): a simple day pins
+ * Golden snapshots for the frozen output contract (1.0 line): a simple day pins
  * the full shape, and the transfer/omit/commemoration cases pin the office-level
  * outcome and transfer links. The contract is deterministic, so the snapshots
  * are exact — any drift is a deliberate, reviewed change.
@@ -36,7 +36,7 @@ final class DayContractTest extends TestCase
     public function testSimpleDaySerialisesToTheFrozenShape(): void
     {
         $expected = [
-            'contractVersion' => '1.0.1',
+            'contractVersion' => '1.0.2',
             'corpusVersion' => Corpus::default()->corpusVersion(),
             'engineVersion' => '0.4.0',
             'rite' => 'roman',
@@ -56,7 +56,14 @@ final class DayContractTest extends TestCase
             ],
             'firstVespers' => null,
             'resolution' => null,
-            'fasting' => null,
+            // 11 July 2025 is a Friday — abstinence, no fast, under the 1917 discipline.
+            'fasting' => [
+                'fast' => false,
+                'abstinence' => 'full',
+                'discipline' => 'roman:cic-1917',
+                'reason' => 'friday',
+                'citation' => 'cic-1917:c1252',
+            ],
             'calendar' => [
                 'astronomical' => [
                     'goldenNumber' => 12,
@@ -77,7 +84,7 @@ final class DayContractTest extends TestCase
     {
         $day = contract(self::utc('2025-07-15'));
 
-        self::assertSame('1.0.1', $day['contractVersion']);
+        self::assertSame('1.0.2', $day['contractVersion']);
         self::assertSame('0.4.0', $day['engineVersion']);
         self::assertSame('roman:rubricae-1960', $day['edition']);
         self::assertSame('roman', $day['rite']);

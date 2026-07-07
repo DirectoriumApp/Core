@@ -12,6 +12,8 @@ use Directorium\Core\Calendar\RealizedObservance;
 use Directorium\Core\Calendar\RoledObservance;
 use Directorium\Core\Contract\Provenance;
 use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Discipline\FastingResolver;
+use Directorium\Core\Discipline\PenitentialDiscipline;
 use Directorium\Core\Edition\RubricSystem;
 use Directorium\Core\Directorium;
 use Directorium\Core\Sanctoral\CorpusSanctoralData;
@@ -51,18 +53,22 @@ final class DayResolver
 
     private SanctoralData $sanctoralData;
 
+    private FastingResolver $fasting;
+
     private bool $tracing;
 
     private function __construct(
         PrecedenceRules $rules,
         string $edition,
         SanctoralData $sanctoralData,
+        FastingResolver $fasting,
         bool $tracing = false
     ) {
         $this->rules = $rules;
         $this->commemorations = new CommemorationSelector($rules);
         $this->edition = $edition;
         $this->sanctoralData = $sanctoralData;
+        $this->fasting = $fasting;
         $this->tracing = $tracing;
     }
 
@@ -84,7 +90,8 @@ final class DayResolver
         return new self(
             self::rulesFor($system, $corpus),
             $system->urn(),
-            $sanctoralData ?? new CorpusSanctoralData($corpus, $system->corpusDir())
+            $sanctoralData ?? new CorpusSanctoralData($corpus, $system->corpusDir()),
+            new FastingResolver(PenitentialDiscipline::fromCorpus($corpus, $system->penitentialDiscipline()))
         );
     }
 
@@ -122,7 +129,7 @@ final class DayResolver
      */
     public function explaining(): self
     {
-        return new self($this->rules, $this->edition, $this->sanctoralData, true);
+        return new self($this->rules, $this->edition, $this->sanctoralData, $this->fasting, true);
     }
 
     /** The edition, corpus, and engine versions this resolver stamps onto a year. */
@@ -316,6 +323,27 @@ final class DayResolver
             ? [new RoledObservance($temporalOffice, CelebrationRole::tempora())]
             : [];
 
+        // The penitential obligation reads the resolved day's own properties (its weekday,
+        // season, and the offices' kinds/ids), so a vigil or Ember day the edition suppressed
+        // never produces one — per-edition correctness without a per-edition discipline. Every
+        // office in play is scanned — including the displaced — because the fast attaches to
+        // the day, not to whichever office won: a fasting vigil outranked to omission still
+        // carries its fast.
+        $displacedObservances = [];
+        foreach ($displaced as $roled) {
+            $displacedObservances[] = $roled->observance();
+        }
+        $fasting = $this->fasting->resolve(
+            $date,
+            $temporalOffice !== null ? $temporalOffice->season()->value() : null,
+            array_merge(
+                [$celebration],
+                $temporalOffice !== null ? [$temporalOffice] : [],
+                $selected,
+                $displacedObservances
+            )
+        );
+
         $day = new LiturgicalDay(
             $date,
             [new RoledObservance($celebration, CelebrationRole::celebration())],
@@ -324,7 +352,8 @@ final class DayResolver
             $tempora,
             null,
             null,
-            $this->rules->commemorationClassLimit($celebration)
+            $this->rules->commemorationClassLimit($celebration),
+            $fasting
         );
 
         if (!$this->tracing) {

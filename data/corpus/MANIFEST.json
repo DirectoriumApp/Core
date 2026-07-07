@@ -1,11 +1,24 @@
 {
-  "corpusVersion": "1962-2026-07-02.1",
+  "corpusVersion": "1962-2026-07-06.1",
+  "disciplines": [
+    "cic-1917"
+  ],
   "editions": [
     "roman-rubricae-1960",
     "roman-divino-afflatu",
     "roman-rubricae-1955"
   ],
   "files": {
+    "disciplines/cic-1917/discipline.json": {
+      "primaryKey": "id",
+      "records": 1,
+      "sha256": "7157055feac0fb73423e3a9f920f814c8552aba0f6c8c37947ecb889b3fd9ae7"
+    },
+    "disciplines/cic-1917/fasting-rules.ndjson": {
+      "primaryKey": "rule",
+      "records": 6,
+      "sha256": "b620236638d7b2680265605cd0bb4fdb2d2e85df8f0278aa0e756dc0708733d2"
+    },
     "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 349,
@@ -93,8 +106,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 7,
-      "sha256": "3417a25c9b38dd58657247b976fb026da162dda5c2d1f41c904cdf07fd0f0b88"
+      "records": 8,
+      "sha256": "1d61ec56302b541910d682149127ab0ab9fdd0f65ba06167db67624b829d6348"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -113,6 +126,14 @@
     "sspx"
   ],
   "sources": [
+    {
+      "key": "cic-1917",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Codex Iuris Canonici (1917) — the law of fast and abstinence (cann. 1250–1254)",
+      "urn": "directorium:source:cic-1917",
+      "uses": 7
+    },
     {
       "key": "cn-1955",
       "kind": "reference",
