@@ -30,10 +30,11 @@ final class LegacyRankEditionTest extends TestCase
 
         // The full 1954 sanctoral: 290 feasts of the 1962 base re-graded into the pre-1955
         // double scheme (#64); 25 general-calendar feasts the 1955/1960 reforms SUPPRESSED,
-        // authored as notInBaseEdition; the materialised sanctoral octaves (#65 — 21 octave
-        // observances); the pre-1955 vigils (#66 — 13); and the Commemoration of All Souls
+        // authored as notInBaseEdition; the materialised sanctoral octaves (#65/#453 — 38 octave
+        // observances, the comites-Christi/All-Saints/Immaculate-Conception octave DAYS added
+        // with #453); the pre-1955 vigils (#66 — 13); and the Commemoration of All Souls
         // (#453 — the Office of the Dead, +1). Every one carries a legacy grade.
-        self::assertCount(290 + 25 + 21 + 13 + 1, $entries);
+        self::assertCount(290 + 25 + 38 + 13 + 1, $entries);
         foreach ($entries as $entry) {
             self::assertNotNull(
                 $entry->legacyRank(),

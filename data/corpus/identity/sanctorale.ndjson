@@ -156,9 +156,17 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ignatius-antiochenus","kind":"feast","names":{"la":"S. Ignatii Episcopi et Martyris"},"titulars":["ignatius-antiochenus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ignatius-de-loyola","kind":"feast","names":{"la":"S. Ignatii Confessoris"},"titulars":["ignatius-de-loyola"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio","kind":"feast","names":{"la":"In Conceptione Immaculata B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:in-octava","kind":"octave-day","names":{"la":"In Octava Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:2","kind":"within-octave","names":{"la":"Dies secunda infra Octavam Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:3","kind":"within-octave","names":{"la":"Dies tertia infra Octavam Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:4","kind":"within-octave","names":{"la":"Dies quarta infra Octavam Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:5","kind":"within-octave","names":{"la":"Dies quinta infra Octavam Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:6","kind":"within-octave","names":{"la":"Dies sexta infra Octavam Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:7","kind":"within-octave","names":{"la":"Dies septima infra Octavam Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculata-conceptio:vigilia","kind":"vigil","names":{"la":"In Vigilia Immaculatae Conceptionis B.M.V."},"titulars":["maria"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:immaculatum-cor-mariae","kind":"feast","names":{"la":"Immaculati Cordis B.M.V."},"titulars":["immaculatum-cor-beatae-mariae-virginis"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:innocentes","kind":"feast","names":{"la":"Ss. Innocentium Martyrum"},"titulars":["innocentes"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:innocentes:in-octava","kind":"octave-day","names":{"la":"In Octava Ss. Innocentium Martyrum"},"titulars":["innocentes"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:inventio-crucis","kind":"feast","names":{"la":"In Inventione Sanctae Crucis"},"titulars":["sancta-crux"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:inventio-stephani","kind":"feast","names":{"la":"In Inventione S. Stephani Protomartyris"},"titulars":["stephanus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioachim","kind":"feast","names":{"la":"S. Ioachim Confessoris, Patris B.M.V."},"titulars":["ioachim"]}
@@ -177,6 +185,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-de-matha","kind":"feast","names":{"la":"S. Ioannis de Matha Confessoris"},"titulars":["ioannes-de-matha"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-eudes","kind":"feast","names":{"la":"S. Ioannis Eudes Confessoris"},"titulars":["ioannes-eudes"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-evangelista","kind":"feast","names":{"la":"S. Ioannis Apostoli et Evangelistae"},"titulars":["ioannes-evangelista"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-evangelista:in-octava","kind":"octave-day","names":{"la":"In Octava S. Ioannis Apostoli et Evangelistae"},"titulars":["ioannes-evangelista"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-gualbertus","kind":"feast","names":{"la":"S. Ioannis Gualberti Abbatis"},"titulars":["ioannes-gualbertus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-i","kind":"commemoration-only","names":{"la":"S. Ioannis I Papae et Martyris"},"titulars":["ioannes-i"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:ioannes-leonardi","kind":"feast","names":{"la":"S. Ioannis Leonardi Confessoris"},"titulars":["ioannes-leonardi","dionysius","rusticus","eleutherius"]}
@@ -246,6 +255,13 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:nomen-mariae","kind":"feast","names":{"la":"Ss. Nominis Mariae"},"titulars":["beata-maria-virgo"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:norbertus","kind":"feast","names":{"la":"S. Norberti Episcopi et Confessoris"},"titulars":["norbertus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti","kind":"feast","names":{"la":"Festum Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:in-octava","kind":"octave-day","names":{"la":"In Octava Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:2","kind":"within-octave","names":{"la":"Dies secunda infra Octavam Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:3","kind":"within-octave","names":{"la":"Dies tertia infra Octavam Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:4","kind":"within-octave","names":{"la":"Dies quarta infra Octavam Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:5","kind":"within-octave","names":{"la":"Dies quinta infra Octavam Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:6","kind":"within-octave","names":{"la":"Dies sexta infra Octavam Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:7","kind":"within-octave","names":{"la":"Dies septima infra Octavam Omnium Sanctorum"},"titulars":["omnes-sancti"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:vigilia","kind":"vigil","names":{"la":"In Vigilia Omnium Sanctorum"},"titulars":["omnes-sancti"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnium-fidelium-defunctorum","kind":"office-of-the-dead","names":{"la":"In Commemoratione Omnium Fidelium Defunctorum"},"titulars":["fideles-defuncti"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pantaleon","kind":"commemoration-only","names":{"la":"S. Pantaleonis Martyris"},"titulars":["pantaleon"]}
@@ -321,6 +337,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stephanus","kind":"feast","names":{"la":"S. Stephani Protomartyris"},"titulars":["stephanus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stephanus-hungariae","kind":"feast","names":{"la":"S. Stephani Regis Confessoris"},"titulars":["stephanus-hungariae"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stephanus-papa","kind":"commemoration-only","names":{"la":"S. Stephani I Papae et Martyris"},"titulars":["stephanus-i-papa"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stephanus:in-octava","kind":"octave-day","names":{"la":"In Octava S. Stephani Protomartyris"},"titulars":["stephanus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:stigmata-francisci","kind":"commemoration-only","names":{"la":"Impressionis Ss. Stigmatum S. Francisci Confessoris"},"titulars":["franciscus-assisiensis"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:sylvester-abbas","kind":"feast","names":{"la":"S. Silvestri Abbatis"},"titulars":["sylvester-abbas"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:symphorosa","kind":"feast","names":{"la":"Ss. Symphorosae et Septem Filiorum eius Martyrum"},"titulars":["symphorosa"]}

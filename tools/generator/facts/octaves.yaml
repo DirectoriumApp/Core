@@ -22,23 +22,23 @@
 # here: its octave belonged to the *moveable* Solemnity of St Joseph (abolished 1955), never
 # to the fixed March feast.
 #
-# DEFERRED octave days — authored later with #64 (their displacing feasts) + #67 (the
-# precedence + commemoration rules), because the research left their survival-as-a-
-# commemoration UNCONFIRMED (the office is certainly displaced; whether a commemoration
-# remains is the open question). Emitting octave observances confirmed to exist, and holding
-# those that are not, keeps the corpus to the 100%-accuracy bar:
+# DEFERRED octave days — held because the research left their survival-as-a-commemoration
+# UNCONFIRMED (the office is certainly displaced; whether a commemoration remains is the open
+# question). Emitting octave observances confirmed to exist, and holding those that are not,
+# keeps the corpus to the 100%-accuracy bar:
 #   * Assumption octave day (Aug 22): occupied by the Immaculate Heart of the BVM (duplex II
 #     cl., instituted 1944). Its days within (Aug 16-21) ARE observed and are emitted; only
 #     the octave day is held (octaveDay: false).
 #   * Nativity BVM octave (Sep 8): a SIMPLE octave whose only observance — the Sep 15 octave
 #     day — was replaced by the Seven Sorrows of the BVM (duplex II cl.). The whole octave is
 #     held; it is intentionally absent below (a simple octave with no octave day is nothing).
-#   * Immaculate Conception octave (Dec 8): a COMMON octave (days within Dec 9-15, octave day
-#     Dec 15) abolished by Cum nostra hac aetate (1955). Held with the other 1954 octave DAYS
-#     (comites-Christi Jan 2-4, Octave of All Saints Nov 8) pending the octave-day burndown —
-#     its days within are NOT trivial (St Damasus I Dec 11 and St Lucy Dec 13 are graded
-#     feasts falling inside the window, so the days-within need real precedence resolution,
-#     not a bare emit). Its Dec 8 feast and Dec 7 vigil are already present.
+#
+# MATERIALISED with #453 (the "octave DAYS" #64 deferred): the comites-Christi simple octaves
+# (Jan 2-4), the Octave of All Saints (common; Nov 8), and the Immaculate Conception common
+# octave (Dec 9-15). The Immaculate Conception days within are impeded by St Damasus I (Dec 11)
+# and St Lucy (Dec 13) — the pre-1955 precedence keeps the octave as a commemoration there; and
+# on Nov 2 the Octave of All Saints yields to All Souls (which admits no commemoration), the
+# octave resuming on Nov 3.
 
 roman-divino-afflatu:
   # --- Common octaves: days within (semidouble) + octave day (greater double). ---
@@ -60,8 +60,40 @@ roman-divino-afflatu:
     octaveDay: false   # Aug 22 displaced by the Immaculate Heart — octave day DEFERRED (see header)
     cites: { class: ordo-1954, name: mr-1920 }
 
+  - bearingFeast: roman:sanctorale:omnes-sancti
+    class: common
+    # Nov 1 -> days within Nov 2-7 + octave day Nov 8. On Nov 2 the Office of the Dead (All
+    # Souls) holds the day and the octave yields (All Souls admits no commemoration); Nov 3-7
+    # keep the octave (celebrated on a free day, commemorated under a feast); Nov 8 = octave day.
+    genitive: "Omnium Sanctorum"
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  - bearingFeast: roman:sanctorale:immaculata-conceptio
+    class: common
+    # Dec 8 -> days within Dec 9-14 + octave day Dec 15. St Damasus I (Dec 11) and St Lucy
+    # (Dec 13) fall inside the window and are celebrated, the octave commemorated under them.
+    genitive: "Immaculatae Conceptionis B.M.V."
+    cites: { class: ordo-1954, name: mr-1920 }
+
   # --- Simple octaves: octave day only (simple); no proper days within. ---
   - bearingFeast: roman:sanctorale:laurentius
     class: simple
     genitive: "S. Laurentii Martyris"
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  # The comites Christi — Christ's companions in the Christmas octave: their octave DAYS
+  # (Jan 2/3/4) fall after the Circumcision, each a simple octave of the Dec 26/27/28 feast.
+  - bearingFeast: roman:sanctorale:stephanus
+    class: simple
+    genitive: "S. Stephani Protomartyris"
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  - bearingFeast: roman:sanctorale:ioannes-evangelista
+    class: simple
+    genitive: "S. Ioannis Apostoli et Evangelistae"
+    cites: { class: ordo-1954, name: mr-1920 }
+
+  - bearingFeast: roman:sanctorale:innocentes
+    class: simple
+    genitive: "Ss. Innocentium Martyrum"
     cites: { class: ordo-1954, name: mr-1920 }

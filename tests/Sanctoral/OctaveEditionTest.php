@@ -115,6 +115,82 @@ final class OctaveEditionTest extends TestCase
         }
     }
 
+    public function testTheComitesChristiKeepSimpleOctaveDaysAfterTheCircumcision(): void
+    {
+        // St Stephen (Dec 26), St John (Dec 27), and the Holy Innocents (Dec 28) each keep a
+        // SIMPLE octave — only the octave day, on 2/3/4 Jan of the following year — in the
+        // bearing feast's own colour (red, white, red).
+        $calendar = SanctoralCalendar::forYear(1955, new CorpusSanctoralData(null, self::DIVINO_AFFLATU));
+
+        $stephen = $this->observanceFor(
+            $this->on($calendar, '1955-01-02'),
+            'roman:sanctorale:stephanus:in-octava'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $stephen);
+        self::assertSame('simplex', $stephen->legacyRank()->value());
+        self::assertSame('red', $stephen->colour()->base()->value());
+        self::assertSame('In Octava S. Stephani Protomartyris', $stephen->latinName());
+
+        $john = $this->observanceFor(
+            $this->on($calendar, '1955-01-03'),
+            'roman:sanctorale:ioannes-evangelista:in-octava'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $john);
+        self::assertSame('white', $john->colour()->base()->value());
+
+        $innocents = $this->observanceFor(
+            $this->on($calendar, '1955-01-04'),
+            'roman:sanctorale:innocentes:in-octava'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $innocents);
+        self::assertSame('red', $innocents->colour()->base()->value());
+    }
+
+    public function testTheOctaveOfAllSaintsRunsToItsGreaterDoubleOctaveDay(): void
+    {
+        $calendar = $this->nineteenFiftyFour();
+
+        // A common octave: days within (Nov 2-7, semidouble) + octave day (Nov 8, greater
+        // double), white, each linked to All Saints.
+        $within = $this->observanceFor(
+            $this->on($calendar, '1954-11-03'),
+            'roman:sanctorale:omnes-sancti:infra-octavam:3'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $within);
+        self::assertSame('semiduplex', $within->legacyRank()->value());
+        self::assertSame('white', $within->colour()->base()->value());
+
+        $octaveDay = $this->observanceFor(
+            $this->on($calendar, '1954-11-08'),
+            'roman:sanctorale:omnes-sancti:in-octava'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $octaveDay);
+        self::assertSame('duplex-maius', $octaveDay->legacyRank()->value());
+        self::assertSame('In Octava Omnium Sanctorum', $octaveDay->latinName());
+        self::assertSame('roman:sanctorale:omnes-sancti', $octaveDay->octaveOfId()->toString());
+    }
+
+    public function testTheImmaculateConceptionKeepsItsCommonOctave(): void
+    {
+        $calendar = $this->nineteenFiftyFour();
+
+        $within = $this->observanceFor(
+            $this->on($calendar, '1954-12-11'),
+            'roman:sanctorale:immaculata-conceptio:infra-octavam:4'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $within);
+        self::assertSame('semiduplex', $within->legacyRank()->value());
+        self::assertSame('white', $within->colour()->base()->value());
+
+        $octaveDay = $this->observanceFor(
+            $this->on($calendar, '1954-12-15'),
+            'roman:sanctorale:immaculata-conceptio:in-octava'
+        );
+        self::assertInstanceOf(SanctoralObservance::class, $octaveDay);
+        self::assertSame('duplex-maius', $octaveDay->legacyRank()->value());
+        self::assertSame('In Octava Immaculatae Conceptionis B.M.V.', $octaveDay->latinName());
+    }
+
     public function testTheDeferredOctaveDaysAreNotPlaced(): void
     {
         $calendar = $this->nineteenFiftyFour();
