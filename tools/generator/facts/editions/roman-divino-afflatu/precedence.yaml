@@ -73,7 +73,15 @@ tiers:
   - { selector: semidouble, line: 17, ordinal: 17, subOrder: 0, cite: rg-da }
   - { selector: christmas-octave-within, line: 18, ordinal: 18, subOrder: 0, cite: rg-da }
   - { selector: third-order-octave-within, line: 19, ordinal: 19, subOrder: 0, cite: ordo-1954 }
-  - { selector: greater-feria, line: 20, ordinal: 20, subOrder: 0, cite: rg-da }
+  # A day within a COMMON octave (the moveable Solemnity of St Joseph, Easter+18..+23, #453): a
+  # semidouble that yields to any feast above a simple (the feast celebrated, the octave commemorated)
+  # and wins over a simple. It sits just below the privileged 3rd-order octave within because a common
+  # octave is weaker: a day within it is OMITTED (not commemorated) under a Double of the I or II class
+  # (Sts Philip & James on 1 May; the Finding of the Cross on 3 May) — that omission is decided in
+  # occurrenceOutcome/isOctaveOmitted, keyed by identity, since the temporal common octave carries no
+  # legacy grade. Its octave DAY (Easter+24) is a greater double and routes to the greater-double tier.
+  - { selector: common-octave-within, line: 20, ordinal: 20, subOrder: 0, cite: ordo-1954 }
+  - { selector: greater-feria, line: 21, ordinal: 21, subOrder: 0, cite: rg-da }
   - { selector: common-vigil, line: 22, ordinal: 22, subOrder: 0, cite: rg-da }
   - { selector: simple, line: 24, ordinal: 24, subOrder: 0, cite: rg-da }
   - { selector: lady-on-saturday, line: 26, ordinal: 26, subOrder: 0, cite: rg-da }
@@ -145,6 +153,14 @@ membership:
     ids:
       - roman:temporale:christmas:holy-name
       - roman:temporale:epiphany:holy-family
+  # A moveable feast that is a greater double (Duplex maius) but of a saint / the BVM, not the Lord
+  # — the Passiontide Seven Sorrows (#453). It is minted on the temporal path, so it carries no
+  # legacy grade, and its 1962-mapped numeric rank (III) cannot tell a greater double from an
+  # ordinary double (also III). Named here so tierOf routes it to the greater-double tier.
+  - name: moveable-greater-double
+    cite: ordo-1954
+    ids:
+      - roman:temporale:paschal:passion-week:septem-dolorum
 
 # Commemorations admitted per day-type. The pre-1955 rite imposes no flat integer cap the
 # way 1962 does (I=1/II=1/III=2/IV=2): multiple commemorations are normal and the practical

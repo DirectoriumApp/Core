@@ -63,7 +63,11 @@
 {"archetype":"sacred-heart-within-octave","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"De {ord} die infra Octavam Sacratissimi Cordis Iesu"}}
 {"archetype":"septuagesima-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Septuagesimae"}}
 {"archetype":"septuagesima-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Septuagesima"}}
+{"archetype":"seven-sorrows","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"Septem Dolorum Beatae Mariae Virginis"}}
 {"archetype":"sexagesima-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam Sexagesimae"}}
 {"archetype":"sexagesima-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Sexagesima"}}
+{"archetype":"solemnitas-ioseph","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"Solemnitas Sancti Ioseph Sponsi Beatae Mariae Virginis Confessoris et Ecclesiae Universalis Patroni"}}
+{"archetype":"solemnitas-ioseph-octave-day","cites":{"names.la":"mr-1920"},"kind":"octave-day","names":{"la":"In Octava Solemnitatis Sancti Ioseph"}}
+{"archetype":"solemnitas-ioseph-within-octave","cites":{"names.la":"mr-1920"},"kind":"within-octave","names":{"la":"De {ord} die infra Octavam Solemnitatis Sancti Ioseph"}}
 {"archetype":"sunday-after-ascension","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica post Ascensionem"}}
 {"archetype":"trinity-sunday","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Festo Sanctissimae Trinitatis"}}

@@ -341,6 +341,20 @@ export function deriveCumNostra1955(entries) {
   return out;
 }
 
+/**
+ * The TEMPORAL half of the Cum nostra (1955) reform, applied to the 1954 additional archetypes.
+ * Cum nostra hac aetate suppressed every octave except Christmas, Easter, and Pentecost (which are
+ * minted by the base fillers, not these edition archetypes), while leaving the moveable FEASTS in
+ * place. So the derived 1955 temporale is the 1954 archetypes with the octave kinds removed: the
+ * four privileged octaves (Epiphany, Corpus Christi, Ascension, Sacred Heart) and the St Joseph
+ * common octave all vanish, but the Passiontide Seven Sorrows and the Solemnity of St Joseph feasts
+ * (both doubles, untouched by the grade-transform) carry through. A `feast` archetype is kept; a
+ * `within-octave` or `octave-day` archetype is dropped.
+ */
+export function deriveCumNostra1955Temporale(archetypes) {
+  return archetypes.filter((a) => a.kind !== 'within-octave' && a.kind !== 'octave-day');
+}
+
 /** Latin ordinal (feminine, agreeing with dies) for the 2nd..7th day within an octave. */
 const OCTAVE_WITHIN_ORDINAL = {
   2: 'secunda',

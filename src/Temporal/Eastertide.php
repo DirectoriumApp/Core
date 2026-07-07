@@ -140,6 +140,18 @@ final class Eastertide
             $n = intdiv($offset, 7); // 2..5
             return $this->mint('roman:temporale:paschal:paschaltide:sunday-' . $n, 'paschaltide-sunday', $date, $n);
         }
+        // The 1954 COMMON octave of the moveable Solemnity of St Joseph (Easter+18..+24): the days
+        // within (semidouble) and the octave day (greater double). The Solemnity itself (Easter+17,
+        // day 1) is minted by MovableFeasts; the 3rd Sunday after Easter (Easter+21, the Sunday
+        // within) is caught above and keeps its own office. Returns null when the edition declares no
+        // such archetype (1962 and 1955 — Cum nostra suppressed it), so the day falls through to the
+        // ordinary paschaltide week feria and the golden fixture is unmoved by construction.
+        if ($offset >= 18 && $offset <= 24) {
+            $octave = $this->solemnityJosephOctave($date, $offset);
+            if ($octave !== null) {
+                return $octave;
+            }
+        }
         if ($offset >= 8 && $offset <= 34) {
             $week = intdiv($offset - 8, 7) + 1; // weeks I–IV post Octavam Paschae
             return $this->mint(
@@ -251,6 +263,42 @@ final class Eastertide
             return $this->mint(
                 'roman:temporale:paschal:ascension-octave:day-' . $dayOfOctave,
                 'ascension-within-octave',
+                $date,
+                $dayOfOctave
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * The 1954 COMMON octave of the moveable Solemnity of St Joseph (Easter+17): the days within
+     * (Easter+18..+23, excluding the 3rd Sunday after Easter at Easter+21, which keeps its own office
+     * and commemorates the octave) and the octave day (Easter+24). The Solemnity itself (Easter+17)
+     * is day 1, minted by {@see MovableFeasts}. Unlike the always-commemorated privileged octaves,
+     * this common octave's days within are OMITTED under a Double of the I or II class — a precedence
+     * decision (Rubrics1954Precedence), not a minting one. Returns null when the edition declares no
+     * such archetype (1962; and 1955, whose Cum nostra derive drops the octave) or the date is the
+     * Sunday within, so the caller falls through to the ordinary paschaltide classification.
+     */
+    private function solemnityJosephOctave(DateTimeImmutable $date, int $offset): ?TemporalObservance
+    {
+        $dayOfOctave = $offset - 16; // the Solemnity (Easter+17) = day 1
+        if ($dayOfOctave === 8 && $this->attributes->has('solemnitas-ioseph-octave-day')) {
+            return $this->mint(
+                'roman:temporale:paschal:solemnitas-ioseph-octave:octave-day',
+                'solemnitas-ioseph-octave-day',
+                $date
+            );
+        }
+        if (
+            $dayOfOctave >= 2 && $dayOfOctave <= 7
+            && !TemporalCalendar::isSunday($date)
+            && $this->attributes->has('solemnitas-ioseph-within-octave')
+        ) {
+            return $this->mint(
+                'roman:temporale:paschal:solemnitas-ioseph-octave:day-' . $dayOfOctave,
+                'solemnitas-ioseph-within-octave',
                 $date,
                 $dayOfOctave
             );
