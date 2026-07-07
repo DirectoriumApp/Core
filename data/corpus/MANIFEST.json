@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1962-2026-07-06.3",
+  "corpusVersion": "1962-2026-07-07.1",
   "disciplines": [
     "cic-1917"
   ],
@@ -24,6 +24,11 @@
       "records": 367,
       "sha256": "3affa1613eee02928d4ab15270a717192939fdf1ed7f2863992cafcb08a46b7e"
     },
+    "editions/roman-divino-afflatu/attributes.temporale.ndjson": {
+      "primaryKey": "archetype",
+      "records": 69,
+      "sha256": "96cd8f5ddc82b027600edf60acf5515b8858d38bbb8f5356793fd701a2ce8369"
+    },
     "editions/roman-divino-afflatu/placement.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 367,
@@ -36,13 +41,18 @@
     },
     "editions/roman-divino-afflatu/precedence-tiers.ndjson": {
       "primaryKey": "selector",
-      "records": 22,
-      "sha256": "f338d934c5fa7f8767b13cec3f035f5c091f66050731b526298af394eb4834d1"
+      "records": 26,
+      "sha256": "e29f83a93d5d0d811be277f966a6f19d7eaa041bdfe179b713604cc48695753d"
     },
     "editions/roman-rubricae-1955/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
       "records": 320,
       "sha256": "aed0a73edf137122f5c235ed1b2ed4adb0d4044b3382417e3a95d443e290ea70"
+    },
+    "editions/roman-rubricae-1955/attributes.temporale.ndjson": {
+      "primaryKey": "archetype",
+      "records": 61,
+      "sha256": "9055c7a938e76d322cf654ca2d24dbe1d83c2d07fa5e526647c53adfbb3fc82a"
     },
     "editions/roman-rubricae-1955/placement.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -91,8 +101,8 @@
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
-      "records": 61,
-      "sha256": "8f1b5d79c66b17fe17b44c6618cbe76c20d9ccf0c14c1a2383a086eb3f3b4477"
+      "records": 69,
+      "sha256": "e302503737c7cbdcd68515d17782e469e05e96310e614a12c56f6aff9d32d68a"
     },
     "overlays/sspx/operations.ndjson": {
       "primaryKey": "target",
@@ -148,7 +158,7 @@
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
       "urn": "directorium:source:mr-1920",
-      "uses": 435
+      "uses": 443
     },
     {
       "key": "ordo-1954",
@@ -156,7 +166,7 @@
       "rights": "reference",
       "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
       "urn": "directorium:source:ordo-1954",
-      "uses": 2795
+      "uses": 2814
     },
     {
       "key": "rg-1960",
@@ -164,7 +174,7 @@
       "rights": "reference",
       "title": "Rubricae Generales / Codex Rubricarum (1960)",
       "urn": "directorium:source:rg-1960",
-      "uses": 1403
+      "uses": 1647
     },
     {
       "key": "rg-da",
@@ -172,7 +182,7 @@
       "rights": "reference",
       "title": "Rubricae Generales Missalis et Breviarii Romani (Divino Afflatu, pre-1955)",
       "urn": "directorium:source:rg-da",
-      "uses": 52
+      "uses": 53
     },
     {
       "key": "sspx-ordo",

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Directorium\Core\Temporal;
 
 use DateTimeImmutable;
+use Directorium\Core\Corpus\Corpus;
 use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 
@@ -58,7 +59,7 @@ final class TimeAfterPentecost
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
-    private function __construct(int $year)
+    private function __construct(int $year, ?Corpus $corpus = null, ?string $editionDir = null)
     {
         if ($year < Computus::GREGORIAN_REFORM_YEAR) {
             throw new InvalidArgumentException(sprintf(
@@ -68,7 +69,7 @@ final class TimeAfterPentecost
             ));
         }
 
-        $this->attributes = TemporalAttributes::default();
+        $this->attributes = new TemporalAttributes($corpus, $editionDir);
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->easter = $skeleton->easter();
@@ -85,9 +86,9 @@ final class TimeAfterPentecost
         }
     }
 
-    public static function forYear(int $year): self
+    public static function forYear(int $year, ?Corpus $corpus = null, ?string $editionDir = null): self
     {
-        return new self($year);
+        return new self($year, $corpus, $editionDir);
     }
 
     public function year(): int
@@ -142,6 +143,15 @@ final class TimeAfterPentecost
 
     private function classify(DateTimeImmutable $date): TemporalObservance
     {
+        // The two 1954 privileged temporal octaves overlaying the early green weeks are tested
+        // first; outside their windows (and for 1962, which declares neither archetype) this is a
+        // no-op and the ordinary green Sunday/feria classification runs. Crucially the octave
+        // overlay does NOT touch the week computation below, which drives the resumed-Sunday tail.
+        $octave = $this->privilegedOctave($date);
+        if ($octave !== null) {
+            return $octave;
+        }
+
         $week = intdiv(TemporalCalendar::daysBetween($this->trinitySunday, $date), 7) + 1; // 1 … sundayCount
 
         if (TemporalCalendar::isSunday($date)) {
@@ -156,6 +166,66 @@ final class TimeAfterPentecost
             $date,
             $week
         );
+    }
+
+    /**
+     * The two 1954 privileged temporal octaves that overlay the early green weeks — the octave
+     * of Corpus Christi (2nd order; days within Easter+61..+66, octave day Easter+67) and the
+     * octave of the Sacred Heart (3rd order; days within Easter+69..+74, octave day Easter+75).
+     * Each feast is day 1 (Corpus Christi Easter+60, the Sacred Heart Easter+68), minted by
+     * {@see MovableFeasts}, so the octave proper begins at day 2. The Sunday within each octave
+     * (the 2nd Sunday after Pentecost inside the Corpus octave, the 3rd inside the Sacred Heart
+     * octave) keeps its own green Sunday office and commemorates the octave. Returns null outside
+     * both windows, on a Sunday within, or for an edition that declares neither archetype (1962).
+     */
+    private function privilegedOctave(DateTimeImmutable $date): ?TemporalObservance
+    {
+        $offset = TemporalCalendar::daysBetween($this->easter, $date);
+        if ($offset >= 61 && $offset <= 67) {
+            // Corpus Christi (Easter+60) = day 1, so day-of-octave = offset - 59.
+            return $this->octaveOffice(
+                $date,
+                $offset - 59,
+                'corpus-christi',
+                'roman:temporale:paschal:corpus-christi-octave'
+            );
+        }
+        if ($offset >= 69 && $offset <= 75) {
+            // The Sacred Heart (Easter+68) = day 1, so day-of-octave = offset - 67.
+            return $this->octaveOffice(
+                $date,
+                $offset - 67,
+                'sacred-heart',
+                'roman:temporale:paschal:sacred-heart-octave'
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * One day of a privileged temporal octave: the octave day (day 8) or a day within (days
+     * 2..7, skipping a Sunday, which keeps its own office). `$stem` is the octave's archetype /
+     * observance-id stem (`corpus-christi` / `sacred-heart`), `$slug` its observance-id prefix.
+     */
+    private function octaveOffice(
+        DateTimeImmutable $date,
+        int $dayOfOctave,
+        string $stem,
+        string $slug
+    ): ?TemporalObservance {
+        if ($dayOfOctave === 8 && $this->attributes->has($stem . '-octave-day')) {
+            return $this->mint($slug . ':octave-day', $stem . '-octave-day', $date);
+        }
+        if (
+            $dayOfOctave >= 2 && $dayOfOctave <= 7
+            && !TemporalCalendar::isSunday($date)
+            && $this->attributes->has($stem . '-within-octave')
+        ) {
+            return $this->mint($slug . ':day-' . $dayOfOctave, $stem . '-within-octave', $date, $dayOfOctave);
+        }
+
+        return null;
     }
 
     private function classifySunday(int $week, DateTimeImmutable $date): TemporalObservance

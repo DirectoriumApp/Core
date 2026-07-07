@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Directorium\Core\Temporal;
 
 use DateTimeImmutable;
+use Directorium\Core\Corpus\Corpus;
 use Directorium\Core\Observance\ObservanceId;
 use InvalidArgumentException;
 use LogicException;
@@ -48,7 +49,7 @@ final class Eastertide
     /** @var array<string, TemporalObservance> Keyed by 'Y-m-d', in chronological order. */
     private array $days;
 
-    private function __construct(int $year)
+    private function __construct(int $year, ?Corpus $corpus = null, ?string $editionDir = null)
     {
         if ($year < Computus::GREGORIAN_REFORM_YEAR) {
             throw new InvalidArgumentException(sprintf(
@@ -58,7 +59,7 @@ final class Eastertide
             ));
         }
 
-        $this->attributes = TemporalAttributes::default();
+        $this->attributes = new TemporalAttributes($corpus, $editionDir);
         $skeleton = PaschalSkeleton::forYear($year);
         $this->year = $year;
         $this->easter = $skeleton->easter();
@@ -72,9 +73,9 @@ final class Eastertide
         }
     }
 
-    public static function forYear(int $year): self
+    public static function forYear(int $year, ?Corpus $corpus = null, ?string $editionDir = null): self
     {
-        return new self($year);
+        return new self($year, $corpus, $editionDir);
     }
 
     public function year(): int
@@ -163,6 +164,12 @@ final class Eastertide
         if ($offset === 39) {
             return $this->mint('roman:temporale:paschal:ascension', 'ascension', $date);
         }
+        if ($offset >= 40 && $offset <= 46) {
+            $octave = $this->ascensionOctave($date, $offset);
+            if ($octave !== null) {
+                return $octave;
+            }
+        }
         if ($offset === 40 || $offset === 41) {
             return $this->mint(
                 'roman:temporale:paschal:ascension-week:' . TemporalCalendar::feriaToken($date),
@@ -220,6 +227,36 @@ final class Eastertide
         }
 
         throw new LogicException(sprintf('Unclassified Eastertide day at Easter offset %d.', $offset));
+    }
+
+    /**
+     * The 1954 privileged octave of the Ascension (3rd order): the days within (Easter+40..+45,
+     * excluding the Sunday after the Ascension at Easter+42, which keeps its own office and
+     * commemorates the octave) and the octave day (Easter+46). The Ascension itself (Easter+39)
+     * is day 1, minted above. Returns null when the edition declares no such archetype (1962) or
+     * the date is the Sunday within, so the caller falls through to the ordinary post-Ascension
+     * classification — the golden fixture is unmoved by construction.
+     */
+    private function ascensionOctave(DateTimeImmutable $date, int $offset): ?TemporalObservance
+    {
+        $dayOfOctave = $offset - 38; // Ascension (Easter+39) = day 1
+        if ($dayOfOctave === 8 && $this->attributes->has('ascension-octave-day')) {
+            return $this->mint('roman:temporale:paschal:ascension-octave:octave-day', 'ascension-octave-day', $date);
+        }
+        if (
+            $dayOfOctave >= 2 && $dayOfOctave <= 7
+            && !TemporalCalendar::isSunday($date)
+            && $this->attributes->has('ascension-within-octave')
+        ) {
+            return $this->mint(
+                'roman:temporale:paschal:ascension-octave:day-' . $dayOfOctave,
+                'ascension-within-octave',
+                $date,
+                $dayOfOctave
+            );
+        }
+
+        return null;
     }
 
     private function easterOctaveFeria(DateTimeImmutable $date, int $offset): TemporalObservance

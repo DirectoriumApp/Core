@@ -28,25 +28,42 @@ use RuntimeException;
  */
 final class TemporalAttributes
 {
-    /** The path-safe directory key for the 1962 edition inside the corpus tree. */
+    /** The path-safe directory key for the base (1962) edition inside the corpus tree. */
     private const EDITION_DIR = 'roman-rubricae-1960';
 
-    /** @var array<string, array<string, TemporalArchetype>> Archetype maps, keyed by corpus base. */
+    /** @var array<string, array<string, TemporalArchetype>> Archetype maps, keyed by corpus base + edition. */
     private static array $archetypes = [];
 
     private Corpus $corpus;
 
+    /** The edition whose temporal attributes this reader overlays (the corpus dir key). */
+    private string $editionDir;
+
     private string $cacheKey;
 
-    public function __construct(?Corpus $corpus = null)
+    public function __construct(?Corpus $corpus = null, ?string $editionDir = null)
     {
         $this->corpus = $corpus ?? Corpus::default();
-        $this->cacheKey = spl_object_hash($this->corpus);
+        $this->editionDir = $editionDir ?? self::EDITION_DIR;
+        $this->cacheKey = spl_object_hash($this->corpus) . ':' . $this->editionDir;
     }
 
     public static function default(): self
     {
         return new self();
+    }
+
+    /**
+     * Whether the edition declares a temporal archetype — the edition-aware gate the
+     * season-fillers use to mint an office ONLY where the edition keeps it (the 1954
+     * privileged temporal octaves: Epiphany, Corpus Christi, Ascension, Sacred Heart).
+     * The base (1962) edition declares none of the additional archetypes, so its fillers
+     * mint nothing extra and its resolution — and the golden fixture — stays byte-identical
+     * by construction.
+     */
+    public function has(string $key): bool
+    {
+        return isset($this->archetypes()[$key]);
     }
 
     /**
@@ -79,7 +96,7 @@ final class TemporalAttributes
         }
 
         $map = [];
-        foreach ($this->corpus->attributesTemporale(self::EDITION_DIR) as $attributes) {
+        foreach ($this->corpus->attributesTemporale($this->editionDir) as $attributes) {
             $key = $this->requireString($attributes, 'archetype');
             $identity = $identityByKey[$key] ?? null;
             if ($identity === null) {

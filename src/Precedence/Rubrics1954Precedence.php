@@ -114,6 +114,16 @@ final class Rubrics1954Precedence implements PrecedenceRules
         if ($this->isWithinPaschalOctave($id)) {
             return $this->table->tier('paschal-octave');
         }
+        // The four 1954 privileged TEMPORAL octaves (#453). They are temporal offices carrying no
+        // legacy grade, so they are routed by identity here, before the sanctoral grade ladder.
+        // A 2nd-order octave (Epiphany, Corpus Christi) yields ONLY to a Double of the I class —
+        // its octave day above its days within — so a transferred lesser feast can never land on
+        // one; a 3rd-order octave (Ascension, Sacred Heart) sits low, its days within beside the
+        // Christmas octave within and its octave day a plain greater double. All four are always
+        // commemorated (never omitted — see occurrenceOutcome / isOctaveOmitted).
+        if ($this->isPrivilegedTemporalOctave($id)) {
+            return $this->privilegedTemporalOctaveTier($id);
+        }
         // The privileged ferias that admit no feast — Ash Wednesday and Monday/Tuesday/
         // Wednesday of Holy Week — carry the first-class ferial rank in the temporal data.
         if ($kind === ObservanceKind::FERIA && $observance->rank()->ordinal() === 1) {
@@ -123,10 +133,14 @@ final class Rubrics1954Precedence implements PrecedenceRules
         if ($kind === ObservanceKind::OFFICE_OF_THE_DEAD) {
             return $this->table->tier('all-souls');
         }
-        // Feasts of the Lord that are themselves Doubles of the I class (Epiphany, the Octave
-        // of Christmas, Ascension, Corpus Christi, ...) — mapped to the Double I class tier.
+        // Feasts of the Lord that are themselves Doubles of the I class (Epiphany, the Octave of
+        // Christmas, Ascension, Corpus Christi, ...) sit on the I-class line but OUTRANK a I-class
+        // feast of a saint — their own tier, a lower subOrder — so on occurrence the Lord's feast
+        // is celebrated and the saint transferred. That keeps Corpus Christi / the Sacred Heart on
+        // their own day (not transferred off it by a coincident I-class saint), and so keeps their
+        // temporal octave attached to its feast (#453).
         if ($this->table->isMember('great-lord', $id)) {
-            return $this->table->tier('double-i-class');
+            return $this->table->tier('great-lord');
         }
 
         // The sanctoral grade ladder, by legacy token. (Common-octave days-within carry
@@ -443,6 +457,13 @@ final class Rubrics1954Precedence implements PrecedenceRules
             return true;
         }
 
+        // A day within (or the octave day of) a privileged temporal octave (Epiphany, Ascension,
+        // Corpus Christi, Sacred Heart): the octave is always commemorated, so its commemoration
+        // is privileged and survives even on a Double of the I class.
+        if ($this->isPrivilegedTemporalOctave($office->id()->toString())) {
+            return true;
+        }
+
         // A greater (privileged) feria of Advent, Lent, or Passiontide.
         if ($kind === ObservanceKind::FERIA) {
             return in_array(
@@ -587,6 +608,49 @@ final class Rubrics1954Precedence implements PrecedenceRules
     private function isChristmasOctaveWithin(string $id): bool
     {
         return strpos($id, 'christmas:within-octave') !== false;
+    }
+
+    /**
+     * Whether an id is a day of one of the four 1954 privileged temporal octaves (Epiphany,
+     * Ascension, Corpus Christi, Sacred Heart) — a day within or the octave day. Temporal offices
+     * carry no legacy grade, so they are recognised by id, which is disjoint from every sanctoral
+     * id and from the octaves' own bearing feasts.
+     */
+    private function isPrivilegedTemporalOctave(string $id): bool
+    {
+        return $this->isSecondOrderTemporalOctave($id) || $this->isThirdOrderTemporalOctave($id);
+    }
+
+    /** The 2nd-order privileged octaves: Epiphany and Corpus Christi. */
+    private function isSecondOrderTemporalOctave(string $id): bool
+    {
+        return strpos($id, ':epiphany:within-octave') !== false
+            || strpos($id, ':epiphany:octave-day') !== false
+            || strpos($id, ':corpus-christi-octave:') !== false;
+    }
+
+    /** The 3rd-order privileged octaves: the Ascension and the Sacred Heart. */
+    private function isThirdOrderTemporalOctave(string $id): bool
+    {
+        return strpos($id, ':ascension-octave:') !== false
+            || strpos($id, ':sacred-heart-octave:') !== false;
+    }
+
+    /**
+     * The tier of a privileged temporal-octave day. A 2nd-order octave (Epiphany, Corpus Christi)
+     * yields only to a Double of the I class: its octave day above its days within. A 3rd-order
+     * octave (Ascension, Sacred Heart) sits low — its days within beside the Christmas octave
+     * within, its octave day a plain greater double. The `:octave-day` suffix distinguishes the
+     * octave day from a `:day-N` / `:within-octave:day-N` day within.
+     */
+    private function privilegedTemporalOctaveTier(string $id): PrecedenceTier
+    {
+        $isOctaveDay = strpos($id, ':octave-day') !== false;
+        if ($this->isSecondOrderTemporalOctave($id)) {
+            return $this->table->tier($isOctaveDay ? 'second-order-octave-day' : 'second-order-octave-within');
+        }
+
+        return $this->table->tier($isOctaveDay ? 'greater-double' : 'third-order-octave-within');
     }
 
     /** The pre-1960 grade token of a sanctoral office, or null for a temporal office. */

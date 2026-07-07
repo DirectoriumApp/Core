@@ -17,10 +17,13 @@
 # (Seam 6) for the research trail and the CONFIRMED-vs-DEFERRED boundary.
 #
 # THE TIER ORDER (lower ordinal wins occurrence). `line` mirrors `ordinal` — unlike 1962's
-# n.91 there is no numbered pre-1955 table, so no independent line number exists. Ordinals
-# carry gaps so the DEFERRED privileged temporal octaves (Epiphany/Corpus Christi 2nd order,
-# Christmas/Ascension/Sacred-Heart 3rd order — movable offices not yet minted for 1954) can
-# slot in later without a renumber. Sundays sit high, per the Divino Afflatu elevation: a
+# n.91 there is no numbered pre-1955 table, so no independent line number exists. The four
+# privileged TEMPORAL octaves are now minted for 1954 (#453): the 2nd-order octave day + days
+# within (Epiphany, Corpus Christi) sit just below the Double I class, so they yield ONLY to a
+# Double of the I class (which is exactly what stops a transferred lesser feast from landing on
+# a Corpus-octave day — the Maria-Regina-1956 case); the 3rd-order days within (Ascension,
+# Sacred Heart) sit beside the Christmas octave within, and the 3rd-order octave day is a plain
+# greater double. Sundays sit high, per the Divino Afflatu elevation: a
 # lesser (per-annum) Sunday yields ONLY to a Double of the I/II class and to a feast of the
 # Lord, and outranks every ordinary double, semidouble, simple, octave, vigil, and feria
 # below it (Rubr. Gen. Brev. Tit. IV, dated-proven by ordo-1954: the green Sunday keeps the
@@ -36,25 +39,40 @@ tiers:
   - { selector: privileged-vigil, line: 4, ordinal: 4, subOrder: 0, cite: rg-da }
   - { selector: paschal-octave, line: 5, ordinal: 5, subOrder: 0, cite: rg-da }
   - { selector: privileged-feria, line: 6, ordinal: 6, subOrder: 0, cite: rg-da }
-  # --- Double of the I class, then the II-class greater Sundays (which yield ONLY to a
-  #     Double I class — Tit. IV §1), then the Double of the II class. ---
-  - { selector: double-i-class, line: 7, ordinal: 7, subOrder: 0, cite: rg-da }
-  - { selector: all-souls, line: 8, ordinal: 8, subOrder: 0, cite: rg-da }
-  - { selector: second-class-sunday, line: 9, ordinal: 9, subOrder: 0, cite: rg-da }
-  - { selector: double-ii-class, line: 10, ordinal: 10, subOrder: 0, cite: rg-da }
-  # (gap 11 reserved: DEFERRED privileged 2nd-order octave days-within — Epiphany/Corpus
-  #  Christi, "displaced only by a Double I class" — authored when those temporal octaves
-  #  are minted for 1954.)
+  # --- The I class, in dignity order on ONE line (broken by subOrder): a feast OF THE LORD
+  #     (great-lord — Epiphany, the Circumcision, Ascension, Trinity, Corpus Christi, the Sacred
+  #     Heart, Christ the King) outranks a I-class feast of a SAINT, so when the two occur the
+  #     Lord's feast is celebrated and the saint transferred — as 1962 does, and as the pre-1955
+  #     Tabella Occurrentiae ranks the I class by dignity (Lord > BVM > saint). This is what keeps
+  #     Corpus Christi / the Sacred Heart on their own day when a I-class saint falls with them
+  #     (St John the Baptist on 24 Jun / the Precious Blood on 1 Jul, in the rare years Easter is
+  #     25/24 Apr), so their temporal octaves stay attached. Then the privileged 2nd-order
+  #     temporal octaves, which yield ONLY to a Double I class (rubric-system-model.md §444;
+  #     #453): the octave DAY (a Duplex maius of the Lord — Epiphany/Corpus Christi) above its
+  #     days WITHIN (a semidouble). Both sit ABOVE All Souls / the II-class Sunday / the Double
+  #     II class, so a transferred lesser feast (a Double II) can never land on a 2nd-order
+  #     octave day. ---
+  - { selector: great-lord, line: 7, ordinal: 7, subOrder: 0, cite: rg-da }
+  - { selector: double-i-class, line: 7, ordinal: 7, subOrder: 1, cite: rg-da }
+  - { selector: second-order-octave-day, line: 8, ordinal: 8, subOrder: 0, cite: ordo-1954 }
+  - { selector: second-order-octave-within, line: 9, ordinal: 9, subOrder: 0, cite: ordo-1954 }
+  - { selector: all-souls, line: 10, ordinal: 10, subOrder: 0, cite: rg-da }
+  - { selector: second-class-sunday, line: 11, ordinal: 11, subOrder: 0, cite: rg-da }
+  - { selector: double-ii-class, line: 12, ordinal: 12, subOrder: 0, cite: rg-da }
   # --- A feast OF THE LORD below Double II (an ordinary or greater double of the Lord)
   #     takes a lesser Sunday's place (Tit. IV §2). It sits ABOVE the lesser Sunday but
   #     below the II-class Sunday, which yields only to a Double I class. ---
-  - { selector: feast-of-the-lord, line: 12, ordinal: 12, subOrder: 0, cite: rg-da }
-  - { selector: lesser-sunday, line: 13, ordinal: 13, subOrder: 0, cite: rg-da }
-  # --- Below the lesser Sunday: the ordinary festal grades and the common octave. ---
-  - { selector: greater-double, line: 14, ordinal: 14, subOrder: 0, cite: rg-da }
+  - { selector: feast-of-the-lord, line: 13, ordinal: 13, subOrder: 0, cite: rg-da }
+  - { selector: lesser-sunday, line: 14, ordinal: 14, subOrder: 0, cite: rg-da }
+  # --- Below the lesser Sunday: the ordinary festal grades and the octaves. A 3rd-order
+  #     octave DAY (Ascension/Sacred Heart) is a plain greater double, so it routes to the
+  #     greater-double tier in code. A 3rd-order octave WITHIN sits beside the Christmas octave
+  #     within: any feast above a simple is celebrated within it, the octave commemorated. ---
+  - { selector: greater-double, line: 15, ordinal: 15, subOrder: 0, cite: rg-da }
   - { selector: double, line: 16, ordinal: 16, subOrder: 0, cite: rg-da }
   - { selector: semidouble, line: 17, ordinal: 17, subOrder: 0, cite: rg-da }
   - { selector: christmas-octave-within, line: 18, ordinal: 18, subOrder: 0, cite: rg-da }
+  - { selector: third-order-octave-within, line: 19, ordinal: 19, subOrder: 0, cite: ordo-1954 }
   - { selector: greater-feria, line: 20, ordinal: 20, subOrder: 0, cite: rg-da }
   - { selector: common-vigil, line: 22, ordinal: 22, subOrder: 0, cite: rg-da }
   - { selector: simple, line: 24, ordinal: 24, subOrder: 0, cite: rg-da }

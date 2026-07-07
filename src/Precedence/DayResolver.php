@@ -56,6 +56,12 @@ final class DayResolver
 
     private FastingResolver $fasting;
 
+    /** The corpus the temporal fillers read their edition-specific archetypes from. */
+    private Corpus $corpus;
+
+    /** The corpus dir key of this resolver's edition, threaded into the temporal fillers. */
+    private string $editionDir;
+
     private bool $tracing;
 
     private function __construct(
@@ -63,6 +69,8 @@ final class DayResolver
         string $edition,
         SanctoralData $sanctoralData,
         FastingResolver $fasting,
+        Corpus $corpus,
+        string $editionDir,
         bool $tracing = false
     ) {
         $this->rules = $rules;
@@ -70,6 +78,8 @@ final class DayResolver
         $this->edition = $edition;
         $this->sanctoralData = $sanctoralData;
         $this->fasting = $fasting;
+        $this->corpus = $corpus;
+        $this->editionDir = $editionDir;
         $this->tracing = $tracing;
     }
 
@@ -92,7 +102,9 @@ final class DayResolver
             self::rulesFor($system, $corpus),
             $system->urn(),
             $sanctoralData ?? new CorpusSanctoralData($corpus, $system->corpusDir()),
-            new FastingResolver(PenitentialDiscipline::fromCorpus($corpus, $system->penitentialDiscipline()))
+            new FastingResolver(PenitentialDiscipline::fromCorpus($corpus, $system->penitentialDiscipline())),
+            $corpus,
+            $system->corpusDir()
         );
     }
 
@@ -130,7 +142,15 @@ final class DayResolver
      */
     public function explaining(): self
     {
-        return new self($this->rules, $this->edition, $this->sanctoralData, $this->fasting, true);
+        return new self(
+            $this->rules,
+            $this->edition,
+            $this->sanctoralData,
+            $this->fasting,
+            $this->corpus,
+            $this->editionDir,
+            true
+        );
     }
 
     /** The edition, corpus, and engine versions this resolver stamps onto a year. */
@@ -146,16 +166,16 @@ final class DayResolver
 
     public function resolveYear(int $year): ResolvedYear
     {
-        $holyWeek = HolyWeek::forYear($year);
+        $holyWeek = HolyWeek::forYear($year, $this->corpus, $this->editionDir);
         $temporal = [
-            ChristmasCycle::forYear($year - 1),
-            LentenCycle::forYear($year),
+            ChristmasCycle::forYear($year - 1, $this->corpus, $this->editionDir),
+            LentenCycle::forYear($year, $this->corpus, $this->editionDir),
             $holyWeek,
-            Eastertide::forYear($year),
-            TimeAfterPentecost::forYear($year),
-            ChristmasCycle::forYear($year),
+            Eastertide::forYear($year, $this->corpus, $this->editionDir),
+            TimeAfterPentecost::forYear($year, $this->corpus, $this->editionDir),
+            ChristmasCycle::forYear($year, $this->corpus, $this->editionDir),
         ];
-        $movable = MovableFeasts::forYear($year);
+        $movable = MovableFeasts::forYear($year, $this->corpus, $this->editionDir);
         $sanctoral = SanctoralCalendar::forYear(
             $year,
             $this->sanctoralData,
