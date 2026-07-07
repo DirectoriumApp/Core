@@ -17,7 +17,7 @@
     "disciplines/cic-1917/fasting-rules.ndjson": {
       "primaryKey": "rule",
       "records": 6,
-      "sha256": "96de712f3c232f36d0bfd50a4978258ee36837b1184db60583b53653dc2256f9"
+      "sha256": "b620236638d7b2680265605cd0bb4fdb2d2e85df8f0278aa0e756dc0708733d2"
     },
     "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
       "primaryKey": "id",

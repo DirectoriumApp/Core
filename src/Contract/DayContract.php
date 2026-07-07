@@ -20,8 +20,8 @@ use LogicException;
  * public output contract every other Directorium repo (Api/Site/Ordo) builds on.
  *
  * {@see LiturgicalDay} is kept a pure aggregate; this class is the seam that
- * turns it into a stable JSON-ready structure. The shape is frozen at
- * {@see SHAPE_VERSION} 1.0.0: a day carries its three provenance axes
+ * turns it into a stable JSON-ready structure. The shape is frozen on the 1.0 line
+ * ({@see SHAPE_VERSION}): a day carries its three provenance axes
  * ({@see Provenance}) and the four office roles, each office a self-describing
  * record of identity, per-edition attributes, occurrence outcome, and transfer
  * links. The `calendar` block carries the calendrical/astronomical figures (#242) and

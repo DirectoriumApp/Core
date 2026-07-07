@@ -32,8 +32,8 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   shifting St Matthias to 25 Feb and related observances — handled explicitly and tested.
 - **Fast & abstinence (holyday dispensation):** the `fasting` block (#248/#249) applies the 1917 Code's
   core rules — abstinence on Fridays, fast and abstinence on Ash Wednesday, the Fridays and Saturdays of
-  Lent, the Ember days, and the vigils of Christmas/Pentecost/Assumption/All Saints, and fast with partial
-  abstinence on the other Lenten weekdays (cann. 1252). **Not yet modelled** is the c.1252 §4 dispensation
+  Lent, the Ember days, and the vigils of Christmas/Pentecost/Assumption/All Saints, and the fast alone
+  (no abstinence) on the other Lenten weekdays (cann. 1252). **Not yet modelled** is the c.1252 §4 dispensation
   that lifts fast/abstinence when a day of precept (holyday of obligation) falls outside Lent — so, e.g., a
   first-class feast of precept on an ordinary Friday still shows abstinence. The **September Ember days** are
   likewise absent because the temporal engine does not yet place them (deferred with the movable-feast work,

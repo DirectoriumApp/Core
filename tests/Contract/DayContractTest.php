@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
 use function Directorium\Core\contract;
 
 /**
- * Golden snapshots for the frozen output contract (v1.0.0): a simple day pins
+ * Golden snapshots for the frozen output contract (1.0 line): a simple day pins
  * the full shape, and the transfer/omit/commemoration cases pin the office-level
  * outcome and transfer links. The contract is deterministic, so the snapshots
  * are exact — any drift is a deliberate, reviewed change.

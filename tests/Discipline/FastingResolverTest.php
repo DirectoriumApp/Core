@@ -6,6 +6,7 @@ namespace Directorium\Core\Tests\Discipline;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Directorium\Core\Edition\RubricSystem;
 use Directorium\Core\Precedence\DayResolver;
 use PHPUnit\Framework\TestCase;
 
@@ -74,7 +75,7 @@ final class FastingResolverTest extends TestCase
             'Ash Wednesday (5 Mar)' => ['2025-03-05', true, 'full', 'ash-wednesday'],
             'Friday of Lent (7 Mar)' => ['2025-03-07', true, 'full', 'lent-major'],
             'Saturday of Lent (8 Mar)' => ['2025-03-08', true, 'full', 'lent-major'],
-            'Monday of Lent (10 Mar)' => ['2025-03-10', true, 'partial', 'lent-minor'],
+            'Monday of Lent (10 Mar)' => ['2025-03-10', true, 'none', 'lent-minor'],
             'Ember Wednesday of Lent (12 Mar)' => ['2025-03-12', true, 'full', 'ember-day'],
             'Good Friday (18 Apr)' => ['2025-04-18', true, 'full', 'lent-major'],
             'Holy Saturday (19 Apr)' => ['2025-04-19', true, 'full', 'lent-major'],
@@ -104,6 +105,28 @@ final class FastingResolverTest extends TestCase
             'ordinary Thursday' => ['2025-07-17'],
             'Christmas Day (a feast, no fast)' => ['2025-12-25'],
         ];
+    }
+
+    /**
+     * The vigil fast follows the calendar across editions: the All Saints vigil (31 Oct)
+     * was suppressed by the 1960 rubrics but kept under Divino Afflatu, so the same
+     * discipline data produces the fast under 1954 and nothing under 1962 — proving the
+     * fasting-vigil id matches the real `omnes-sancti:vigilia` the corpus places. (31 Oct
+     * 1950 is a Tuesday, so it is the celebrated vigil, not displaced by a Sunday.)
+     */
+    public function testTheAllSaintsVigilFastFollowsTheEditionThatKeepsIt(): void
+    {
+        $date = new DateTimeImmutable('1950-10-31 00:00:00', new DateTimeZone('UTC'));
+
+        $under1954 = DayResolver::forEdition(RubricSystem::divinoAfflatu())->resolveDay($date)->fasting();
+        self::assertNotNull($under1954, 'The All Saints vigil is a fast day under 1954.');
+        self::assertTrue($under1954->fast());
+        self::assertSame('full', $under1954->abstinence()->value());
+        self::assertSame('vigil', $under1954->reason());
+
+        // 1962 suppressed the vigil, so 31 Oct is an ordinary weekday — no vigil fast.
+        $under1962 = DayResolver::forEdition(RubricSystem::rubricae1960())->resolveDay($date)->fasting();
+        self::assertNull($under1962, 'The suppressed vigil leaves no fast under 1962.');
     }
 
     public function testTheStrictestAbstinenceIsKeptWhenSeveralRulesMeet(): void

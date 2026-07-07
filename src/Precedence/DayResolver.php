@@ -325,14 +325,22 @@ final class DayResolver
 
         // The penitential obligation reads the resolved day's own properties (its weekday,
         // season, and the offices' kinds/ids), so a vigil or Ember day the edition suppressed
-        // never produces one — per-edition correctness without a per-edition discipline.
+        // never produces one — per-edition correctness without a per-edition discipline. Every
+        // office in play is scanned — including the displaced — because the fast attaches to
+        // the day, not to whichever office won: a fasting vigil outranked to omission still
+        // carries its fast.
+        $displacedObservances = [];
+        foreach ($displaced as $roled) {
+            $displacedObservances[] = $roled->observance();
+        }
         $fasting = $this->fasting->resolve(
             $date,
             $temporalOffice !== null ? $temporalOffice->season()->value() : null,
             array_merge(
                 [$celebration],
                 $temporalOffice !== null ? [$temporalOffice] : [],
-                $selected
+                $selected,
+                $displacedObservances
             )
         );
 

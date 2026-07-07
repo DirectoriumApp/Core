@@ -32,8 +32,9 @@ rules:
   - { rule: friday, fast: false, abstinence: full, cite: "cic-1917:c1252" }
   # The Fridays and Saturdays of Lent — fast and complete abstinence (c.1252 §2).
   - { rule: lent-major, fast: true, abstinence: full, cite: "cic-1917:c1252" }
-  # The other weekdays of Lent — fast, with partial abstinence (c.1252 §3, c.1251 §2).
-  - { rule: lent-minor, fast: true, abstinence: partial, cite: "cic-1917:c1252" }
+  # The other weekdays of Lent — fast ALONE, no abstinence obligation (c.1252 §3,
+  # "lex ieiunii tantum"); meat is permitted, so the abstinence grade is none.
+  - { rule: lent-minor, fast: true, abstinence: none, cite: "cic-1917:c1252" }
   # The vigils of Christmas, Pentecost, the Assumption, and All Saints — fast and complete
   # abstinence (c.1252 §2). Named by the vigil day's id; a vigil absent from the resolving
   # edition's calendar never matches, so the fast follows the calendar automatically.
@@ -43,6 +44,6 @@ rules:
     cite: "cic-1917:c1252"
     vigils:
       - roman:sanctorale:assumptio:vigilia
-      - roman:sanctorale:omnium-sanctorum:vigilia
+      - roman:sanctorale:omnes-sancti:vigilia
       - roman:temporale:christmas:vigil
       - roman:temporale:paschal:pentecost-vigil

@@ -97,7 +97,7 @@ final class FastingResolver
         }
 
         // The Lenten fast: Ash Wednesday, then the weekdays of Lent — Fridays and Saturdays
-        // to complete abstinence, the rest to fast with partial abstinence.
+        // to fast with complete abstinence, the rest to fast alone (no abstinence, c.1252 §3).
         if ($isAshWednesday) {
             $tags[] = 'ash-wednesday';
         } elseif (in_array($season, self::LENTEN_SEASONS, true)) {

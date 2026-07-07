@@ -41,7 +41,8 @@ final class PenitentialDisciplineTest extends TestCase
         $lentMinor = $discipline->rule('lent-minor');
         self::assertNotNull($lentMinor);
         self::assertTrue($lentMinor['fast']);
-        self::assertSame('partial', $lentMinor['abstinence']->value());
+        // c.1252 §3 obliges the fast alone on the other weekdays of Lent — no abstinence.
+        self::assertSame('none', $lentMinor['abstinence']->value());
     }
 
     public function testAnUndeclaredRuleIsNull(): void
@@ -58,7 +59,7 @@ final class PenitentialDisciplineTest extends TestCase
         self::assertTrue($discipline->isFastingVigil('roman:temporale:christmas:vigil'));
         self::assertTrue($discipline->isFastingVigil('roman:temporale:paschal:pentecost-vigil'));
         self::assertTrue($discipline->isFastingVigil('roman:sanctorale:assumptio:vigilia'));
-        self::assertTrue($discipline->isFastingVigil('roman:sanctorale:omnium-sanctorum:vigilia'));
+        self::assertTrue($discipline->isFastingVigil('roman:sanctorale:omnes-sancti:vigilia'));
 
         // A vigil the 1917 discipline does not keep as a fast (e.g. St Lawrence's).
         self::assertFalse($discipline->isFastingVigil('roman:sanctorale:laurentius:vigilia'));

@@ -66,9 +66,9 @@ same discipline data produces the fast. The discipline is never forked per editi
 
 Per canon 1252: complete abstinence on every **Friday** (§1); **fast and complete
 abstinence** on Ash Wednesday, the Fridays and Saturdays of Lent, the Ember days, and
-the vigils of Christmas, Pentecost, the Assumption, and All Saints (§2); **fast with
-partial abstinence** on the other weekdays of Lent (§3). Sundays are never days of fast
-or abstinence.
+the vigils of Christmas, Pentecost, the Assumption, and All Saints (§2); the **fast
+alone** — no abstinence obligation (*lex ieiunii tantum*) — on the other weekdays of
+Lent (§3). Sundays are never days of fast or abstinence.
 
 ## Known limitations
 
