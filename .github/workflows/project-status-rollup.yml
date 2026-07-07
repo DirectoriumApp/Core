@@ -49,7 +49,7 @@ jobs:
 
       - name: Roll up project status
         if: steps.guard.outputs.ok == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.PROJECTS_PAT }}
           script: |
