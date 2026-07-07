@@ -240,6 +240,7 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":6,"id":"roman:sanctorale:norbertus","month":6}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":1,"id":"roman:sanctorale:omnes-sancti","month":11}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":31,"id":"roman:sanctorale:omnes-sancti:vigilia","month":10,"vigilOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":2,"id":"roman:sanctorale:omnium-fidelium-defunctorum","month":11}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":27,"id":"roman:sanctorale:pantaleon","month":7}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":17,"id":"roman:sanctorale:paschalis-baylon","month":5}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":17,"id":"roman:sanctorale:patricius","month":3}

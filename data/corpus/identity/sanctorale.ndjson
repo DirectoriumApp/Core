@@ -247,7 +247,7 @@
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:norbertus","kind":"feast","names":{"la":"S. Norberti Episcopi et Confessoris"},"titulars":["norbertus"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti","kind":"feast","names":{"la":"Festum Omnium Sanctorum"},"titulars":["omnes-sancti"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnes-sancti:vigilia","kind":"vigil","names":{"la":"In Vigilia Omnium Sanctorum"},"titulars":["omnes-sancti"]}
-{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnium-sanctorum","kind":"feast","names":{"la":"In Festo Omnium Sanctorum"},"titulars":["omnes-sancti"]}
+{"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:omnium-fidelium-defunctorum","kind":"office-of-the-dead","names":{"la":"In Commemoratione Omnium Fidelium Defunctorum"},"titulars":["fideles-defuncti"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:pantaleon","kind":"commemoration-only","names":{"la":"S. Pantaleonis Martyris"},"titulars":["pantaleon"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:paschalis-baylon","kind":"feast","names":{"la":"S. Paschalis Baylon Confessoris"},"titulars":["paschalis-baylon"]}
 {"cites":{"names.la":"mr-1920"},"id":"roman:sanctorale:patricius","kind":"feast","names":{"la":"S. Patricii Episcopi Confessoris"},"titulars":["patricius"]}

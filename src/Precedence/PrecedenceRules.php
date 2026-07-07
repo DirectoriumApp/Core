@@ -129,4 +129,14 @@ interface PrecedenceRules
      * {@see Rubrics1954Precedence}.
      */
     public function anticipatesSundayVigils(): bool;
+
+    /**
+     * Whether the Office of the Dead (All Souls) yields the celebration to a Sunday and is
+     * transferred to the next free day, though it outranks the Sunday in the Table of
+     * Liturgical Days — a requiem is never sung on a Sunday (the rubric of 2 November; a
+     * displaced All Souls takes the next-free-day placement, n. 96b). True for the
+     * traditional editions; the reformed calendar, which keeps All Souls on the Sunday,
+     * overrides it to false.
+     */
+    public function officeOfTheDeadYieldsToSunday(): bool;
 }

@@ -216,10 +216,11 @@ entries in `sanctorale.yaml`, and edition membership is simply which blocks each
   anchored at its nominal civil date (Feb 23), and the leap-year move to Feb 24 (the doubled *bis sextum*) is a
   Kalends-relative occurrence rule, never a second stored date. The Immaculate Conception vigil title
   (`In Vigilia Immaculatae Conceptionis B.M.V.`) was source-verified against the Missal heading.
-- **Known-limitation flagged for #64.** `sanctorale.yaml` carries a pre-existing **duplicate All Saints feast**
-  (`omnes-sancti` and `omnium-sanctorum`, both Nov 1); the vigil's `vigilOf` points at `omnes-sancti` (the Nov 1
-  winner in the golden trace). Resolving the duplicate is the #64 burndown's job (it would move the frozen
-  golden traces), not this issue's.
+- **Duplicate All Saints feast — RETIRED (#453).** `sanctorale.yaml` had carried a pre-existing **duplicate
+  All Saints feast** (`omnes-sancti` and `omnium-sanctorum`, both Nov 1); the vigil's `vigilOf` points at
+  `omnes-sancti` (the Nov 1 winner in the golden trace). The `omnium-sanctorum` duplicate was retired together
+  with the new Office of the Dead (All Souls) in #453 — its phantom transfer onto Nov 2 had masked the missing
+  All Souls office (see Seam 6b), so the two landed together, moving the frozen golden traces then.
 - **Guardrails.** The 1583–2200 golden fixture stays byte-identical (the 1960 edition dir places none of the
   1954-only vigils — proven) **and** `VigilEditionTest` pins the 1954 outcomes (Nov 29 = Vigil of St Andrew,
   `vigilia`/IV, violet, `vigilOf` the feast; Dec 7 = Vigil of the Immaculate Conception; the John Baptist vigil
@@ -314,13 +315,13 @@ Brindisi's universal feast (so 1954 keeps St Praxedes on 21 July).
   `CalendarCatalog` boundary refuses `day('1954')`): the **privileged temporal octaves** (Epiphany,
   Corpus Christi, Ascension, Sacred Heart — the residual DO diffs, e.g. a transfer that must skip the
   Corpus Christi octave, all trace to these), the **moveable feasts** (the Friday-in-Passion-Week
-  Seven Sorrows; the Solemnity/Patronage of St Joseph), the **Office of the Dead** (All Souls, Nov 2 —
-  unimplemented in *every* edition today, and coupled to resolving the pre-existing All-Saints
-  duplicate `omnium-sanctorum`, which currently masks it), the **sanctoral octave DAYS** not yet
+  Seven Sorrows; the Solemnity/Patronage of St Joseph), the **sanctoral octave DAYS** not yet
   materialised (the comites-Christi octaves Jan 2–4; the Octave of All Saints Nov 8; and the
   **Immaculate Conception** common octave Dec 9–15, whose days-within are impeded by St Damasus I and
   St Lucy — see the `octaves.yaml` deferred header), and the **Saturday Office of Our Lady**. Each is
-  a tracked follow-up (#453); the 1962 golden fixture stays byte-identical throughout.
+  a tracked follow-up (#453). (The **Office of the Dead** — All Souls, Nov 2 — has since landed in all
+  three editions with #453, retiring the `omnium-sanctorum` duplicate that had masked it; that correction
+  moved the 1962 golden fixture on Nov 1–3, and the remaining deferrals keep it otherwise byte-identical.)
 
 ## Seam 6a — 1955 precedence rules (Built — #70; validated — #71)
 

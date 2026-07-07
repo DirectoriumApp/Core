@@ -208,7 +208,7 @@
 {"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"id":"roman:sanctorale:nomen-mariae","rank":3}
 {"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"id":"roman:sanctorale:norbertus","rank":3}
 {"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti","rank":1}
-{"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"id":"roman:sanctorale:omnium-sanctorum","rank":1}
+{"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"black"},"id":"roman:sanctorale:omnium-fidelium-defunctorum","rank":1}
 {"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"red"},"id":"roman:sanctorale:pantaleon","rank":4}
 {"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"id":"roman:sanctorale:paschalis-baylon","rank":3}
 {"cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"id":"roman:sanctorale:patricius","rank":3}

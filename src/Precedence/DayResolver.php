@@ -16,6 +16,7 @@ use Directorium\Core\Discipline\FastingResolver;
 use Directorium\Core\Discipline\PenitentialDiscipline;
 use Directorium\Core\Edition\RubricSystem;
 use Directorium\Core\Directorium;
+use Directorium\Core\Observance\ObservanceKind;
 use Directorium\Core\Sanctoral\CorpusSanctoralData;
 use Directorium\Core\Sanctoral\SanctoralCalendar;
 use Directorium\Core\Sanctoral\SanctoralData;
@@ -180,6 +181,7 @@ final class DayResolver
             $candidates = $this->sortByTier($candidates, $context);
 
             $candidates = $this->admitTransferClaimant($candidates, $ledger, $context);
+            $candidates = $this->applyOfficeOfTheDeadSundayYield($candidates);
 
             $days[$key] = $this->assemble($date, $candidates, $temporalOffice, $context, $ledger, $forced);
 
@@ -246,13 +248,60 @@ final class DayResolver
      */
     private function admitTransferClaimant(array $candidates, TransferLedger $ledger, PrecedenceContext $context): array
     {
-        if ($candidates === [] || $ledger->isEmpty() || $candidates[0]->rank()->ordinal() < 3) {
+        // A pending transfer claims only a genuinely free day. The Office of the Dead (All
+        // Souls) is never displaced by a queued feast — even where it normalises to a third-
+        // class grade under the pre-1955 editions — so it is never treated as free.
+        if (
+            $candidates === []
+            || $ledger->isEmpty()
+            || $candidates[0]->rank()->ordinal() < 3
+            || $candidates[0]->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD
+        ) {
             return $candidates;
         }
 
         $candidates[] = $ledger->dequeue();
 
         return $this->sortByTier($candidates, $context);
+    }
+
+    /**
+     * The Office of the Dead (All Souls) is never celebrated on a Sunday — a requiem is not
+     * sung on the day of the Resurrection — so although it outranks the Sunday in the Table of
+     * Liturgical Days, it yields the day to it and is kept on the next free day (the rubric of
+     * 2 November; n. 96b). Editions that keep this rule answer
+     * {@see PrecedenceRules::officeOfTheDeadYieldsToSunday()} true; the reformed calendar, which
+     * celebrates All Souls even on a Sunday, answers false and this is a no-op.
+     *
+     * Promoting the Sunday makes it the celebration and drops All Souls into the loser pool,
+     * where {@see PrecedenceRules::occurrenceOutcome()} transfers it — the only transferable
+     * loser — to the next free day through the ordinary transfer ledger (typically 3 November).
+     *
+     * @param list<RealizedObservance> $candidates already ordered by tier
+     *
+     * @return list<RealizedObservance>
+     */
+    private function applyOfficeOfTheDeadSundayYield(array $candidates): array
+    {
+        if (
+            $candidates === []
+            || !$this->rules->officeOfTheDeadYieldsToSunday()
+            || $candidates[0]->kind()->value() !== ObservanceKind::OFFICE_OF_THE_DEAD
+        ) {
+            return $candidates;
+        }
+
+        foreach ($candidates as $index => $candidate) {
+            if ($index === 0 || $candidate->kind()->value() !== ObservanceKind::SUNDAY) {
+                continue;
+            }
+            array_splice($candidates, $index, 1);
+            array_unshift($candidates, $candidate);
+
+            return $candidates;
+        }
+
+        return $candidates;
     }
 
     /**

@@ -219,6 +219,7 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"white"},"id":"roman:sanctorale:nomen-mariae","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"white"},"id":"roman:sanctorale:norbertus","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti","legacyRank":"duplex-i-classis","rank":1}
+{"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"black"},"id":"roman:sanctorale:omnium-fidelium-defunctorum","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"red"},"id":"roman:sanctorale:pantaleon","legacyRank":"commemoratio","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"white"},"id":"roman:sanctorale:paschalis-baylon","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"cn-1955","rank":"cn-1955"},"colour":{"base":"white"},"id":"roman:sanctorale:patricius","legacyRank":"duplex","rank":3}

@@ -86,7 +86,6 @@
 {"date":"2024-10-13","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2024-10-20","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2024-10-26","field":"colour","oracle":"white","engine":"green","category":"colour-other"}
-{"date":"2024-11-02","field":"colour","oracle":"black","engine":"white","category":"colour-other"}
 {"date":"2024-11-04","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
 {"date":"2024-11-09","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
 {"date":"2024-11-10","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
@@ -179,7 +178,6 @@
 {"date":"2025-10-09","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
 {"date":"2025-10-19","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}
 {"date":"2025-10-25","field":"colour","oracle":"white","engine":"green","category":"colour-other"}
-{"date":"2025-11-03","field":"colour","oracle":"black","engine":"white","category":"colour-other"}
 {"date":"2025-11-04","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
 {"date":"2025-11-08","field":"colour","oracle":"white","engine":"green","category":"colour-other"}
 {"date":"2025-11-09","field":"colour","oracle":"white","engine":"green","category":"colour-other"}
@@ -279,7 +277,6 @@
 {"date":"2026-10-09","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
 {"date":"2026-10-31","field":"colour","oracle":"white","engine":"green","category":"colour-other"}
 {"date":"2026-11-01","field":"commemorations","oracle":"0","engine":"1","category":"commem-feast"}
-{"date":"2026-11-02","field":"colour","oracle":"black","engine":"white","category":"colour-other"}
 {"date":"2026-11-04","field":"commemorations","oracle":"1","engine":"0","category":"commem-feast"}
 {"date":"2026-11-07","field":"colour","oracle":"white","engine":"green","category":"colour-other"}
 {"date":"2026-11-08","field":"commemorations","oracle":"0","engine":"1","category":"commem-sunday"}

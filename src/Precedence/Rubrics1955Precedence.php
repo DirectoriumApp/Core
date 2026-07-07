@@ -392,6 +392,13 @@ final class Rubrics1955Precedence implements PrecedenceRules
         return false;
     }
 
+    public function officeOfTheDeadYieldsToSunday(): bool
+    {
+        // As under 1954/1962: All Souls is never sung on a Sunday, so its Office and Mass are
+        // deferred to the next free day (3 November when 2 November is a Sunday).
+        return true;
+    }
+
     public function privilegedCommemorationsExemptFromLimit(): bool
     {
         // Title III.2: the privileged commemorations (any Sunday, a first-class feast, the
@@ -538,6 +545,11 @@ final class Rubrics1955Precedence implements PrecedenceRules
     private function admitsNoCommemoration(RealizedObservance $winner, PrecedenceContext $context): bool
     {
         if ($context->isTriduum()) {
+            return true;
+        }
+
+        // The Office of the Dead (All Souls) is a Requiem: it admits no commemoration.
+        if ($winner->kind()->value() === ObservanceKind::OFFICE_OF_THE_DEAD) {
             return true;
         }
 
