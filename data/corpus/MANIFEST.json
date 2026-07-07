@@ -61,8 +61,8 @@
     },
     "editions/roman-rubricae-1955/precedence-rules.ndjson": {
       "primaryKey": "rule",
-      "records": 11,
-      "sha256": "702e9010e353cd7d46ea2190d4b643c4957b48c159bd12888162ea18215a7c23"
+      "records": 12,
+      "sha256": "903fb32c6a810f07e8ef12a3f93b7af747ddc9ec1c23e748fc486b11ebd85ad1"
     },
     "editions/roman-rubricae-1955/precedence-tiers.ndjson": {
       "primaryKey": "selector",
@@ -166,7 +166,7 @@
       "rights": "reference",
       "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
       "urn": "directorium:source:ordo-1954",
-      "uses": 2828
+      "uses": 2829
     },
     {
       "key": "rg-1960",

@@ -400,8 +400,9 @@ derivation, no live oracle), then built + tested. As-built:
   **OMITTED — not commemorated — under a Double of the I or II class**. That one new rule is the load-bearing
   addition: `Rubrics1954Precedence::isOctaveOmitted` now recognises the common temporal octave (by id, since it
   carries no legacy grade) and omits its day within under a Double I/II, exactly as it does a *sanctoral* common
-  octave. Live-triggered by **Sts Philip & James** (1 May, `duplex-ii-classis`) and the **Finding of the Cross**
-  (3 May) when they fall within the window (Easter ∈ [8, 13] Apr): 1 May 2020 → Philip & James celebrated, the
+  octave. Live-triggered by **Sts Philip & James** (1 May, `duplex-ii-classis`, when Easter ∈ [8, 13] Apr) and
+  the **Finding of the Cross** (3 May, `duplex-ii-classis`, when Easter ∈ [10, 15] Apr — the window is per-feast,
+  each fixed date being a day-within only for its own span): 1 May 2020 → Philip & James celebrated, the
   octave day-within displaced (omitted). A *plain* Double (St Catherine of Siena, 30 Apr 2020) does NOT omit it
   — the octave is commemorated. `MoveableFeastResolutionTest`.
 - **Precedence tiers.** A new `common-octave-within` selector (ordinal 20, just below the privileged

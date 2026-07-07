@@ -174,6 +174,14 @@ final class Rubrics1955Precedence implements PrecedenceRules
         if ($this->table->isMember('feasts-of-the-lord', $id)) {
             return $this->table->tier('feast-of-the-lord');
         }
+        // A moveable feast that is a greater double of a saint / the BVM — the Passiontide Seven
+        // Sorrows (#453). Cum nostra leaves a double unchanged, so it keeps the Duplex maius grade
+        // 1954 gives it; minted on the temporal path it carries no legacy grade, and its numeric
+        // rank (III) cannot tell a greater double from an ordinary double — so it is named to the
+        // greater-double tier by identity, exactly as in the Divino Afflatu edition.
+        if ($this->table->isMember('moveable-greater-double', $id)) {
+            return $this->table->tier('greater-double');
+        }
         if ($grade === LegacyRank::DUPLEX_MAIUS) {
             return $this->table->tier('greater-double');
         }

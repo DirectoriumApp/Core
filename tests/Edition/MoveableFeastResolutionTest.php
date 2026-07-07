@@ -87,6 +87,22 @@ final class MoveableFeastResolutionTest extends TestCase
         self::assertSame(self::SEVEN_SORROWS, self::celebrationId(self::on(self::cnYear(1954), '1954-04-09')));
     }
 
+    public function testSevenSorrowsOutranksACoincidentOrdinaryDoubleInBothEditions(): void
+    {
+        // 2003: Easter 20 Apr, so the Friday in Passion Week (Easter−9) is 11 Apr — St Leo the
+        // Great, an ordinary Double in both editions. A Duplex maius must outrank an ordinary
+        // Double, so the Seven Sorrows is celebrated and St Leo commemorated. This exercises the
+        // greater-double tier (a numeric rank III cannot tell a greater double from an ordinary
+        // double) in BOTH editions — crucially the derived Cum nostra edition, which has its own
+        // precedence table and engine; the calendar-year-1954 case above has no coincident double,
+        // so it never exercised the tier and masked a 1955 regression.
+        foreach ([self::daYear(2003), self::cnYear(2003)] as $year) {
+            $day = self::on($year, '2003-04-11');
+            self::assertSame(self::SEVEN_SORROWS, self::celebrationId($day));
+            self::assertSame('commemoration', self::roleOf($day, 'roman:sanctorale:leo-magnus'));
+        }
+    }
+
     // --- The Solemnity of St Joseph (Easter+17) and its common octave (1954) --------------
 
     public function testTheSolemnityOfStJosephIsCelebratedOnTheWednesdayAfterEaster(): void
