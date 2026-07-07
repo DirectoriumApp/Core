@@ -98,6 +98,7 @@ tiers:
   # id-string tie-break never decides between two named Simples. The `dignior-simple` membership
   # set (below) names the dignified feasts; an unlisted Simple keeps subOrder 1.
   #   * 19 Jan — Ss Marius, Martha, Audifax & Abachum (the older Roman martyrs) over St Canute.
+  #   * 21 Oct — St Hilarion, Abbot (the day's titular feast) over Ss Ursula & Companions.
   - { selector: dignior-simple, line: 24, ordinal: 24, subOrder: 0, cite: ordo-1954 }
   - { selector: simple, line: 24, ordinal: 24, subOrder: 1, cite: rg-da }
   - { selector: ordinary-feria, line: 27, ordinal: 27, subOrder: 0, cite: rg-da }
@@ -180,13 +181,19 @@ membership:
   # The Simples of higher dignity (the two-simples tie-break, #453): named here so tierOf routes
   # them to the `dignior-simple` tier (subOrder 0), above a plain Simple (subOrder 1), so the more
   # worthy is celebrated and the other commemorated — instead of the resolver's arbitrary id-string
-  # tie-break. Seeded with the one universal-calendar Simple-vs-Simple collision confirmed offline;
-  # the full set is completed against the Divinum Officium oracle in the isBuilt sweep.
+  # tie-break. These are the complete set of same-day Simple-vs-Simple collisions on the universal
+  # 1954 calendar (both found by an offline scan of the fixed-date placements); a particular
+  # calendar that adds its own Simples can extend the set through an overlay.
   #   * 19 January — Ss Marius, Martha, Audifax & Abachum (the older, first-listed Roman martyrs)
   #     over St Canute (a later addition); without this the id string wrongly prefers "canutus".
+  #   * 21 October — St Hilarion, Abbot (the historic titular of the day) over Ss Ursula &
+  #     Companions, Virgins & Martyrs (celebrated as the day's commemoration in the 1954 ordo).
+  #     Here the id string happens to agree ("hilarion" < "ursula-et-socii"); listing it makes the
+  #     result rule-driven, not luck.
   - name: dignior-simple
     cite: ordo-1954
     ids:
+      - roman:sanctorale:hilarion
       - roman:sanctorale:marius-et-socii
 
 # Commemorations admitted per day-type. The pre-1955 rite imposes no flat integer cap the

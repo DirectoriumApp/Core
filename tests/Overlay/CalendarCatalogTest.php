@@ -62,6 +62,34 @@ final class CalendarCatalogTest extends TestCase
         self::assertContains('sspx', (new CalendarCatalog())->particularCalendars());
     }
 
+    public function testResolvesTheHistoricalEditionsUnderTheUniversalCalendar(): void
+    {
+        // The two selectors are orthogonal: with no particular calendar (null), naming the 1954 or
+        // 1955 rubric system resolves that edition's universal calendar. Both are built since #453,
+        // so the catalog no longer refuses them. The Assumption (15 Aug, first class everywhere) is
+        // the stable probe.
+        $catalog = new CalendarCatalog();
+
+        foreach (['1954', '1955'] as $edition) {
+            $day = $catalog->resolver(null, $edition)->resolveDay(self::date('1958-08-15'));
+            self::assertSame(
+                'roman:sanctorale:assumptio',
+                $day->celebration()[0]->id()->toString(),
+                "the $edition edition resolves the Assumption on 15 Aug"
+            );
+        }
+    }
+
+    public function testLayersTheSspxOverlayOverAHistoricalEdition(): void
+    {
+        // The orthogonal combination: a particular calendar layered over a non-1962 edition. St
+        // Pius X (3 Sep) resolves under the SSPX overlay on the 1954 base without error — proving
+        // $calendar and $rubricSystem compose, not just $calendar over the 1962 default.
+        $day = (new CalendarCatalog())->resolver('sspx', '1954')->resolveDay(self::date('1954-09-03'));
+
+        self::assertSame('roman:sanctorale:pius-x', $day->celebration()[0]->id()->toString());
+    }
+
     public function testUnknownCalendarSelectorThrows(): void
     {
         $this->expectException(InvalidArgumentException::class);

@@ -43,7 +43,7 @@ final class HistoricalEditionOracleTest extends TestCase
         '1955-instituted-feast',
         'grade-source-disagreement',
         'deferred-temporal-feast',
-        'deferred-saturday-office',
+        'deferred-anticipated-sunday',
     ];
 
     /**

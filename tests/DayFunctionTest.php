@@ -6,7 +6,6 @@ namespace Directorium\Core\Tests;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 use function Directorium\Core\contract;
@@ -100,13 +99,21 @@ final class DayFunctionTest extends TestCase
         self::assertSame('roman:rubricae-1960', contract($date, false, null, '1962')['edition']);
     }
 
-    public function testSelectingAnUnbuiltEditionThrows(): void
+    public function testTheHistoricalEditionsResolveAtThePublicBoundary(): void
     {
-        // 1954's precedence engine is wired (#67), but its calendar is incomplete pending the
-        // dataset burndown (#64), so it is not yet marked built: the public boundary refuses
-        // it. (1955 has no engine at all and is likewise refused.)
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('/not yet built/');
-        day(new DateTimeImmutable('2026-06-29', new DateTimeZone('UTC')), null, '1954');
+        // Once #453 flipped their isBuilt flag, 1954 and 1955 resolve through the public day()
+        // boundary exactly like 1962 — the guard no longer refuses them. St Peter's Chair at Rome
+        // (18 Jan) is a per-annum weekday feast present under every edition, a stable probe.
+        $date = new DateTimeImmutable('1954-01-18', new DateTimeZone('UTC'));
+
+        foreach (['1954', 'roman:divino-afflatu', '1955', 'roman:rubricae-1955'] as $selector) {
+            $day = day($date, null, $selector);
+            self::assertFalse($day->isEmpty(), "$selector resolves a non-empty day");
+            self::assertCount(1, $day->celebration(), "$selector celebrates exactly one office");
+        }
+
+        // The edition is a real discriminator: naming 1954 stamps its own edition URN, not 1962's.
+        self::assertSame('roman:divino-afflatu', contract($date, false, null, '1954')['edition']);
+        self::assertSame('roman:rubricae-1955', contract($date, false, null, '1955')['edition']);
     }
 }

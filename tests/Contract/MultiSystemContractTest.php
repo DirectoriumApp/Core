@@ -6,10 +6,7 @@ namespace Directorium\Core\Tests\Contract;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Directorium\Core\Contract\DayContract;
 use Directorium\Core\Edition\RubricSystem;
-use Directorium\Core\Precedence\DayResolver;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 use function Directorium\Core\contract;
@@ -22,9 +19,9 @@ use function Directorium\Core\contract;
  *
  * The Assumption (15 Aug) is a first-class feast under every edition, so its class-I
  * commemoration cap is exactly the reform story: 1962 admits one, the pre-1955 rite three, and
- * Cum nostra none (a first-class day's additional-commemoration count is zero). The public
- * `contract()` boundary resolves only the built default (1962); 1954 and 1955 are reached the
- * same way the validation harness reaches them, through {@see DayResolver::forEdition()}.
+ * Cum nostra none (a first-class day's additional-commemoration count is zero). Since #453 flipped
+ * their isBuilt flag, all three editions resolve through the public `contract()` boundary — the
+ * same day is asked of each by naming its rubric system, no {@see DayResolver::forEdition()} needed.
  */
 final class MultiSystemContractTest extends TestCase
 {
@@ -91,29 +88,30 @@ final class MultiSystemContractTest extends TestCase
     }
 
     /**
-     * The public boundary refuses a declared-but-unbuilt edition (1954/1955 are stamped only
-     * through the resolver, not day()/contract()); this documents the gate the cross-system
-     * assertions deliberately bypass.
+     * The public boundary now serves the historical editions directly: naming 1954 or 1955 to
+     * contract() resolves and stamps that edition, where before #453 it refused them. (A future
+     * declared-but-unbuilt edition would still be refused; there is none to name today.)
      */
-    public function testThePublicContractRefusesAnUnbuiltEdition(): void
+    public function testThePublicContractResolvesTheHistoricalEditionsDirectly(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        contract(self::utc('1958-08-15'), false, null, RubricSystem::DIVINO_AFFLATU);
+        $da = contract(self::utc('1958-08-15'), false, null, RubricSystem::DIVINO_AFFLATU);
+        $cn = contract(self::utc('1958-08-15'), false, null, RubricSystem::RUBRICAE_1955);
+
+        self::assertSame('roman:divino-afflatu', $da['edition']);
+        self::assertSame('roman:rubricae-1955', $cn['edition']);
+        self::assertSame('roman:sanctorale:assumptio', $da['celebration'][0]['id']);
+        self::assertSame('roman:sanctorale:assumptio', $cn['celebration'][0]['id']);
     }
 
     /**
-     * The Assumption's serialised day under the named rubric system, built the way the
-     * validation harness resolves the historical editions.
+     * The Assumption's serialised day under the named rubric system, resolved through the public
+     * contract() boundary — the same path a real caller uses to reach each built edition.
      *
      * @return array<string, mixed>
      */
     private static function assumptionUnder(string $selector): array
     {
-        $date = self::utc('1958-08-15');
-        $year = DayResolver::forEdition(RubricSystem::fromString($selector))
-            ->resolveYear((int) $date->format('Y'));
-
-        return DayContract::from($year->day($date), $year->provenance())->toArray();
+        return contract(self::utc('1958-08-15'), false, null, $selector);
     }
 
     private static function utc(string $ymd): DateTimeImmutable

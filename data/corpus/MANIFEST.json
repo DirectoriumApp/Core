@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1962-2026-07-07.2",
+  "corpusVersion": "1962-2026-07-07.3",
   "disciplines": [
     "cic-1917"
   ],
@@ -37,7 +37,7 @@
     "editions/roman-divino-afflatu/precedence-rules.ndjson": {
       "primaryKey": "rule",
       "records": 12,
-      "sha256": "ce60c57aedb806af23ba0476fc4153c0b1b71b3e642b60a16c4f7448b1b494e8"
+      "sha256": "4b3853252a6ce25d5f03d39bc3e0792322fd9d50da77e6574a3522e561e075e7"
     },
     "editions/roman-divino-afflatu/precedence-tiers.ndjson": {
       "primaryKey": "selector",

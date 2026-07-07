@@ -22,9 +22,11 @@ use RuntimeException;
  *
  * A system carries its stable **edition URN** (stamped into the output contract's
  * {@see \Directorium\Core\Contract\Provenance}), its **corpus directory**, a display **label**,
- * and its historical **validity window**. Only 1962 is built today; 1954 and 1955 are declared
- * on the axis so their eventual arrival (Epics #63 / #68) is additive, and are marked
- * {@see isBuilt()} = false until then. See docs/design/rubric-system-model.md.
+ * and its historical **validity window**. All three declared systems — 1962 (Rubricae 1960),
+ * 1954 (Divino Afflatu) and 1955 (Cum nostra) — are now built and publicly resolvable (Epics
+ * #63 / #68 landed via the #453 burndown). The {@see isBuilt()} flag remains on the axis so a
+ * future system (Tridentine, Novus Ordo) can be declared before its data and rules exist and be
+ * refused at the public boundary until then. See docs/design/rubric-system-model.md.
  */
 final class RubricSystem
 {
@@ -70,8 +72,9 @@ final class RubricSystem
     }
 
     /**
-     * The rubric systems the platform knows, in historical order. 1954 and 1955 are
-     * declared but not yet {@see isBuilt()} until Epics #63 / #68 land their data and rules.
+     * The rubric systems the platform knows, in historical order. All three are now built
+     * and resolvable (Epics #63 / #68, via the #453 burndown); the `built` flag stays so a
+     * future system can be declared before its data and rules land.
      *
      * @return array<string, array{dir: string, label: string, from: int, to: int|null,
      *     built: bool, discipline: string}>
@@ -84,7 +87,7 @@ final class RubricSystem
                 'label' => 'Divino Afflatu (1954)',
                 'from' => 1913,
                 'to' => 1955,
-                'built' => false,
+                'built' => true,
                 'discipline' => 'cic-1917',
             ],
             self::RUBRICAE_1955 => [
@@ -92,7 +95,7 @@ final class RubricSystem
                 'label' => 'Interim rubrics (1955)',
                 'from' => 1956,
                 'to' => 1960,
-                'built' => false,
+                'built' => true,
                 'discipline' => 'cic-1917',
             ],
             self::RUBRICAE_1960 => [

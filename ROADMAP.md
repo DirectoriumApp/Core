@@ -26,9 +26,10 @@ whole-corpus **data-quality gates**, multi-oracle **re-proving with a coverage/c
 others, then FSSP, ICKSP, and Generic 1962 overlays + the Cum sanctissima toggle.
 
 ## 🔭 Future
-- **[v0.3.0](https://github.com/Directorium/Core/milestone/2) — 1954 & 1955 engines.** The pre-1955
-  (1954, Divino Afflatu) and 1955 interim engines alongside 1962, keeping the core rubric-generic via a
-  rubric-family abstraction. Precedence rules and commemoration limits become per-edition here.
+- **[v0.3.0](https://github.com/Directorium/Core/milestone/2) — 1954 & 1955 engines. ✅ Shipped (#453).**
+  The pre-1955 (1954, Divino Afflatu) and 1955 interim engines run alongside 1962 from one rubric-generic
+  codebase, with per-edition precedence rules and commemoration limits. All three editions are now built
+  and publicly resolvable; 1962 stays byte-identical.
 - **[v0.4.0](https://github.com/Directorium/Core/milestone/10) — Calendrical & fasting layers.** The
   calendrical/astronomical block (Golden Number, Epact, Dominical Letter, Indiction, lunar age) and
   per-edition fasting & abstinence.
