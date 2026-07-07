@@ -151,9 +151,17 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":1,"id":"roman:sanctorale:ignatius-antiochenus","month":2}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":31,"id":"roman:sanctorale:ignatius-de-loyola","month":7}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":8,"id":"roman:sanctorale:immaculata-conceptio","month":12}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":15,"id":"roman:sanctorale:immaculata-conceptio:in-octava","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":9,"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:2","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":10,"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:3","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":11,"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:4","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":12,"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:5","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":13,"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:6","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":14,"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:7","month":12,"octaveOf":"roman:sanctorale:immaculata-conceptio"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":7,"id":"roman:sanctorale:immaculata-conceptio:vigilia","month":12,"vigilOf":"roman:sanctorale:immaculata-conceptio"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":22,"id":"roman:sanctorale:immaculatum-cor-mariae","month":8}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":28,"id":"roman:sanctorale:innocentes","month":12}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":4,"id":"roman:sanctorale:innocentes:in-octava","month":1,"octaveOf":"roman:sanctorale:innocentes"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":3,"id":"roman:sanctorale:inventio-crucis","month":5}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":3,"id":"roman:sanctorale:inventio-stephani","month":8}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":16,"id":"roman:sanctorale:ioachim","month":8}
@@ -172,6 +180,7 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":8,"id":"roman:sanctorale:ioannes-de-matha","month":2}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":19,"id":"roman:sanctorale:ioannes-eudes","month":8}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":27,"id":"roman:sanctorale:ioannes-evangelista","month":12}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":3,"id":"roman:sanctorale:ioannes-evangelista:in-octava","month":1,"octaveOf":"roman:sanctorale:ioannes-evangelista"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":12,"id":"roman:sanctorale:ioannes-gualbertus","month":7}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":27,"id":"roman:sanctorale:ioannes-i","month":5}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":9,"id":"roman:sanctorale:ioannes-leonardi","month":10}
@@ -239,6 +248,13 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":12,"id":"roman:sanctorale:nomen-mariae","month":9}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":6,"id":"roman:sanctorale:norbertus","month":6}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":1,"id":"roman:sanctorale:omnes-sancti","month":11}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":8,"id":"roman:sanctorale:omnes-sancti:in-octava","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":2,"id":"roman:sanctorale:omnes-sancti:infra-octavam:2","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":3,"id":"roman:sanctorale:omnes-sancti:infra-octavam:3","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":4,"id":"roman:sanctorale:omnes-sancti:infra-octavam:4","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":5,"id":"roman:sanctorale:omnes-sancti:infra-octavam:5","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":6,"id":"roman:sanctorale:omnes-sancti:infra-octavam:6","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":7,"id":"roman:sanctorale:omnes-sancti:infra-octavam:7","month":11,"octaveOf":"roman:sanctorale:omnes-sancti"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":31,"id":"roman:sanctorale:omnes-sancti:vigilia","month":10,"vigilOf":"roman:sanctorale:omnes-sancti"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":2,"id":"roman:sanctorale:omnium-fidelium-defunctorum","month":11}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":27,"id":"roman:sanctorale:pantaleon","month":7}
@@ -314,6 +330,7 @@
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":26,"id":"roman:sanctorale:stephanus","month":12}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":2,"id":"roman:sanctorale:stephanus-hungariae","month":9}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":2,"id":"roman:sanctorale:stephanus-papa","month":8}
+{"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":2,"id":"roman:sanctorale:stephanus:in-octava","month":1,"octaveOf":"roman:sanctorale:stephanus"}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":17,"id":"roman:sanctorale:stigmata-francisci","month":9}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":26,"id":"roman:sanctorale:sylvester-abbas","month":11}
 {"cites":{"day":"ordo-1954","month":"ordo-1954"},"day":18,"id":"roman:sanctorale:symphorosa","month":7}

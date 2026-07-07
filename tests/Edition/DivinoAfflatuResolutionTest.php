@@ -134,6 +134,82 @@ final class DivinoAfflatuResolutionTest extends TestCase
         self::assertFalse(self::hasOffice(self::on($leap, '1956-02-23'), $vigil), 'leap year: vigil not on 23 Feb');
     }
 
+    public function testTheOctaveOfAllSaintsYieldsToAllSoulsAndResumes(): void
+    {
+        // The octave of All Saints (Nov 1) runs Nov 2-8. On 2 Nov the Office of the Dead holds
+        // the day and the day within is omitted (a requiem admits no commemoration); the octave
+        // resumes on 3 Nov and closes with its greater-double octave day on 8 Nov (#453).
+        $year = self::resolver()->resolveYear(1954);
+
+        self::assertSame(
+            'roman:sanctorale:omnium-fidelium-defunctorum',
+            self::celebrationId(self::on($year, '1954-11-02'))
+        );
+        self::assertNotContains(
+            'roman:sanctorale:omnes-sancti:infra-octavam:2',
+            self::commemorationIds(self::on($year, '1954-11-02')),
+            'All Souls admits no commemoration, so the day within is omitted on 2 Nov'
+        );
+        self::assertSame(
+            'roman:sanctorale:omnes-sancti:infra-octavam:3',
+            self::celebrationId(self::on($year, '1954-11-03')),
+            'the octave resumes on 3 Nov'
+        );
+        self::assertSame(
+            'roman:sanctorale:omnes-sancti:in-octava',
+            self::celebrationId(self::on($year, '1954-11-08')),
+            'the octave closes with its octave day on 8 Nov'
+        );
+    }
+
+    public function testTheImmaculateConceptionOctaveIsCommemoratedUnderTheFeastsWithinIt(): void
+    {
+        // The Immaculate Conception octave (Dec 8) runs Dec 9-15. St Damasus (Dec 11) and St
+        // Lucy (Dec 13) are celebrated within it, the octave commemorated; it closes with its
+        // greater-double octave day on 15 Dec (#453).
+        $year = self::resolver()->resolveYear(1954);
+
+        $damasus = self::on($year, '1954-12-11');
+        self::assertSame('roman:sanctorale:damasus', self::celebrationId($damasus));
+        self::assertContains(
+            'roman:sanctorale:immaculata-conceptio:infra-octavam:4',
+            self::commemorationIds($damasus)
+        );
+
+        $lucy = self::on($year, '1954-12-13');
+        self::assertSame('roman:sanctorale:lucia', self::celebrationId($lucy));
+        self::assertContains(
+            'roman:sanctorale:immaculata-conceptio:infra-octavam:6',
+            self::commemorationIds($lucy)
+        );
+
+        self::assertSame(
+            'roman:sanctorale:immaculata-conceptio:in-octava',
+            self::celebrationId(self::on($year, '1954-12-15'))
+        );
+    }
+
+    public function testTheComitesChristiKeepTheirSimpleOctaveDays(): void
+    {
+        // St John (3 Jan) and the Holy Innocents (4 Jan) keep their simple octave days after
+        // the Circumcision; St Stephen's octave (2 Jan) yields to the Holy Name when a Sunday
+        // falls there (1955) and is commemorated (#453).
+        $year = self::resolver()->resolveYear(1955);
+
+        self::assertSame(
+            'roman:sanctorale:ioannes-evangelista:in-octava',
+            self::celebrationId(self::on($year, '1955-01-03'))
+        );
+        self::assertSame(
+            'roman:sanctorale:innocentes:in-octava',
+            self::celebrationId(self::on($year, '1955-01-04'))
+        );
+
+        $holyName = self::on($year, '1955-01-02');
+        self::assertSame('roman:temporale:christmas:holy-name', self::celebrationId($holyName));
+        self::assertContains('roman:sanctorale:stephanus:in-octava', self::commemorationIds($holyName));
+    }
+
     public function testACommonVigilFallingOnASundayIsAnticipatedToSaturday(): void
     {
         // 14 Aug 1955 (the Vigil of the Assumption) is a Sunday, so the common vigil is

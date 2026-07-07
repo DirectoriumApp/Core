@@ -151,9 +151,17 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:ignatius-antiochenus","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ignatius-de-loyola","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio","legacyRank":"duplex-i-classis","rank":1}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:in-octava","legacyRank":"duplex-maius","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:2","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:3","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:4","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:5","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:6","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculata-conceptio:infra-octavam:7","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:immaculata-conceptio:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:immaculatum-cor-mariae","legacyRank":"duplex-ii-classis","rank":2}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:innocentes","legacyRank":"duplex-ii-classis","rank":2}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:innocentes:in-octava","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:inventio-crucis","legacyRank":"duplex-ii-classis","rank":2}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:inventio-stephani","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioachim","legacyRank":"duplex-ii-classis","rank":2}
@@ -172,6 +180,7 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-de-matha","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-eudes","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-evangelista","legacyRank":"duplex-ii-classis","rank":2}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-evangelista:in-octava","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-gualbertus","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:ioannes-i","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:ioannes-leonardi","legacyRank":"duplex","rank":3}
@@ -239,6 +248,13 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:nomen-mariae","legacyRank":"duplex-maius","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:norbertus","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti","legacyRank":"duplex-i-classis","rank":1}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:in-octava","legacyRank":"duplex-maius","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:2","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:3","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:4","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:5","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:6","legacyRank":"semiduplex","rank":3}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:omnes-sancti:infra-octavam:7","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"violet"},"id":"roman:sanctorale:omnes-sancti:vigilia","legacyRank":"vigilia","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"black"},"id":"roman:sanctorale:omnium-fidelium-defunctorum","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:pantaleon","legacyRank":"simplex","rank":4}
@@ -314,6 +330,7 @@
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:stephanus","legacyRank":"duplex-ii-classis","rank":2}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:stephanus-hungariae","legacyRank":"semiduplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:stephanus-papa","legacyRank":"simplex","rank":4}
+{"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:stephanus:in-octava","legacyRank":"simplex","rank":4}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:stigmata-francisci","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"id":"roman:sanctorale:sylvester-abbas","legacyRank":"duplex","rank":3}
 {"cites":{"colour":"ordo-1954","legacyRank":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"red"},"id":"roman:sanctorale:symphorosa","legacyRank":"simplex","rank":4}

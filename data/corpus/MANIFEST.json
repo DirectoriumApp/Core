@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1962-2026-07-06.2",
+  "corpusVersion": "1962-2026-07-06.3",
   "disciplines": [
     "cic-1917"
   ],
@@ -21,13 +21,13 @@
     },
     "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 350,
-      "sha256": "a29e15519016530839afcc6e0566124c6e0ddc0802e7fd6617212cc55ab238c9"
+      "records": 367,
+      "sha256": "3affa1613eee02928d4ab15270a717192939fdf1ed7f2863992cafcb08a46b7e"
     },
     "editions/roman-divino-afflatu/placement.sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 350,
-      "sha256": "f950b902b4559358e164187f52f0e5ad5c6a0a4fb4c43492f1a814f54bafa192"
+      "records": 367,
+      "sha256": "058c08e91c2a60c1cf4d07d1192d81a9bf3dccdfdb3e2e54a01b2cd741eb3797"
     },
     "editions/roman-divino-afflatu/precedence-rules.ndjson": {
       "primaryKey": "rule",
@@ -86,8 +86,8 @@
     },
     "identity/sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 357,
-      "sha256": "2233738a88afdc47425187412ec3460199ff3de82081849b2a809fb75d910587"
+      "records": 374,
+      "sha256": "d36b69c44e84d9fc517e831ccd4cc2b4ea251b751732f9f8423571dd02ebf528"
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
@@ -148,7 +148,7 @@
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
       "urn": "directorium:source:mr-1920",
-      "uses": 418
+      "uses": 435
     },
     {
       "key": "ordo-1954",
@@ -156,7 +156,7 @@
       "rights": "reference",
       "title": "St. Lawrence Press — Ordo Recitandi (pre-1955 rite / Divino Afflatu)",
       "urn": "directorium:source:ordo-1954",
-      "uses": 2710
+      "uses": 2795
     },
     {
       "key": "rg-1960",
