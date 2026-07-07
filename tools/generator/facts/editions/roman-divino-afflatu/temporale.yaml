@@ -1,8 +1,9 @@
 # The 1954 (Divino Afflatu) edition's ADDITIONAL temporal archetypes — the four
-# privileged temporal octaves, plus the two moveable feasts (the Passiontide Seven
-# Sorrows and the Solemnity of St Joseph, with its common octave), that the pre-1955
-# rite keeps and the 1962 rubrics dropped (#453). The octaves and the Seven Sorrows
-# come first; the moveable feasts are at the foot of the file.
+# privileged temporal octaves, the two moveable feasts (the Passiontide Seven
+# Sorrows and the Solemnity of St Joseph, with its common octave), and the votive
+# Office of Our Lady on a free Saturday, that the pre-1955 rite keeps and the 1962
+# rubrics dropped (#453). The octaves and the Seven Sorrows come first; the moveable
+# feasts and the Saturday Office are at the foot of the file.
 #
 # Companion to the base tools/generator/facts/temporale.yaml (1962). The generator
 # joins these onto the base archetypes for this edition's attributes.temporale.ndjson
@@ -136,5 +137,26 @@ archetypes:
     kind: octave-day
     name: "In Octava Solemnitatis Sancti Ioseph"
     rank: 3
+    colour: white
+    cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }
+
+  # ---- The votive Office of Our Lady on a free Saturday (#453) --------------
+  # The Officium Sanctae Mariae in Sabbato — a white votive Office of the ritus simplex
+  # said on any Saturday whose Office would otherwise be at most a Simple or the ordinary
+  # (non-privileged) feria, throughout the year OUTSIDE Advent, the Christmas→Epiphany block,
+  # and Lent/Passiontide. It is NOT the Little Office of the BVM (a separate devotional
+  # cursus): it is the Office OF THE DAY on a free Saturday, minted for every eligible
+  # Saturday by SaturdayOfOurLady (which computes the seasonal eligibility); the per-day
+  # contest with a coincident Simple / feria / vigil is left to the precedence engine. It
+  # yields to any Semidouble-or-higher (and to every privileged feria / vigil / Ember day /
+  # semidouble+ octave-day) — dropped, not commemorated — but OUTRANKS a Simple (which is
+  # commemorated) and the ordinary feria, so its tier sits just above `simple`
+  # (precedence.yaml). Cum nostra (1955) keeps it (this archetype's kind is neither a
+  # within-octave nor an octave-day, so deriveCumNostra1955Temporale carries it forward). The
+  # rank here is the deferred 1962-mapped display value (a Simple -> IV); precedence is by tier.
+  - key: sancta-maria-sabbato
+    kind: lady-on-saturday
+    name: "Sanctae Mariae in Sabbato"
+    rank: 4
     colour: white
     cites: { name: mr-1920, rank: ordo-1954, colour: ordo-1954 }

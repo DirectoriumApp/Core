@@ -61,6 +61,7 @@
 {"archetype":"sacred-heart","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"white"},"rank":1}
 {"archetype":"sacred-heart-octave-day","cites":{"colour":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"rank":3}
 {"archetype":"sacred-heart-within-octave","cites":{"colour":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"rank":3}
+{"archetype":"sancta-maria-sabbato","cites":{"colour":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"rank":4}
 {"archetype":"septuagesima-feria","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":4}
 {"archetype":"septuagesima-sunday","cites":{"colour":"rg-1960","rank":"rg-1960"},"colour":{"base":"violet"},"rank":2}
 {"archetype":"seven-sorrows","cites":{"colour":"ordo-1954","rank":"ordo-1954"},"colour":{"base":"white"},"rank":3}

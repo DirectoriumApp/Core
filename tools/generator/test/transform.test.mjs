@@ -563,7 +563,7 @@ test('deriveCumNostra1955 leaves an entry absent from 1954 untouched', () => {
 
 // --- deriveCumNostra1955Temporale: keep the moveable feasts, drop the octaves (#453) -------
 
-test('deriveCumNostra1955Temporale keeps feasts and drops every octave archetype', () => {
+test('deriveCumNostra1955Temporale keeps feasts and the Saturday Office, drops every octave', () => {
   const archetypes = [
     { key: 'seven-sorrows', kind: 'feast' },
     { key: 'solemnitas-ioseph', kind: 'feast' },
@@ -571,12 +571,14 @@ test('deriveCumNostra1955Temporale keeps feasts and drops every octave archetype
     { key: 'solemnitas-ioseph-octave-day', kind: 'octave-day' },
     { key: 'ascension-within-octave', kind: 'within-octave' },
     { key: 'corpus-christi-octave-day', kind: 'octave-day' },
+    { key: 'sancta-maria-sabbato', kind: 'lady-on-saturday' },
   ];
   const kept = deriveCumNostra1955Temporale(archetypes).map((a) => a.key);
 
   // Cum nostra suppressed every octave except Christmas/Easter/Pentecost (minted by the base
-  // fillers), but left the moveable feasts in place — so only the two `feast` archetypes survive.
-  assert.deepEqual(kept, ['seven-sorrows', 'solemnitas-ioseph']);
+  // fillers), but LEFT the moveable feasts and the Saturday Office of Our Lady in place — so the
+  // two `feast` archetypes and the `lady-on-saturday` archetype survive, the octaves do not (#453).
+  assert.deepEqual(kept, ['seven-sorrows', 'solemnitas-ioseph', 'sancta-maria-sabbato']);
 });
 
 test('deriveCumNostra1955Temporale is a no-op when there are no octaves', () => {
