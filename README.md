@@ -25,24 +25,38 @@ composer require directorium/core
 
 Requires PHP 7.4+. No runtime dependencies.
 
-## Usage (target API)
+## Usage
+
+Two free functions in the `Directorium\Core` namespace are the entry points:
 
 ```php
-use Directorium\Core\LiturgicalCalendar;
+use function Directorium\Core\day;
+use function Directorium\Core\contract;
 
-$day = (new LiturgicalCalendar())->day(new DateTimeImmutable('2026-06-30'));
-echo $day->title;        // the office of the day
-echo $day->rank;         // class (I–IV)
-print_r($day->colors);   // liturgical colour(s)
+// The resolved office as typed value objects:
+$day = day(new DateTimeImmutable('2026-06-30'));
+foreach ($day->celebration() as $office) {
+    echo $office->id()->toString(), ' — ', $office->rank()->label(), "\n";
+}
+
+// The versioned, JSON-ready output contract (what the Api/Site/Ordo build on):
+$c = contract(new DateTimeImmutable('2026-06-30'), false, 'sspx', '1954');
+echo $c['edition'];               // roman:divino-afflatu
+echo $c['celebration'][0]['id'];  // the winning office
 ```
+
+Both take optional `$calendar` (particular-calendar overlay) and `$rubricSystem`
+(edition) selectors. The **[integration guide](docs/integration-guide.md)** covers the
+full API and worked examples; **[calendars and editions](docs/calendars-and-editions.md)**
+explains the editions (1962/1954/1955) and overlays (SSPX/FSSP/ICKSP) and how to select
+them.
 
 ## Output contract
 
-`Directorium\Core\contract(new DateTimeImmutable('2026-06-30'))` returns the
-versioned, JSON-ready **output contract** — the public shape the Api, Site, and
-Ordo repos build on. It is frozen at contract version 1.0.0 and grows only
-additively. Every field, the three-version provenance scheme, the stability
-guarantees, and worked examples are documented in
+`contract()` returns the versioned, JSON-ready **output contract** — the public shape
+the Api, Site, and Ordo repos build on. It is versioned (currently `1.0.2`) and grows
+only additively within 1.x. Every field, the three-version provenance scheme, the
+stability guarantees, and worked examples are documented in
 [docs/design/output-contract.md](docs/design/output-contract.md).
 
 ## Development
