@@ -103,14 +103,16 @@ The rule keeps cross-edition comparison honest:
   and `eastertide` mean the same liturgical thing across editions, so the token
   is identical and the diff engine aligns by token — no per-edition remapping.
 - **Each edition declares its valid subset.** The Novus Ordo adds
-  `ordinary-time`; the 1962 subset (`advent` · `christmastide` · `epiphany` ·
-  `septuagesima` · `lent` · `passiontide` · `eastertide` · `pentecost`) is
-  **unchanged** — the reclassification is source-compatible for the only edition
+  `ordinary-time`; the traditional subset (`advent` · `christmastide` ·
+  `epiphany` · `septuagesima` · `lent` · `passiontide` · `eastertide` ·
+  `pentecost`) is **unchanged**, and every edition built today (1954/1955/1962)
+  shares it — so the reclassification is source-compatible for every edition
   shipped today.
 - **Adding a vocabulary entry is a minor bump**, per the open-enum rule above.
 
-Per-edition subsets live in a forthcoming `season-vocabulary.md`; this contract
-fixes only that the field is open and that shared concepts share a token.
+Per-edition subsets and the registry live in
+[`season-vocabulary.md`](season-vocabulary.md); this contract fixes only that the
+field is open and that shared concepts share a token.
 
 ## The day shape
 
