@@ -62,7 +62,8 @@ stability guarantees, and worked examples are documented in
 ## Development
 
 Work branches off `develop`, lands via squash PRs with Conventional-Commit titles, and releases
-are cut automatically by release-please. Local checks once the code lands:
+are cut automatically by release-please (see [docs/releasing.md](docs/releasing.md)). Local checks
+once the code lands:
 
 ```bash
 composer install
