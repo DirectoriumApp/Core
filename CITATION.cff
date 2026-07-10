@@ -7,7 +7,8 @@ abstract: >-
 type: software
 authors:
   - name: "Directorium"
-repository-code: "https://github.com/Directorium/Core"
+version: 0.1.0 # x-release-please-version
+repository-code: "https://github.com/DirectoriumApp/Core"
 url: "https://directorium.org"
 license: AGPL-3.0-or-later
 keywords:
@@ -15,5 +16,7 @@ keywords:
   - traditional Roman rite
   - computus
   - ordo
-# The compiled dataset is released separately under CC0; a versioned, archival
-# (DOI-bearing) release of the dataset is a roadmap item.
+# The compiled dataset is released separately under CC0 as a versioned, SHA-256-manifested
+# release artifact (see docs/citable-dataset.md). Tagged releases are archived to Zenodo,
+# which mints a per-version DOI once the maintainer enables the GitHub↔Zenodo integration;
+# add the DOI here as `doi:` and to the README badge when it is first minted.

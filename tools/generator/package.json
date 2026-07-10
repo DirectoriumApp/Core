@@ -11,6 +11,7 @@
   "scripts": {
     "build": "node src/build.mjs",
     "verify": "node src/verify.mjs",
+    "package": "node src/package.mjs",
     "test": "node --test"
   },
   "devDependencies": {

@@ -9,7 +9,47 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
+      - id: release
+        uses: googleapis/release-please-action@v4
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+
+      # When a release is actually cut (the release PR is merged), attach the
+      # versioned CC0 dataset artifact to it (#239): the corpus tarball, its
+      # sha256, and a SHA256SUMS manifest of every file inside.
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          ref: ${{ steps.release.outputs.tag_name }}
+      - uses: actions/setup-node@v4
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          node-version: '20'
+      - name: Install generator dependencies
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm ci
+        working-directory: tools/generator
+      - name: Prepare the dataset release (verify manifest, emit SHA256SUMS)
+        id: package
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm run package -- "${GITHUB_WORKSPACE}/dist"
+        working-directory: tools/generator
+      - name: Assemble the CC0 dataset tarball and attach it to the release
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+          NAME: ${{ steps.package.outputs.dataset_name }}
+        run: |
+          set -euo pipefail
+          # Deterministic, reproducible archive (sorted entries, fixed mtime/owner, no gzip metadata).
+          tar --sort=name --mtime='2020-01-01 00:00:00Z' --owner=0 --group=0 --numeric-owner \
+            -cf - -C data corpus | gzip -n > "dist/${NAME}.tar.gz"
+          ( cd dist && sha256sum "${NAME}.tar.gz" > "${NAME}.tar.gz.sha256" )
+          gh release upload "${TAG}" \
+            "dist/${NAME}.tar.gz" \
+            "dist/${NAME}.tar.gz.sha256" \
+            "dist/SHA256SUMS" \
+            "dist/release-metadata.json" \
+            --clobber
