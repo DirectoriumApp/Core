@@ -3,13 +3,28 @@
     "description": "The Directorium liturgical engine: a clean-room PHP library computing the traditional Roman calendar.",
     "type": "library",
     "license": "AGPL-3.0-or-later",
+    "homepage": "https://directorium.org",
     "keywords": [
         "liturgical",
         "calendar",
         "catholic",
         "ordo",
-        "computus"
+        "computus",
+        "roman-rite",
+        "traditional-latin-mass",
+        "1962"
     ],
+    "authors": [
+        {
+            "name": "Directorium",
+            "homepage": "https://directorium.org"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/DirectoriumApp/Core/issues",
+        "source": "https://github.com/DirectoriumApp/Core",
+        "docs": "https://github.com/DirectoriumApp/Core/blob/main/docs/integration-guide.md"
+    },
     "require": {
         "php": ">=7.4"
     },

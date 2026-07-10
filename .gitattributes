@@ -4,3 +4,21 @@
 # Generated corpus + fixtures: tracked as text, but not diffed inline.
 src/**/Data/*.php linguist-generated=true
 tests/fixtures/*.json -diff linguist-generated=true
+
+# Lean Packagist dist: ship only the runtime (src/, data/corpus/, README, licence,
+# provenance) — never the tests, tooling, docs, or CI/release config. The `data/`
+# corpus is runtime data and is deliberately NOT ignored.
+/.github export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.release-please-manifest.json export-ignore
+/.zenodo.json export-ignore
+/bin export-ignore
+/docs export-ignore
+/phpcs.xml.dist export-ignore
+/phpstan.neon.dist export-ignore
+/phpunit.xml.dist export-ignore
+/release-please-config.json export-ignore
+/ROADMAP.md export-ignore
+/tests export-ignore
+/tools export-ignore
