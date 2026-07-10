@@ -14,8 +14,14 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
 - **Pillars:** the **calendar** comes first; the **Missal** (Mass propers/ordinary) and **Breviary**
   (Divine Office) text layers are later milestones. The Office psalter is initially the 1962 scheme only;
   the pre-1911 and Divino Afflatu psalters are a later milestone.
-- **Particular calendars:** the **universal** calendar comes first. Regional/diocesan calendars, religious
-  order propers, and society presets (SSPX/FSSP/…) are roadmapped.
+- **Particular calendars:** four society/institute overlays are **built** over the universal calendar —
+  **SSPX**, **FSSP**, **ICKSP**, and **Generic 1962** (the identity overlay). SSPX is cross-checked against
+  its live published ordo feed; FSSP and ICKSP are **deliberately NON-EXHAUSTIVE, well-attested subsets** —
+  each society's headline proper-patron elevations, cited to its own published calendar, **not** the complete
+  promulgated *Proprium* (the full proper calendars await a pinnable society ordo, as SSPX has). Regional/
+  diocesan calendars and religious-order propers remain roadmapped. The **Cum sanctissima** (2020) optional
+  celebration of post-1960 saints (#85) is deferred to v2.3.0, where the post-1960-saints corpus it needs is
+  built — until then the 1962 books have no eligible saint for the toggle to resolve.
 - **Movable feasts of the Lord/Saints:** the sanctoral corpus (#41) covers the **fixed-date** universal
   calendar. Feasts tied to a Sunday rather than a civil date — the **Holy Name of Jesus** (Sunday between
   1 and 5 Jan, else 2 Jan), the **Holy Family** (Sunday after Epiphany), and **Christ the King** (last

@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  * fixed-date overlay does not model. See {@see SspxOracle} for the comparison shape and
  * the rationale for the baseline (approval-test) design.
  *
- * @group edition-1962
+ * @group overlays
  */
 final class SspxOracleTest extends TestCase
 {

@@ -27,7 +27,7 @@ use PHPUnit\Framework\TestCase;
  * The fixtures are a NON-EXHAUSTIVE, well-attested subset of each society's proper calendar,
  * not the complete promulgated Proprium; see each overlay's YAML scope note and provenance.json.
  *
- * @group edition-1962
+ * @group overlays
  */
 final class InstituteOverlayTest extends TestCase
 {
