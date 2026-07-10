@@ -89,6 +89,11 @@ additive (see bump rules):
 - Within each role, offices are ordered deterministically (precedence tier, then
   canonical id) and pinned by snapshot.
 
+The 1.0 shape is frozen: `ContractShapeTest` pins the key layout above and the
+golden-year digest pins the resolved values across the centuries, so a field cannot be
+removed, renamed, or reordered without a deliberate, reviewed change. How this relates to
+the PHP API and how versions move together is [`api-stability.md`](../api-stability.md).
+
 ### `season`: open, edition-scoped vocabulary
 
 `season` is being **reclassified from a closed 8-member enum to an open,
