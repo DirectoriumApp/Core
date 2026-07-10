@@ -27,7 +27,7 @@ use PHPUnit\Framework\TestCase;
  * A non-empty Generic overlay, a resolver that reads the wrong data, or any regression that
  * makes an overlay perturb resolution would fail here, naming the day.
  *
- * @group edition-1962
+ * @group overlays
  */
 final class GenericBaselineTest extends TestCase
 {

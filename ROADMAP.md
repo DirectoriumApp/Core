@@ -22,8 +22,12 @@ whole-corpus **data-quality gates**, multi-oracle **re-proving with a coverage/c
 **show-your-work resolution trace**, and the **cited 1962 dataset** itself.
 
 ## 🗓️ Next — [v0.2.0](https://github.com/Directorium/Core/milestone/3)
-**Particular calendars — SSPX first.** The **3mi.org release vehicle**: the SSPX overlay before all
-others, then FSSP, ICKSP, and Generic 1962 overlays + the Cum sanctissima toggle.
+**Particular calendars — SSPX first.** The **3mi.org release vehicle**. All four overlays are
+**✅ shipped** — SSPX (vs its live ordo feed), FSSP and ICKSP (proper-patron elevations, vs pinned
+proper-day fixtures), and Generic 1962 (the identity overlay) — each a distinct `validate (overlays)`
+CI gate. The **Cum sanctissima** toggle (#85) is **deferred to v2.3.0**: the 2020 decree is fundamentally
+about saints canonized *after 1960* (not in the 1962 calendar), so it needs the post-1960-saints corpus
+built there before the toggle can resolve any eligible saint.
 
 ## 🔭 Future
 - **[v0.3.0](https://github.com/Directorium/Core/milestone/2) — 1954 & 1955 engines. ✅ Shipped (#453).**

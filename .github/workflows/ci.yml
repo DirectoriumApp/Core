@@ -39,21 +39,27 @@ jobs:
       # The full suite above already includes the validation harness across every PHP
       # version; the dedicated `validate` job below runs it as an explicit, named gate.
 
-  # Per-system validation gate (#45 / #51 / #73): re-prove each rubric system against
-  # its own pinned oracles on every PR, as a MATRIX so a regression in one edition fails
-  # only its leg and can never mask another (fail-fast is off). 1962 runs Computus vs
-  # easter_days(), the missalemeum fixture, and the SSPX conformance feed; 1954 and 1955
-  # run their Divinum Officium agreement fixtures. Each leg is an explicit, named check
-  # (`validate (<system>)`) that can be required to merge. The oracle fixtures are
-  # committed (no network at test time) and each leg runs only its `edition-<system>`
+  # Per-target validation gate (#45 / #51 / #73 / #87): re-prove each rubric system, and
+  # each particular-calendar overlay, against its own pinned oracles on every PR, as a
+  # MATRIX so a regression in one target fails only its leg and can never mask another
+  # (fail-fast is off). `1962` runs Computus vs easter_days() and the missalemeum fixture;
+  # `1954`/`1955` run their Divinum Officium agreement fixtures; `overlays` runs the four
+  # particular-calendar conformance gates — SSPX (vs its live ordo feed), FSSP/ICKSP (vs
+  # pinned proper-day fixtures), and Generic 1962 (the identity-overlay proof). Each leg is
+  # an explicit, named check (`validate (<name>)`) that can be required to merge. The
+  # fixtures are committed (no network at test time) and each leg runs only its PHPUnit
   # group, so only the Composer dependencies are cached to keep every leg fast.
   validate:
-    name: validate (${{ matrix.system }})
+    name: validate (${{ matrix.name }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        system: ['1962', '1954', '1955']
+        include:
+          - { name: '1962', group: 'edition-1962' }
+          - { name: '1954', group: 'edition-1954' }
+          - { name: '1955', group: 'edition-1955' }
+          - { name: 'overlays', group: 'overlays' }
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -73,8 +79,8 @@ jobs:
           restore-keys: composer-${{ runner.os }}-
       - name: Install dependencies
         run: composer install --no-interaction --no-progress
-      - name: Oracle gate — ${{ matrix.system }}
-        run: composer run-script validate-oracles -- --group edition-${{ matrix.system }}
+      - name: Oracle gate — ${{ matrix.name }}
+        run: composer run-script validate-oracles -- --group ${{ matrix.group }}
 
   # Build-time corpus generator (Node only; the runtime engine never runs it).
   # Asserts the committed corpus is reproducible and matches a fresh build.
