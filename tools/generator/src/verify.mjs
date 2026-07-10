@@ -1,8 +1,10 @@
-// Reproducibility gate. Runs two guarantees and exits non-zero on any difference:
+// Reproducibility gate. Runs three guarantees and exits non-zero on any difference:
 //
 //   1. determinism  — two fresh builds produce byte-identical output;
 //   2. freshness    — the committed corpus matches a fresh build (nothing stale,
-//                     no hand-edit that the generator would not reproduce).
+//                     no hand-edit that the generator would not reproduce);
+//   3. integrity    — the committed MANIFEST.json's sha256s match the committed files
+//                     (the check a dataset consumer runs against a download, #238).
 //
 // CI runs `npm run verify`; a non-empty diff is a red build.
 
@@ -10,6 +12,7 @@ import { mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build, DEFAULT_OUT } from './build.mjs';
+import { verifyManifest } from './manifest.mjs';
 
 /** Byte-compare `paths` between two roots; return a list of difference messages. */
 function diff(expectedRoot, actualRoot, paths) {
@@ -39,6 +42,7 @@ try {
   }
   problems.push(...diff(tmpA, tmpB, pathsA).map((m) => `determinism: ${m}`));
   problems.push(...diff(tmpA, DEFAULT_OUT, pathsA).map((m) => `freshness: ${m}`));
+  problems.push(...verifyManifest(DEFAULT_OUT).map((m) => `integrity: ${m}`));
 
   if (problems.length > 0) {
     process.stderr.write('CORPUS VERIFY FAILED:\n');

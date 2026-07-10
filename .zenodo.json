@@ -1,0 +1,23 @@
+{
+  "title": "Directorium Core — traditional Roman liturgical-calendar engine and CC0 dataset",
+  "description": "A clean-room engine that computes the traditional Roman liturgical calendar (the 1954 Divino Afflatu, 1955 interim, and 1962 Rubricae 1960 editions) and generates a cited, independently oracle-validated, byte-reproducible corpus. Each release attaches the compiled dataset as a versioned CC0 artifact with a SHA-256 manifest. This archive is the versioned source that produces it.",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "AGPL-3.0-or-later",
+  "creators": [
+    { "name": "Directorium" }
+  ],
+  "keywords": [
+    "liturgical calendar",
+    "traditional Roman rite",
+    "computus",
+    "ordo",
+    "reproducible dataset",
+    "CC0"
+  ],
+  "related_identifiers": [
+    { "identifier": "https://github.com/DirectoriumApp/Core", "relation": "isSupplementTo", "scheme": "url" },
+    { "identifier": "https://directorium.org", "relation": "isDocumentedBy", "scheme": "url" }
+  ],
+  "notes": "The engine and source are AGPL-3.0-or-later; the compiled dataset attached to each release is dedicated to the public domain under CC0-1.0 (see the dataset's own LICENSE.txt)."
+}
