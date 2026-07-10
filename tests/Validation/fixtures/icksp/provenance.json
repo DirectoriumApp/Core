@@ -1,0 +1,17 @@
+{
+  "source": {
+    "name": "ICKSP proper calendar",
+    "publisher": "Institute of Christ the King Sovereign Priest",
+    "homepage": "https://institute-christ-king.org",
+    "reference": "https://icksp.org.uk",
+    "particularCalendar": true
+  },
+  "notes": "Pinned proper-day fixture (Core #82/#87). Each row is a fixed-date proper feast the ICKSP calendar publishes at an elevated class, pinned to a specific civil year in which the feast is actually celebrated, with the class the Institute assigns it. The Institute's own calendar names its patrons — St Francis de Sales (Principal Patron), St Thomas Aquinas and St Benedict (Patrons of the Institute), St Thérèse of Lisieux (Patroness of the Missions) — and its apostolate ordos print each at the FIRST class (universal: third class). The pinned years match the dates on those published ordos: de Sales 2023-01-29, Thérèse 2024-10-03, Aquinas 2025-03-07, Benedict 2025-03-21. On several of these the elevation is decisive: the two Lenten dates (Aquinas, Benedict) would, under the universal calendar, yield to the Lenten feria (a III-class feast is only commemorated), and de Sales (2023-01-29) falls on the Fourth Sunday after Epiphany — in each case the I-class elevation makes the feast the celebration where the base calendar keeps the feria or the Sunday, exactly as the Institute's ordo prints. Thérèse (2024-10-03) falls on a free feria. Uncopyrightable calendar facts only; the overlay only re-ranks existing universal feasts, so no Latin titles are stored. A NON-EXHAUSTIVE, well-attested subset — not the Institute's complete promulgated Proprium.",
+  "fields": {
+    "date": "ISO date (YYYY-MM-DD) — the specific year the proper day is checked in",
+    "id": "the universal ObservanceId the ICKSP calendar elevates",
+    "name": "readable English name (not compared)",
+    "class": "the liturgical class the ICKSP calendar assigns (1 = first class)",
+    "source": "the registered corpus source key backing the fact"
+  }
+}

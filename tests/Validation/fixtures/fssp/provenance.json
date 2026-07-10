@@ -1,0 +1,17 @@
+{
+  "source": {
+    "name": "FSSP proper calendar",
+    "publisher": "Priestly Fraternity of St Peter",
+    "homepage": "https://fssp.org.uk",
+    "reference": "https://fssp.org.uk/chair-of-st-peter-1st-class-feast/",
+    "particularCalendar": true
+  },
+  "notes": "Pinned proper-day fixture (Core #81/#87). Each row is a fixed-date proper feast the FSSP calendar publishes at an elevated class, pinned to a specific civil year in which the feast is actually celebrated (not impeded by a privileged temporal day), with the class the Fraternity assigns it. The FSSP District of England & Wales states the Chair of St Peter (22 Feb) is a feast of the FIRST class in FSSP apostolates (universal: second class). Uncopyrightable calendar facts only; Latin titles are not stored here (the overlay only re-ranks existing universal feasts). A NON-EXHAUSTIVE, well-attested subset — not the Fraternity's complete promulgated Proprium.",
+  "fields": {
+    "date": "ISO date (YYYY-MM-DD) — the specific year the proper day is checked in",
+    "id": "the universal ObservanceId the FSSP calendar elevates",
+    "name": "readable English name (not compared)",
+    "class": "the liturgical class the FSSP calendar assigns (1 = first class)",
+    "source": "the registered corpus source key backing the fact"
+  }
+}

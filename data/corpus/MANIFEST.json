@@ -104,6 +104,16 @@
       "records": 74,
       "sha256": "f58a6ba02c7d8202fe6b05136d096399be7b698ba9602392d227595d3bcf333f"
     },
+    "overlays/fssp/operations.ndjson": {
+      "primaryKey": "target",
+      "records": 1,
+      "sha256": "c64561d53675acd4b6735a85530ae7deeead0bb3ad55f3f74f278a9125a483ee"
+    },
+    "overlays/fssp/overlay.json": {
+      "primaryKey": "id",
+      "records": 1,
+      "sha256": "5052aeaf03959ff594a0257bb24a52abe4161a81b5a8f8747e9e332326fc125e"
+    },
     "overlays/generic-1962/operations.ndjson": {
       "primaryKey": "target",
       "records": 0,
@@ -113,6 +123,16 @@
       "primaryKey": "id",
       "records": 1,
       "sha256": "5610e4a01094335193f77e9e89b0c12dcedf250a5365d42e04ef1b257d5c854e"
+    },
+    "overlays/icksp/operations.ndjson": {
+      "primaryKey": "target",
+      "records": 4,
+      "sha256": "2303482f6923cfe125cc683763d879fa4e346683234ce4ac48107aa2e1e6e37d"
+    },
+    "overlays/icksp/overlay.json": {
+      "primaryKey": "id",
+      "records": 1,
+      "sha256": "af10f5198f203ab956135e6df3953d3a884d7d649cef89408d55e3f84c732935"
     },
     "overlays/sspx/operations.ndjson": {
       "primaryKey": "target",
@@ -126,8 +146,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 8,
-      "sha256": "1d61ec56302b541910d682149127ab0ab9fdd0f65ba06167db67624b829d6348"
+      "records": 10,
+      "sha256": "7016b0dc877a3c4b742950a3e63d50b1ecc9efceca45d3eeb79039a781978191"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -143,7 +163,9 @@
   "generator": "@directorium/corpus-generator",
   "license": "CC0-1.0",
   "overlays": [
+    "fssp",
     "generic-1962",
+    "icksp",
     "sspx"
   ],
   "sources": [
@@ -162,6 +184,22 @@
       "title": "Cum nostra hac aetate — General Decree of the S.R.C. reducing the rubrics (23 March 1955)",
       "urn": "directorium:source:cn-1955",
       "uses": 653
+    },
+    {
+      "key": "fssp-ordo",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Priestly Fraternity of St Peter — proper calendar (Rubricae 1960 / 1962)",
+      "urn": "directorium:source:fssp-ordo",
+      "uses": 1
+    },
+    {
+      "key": "icksp-ordo",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Institute of Christ the King Sovereign Priest — proper calendar (Rubricae 1960 / 1962)",
+      "urn": "directorium:source:icksp-ordo",
+      "uses": 4
     },
     {
       "key": "mr-1920",
