@@ -50,6 +50,20 @@ final class Corpus
         return new self($baseDir);
     }
 
+    /**
+     * Drop the process-wide parsed-corpus caches. The corpus is immutable per process,
+     * so normal callers never need this; it exists to invalidate the caches when the
+     * underlying data-version changes under a long-lived process, and to let the
+     * benchmark and the cache-consistency test measure a cold, unparsed load. It does
+     * not change what any subsequent read returns — only whether it is reparsed.
+     */
+    public static function flush(): void
+    {
+        self::$records = [];
+        self::$manifests = [];
+        self::$singletons = [];
+    }
+
     /** The corpus root directory — a stable identity for readers that cache per corpus. */
     public function baseDir(): string
     {
