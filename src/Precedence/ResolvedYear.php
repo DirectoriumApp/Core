@@ -19,6 +19,9 @@ use Directorium\Core\Contract\Provenance;
  *
  * It also carries the {@see Provenance} that produced it — the edition, corpus,
  * and engine versions the output contract (#52) stamps onto each serialised day.
+ *
+ * @internal Not part of the public API (docs/api-stability.md); it is returned by the
+ *           internal resolver, not by the stable day()/contract() boundary.
  */
 final class ResolvedYear
 {

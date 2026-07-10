@@ -1,0 +1,242 @@
+# Public functions
+function Directorium\Core\contract(DateTimeImmutable $date, bool $explain = …, ?string $calendar = …, ?string $rubricSystem = …): array
+function Directorium\Core\day(DateTimeImmutable $date, ?string $calendar = …, ?string $rubricSystem = …): Directorium\Core\Calendar\LiturgicalDay
+function Directorium\Core\explain(DateTimeImmutable $date, ?string $calendar = …, ?string $rubricSystem = …): array
+
+# Public classes
+final class Directorium\Core\Attribute\Colour
+  const BLACK
+  const GREEN
+  const RED
+  const ROSE
+  const VIOLET
+  const WHITE
+  __toString(): string
+  static black(): Directorium\Core\Attribute\Colour
+  equals(Directorium\Core\Attribute\Colour $other): bool
+  static fromString(string $value): Directorium\Core\Attribute\Colour
+  static green(): Directorium\Core\Attribute\Colour
+  isRose(): bool
+  isViolet(): bool
+  static red(): Directorium\Core\Attribute\Colour
+  static rose(): Directorium\Core\Attribute\Colour
+  value(): string
+  static violet(): Directorium\Core\Attribute\Colour
+  static white(): Directorium\Core\Attribute\Colour
+final class Directorium\Core\Attribute\ElementColour
+  base(): Directorium\Core\Attribute\Colour
+  equals(Directorium\Core\Attribute\ElementColour $other): bool
+  static of(Directorium\Core\Attribute\Colour $base): Directorium\Core\Attribute\ElementColour
+  roseAllowed(): bool
+  static violetWithRose(): Directorium\Core\Attribute\ElementColour
+final class Directorium\Core\Attribute\RankClass
+  __toString(): string
+  static classI(): Directorium\Core\Attribute\RankClass
+  static classII(): Directorium\Core\Attribute\RankClass
+  static classIII(): Directorium\Core\Attribute\RankClass
+  static classIV(): Directorium\Core\Attribute\RankClass
+  equals(Directorium\Core\Attribute\RankClass $other): bool
+  static fromOrdinal(int $ordinal): Directorium\Core\Attribute\RankClass
+  isHigherThan(Directorium\Core\Attribute\RankClass $other): bool
+  isLowerThan(Directorium\Core\Attribute\RankClass $other): bool
+  label(): string
+  ordinal(): int
+final class Directorium\Core\Calendar\LiturgicalDay
+  __construct(DateTimeImmutable $date, array $celebration, array $commemoration, array $displaced, array $tempora, ?Directorium\Core\Precedence\ConcurrenceOutcome $secondVespers = …, ?Directorium\Core\Trace\ResolutionTrace $trace = …, ?int $commemorationLimit = …, ?Directorium\Core\Discipline\FastingObligation $fasting = …)
+  celebration(): array
+  commemoration(): array
+  commemorationLimit(): ?int
+  date(): DateTimeImmutable
+  displaced(): array
+  fasting(): ?Directorium\Core\Discipline\FastingObligation
+  isEmpty(): bool
+  offices(): array
+  static placeholder(DateTimeImmutable $date): Directorium\Core\Calendar\LiturgicalDay
+  secondVespers(): ?Directorium\Core\Precedence\ConcurrenceOutcome
+  tempora(): array
+  trace(): ?Directorium\Core\Trace\ResolutionTrace
+  withOffices(array $offices): Directorium\Core\Calendar\LiturgicalDay
+  withSecondVespers(Directorium\Core\Precedence\ConcurrenceOutcome $secondVespers): Directorium\Core\Calendar\LiturgicalDay
+  withTrace(Directorium\Core\Trace\ResolutionTrace $trace): Directorium\Core\Calendar\LiturgicalDay
+interface Directorium\Core\Calendar\RealizedObservance
+  colour(): Directorium\Core\Attribute\ElementColour
+  id(): Directorium\Core\Observance\ObservanceId
+  kind(): Directorium\Core\Observance\ObservanceKind
+  latinName(): string
+  rank(): Directorium\Core\Attribute\RankClass
+final class Directorium\Core\Compare\CalendarComparator
+  __construct()
+  compareDay(array $editions, DateTimeImmutable $date): Directorium\Core\Compare\ComparedDay
+  compareRange(array $editions, DateTimeImmutable $from, DateTimeImmutable $to): Directorium\Core\Compare\CalendarComparison
+final class Directorium\Core\Compare\CalendarComparison
+  __construct(array $editions, array $days)
+  dayCount(): int
+  days(): array
+  divergentDayCount(): int
+  divergentDays(): array
+  editions(): array
+  toArray(): array
+final class Directorium\Core\Compare\ComparedDay
+  agreesOn(string $field): bool
+  cell(string $edition): ?Directorium\Core\Compare\EditionDayCell
+  cells(): array
+  date(): DateTimeImmutable
+  divergences(): array
+  isDivergent(): bool
+  static of(DateTimeImmutable $date, array $cells): Directorium\Core\Compare\ComparedDay
+  toArray(): array
+final class Directorium\Core\Compare\ComparedSequence
+  const AXIS_EDITION
+  const AXIS_YEAR
+  __construct(string $axis, array $points)
+  axis(): string
+  changedPoints(): array
+  length(): int
+  points(): array
+  toArray(): array
+final class Directorium\Core\Compare\ComparisonField
+  const COLOUR
+  const COMMEMORATIONS
+  const FEAST
+  const RANK
+  const SEASON
+  static all(): array
+final class Directorium\Core\Compare\EditionDayCell
+  colour(): ?string
+  commemorations(): array
+  comparableValues(): array
+  edition(): string
+  feastId(): ?string
+  feastName(): ?string
+  static fromContract(string $edition, array $contract): Directorium\Core\Compare\EditionDayCell
+  rankOrdinal(): ?int
+  season(): ?string
+  toArray(): array
+final class Directorium\Core\Compare\SequenceComparator
+  __construct()
+  acrossEditions(DateTimeImmutable $date, array $editions): Directorium\Core\Compare\ComparedSequence
+  acrossYears(DateTimeImmutable $anchor, int $fromYear, int $toYear, ?string $edition = …): Directorium\Core\Compare\ComparedSequence
+final class Directorium\Core\Compare\SequencePoint
+  __construct(string $key, DateTimeImmutable $date, Directorium\Core\Compare\EditionDayCell $cell, array $changes)
+  cell(): Directorium\Core\Compare\EditionDayCell
+  changed(): bool
+  changes(): array
+  date(): DateTimeImmutable
+  key(): string
+  toArray(): array
+final class Directorium\Core\Contract\CalendarDescriptor
+  __construct(string $id, string $name)
+  id(): string
+  name(): string
+  toArray(): array
+final class Directorium\Core\Contract\DayContract
+  const SHAPE_VERSION
+  static from(Directorium\Core\Calendar\LiturgicalDay $day, Directorium\Core\Contract\Provenance $provenance, ?Directorium\Core\Contract\CalendarDescriptor $calendar = …): Directorium\Core\Contract\DayContract
+  toArray(): array
+  toJson(): string
+final class Directorium\Core\Corpus\Corpus
+  static at(string $baseDir): Directorium\Core\Corpus\Corpus
+  attributesSanctorale(string $editionDir): array
+  attributesTemporale(string $editionDir): array
+  baseDir(): string
+  blockSeasons(): array
+  corpusVersion(): string
+  static default(): Directorium\Core\Corpus\Corpus
+  disciplineMeta(string $disciplineKey): array
+  easterOffsets(): array
+  fastingRules(string $disciplineKey): array
+  static flush(): void
+  identitySanctorale(): array
+  identityTemporale(): array
+  manifest(): array
+  overlayMeta(string $slug): array
+  overlayOperations(string $slug): array
+  overlaySlugs(): array
+  placementSanctorale(string $editionDir): array
+  precedenceRules(string $editionDir): array
+  precedenceTiers(string $editionDir): array
+  records(string $relativePath): array
+final class Directorium\Core\Directorium
+  const NAME
+  const VERSION
+final class Directorium\Core\Edition\RubricSystem
+  const DIVINO_AFFLATU
+  const RUBRICAE_1955
+  const RUBRICAE_1960
+  __toString(): string
+  static all(): array
+  corpusDir(): string
+  static default(): Directorium\Core\Edition\RubricSystem
+  static divinoAfflatu(): Directorium\Core\Edition\RubricSystem
+  equals(Directorium\Core\Edition\RubricSystem $other): bool
+  static fromString(?string $selector): Directorium\Core\Edition\RubricSystem
+  governs(int $year): bool
+  isBuilt(): bool
+  label(): string
+  penitentialDiscipline(): string
+  static rubricae1955(): Directorium\Core\Edition\RubricSystem
+  static rubricae1960(): Directorium\Core\Edition\RubricSystem
+  urn(): string
+  validFrom(): int
+  validTo(): ?int
+final class Directorium\Core\Observance\ObservanceId
+  __toString(): string
+  anchorFamily(): ?Directorium\Core\Observance\AnchorFamily
+  cycle(): Directorium\Core\Observance\Cycle
+  equals(Directorium\Core\Observance\ObservanceId $other): bool
+  static of(string ...$segments = …): Directorium\Core\Observance\ObservanceId
+  static parse(string $slug): Directorium\Core\Observance\ObservanceId
+  rite(): Directorium\Core\Observance\Rite
+  segments(): array
+  toString(): string
+final class Directorium\Core\Observance\ObservanceKind
+  const COMMEMORATION_ONLY
+  const EMBER_DAY
+  const FEAST
+  const FERIA
+  const LADY_ON_SATURDAY
+  const OCTAVE_DAY
+  const OFFICE_OF_THE_DEAD
+  const ROGATION_DAY
+  const SPECIAL_MOVABLE
+  const SUNDAY
+  const VIGIL
+  const WITHIN_OCTAVE
+  __toString(): string
+  equals(Directorium\Core\Observance\ObservanceKind $other): bool
+  static fromString(string $value): Directorium\Core\Observance\ObservanceKind
+  value(): string
+final class Directorium\Core\Overlay\CalendarCatalog
+  __construct(?Directorium\Core\Corpus\Corpus $corpus = …)
+  descriptor(?string $calendar): ?Directorium\Core\Contract\CalendarDescriptor
+  particularCalendars(): array
+  resolver(?string $calendar, ?string $rubricSystem = …): Directorium\Core\Precedence\DayResolver
+final class Directorium\Core\Temporal\Season
+  const ADVENT
+  const CHRISTMASTIDE
+  const EASTERTIDE
+  const EPIPHANY
+  const LENT
+  const PASSIONTIDE
+  const PENTECOST
+  const SEPTUAGESIMA
+  __toString(): string
+  static advent(): Directorium\Core\Temporal\Season
+  static christmastide(): Directorium\Core\Temporal\Season
+  static eastertide(): Directorium\Core\Temporal\Season
+  static epiphany(): Directorium\Core\Temporal\Season
+  equals(Directorium\Core\Temporal\Season $other): bool
+  static forBlock(string $block): Directorium\Core\Temporal\Season
+  static forEdition(string $value, string $edition): Directorium\Core\Temporal\Season
+  static fromString(string $value): Directorium\Core\Temporal\Season
+  static lent(): Directorium\Core\Temporal\Season
+  static passiontide(): Directorium\Core\Temporal\Season
+  static pentecost(): Directorium\Core\Temporal\Season
+  static septuagesima(): Directorium\Core\Temporal\Season
+  value(): string
+final class Directorium\Core\Temporal\SeasonVocabulary
+  static editions(): array
+  static isRegistered(string $token): bool
+  static permits(string $edition, string $token): bool
+  static subsetFor(string $edition): array
+  static tokens(): array

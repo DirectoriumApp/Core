@@ -44,6 +44,9 @@ use Directorium\Core\Trace\ResolutionTrace;
  * takes the top as the celebration, and resolves every other office to a
  * commemoration, a transfer, or an omission. A second pass fills in the evening
  * concurrence from the following day. See docs/design/precedence-model.md.
+ *
+ * @internal Not part of the public API (docs/api-stability.md); reach resolution through
+ *           {@see \Directorium\Core\day()} / {@see \Directorium\Core\contract()}.
  */
 final class DayResolver
 {
