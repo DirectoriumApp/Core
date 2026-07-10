@@ -1,0 +1,24 @@
+# The Generic 1962 baseline — the universal Roman calendar as a NAMED, selectable
+# particular calendar (Core #83). It is the identity overlay: it adds, suppresses,
+# and re-ranks nothing, so the calendar it produces is byte-for-byte the universal
+# 1962 calendar the engine resolves under `null`.
+#
+# Why ship an empty overlay at all? It gives a consumer (the Api, the Ordo plugin) an
+# explicit, addressable preset — a stable URN and display name — for "no particular
+# calendar, plain 1962", to list and offer alongside the society/institute calendars
+# (SSPX #80, FSSP #81, ICKSP #82). Selecting it resolves the universal calendar and
+# stamps the contract's `calendar` block with this overlay's identity, so a day served
+# under "Generic 1962" is self-describing rather than an unlabelled default. It is also
+# the reference the other overlays are diffs FROM: their conformance gates show what
+# each society changes ON TOP of exactly this baseline.
+#
+# It carries no operations, so it introduces no new strings and cites no source — the
+# born-cited gate has nothing to check, and the identity is proved structurally: the
+# Generic overlay resolves identically to the base (GenericBaselineTest, #83/#87).
+
+id: directorium:overlay:roman:generic-1962
+name: "Generic 1962"
+rite: roman
+
+# No operations: the universal calendar, unaltered.
+operations: []

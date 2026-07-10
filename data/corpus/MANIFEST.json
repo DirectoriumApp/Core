@@ -104,6 +104,16 @@
       "records": 74,
       "sha256": "f58a6ba02c7d8202fe6b05136d096399be7b698ba9602392d227595d3bcf333f"
     },
+    "overlays/generic-1962/operations.ndjson": {
+      "primaryKey": "target",
+      "records": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "overlays/generic-1962/overlay.json": {
+      "primaryKey": "id",
+      "records": 1,
+      "sha256": "5610e4a01094335193f77e9e89b0c12dcedf250a5365d42e04ef1b257d5c854e"
+    },
     "overlays/sspx/operations.ndjson": {
       "primaryKey": "target",
       "records": 2,
@@ -133,6 +143,7 @@
   "generator": "@directorium/corpus-generator",
   "license": "CC0-1.0",
   "overlays": [
+    "generic-1962",
     "sspx"
   ],
   "sources": [
