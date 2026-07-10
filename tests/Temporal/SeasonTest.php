@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Directorium\Core\Tests\Temporal;
 
+use Directorium\Core\Edition\RubricSystem;
 use Directorium\Core\Temporal\Season;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -42,6 +43,30 @@ final class SeasonTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         Season::fromString('ordinary');
+    }
+
+    /** An edition-scoped season is accepted when the token is in that edition's subset. */
+    public function testForEditionAcceptsSeasonInSubset(): void
+    {
+        $lent = Season::forEdition(Season::LENT, RubricSystem::RUBRICAE_1960);
+
+        self::assertTrue($lent->equals(Season::lent()));
+    }
+
+    /** A token absent from the vocabulary is rejected even by an edition that has no such tempus. */
+    public function testForEditionRejectsSeasonOutsideEditionVocabulary(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Season::forEdition('ordinary-time', RubricSystem::RUBRICAE_1960);
+    }
+
+    /** An unregistered edition is rejected — the vocabulary is scoped to built editions. */
+    public function testForEditionRejectsUnknownEdition(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Season::forEdition(Season::LENT, 'roman:novus-ordo-2002');
     }
 
     /**

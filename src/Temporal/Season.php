@@ -21,9 +21,14 @@ use InvalidArgumentException;
  * of Lent — Passion Week and Holy Week — treated as its own tempus, not merely
  * "Lent".
  *
- * The set is closed for the traditional editions (v0.1.0). Later rules-families
- * that drop or rename tempora (e.g. the Novus Ordo, which keeps neither
- * Septuagesima nor Passiontide) are a separate concern.
+ * The season vocabulary is **open and edition-scoped** ({@see SeasonVocabulary},
+ * docs/design/season-vocabulary.md): each token is bare and shared wherever the
+ * concept is shared, and each edition declares the subset it admits. Every edition
+ * built today shares the traditional eight tempora named below as constants and
+ * factories, so validation delegates to the registry rather than a hardcoded set. A
+ * later rules-family that drops or adds tempora (the Novus Ordo keeps neither
+ * Septuagesima nor Passiontide and adds Ordinary Time) registers its own subset in
+ * {@see SeasonVocabulary} — a minor, additive contract change, never a breaking one.
  */
 final class Season
 {
@@ -36,18 +41,6 @@ final class Season
     public const EASTERTIDE = 'eastertide';
     public const PENTECOST = 'pentecost';
 
-    /** @var list<string> */
-    private const VALID = [
-        self::ADVENT,
-        self::CHRISTMASTIDE,
-        self::EPIPHANY,
-        self::SEPTUAGESIMA,
-        self::LENT,
-        self::PASSIONTIDE,
-        self::EASTERTIDE,
-        self::PENTECOST,
-    ];
-
     private string $value;
 
     private function __construct(string $value)
@@ -55,13 +48,42 @@ final class Season
         $this->value = $value;
     }
 
+    /**
+     * A season from any token registered in the open vocabulary (valid for at least
+     * one edition). Use {@see forEdition()} when the season must belong to a specific
+     * edition's declared subset.
+     */
     public static function fromString(string $value): self
     {
-        if (!in_array($value, self::VALID, true)) {
+        if (!SeasonVocabulary::isRegistered($value)) {
             throw new InvalidArgumentException(sprintf(
-                'Unknown liturgical season "%s"; valid values: %s',
+                'Unknown liturgical season "%s"; registered seasons: %s.',
                 $value,
-                implode(', ', self::VALID)
+                implode(', ', SeasonVocabulary::tokens())
+            ));
+        }
+
+        return new self($value);
+    }
+
+    /**
+     * A season constrained to an edition's declared subset: the token must be one the
+     * given edition admits ({@see SeasonVocabulary}), so a caller building a season for
+     * a specific rubric system cannot mint one outside that edition's tempora (e.g. a
+     * Novus-Ordo `ordinary-time` under the 1962 edition).
+     *
+     * @param string $edition the edition URN, e.g. {@see \Directorium\Core\Edition\RubricSystem::RUBRICAE_1960}
+     *
+     * @throws InvalidArgumentException if the edition does not admit the token
+     */
+    public static function forEdition(string $value, string $edition): self
+    {
+        if (!SeasonVocabulary::permits($edition, $value)) {
+            throw new InvalidArgumentException(sprintf(
+                'Season "%s" is not in the %s vocabulary; valid seasons: %s.',
+                $value,
+                $edition,
+                implode(', ', SeasonVocabulary::subsetFor($edition))
             ));
         }
 
