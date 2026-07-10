@@ -39,6 +39,33 @@
     facts (uncopyrightable). A witness to the 1962 calendar, never transcribed. Also
     pinned as a validation oracle — see tests/Validation/fixtures/sspx."
 
+- key: fssp-ordo
+  urn: directorium:source:fssp-ordo
+  kind: reference
+  title: "Priestly Fraternity of St Peter — proper calendar (Rubricae 1960 / 1962)"
+  year: 2024
+  rights: reference
+  note: "Consult-only. The authority for the FSSP particular-calendar overlay's rank facts
+    (uncopyrightable). The Fraternity's own published calendar: its District of England & Wales
+    (fssp.org.uk) states the Chair of St Peter (22 Feb) is a feast of the FIRST class in FSSP
+    apostolates — the Fraternity's titular patron, elevated from the universal second class. A
+    witness to the FSSP proper calendar, never transcribed; a NON-EXHAUSTIVE subset of the
+    Fraternity's promulgated Proprium (see the overlay's scope note)."
+
+- key: icksp-ordo
+  urn: directorium:source:icksp-ordo
+  kind: reference
+  title: "Institute of Christ the King Sovereign Priest — proper calendar (Rubricae 1960 / 1962)"
+  year: 2024
+  rights: reference
+  note: "Consult-only. The authority for the ICKSP particular-calendar overlay's rank facts
+    (uncopyrightable). The Institute's own published liturgical calendar (icksp.org.uk) names its
+    patrons — St Francis de Sales (Principal Patron), St Thomas Aquinas and St Benedict (Patrons of
+    the Institute), St Thérèse of Lisieux (Patroness of the Missions) — and its apostolate ordos
+    print each at the FIRST class, elevated from the universal third class. A witness to the ICKSP
+    proper calendar, never transcribed; a NON-EXHAUSTIVE subset of the Institute's promulgated
+    Proprium (see the overlay's scope note)."
+
 - key: ordo-1954
   urn: directorium:source:ordo-1954
   kind: reference

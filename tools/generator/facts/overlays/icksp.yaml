@@ -1,0 +1,56 @@
+# The Institute of Christ the King Sovereign Priest (ICKSP) particular calendar, as a
+# declarative overlay over the universal 1962 sanctoral (Core #76/#82). An overlay never
+# changes engine code: it is a set of add/suppress/rerank operations on stable feast ids,
+# layered onto the base sanctoral before precedence runs (docs/design/platform-urn-scheme.md
+# — an overlay is NOT an edition; it adds/removes/reranks over one).
+#
+# Every rank fact cites `icksp-ordo`, the Institute's own published calendar and apostolate
+# ordos (a consult-only reference; a witness to the calendar, never transcribed). Because each
+# feast already exists in the universal calendar with its Latin title cited to the public-domain
+# Missale Romanum 1920, this overlay carries no new transcribed strings — it only re-ranks, so
+# the born-cited gate is satisfied by the base identity rows.
+#
+# SCOPE (v0.2): the Institute's patron saints, each elevated from the universal third class to
+# first class in ICKSP apostolates. The Institute's own calendar names them — St Francis de
+# Sales (Principal Patron), St Thomas Aquinas and St Benedict (Patrons of the Institute), and
+# St Thérèse of Lisieux (Patroness of the Missions). This is a deliberately NON-EXHAUSTIVE,
+# well-attested subset — not the Institute's complete promulgated Proprium (that awaits a pinned
+# ICKSP ordo as an oracle, as SSPX has). What is NOT modelled is documented, not silently implied:
+#   - The Institute's titular feast, Christ the King, is a movable TEMPORAL feast already first
+#     class universally — no fixed-date sanctoral delta (and beyond a SanctoralData overlay).
+#   - The Immaculate Conception (8 Dec), the Institute's principal Patroness, is already first
+#     class universally — no delta.
+#   - St Joseph, Patron of the Universal Church (19 Mar), is already first class — no delta.
+
+id: directorium:overlay:roman:icksp
+name: "Institute of Christ the King Sovereign Priest"
+rite: roman
+
+operations:
+  # St Francis de Sales (29 Jan) — the Institute's Principal Patron — third class to first.
+  - op: rerank
+    target: roman:sanctorale:franciscus-salesius
+    rank: 1
+    cites:
+      rank: icksp-ordo
+
+  # St Thomas Aquinas (7 Mar) — a Patron of the Institute — third class to first.
+  - op: rerank
+    target: roman:sanctorale:thomas-aquinas
+    rank: 1
+    cites:
+      rank: icksp-ordo
+
+  # St Benedict (21 Mar) — a Patron of the Institute — third class to first.
+  - op: rerank
+    target: roman:sanctorale:benedictus
+    rank: 1
+    cites:
+      rank: icksp-ordo
+
+  # St Thérèse of the Child Jesus (3 Oct) — Patroness of the Institute's Missions — third to first.
+  - op: rerank
+    target: roman:sanctorale:teresia-a-iesu-infante
+    rank: 1
+    cites:
+      rank: icksp-ordo
