@@ -14,6 +14,7 @@
     },
     "rank": { "$ref": "#/$defs/rank" },
     "legacyRank": { "$ref": "#/$defs/legacyRank" },
+    "novusRank": { "$ref": "#/$defs/novusRank" },
     "colour": { "$ref": "#/$defs/colour" },
     "nameOverride": { "$ref": "#/$defs/names" },
     "cites": {
@@ -31,6 +32,10 @@
     {
       "if": { "required": ["legacyRank"] },
       "then": { "properties": { "cites": { "required": ["legacyRank"] } } }
+    },
+    {
+      "if": { "required": ["novusRank"] },
+      "then": { "properties": { "cites": { "required": ["novusRank"] } } }
     }
   ],
   "$defs": {
@@ -47,6 +52,10 @@
         "semiduplex", "simplex", "vigilia", "feria-maior", "dominica-maior",
         "dominica-minor", "commemoratio"
       ]
+    },
+    "novusRank": {
+      "description": "The Novus-Ordo (Ordinary-Form) grade token, retained verbatim for fidelity (the numeric rank is its normalized RankClass: solemnity=1 ... optional-memorial=4). Present only for a Novus-Ordo edition; kept a separate vocabulary from legacyRank.",
+      "enum": ["solemnity", "feast", "memorial", "optional-memorial"]
     },
     "colour": {
       "type": "object",
@@ -74,7 +83,7 @@
     "cites": {
       "type": "object",
       "minProperties": 1,
-      "propertyNames": { "pattern": "^(rank|colour|legacyRank)$|^nameOverride\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "propertyNames": { "pattern": "^(rank|colour|legacyRank|novusRank)$|^nameOverride\\.[a-z]{2}(-[A-Za-z0-9]+)*$" },
       "additionalProperties": { "$ref": "#/$defs/sourceRef" }
     }
   }

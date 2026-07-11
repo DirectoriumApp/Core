@@ -147,6 +147,44 @@ function deriveLegacyRank(entryId, editionDir, ed, edCites) {
 }
 
 /**
+ * The normalization of a Novus-Ordo grade token onto its {@see RankClass} ordinal — the
+ * Ordinary-Form counterpart of {@see DEFAULT_RANK_BY_LEGACY}. The NO's four grades map
+ * cleanly onto the 1..4 sort key (solemnity = I … optional memorial = IV), so the numeric
+ * `rank` is DERIVED from the authored `novusRank` grade and cited to the same source, and the
+ * token is carried verbatim so the display and the Table-of-Liturgical-Days precedence read
+ * the native grade. Kept a separate bag from the pre-1960 grades so the two vocabularies
+ * cannot be mixed (docs/design/novus-ordo-calendar-model.md §The rank scale).
+ */
+const DEFAULT_RANK_BY_NOVUS = {
+  solemnity: 1,
+  feast: 2,
+  memorial: 3,
+  'optional-memorial': 4,
+};
+
+/**
+ * Derive `{ rank, rankCite }` for a Novus-Ordo whole-edition entry from its `novusRank`
+ * grade: the default-table class cited to the same source as the grade. Fails closed on a
+ * missing/unknown grade or a missing `cites.novusRank`, exactly as {@see deriveLegacyRank}.
+ */
+function deriveNovusRank(entryId, editionDir, entry, cites) {
+  if (!entry.novusRank) {
+    throw new Error(`entry ${entryId}: the "${editionDir}" whole-edition block must declare a novusRank grade`);
+  }
+  const rank = DEFAULT_RANK_BY_NOVUS[entry.novusRank];
+  if (rank === undefined) {
+    throw new Error(
+      `entry ${entryId}: unknown novusRank grade "${entry.novusRank}" ` +
+        '(expected solemnity | feast | memorial | optional-memorial)',
+    );
+  }
+  if (cites.novusRank === undefined) {
+    throw new Error(`entry ${entryId}: novusRank must carry cites.novusRank`);
+  }
+  return { rank, rankCite: cites.novusRank };
+}
+
+/**
  * Co-placement referential-integrity gate (#64). A vigil's or octave's placement names
  * its bearing feast via `vigilOf` / `octaveOf`; that feast MUST be placed in the SAME
  * edition. The runtime never dereferences the link (it is a provenance pointer, not a
@@ -233,6 +271,94 @@ export function transformSanctoraleEdition(entries, editionDir) {
   }
 
   return { attributes, placement };
+}
+
+/**
+ * Fan a WHOLE edition's own sanctoral file (Core v1.1: the Novus Ordo) out into all three
+ * shapes. Unlike {@see transformSanctoraleEdition} — which reads per-edition blocks nested in
+ * the shared sanctorale.yaml and emits only the diff (attributes + placement, joining the
+ * shared identity) — this reads a self-contained `facts/editions/<dir>/sanctorale.yaml` whose
+ * entries are FLAT (identity + attributes + placement at top level), because that edition is
+ * authored whole rather than as a diff of 1962 (docs/design/novus-ordo-calendar-model.md).
+ *
+ * An entry either:
+ *   - **declares its identity** (kind + titulars + names) — a NO-only observance whose identity
+ *     the caller merges into the shared cross-edition UNION (deduped, exactly as octave and
+ *     temporal-archetype identities merge); or
+ *   - **references a shared identity by id only** (no kind/titulars/names) — a saint the NO
+ *     keeps from the traditional calendar, whose identity the base pass already emitted; here it
+ *     carries only its NO rank/colour/date. Partial identity (some but not all of the three
+ *     fields) is an authoring slip and fails closed.
+ *
+ * The grade is the NO `novusRank` token; the numeric `rank` is DERIVED from it
+ * ({@see deriveNovusRank}) and the token carried verbatim, mirroring the legacyRank path.
+ * Returns `{ identity, attributes, placement }`.
+ */
+export function transformSanctoraleWhole(entries, editionDir) {
+  const identity = [];
+  const attributes = [];
+  const placement = [];
+  const IDENTITY_FIELDS = ['kind', 'titulars', 'names'];
+
+  for (const entry of entries) {
+    const cites = entry.cites || {};
+
+    const present = IDENTITY_FIELDS.filter((field) => entry[field] !== undefined);
+    if (present.length > 0 && present.length < IDENTITY_FIELDS.length) {
+      throw new Error(
+        `entry ${entry.id}: partial identity in the "${editionDir}" whole edition — declare all of ` +
+          'kind/titulars/names (a NO-only observance) or none (a reference to a shared identity by id)',
+      );
+    }
+    if (present.length === IDENTITY_FIELDS.length) {
+      const identityRecord = {
+        id: entry.id,
+        kind: entry.kind,
+        titulars: entry.titulars,
+        names: entry.names,
+        cites: citesFor(cites, (key) => key.startsWith('names.')),
+      };
+      if (entry.aliases) {
+        identityRecord.aliases = entry.aliases;
+      }
+      identity.push(identityRecord);
+    }
+
+    const { rank, rankCite } = deriveNovusRank(entry.id, editionDir, entry, cites);
+    const attributeCites = { rank: rankCite, novusRank: cites.novusRank, colour: cites.colour };
+    for (const key of Object.keys(cites)) {
+      if (key.startsWith('nameOverride.')) {
+        attributeCites[key] = cites[key];
+      }
+    }
+    const attributeRecord = {
+      id: entry.id,
+      rank,
+      novusRank: entry.novusRank,
+      colour: colourOf(entry.colour),
+      cites: attributeCites,
+    };
+    if (entry.nameOverride) {
+      attributeRecord.nameOverride = entry.nameOverride;
+    }
+    attributes.push(attributeRecord);
+
+    const placementRecord = {
+      id: entry.id,
+      month: entry.month,
+      day: entry.day,
+      cites: citesFor(cites, (key) => key === 'month' || key === 'day'),
+    };
+    if (entry.vigilOf) {
+      placementRecord.vigilOf = entry.vigilOf;
+    }
+    if (entry.octaveOf) {
+      placementRecord.octaveOf = entry.octaveOf;
+    }
+    placement.push(placementRecord);
+  }
+
+  return { identity, attributes, placement };
 }
 
 /**
