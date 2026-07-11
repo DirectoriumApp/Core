@@ -1,0 +1,11 @@
+{"selector":"triduum","line":1,"ordinal":1,"subOrder":0,"cite":"fixture"}
+{"selector":"privileged-temporal","line":2,"ordinal":2,"subOrder":0,"cite":"fixture"}
+{"selector":"solemnity","line":3,"ordinal":3,"subOrder":0,"cite":"fixture"}
+{"selector":"all-souls","line":3,"ordinal":3,"subOrder":1,"cite":"fixture"}
+{"selector":"feast-of-the-lord","line":5,"ordinal":5,"subOrder":0,"cite":"fixture"}
+{"selector":"sunday","line":6,"ordinal":6,"subOrder":0,"cite":"fixture"}
+{"selector":"feast","line":7,"ordinal":7,"subOrder":0,"cite":"fixture"}
+{"selector":"privileged-weekday","line":9,"ordinal":9,"subOrder":0,"cite":"fixture"}
+{"selector":"obligatory-memorial","line":10,"ordinal":10,"subOrder":0,"cite":"fixture"}
+{"selector":"optional-memorial","line":12,"ordinal":12,"subOrder":0,"cite":"fixture"}
+{"selector":"weekday","line":13,"ordinal":13,"subOrder":0,"cite":"fixture"}

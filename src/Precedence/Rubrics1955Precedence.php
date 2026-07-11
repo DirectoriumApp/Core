@@ -431,6 +431,12 @@ final class Rubrics1955Precedence implements PrecedenceRules
         return true;
     }
 
+    public function observesVespersConcurrence(): bool
+    {
+        // The 1955 Office contests the evening between Second and First Vespers.
+        return true;
+    }
+
     public function privilegedCommemorationsExemptFromLimit(): bool
     {
         // Title III.2: the privileged commemorations (any Sunday, a first-class feast, the

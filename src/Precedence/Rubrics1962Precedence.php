@@ -347,6 +347,12 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return true;
     }
 
+    public function observesVespersConcurrence(): bool
+    {
+        // The traditional Office contests the evening between Second and First Vespers.
+        return true;
+    }
+
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
     {
         // n. 96(a): the Annunciation, impeded into Holy Week or the Easter octave,

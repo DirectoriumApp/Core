@@ -1,0 +1,2 @@
+{"rule":"membership","name":"privileged-temporal","ids":["roman:temporale:christmas:nativity","roman:temporale:epiphany:domini","roman:temporale:paschal:ascension","roman:temporale:paschal:pentecost"],"cite":"fixture"}
+{"rule":"membership","name":"feasts-of-the-lord","ids":["roman:sanctorale:transfiguratio","roman:temporale:ordinary-time:baptism-of-the-lord"],"cite":"fixture"}
