@@ -1,0 +1,43 @@
+# The penitential discipline of the reformed (Ordinary Form) era — Paenitemini (1966) and the
+# 1983 Code of Canon Law (cann. 1249-1253) — fast and abstinence as data, on the SAME discipline
+# axis as cic-1917, distinct from the rubric editions. The Novus-Ordo editions
+# (roman-novus-ordo-1969/1975/2002) point their RubricSystem::penitentialDiscipline at this key.
+#
+# WHAT CHANGED from the 1917 Code (cic-1917): the reform SHARPLY reduced the days of fast and
+# abstinence (Paenitemini, Const. Ap., 17 Feb 1966; CIC 1983 cann. 1250-1252):
+#   * FAST (one full meal) is kept on only TWO days of the year — Ash Wednesday and Good Friday
+#     (c.1251), which are also days of complete abstinence.
+#   * ABSTINENCE (no flesh meat) is kept on Ash Wednesday, Good Friday, and EVERY FRIDAY of the
+#     year outside a solemnity (cc.1250-1251). Conferences may permit another penance in place of
+#     Friday abstinence outside Lent (c.1253) — a NATIONAL variation, authored later as an overlay;
+#     the universal law modelled here is abstinence.
+#   * GONE: the Ember-day and vigil fasts, the Saturdays-of-Lent abstinence, and the fast on the
+#     ordinary weekdays of Lent — so the reformed Lenten weekdays carry NO obligation here, and a
+#     vigil that once fasted no longer does (there is no `ember-day`, `vigil`, `lent-major`, or
+#     `lent-minor` rule below; the resolver still emits those tags, but with no matching rule they
+#     lay no obligation — per-edition correctness is emergent, exactly as for cic-1917).
+#
+# Fanned out by the generator into:
+#   disciplines/cic-1983/discipline.json    the meta singleton (urn, name)
+#   disciplines/cic-1983/fasting-rules.ndjson  one obligation per named condition
+#
+# The reformed fast/abstinence days are uncopyrightable discipline facts; every rule cites the
+# 1983 Code (cic-1983). See docs/design/novus-ordo-calendar-model.md (The corpus — the penitential
+# discipline for the NO is the 1983 Code / Paenitemini).
+
+urn: roman:cic-1983
+name: "1983 Code of Canon Law (Paenitemini)"
+cite: cic-1983
+
+rules:
+  # Ash Wednesday — fast and complete abstinence (cc.1251). Detected by the day's temporal id in
+  # the FastingResolver (the reformed Ash Wednesday, roman:temporale:paschal:lent:ash-wednesday).
+  - { rule: ash-wednesday, fast: true, abstinence: full, cite: "cic-1983:c1251" }
+  # Good Friday — fast and complete abstinence (cc.1251). Detected by the Good-Friday temporal id;
+  # unlike the traditional discipline (where the Good-Friday fast falls out of the Lenten
+  # Friday/Saturday rule) the reformed calendar has no Lenten-weekday fast, so this rule is named.
+  - { rule: good-friday, fast: true, abstinence: full, cite: "cic-1983:c1251" }
+  # Every Friday of the year outside a solemnity — complete abstinence, no fast (cc.1250-1251).
+  # (A solemnity falling on a Friday lifts the abstinence; that refinement is noted in
+  # KNOWN-LIMITATIONS. Conference substitution outside Lent is a national overlay.)
+  - { rule: friday, fast: false, abstinence: full, cite: "cic-1983:c1250" }

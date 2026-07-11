@@ -22,14 +22,47 @@ use Directorium\Core\Calendar\RealizedObservance;
  */
 final class FastingResolver
 {
-    /** The temporal id of Ash Wednesday, the one Lenten day that is complete abstinence by name. */
-    private const ASH_WEDNESDAY_ID = 'roman:temporale:paschal:ash-wednesday';
+    /**
+     * The temporal ids of Ash Wednesday — the one Lenten day that is complete abstinence by name —
+     * across the fillers that mint it: the traditional editions and the Novus Ordo (which re-slugs
+     * it under its Lenten filler). Edition-agnostic detection: whichever edition resolves the day,
+     * the Ash-Wednesday obligation attaches iff the discipline it points at names the rule.
+     */
+    private const ASH_WEDNESDAY_IDS = [
+        'roman:temporale:paschal:ash-wednesday',
+        'roman:temporale:paschal:lent:ash-wednesday',
+    ];
+
+    /**
+     * The temporal ids of Good Friday across the fillers. In the traditional discipline the
+     * Good-Friday fast falls out of the Lenten Friday/Saturday rule (`lent-major`); the reformed
+     * discipline has no Lenten-weekday fast, so it names a `good-friday` rule instead. Emitting the
+     * tag for both editions is harmless where no such rule exists (cic-1917 lays none), so the 1962
+     * obligation is unchanged.
+     */
+    private const GOOD_FRIDAY_IDS = [
+        'roman:temporale:paschal:good-friday',
+        'roman:temporale:paschal:holy-week:good-friday',
+    ];
 
     /** The seasons that make up the Lenten fast: Lent proper and Passiontide (through Holy Saturday). */
     private const LENTEN_SEASONS = ['lent', 'passiontide'];
 
-    /** Which rule names the reason/citation when several apply — most characteristic first. */
-    private const REASON_PRIORITY = ['ash-wednesday', 'ember-day', 'vigil', 'lent-major', 'lent-minor', 'friday'];
+    /**
+     * Which rule names the reason/citation when several apply — most characteristic first.
+     * `good-friday` sorts above `lent-major`/`friday` so the reformed Good Friday reports the
+     * Good-Friday fast; on a traditional Good Friday (no `good-friday` rule) it falls through to
+     * `lent-major`, unchanged.
+     */
+    private const REASON_PRIORITY = [
+        'ash-wednesday',
+        'good-friday',
+        'ember-day',
+        'vigil',
+        'lent-major',
+        'lent-minor',
+        'friday',
+    ];
 
     private PenitentialDiscipline $discipline;
 
@@ -80,13 +113,17 @@ final class FastingResolver
         }
 
         $isAshWednesday = false;
+        $isGoodFriday = false;
         $isEmberDay = false;
         $isFastingVigil = false;
         foreach ($offices as $office) {
             $id = $office->id()->toString();
             $kind = $office->kind()->value();
-            if ($id === self::ASH_WEDNESDAY_ID) {
+            if (in_array($id, self::ASH_WEDNESDAY_IDS, true)) {
                 $isAshWednesday = true;
+            }
+            if (in_array($id, self::GOOD_FRIDAY_IDS, true)) {
+                $isGoodFriday = true;
             }
             if ($kind === 'ember-day') {
                 $isEmberDay = true;
@@ -102,6 +139,12 @@ final class FastingResolver
             $tags[] = 'ash-wednesday';
         } elseif (in_array($season, self::LENTEN_SEASONS, true)) {
             $tags[] = ($weekday === 5 || $weekday === 6) ? 'lent-major' : 'lent-minor';
+        }
+
+        // Good Friday, named by the reformed discipline (which drops the Lenten-weekday fast); the
+        // traditional discipline has no such rule, so this tag lays no obligation there.
+        if ($isGoodFriday) {
+            $tags[] = 'good-friday';
         }
 
         if ($isEmberDay) {

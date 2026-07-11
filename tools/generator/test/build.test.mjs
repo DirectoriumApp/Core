@@ -115,14 +115,81 @@ test('a diff edition (1954) still unions the base 1962 temporal archetypes', () 
   }
 });
 
-test('a whole edition authored temporal-first emits no empty sanctoral files', () => {
+/** Parse an NDJSON file into an array of records (empty if absent). */
+function records(out, rel) {
+  const path = join(out, rel);
+  if (!existsSync(path)) {
+    return [];
+  }
+  const text = readFileSync(path, 'utf8').trim();
+  return text === '' ? [] : text.split('\n').map((line) => JSON.parse(line));
+}
+
+test('the whole edition (Novus Ordo) authors its own sanctoral, referencing shared saints by id', () => {
   const out = buildToTemp();
   try {
-    const dir = join(out, 'editions', 'roman-novus-ordo-2002');
-    assert.ok(existsSync(join(dir, 'attributes.temporale.ndjson')), 'NO temporale is emitted');
-    // No empty sanctoral shapes are committed for the temporal-first slice.
-    assert.ok(!existsSync(join(dir, 'attributes.sanctorale.ndjson')), 'no empty NO sanctoral attributes');
-    assert.ok(!existsSync(join(dir, 'placement.sanctorale.ndjson')), 'no empty NO sanctoral placement');
+    const dir = 'editions/roman-novus-ordo-2002';
+    const placement = records(out, join(dir, 'placement.sanctorale.ndjson'));
+    const attributes = records(out, join(dir, 'attributes.sanctorale.ndjson'));
+    const union = records(out, 'identity/sanctorale.ndjson');
+    assert.ok(placement.length > 150, 'the NO places its whole general-calendar sanctoral');
+    assert.equal(attributes.length, placement.length, 'every placed NO office carries its attributes');
+
+    // A saint the reform KEEPS from 1962 (Augustine) is placed by the NO — on its reformed date and
+    // grade — but its identity is NOT re-declared by the NO: it lives once in the shared union, from
+    // the base pass. The union therefore holds exactly one augustinus row.
+    const augustinePlacement = placement.find((r) => r.id === 'roman:sanctorale:augustinus');
+    assert.ok(augustinePlacement, 'the NO places Augustine');
+    assert.deepEqual([augustinePlacement.month, augustinePlacement.day], [8, 28], 'Augustine stays 28 Aug in the NO');
+    assert.equal(
+      union.filter((r) => r.id === 'roman:sanctorale:augustinus').length,
+      1,
+      'a shared saint has exactly one identity in the union — the NO references it by id, never re-declares it',
+    );
+
+    // A reform-ADDED observance (Fabian, split from the base Fabian-and-Sebastian) declares its own
+    // identity, which merges into the shared union.
+    const fabian = union.find((r) => r.id === 'roman:sanctorale:fabianus');
+    assert.ok(fabian && fabian.kind === 'feast', 'a NO-only saint merges its identity into the shared union');
+
+    // The reformed grade token is carried and its numeric class derived (solemnity 1 … optional 4).
+    const augustineAttr = attributes.find((r) => r.id === 'roman:sanctorale:augustinus');
+    assert.equal(augustineAttr.novusRank, 'memorial', 'Augustine is an obligatory memorial in the NO');
+    assert.equal(augustineAttr.rank, 3, 'the memorial grade derives RankClass 3');
+  } finally {
+    rmSync(out, { recursive: true, force: true });
+  }
+});
+
+test('the whole edition (Novus Ordo) emits its Table of Liturgical Days and the reformed discipline', () => {
+  const out = buildToTemp();
+  try {
+    const dir = 'editions/roman-novus-ordo-2002';
+    const tiers = records(out, join(dir, 'precedence-tiers.ndjson'));
+    const rules = records(out, join(dir, 'precedence-rules.ndjson'));
+    const selectors = new Set(tiers.map((t) => t.selector));
+    for (const s of ['triduum', 'privileged-temporal', 'solemnity', 'feast-of-the-lord', 'sunday', 'feast', 'obligatory-memorial', 'optional-memorial', 'weekday']) {
+      assert.ok(selectors.has(s), `the NO table defines the ${s} tier`);
+    }
+    // The three membership sets NovusOrdoPrecedence branches on must all be present — in particular
+    // privileged-temporal-weekday, whose absence throws the moment a paschal weekday is graded.
+    const sets = new Set(rules.filter((r) => r.rule === 'membership').map((r) => r.name));
+    for (const name of ['privileged-temporal', 'privileged-temporal-weekday', 'feasts-of-the-lord']) {
+      assert.ok(sets.has(name), `the NO table defines the ${name} membership set`);
+    }
+    // The reform has no commemorations, so it authors no commemoration-limit rows.
+    assert.equal(rules.filter((r) => r.rule === 'commemoration-limit').length, 0, 'the NO admits no commemoration limits');
+    // The six Feasts of the Lord (two temporal, four sanctoral) route to line 5.
+    const fol = rules.find((r) => r.rule === 'membership' && r.name === 'feasts-of-the-lord');
+    assert.ok(fol.ids.includes('roman:temporale:epiphany:baptism-of-the-lord'), 'the Baptism is a Feast of the Lord');
+    assert.ok(fol.ids.includes('roman:sanctorale:transfiguratio-domini'), 'the Transfiguration is a Feast of the Lord');
+
+    // The reformed penitential discipline (cic-1983) is emitted, keeping the fast on Ash Wednesday
+    // and Good Friday only, and Friday abstinence — distinct from the 1917-Code discipline.
+    const fasting = records(out, 'disciplines/cic-1983/fasting-rules.ndjson');
+    const fastDays = new Set(fasting.filter((r) => r.fast).map((r) => r.rule));
+    assert.deepEqual([...fastDays].sort(), ['ash-wednesday', 'good-friday'], 'the reformed fast is Ash Wednesday and Good Friday only');
+    assert.ok(fasting.some((r) => r.rule === 'friday' && !r.fast && r.abstinence === 'full'), 'every Friday is abstinence, no fast');
   } finally {
     rmSync(out, { recursive: true, force: true });
   }

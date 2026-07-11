@@ -161,13 +161,16 @@ final class ChristmasCycleTest extends TestCase
         self::assertSame('In Festo Sanctae Familiae Iesu, Mariae et Ioseph', $holyFamily->latinName());
     }
 
-    /** 1 January is the octave day of the Nativity — a white solemnity in the reform. */
+    /** 1 January is the octave day of the Nativity, kept as the Solemnity of Mary Mother of God. */
     public function testOctaveDay(): void
     {
         $octaveDay = $this->cycle(2024)->on(self::utc('2025-01-01'));
 
         self::assertSame('roman:temporale:christmas:octave-day', $octaveDay->id()->toString());
-        self::assertSame('In Octava Nativitatis Domini', $octaveDay->latinName());
+        self::assertSame(
+            'In octava Nativitatis Domini, sollemnitas Sanctae Dei Genetricis Mariae',
+            $octaveDay->latinName()
+        );
         self::assertSame('octave-day', $octaveDay->kind()->value());
         self::assertSame('white', $octaveDay->colour()->base()->value());
     }

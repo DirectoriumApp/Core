@@ -353,6 +353,13 @@ final class Rubrics1962Precedence implements PrecedenceRules
         return true;
     }
 
+    public function isElectableOptionalMemorial(RealizedObservance $observance): bool
+    {
+        // The 1962 rite has no electable optional memorial — its lowest grade is a commemoration,
+        // resolved by the occurrence rules, not freely chosen. Only the Novus Ordo elects.
+        return false;
+    }
+
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
     {
         // n. 96(a): the Annunciation, impeded into Holy Week or the Easter octave,

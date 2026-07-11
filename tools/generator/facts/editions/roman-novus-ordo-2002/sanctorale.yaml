@@ -1,0 +1,2781 @@
+# Cited sanctoral of the Novus Ordo (Ordinary Form) — the UNIVERSAL General Roman Calendar of
+# the 2002 editio typica tertia, authored WHOLE for this edition (transformSanctoraleWhole, #108).
+#
+# THREE ENTRY SHAPES (docs/design/novus-ordo-calendar-model.md):
+#   * A saint the reform KEEPS from the 1962 calendar is referenced BY ID ONLY — it carries its
+#     Novus-Ordo grade (novusRank), colour, and date, and inherits its identity (kind, titulars, and
+#     public-domain Latin name) from the shared cross-edition union (the base pass). Re-declaring its
+#     identity would collide, and the copyrighted 2002 titles are never transcribed.
+#   * A reform-ADDED observance declares its own identity (kind, titulars, names) and merges it into
+#     the shared union. Its Latin title cites a public-domain text (mr-1920 / mart-rom-1922) where the
+#     saint is ancient; a reform-coined descriptor or a modern saint's proper name — an uncopyrightable
+#     identifier, not the Missal's literary text — cites the norming calendar (cal-rom-1969), the
+#     sanctoral extension of the option-A rule already used for the temporal day-labels.
+#   * A feast the reform RE-TITLED (e.g. the 2 Feb Presentation of the Lord, formerly the Purification)
+#     takes a NEW id + identity, exactly like the re-titled Easter, since a differing name cannot reuse
+#     a shared id.
+#
+# novusRank is the reformed grade (solemnity / feast / memorial / optional-memorial); the numeric
+# RankClass is derived from it (transform.mjs deriveNovusRank) and both are carried. Every datum is
+# cited: the grade/colour/date to the reformed General Roman Calendar (cal-rom-1969), a transcribed
+# name to its public-domain or norming source. The dated calendar is cross-checked (run-and-compare)
+# against romcal / LitCal / calapi and a human ordo in the validation slice (#260); no oracle is a
+# data source. Generated from the verified authoring roster; edit the facts, not this file's shape.
+
+# Basil the Great and Gregory Nazianzen — memorial (Jan 2)
+- id: roman:sanctorale:basilius-et-gregorius-nazianzenus
+  kind: feast
+  titulars: [basilius-magnus, gregorius-nazianzenus]
+  names:
+    la: "Ss. Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiae doctorum"
+  novusRank: memorial
+  colour: white
+  month: 1
+  day: 2
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# The Most Holy Name of Jesus — optional-memorial (Jan 3)
+- id: roman:sanctorale:nomen-iesu
+  kind: feast
+  titulars: [nomen-iesu]
+  names:
+    la: "Sanctissimi Nominis Iesu"
+  novusRank: optional-memorial
+  colour: white
+  month: 1
+  day: 3
+  cites:
+    names.la: mr-1920
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Raymond of Penyafort — optional-memorial (Jan 7)
+- id: roman:sanctorale:raymundus-de-penafort
+  novusRank: optional-memorial
+  colour: white
+  month: 1
+  day: 7
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Hilary of Poitiers — optional-memorial (Jan 13)
+- id: roman:sanctorale:hilarius
+  novusRank: optional-memorial
+  colour: white
+  month: 1
+  day: 13
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Anthony of Egypt (the Abbot) — memorial (Jan 17)
+- id: roman:sanctorale:antonius-abbas
+  novusRank: memorial
+  colour: white
+  month: 1
+  day: 17
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Fabian — optional-memorial (Jan 20)
+- id: roman:sanctorale:fabianus
+  kind: feast
+  titulars: [fabianus]
+  names:
+    la: "S. Fabiani, papae et martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 1
+  day: 20
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Sebastian — optional-memorial (Jan 20)
+- id: roman:sanctorale:sebastianus
+  kind: feast
+  titulars: [sebastianus]
+  names:
+    la: "S. Sebastiani, martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 1
+  day: 20
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Agnes — memorial (Jan 21)
+- id: roman:sanctorale:agnes
+  novusRank: memorial
+  colour: red
+  month: 1
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Vincent of Saragossa (the Deacon) — optional-memorial (Jan 22)
+- id: roman:sanctorale:vincentius
+  kind: feast
+  titulars: [vincentius]
+  names:
+    la: "S. Vincentii, diaconi et martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 1
+  day: 22
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Francis de Sales — memorial (Jan 24)
+- id: roman:sanctorale:franciscus-salesius
+  novusRank: memorial
+  colour: white
+  month: 1
+  day: 24
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# The Conversion of Paul the Apostle — feast (Jan 25)
+- id: roman:sanctorale:conversio-pauli
+  novusRank: feast
+  colour: white
+  month: 1
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Timothy and Titus — memorial (Jan 26)
+- id: roman:sanctorale:timotheus-et-titus
+  kind: feast
+  titulars: [timotheus, titus]
+  names:
+    la: "Ss. Timothei et Titi, episcoporum"
+  novusRank: memorial
+  colour: white
+  month: 1
+  day: 26
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Angela Merici — optional-memorial (Jan 27)
+- id: roman:sanctorale:angela-mericia
+  novusRank: optional-memorial
+  colour: white
+  month: 1
+  day: 27
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Thomas Aquinas — memorial (Jan 28)
+- id: roman:sanctorale:thomas-aquinas
+  novusRank: memorial
+  colour: white
+  month: 1
+  day: 28
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Bosco — memorial (Jan 31)
+- id: roman:sanctorale:ioannes-bosco
+  novusRank: memorial
+  colour: white
+  month: 1
+  day: 31
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Presentation of the Lord — feast, feast of the Lord (Feb 2)
+- id: roman:sanctorale:praesentatio-domini
+  kind: feast
+  titulars: [praesentatio-domini]
+  names:
+    la: "In Praesentatione Domini"
+  novusRank: feast
+  colour: white
+  month: 2
+  day: 2
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Ansgar — optional-memorial (Feb 3)
+- id: roman:sanctorale:ansgarius
+  kind: feast
+  titulars: [ansgarius]
+  names:
+    la: "S. Ansgarii Episcopi"
+  novusRank: optional-memorial
+  colour: white
+  month: 2
+  day: 3
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Blaise — optional-memorial (Feb 3)
+- id: roman:sanctorale:blasius
+  novusRank: optional-memorial
+  colour: red
+  month: 2
+  day: 3
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Agatha — memorial (Feb 5)
+- id: roman:sanctorale:agatha
+  novusRank: memorial
+  colour: red
+  month: 2
+  day: 5
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Paul Miki and companions — memorial (Feb 6)
+- id: roman:sanctorale:paulus-miki-et-socii
+  kind: feast
+  titulars: [paulus-miki]
+  names:
+    la: "Ss. Pauli Miki et Sociorum, Martyrum"
+  novusRank: memorial
+  colour: red
+  month: 2
+  day: 6
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Jerome Emiliani — optional-memorial (Feb 8)
+- id: roman:sanctorale:hieronymus-aemilianus
+  novusRank: optional-memorial
+  colour: white
+  month: 2
+  day: 8
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Josephine Bakhita — optional-memorial (Feb 8)
+- id: roman:sanctorale:iosephina-bakhita
+  kind: feast
+  titulars: [iosephina-bakhita]
+  names:
+    la: "S. Iosephinae Bakhita, Virginis"
+  novusRank: optional-memorial
+  colour: white
+  month: 2
+  day: 8
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Scholastica — memorial (Feb 10)
+- id: roman:sanctorale:scholastica
+  novusRank: memorial
+  colour: white
+  month: 2
+  day: 10
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Our Lady of Lourdes — optional-memorial (Feb 11)
+- id: roman:sanctorale:apparitio-immaculatae
+  novusRank: optional-memorial
+  colour: white
+  month: 2
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cyril and Methodius — memorial (Feb 14)
+- id: roman:sanctorale:cyrillus-et-methodius
+  kind: feast
+  titulars: [cyrillus, methodius]
+  names:
+    la: "Ss. Cyrilli Monachi et Methodii Episcopi"
+  novusRank: memorial
+  colour: white
+  month: 2
+  day: 14
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Seven Holy Founders of the Servites — optional-memorial (Feb 17)
+- id: roman:sanctorale:septem-fundatores
+  novusRank: optional-memorial
+  colour: white
+  month: 2
+  day: 17
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter Damian — optional-memorial (Feb 21)
+- id: roman:sanctorale:petrus-damiani
+  novusRank: optional-memorial
+  colour: white
+  month: 2
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Chair of Saint Peter — feast (Feb 22)
+- id: roman:sanctorale:cathedra-petri
+  novusRank: feast
+  colour: white
+  month: 2
+  day: 22
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Polycarp — memorial (Feb 23)
+- id: roman:sanctorale:polycarpus
+  novusRank: memorial
+  colour: red
+  month: 2
+  day: 23
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Casimir — optional-memorial (Mar 4)
+- id: roman:sanctorale:casimirus
+  novusRank: optional-memorial
+  colour: white
+  month: 3
+  day: 4
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Perpetua and Felicity — memorial (Mar 7)
+- id: roman:sanctorale:perpetua-felicitas
+  novusRank: memorial
+  colour: red
+  month: 3
+  day: 7
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John of God — optional-memorial (Mar 8)
+- id: roman:sanctorale:ioannes-de-deo
+  novusRank: optional-memorial
+  colour: white
+  month: 3
+  day: 8
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Frances of Rome — optional-memorial (Mar 9)
+- id: roman:sanctorale:francisca-romana
+  novusRank: optional-memorial
+  colour: white
+  month: 3
+  day: 9
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Patrick — optional-memorial (Mar 17)
+- id: roman:sanctorale:patricius
+  novusRank: optional-memorial
+  colour: white
+  month: 3
+  day: 17
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cyril of Jerusalem — optional-memorial (Mar 18)
+- id: roman:sanctorale:cyrillus-hierosolymitanus
+  novusRank: optional-memorial
+  colour: white
+  month: 3
+  day: 18
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Joseph — solemnity (Mar 19)
+- id: roman:sanctorale:ioseph
+  novusRank: solemnity
+  colour: white
+  month: 3
+  day: 19
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Turibius of Mogrovejo — optional-memorial (Mar 23)
+- id: roman:sanctorale:turibius-de-mogrovejo
+  kind: feast
+  titulars: [turibius-de-mogrovejo]
+  names:
+    la: "S. Turibii de Mogrovejo, Episcopi"
+  novusRank: optional-memorial
+  colour: white
+  month: 3
+  day: 23
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Annunciation of the Lord — solemnity (Mar 25)
+- id: roman:sanctorale:annuntiatio
+  novusRank: solemnity
+  colour: white
+  month: 3
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Francis of Paola — optional-memorial (Apr 2)
+- id: roman:sanctorale:franciscus-de-paula
+  novusRank: optional-memorial
+  colour: white
+  month: 4
+  day: 2
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Isidore of Seville — optional-memorial (Apr 4)
+- id: roman:sanctorale:isidorus
+  novusRank: optional-memorial
+  colour: white
+  month: 4
+  day: 4
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Vincent Ferrer — optional-memorial (Apr 5)
+- id: roman:sanctorale:vincentius-ferrer
+  novusRank: optional-memorial
+  colour: white
+  month: 4
+  day: 5
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Baptist de la Salle — memorial (Apr 7)
+- id: roman:sanctorale:ioannes-baptista-de-la-salle
+  novusRank: memorial
+  colour: white
+  month: 4
+  day: 7
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Stanislaus — memorial (Apr 11)
+- id: roman:sanctorale:stanislaus
+  novusRank: memorial
+  colour: red
+  month: 4
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Martin I — optional-memorial (Apr 13)
+- id: roman:sanctorale:martinus-papa
+  novusRank: optional-memorial
+  colour: red
+  month: 4
+  day: 13
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Anselm of Canterbury — optional-memorial (Apr 21)
+- id: roman:sanctorale:anselmus
+  novusRank: optional-memorial
+  colour: white
+  month: 4
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Adalbert of Prague — optional-memorial (Apr 23)
+- id: roman:sanctorale:adalbertus
+  kind: feast
+  titulars: [adalbertus]
+  names:
+    la: "S. Adalberti Episcopi et Martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 4
+  day: 23
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# George — optional-memorial (Apr 23)
+- id: roman:sanctorale:georgius
+  novusRank: optional-memorial
+  colour: red
+  month: 4
+  day: 23
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Fidelis of Sigmaringen — optional-memorial (Apr 24)
+- id: roman:sanctorale:fidelis-a-sigmaringa
+  novusRank: optional-memorial
+  colour: red
+  month: 4
+  day: 24
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Mark the Evangelist — feast (Apr 25)
+- id: roman:sanctorale:marcus
+  novusRank: feast
+  colour: red
+  month: 4
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Louis Grignion de Montfort — optional-memorial (Apr 28)
+- id: roman:sanctorale:ludovicus-maria-grignion-de-montfort
+  kind: feast
+  titulars: [ludovicus-maria-grignion-de-montfort]
+  names:
+    la: "S. Ludovici Mariae Grignion de Montfort Presbyteri"
+  novusRank: optional-memorial
+  colour: white
+  month: 4
+  day: 28
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter Chanel — optional-memorial (Apr 28)
+- id: roman:sanctorale:petrus-chanel
+  kind: feast
+  titulars: [petrus-chanel]
+  names:
+    la: "S. Petri Chanel Presbyteri et Martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 4
+  day: 28
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Catherine of Siena — memorial (Apr 29)
+- id: roman:sanctorale:catharina-senensis
+  novusRank: memorial
+  colour: white
+  month: 4
+  day: 29
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Pius V — optional-memorial (Apr 30)
+- id: roman:sanctorale:pius-v
+  novusRank: optional-memorial
+  colour: white
+  month: 4
+  day: 30
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Joseph the Worker — optional-memorial (May 1)
+- id: roman:sanctorale:ioseph-opifex
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 1
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Athanasius of Alexandria — memorial (May 2)
+- id: roman:sanctorale:athanasius
+  novusRank: memorial
+  colour: white
+  month: 5
+  day: 2
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Philip and James, Apostles — feast (May 3)
+- id: roman:sanctorale:philippus-iacobus
+  novusRank: feast
+  colour: red
+  month: 5
+  day: 3
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Nereus and Achilleus — optional-memorial (May 12)
+- id: roman:sanctorale:nerei-et-achillei
+  kind: feast
+  titulars: [nereus, achilleus]
+  names:
+    la: "Ss. Nerei et Achillei Martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 5
+  day: 12
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Pancras of Rome — optional-memorial (May 12)
+- id: roman:sanctorale:pancratius
+  kind: feast
+  titulars: [pancratius]
+  names:
+    la: "S. Pancratii Martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 5
+  day: 12
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Our Lady of Fatima — optional-memorial (May 13)
+- id: roman:sanctorale:maria-fatima
+  kind: feast
+  titulars: [maria-fatima]
+  names:
+    la: "Beatae Mariae Virginis de Fatima"
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 13
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Matthias, Apostle — feast (May 14)
+- id: roman:sanctorale:matthias
+  novusRank: feast
+  colour: red
+  month: 5
+  day: 14
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John I, pope and martyr — optional-memorial (May 18)
+- id: roman:sanctorale:ioannes-i
+  novusRank: optional-memorial
+  colour: red
+  month: 5
+  day: 18
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bernardine of Siena — optional-memorial (May 20)
+- id: roman:sanctorale:bernardinus-senensis
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 20
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Christopher Magallanes and companions — optional-memorial (May 21)
+- id: roman:sanctorale:christophorus-magallanes
+  kind: feast
+  titulars: [christophorus-magallanes]
+  names:
+    la: "Ss. Christophori Magallanes, Presbyteri, et Sociorum Martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 5
+  day: 21
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Rita of Cascia — optional-memorial (May 22)
+- id: roman:sanctorale:rita-de-cascia
+  kind: feast
+  titulars: [rita-cascia]
+  names:
+    la: "S. Ritae de Cascia Religiosae"
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 22
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bede the Venerable — optional-memorial (May 25)
+- id: roman:sanctorale:beda-venerabilis
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Gregory VII — optional-memorial (May 25)
+- id: roman:sanctorale:gregorius-vii
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Mary Magdalene de' Pazzi — optional-memorial (May 25)
+- id: roman:sanctorale:maria-magdalena-de-pazzis
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Philip Neri — memorial (May 26)
+- id: roman:sanctorale:philippus-nerius
+  novusRank: memorial
+  colour: white
+  month: 5
+  day: 26
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Augustine of Canterbury — optional-memorial (May 27)
+- id: roman:sanctorale:augustinus-cantuariensis
+  novusRank: optional-memorial
+  colour: white
+  month: 5
+  day: 27
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Visitation of the Blessed Virgin Mary — feast (May 31)
+- id: roman:sanctorale:visitatio-bmv
+  kind: feast
+  titulars: [maria]
+  names:
+    la: "In Visitatione Beatae Mariae Virginis"
+  novusRank: feast
+  colour: white
+  month: 5
+  day: 31
+  cites:
+    names.la: mr-1920
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Justin Martyr — memorial (Jun 1)
+- id: roman:sanctorale:iustinus
+  novusRank: memorial
+  colour: red
+  month: 6
+  day: 1
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Marcellinus and Peter — optional-memorial (Jun 2)
+- id: roman:sanctorale:marcellinus-et-petrus
+  kind: feast
+  titulars: [marcellinus, petrus]
+  names:
+    la: "Ss. Marcellini et Petri, martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 6
+  day: 2
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Charles Lwanga and Companions (Ugandan Martyrs) — memorial (Jun 3)
+- id: roman:sanctorale:carolus-lwanga-et-socii
+  kind: feast
+  titulars: [carolus-lwanga]
+  names:
+    la: "Ss. Caroli Lwanga et Sociorum, Martyrum"
+  novusRank: memorial
+  colour: red
+  month: 6
+  day: 3
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Boniface — memorial (Jun 5)
+- id: roman:sanctorale:bonifatius
+  novusRank: memorial
+  colour: red
+  month: 6
+  day: 5
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Norbert — optional-memorial (Jun 6)
+- id: roman:sanctorale:norbertus
+  novusRank: optional-memorial
+  colour: white
+  month: 6
+  day: 6
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Ephrem the Syrian — optional-memorial (Jun 9)
+- id: roman:sanctorale:ephraem-syrus
+  novusRank: optional-memorial
+  colour: white
+  month: 6
+  day: 9
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Barnabas the Apostle — memorial (Jun 11)
+- id: roman:sanctorale:barnabas
+  novusRank: memorial
+  colour: red
+  month: 6
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Anthony of Padua — memorial (Jun 13)
+- id: roman:sanctorale:antonius-patavinus
+  novusRank: memorial
+  colour: white
+  month: 6
+  day: 13
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Romuald — optional-memorial (Jun 19)
+- id: roman:sanctorale:romualdus
+  novusRank: optional-memorial
+  colour: white
+  month: 6
+  day: 19
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Aloysius Gonzaga — memorial (Jun 21)
+- id: roman:sanctorale:aloysius-gonzaga
+  novusRank: memorial
+  colour: white
+  month: 6
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Fisher and Thomas More — optional-memorial (Jun 22)
+- id: roman:sanctorale:ioannes-fisher-et-thomas-morus
+  kind: feast
+  titulars: [ioannes-fisher, thomas-morus]
+  names:
+    la: "Ss. Ioannis Fisher, Episcopi, et Thomae More, Martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 6
+  day: 22
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Paulinus of Nola — optional-memorial (Jun 22)
+- id: roman:sanctorale:paulinus-nolanus
+  novusRank: optional-memorial
+  colour: white
+  month: 6
+  day: 22
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Nativity of John the Baptist — solemnity (Jun 24)
+- id: roman:sanctorale:nativitas-ioannis-baptistae
+  novusRank: solemnity
+  colour: white
+  month: 6
+  day: 24
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cyril of Alexandria — optional-memorial (Jun 27)
+- id: roman:sanctorale:cyrillus-alexandrinus
+  novusRank: optional-memorial
+  colour: white
+  month: 6
+  day: 27
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Irenaeus — memorial (Jun 28)
+- id: roman:sanctorale:irenaeus
+  novusRank: memorial
+  colour: red
+  month: 6
+  day: 28
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter and Paul, Apostles — solemnity (Jun 29)
+- id: roman:sanctorale:petrus-paulus
+  novusRank: solemnity
+  colour: red
+  month: 6
+  day: 29
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# First Martyrs of the Church of Rome — optional-memorial (Jun 30)
+- id: roman:sanctorale:protomartyres-romani
+  kind: feast
+  titulars: [protomartyres-romani]
+  names:
+    la: "Ss. Protomartyrum Sanctae Romanae Ecclesiae"
+  novusRank: optional-memorial
+  colour: red
+  month: 6
+  day: 30
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Thomas the Apostle — feast (Jul 3)
+- id: roman:sanctorale:thomas-apostolus
+  novusRank: feast
+  colour: red
+  month: 7
+  day: 3
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Elizabeth of Portugal — optional-memorial (Jul 4)
+- id: roman:sanctorale:elisabeth-lusitaniae
+  kind: feast
+  titulars: [elisabeth-lusitaniae]
+  names:
+    la: "S. Elisabeth Lusitaniae"
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 4
+  cites:
+    names.la: mr-1920
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Anthony Mary Zaccaria — optional-memorial (Jul 5)
+- id: roman:sanctorale:antonius-maria-zaccaria
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 5
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Maria Goretti — optional-memorial (Jul 6)
+- id: roman:sanctorale:maria-goretti
+  kind: feast
+  titulars: [maria-goretti]
+  names:
+    la: "S. Mariae Goretti"
+  novusRank: optional-memorial
+  colour: red
+  month: 7
+  day: 6
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Augustine Zhao Rong and companions (Martyrs of China) — optional-memorial (Jul 9)
+- id: roman:sanctorale:augustinus-zhao-rong-et-socii
+  kind: feast
+  titulars: [augustinus-zhao-rong]
+  names:
+    la: "Ss. Augustini Zhao Rong et Sociorum"
+  novusRank: optional-memorial
+  colour: red
+  month: 7
+  day: 9
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Benedict of Nursia — memorial (Jul 11)
+- id: roman:sanctorale:benedictus
+  novusRank: memorial
+  colour: white
+  month: 7
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Henry II (emperor) — optional-memorial (Jul 13)
+- id: roman:sanctorale:henricus
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 13
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Camillus de Lellis — optional-memorial (Jul 14)
+- id: roman:sanctorale:camillus-de-lellis
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 14
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bonaventure — memorial (Jul 15)
+- id: roman:sanctorale:bonaventura
+  novusRank: memorial
+  colour: white
+  month: 7
+  day: 15
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Our Lady of Mount Carmel — optional-memorial (Jul 16)
+- id: roman:sanctorale:beatae-mariae-de-monte-carmelo
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Apollinaris — optional-memorial (Jul 20)
+- id: roman:sanctorale:apollinaris
+  novusRank: optional-memorial
+  colour: red
+  month: 7
+  day: 20
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Lawrence of Brindisi — optional-memorial (Jul 21)
+- id: roman:sanctorale:laurentius-a-brundusio
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Mary Magdalene — memorial (Jul 22)
+- id: roman:sanctorale:maria-magdalena
+  novusRank: memorial
+  colour: white
+  month: 7
+  day: 22
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bridget of Sweden — optional-memorial (Jul 23)
+- id: roman:sanctorale:brigitta-suecica
+  kind: feast
+  titulars: [brigitta-suecica]
+  names:
+    la: "S. Birgittae"
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 23
+  cites:
+    names.la: mr-1920
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Sharbel Makhluf — optional-memorial (Jul 24)
+- id: roman:sanctorale:sarbelius-makhluf
+  kind: feast
+  titulars: [sarbelius-makhluf]
+  names:
+    la: "S. Sarbelii Makhluf"
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 24
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# James the Greater (Apostle) — feast (Jul 25)
+- id: roman:sanctorale:iacobus
+  novusRank: feast
+  colour: red
+  month: 7
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Joachim and Anne, parents of the BVM — memorial (Jul 26)
+- id: roman:sanctorale:ioachim-et-anna
+  kind: feast
+  titulars: [ioachim, anna]
+  names:
+    la: "Ss. Ioachim et Annae, parentum B. Mariae Virginis"
+  novusRank: memorial
+  colour: white
+  month: 7
+  day: 26
+  cites:
+    names.la: mr-1920
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Martha — memorial (Jul 29)
+- id: roman:sanctorale:martha
+  novusRank: memorial
+  colour: white
+  month: 7
+  day: 29
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter Chrysologus — optional-memorial (Jul 30)
+- id: roman:sanctorale:petrus-chrysologus
+  novusRank: optional-memorial
+  colour: white
+  month: 7
+  day: 30
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Ignatius of Loyola — memorial (Jul 31)
+- id: roman:sanctorale:ignatius-de-loyola
+  novusRank: memorial
+  colour: white
+  month: 7
+  day: 31
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Alphonsus Liguori — memorial (Aug 1)
+- id: roman:sanctorale:alphonsus-maria-de-ligorio
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 1
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Eusebius of Vercelli — optional-memorial (Aug 2)
+- id: roman:sanctorale:eusebius-vercellensis
+  kind: feast
+  titulars: [eusebius-vercellensis]
+  names:
+    la: "S. Eusebii Vercellensis Episcopi"
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 2
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter Julian Eymard — optional-memorial (Aug 2)
+- id: roman:sanctorale:petrus-iulianus-eymard
+  kind: feast
+  titulars: [petrus-iulianus-eymard]
+  names:
+    la: "S. Petri Iuliani Eymard Presbyteri"
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 2
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Mary Vianney — memorial (Aug 4)
+- id: roman:sanctorale:ioannes-maria-vianney
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 4
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Dedication of the Basilica of St Mary Major — optional-memorial (Aug 5)
+- id: roman:sanctorale:dedicatio-basilicae-sanctae-mariae
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 5
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Transfiguration of the Lord — feast, feast of the Lord (Aug 6)
+- id: roman:sanctorale:transfiguratio-domini
+  novusRank: feast
+  colour: white
+  month: 8
+  day: 6
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cajetan — optional-memorial (Aug 7)
+- id: roman:sanctorale:caietanus
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 7
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Sixtus II and Companions — optional-memorial (Aug 7)
+- id: roman:sanctorale:xystus-ii-et-socii
+  kind: feast
+  titulars: [xystus-ii, socii-martyres]
+  names:
+    la: "Ss. Xysti II Papae et Sociorum Martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 8
+  day: 7
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Dominic — memorial (Aug 8)
+- id: roman:sanctorale:dominicus
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 8
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Teresa Benedicta of the Cross (Edith Stein) — optional-memorial (Aug 9)
+- id: roman:sanctorale:teresia-benedicta-a-cruce
+  kind: feast
+  titulars: [teresia-benedicta-a-cruce]
+  names:
+    la: "S. Teresiae Benedictae a Cruce Virginis et Martyris"
+  novusRank: optional-memorial
+  colour: red
+  month: 8
+  day: 9
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Lawrence, Deacon — feast (Aug 10)
+- id: roman:sanctorale:laurentius
+  novusRank: feast
+  colour: red
+  month: 8
+  day: 10
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Clare — memorial (Aug 11)
+- id: roman:sanctorale:clara
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Jane Frances de Chantal — optional-memorial (Aug 12)
+- id: roman:sanctorale:ioanna-francisca-fremiot-de-chantal
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 12
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Pontian and Hippolytus — optional-memorial (Aug 13)
+- id: roman:sanctorale:pontianus-et-hippolytus
+  kind: feast
+  titulars: [pontianus, hippolytus]
+  names:
+    la: "Ss. Pontiani Papae et Hippolyti Presbyteri Martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 8
+  day: 13
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Maximilian Mary Kolbe — memorial (Aug 14)
+- id: roman:sanctorale:maximilianus-maria-kolbe
+  kind: feast
+  titulars: [maximilianus-maria-kolbe]
+  names:
+    la: "S. Maximiliani Mariae Kolbe Presbyteri et Martyris"
+  novusRank: memorial
+  colour: red
+  month: 8
+  day: 14
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Assumption of the Blessed Virgin Mary — solemnity (Aug 15)
+- id: roman:sanctorale:assumptio
+  novusRank: solemnity
+  colour: white
+  month: 8
+  day: 15
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Stephen of Hungary — optional-memorial (Aug 16)
+- id: roman:sanctorale:stephanus-hungariae
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Eudes — optional-memorial (Aug 19)
+- id: roman:sanctorale:ioannes-eudes
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 19
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bernard of Clairvaux — memorial (Aug 20)
+- id: roman:sanctorale:bernardus
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 20
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Pius X — memorial (Aug 21)
+- id: roman:sanctorale:pius-x
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Queenship of the Blessed Virgin Mary — memorial (Aug 22)
+- id: roman:sanctorale:maria-regina
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 22
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Rose of Lima — optional-memorial (Aug 23)
+- id: roman:sanctorale:rosa-limana
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 23
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bartholomew, Apostle — feast (Aug 24)
+- id: roman:sanctorale:bartholomaeus
+  novusRank: feast
+  colour: red
+  month: 8
+  day: 24
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Joseph Calasanz — optional-memorial (Aug 25)
+- id: roman:sanctorale:ioseph-calasanctius
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Louis of France — optional-memorial (Aug 25)
+- id: roman:sanctorale:ludovicus
+  novusRank: optional-memorial
+  colour: white
+  month: 8
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Monica — memorial (Aug 27)
+- id: roman:sanctorale:monica
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 27
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Augustine of Hippo — memorial (Aug 28)
+- id: roman:sanctorale:augustinus
+  novusRank: memorial
+  colour: white
+  month: 8
+  day: 28
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# The Passion (Beheading) of John the Baptist — memorial (Aug 29)
+- id: roman:sanctorale:decollatio-ioannis-baptistae
+  novusRank: memorial
+  colour: red
+  month: 8
+  day: 29
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Gregory the Great — memorial (Sep 3)
+- id: roman:sanctorale:gregorius-magnus
+  novusRank: memorial
+  colour: white
+  month: 9
+  day: 3
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Nativity of the Blessed Virgin Mary — feast (Sep 8)
+- id: roman:sanctorale:nativitas-mariae
+  novusRank: feast
+  colour: white
+  month: 9
+  day: 8
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter Claver — optional-memorial (Sep 9)
+- id: roman:sanctorale:petrus-claver
+  kind: feast
+  titulars: [petrus-claver]
+  names:
+    la: "S. Petri Claver, presbyteri"
+  novusRank: optional-memorial
+  colour: white
+  month: 9
+  day: 9
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Holy Name of Mary — optional-memorial (Sep 12)
+- id: roman:sanctorale:nomen-mariae
+  novusRank: optional-memorial
+  colour: white
+  month: 9
+  day: 12
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Chrysostom — memorial (Sep 13)
+- id: roman:sanctorale:ioannes-chrysostomus
+  novusRank: memorial
+  colour: white
+  month: 9
+  day: 13
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Exaltation of the Holy Cross — feast, feast of the Lord (Sep 14)
+- id: roman:sanctorale:exaltatio-crucis
+  novusRank: feast
+  colour: red
+  month: 9
+  day: 14
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Our Lady of Sorrows — memorial (Sep 15)
+- id: roman:sanctorale:septem-dolorum-bmv
+  novusRank: memorial
+  colour: white
+  month: 9
+  day: 15
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cornelius and Cyprian — memorial (Sep 16)
+- id: roman:sanctorale:cornelius-et-cyprianus
+  novusRank: memorial
+  colour: red
+  month: 9
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Robert Bellarmine — optional-memorial (Sep 17)
+- id: roman:sanctorale:robertus-bellarminus
+  novusRank: optional-memorial
+  colour: white
+  month: 9
+  day: 17
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Januarius — optional-memorial (Sep 19)
+- id: roman:sanctorale:ianuarius-et-socii
+  novusRank: optional-memorial
+  colour: red
+  month: 9
+  day: 19
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Andrew Kim Taegon, Paul Chong Hasang, and Companions (Korean Martyrs) — memorial (Sep 20)
+- id: roman:sanctorale:andreas-kim-taegon-et-socii
+  kind: feast
+  titulars: [andreas-kim-taegon, paulus-chong-hasang]
+  names:
+    la: "Ss. Andreae Kim Taegon, presbyteri, Pauli Chong Hasang et sociorum, martyrum"
+  novusRank: memorial
+  colour: red
+  month: 9
+  day: 20
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Matthew — feast (Sep 21)
+- id: roman:sanctorale:matthaeus
+  novusRank: feast
+  colour: red
+  month: 9
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Pius of Pietrelcina (Padre Pio) — memorial (Sep 23)
+- id: roman:sanctorale:pius-de-pietrelcina
+  kind: feast
+  titulars: [pius-de-pietrelcina]
+  names:
+    la: "S. Pii de Pietrelcina, presbyteri"
+  novusRank: memorial
+  colour: white
+  month: 9
+  day: 23
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cosmas and Damian — optional-memorial (Sep 26)
+- id: roman:sanctorale:cosmas-et-damianus
+  novusRank: optional-memorial
+  colour: red
+  month: 9
+  day: 26
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Vincent de Paul — memorial (Sep 27)
+- id: roman:sanctorale:vincentius-a-paulo
+  novusRank: memorial
+  colour: white
+  month: 9
+  day: 27
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Lawrence Ruiz and Companions (Martyrs of Nagasaki) — optional-memorial (Sep 28)
+- id: roman:sanctorale:laurentius-ruiz-et-socii
+  kind: feast
+  titulars: [laurentius-ruiz]
+  names:
+    la: "Ss. Laurentii Ruiz et sociorum, martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 9
+  day: 28
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Wenceslaus — optional-memorial (Sep 28)
+- id: roman:sanctorale:wenceslaus
+  novusRank: optional-memorial
+  colour: red
+  month: 9
+  day: 28
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Michael, Gabriel, and Raphael, Archangels — feast (Sep 29)
+- id: roman:sanctorale:michael-gabriel-raphael-archangeli
+  kind: feast
+  titulars: [michael, gabriel, raphael]
+  names:
+    la: "Ss. Michaelis, Gabrielis et Raphaelis, archangelorum"
+  novusRank: feast
+  colour: white
+  month: 9
+  day: 29
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Jerome — memorial (Sep 30)
+- id: roman:sanctorale:hieronymus
+  novusRank: memorial
+  colour: white
+  month: 9
+  day: 30
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Thérèse of the Child Jesus (of Lisieux) — memorial (Oct 1)
+- id: roman:sanctorale:teresia-a-iesu-infante
+  novusRank: memorial
+  colour: white
+  month: 10
+  day: 1
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Guardian Angels — memorial (Oct 2)
+- id: roman:sanctorale:angeli-custodes
+  novusRank: memorial
+  colour: white
+  month: 10
+  day: 2
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Francis of Assisi — memorial (Oct 4)
+- id: roman:sanctorale:franciscus-assisiensis
+  novusRank: memorial
+  colour: white
+  month: 10
+  day: 4
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Bruno — optional-memorial (Oct 6)
+- id: roman:sanctorale:bruno
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 6
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Our Lady of the Rosary — memorial (Oct 7)
+- id: roman:sanctorale:rosarium
+  novusRank: memorial
+  colour: white
+  month: 10
+  day: 7
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Denis and companions — optional-memorial (Oct 9)
+- id: roman:sanctorale:dionysius-et-socii
+  kind: feast
+  titulars: [dionysius, rusticus, eleutherius]
+  names:
+    la: "Ss. Dionysii, episcopi, et sociorum, martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 10
+  day: 9
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Leonardi — optional-memorial (Oct 9)
+- id: roman:sanctorale:ioannes-leonardi
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 9
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Callistus I — optional-memorial (Oct 14)
+- id: roman:sanctorale:callistus
+  novusRank: optional-memorial
+  colour: red
+  month: 10
+  day: 14
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Teresa of Jesus (of Avila) — memorial (Oct 15)
+- id: roman:sanctorale:teresia-a-iesu
+  novusRank: memorial
+  colour: white
+  month: 10
+  day: 15
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Hedwig — optional-memorial (Oct 16)
+- id: roman:sanctorale:hedwigis
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Margaret Mary Alacoque — optional-memorial (Oct 16)
+- id: roman:sanctorale:margarita-maria-alacoque
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Ignatius of Antioch — memorial (Oct 17)
+- id: roman:sanctorale:ignatius-antiochenus
+  novusRank: memorial
+  colour: red
+  month: 10
+  day: 17
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Luke the Evangelist — feast (Oct 18)
+- id: roman:sanctorale:lucas
+  novusRank: feast
+  colour: red
+  month: 10
+  day: 18
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John de Brébeuf, Isaac Jogues and companions (North American Martyrs) — optional-memorial (Oct 19)
+- id: roman:sanctorale:ioannes-de-brebeuf-et-socii
+  kind: feast
+  titulars: [ioannes-de-brebeuf, isaac-jogues]
+  names:
+    la: "Ss. Ioannis de Brebeuf et Isaac Jogues, presbyterorum, et sociorum, martyrum"
+  novusRank: optional-memorial
+  colour: red
+  month: 10
+  day: 19
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Paul of the Cross — optional-memorial (Oct 19)
+- id: roman:sanctorale:paulus-a-cruce
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 19
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John of Capistrano — optional-memorial (Oct 23)
+- id: roman:sanctorale:ioannes-a-capistrano
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 23
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Anthony Mary Claret — optional-memorial (Oct 24)
+- id: roman:sanctorale:antonius-maria-claret
+  novusRank: optional-memorial
+  colour: white
+  month: 10
+  day: 24
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Simon and Jude — feast (Oct 28)
+- id: roman:sanctorale:simon-et-iudas
+  novusRank: feast
+  colour: red
+  month: 10
+  day: 28
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# All Saints — solemnity (Nov 1)
+- id: roman:sanctorale:omnes-sancti
+  novusRank: solemnity
+  colour: white
+  month: 11
+  day: 1
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Commemoration of All the Faithful Departed (All Souls) — feast (Nov 2)
+- id: roman:sanctorale:omnium-fidelium-defunctorum
+  novusRank: feast
+  colour: violet
+  month: 11
+  day: 2
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Martin de Porres — optional-memorial (Nov 3)
+- id: roman:sanctorale:martinus-de-porres
+  kind: feast
+  titulars: [martinus-de-porres]
+  names:
+    la: "S. Martini de Porres Religiosi"
+  novusRank: optional-memorial
+  colour: white
+  month: 11
+  day: 3
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Charles Borromeo — memorial (Nov 4)
+- id: roman:sanctorale:carolus-borromeus
+  novusRank: memorial
+  colour: white
+  month: 11
+  day: 4
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Dedication of the Lateran Basilica — feast, feast of the Lord (Nov 9)
+- id: roman:sanctorale:dedicatio-basilicae-salvatoris
+  novusRank: feast
+  colour: white
+  month: 11
+  day: 9
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Leo the Great — memorial (Nov 10)
+- id: roman:sanctorale:leo-magnus
+  novusRank: memorial
+  colour: white
+  month: 11
+  day: 10
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Martin of Tours — memorial (Nov 11)
+- id: roman:sanctorale:martinus-turonensis
+  novusRank: memorial
+  colour: white
+  month: 11
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Josaphat — memorial (Nov 12)
+- id: roman:sanctorale:iosaphat
+  novusRank: memorial
+  colour: red
+  month: 11
+  day: 12
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Albert the Great — optional-memorial (Nov 15)
+- id: roman:sanctorale:albertus-magnus
+  novusRank: optional-memorial
+  colour: white
+  month: 11
+  day: 15
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Gertrude — optional-memorial (Nov 16)
+- id: roman:sanctorale:gertrudis
+  novusRank: optional-memorial
+  colour: white
+  month: 11
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Margaret of Scotland — optional-memorial (Nov 16)
+- id: roman:sanctorale:margarita-scotiae
+  novusRank: optional-memorial
+  colour: white
+  month: 11
+  day: 16
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Elizabeth of Hungary — memorial (Nov 17)
+- id: roman:sanctorale:elisabeth-hungariae
+  kind: feast
+  titulars: [elisabeth-hungariae]
+  names:
+    la: "S. Elisabeth Hungariae Religiosae"
+  novusRank: memorial
+  colour: white
+  month: 11
+  day: 17
+  cites:
+    names.la: mr-1920
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Dedication of the Basilicas of Peter and Paul — optional-memorial (Nov 18)
+- id: roman:sanctorale:dedicatio-basilicarum-petri-et-pauli
+  novusRank: optional-memorial
+  colour: white
+  month: 11
+  day: 18
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Presentation of the Blessed Virgin Mary — memorial (Nov 21)
+- id: roman:sanctorale:praesentatio-bmv
+  novusRank: memorial
+  colour: white
+  month: 11
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Cecilia — memorial (Nov 22)
+- id: roman:sanctorale:caecilia
+  novusRank: memorial
+  colour: red
+  month: 11
+  day: 22
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Clement I — optional-memorial (Nov 23)
+- id: roman:sanctorale:clemens
+  novusRank: optional-memorial
+  colour: red
+  month: 11
+  day: 23
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Columban — optional-memorial (Nov 23)
+- id: roman:sanctorale:columbanus
+  kind: feast
+  titulars: [columbanus]
+  names:
+    la: "S. Columbani Abbatis"
+  novusRank: optional-memorial
+  colour: white
+  month: 11
+  day: 23
+  cites:
+    names.la: mart-rom-1922
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Andrew Dung-Lac and companions (Vietnamese Martyrs) — memorial (Nov 24)
+- id: roman:sanctorale:andreas-dung-lac-et-socii
+  kind: feast
+  titulars: [andreas-dung-lac]
+  names:
+    la: "Ss. Andreae Dung-Lac Presbyteri et Sociorum Martyrum"
+  novusRank: memorial
+  colour: red
+  month: 11
+  day: 24
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Catherine of Alexandria — optional-memorial (Nov 25)
+- id: roman:sanctorale:catharina
+  novusRank: optional-memorial
+  colour: red
+  month: 11
+  day: 25
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Andrew the Apostle — feast (Nov 30)
+- id: roman:sanctorale:andreas
+  novusRank: feast
+  colour: red
+  month: 11
+  day: 30
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Francis Xavier — memorial (Dec 3)
+- id: roman:sanctorale:franciscus-xaverius
+  novusRank: memorial
+  colour: white
+  month: 12
+  day: 3
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John Damascene — optional-memorial (Dec 4)
+- id: roman:sanctorale:ioannes-damascenus
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 4
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Nicholas of Myra — optional-memorial (Dec 6)
+- id: roman:sanctorale:nicolaus
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 6
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Ambrose — memorial (Dec 7)
+- id: roman:sanctorale:ambrosius
+  novusRank: memorial
+  colour: white
+  month: 12
+  day: 7
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Immaculate Conception of the BVM — solemnity (Dec 8)
+- id: roman:sanctorale:immaculata-conceptio
+  novusRank: solemnity
+  colour: white
+  month: 12
+  day: 8
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Juan Diego Cuauhtlatoatzin — optional-memorial (Dec 9)
+- id: roman:sanctorale:ioannes-didacus-cuauhtlatoatzin
+  kind: feast
+  titulars: [ioannes-didacus-cuauhtlatoatzin]
+  names:
+    la: "S. Ioannis Didaci Cuauhtlatoatzin"
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 9
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Damasus I — optional-memorial (Dec 11)
+- id: roman:sanctorale:damasus
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 11
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Our Lady of Guadalupe — optional-memorial (Dec 12)
+- id: roman:sanctorale:beatae-mariae-de-guadalupe
+  kind: feast
+  titulars: [maria]
+  names:
+    la: "Beatae Mariae Virginis de Guadalupe"
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 12
+  cites:
+    names.la: cal-rom-1969
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Lucy — memorial (Dec 13)
+- id: roman:sanctorale:lucia
+  novusRank: memorial
+  colour: red
+  month: 12
+  day: 13
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John of the Cross — memorial (Dec 14)
+- id: roman:sanctorale:ioannes-a-cruce
+  novusRank: memorial
+  colour: white
+  month: 12
+  day: 14
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Peter Canisius — optional-memorial (Dec 21)
+- id: roman:sanctorale:petrus-canisius
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 21
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John of Kanty (Kety) — optional-memorial (Dec 23)
+- id: roman:sanctorale:ioannes-cantius
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 23
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Stephen, Protomartyr — feast (Dec 26)
+- id: roman:sanctorale:stephanus
+  novusRank: feast
+  colour: red
+  month: 12
+  day: 26
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# John, Apostle and Evangelist — feast (Dec 27)
+- id: roman:sanctorale:ioannes-evangelista
+  novusRank: feast
+  colour: white
+  month: 12
+  day: 27
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Holy Innocents — feast (Dec 28)
+- id: roman:sanctorale:innocentes
+  novusRank: feast
+  colour: red
+  month: 12
+  day: 28
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Thomas Becket — optional-memorial (Dec 29)
+- id: roman:sanctorale:thomas-becket
+  novusRank: optional-memorial
+  colour: red
+  month: 12
+  day: 29
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969
+
+# Sylvester I — optional-memorial (Dec 31)
+- id: roman:sanctorale:silvester
+  novusRank: optional-memorial
+  colour: white
+  month: 12
+  day: 31
+  cites:
+    novusRank: cal-rom-1969
+    colour: cal-rom-1969
+    month: cal-rom-1969
+    day: cal-rom-1969

@@ -1,7 +1,8 @@
 // Unit tests for the born-cited provenance gate — in particular the Core option A
-// narrowing (#108): a TEMPORAL day-label may cite a `reference` source, while a
-// sanctoral title keeps the strict public-domain-text rule and an oracle is never a
-// name source. Run with `npm test` (node --test).
+// exception (#108): a generic name-DESCRIPTOR (a temporal day-label OR a sanctoral
+// saint's proper name + grade word / reform-coined feast title) may cite a `reference`
+// source, a transcribed literary title must cite a public-domain text, and an oracle is
+// never a name source in either case. Run with `npm test` (node --test).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -40,15 +41,22 @@ test('a temporal label may NOT cite an oracle source', () => {
   assert.match(problems[0], /public-domain text or a reference source/);
 });
 
-test('a sanctoral title may NOT cite a reference source (strict)', () => {
+test('a sanctoral name-descriptor may cite a reference source (option A extended, #108)', () => {
+  // A reformed-calendar saint canonised after the public-domain sources close, or a reform-coined
+  // feast title, names an uncopyrightable descriptor cited to the norming General Roman Calendar.
   const { problems } = checkProvenance([sanctoral('nu-1969')], SOURCES);
-  assert.equal(problems.length, 1);
-  assert.match(problems[0], /a title must cite a public-domain text source/);
+  assert.deepEqual(problems, []);
 });
 
-test('a sanctoral title may cite a public-domain text', () => {
+test('a sanctoral name may still cite a public-domain text', () => {
   const { problems } = checkProvenance([sanctoral('mr-1920')], SOURCES);
   assert.deepEqual(problems, []);
+});
+
+test('a sanctoral name may NOT cite an oracle source', () => {
+  const { problems } = checkProvenance([sanctoral('romcal')], SOURCES);
+  assert.equal(problems.length, 1);
+  assert.match(problems[0], /public-domain text or a reference source/);
 });
 
 test('an unknown source key is still a problem for a temporal label', () => {

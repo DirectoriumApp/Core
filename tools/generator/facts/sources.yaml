@@ -10,7 +10,11 @@
 #
 # The provenance gate enforces the clean-room rule: a transcribed name (names.*,
 # nameOverride.*) must cite a `text` source whose rights are `public-domain`. Facts
-# (rank, colour, month, day) may cite any registered source.
+# (rank, colour, month, day) may cite any registered source. One exception (option A,
+# #108): a generic name-DESCRIPTOR — a temporal day-label, or a sanctoral saint's proper
+# name plus a grade word / reform-coined feast title — may cite a `reference` source (the
+# norming document that establishes it), never an oracle: it is an uncopyrightable
+# identifier, not the copyrighted books' literary text. See text-licensing-model.md.
 
 - key: mr-1920
   urn: directorium:source:mr-1920
@@ -149,3 +153,45 @@
     Liturgical Days (n. 59). Cited for those uncopyrightable facts and — per option A
     (text-licensing-model.md) — for the generic Latin day-labels of the temporal cycle it
     establishes (e.g. 'Dominica … per annum'); its running text is never transcribed."
+
+- key: cal-rom-1969
+  urn: directorium:source:cal-rom-1969
+  kind: reference
+  title: "Calendarium Romanum (ex decreto Sacrosancti Oecumenici Concilii Vaticani II instauratum)"
+  publisher: "Typis Polyglottis Vaticanis"
+  year: 1969
+  rights: reference
+  note: "Consult-only. The General Roman Calendar promulgated with the motu proprio Mysterii
+    Paschalis (14 Feb 1969) and carried, updated, into the 2002 editio typica tertia of the Missale
+    Romanum. The norming authority for the roman-novus-ordo-2002 edition's SANCTORAL calendar FACTS
+    — which saint on which day, the grade (solemnity / feast / obligatory or optional memorial), and
+    the colour — all uncopyrightable. Its running texts are copyrighted (LEV) and are never
+    transcribed; a Latin saint-title is taken only from a public-domain text (mr-1920 /
+    mart-rom-1922), never from here. The dated outcomes are cross-checked against the code oracles
+    (romcal / LitCal / calapi) and a human ordo in the validation slice (#260)."
+
+- key: mart-rom-1922
+  urn: directorium:source:mart-rom-1922
+  kind: text
+  title: "Martyrologium Romanum, editio typica"
+  publisher: "Typis Polyglottis Vaticanis"
+  year: 1922
+  rights: public-domain
+  note: "Public domain by age. The Roman Martyrology's day-by-day roster of the saints, the source
+    for a transcribed Latin saint-title in the Novus-Ordo sanctoral when the saint is NOT already in
+    the shared identity union (a reform-restored ancient saint) and the title is not in the 1920
+    Missal. A saint the reform keeps from the 1962 calendar is referenced by id and inherits its
+    public-domain name from the base pass, so it needs no citation here."
+
+- key: cic-1983
+  urn: directorium:source:cic-1983
+  kind: reference
+  title: "Codex Iuris Canonici (1983) — the law of fast and abstinence (cann. 1249-1253); Paenitemini (1966)"
+  year: 1983
+  rights: reference
+  note: "Consult-only. The 1983 Code of Canon Law (with Paul VI's Apostolic Constitution
+    Paenitemini, 17 Feb 1966) governs the reformed penitential discipline the Novus-Ordo editions
+    resolve under (roman:cic-1983). Cann. 1250-1252 keep the fast on Ash Wednesday and Good Friday
+    only, and abstinence on those days and every Friday of the year outside a solemnity (c.1251),
+    conferences free to substitute another penance outside Lent (c.1253). Cited for the
+    uncopyrightable discipline facts; the canons' text is never transcribed."
