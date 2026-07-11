@@ -139,4 +139,14 @@ interface PrecedenceRules
      * overrides it to false.
      */
     public function officeOfTheDeadYieldsToSunday(): bool;
+
+    /**
+     * Whether the edition resolves an evening Vespers concurrence at all. The traditional
+     * Office contests the evening between one day's Second Vespers and the next day's First
+     * Vespers, so the resolver runs a concurrence pass (true). The Novus-Ordo Office gives
+     * First Vespers only to Sundays and solemnities and has no such contest, so stamping a
+     * second-Vespers outcome on an ordinary weekday would be meaningless — it answers false
+     * and the resolver skips the pass entirely.
+     */
+    public function observesVespersConcurrence(): bool;
 }

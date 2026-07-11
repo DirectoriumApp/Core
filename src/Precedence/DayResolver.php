@@ -128,6 +128,8 @@ final class DayResolver
                 return new Rubrics1954Precedence($table);
             case RubricSystem::RUBRICAE_1955:
                 return new Rubrics1955Precedence($table);
+            case RubricSystem::NOVUS_ORDO_2002:
+                return new NovusOrdoPrecedence($table);
         }
 
         throw new \RuntimeException(sprintf(
@@ -534,6 +536,12 @@ final class DayResolver
      */
     private function withConcurrence(array $days, DateInterval $oneDay): array
     {
+        // An edition whose Office has no evening concurrence contest (the Novus Ordo) skips the
+        // pass entirely rather than stamping a meaningless second-Vespers outcome on every day.
+        if (!$this->rules->observesVespersConcurrence()) {
+            return $days;
+        }
+
         foreach ($days as $key => $day) {
             $nextKey = $day->date()->add($oneDay)->format('Y-m-d');
             if (!isset($days[$nextKey]) || $day->celebration() === [] || $days[$nextKey]->celebration() === []) {
