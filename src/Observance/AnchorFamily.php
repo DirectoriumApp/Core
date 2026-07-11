@@ -16,6 +16,12 @@ use InvalidArgumentException;
  * - `advent`         — Advent Sundays/ferias counted toward Christmas.
  * - `christmas`      — Christmastide counted forward from 25 December.
  * - `epiphany`       — the resumed-green Sundays/ferias after Epiphany.
+ * - `ordinary-time`  — the Novus-Ordo `tempus per annum`: its two green blocks and the
+ *                      single 1–34 week series counted backward from Christ the King. It is
+ *                      neither `paschal` nor `epiphany` (it spans a Baptism-to-Lent block and a
+ *                      Pentecost-to-Advent block under one count), so it is its own family;
+ *                      only the Novus-Ordo cycle mints it. Additive with the `ordinary-time`
+ *                      season token (docs/design/novus-ordo-calendar-model.md).
  * - `civil-fixed`    — a true absolute civil date (Christmas Day, Epiphany, Major Rogation).
  * - `month-computed` — anchored to a civil-month landmark but computed (e.g. September Embers).
  *
@@ -28,6 +34,7 @@ final class AnchorFamily
     public const ADVENT = 'advent';
     public const CHRISTMAS = 'christmas';
     public const EPIPHANY = 'epiphany';
+    public const ORDINARY_TIME = 'ordinary-time';
     public const CIVIL_FIXED = 'civil-fixed';
     public const MONTH_COMPUTED = 'month-computed';
 
@@ -37,6 +44,7 @@ final class AnchorFamily
         self::ADVENT,
         self::CHRISTMAS,
         self::EPIPHANY,
+        self::ORDINARY_TIME,
         self::CIVIL_FIXED,
         self::MONTH_COMPUTED,
     ];

@@ -45,7 +45,7 @@ final class EnumsTest extends TestCase
 
     public function testAnchorFamilyAcceptsEachValue(): void
     {
-        $values = ['paschal', 'advent', 'christmas', 'epiphany', 'civil-fixed', 'month-computed'];
+        $values = ['paschal', 'advent', 'christmas', 'epiphany', 'ordinary-time', 'civil-fixed', 'month-computed'];
 
         foreach ($values as $value) {
             self::assertSame($value, AnchorFamily::fromString($value)->value());

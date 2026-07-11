@@ -95,7 +95,12 @@ final class TemporalCalendar
 
     public static function addDays(DateTimeImmutable $date, int $days): DateTimeImmutable
     {
-        return $date->add(new DateInterval('P' . $days . 'D'));
+        // A signed offset: DateInterval's string form rejects a negative literal, so a
+        // backward step subtracts the magnitude. A non-negative step is byte-identical to
+        // the original add — the traditional fillers only ever step forward.
+        $interval = new DateInterval('P' . abs($days) . 'D');
+
+        return $days < 0 ? $date->sub($interval) : $date->add($interval);
     }
 
     public static function utcDate(int $year, int $month, int $day): DateTimeImmutable

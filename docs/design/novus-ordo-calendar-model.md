@@ -138,6 +138,27 @@ temporal-cycle-agnostic the same way. The Easter computus, `PaschalSkeleton`, `T
 `TemporalAttributes`/`TemporalArchetype`, and `TemporalObservance` are reused unchanged; the NO
 supplies its own per-edition **temporal skeleton** (offsets + block→season map).
 
+### Implementation sequencing (v1.1 build)
+
+The Ordinary-Time engine and the edition-selected cycle seam land first, on their own, as the
+`#258` slice: the `OrdinaryTime` filler (both blocks, the 34-week backward count, minted from
+`ot-sunday`/`ot-feria` archetypes), the `TemporalCycle` / `YearTemporalCycle` strategy with
+`TraditionalTemporalCycle` (byte-identical to the historic filler list) and `NovusOrdoTemporalCycle`,
+the additive `AnchorFamily::ORDINARY_TIME`, and `TemporalCalendar::addDays` made signed. Because the
+Ordinary-Time date arithmetic is pure Easter/civil computus, it **reuses the shared `PaschalSkeleton`
+unchanged** — the NO needs no distinct Easter anchors — so no `PaschalSkeleton` global is touched and
+the 1962/1954/1955 corpus stays byte-identical. The `#258` filler tests run against a minimal
+temporal fixture corpus.
+
+Two pieces the fuller design lists under the temporal cycle move to the **general-calendar corpus
+slice (`#108`)**, where they belong with the cited data and confront the born-cited/public-domain
+naming gate once, holistically: (1) the **per-edition `temporal-skeleton.yaml`** generator addition
+and its block→season map — deferred because Ordinary Time expresses its seasons in the filler and
+needs no new offsets; and (2) the **remaining NO season fillers** (Advent / Christmas Time / Lent /
+Holy Week / Easter Time) with their cited archetypes. The `NovusOrdoTemporalCycle` filler set and the
+Triduum source are completed there. The edition remains `isBuilt=false` throughout, so nothing is
+publicly resolvable until `#108`/`#260` land.
+
 ## Precedence — simpler, not harder (#257)
 
 `NovusOrdoPrecedence implements PrecedenceRules` beside the three traditional impls, selected by a
