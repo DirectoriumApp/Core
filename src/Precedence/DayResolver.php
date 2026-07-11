@@ -379,6 +379,25 @@ final class DayResolver
             return LiturgicalDay::placeholder($date);
         }
 
+        // The Novus-Ordo day resolves deterministically to its obligatory office (a memorial, a
+        // feast, or the feria), never to an *electable* optional memorial: the celebrant may choose
+        // one, but it does not displace the day. Such offices are removed from the winning contest
+        // before the celebration is chosen, so an optional memorial (line 12) cannot outrank the
+        // feria (line 13). They neither celebrate, commemorate, nor displace — they lapse. (Their
+        // surfacing in the contract's `optionalMemorials` slot is the exposure slice #260; the
+        // three traditional editions answer isElectableOptionalMemorial() false, so this is inert
+        // for them and the 1962 golden is unmoved.) A day is never wholly electable — the temporal
+        // office is always non-electable — but the guard restores the field if it ever were.
+        $contest = [];
+        foreach ($candidates as $candidate) {
+            if (!$this->rules->isElectableOptionalMemorial($candidate)) {
+                $contest[] = $candidate;
+            }
+        }
+        if ($contest !== []) {
+            $candidates = $contest;
+        }
+
         $celebration = $candidates[0];
         $commemorationCandidates = [];
 

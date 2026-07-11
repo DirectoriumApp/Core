@@ -141,9 +141,13 @@ archetypes:
     rank: 2
     colour: white
     cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  # The Octave Day of the Nativity (1 January) is the Solemnity of Mary, Mother of God — one
+  # celebration, so the octave day carries the Marian title (Normae universales; the reform's
+  # designation of the day, a generic descriptor cited under option A, not a transcribed literary
+  # text). The sanctoral holds no separate 1 January solemnity.
   - key: no-octave-day
     kind: octave-day
-    name: "In Octava Nativitatis Domini"
+    name: "In octava Nativitatis Domini, sollemnitas Sanctae Dei Genetricis Mariae"
     rank: 1
     colour: white
     cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }

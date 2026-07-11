@@ -1,0 +1,97 @@
+# Cited precedence rules of the Novus Ordo (Ordinary Form) — the reformed **Table of Liturgical
+# Days** (Normae universales de Anno liturgico et de Calendario, 1969, n. 59), authored WHOLE as
+# this edition's own table (it is not a diff of the 1962 n. 91 table). Fanned out into
+# editions/roman-novus-ordo-2002/precedence-{tiers,rules}.ndjson and read at runtime by
+# NovusOrdoPrecedence (#257), which maps an observance to its line here.
+#
+# THE REFORMED TABLE IS FLATTER than the traditional one (docs/design/novus-ordo-calendar-model.md):
+#   * NO COMMEMORATIONS. When two celebrations occur the higher wins; the loser is transferred (an
+#     impeded Solemnity) or omitted. There are therefore NO commemorationLimits here — the engine
+#     hard-returns 0 — and no commemoration tier.
+#   * The four working grades are Solemnity / Feast / Memorial / optional Memorial (nn. 10-14),
+#     normalised to RankClass 1-4; the tier a sanctoral office lands on is read from its grade.
+#   * A lower `ordinal` wins occurrence, exactly as the 1962 table. The ordinals mirror the n. 59
+#     line numbers, so the gaps (lines this edition folds together) are meaningful.
+#
+# THE FOUR GROUPS of n. 59, as the engine detects them:
+#   Group I  — the Triduum (line 1); the four unmovable feasts of the Lord + the Sundays of
+#              Advent/Lent/Easter + Ash Wednesday + Holy-Week weekdays + the Easter octave (line 2,
+#              via `privileged-temporal` / `privileged-temporal-weekday`, and — for the privileged
+#              Sundays — by season, detected in NovusOrdoPrecedence, not listed here).
+#   Group II — Solemnities and All Souls (line 3, outranking a per-annum/Christmas-Time Sunday);
+#              the Feasts of the Lord (line 5, the only "feasts" that outrank such a Sunday); those
+#              Sundays themselves (line 6); Feasts of the BVM and the saints (line 7, omitted on a
+#              Sunday).
+#   Group III— days within the Christmas octave and privileged Advent/Lenten weekdays (line 9).
+#   Group IV — obligatory Memorials (line 10); optional Memorials (line 12); the weekdays of
+#              Ordinary/Christmas/Easter Time (line 13).
+#
+# PROVENANCE. Every row cites the Normae universales (nu-1969); the reformed table is an
+# uncopyrightable ordering of days. The resolved days are cross-checked (run-and-compare) against
+# romcal / LitCal / calapi and a human ordo in the validation slice (#260); no oracle is a data
+# source. See docs/design/novus-ordo-calendar-model.md (The rank scale and the Table of Liturgical
+# Days) and docs/design/precedence-model.md.
+tiers:
+  # Group I.
+  - { selector: triduum, line: 1, ordinal: 1, subOrder: 0, cite: nu-1969 }
+  - { selector: privileged-temporal, line: 2, ordinal: 2, subOrder: 0, cite: nu-1969 }
+  # Group II. All Souls (2 Nov) shares line 3 with the Solemnities and, staying on a Sunday,
+  # displaces the line-6 Sunday; the subOrder only breaks the (practically impossible) tie with a
+  # coincident Solemnity.
+  - { selector: solemnity, line: 3, ordinal: 3, subOrder: 0, cite: nu-1969 }
+  - { selector: all-souls, line: 3, ordinal: 3, subOrder: 1, cite: nu-1969 }
+  - { selector: feast-of-the-lord, line: 5, ordinal: 5, subOrder: 0, cite: nu-1969 }
+  - { selector: sunday, line: 6, ordinal: 6, subOrder: 0, cite: nu-1969 }
+  - { selector: feast, line: 7, ordinal: 7, subOrder: 0, cite: nu-1969 }
+  # Group III.
+  - { selector: privileged-weekday, line: 9, ordinal: 9, subOrder: 0, cite: nu-1969 }
+  # Group IV.
+  - { selector: obligatory-memorial, line: 10, ordinal: 10, subOrder: 0, cite: nu-1969 }
+  - { selector: optional-memorial, line: 12, ordinal: 12, subOrder: 0, cite: nu-1969 }
+  - { selector: weekday, line: 13, ordinal: 13, subOrder: 0, cite: nu-1969 }
+
+# The named id-sets NovusOrdoPrecedence branches on, minted by the temporal fillers and the
+# sanctoral. A lower-cased, edition-invariant fact: each id celebrates as the office named.
+membership:
+  # Line 2 — the four unmovable feasts of the Lord, recognised by identity (they are not
+  # "solemnities" by grade). The Sundays of Advent/Lent/Easter that also sit at line 2 are detected
+  # by season in NovusOrdoPrecedence and need no membership.
+  - name: privileged-temporal
+    cite: nu-1969
+    ids:
+      - roman:temporale:christmas:nativity
+      - roman:temporale:epiphany:domini
+      - roman:temporale:paschal:ascension
+      - roman:temporale:paschal:pentecost
+  # Line 2 — the privileged temporal weekdays and octave days: Ash Wednesday, the weekdays of Holy
+  # Week (Mon-Wed; Holy Thursday is the Triduum), and the days of the Octave of Easter (each a
+  # Solemnity of the Lord, n. 24). Load-bearing for the Annunciation transfer out of Holy Week /
+  # the Easter octave; its absence throws the moment a paschal weekday is graded.
+  - name: privileged-temporal-weekday
+    cite: nu-1969
+    ids:
+      - roman:temporale:paschal:lent:ash-wednesday
+      - roman:temporale:paschal:holy-week:feria-2
+      - roman:temporale:paschal:holy-week:feria-3
+      - roman:temporale:paschal:holy-week:feria-4
+      - roman:temporale:paschal:easter-octave:feria-2
+      - roman:temporale:paschal:easter-octave:feria-3
+      - roman:temporale:paschal:easter-octave:feria-4
+      - roman:temporale:paschal:easter-octave:feria-5
+      - roman:temporale:paschal:easter-octave:feria-6
+      - roman:temporale:paschal:easter-octave:sabbatum
+  # Line 5 — the six Feasts of the Lord, the ONLY feasts that outrank a Sunday of Ordinary /
+  # Christmas Time (n. 59, II.5). Two are movable (minted by the temporal fillers as kind=feast):
+  # the Baptism of the Lord and the Holy Family; four are fixed-date (in the NO sanctoral): the
+  # Presentation (2 Feb), the Transfiguration (6 Aug), the Exaltation of the Cross (14 Sep), and the
+  # Dedication of the Lateran Basilica (9 Nov). Any Feast (grade 2) NOT in this set is a feast of
+  # the BVM or a saint and routes to line 7.
+  - name: feasts-of-the-lord
+    cite: nu-1969
+    ids:
+      - roman:temporale:epiphany:baptism-of-the-lord
+      - roman:temporale:christmas:holy-family
+      - roman:sanctorale:praesentatio-domini
+      - roman:sanctorale:transfiguratio-domini
+      - roman:sanctorale:exaltatio-crucis
+      - roman:sanctorale:dedicatio-basilicae-salvatoris

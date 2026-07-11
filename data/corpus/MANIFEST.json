@@ -1,7 +1,8 @@
 {
   "corpusVersion": "1962-2026-07-11.1",
   "disciplines": [
-    "cic-1917"
+    "cic-1917",
+    "cic-1983"
   ],
   "editions": [
     "roman-rubricae-1960",
@@ -19,6 +20,16 @@
       "primaryKey": "rule",
       "records": 6,
       "sha256": "b620236638d7b2680265605cd0bb4fdb2d2e85df8f0278aa0e756dc0708733d2"
+    },
+    "disciplines/cic-1983/discipline.json": {
+      "primaryKey": "id",
+      "records": 1,
+      "sha256": "87f7d2deb1cea9bd9cdd6f21cf1e6ffda948ad69c32cfa5d8d48b0747aeb205f"
+    },
+    "disciplines/cic-1983/fasting-rules.ndjson": {
+      "primaryKey": "rule",
+      "records": 3,
+      "sha256": "4d014781d37f7e54835495fdd415a5160e8ae4c18c879b816aff02bcb69d023e"
     },
     "editions/roman-divino-afflatu/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -45,10 +56,30 @@
       "records": 28,
       "sha256": "75ffe9ea6a4a9dfd523eccc4ae60530f7988e38499b29b7001376d933fe3780b"
     },
+    "editions/roman-novus-ordo-2002/attributes.sanctorale.ndjson": {
+      "primaryKey": "id",
+      "records": 209,
+      "sha256": "e291fe56f2196693441538b395d9db5bf5990b72d757947656b16052b132c7c6"
+    },
     "editions/roman-novus-ordo-2002/attributes.temporale.ndjson": {
       "primaryKey": "archetype",
       "records": 36,
       "sha256": "a4f52d0e506f7acae83b87a96e0a32da06d728e38c5dd8f82f41a51fa572e945"
+    },
+    "editions/roman-novus-ordo-2002/placement.sanctorale.ndjson": {
+      "primaryKey": "id",
+      "records": 209,
+      "sha256": "d20e9aedf41c7c6dc84f3d7e1d897a143351eee54cba4c31ebd68ff1e3f9ee8a"
+    },
+    "editions/roman-novus-ordo-2002/precedence-rules.ndjson": {
+      "primaryKey": "rule",
+      "records": 3,
+      "sha256": "a598b9df865da54e90c44eae9a0bff651722f59c6831863787afddbbbcdfe194"
+    },
+    "editions/roman-novus-ordo-2002/precedence-tiers.ndjson": {
+      "primaryKey": "selector",
+      "records": 11,
+      "sha256": "102e9ef79a4f792a2ec3cf5225537f4deb9a8e7911b94cef0b39c2284043d6ae"
     },
     "editions/roman-rubricae-1955/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -102,13 +133,13 @@
     },
     "identity/sanctorale.ndjson": {
       "primaryKey": "id",
-      "records": 374,
-      "sha256": "d36b69c44e84d9fc517e831ccd4cc2b4ea251b751732f9f8423571dd02ebf528"
+      "records": 424,
+      "sha256": "b9f16f21a84551f5b7c50d0fe5027d582834241b6b6727dd41b399b1716354e3"
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
       "records": 105,
-      "sha256": "31b4438a1b7f8673c400e619c0b2b42c1643e0b47c6fa569392ba7d3d6b45a71"
+      "sha256": "d4fc349b38040e7f68734680fe1623b7d35482636414086ffc097f611fd0ed1b"
     },
     "overlays/fssp/operations.ndjson": {
       "primaryKey": "target",
@@ -152,8 +183,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 11,
-      "sha256": "ca5000edbbcea7aa4c0753f4f4661f8bd855bc8e5122b86ac132170d866bdebe"
+      "records": 14,
+      "sha256": "e8c07c3d0e19a2782217e83a0738ea19fbef53ae42c58c2aaef37a76caba5655"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -176,12 +207,28 @@
   ],
   "sources": [
     {
+      "key": "cal-rom-1969",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Calendarium Romanum (ex decreto Sacrosancti Oecumenici Concilii Vaticani II instauratum)",
+      "urn": "directorium:source:cal-rom-1969",
+      "uses": 1069
+    },
+    {
       "key": "cic-1917",
       "kind": "reference",
       "rights": "reference",
       "title": "Codex Iuris Canonici (1917) — the law of fast and abstinence (cann. 1250–1254)",
       "urn": "directorium:source:cic-1917",
       "uses": 7
+    },
+    {
+      "key": "cic-1983",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Codex Iuris Canonici (1983) — the law of fast and abstinence (cann. 1249-1253); Paenitemini (1966)",
+      "urn": "directorium:source:cic-1983",
+      "uses": 4
     },
     {
       "key": "cn-1955",
@@ -208,12 +255,20 @@
       "uses": 4
     },
     {
+      "key": "mart-rom-1922",
+      "kind": "text",
+      "rights": "public-domain",
+      "title": "Martyrologium Romanum, editio typica",
+      "urn": "directorium:source:mart-rom-1922",
+      "uses": 20
+    },
+    {
       "key": "mr-1920",
       "kind": "text",
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
       "urn": "directorium:source:mr-1920",
-      "uses": 456
+      "uses": 462
     },
     {
       "key": "nu-1969",
@@ -221,7 +276,7 @@
       "rights": "reference",
       "title": "Normae universales de Anno liturgico et de Calendario (1969)",
       "urn": "directorium:source:nu-1969",
-      "uses": 95
+      "uses": 109
     },
     {
       "key": "ordo-1954",

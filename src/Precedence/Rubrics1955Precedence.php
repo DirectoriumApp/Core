@@ -437,6 +437,12 @@ final class Rubrics1955Precedence implements PrecedenceRules
         return true;
     }
 
+    public function isElectableOptionalMemorial(RealizedObservance $observance): bool
+    {
+        // The 1955 rite has no electable optional memorial — only the Novus Ordo elects.
+        return false;
+    }
+
     public function privilegedCommemorationsExemptFromLimit(): bool
     {
         // Title III.2: the privileged commemorations (any Sunday, a first-class feast, the

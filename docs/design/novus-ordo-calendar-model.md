@@ -207,8 +207,14 @@ each following an existing template:
    number), and the validation oracles (`kind: oracle`).
 
 Born-cited discipline is unchanged: every NO datum carries a citation or the build fails closed;
-a transcribed title must cite a public-domain `text` source, while facts (rank/colour/date) may
-cite any registered source. The **penitential discipline** for the NO is the 1983 Code /
+facts (rank/colour/date) may cite any registered source. A saint the reform KEEPS from a
+public-domain book is **referenced by id** and inherits its public-domain name, so it needs no
+name citation at all. A genuinely reform-specific name — a saint canonised after the public-domain
+sources close, or a reform-coined/-re-titled feast (e.g. *In Praesentatione Domini*) — is an
+uncopyrightable proper-name **descriptor**, so it cites the promulgating *Calendarium Romanum*
+(`cal-rom-1969`) under the sanctoral extension of option A (the same rule the temporal day-labels
+use; docs/design/text-licensing-model.md). The copyrighted running texts of the modern Missal are
+never transcribed. The **penitential discipline** for the NO is the 1983 Code /
 *Paenitemini* (`cic-1983`) — a small, citable discipline (Ash Wednesday + Good Friday fast &
 abstinence; Fridays of Lent abstinence; Fridays of the year abstinence-or-substitution) authored
 as a new discipline record so NO fasting is correct rather than reusing the 1917 Code.

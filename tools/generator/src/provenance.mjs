@@ -5,13 +5,21 @@
 // never a `reference` or `oracle` source. Facts (rank, colour, month, day) may
 // cite any registered source, because facts are uncopyrightable.
 //
-// One narrow exception (Core option A, #108): a TEMPORAL day-label — a `names.la`
-// on an `identity.temporale` row — is a generic, uncopyrightable descriptor
-// ("Dominica per annum"), not a literary title, so it may cite either a
-// public-domain text OR a `reference` source (the norming document that
-// establishes it, e.g. the 1969 Normae universales). A sanctoral saint's title
-// keeps the strict PD-text rule, and an `oracle` source is never a data source in
-// either case. See docs/design/text-licensing-model.md.
+// One exception (Core option A, #108): a generic, uncopyrightable name-DESCRIPTOR
+// — as opposed to a transcribed literary title — may cite either a public-domain
+// text OR a `reference` source (the norming document that establishes it). This
+// covers two record types:
+//   * a TEMPORAL day-label on an `identity.temporale` row ("Dominica per annum"),
+//     cited to the 1969 Normae universales; and
+//   * a SANCTORAL descriptor on an `identity.sanctorale` row — a saint's proper name
+//     plus a generic grade word ("S. Pii de Pietrelcina, presbyter") or a reform-coined
+//     feast title ("In Praesentatione Domini") — for the reformed calendar's own saints
+//     (canonised after the public-domain sources close, or re-titled by the reform),
+//     cited to the promulgating General Roman Calendar (cal-rom-1969).
+// Both are uncopyrightable identifiers, not the copyrighted Missal's running texts,
+// which are never transcribed. An `oracle` source is never a name source in either
+// case. See docs/design/text-licensing-model.md (option A) and
+// docs/design/novus-ordo-calendar-model.md (the corpus).
 
 /** The record fields whose values are transcribed, human-readable strings. */
 const NAME_GROUPS = [
@@ -52,17 +60,18 @@ export function checkProvenance(shapes, sources) {
         const isName = field.startsWith('names.') || field.startsWith('nameOverride.');
         if (isName) {
           const pdText = source.kind === 'text' && source.rights === 'public-domain';
-          // A temporal day-label may also cite a `reference` source (option A): it is a
-          // generic descriptor, not a transcribed literary title. Sanctoral titles stay
-          // strict; an oracle is never admissible as a name source in either case.
-          const temporalLabelRef = shape === 'identity.temporale' && source.kind === 'reference';
-          if (!pdText && !temporalLabelRef) {
+          // A temporal day-label OR a sanctoral name-descriptor may also cite a `reference`
+          // source (option A): a generic, uncopyrightable identifier, not a transcribed literary
+          // title. An oracle is never admissible as a name source in either case.
+          const descriptorShape = shape === 'identity.temporale' || shape === 'identity.sanctorale';
+          const descriptorRef = descriptorShape && source.kind === 'reference';
+          if (!pdText && !descriptorRef) {
             problems.push(
               `${shape} ${rowId}: "${field}" transcribes from "${key}" ` +
                 `(kind=${source.kind}, rights=${source.rights}); ` +
-                (shape === 'identity.temporale'
-                  ? 'a temporal label must cite a public-domain text or a reference source'
-                  : 'a title must cite a public-domain text source'),
+                (descriptorShape
+                  ? 'a name-descriptor must cite a public-domain text or a reference source'
+                  : 'a name must cite a public-domain text source'),
             );
           }
         }

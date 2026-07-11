@@ -149,4 +149,18 @@ interface PrecedenceRules
      * and the resolver skips the pass entirely.
      */
     public function observesVespersConcurrence(): bool;
+
+    /**
+     * Whether $observance is an *electable* optional memorial — one the celebrant may freely choose
+     * but which never DISPLACES the day's ordinary office. The Novus Ordo alone has such offices
+     * (an optional memorial, {@see \Directorium\Core\Attribute\RankClass} 4, of a saint), so the day
+     * resolves deterministically to the obligatory memorial or the feria and the optional memorials
+     * are electable alternatives rather than losers of the occurrence contest. The resolver removes
+     * an electable office from the winning contest before choosing the celebration (so an optional
+     * memorial cannot outrank a feria at line 12 vs 13). False for the three traditional editions,
+     * which have no electable office (their lowest grade is a commemoration, resolved by the
+     * occurrence rules). The electable options themselves are surfaced in the contract's
+     * `optionalMemorials` slot by the later exposure slice (#260); until then they simply lapse.
+     */
+    public function isElectableOptionalMemorial(RealizedObservance $observance): bool;
 }

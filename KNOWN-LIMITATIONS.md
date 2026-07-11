@@ -48,6 +48,24 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   `triduum` token is a candidate refinement, a minor open-vocabulary bump
   (docs/design/season-vocabulary.md) deferred to the validation/contract work (#260); it would touch only
   those three days' reported season, never a date, colour, kind, or precedence.
+- **Novus Ordo optional memorials not yet surfaced (#108):** the reformed sanctoral carries ~40 *optional*
+  memorials (grade 4) the celebrant may freely elect. The day already resolves **correctly** — the
+  celebration is the obligatory memorial or the feria, and an un-elected optional memorial never displaces
+  it (`isElectableOptionalMemorial`) — but the electable options are not yet **listed** in the output
+  contract: they simply lapse. Surfacing them in the additive `optionalMemorials` slot (with the
+  `SHAPE_VERSION` 1.0.2 → 1.1.0 bump the Phase-A design reserved) lands with the validation slice (#260),
+  where the calendar is checked against the oracles that also list them. Until then the *celebration* is
+  right on every day; only the "what else could I choose today" list is absent.
+- **Novus Ordo movable memorials (#108):** the fixed-date reformed sanctoral is complete, but two **movable**
+  Marian memorials are deferred to the movable-feasts follow-up: the **Immaculate Heart of Mary** (the
+  Saturday after the Sacred Heart, an obligatory memorial in the 2002 typical edition) and — a later 2018
+  decree, so an edition-governance overlay (#366) — the **BVM Mother of the Church** (the Monday after
+  Pentecost). Neither changes a fixed-date resolution; both are additive to `NovusOrdo\MovableFeasts`.
+- **Novus Ordo Friday abstinence on a solemnity (#108):** the reformed discipline (`cic-1983`) lays
+  abstinence on every Friday of the year, but the c.1251 lifting of that abstinence when a **solemnity**
+  falls on the Friday is not yet modelled (the resolver's Friday rule does not consult the day's grade);
+  nor is the c.1253 conference substitution of another penance outside Lent (a national overlay). Both are
+  refinements of the universal rule the corpus encodes, never a change to a calendar date or office.
 - **Fast & abstinence (holyday dispensation):** the `fasting` block (#248/#249) applies the 1917 Code's
   core rules — abstinence on Fridays, fast and abstinence on Ash Wednesday, the Fridays and Saturdays of
   Lent, the Ember days, and the vigils of Christmas/Pentecost/Assumption/All Saints, and the fast alone

@@ -64,7 +64,7 @@
 {"archetype":"no-lent-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} in Quadragesima"}}
 {"archetype":"no-lent-sunday-laetare","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} in Quadragesima"}}
 {"archetype":"no-nativity-octave-weekday","cites":{"names.la":"nu-1969"},"kind":"within-octave","names":{"la":"Die {dies} decembris"}}
-{"archetype":"no-octave-day","cites":{"names.la":"nu-1969"},"kind":"octave-day","names":{"la":"In Octava Nativitatis Domini"}}
+{"archetype":"no-octave-day","cites":{"names.la":"nu-1969"},"kind":"octave-day","names":{"la":"In octava Nativitatis Domini, sollemnitas Sanctae Dei Genetricis Mariae"}}
 {"archetype":"no-palm-sunday","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica in Palmis de Passione Domini"}}
 {"archetype":"no-post-cineres-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Cineres"}}
 {"archetype":"no-sacred-heart","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"Sacratissimi Cordis Iesu"}}

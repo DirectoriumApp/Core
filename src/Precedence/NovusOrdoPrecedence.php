@@ -323,6 +323,17 @@ final class NovusOrdoPrecedence implements PrecedenceRules
         return false;
     }
 
+    public function isElectableOptionalMemorial(RealizedObservance $observance): bool
+    {
+        // A saint's OPTIONAL memorial (grade 4). It is an electable alternative the celebrant may
+        // freely choose but which never displaces the day's feria or obligatory memorial, so the
+        // resolver removes it from the winning contest (an optional memorial sits at line 12, above
+        // the line-13 weekday, and would otherwise wrongly become the celebration). A temporal
+        // office is never electable — the guard excludes a low-graded feria — and the four grades
+        // above optional memorial are always celebrated when they occur.
+        return !($observance instanceof TemporalObservance) && $observance->rank()->ordinal() === 4;
+    }
+
     private function seasonOf(RealizedObservance $observance): ?string
     {
         return $observance instanceof TemporalObservance ? $observance->season()->value() : null;

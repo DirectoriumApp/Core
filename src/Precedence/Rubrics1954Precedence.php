@@ -426,6 +426,12 @@ final class Rubrics1954Precedence implements PrecedenceRules
         return true;
     }
 
+    public function isElectableOptionalMemorial(RealizedObservance $observance): bool
+    {
+        // The pre-1955 rite has no electable optional memorial — only the Novus Ordo elects.
+        return false;
+    }
+
     public function forcedTransferDate(RealizedObservance $feast, PrecedenceContext $context): ?DateTimeImmutable
     {
         // The Annunciation, impeded into Holy Week or the Easter octave, is kept on the Monday
