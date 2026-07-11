@@ -9,6 +9,7 @@ import assert from 'node:assert/strict';
 import {
   transformSanctorale,
   transformSanctoraleEdition,
+  transformSanctoraleWhole,
   deriveCumNostra1955,
   deriveCumNostra1955Temporale,
   transformOctaves,
@@ -584,4 +585,137 @@ test('deriveCumNostra1955Temporale keeps feasts and the Saturday Office, drops e
 test('deriveCumNostra1955Temporale is a no-op when there are no octaves', () => {
   const archetypes = [{ key: 'seven-sorrows', kind: 'feast' }];
   assert.deepEqual(deriveCumNostra1955Temporale(archetypes), archetypes);
+});
+
+// --- transformSanctoraleWhole: the Novus Ordo authored as a whole peer edition (Core v1.1) ---
+
+const NO = 'roman-novus-ordo-2002';
+
+// A NO-only observance declaring full identity, and a shared saint referenced by id only.
+const NO_ENTRIES = [
+  {
+    id: 'roman:sanctorale:pius-x',
+    kind: 'feast',
+    titulars: ['pius-x'],
+    names: { la: 'Sancti Pii X, Papae' },
+    novusRank: 'memorial',
+    colour: 'white',
+    month: 8,
+    day: 21,
+    cites: { 'names.la': 'mr-2002', novusRank: 'norm-univ', colour: 'girm-346', month: 'cal-rom', day: 'cal-rom' },
+  },
+  {
+    // A saint the NO keeps from the traditional calendar: id-only reference, no identity fields.
+    id: 'roman:sanctorale:augustinus',
+    novusRank: 'memorial',
+    colour: 'white',
+    month: 8,
+    day: 28,
+    cites: { novusRank: 'norm-univ', colour: 'girm-346', month: 'cal-rom', day: 'cal-rom' },
+  },
+];
+
+test('transformSanctoraleWhole emits identity only for entries that declare it', () => {
+  const { identity, attributes, placement } = transformSanctoraleWhole(NO_ENTRIES, NO);
+
+  // Identity is emitted for the NO-only feast, NOT for the id-only reference to a shared saint.
+  assert.deepEqual(
+    identity.map((r) => r.id),
+    ['roman:sanctorale:pius-x'],
+    'only the NO-only observance declares identity; the shared saint reuses the union by id',
+  );
+  assert.deepEqual(identity[0].names, { la: 'Sancti Pii X, Papae' });
+  assert.deepEqual(identity[0].cites, { 'names.la': 'mr-2002' });
+
+  // Attributes and placement are emitted for BOTH.
+  assert.deepEqual(attributes.map((r) => r.id).sort(), [
+    'roman:sanctorale:augustinus',
+    'roman:sanctorale:pius-x',
+  ]);
+  assert.deepEqual(placement.map((r) => r.id).sort(), [
+    'roman:sanctorale:augustinus',
+    'roman:sanctorale:pius-x',
+  ]);
+});
+
+test('transformSanctoraleWhole derives the numeric rank from the novusRank grade and carries the token', () => {
+  const grades = [
+    ['solemnity', 1],
+    ['feast', 2],
+    ['memorial', 3],
+    ['optional-memorial', 4],
+  ];
+  for (const [novusRank, expectedRank] of grades) {
+    const { attributes } = transformSanctoraleWhole(
+      [{ id: 'roman:sanctorale:probe', novusRank, colour: 'white', month: 1, day: 1, cites: { novusRank: 'norm-univ', colour: 'girm-346', month: 'cal-rom', day: 'cal-rom' } }],
+      NO,
+    );
+    assert.equal(attributes[0].rank, expectedRank, `${novusRank} -> RankClass ${expectedRank}`);
+    assert.equal(attributes[0].novusRank, novusRank, 'the native grade token is carried verbatim');
+    // The derived numeric rank cites the same source as the grade.
+    assert.equal(attributes[0].cites.rank, 'norm-univ');
+    assert.equal(attributes[0].cites.novusRank, 'norm-univ');
+  }
+});
+
+test('transformSanctoraleWhole carries roseAllowed, vigilOf/octaveOf, nameOverride, and aliases', () => {
+  const { identity, attributes, placement } = transformSanctoraleWhole(
+    [
+      {
+        id: 'roman:sanctorale:probe',
+        kind: 'feast',
+        titulars: ['probe'],
+        names: { la: 'Probe' },
+        aliases: { secondaryFacet: 'roman:sanctorale:probe-alt' },
+        novusRank: 'feast',
+        colour: { base: 'violet', roseAllowed: true },
+        nameOverride: { en: 'Probe (transferred)' },
+        month: 3,
+        day: 25,
+        octaveOf: 'roman:sanctorale:bearer',
+        cites: {
+          'names.la': 'mr-2002',
+          novusRank: 'norm-univ',
+          colour: 'girm-346',
+          month: 'cal-rom',
+          day: 'cal-rom',
+          'nameOverride.en': 'icel',
+        },
+      },
+    ],
+    NO,
+  );
+
+  assert.deepEqual(identity[0].aliases, { secondaryFacet: 'roman:sanctorale:probe-alt' });
+  assert.deepEqual(attributes[0].colour, { base: 'violet', roseAllowed: true });
+  assert.deepEqual(attributes[0].nameOverride, { en: 'Probe (transferred)' });
+  assert.equal(attributes[0].cites['nameOverride.en'], 'icel');
+  assert.equal(placement[0].octaveOf, 'roman:sanctorale:bearer');
+});
+
+test('transformSanctoraleWhole fails closed on partial identity', () => {
+  assert.throws(
+    () =>
+      transformSanctoraleWhole(
+        [{ id: 'roman:sanctorale:probe', kind: 'feast', novusRank: 'memorial', colour: 'white', month: 1, day: 1, cites: { novusRank: 'x', colour: 'x', month: 'x', day: 'x' } }],
+        NO,
+      ),
+    /partial identity/,
+  );
+});
+
+test('transformSanctoraleWhole fails closed on a missing, unknown, or uncited novusRank', () => {
+  const base = { id: 'roman:sanctorale:probe', colour: 'white', month: 1, day: 1 };
+  assert.throws(
+    () => transformSanctoraleWhole([{ ...base, cites: { colour: 'x', month: 'x', day: 'x' } }], NO),
+    /must declare a novusRank grade/,
+  );
+  assert.throws(
+    () => transformSanctoraleWhole([{ ...base, novusRank: 'double', cites: { novusRank: 'x', colour: 'x', month: 'x', day: 'x' } }], NO),
+    /unknown novusRank grade/,
+  );
+  assert.throws(
+    () => transformSanctoraleWhole([{ ...base, novusRank: 'memorial', cites: { colour: 'x', month: 'x', day: 'x' } }], NO),
+    /must carry cites\.novusRank/,
+  );
 });

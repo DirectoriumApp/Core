@@ -14,6 +14,7 @@ import { makeValidators, validateAll } from './validate.mjs';
 import {
   transformSanctorale,
   transformSanctoraleEdition,
+  transformSanctoraleWhole,
   deriveCumNostra1955,
   deriveCumNostra1955Temporale,
   transformOctaves,
@@ -143,8 +144,18 @@ export function build(outDir = DEFAULT_OUT) {
     const edEntries = e.derive === 'cum-nostra-1955' ? deriveCumNostra1955(entries) : entries;
     const base = transformSanctoraleEdition(edEntries, e.dir);
     const octaves = transformOctaves(edEntries, e.dir, octavesByEdition[e.dir] || []);
-    const attributes = [...base.attributes, ...octaves.attributes].sort(byId);
-    const placement = [...base.placement, ...octaves.placement].sort(byId);
+    // A WHOLE edition (Core v1.1: the Novus Ordo) authors its own sanctoral in
+    // facts/editions/<dir>/sanctorale.yaml rather than as diff-blocks on the shared file,
+    // because it is not a diff of 1962 (its own saints, dates, ranks). Its entries are flat
+    // (identity + attributes + placement); the identity of any NO-only observance merges into
+    // the shared union below, exactly as octave identities do. Absent the file, whole is empty
+    // and the edition is a pure diff (1954/1955), so this is inert for them.
+    const wholeSanctoraleFile = join(FACTS_DIR, 'editions', e.dir, 'sanctorale.yaml');
+    const whole = existsSync(wholeSanctoraleFile)
+      ? transformSanctoraleWhole(loadYaml(wholeSanctoraleFile), e.dir)
+      : { identity: [], attributes: [], placement: [] };
+    const attributes = [...base.attributes, ...octaves.attributes, ...whole.attributes].sort(byId);
+    const placement = [...base.placement, ...octaves.placement, ...whole.placement].sort(byId);
     // A non-base edition may carry its OWN precedence table (Core v0.3.0: the pre-1955
     // Tabella Occurrentiae is a wholly different order, not a diff of the 1962 n.91 table),
     // authored whole in facts/editions/<dir>/precedence.yaml and read at runtime by that
@@ -184,6 +195,7 @@ export function build(outDir = DEFAULT_OUT) {
       attributes,
       placement,
       octaveIdentity: octaves.identity,
+      wholeIdentity: whole.identity,
       precedence,
       temporaleAttributes,
       temporaleIdentity: extraTemporale.identity,
@@ -209,6 +221,26 @@ export function build(outDir = DEFAULT_OUT) {
         throw new Error(
           `octave identity "${record.id}" differs between editions; a shared octave identity must be ` +
             'identical across editions (it is edition-invariant)',
+        );
+      }
+    }
+  }
+  // Whole-edition sanctoral identities (Core v1.1: the NO-only observances the Novus Ordo authors
+  // in its own facts/editions/<dir>/sanctorale.yaml) merge into the SAME union, deduped the same
+  // way. A saint the NO shares with an existing edition must reuse its id and identity (it is
+  // referenced by id only, emitting no identity here); an identity declared for a shared id that
+  // DIFFERS from the union's is an authoring error, not a silent first-wins: fail closed.
+  for (const ed of extraEditions) {
+    for (const record of ed.wholeIdentity) {
+      const existing = identityById.get(record.id);
+      if (existing === undefined) {
+        identityById.set(record.id, record);
+        identity.push(record);
+      } else if (JSON.stringify(existing) !== JSON.stringify(record)) {
+        throw new Error(
+          `sanctoral identity "${record.id}" declared by the whole edition "${ed.dir}" differs from the ` +
+            'shared identity already in the union; a saint shared across editions must reuse the same id ' +
+            'and identity — reference it by id only, or make the declared identities identical',
         );
       }
     }
@@ -255,6 +287,24 @@ export function build(outDir = DEFAULT_OUT) {
         orphans.join(', ') +
         '. Every identity must be placed by at least one edition — check for a mistyped edition block key.',
     );
+  }
+
+  // Placement-has-identity gate (Core v1.1): every id an edition PLACES must have an identity in
+  // the union — the converse of the orphan gate. A whole edition (NO) that references a saint by
+  // id only relies on the base pass having emitted that identity; a typo'd id would otherwise ship
+  // placement + attributes the runtime cannot join to any identity. Fail closed. (The base
+  // edition's placements are covered by construction — transformSanctorale emits identity for
+  // every entry it places — so only the extra editions can violate this.)
+  const identityIds = new Set(identity.map((record) => record.id));
+  for (const ed of extraEditions) {
+    for (const record of ed.placement) {
+      if (!identityIds.has(record.id)) {
+        throw new Error(
+          `edition "${ed.dir}" places "${record.id}" but no identity for it exists in the shared union — ` +
+            'a whole-edition entry must declare its identity or reference an id present in the base/union.',
+        );
+      }
+    }
   }
 
   // Co-placement gate (#64): every vigilOf/octaveOf target is placed in its own edition.
