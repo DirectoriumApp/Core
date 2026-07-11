@@ -188,7 +188,16 @@ export function build(outDir = DEFAULT_OUT) {
     const extraTemporale = extraArchetypes.length
       ? transformTemporale(extraArchetypes, e.dir)
       : { identity: [], attributes: [] };
-    const temporaleAttributes = [...temporale.attributes, ...extraTemporale.attributes].sort(byArchetype);
+    // A WHOLE edition (Core v1.1: the Novus Ordo) authors its temporal overlay ENTIRE in its own
+    // facts/editions/<dir>/temporale.yaml, so its attributes are its OWN archetypes only — mirroring
+    // its whole sanctoral, which likewise does not union the base 1962 attributes. A DIFF edition
+    // (1954/1955) is additive: it keeps every base 1962 archetype (carried at the deferred
+    // 1962-mapped display rank, Seam 6b) and appends its extras, so its attributes are the base
+    // union plus its own. Either way the extra ARCHETYPE identities still merge into the shared
+    // temporal identity union below (an edition selects what it observes via its own attributes).
+    const temporaleAttributes = (
+      e.whole ? [...extraTemporale.attributes] : [...temporale.attributes, ...extraTemporale.attributes]
+    ).sort(byArchetype);
     return {
       dir: e.dir,
       base: e.base,
@@ -470,23 +479,32 @@ export function build(outDir = DEFAULT_OUT) {
   }
 
   // Each additional edition contributes its diff — the per-edition Layer-2 attributes and
-  // the placement — into its own dir. Identity and the temporal skeleton are shared.
+  // the placement — into its own dir. Identity and the temporal skeleton are shared. A whole
+  // edition may be authored one half at a time (Core v1.1: the Novus Ordo lands its Ordinary-Time
+  // temporal overlay before its sanctoral), so any of its shapes can be empty this slice — emit
+  // each only when it has at least one record, rather than committing an empty file. The base and
+  // diff editions always populate every shape, so this only ever suppresses a partially-authored
+  // whole edition's not-yet-written half.
   for (const ed of extraEditions) {
-    outputs[`editions/${ed.dir}/attributes.sanctorale.ndjson`] = {
-      text: toNdjson(ed.attributes),
-      records: ed.attributes.length,
-      primaryKey: 'id',
-    };
-    outputs[`editions/${ed.dir}/placement.sanctorale.ndjson`] = {
-      text: toNdjson(ed.placement),
-      records: ed.placement.length,
-      primaryKey: 'id',
-    };
-    outputs[`editions/${ed.dir}/attributes.temporale.ndjson`] = {
-      text: toNdjson(ed.temporaleAttributes),
-      records: ed.temporaleAttributes.length,
-      primaryKey: 'archetype',
-    };
+    if (ed.attributes.length > 0) {
+      outputs[`editions/${ed.dir}/attributes.sanctorale.ndjson`] = {
+        text: toNdjson(ed.attributes),
+        records: ed.attributes.length,
+        primaryKey: 'id',
+      };
+      outputs[`editions/${ed.dir}/placement.sanctorale.ndjson`] = {
+        text: toNdjson(ed.placement),
+        records: ed.placement.length,
+        primaryKey: 'id',
+      };
+    }
+    if (ed.temporaleAttributes.length > 0) {
+      outputs[`editions/${ed.dir}/attributes.temporale.ndjson`] = {
+        text: toNdjson(ed.temporaleAttributes),
+        records: ed.temporaleAttributes.length,
+        primaryKey: 'archetype',
+      };
+    }
     if (ed.precedence) {
       outputs[`editions/${ed.dir}/precedence-tiers.ndjson`] = {
         text: toNdjson(ed.precedence.tiers),

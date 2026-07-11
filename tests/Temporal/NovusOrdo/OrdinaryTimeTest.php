@@ -59,7 +59,7 @@ final class OrdinaryTimeTest extends TestCase
         $monday = $ot->on(self::utc('2024-01-08'));
         self::assertNotNull($monday);
         self::assertSame('roman:temporale:ordinary-time:week-1:feria-2', $monday->id()->toString());
-        self::assertSame('Feria II hebdomadae I per annum', $monday->latinName());
+        self::assertSame('Feria II Hebdomadae I per annum', $monday->latinName());
     }
 
     /** There is no "First Sunday of Ordinary Time": the Baptism occupies it, so the first Sunday minted is the Second. */
@@ -103,7 +103,7 @@ final class OrdinaryTimeTest extends TestCase
         $monday = $ot->on(self::utc('2024-05-20'));
         self::assertNotNull($monday);
         self::assertSame('roman:temporale:ordinary-time:week-7:feria-2', $monday->id()->toString());
-        self::assertSame('Feria II hebdomadae VII per annum', $monday->latinName());
+        self::assertSame('Feria II Hebdomadae VII per annum', $monday->latinName());
 
         // The first Sunday after Pentecost is the 8th of Ordinary Time (Trinity is laid over it elsewhere).
         self::assertSame(
@@ -196,6 +196,35 @@ final class OrdinaryTimeTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         OrdinaryTime::forYear(1580, Corpus::at(self::FIXTURE), self::EDITION);
+    }
+
+    /**
+     * The filler resolves against the REAL shipped Novus-Ordo corpus (#108), not only the
+     * two-row fixture: the cited `ot-sunday` / `ot-feria` archetypes now live in
+     * data/corpus/editions/roman-novus-ordo-2002/attributes.temporale.ndjson, so the same
+     * offices render identically from the whole-edition data as from the fixture.
+     */
+    public function testResolvesAgainstTheShippedCorpus(): void
+    {
+        $ot = OrdinaryTime::forYear(2024, Corpus::default(), self::EDITION);
+
+        $sunday = $ot->on(self::utc('2024-01-14'));
+        self::assertNotNull($sunday, 'The shipped NO temporale data must resolve Ordinary-Time Sundays.');
+        self::assertSame('roman:temporale:ordinary-time:sunday-2', $sunday->id()->toString());
+        self::assertSame('Dominica II per annum', $sunday->latinName());
+        self::assertSame(Season::ORDINARY_TIME, $sunday->season()->value());
+        self::assertSame('green', $sunday->colour()->base()->value());
+
+        $feria = $ot->on(self::utc('2024-01-08'));
+        self::assertSame('roman:temporale:ordinary-time:week-1:feria-2', $feria->id()->toString());
+        self::assertSame('Feria II Hebdomadae I per annum', $feria->latinName());
+        self::assertSame('green', $feria->colour()->base()->value());
+
+        // Christ the King's green Sunday beneath, minted from the shipped ot-sunday archetype.
+        self::assertSame(
+            'Dominica XXXIV per annum',
+            $ot->on(self::utc('2024-11-24'))->latinName()
+        );
     }
 
     /**

@@ -1,0 +1,48 @@
+# The Novus Ordo (Ordinary Form) edition's temporal ARCHETYPES — authored WHOLE, not
+# as a diff of 1962. Because meta.yaml marks this edition `whole: true`, the generator
+# takes this edition's attributes.temporale.ndjson ENTIRELY from the archetypes here,
+# rather than unioning them onto the base 1962 archetypes (the additive model the 1954
+# edition uses for its extra octaves). The reformed temporal cycle is a different world —
+# five seasons (advent · christmastide · ordinary-time · lent · eastertide), no
+# Septuagesima, no distinct Passiontide, no Ember/Rogation days, only the Christmas and
+# Easter octaves — so it declares its own overlay from scratch.
+#
+# The identity/attributes split and the `{ord}`/`{feria}` template grammar are exactly
+# the base file's (tools/generator/facts/temporale.yaml): the PHP filler computes WHICH
+# archetype a date is and its runtime ordinal (the week number) and reads the office's
+# kind, rank, colour, and Latin name from here. `names.la` is a Latin template.
+#
+# PROVENANCE (option A — docs/design/text-licensing-model.md). The reform coined the
+# generic temporal day-labels of the season it invents ("Dominica … per annum"), which
+# exist only in the copyrighted modern books; but a short generic day-label of the
+# temporal cycle is an uncopyrightable descriptor, not a literary title, so it cites the
+# norming REFERENCE (the 1969 Normae universales, `nu-1969`) that establishes it, not a
+# public-domain text. The ranks and the green colour are uncopyrightable calendar facts,
+# likewise cited to the Normae (the OT structure and the Sunday/weekday dignity, nn. 43–44,
+# 11, 16; green per n. 346). Ancient shared temporal names (Nativity, Epiphany, Easter,
+# …) still cite the public-domain 1920 Missal and arrive with the other season fillers
+# (#108 follow-ups); this slice authors only the one season the reform genuinely invents.
+#
+# The numeric `rank` is the normalized RankClass display sort key (a Sunday of Ordinary
+# Time ranks as a second-class-equivalent Sunday; a weekday is the floor). It is NOT what
+# governs Novus-Ordo occurrence — the Table of Liturgical Days (NovusOrdoPrecedence, #257)
+# resolves that by the observance KIND and its Table line — so these values only shape the
+# display grade, and the precedence engine never reads them.
+
+archetypes:
+  # ---- Ordinary Time (tempus per annum) — the two green blocks, one 1–34 week series ----
+  # Minted by NovusOrdo\OrdinaryTime (#258): Block I from the Monday after the Baptism of the
+  # Lord (week 1) to the Tuesday before Ash Wednesday; Block II from the Monday after Pentecost
+  # to the eve of Advent I, closing with the 34th Sunday (Christ the King is laid over it).
+  - key: ot-sunday
+    kind: sunday
+    name: "Dominica {ord} per annum"
+    rank: 2
+    colour: green
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: ot-feria
+    kind: feria
+    name: "{feria} Hebdomadae {ord} per annum"
+    rank: 4
+    colour: green
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }

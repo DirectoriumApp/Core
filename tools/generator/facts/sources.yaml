@@ -126,3 +126,26 @@
     vigils of Christmas, Pentecost, the Assumption, and All Saints (c.1252 §2); fast alone on the
     other weekdays of Lent (c.1252 §3). Cited for the uncopyrightable discipline facts the
     roman:cic-1917 penitential rules encode; the canons' text is never transcribed."
+
+# ---- Novus Ordo (Ordinary Form) sources — Core v1.1 (#108) -------------------
+# The reform's norming documents. The full running texts of the modern books are
+# copyrighted (LEV/ICEL, see docs/design/text-licensing-model.md) and are NEVER
+# transcribed; these are consult-only `reference` sources cited for the
+# uncopyrightable calendar FACTS (rank, colour, season, day-structure) and — under
+# Core option A — for the reform's generic Latin temporal day-LABELS ("Dominica per
+# annum"), which are uncopyrightable descriptors, not literary titles.
+
+- key: nu-1969
+  urn: directorium:source:nu-1969
+  kind: reference
+  title: "Normae universales de Anno liturgico et de Calendario (1969)"
+  year: 1969
+  rights: reference
+  note: "Consult-only. The General Norms for the Liturgical Year and the Calendar, promulgated
+    with the motu proprio Mysterii Paschalis (14 Feb 1969) and printed at the head of the reformed
+    Missale Romanum and the Calendarium Romanum. The norming authority for the roman-novus-ordo-2002
+    edition's temporal STRUCTURE and precedence: the five seasons and the two-block 34-week Ordinary
+    Time (nn. 43–44), the Sunday/solemnity/feast/memorial grades (nn. 10–16), and the Table of
+    Liturgical Days (n. 59). Cited for those uncopyrightable facts and — per option A
+    (text-licensing-model.md) — for the generic Latin day-labels of the temporal cycle it
+    establishes (e.g. 'Dominica … per annum'); its running text is never transcribed."

@@ -1,12 +1,13 @@
 {
-  "corpusVersion": "1962-2026-07-07.3",
+  "corpusVersion": "1962-2026-07-11.1",
   "disciplines": [
     "cic-1917"
   ],
   "editions": [
     "roman-rubricae-1960",
     "roman-divino-afflatu",
-    "roman-rubricae-1955"
+    "roman-rubricae-1955",
+    "roman-novus-ordo-2002"
   ],
   "files": {
     "disciplines/cic-1917/discipline.json": {
@@ -43,6 +44,11 @@
       "primaryKey": "selector",
       "records": 28,
       "sha256": "75ffe9ea6a4a9dfd523eccc4ae60530f7988e38499b29b7001376d933fe3780b"
+    },
+    "editions/roman-novus-ordo-2002/attributes.temporale.ndjson": {
+      "primaryKey": "archetype",
+      "records": 2,
+      "sha256": "b2871341d311ab8492a07da2172f51d1817e6ed107800aeb3dd0476328cbe224"
     },
     "editions/roman-rubricae-1955/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -101,8 +107,8 @@
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
-      "records": 74,
-      "sha256": "f58a6ba02c7d8202fe6b05136d096399be7b698ba9602392d227595d3bcf333f"
+      "records": 76,
+      "sha256": "d6bc70930f1039384ec9d47e2251b7eb02a89127d83eb5d630a7f6959a2ead8e"
     },
     "overlays/fssp/operations.ndjson": {
       "primaryKey": "target",
@@ -146,8 +152,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 10,
-      "sha256": "7016b0dc877a3c4b742950a3e63d50b1ecc9efceca45d3eeb79039a781978191"
+      "records": 11,
+      "sha256": "ca5000edbbcea7aa4c0753f4f4661f8bd855bc8e5122b86ac132170d866bdebe"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -208,6 +214,14 @@
       "title": "Missale Romanum, editio typica",
       "urn": "directorium:source:mr-1920",
       "uses": 448
+    },
+    {
+      "key": "nu-1969",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Normae universales de Anno liturgico et de Calendario (1969)",
+      "urn": "directorium:source:nu-1969",
+      "uses": 6
     },
     {
       "key": "ordo-1954",

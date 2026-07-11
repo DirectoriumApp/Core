@@ -40,6 +40,8 @@
 {"archetype":"low-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Albis"}}
 {"archetype":"maundy-thursday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Feria V in Cena Domini"}}
 {"archetype":"nativity","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Nativitate Domini"}}
+{"archetype":"ot-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae {ord} per annum"}}
+{"archetype":"ot-sunday","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica {ord} per annum"}}
 {"archetype":"palm-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica II Passionis seu in Palmis"}}
 {"archetype":"paschaltide-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} post Pascha"}}
 {"archetype":"paschaltide-week-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} infra Hebdomadam {ord} post Octavam Paschae"}}
