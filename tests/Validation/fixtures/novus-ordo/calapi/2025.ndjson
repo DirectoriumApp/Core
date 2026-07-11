@@ -1,0 +1,365 @@
+{"date":"2025-01-01","season":"christmas","celebrations":[{"title":"Mary, Mother of God (Octave of Christmas)","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-01-02","season":"christmas","celebrations":[{"title":"Ss. Basilii et Gregorii Nazianzeni, episcoporum et Ecclesiae doctorum","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-01-03","season":"christmas","celebrations":[{"title":"Friday after Christmas Octave","colour":"white","rank":"ferial","rank_num":3.13},{"title":"Ss.mi Nominis Iesu","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-04","season":"christmas","celebrations":[{"title":"Saturday after Christmas Octave","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-05","season":"christmas","celebrations":[{"title":"2nd Sunday after the Nativity of the Lord","colour":"white","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-01-06","season":"christmas","celebrations":[{"title":"The Epiphany","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-01-07","season":"christmas","celebrations":[{"title":"Tuesday after Epiphany","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Raimundi de Penyafort, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-08","season":"christmas","celebrations":[{"title":"Wednesday after Epiphany","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-09","season":"christmas","celebrations":[{"title":"Thursday after Epiphany","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-10","season":"christmas","celebrations":[{"title":"Friday after Epiphany","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-11","season":"christmas","celebrations":[{"title":"Saturday after Epiphany","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-12","season":"christmas","celebrations":[{"title":"The Baptism of the Lord","colour":"white","rank":"feast","rank_num":2.5}]}
+{"date":"2025-01-13","season":"ordinary","celebrations":[{"title":"Monday, 1st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Hilarii, episcopi et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-14","season":"ordinary","celebrations":[{"title":"Tuesday, 1st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-15","season":"ordinary","celebrations":[{"title":"Wednesday, 1st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-16","season":"ordinary","celebrations":[{"title":"Thursday, 1st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-17","season":"ordinary","celebrations":[{"title":"S. Antonii, abbatis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-01-18","season":"ordinary","celebrations":[{"title":"Saturday, 1st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-19","season":"ordinary","celebrations":[{"title":"2nd Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-01-20","season":"ordinary","celebrations":[{"title":"Monday, 2nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Fabiani, papae et martyris","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"S. Sebastiani, martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-21","season":"ordinary","celebrations":[{"title":"S. Agnetis, virginis et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-01-22","season":"ordinary","celebrations":[{"title":"Wednesday, 2nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Vincentii, diaconi et martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-23","season":"ordinary","celebrations":[{"title":"Thursday, 2nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-24","season":"ordinary","celebrations":[{"title":"S. Francisci de Sales, episcopi et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-01-25","season":"ordinary","celebrations":[{"title":"In conversione S. Pauli, apostoli","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-01-26","season":"ordinary","celebrations":[{"title":"3rd Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-01-27","season":"ordinary","celebrations":[{"title":"Monday, 3rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Angelae Merici, virginis","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-01-28","season":"ordinary","celebrations":[{"title":"S. Thomae de Aquino, presbyteri et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-01-29","season":"ordinary","celebrations":[{"title":"Wednesday, 3rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-30","season":"ordinary","celebrations":[{"title":"Thursday, 3rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-01-31","season":"ordinary","celebrations":[{"title":"S. Ioannis Bosco, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-02-01","season":"ordinary","celebrations":[{"title":"Saturday, 3rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-02","season":"ordinary","celebrations":[{"title":"IN PRAESENTATIONE DOMINI","colour":"white","rank":"feast","rank_num":2.5}]}
+{"date":"2025-02-03","season":"ordinary","celebrations":[{"title":"Monday, 4th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Blasii, episcopi et martyris","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"S. Ansgarii, episcopi","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-04","season":"ordinary","celebrations":[{"title":"Tuesday, 4th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-05","season":"ordinary","celebrations":[{"title":"S. Agathae, virginis et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-02-06","season":"ordinary","celebrations":[{"title":"Ss. Pauli Miki et sociorum, martyrum","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-02-07","season":"ordinary","celebrations":[{"title":"Friday, 4th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-08","season":"ordinary","celebrations":[{"title":"Saturday, 4th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Hieronymi Emiliani","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"S. Iosephinae Bakhita, virginis","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-09","season":"ordinary","celebrations":[{"title":"5th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-02-10","season":"ordinary","celebrations":[{"title":"S. Scholasticae, virginis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-02-11","season":"ordinary","celebrations":[{"title":"Tuesday, 5th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"B. Mariae Virginis de Lourdes","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-12","season":"ordinary","celebrations":[{"title":"Wednesday, 5th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-13","season":"ordinary","celebrations":[{"title":"Thursday, 5th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-14","season":"ordinary","celebrations":[{"title":"Ss. Cyrilli, monachi, et Methodii, episcopi","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-02-15","season":"ordinary","celebrations":[{"title":"Saturday, 5th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-16","season":"ordinary","celebrations":[{"title":"6th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-02-17","season":"ordinary","celebrations":[{"title":"Monday, 6th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. septem Fundatorum Ordinis Servorum B. M. V.","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-18","season":"ordinary","celebrations":[{"title":"Tuesday, 6th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-19","season":"ordinary","celebrations":[{"title":"Wednesday, 6th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-20","season":"ordinary","celebrations":[{"title":"Thursday, 6th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-21","season":"ordinary","celebrations":[{"title":"Friday, 6th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Petri Damiani, episcopi et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-02-22","season":"ordinary","celebrations":[{"title":"Cathedrae S. Petri, apostoli","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-02-23","season":"ordinary","celebrations":[{"title":"7th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-02-24","season":"ordinary","celebrations":[{"title":"Monday, 7th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-25","season":"ordinary","celebrations":[{"title":"Tuesday, 7th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-26","season":"ordinary","celebrations":[{"title":"Wednesday, 7th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-27","season":"ordinary","celebrations":[{"title":"Thursday, 7th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-02-28","season":"ordinary","celebrations":[{"title":"Friday, 7th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-03-01","season":"ordinary","celebrations":[{"title":"Saturday, 7th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-03-02","season":"ordinary","celebrations":[{"title":"8th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-03-03","season":"ordinary","celebrations":[{"title":"Monday, 8th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-03-04","season":"ordinary","celebrations":[{"title":"Tuesday, 8th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Casimiri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-03-05","season":"lent","celebrations":[{"title":"Ash Wednesday","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-03-06","season":"lent","celebrations":[{"title":"Thursday after Ash Wednesday","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-07","season":"lent","celebrations":[{"title":"Friday after Ash Wednesday","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"Ss. Perpetuae et Felicitatis, martyrum","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-03-08","season":"lent","celebrations":[{"title":"Saturday after Ash Wednesday","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Ioannis a Deo, religiosi","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-03-09","season":"lent","celebrations":[{"title":"1st Sunday of Lent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-03-10","season":"lent","celebrations":[{"title":"Monday, 1st week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-11","season":"lent","celebrations":[{"title":"Tuesday, 1st week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-12","season":"lent","celebrations":[{"title":"Wednesday, 1st week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-13","season":"lent","celebrations":[{"title":"Thursday, 1st week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-14","season":"lent","celebrations":[{"title":"Friday, 1st week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-15","season":"lent","celebrations":[{"title":"Saturday, 1st week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-16","season":"lent","celebrations":[{"title":"2nd Sunday of Lent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-03-17","season":"lent","celebrations":[{"title":"Monday, 2nd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Patricii, episcopi","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-03-18","season":"lent","celebrations":[{"title":"Tuesday, 2nd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Cyrilli Hierosolymitani, episcopi et Ecclesiae doctoris","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-03-19","season":"lent","celebrations":[{"title":"S. IOSEPH, SPONSI B. M. V.","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-03-20","season":"lent","celebrations":[{"title":"Thursday, 2nd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-21","season":"lent","celebrations":[{"title":"Friday, 2nd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-22","season":"lent","celebrations":[{"title":"Saturday, 2nd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-23","season":"lent","celebrations":[{"title":"3rd Sunday of Lent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-03-24","season":"lent","celebrations":[{"title":"Monday, 3rd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-25","season":"lent","celebrations":[{"title":"IN ANNUNTIATIONE DOMINI","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-03-26","season":"lent","celebrations":[{"title":"Wednesday, 3rd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-27","season":"lent","celebrations":[{"title":"Thursday, 3rd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-28","season":"lent","celebrations":[{"title":"Friday, 3rd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-29","season":"lent","celebrations":[{"title":"Saturday, 3rd week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-03-30","season":"lent","celebrations":[{"title":"4th Sunday of Lent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-03-31","season":"lent","celebrations":[{"title":"Monday, 4th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-01","season":"lent","celebrations":[{"title":"Tuesday, 4th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-02","season":"lent","celebrations":[{"title":"Wednesday, 4th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Francisci de Paola, eremitae","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-04-03","season":"lent","celebrations":[{"title":"Thursday, 4th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-04","season":"lent","celebrations":[{"title":"Friday, 4th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Isidori, episcopi et Ecclesiae doctoris","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-04-05","season":"lent","celebrations":[{"title":"Saturday, 4th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Vincentii Ferrer, presbyteri","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-04-06","season":"lent","celebrations":[{"title":"5th Sunday of Lent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-07","season":"lent","celebrations":[{"title":"Monday, 5th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Ioannis Baptistae de la Salle, presbyteri","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-04-08","season":"lent","celebrations":[{"title":"Tuesday, 5th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-09","season":"lent","celebrations":[{"title":"Wednesday, 5th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-10","season":"lent","celebrations":[{"title":"Thursday, 5th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-11","season":"lent","celebrations":[{"title":"Friday, 5th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Stanislai, episcopi et martyris","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-04-12","season":"lent","celebrations":[{"title":"Saturday, 5th week of Lent","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-04-13","season":"lent","celebrations":[{"title":"Passion Sunday (Palm Sunday)","colour":"red","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-14","season":"lent","celebrations":[{"title":"Monday of Holy Week","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-15","season":"lent","celebrations":[{"title":"Tuesday of Holy Week","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-16","season":"lent","celebrations":[{"title":"Wednesday of Holy Week","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-17","season":"lent","celebrations":[{"title":"Thursday of Holy Week","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-18","season":"lent","celebrations":[{"title":"Good Friday","colour":"red","rank":"Easter triduum","rank_num":1.1}]}
+{"date":"2025-04-19","season":"lent","celebrations":[{"title":"Holy Saturday","colour":"violet","rank":"Easter triduum","rank_num":1.1}]}
+{"date":"2025-04-20","season":"easter","celebrations":[{"title":"Easter Sunday","colour":"white","rank":"Easter triduum","rank_num":1.1}]}
+{"date":"2025-04-21","season":"easter","celebrations":[{"title":"Easter Monday","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-22","season":"easter","celebrations":[{"title":"Easter Tuesday","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-23","season":"easter","celebrations":[{"title":"Easter Wednesday","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-24","season":"easter","celebrations":[{"title":"Easter Thursday","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-25","season":"easter","celebrations":[{"title":"Easter Friday","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-26","season":"easter","celebrations":[{"title":"Easter Saturday","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-27","season":"easter","celebrations":[{"title":"2nd Sunday of Easter","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-04-28","season":"easter","celebrations":[{"title":"Monday, 2nd week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Petri Chanel, presbyteri et martyris","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"S. Ludovici Mariae Grignion de Montfort, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-04-29","season":"easter","celebrations":[{"title":"S. Catharinae Senensis, virginis et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-04-30","season":"easter","celebrations":[{"title":"Wednesday, 2nd week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Pii V, papae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-01","season":"easter","celebrations":[{"title":"Thursday, 2nd week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Ioseph Opificis","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-02","season":"easter","celebrations":[{"title":"S. Athanasii, episcopi et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-05-03","season":"easter","celebrations":[{"title":"Ss. Philippi et Iacobi, apostolorum","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-05-04","season":"easter","celebrations":[{"title":"3rd Sunday of Easter","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-05-05","season":"easter","celebrations":[{"title":"Monday, 3rd week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-06","season":"easter","celebrations":[{"title":"Tuesday, 3rd week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-07","season":"easter","celebrations":[{"title":"Wednesday, 3rd week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-08","season":"easter","celebrations":[{"title":"Thursday, 3rd week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-09","season":"easter","celebrations":[{"title":"Friday, 3rd week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-10","season":"easter","celebrations":[{"title":"Saturday, 3rd week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-11","season":"easter","celebrations":[{"title":"4th Sunday of Easter","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-05-12","season":"easter","celebrations":[{"title":"Monday, 4th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"Ss. Nerei et Achillei, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"S. Pancratii, martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-13","season":"easter","celebrations":[{"title":"Tuesday, 4th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"B. Mariae Virginis de Fatima","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-14","season":"easter","celebrations":[{"title":"S. Matthiae, apostoli","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-05-15","season":"easter","celebrations":[{"title":"Thursday, 4th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-16","season":"easter","celebrations":[{"title":"Friday, 4th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-17","season":"easter","celebrations":[{"title":"Saturday, 4th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-18","season":"easter","celebrations":[{"title":"5th Sunday of Easter","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-05-19","season":"easter","celebrations":[{"title":"Monday, 5th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-20","season":"easter","celebrations":[{"title":"Tuesday, 5th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Bernardini Senensis, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-21","season":"easter","celebrations":[{"title":"Wednesday, 5th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Christophori Magallanes, presbyteri, et sociorum, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-22","season":"easter","celebrations":[{"title":"Thursday, 5th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Ritae de Cascia, religiosae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-23","season":"easter","celebrations":[{"title":"Friday, 5th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-24","season":"easter","celebrations":[{"title":"Saturday, 5th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-25","season":"easter","celebrations":[{"title":"6th Sunday of Easter","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-05-26","season":"easter","celebrations":[{"title":"S. Philippi Neri, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-05-27","season":"easter","celebrations":[{"title":"Tuesday, 6th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Augustini Cantuarensis, episcopi","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-05-28","season":"easter","celebrations":[{"title":"Wednesday, 6th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-29","season":"easter","celebrations":[{"title":"The Ascension","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-05-30","season":"easter","celebrations":[{"title":"Friday, 6th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-05-31","season":"easter","celebrations":[{"title":"In Visitatione B. Mariae Virginis","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-06-01","season":"easter","celebrations":[{"title":"7th Sunday of Easter","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-06-02","season":"easter","celebrations":[{"title":"Monday, 7th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"Ss. Marcellini et Petri, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-06-03","season":"easter","celebrations":[{"title":"Ss. Caroli Lwanga et sociorum, martyrum","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-06-04","season":"easter","celebrations":[{"title":"Wednesday, 7th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-05","season":"easter","celebrations":[{"title":"S. Bonifatii, episcopi et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-06-06","season":"easter","celebrations":[{"title":"Friday, 7th week of Easter","colour":"white","rank":"ferial","rank_num":3.13},{"title":"S. Norberti, episcopi","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-06-07","season":"easter","celebrations":[{"title":"Saturday, 7th week of Easter","colour":"white","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-08","season":"easter","celebrations":[{"title":"Pentecost","colour":"red","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-06-09","season":"ordinary","celebrations":[{"title":"Mary, Mother of the Church","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-06-10","season":"ordinary","celebrations":[{"title":"Tuesday, 10th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-11","season":"ordinary","celebrations":[{"title":"S. Barnabae, apostoli","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-06-12","season":"ordinary","celebrations":[{"title":"Thursday, 10th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-13","season":"ordinary","celebrations":[{"title":"S. Antonii de Padova, presbyteri et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-06-14","season":"ordinary","celebrations":[{"title":"Saturday, 10th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-06-15","season":"ordinary","celebrations":[{"title":"Trinity Sunday","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-06-16","season":"ordinary","celebrations":[{"title":"Monday, 11th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-17","season":"ordinary","celebrations":[{"title":"Tuesday, 11th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-18","season":"ordinary","celebrations":[{"title":"Wednesday, 11th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-19","season":"ordinary","celebrations":[{"title":"Corpus Christi (The Body and Blood of Christ)","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-06-20","season":"ordinary","celebrations":[{"title":"Friday, 11th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-21","season":"ordinary","celebrations":[{"title":"S Aloisii Gonzaga, religiosi","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-06-22","season":"ordinary","celebrations":[{"title":"12th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-06-23","season":"ordinary","celebrations":[{"title":"Monday, 12th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-24","season":"ordinary","celebrations":[{"title":"IN NATIVITATE S. IOANNIS BAPTISTAE","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-06-25","season":"ordinary","celebrations":[{"title":"Wednesday, 12th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-26","season":"ordinary","celebrations":[{"title":"Thursday, 12th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-06-27","season":"ordinary","celebrations":[{"title":"The Sacred Heart of Jesus","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-06-28","season":"ordinary","celebrations":[{"title":"Saturday, 12th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Immaculate Heart of Mary","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"S. Irenaei, episcopi et martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-06-29","season":"ordinary","celebrations":[{"title":"Ss. PETRI ET PAULI, APOSTOLORUM","colour":"red","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-06-30","season":"ordinary","celebrations":[{"title":"Monday, 13th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. Protomartyrum S. Romanae Ecclesiae","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-01","season":"ordinary","celebrations":[{"title":"Tuesday, 13th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-02","season":"ordinary","celebrations":[{"title":"Wednesday, 13th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-03","season":"ordinary","celebrations":[{"title":"S. Thomae, apostoli","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-07-04","season":"ordinary","celebrations":[{"title":"Friday, 13th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Elisabeth Lusitaniae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-05","season":"ordinary","celebrations":[{"title":"Saturday, 13th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Antonii Mariae Zaccaria, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-06","season":"ordinary","celebrations":[{"title":"14th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-07-07","season":"ordinary","celebrations":[{"title":"Monday, 14th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-08","season":"ordinary","celebrations":[{"title":"Tuesday, 14th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-09","season":"ordinary","celebrations":[{"title":"Wednesday, 14th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. Augustini Zhao Rong, presbyteri","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-10","season":"ordinary","celebrations":[{"title":"Thursday, 14th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-11","season":"ordinary","celebrations":[{"title":"S. Benedicti, abbatis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-07-12","season":"ordinary","celebrations":[{"title":"Saturday, 14th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-13","season":"ordinary","celebrations":[{"title":"15th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-07-14","season":"ordinary","celebrations":[{"title":"Monday, 15th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Camilli de Lellis, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-15","season":"ordinary","celebrations":[{"title":"S. Bonaventurae, episcopi et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-07-16","season":"ordinary","celebrations":[{"title":"Wednesday, 15th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"B. Mariae Virginis de Monte Carmelo","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-17","season":"ordinary","celebrations":[{"title":"Thursday, 15th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-18","season":"ordinary","celebrations":[{"title":"Friday, 15th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-19","season":"ordinary","celebrations":[{"title":"Saturday, 15th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-20","season":"ordinary","celebrations":[{"title":"16th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-07-21","season":"ordinary","celebrations":[{"title":"Monday, 16th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Laurentii de Brindisi, presbyteri et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-22","season":"ordinary","celebrations":[{"title":"S. Mariae Magdalenae","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-07-23","season":"ordinary","celebrations":[{"title":"Wednesday, 16th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Birgittae, religiosae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-24","season":"ordinary","celebrations":[{"title":"Thursday, 16th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Sarbelii Makhlūf, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-25","season":"ordinary","celebrations":[{"title":"S. Iacobi, apostoli","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-07-26","season":"ordinary","celebrations":[{"title":"Ss. Ioachim et Annae, parentum B. Mariae Virginis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-07-27","season":"ordinary","celebrations":[{"title":"17th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-07-28","season":"ordinary","celebrations":[{"title":"Monday, 17th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-07-29","season":"ordinary","celebrations":[{"title":"S. Marthae","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-07-30","season":"ordinary","celebrations":[{"title":"Wednesday, 17th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Petri Chrysologi, episcopi et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-07-31","season":"ordinary","celebrations":[{"title":"S. Ignatii de Loyola, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-01","season":"ordinary","celebrations":[{"title":"S. Alfonsi Mariae de' Liguori, episcopi et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-02","season":"ordinary","celebrations":[{"title":"Saturday, 17th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Eusebii Vercellensis, episcopi","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"S. Petri Iuliani Eymard, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-03","season":"ordinary","celebrations":[{"title":"18th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-08-04","season":"ordinary","celebrations":[{"title":"S. Ioannis Mariae Vianney, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-05","season":"ordinary","celebrations":[{"title":"Tuesday, 18th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"In Dedicatione basilicae S. Mariae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-06","season":"ordinary","celebrations":[{"title":"IN TRANSFIGURATIONE DOMINI","colour":"white","rank":"feast","rank_num":2.5}]}
+{"date":"2025-08-07","season":"ordinary","celebrations":[{"title":"Thursday, 18th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. Xysti, papae, et sociorum, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"S. Caietani, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-08","season":"ordinary","celebrations":[{"title":"S. Dominici, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-09","season":"ordinary","celebrations":[{"title":"Saturday, 18th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Teresiae Benedictae a Cruce, virginis et martyris","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-10","season":"ordinary","celebrations":[{"title":"19th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-08-11","season":"ordinary","celebrations":[{"title":"S. Clarae, virginis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-12","season":"ordinary","celebrations":[{"title":"Tuesday, 19th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ioannae Franciscae de Chantal, religiosae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-13","season":"ordinary","celebrations":[{"title":"Wednesday, 19th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. Pontiani, papae, et Hippolyti, presbyteri, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-14","season":"ordinary","celebrations":[{"title":"S. Maximiliani Mariae Kolbe, presbyteri et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-15","season":"ordinary","celebrations":[{"title":"IN ASSUMPTIONE B. MARIAE VIRGINIS","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-08-16","season":"ordinary","celebrations":[{"title":"Saturday, 19th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Stephani Hungariae","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-17","season":"ordinary","celebrations":[{"title":"20th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-08-18","season":"ordinary","celebrations":[{"title":"Monday, 20th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-08-19","season":"ordinary","celebrations":[{"title":"Tuesday, 20th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ioannis Eudes, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-20","season":"ordinary","celebrations":[{"title":"S. Bernardi, abbatis et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-21","season":"ordinary","celebrations":[{"title":"S. Pii X, papae","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-22","season":"ordinary","celebrations":[{"title":"B. Mariae Virginis Reginae","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-23","season":"ordinary","celebrations":[{"title":"Saturday, 20th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Rosae de Lima, virginis","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-24","season":"ordinary","celebrations":[{"title":"21st Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-08-25","season":"ordinary","celebrations":[{"title":"Monday, 21st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ludovici","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"S. Ioseph de Calasanz, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-26","season":"ordinary","celebrations":[{"title":"Tuesday, 21st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-08-27","season":"ordinary","celebrations":[{"title":"S. Monicae","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-28","season":"ordinary","celebrations":[{"title":"S. Augustini, episcopi et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-29","season":"ordinary","celebrations":[{"title":"In Passione S. Ioannis Baptistae, martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-08-30","season":"ordinary","celebrations":[{"title":"Saturday, 21st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-08-31","season":"ordinary","celebrations":[{"title":"22nd Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-09-01","season":"ordinary","celebrations":[{"title":"Monday, 22nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-02","season":"ordinary","celebrations":[{"title":"Tuesday, 22nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-03","season":"ordinary","celebrations":[{"title":"S. Gregorii Magni, papae et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-04","season":"ordinary","celebrations":[{"title":"Thursday, 22nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-05","season":"ordinary","celebrations":[{"title":"Friday, 22nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-06","season":"ordinary","celebrations":[{"title":"Saturday, 22nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-09-07","season":"ordinary","celebrations":[{"title":"23rd Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-09-08","season":"ordinary","celebrations":[{"title":"In Nativitate B. Mariae Virginis","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-09-09","season":"ordinary","celebrations":[{"title":"Tuesday, 23rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Petri Claver, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-09-10","season":"ordinary","celebrations":[{"title":"Wednesday, 23rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-11","season":"ordinary","celebrations":[{"title":"Thursday, 23rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-12","season":"ordinary","celebrations":[{"title":"Friday, 23rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss.mi Nominis Mariae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-09-13","season":"ordinary","celebrations":[{"title":"S. Ioannis Chrysostomi, episcopi et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-14","season":"ordinary","celebrations":[{"title":"IN EXALTATIONE SANCTAE CRUCIS","colour":"red","rank":"feast","rank_num":2.5}]}
+{"date":"2025-09-15","season":"ordinary","celebrations":[{"title":"B. Mariae Virginis Perdolentis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-16","season":"ordinary","celebrations":[{"title":"Ss. Cornelii, papae, et Cypriani, episcopi, martyrum","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-17","season":"ordinary","celebrations":[{"title":"Wednesday, 24th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Roberti Bellarmino, episcopi et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-09-18","season":"ordinary","celebrations":[{"title":"Thursday, 24th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-19","season":"ordinary","celebrations":[{"title":"Friday, 24th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ianuarii, episcopi et martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-09-20","season":"ordinary","celebrations":[{"title":"Ss. Andreae Kim Tae-gŏn et Pauli Chŏng Ha-sang et sociorum, martyrum","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-21","season":"ordinary","celebrations":[{"title":"25th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-09-22","season":"ordinary","celebrations":[{"title":"Monday, 25th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-23","season":"ordinary","celebrations":[{"title":"S. Pii de Pietrelcina, presbyteri [*]","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-24","season":"ordinary","celebrations":[{"title":"Wednesday, 25th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-25","season":"ordinary","celebrations":[{"title":"Thursday, 25th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-09-26","season":"ordinary","celebrations":[{"title":"Friday, 25th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. Cosmae et Damiani, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-09-27","season":"ordinary","celebrations":[{"title":"S. Vincentii de Paul, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-09-28","season":"ordinary","celebrations":[{"title":"26th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-09-29","season":"ordinary","celebrations":[{"title":"Ss. Michaelis, Gabrielis et Raphaelis, archangelorum","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-09-30","season":"ordinary","celebrations":[{"title":"S. Hieronymi, presbyteri et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-01","season":"ordinary","celebrations":[{"title":"S. Teresiae a Iesu Infante, virginis et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-02","season":"ordinary","celebrations":[{"title":"Ss. Angelorum Custodum","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-03","season":"ordinary","celebrations":[{"title":"Friday, 26th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-04","season":"ordinary","celebrations":[{"title":"S. Francisci Assisiensis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-05","season":"ordinary","celebrations":[{"title":"27th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-10-06","season":"ordinary","celebrations":[{"title":"Monday, 27th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Brunonis, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-07","season":"ordinary","celebrations":[{"title":"B. Mariae Virginis a Rosario","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-08","season":"ordinary","celebrations":[{"title":"Wednesday, 27th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-09","season":"ordinary","celebrations":[{"title":"Thursday, 27th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"Ss. Dionysii, episcopi, et sociorum, martyrum","colour":"red","rank":"optional memorial","rank_num":3.12},{"title":"S. Ioannis Leonardi, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-10","season":"ordinary","celebrations":[{"title":"Friday, 27th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-11","season":"ordinary","celebrations":[{"title":"Saturday, 27th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ioannis XXIII, papae","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-12","season":"ordinary","celebrations":[{"title":"28th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-10-13","season":"ordinary","celebrations":[{"title":"Monday, 28th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-14","season":"ordinary","celebrations":[{"title":"Tuesday, 28th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Callisti I, papae et martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-15","season":"ordinary","celebrations":[{"title":"S. Teresiae a Iesu, virginis et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-16","season":"ordinary","celebrations":[{"title":"Thursday, 28th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Hedvigis, religiosae","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"S. Margaritae Mariae Alacoque, virginis","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-17","season":"ordinary","celebrations":[{"title":"S. Ignatii Antiocheni, episcopi et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-10-18","season":"ordinary","celebrations":[{"title":"S. Lucae, evangelistae","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-10-19","season":"ordinary","celebrations":[{"title":"29th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-10-20","season":"ordinary","celebrations":[{"title":"Monday, 29th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-21","season":"ordinary","celebrations":[{"title":"Tuesday, 29th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-22","season":"ordinary","celebrations":[{"title":"Wednesday, 29th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ioannis Pauli II, papae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-23","season":"ordinary","celebrations":[{"title":"Thursday, 29th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Ioannis de Capestrano, presbyteri","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-24","season":"ordinary","celebrations":[{"title":"Friday, 29th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Antonii Mariae Claret, episcopi","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-25","season":"ordinary","celebrations":[{"title":"Saturday, 29th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-10-26","season":"ordinary","celebrations":[{"title":"30th Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-10-27","season":"ordinary","celebrations":[{"title":"Monday, 30th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-28","season":"ordinary","celebrations":[{"title":"Ss. Simonis et Iudae, apostolorum","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-10-29","season":"ordinary","celebrations":[{"title":"Wednesday, 30th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-30","season":"ordinary","celebrations":[{"title":"Thursday, 30th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-10-31","season":"ordinary","celebrations":[{"title":"Friday, 30th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-01","season":"ordinary","celebrations":[{"title":"OMNIUM SANCTORUM","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-11-02","season":"ordinary","celebrations":[{"title":"IN COMMEMORATIONE OMNIUM FIDELIUM DEFUNCTORUM","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-11-03","season":"ordinary","celebrations":[{"title":"Monday, 31st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Martini de Porres, religiosi","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-11-04","season":"ordinary","celebrations":[{"title":"S. Caroli Borromeo, episcopi","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-05","season":"ordinary","celebrations":[{"title":"Wednesday, 31st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-06","season":"ordinary","celebrations":[{"title":"Thursday, 31st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-07","season":"ordinary","celebrations":[{"title":"Friday, 31st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-08","season":"ordinary","celebrations":[{"title":"Saturday, 31st week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-11-09","season":"ordinary","celebrations":[{"title":"32nd Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-11-10","season":"ordinary","celebrations":[{"title":"S. Leonis Magni, papae et Ecclesiae doctoris","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-11","season":"ordinary","celebrations":[{"title":"S. Martini Turonensis, episcopi","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-12","season":"ordinary","celebrations":[{"title":"S. Iosaphat, episcopi et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-13","season":"ordinary","celebrations":[{"title":"Thursday, 32nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-14","season":"ordinary","celebrations":[{"title":"Friday, 32nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-15","season":"ordinary","celebrations":[{"title":"Saturday, 32nd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Alberti Magni, episcopi et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-11-16","season":"ordinary","celebrations":[{"title":"33rd Sunday in Ordinary Time","colour":"green","rank":"Sunday","rank_num":2.6}]}
+{"date":"2025-11-17","season":"ordinary","celebrations":[{"title":"S. Elisabeth Hungariae, religiosae","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-18","season":"ordinary","celebrations":[{"title":"Tuesday, 33rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"In Dedicatione basilicarum Ss. Petri et Pauli, apostolorum","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-11-19","season":"ordinary","celebrations":[{"title":"Wednesday, 33rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-20","season":"ordinary","celebrations":[{"title":"Thursday, 33rd week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-21","season":"ordinary","celebrations":[{"title":"In Praesentatione B. Mariae Virginis","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-22","season":"ordinary","celebrations":[{"title":"S. Caeciliae, virginis et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-23","season":"ordinary","celebrations":[{"title":"Christ The King","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-11-24","season":"ordinary","celebrations":[{"title":"Ss. Andreae Dũng Lac, presbyteri, et sociorum, martyrum","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-11-25","season":"ordinary","celebrations":[{"title":"Tuesday, 34th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"S. Catharinae Alexandrinae, virginis et martyris","colour":"red","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-11-26","season":"ordinary","celebrations":[{"title":"Wednesday, 34th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-27","season":"ordinary","celebrations":[{"title":"Thursday, 34th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-28","season":"ordinary","celebrations":[{"title":"Friday, 34th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-11-29","season":"ordinary","celebrations":[{"title":"Saturday, 34th week in Ordinary Time","colour":"green","rank":"ferial","rank_num":3.13},{"title":"The Memorial of the Blessed Virgin Mary on Saturday","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-11-30","season":"advent","celebrations":[{"title":"1st Sunday of Advent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-12-01","season":"advent","celebrations":[{"title":"Monday, 1st week of Advent","colour":"violet","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-12-02","season":"advent","celebrations":[{"title":"Tuesday, 1st week of Advent","colour":"violet","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-12-03","season":"advent","celebrations":[{"title":"S. Francisci Xavier, presbyteri","colour":"white","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-12-04","season":"advent","celebrations":[{"title":"Thursday, 1st week of Advent","colour":"violet","rank":"ferial","rank_num":3.13},{"title":"S. Ioannis Damasceni, presbyteri et Ecclesiae doctoris","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-12-05","season":"advent","celebrations":[{"title":"Friday, 1st week of Advent","colour":"violet","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-12-06","season":"advent","celebrations":[{"title":"Saturday, 1st week of Advent","colour":"violet","rank":"ferial","rank_num":3.13},{"title":"S. Nicolai, episcopi","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-12-07","season":"advent","celebrations":[{"title":"2nd Sunday of Advent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-12-08","season":"advent","celebrations":[{"title":"IN CONCEPTIONE IMMACULATA BEATAE MARIAE VIRGINIS","colour":"white","rank":"solemnity","rank_num":1.3}]}
+{"date":"2025-12-09","season":"advent","celebrations":[{"title":"Tuesday, 2nd week of Advent","colour":"violet","rank":"ferial","rank_num":3.13},{"title":"S. Ioannis Didaci Cuahtlatoatzin [*]","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-12-10","season":"advent","celebrations":[{"title":"Wednesday, 2nd week of Advent","colour":"violet","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-12-11","season":"advent","celebrations":[{"title":"Thursday, 2nd week of Advent","colour":"violet","rank":"ferial","rank_num":3.13},{"title":"S. Damasi I, papae","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-12-12","season":"advent","celebrations":[{"title":"Friday, 2nd week of Advent","colour":"violet","rank":"ferial","rank_num":3.13},{"title":"Beatae Mariae Virginis de Guadalupe [*]","colour":"white","rank":"optional memorial","rank_num":3.12}]}
+{"date":"2025-12-13","season":"advent","celebrations":[{"title":"S. Luciae, virginis et martyris","colour":"red","rank":"memorial","rank_num":3.1}]}
+{"date":"2025-12-14","season":"advent","celebrations":[{"title":"3rd Sunday of Advent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-12-15","season":"advent","celebrations":[{"title":"Monday, 3rd week of Advent","colour":"violet","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-12-16","season":"advent","celebrations":[{"title":"Tuesday, 3rd week of Advent","colour":"violet","rank":"ferial","rank_num":3.13}]}
+{"date":"2025-12-17","season":"advent","celebrations":[{"title":"17th December","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-18","season":"advent","celebrations":[{"title":"18th December","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-19","season":"advent","celebrations":[{"title":"19th December","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-20","season":"advent","celebrations":[{"title":"20th December","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-21","season":"advent","celebrations":[{"title":"4th Sunday of Advent","colour":"violet","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-12-22","season":"advent","celebrations":[{"title":"22nd December","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-23","season":"advent","celebrations":[{"title":"23rd December","colour":"violet","rank":"ferial","rank_num":2.9},{"title":"S. Ioannis de Kęty, presbyteri","colour":"violet","rank":"commemoration","rank_num":4}]}
+{"date":"2025-12-24","season":"advent","celebrations":[{"title":"24th December","colour":"violet","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-25","season":"christmas","celebrations":[{"title":"Christmas","colour":"white","rank":"Primary liturgical days","rank_num":1.2}]}
+{"date":"2025-12-26","season":"christmas","celebrations":[{"title":"S. Stephani, protomartyris","colour":"red","rank":"feast","rank_num":2.7}]}
+{"date":"2025-12-27","season":"christmas","celebrations":[{"title":"S. Ioannis, apostoli et evangelistae","colour":"white","rank":"feast","rank_num":2.7}]}
+{"date":"2025-12-28","season":"christmas","celebrations":[{"title":"The Holy Family","colour":"white","rank":"feast","rank_num":2.5}]}
+{"date":"2025-12-29","season":"christmas","celebrations":[{"title":"5th day of Christmas Octave","colour":"white","rank":"ferial","rank_num":2.9},{"title":"S. Thomae Becket, episcopi et martyris","colour":"white","rank":"commemoration","rank_num":4}]}
+{"date":"2025-12-30","season":"christmas","celebrations":[{"title":"6th day of Christmas Octave","colour":"white","rank":"ferial","rank_num":2.9}]}
+{"date":"2025-12-31","season":"christmas","celebrations":[{"title":"7th day of Christmas Octave","colour":"white","rank":"ferial","rank_num":2.9},{"title":"S. Silvestri I, papae","colour":"white","rank":"commemoration","rank_num":4}]}

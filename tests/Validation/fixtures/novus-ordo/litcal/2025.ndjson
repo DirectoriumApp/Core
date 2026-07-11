@@ -1,0 +1,365 @@
+{"date":"2025-01-01","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"MaryMotherOfGod","name":"SOLLEMNITAS SANCTÆ DEI GENITRICIS MARIÆ"}
+{"date":"2025-01-02","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StsBasilGreg","name":"Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum"}
+{"date":"2025-01-03","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"NameJesus","name":"Sanctissimi Nominis Iesu"}
+{"date":"2025-01-04","grade":0,"grade_lcl":"feria","colors":["white"],"key":"ChristmasWeekdayJan4","name":"Sabbato temporis Nativitatis"}
+{"date":"2025-01-05","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["white"],"key":"Christmas2","name":"Dominica II Post Nativitatem"}
+{"date":"2025-01-06","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Epiphany","name":"In Epiphania Domini"}
+{"date":"2025-01-07","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StRayPenyafort","name":"Sancti Raimundi de Penyafort, presbyteri"}
+{"date":"2025-01-08","grade":0,"grade_lcl":"feria","colors":["white"],"key":"DayAfterEpiphanyJan8","name":"Feria IV temporis Nativitatis"}
+{"date":"2025-01-09","grade":0,"grade_lcl":"feria","colors":["white"],"key":"DayAfterEpiphanyJan9","name":"Feria V temporis Nativitatis"}
+{"date":"2025-01-10","grade":0,"grade_lcl":"feria","colors":["white"],"key":"DayAfterEpiphanyJan10","name":"Feria VI temporis Nativitatis"}
+{"date":"2025-01-11","grade":0,"grade_lcl":"feria","colors":["white"],"key":"DayAfterEpiphanyJan11","name":"Sabbato temporis Nativitatis"}
+{"date":"2025-01-12","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["white"],"key":"BaptismLord","name":"In Festo Baptismatis Domini"}
+{"date":"2025-01-13","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StHilaryPoitiers","name":"Sancti Hilarii, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-01-14","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday1Tuesday","name":"Feria III Hebdomadæ Primæ Temporis per annum"}
+{"date":"2025-01-15","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday1Wednesday","name":"Feria IV Hebdomadæ Primæ Temporis per annum"}
+{"date":"2025-01-16","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday1Thursday","name":"Feria V Hebdomadæ Primæ Temporis per annum"}
+{"date":"2025-01-17","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAnthonyEgypt","name":"Sancti Antonii, abbatis"}
+{"date":"2025-01-18","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM1","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-01-19","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday2","name":"Dominica II «Per Annum»"}
+{"date":"2025-01-20","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StFabianPope","name":"Sancti Fabiani, papæ et martyris"}
+{"date":"2025-01-21","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StAgnes","name":"Sanctæ Agnetis, virginis et martyris"}
+{"date":"2025-01-22","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StVincentDeacon","name":"Sancti Vincentii, diaconi et martyris"}
+{"date":"2025-01-23","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday2Thursday","name":"Feria V Hebdomadæ Secundæ Temporis per annum"}
+{"date":"2025-01-24","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StFrancisDeSales","name":"Sancti Francisci de Sales, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-01-25","grade":4,"grade_lcl":"FESTUM","colors":["white"],"key":"ConversionStPaul","name":"In Conversione Sancti Pauli, Apostoli"}
+{"date":"2025-01-26","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday3","name":"Dominica III «Per Annum»"}
+{"date":"2025-01-27","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StAngelaMerici","name":"Sanctæ Angelæ Merici, virginis"}
+{"date":"2025-01-28","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StThomasAquinas","name":"Sancti Thomæ de Aquino, presbyteri et Ecclesiæ doctoris"}
+{"date":"2025-01-29","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday3Wednesday","name":"Feria IV Hebdomadæ Tertiæ Temporis per annum"}
+{"date":"2025-01-30","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday3Thursday","name":"Feria V Hebdomadæ Tertiæ Temporis per annum"}
+{"date":"2025-01-31","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StJohnBosco","name":"Sancti Ioannis Bosco, presbyteri"}
+{"date":"2025-02-01","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM2","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-02-02","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["white"],"key":"Presentation","name":"In Præsentatione Domini"}
+{"date":"2025-02-03","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StBlase","name":"Sancti Blasii, episcopi et martyris"}
+{"date":"2025-02-04","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday4Tuesday","name":"Feria III Hebdomadæ Quartæ Temporis per annum"}
+{"date":"2025-02-05","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StAgatha","name":"Sanctæ Agathæ, virginis et martyris"}
+{"date":"2025-02-06","grade":3,"grade_lcl":"Memoria obligatoria","colors":["red"],"key":"StsPaulMiki","name":"Sanctorum Pauli Miki et sociorum, martyrum"}
+{"date":"2025-02-07","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday4Friday","name":"Feria VI Hebdomadæ Quartæ Temporis per annum"}
+{"date":"2025-02-08","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJeromeEmiliani","name":"Sancti Hieronymi Emiliani"}
+{"date":"2025-02-09","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday5","name":"Dominica V «Per Annum»"}
+{"date":"2025-02-10","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StScholastica","name":"Sanctæ Scholasticæ, virginis"}
+{"date":"2025-02-11","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"OurLadyOfLourdes","name":"Beatæ Mariæ Virginis de Lourdes"}
+{"date":"2025-02-12","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday5Wednesday","name":"Feria IV Hebdomadæ Quintæ Temporis per annum"}
+{"date":"2025-02-13","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday5Thursday","name":"Feria V Hebdomadæ Quintæ Temporis per annum"}
+{"date":"2025-02-14","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StsCyrilMethodius","name":"Sancti Cyrilli, monachi, et Methodii, episcopi"}
+{"date":"2025-02-15","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM4","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-02-16","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday6","name":"Dominica VI «Per Annum»"}
+{"date":"2025-02-17","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SevenHolyFounders","name":"Sanctorum Septem Fundatorum Ordinis Servorum B. M. V."}
+{"date":"2025-02-18","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday6Tuesday","name":"Feria III Hebdomadæ Sextæ Temporis per annum"}
+{"date":"2025-02-19","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday6Wednesday","name":"Feria IV Hebdomadæ Sextæ Temporis per annum"}
+{"date":"2025-02-20","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday6Thursday","name":"Feria V Hebdomadæ Sextæ Temporis per annum"}
+{"date":"2025-02-21","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StPeterDamian","name":"Sancti Petri Damiani, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-02-22","grade":4,"grade_lcl":"FESTUM","colors":["white"],"key":"ChairStPeter","name":"Cathedræ S. Petri, Apostoli"}
+{"date":"2025-02-23","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday7","name":"Dominica VII «Per Annum»"}
+{"date":"2025-02-24","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday7Monday","name":"Feria II Hebdomadæ Septimæ Temporis per annum"}
+{"date":"2025-02-25","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday7Tuesday","name":"Feria III Hebdomadæ Septimæ Temporis per annum"}
+{"date":"2025-02-26","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday7Wednesday","name":"Feria IV Hebdomadæ Septimæ Temporis per annum"}
+{"date":"2025-02-27","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StGregoryNarek","name":"Sancti Gregorii Narecensis, abbatis et Ecclesiæ doctoris"}
+{"date":"2025-02-28","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday7Friday","name":"Feria VI Hebdomadæ Septimæ Temporis per annum"}
+{"date":"2025-03-01","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM5","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-03-02","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday8","name":"Dominica VIII «Per Annum»"}
+{"date":"2025-03-03","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday8Monday","name":"Feria II Hebdomadæ Octavæ Temporis per annum"}
+{"date":"2025-03-04","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StCasimir","name":"Sancti Casimiri"}
+{"date":"2025-03-05","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"AshWednesday","name":"Feria IV Cinerum"}
+{"date":"2025-03-06","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"ThursdayAfterAshWednesday","name":"Feria V post Feria IV Cinerum"}
+{"date":"2025-03-07","grade":3,"grade_lcl":"Memoria obligatoria","colors":["red"],"key":"StsPerpetuaFelicity","name":"Sanctarum Perpetuæ et Felicitatis, martyrum"}
+{"date":"2025-03-08","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnGod","name":"Sancti Ioannis a Deo, religiosi"}
+{"date":"2025-03-09","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Lent1","name":"Dominica I in Quadragesima"}
+{"date":"2025-03-10","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday1Monday","name":"Feria II Hebdomadæ Primæ Quadragesimæ"}
+{"date":"2025-03-11","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday1Tuesday","name":"Feria III Hebdomadæ Primæ Quadragesimæ"}
+{"date":"2025-03-12","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday1Wednesday","name":"Feria IV Hebdomadæ Primæ Quadragesimæ"}
+{"date":"2025-03-13","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday1Thursday","name":"Feria V Hebdomadæ Primæ Quadragesimæ"}
+{"date":"2025-03-14","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday1Friday","name":"Feria VI Hebdomadæ Primæ Quadragesimæ"}
+{"date":"2025-03-15","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday1Saturday","name":"Sabbato Hebdomadæ Primæ Quadragesimæ"}
+{"date":"2025-03-16","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Lent2","name":"Dominica II in Quadragesima"}
+{"date":"2025-03-17","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StPatrick","name":"Sancti Patricii, episcopi"}
+{"date":"2025-03-18","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StCyrilJerusalem","name":"Sancti Cyrilli Hierosolymitani, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-03-19","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"StJoseph","name":"Sancti Ioseph Sponsi Beatæ Mariæ Virginis"}
+{"date":"2025-03-20","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday2Thursday","name":"Feria V Hebdomadæ Secundæ Quadragesimæ"}
+{"date":"2025-03-21","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday2Friday","name":"Feria VI Hebdomadæ Secundæ Quadragesimæ"}
+{"date":"2025-03-22","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday2Saturday","name":"Sabbato Hebdomadæ Secundæ Quadragesimæ"}
+{"date":"2025-03-23","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Lent3","name":"Dominica III in Quadragesima"}
+{"date":"2025-03-24","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday3Monday","name":"Feria II Hebdomadæ Tertiæ Quadragesimæ"}
+{"date":"2025-03-25","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"Annunciation","name":"In Annuntiatione Domini"}
+{"date":"2025-03-26","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday3Wednesday","name":"Feria IV Hebdomadæ Tertiæ Quadragesimæ"}
+{"date":"2025-03-27","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday3Thursday","name":"Feria V Hebdomadæ Tertiæ Quadragesimæ"}
+{"date":"2025-03-28","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday3Friday","name":"Feria VI Hebdomadæ Tertiæ Quadragesimæ"}
+{"date":"2025-03-29","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday3Saturday","name":"Sabbato Hebdomadæ Tertiæ Quadragesimæ"}
+{"date":"2025-03-30","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["rose","purple"],"key":"Lent4","name":"Dominica IV in Quadragesima"}
+{"date":"2025-03-31","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday4Monday","name":"Feria II Hebdomadæ Quartæ Quadragesimæ"}
+{"date":"2025-04-01","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday4Tuesday","name":"Feria III Hebdomadæ Quartæ Quadragesimæ"}
+{"date":"2025-04-02","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StFrancisPaola","name":"Sancti Francisci de Paola, eremitæ"}
+{"date":"2025-04-03","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday4Thursday","name":"Feria V Hebdomadæ Quartæ Quadragesimæ"}
+{"date":"2025-04-04","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StIsidore","name":"Sancti Isidori, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-04-05","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StVincentFerrer","name":"Sancti Vincentii Ferrer, presbyteri"}
+{"date":"2025-04-06","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Lent5","name":"Dominica V in Quadragesima"}
+{"date":"2025-04-07","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StJohnBaptistDeLaSalle","name":"S. Ioannis Baptistæ de la Salle, presbyteri"}
+{"date":"2025-04-08","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday5Tuesday","name":"Feria III Hebdomadæ Quintæ Quadragesimæ"}
+{"date":"2025-04-09","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday5Wednesday","name":"Feria IV Hebdomadæ Quintæ Quadragesimæ"}
+{"date":"2025-04-10","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday5Thursday","name":"Feria V Hebdomadæ Quintæ Quadragesimæ"}
+{"date":"2025-04-11","grade":1,"grade_lcl":"commemoratio","colors":["white","red"],"key":"StStanislaus","name":"Sancti Stanislai, episcopi et martyris"}
+{"date":"2025-04-12","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"LentWeekday5Saturday","name":"Sabbato Hebdomadæ Quintæ Quadragesimæ"}
+{"date":"2025-04-13","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["red"],"key":"PalmSun","name":"Dominica in Palmis"}
+{"date":"2025-04-14","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"MonHolyWeek","name":"Feria II Hebdomadæ Sanctæ"}
+{"date":"2025-04-15","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"TueHolyWeek","name":"Feria III Hebdomadæ Sanctæ"}
+{"date":"2025-04-16","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"WedHolyWeek","name":"Feria IV Hebdomadæ Sanctæ"}
+{"date":"2025-04-17","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"HolyThursChrism","name":"Missa Chrismatis"}
+{"date":"2025-04-18","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["red"],"key":"GoodFri","name":"Feria VI in Passione Domini"}
+{"date":"2025-04-19","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"EasterVigil","name":"Vigilia Paschalis"}
+{"date":"2025-04-20","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter","name":"Dominica Paschæ in Resurrectione Domini"}
+{"date":"2025-04-21","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"MonOctaveEaster","name":"Feria II infra Octavam Paschæ"}
+{"date":"2025-04-22","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"TueOctaveEaster","name":"Feria III infra Octavam Paschæ"}
+{"date":"2025-04-23","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"WedOctaveEaster","name":"Feria IV infra Octavam Paschæ"}
+{"date":"2025-04-24","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"ThuOctaveEaster","name":"Feria V infra Octavam Paschæ"}
+{"date":"2025-04-25","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"FriOctaveEaster","name":"Feria VI infra Octavam Paschæ"}
+{"date":"2025-04-26","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"SatOctaveEaster","name":"Sabbato infra Octavam Paschæ"}
+{"date":"2025-04-27","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter2","name":"Dominica II in Paschæ vel Dominica Divinæ Misericordiæ"}
+{"date":"2025-04-28","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StPeterChanel","name":"Sancti Petri Chanel, presbyteri et martyris"}
+{"date":"2025-04-29","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StCatherineSiena","name":"Sanctæ Catharinæ Senensis, virginis"}
+{"date":"2025-04-30","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StPiusV","name":"Sancti Pii V, papæ"}
+{"date":"2025-05-01","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJosephWorker","name":"Sancti Ioseph opificis"}
+{"date":"2025-05-02","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAthanasius","name":"Sancti Athanasii, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-05-03","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StsPhilipJames","name":"Sanctorum Philippi et Iacobi, Apostolorum"}
+{"date":"2025-05-04","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter3","name":"Dominica III in Paschæ"}
+{"date":"2025-05-05","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday3Monday","name":"Feria II Hebdomadæ Tertiæ Temporis Paschali"}
+{"date":"2025-05-06","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday3Tuesday","name":"Feria III Hebdomadæ Tertiæ Temporis Paschali"}
+{"date":"2025-05-07","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday3Wednesday","name":"Feria IV Hebdomadæ Tertiæ Temporis Paschali"}
+{"date":"2025-05-08","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday3Thursday","name":"Feria V Hebdomadæ Tertiæ Temporis Paschali"}
+{"date":"2025-05-09","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday3Friday","name":"Feria VI Hebdomadæ Tertiæ Temporis Paschali"}
+{"date":"2025-05-10","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnAvila","name":"Sancti Ioannis De Avila, presbyteri et Ecclesiæ doctoris"}
+{"date":"2025-05-11","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter4","name":"Dominica IV in Paschæ"}
+{"date":"2025-05-12","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StsNereusAchilleus","name":"Sanctorum Nerei et Achillei, martyrum"}
+{"date":"2025-05-13","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"OurLadyOfFatima","name":"Beatæ Mariæ Virginis de Fatima"}
+{"date":"2025-05-14","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StMatthiasAp","name":"Sancti Matthiæ, Apostoli"}
+{"date":"2025-05-15","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday4Thursday","name":"Feria V Hebdomadæ Quartæ Temporis Paschali"}
+{"date":"2025-05-16","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday4Friday","name":"Feria VI Hebdomadæ Quartæ Temporis Paschali"}
+{"date":"2025-05-17","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday4Saturday","name":"Sabbato Hebdomadæ Quartæ Temporis Paschali"}
+{"date":"2025-05-18","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter5","name":"Dominica V in Paschæ"}
+{"date":"2025-05-19","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday5Monday","name":"Feria II Hebdomadæ Quintæ Temporis Paschali"}
+{"date":"2025-05-20","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StBernardineSiena","name":"Sancti Bernardini Senensis, presbyteri"}
+{"date":"2025-05-21","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StChristopherMagallanes","name":"Sanctorum Christophori Magallanes, presbyteri, et sociorum, martyrum"}
+{"date":"2025-05-22","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StRitaCascia","name":"Sanctæ Ritæ de Cascia, religiosæ"}
+{"date":"2025-05-23","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday5Friday","name":"Feria VI Hebdomadæ Quintæ Temporis Paschali"}
+{"date":"2025-05-24","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday5Saturday","name":"Sabbato Hebdomadæ Quintæ Temporis Paschali"}
+{"date":"2025-05-25","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter6","name":"Dominica VI in Paschæ"}
+{"date":"2025-05-26","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StPhilipNeri","name":"Sancti Philippi Neri, presbyteri"}
+{"date":"2025-05-27","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StAugustineCanterbury","name":"Sancti Augustini Cantuariensis, episcopi"}
+{"date":"2025-05-28","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday6Wednesday","name":"Feria IV Hebdomadæ Sextæ Temporis Paschali"}
+{"date":"2025-05-29","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Ascension","name":"In Ascensione Domini"}
+{"date":"2025-05-30","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday6Friday","name":"Feria VI Hebdomadæ Sextæ Temporis Paschali"}
+{"date":"2025-05-31","grade":4,"grade_lcl":"FESTUM","colors":["white"],"key":"Visitation","name":"In Visitatione Beatæ Mariæ Virginis"}
+{"date":"2025-06-01","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Easter7","name":"Dominica VII Paschæ"}
+{"date":"2025-06-02","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StsMarcellinusPeter","name":"Sanctorum Marcellini et Petri, martyrum"}
+{"date":"2025-06-03","grade":3,"grade_lcl":"Memoria obligatoria","colors":["red"],"key":"StsCharlesLwanga","name":"Sanctorum Caroli Lwanga et sociorum, martyrum"}
+{"date":"2025-06-04","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday7Wednesday","name":"Feria IV Hebdomadæ Septimæ Temporis Paschali"}
+{"date":"2025-06-05","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StBoniface","name":"Sancti Bonifatii, episcopi et martyris"}
+{"date":"2025-06-06","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StNorbert","name":"Sancti Norberti, episcopi"}
+{"date":"2025-06-07","grade":0,"grade_lcl":"feria","colors":["white"],"key":"EasterWeekday7Saturday","name":"Sabbato Hebdomadæ Septimæ Temporis Paschali"}
+{"date":"2025-06-08","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["red"],"key":"Pentecost","name":"Dominica Pentecostes"}
+{"date":"2025-06-09","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"MaryMotherChurch","name":"Beatæ Mariæ Virginis, Ecclesiæ Matris"}
+{"date":"2025-06-10","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday10Tuesday","name":"Feria III Hebdomadæ Decimæ Temporis per annum"}
+{"date":"2025-06-11","grade":3,"grade_lcl":"Memoria obligatoria","colors":["red"],"key":"StBarnabasAp","name":"Sancti Barnabæ, apostoli"}
+{"date":"2025-06-12","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday10Thursday","name":"Feria V Hebdomadæ Decimæ Temporis per annum"}
+{"date":"2025-06-13","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAnthonyPadua","name":"Sancti Antonii de Padova, presbyteri et Ecclesiæ doctoris"}
+{"date":"2025-06-14","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM6","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-06-15","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Trinity","name":"Dominica post Pentecostem Sanctissimæ Trinitatis"}
+{"date":"2025-06-16","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday11Monday","name":"Feria II Hebdomadæ Undecimæ Temporis per annum"}
+{"date":"2025-06-17","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday11Tuesday","name":"Feria III Hebdomadæ Undecimæ Temporis per annum"}
+{"date":"2025-06-18","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday11Wednesday","name":"Feria IV Hebdomadæ Undecimæ Temporis per annum"}
+{"date":"2025-06-19","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"CorpusChristi","name":"Ss.mi Corporis et Sanguinis Christi"}
+{"date":"2025-06-20","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday11Friday","name":"Feria VI Hebdomadæ Undecimæ Temporis per annum"}
+{"date":"2025-06-21","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAloysiusGonzaga","name":"Sancti Aloisii Gonzaga, religiosi"}
+{"date":"2025-06-22","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday12","name":"Dominica XII «Per Annum»"}
+{"date":"2025-06-23","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday12Monday","name":"Feria II Hebdomadæ Duodecimæ Temporis per annum"}
+{"date":"2025-06-24","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"NativityJohnBaptist","name":"In Nativitate Sancti Ioannis Baptistæ"}
+{"date":"2025-06-25","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday12Wednesday","name":"Feria IV Hebdomadæ Duodecimæ Temporis per annum"}
+{"date":"2025-06-26","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday12Thursday","name":"Feria V Hebdomadæ Duodecimæ Temporis per annum"}
+{"date":"2025-06-27","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"SacredHeart","name":"Sacratissimi Cordis Iesu"}
+{"date":"2025-06-28","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"ImmaculateHeart","name":"Immaculati Cordis Beatæ Mariæ Virginis"}
+{"date":"2025-06-29","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["red"],"key":"StsPeterPaulAp","name":"Sanctorum Petri et Pauli, Apostolorum"}
+{"date":"2025-06-30","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"FirstMartyrsRome","name":"Sanctorum Protomartyrum sanctæ Romanæ Ecclesiæ"}
+{"date":"2025-07-01","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday13Tuesday","name":"Feria III Hebdomadæ Decimæ tertiæ Temporis per annum"}
+{"date":"2025-07-02","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday13Wednesday","name":"Feria IV Hebdomadæ Decimæ tertiæ Temporis per annum"}
+{"date":"2025-07-03","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StThomasAp","name":"Sancti Thomæ, Apostoli"}
+{"date":"2025-07-04","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StElizabethPortugal","name":"Sanctæ Elisabeth Lusitaniæ"}
+{"date":"2025-07-05","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StAnthonyZaccaria","name":"Sancti Antonii Mariæ Zaccaria, presbyteri"}
+{"date":"2025-07-06","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday14","name":"Dominica XIV «Per Annum»"}
+{"date":"2025-07-07","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday14Monday","name":"Feria II Hebdomadæ Decimæ quartæ Temporis per annum"}
+{"date":"2025-07-08","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday14Tuesday","name":"Feria III Hebdomadæ Decimæ quartæ Temporis per annum"}
+{"date":"2025-07-09","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StAugustineZhaoRong","name":"Sanctorum Augustini Zhao Rong, presbyteri et sociorum, martyrum"}
+{"date":"2025-07-10","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday14Thursday","name":"Feria V Hebdomadæ Decimæ quartæ Temporis per annum"}
+{"date":"2025-07-11","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StBenedict","name":"Sancti Benedicti, abbatis"}
+{"date":"2025-07-12","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM8","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-07-13","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday15","name":"Dominica XV «Per Annum»"}
+{"date":"2025-07-14","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StCamillusDeLellis","name":"Sancti Camilli de Lellis, presbyteri"}
+{"date":"2025-07-15","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StBonaventure","name":"Sancti Bonaventuræ, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-07-16","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"OurLadyOfMountCarmel","name":"Beatæ Mariæ Virginis de Monte Carmelo"}
+{"date":"2025-07-17","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday15Thursday","name":"Feria V Hebdomadæ Decimæ quintæ Temporis per annum"}
+{"date":"2025-07-18","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday15Friday","name":"Feria VI Hebdomadæ Decimæ quintæ Temporis per annum"}
+{"date":"2025-07-19","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM9","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-07-20","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday16","name":"Dominica XVI «Per Annum»"}
+{"date":"2025-07-21","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StLawrenceBrindisi","name":"Sancti Laurentii de Brindisi, presbyteri et Ecclesiæ doctoris"}
+{"date":"2025-07-22","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StMaryMagdalene","name":"Sanctæ Mariæ Magdalenæ"}
+{"date":"2025-07-23","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StBridget","name":"Sanctæ Brigittæ, religiosæ"}
+{"date":"2025-07-24","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StSharbelMakhluf","name":"Sancti Sarbelii Makhluf, presbyteri"}
+{"date":"2025-07-25","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StJamesAp","name":"Sancti Iacobi, Apostoli"}
+{"date":"2025-07-26","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StsJoachimAnne","name":"Sanctorum Ioachim et Annæ, parentum beatæ Mariæ Virginis"}
+{"date":"2025-07-27","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday17","name":"Dominica XVII «Per Annum»"}
+{"date":"2025-07-28","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday17Monday","name":"Feria II Hebdomadæ Decimæ septimæ Temporis per annum"}
+{"date":"2025-07-29","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StMartha","name":"Sanctæ Marthæ"}
+{"date":"2025-07-30","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StPeterChrysologus","name":"Sancti Petri Chrysologui, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-07-31","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StIgnatiusLoyola","name":"Sancti Ignatii de Loyola, presbyteri"}
+{"date":"2025-08-01","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAlphonsusMariaDeLiguori","name":"Sancti Alfonsi Mariæ de' Liguori, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-08-02","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StEusebius","name":"Sancti Eusebii Vercellensis, episcopi"}
+{"date":"2025-08-03","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday18","name":"Dominica XVIII «Per Annum»"}
+{"date":"2025-08-04","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StJeanVianney","name":"Sancti Ioannis Mariæ Vianney, presbyteri"}
+{"date":"2025-08-05","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"DedicationStMaryMajor","name":"In Dedicatione basilicæ Sanctæ Mariæ"}
+{"date":"2025-08-06","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["white"],"key":"Transfiguration","name":"In Transfiguratione Domini"}
+{"date":"2025-08-07","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StSixtusIIPope","name":"Sanctorum Xysti II, papæ, et sociorum, martyrum"}
+{"date":"2025-08-08","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StDominic","name":"Sancti Dominici, presbyteri"}
+{"date":"2025-08-09","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StEdithStein","name":"Sanctæ Teresiæ Benedictæ a Cruce, virginis et martyris"}
+{"date":"2025-08-10","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday19","name":"Dominica XIX «Per Annum»"}
+{"date":"2025-08-11","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StClare","name":"Sanctæ Claræ, virginis"}
+{"date":"2025-08-12","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJaneFrancesDeChantal","name":"Sanctæ Ioannæ Franciscæ de Chantal, religiosæ"}
+{"date":"2025-08-13","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StsPontianHippolytus","name":"Sanctorum Pontiani, papæ, et Hippolyti, presbyteri, martyrum"}
+{"date":"2025-08-14","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StMaximilianKolbe","name":"Sancti Maximiliani Mariæ Kolbe, presbyteri et martyris"}
+{"date":"2025-08-15","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"Assumption","name":"In Assumptione Beatæ Mariæ Virginis"}
+{"date":"2025-08-16","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StStephenHungary","name":"Sancti Stephani Hungariæ"}
+{"date":"2025-08-17","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday20","name":"Dominica XX «Per Annum»"}
+{"date":"2025-08-18","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday20Monday","name":"Feria II Hebdomadæ Vigesimæ Temporis per annum"}
+{"date":"2025-08-19","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnEudes","name":"Sancti Ioannis Eudes, presbyteri"}
+{"date":"2025-08-20","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StBernardClairvaux","name":"Sancti Bernardi, abbatis et Ecclesiæ doctoris"}
+{"date":"2025-08-21","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StPiusX","name":"Sancti Pii X, papæ"}
+{"date":"2025-08-22","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"QueenshipMary","name":"Beatæ Mariæ Virginis Reginæ"}
+{"date":"2025-08-23","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StRoseLima","name":"Sanctæ Rosæ de Lima, virginis"}
+{"date":"2025-08-24","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday21","name":"Dominica XXI «Per Annum»"}
+{"date":"2025-08-25","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StLouis","name":"Sancti Ludovici"}
+{"date":"2025-08-26","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday21Tuesday","name":"Feria III Hebdomadæ Vigesimæ primæ Temporis per annum"}
+{"date":"2025-08-27","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StMonica","name":"Sanctæ Monicæ"}
+{"date":"2025-08-28","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAugustineHippo","name":"Sancti Augustini, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-08-29","grade":3,"grade_lcl":"Memoria obligatoria","colors":["red"],"key":"BeheadingJohnBaptist","name":"In Passione Sancti Ioannis Baptistæ"}
+{"date":"2025-08-30","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM14","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-08-31","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday22","name":"Dominica XXII «Per Annum»"}
+{"date":"2025-09-01","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday22Monday","name":"Feria II Hebdomadæ Vigesimæ secundæ Temporis per annum"}
+{"date":"2025-09-02","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday22Tuesday","name":"Feria III Hebdomadæ Vigesimæ secundæ Temporis per annum"}
+{"date":"2025-09-03","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StGregoryGreat","name":"Sancti Gregorii Magni, papæ et Ecclesiæ doctoris"}
+{"date":"2025-09-04","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday22Thursday","name":"Feria V Hebdomadæ Vigesimæ secundæ Temporis per annum"}
+{"date":"2025-09-05","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StMotherTeresa","name":"Sanctæ Teresiæ de Calcutta, virginis"}
+{"date":"2025-09-06","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM15","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-09-07","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday23","name":"Dominica XXIII «Per Annum»"}
+{"date":"2025-09-08","grade":4,"grade_lcl":"FESTUM","colors":["white"],"key":"NativityVirginMary","name":"In Nativitate Beatæ Mariæ Virginis"}
+{"date":"2025-09-09","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StPeterClaver","name":"Sancti Petri Claver, presbyteri"}
+{"date":"2025-09-10","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday23Wednesday","name":"Feria IV Hebdomadæ Vigesimæ tertiæ Temporis per annum"}
+{"date":"2025-09-11","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday23Thursday","name":"Feria V Hebdomadæ Vigesimæ tertiæ Temporis per annum"}
+{"date":"2025-09-12","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"HolyNameMary","name":"Sanctissimi Nominis Mariæ"}
+{"date":"2025-09-13","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StJohnChrysostom","name":"Sancti Ioannis Chrysostomi, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-09-14","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["red"],"key":"ExaltationCross","name":"In Exaltatione Sanctæ Crucis"}
+{"date":"2025-09-15","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"OurLadyOfSorrows","name":"Beatæ Mariæ Virginis Perdolentis"}
+{"date":"2025-09-16","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StsCorneliusCyprian","name":"Sanctorum Cornelii, papæ, et Cypriani, episcopi, martyrum"}
+{"date":"2025-09-17","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StRobertBellarmine","name":"Sancti Roberti Bellarmino, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-09-18","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday24Thursday","name":"Feria V Hebdomadæ Vigesimæ quartæ Temporis per annum"}
+{"date":"2025-09-19","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StJanuarius","name":"Sancti Ianuarii, episcopi et martyris"}
+{"date":"2025-09-20","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StAndrewKimTaegon","name":"Sanctorum Andreæ Kim Tægon, presbyteri, et Pauli Chong Hasang et sociorum, martyrum"}
+{"date":"2025-09-21","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday25","name":"Dominica XXV «Per Annum»"}
+{"date":"2025-09-22","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday25Monday","name":"Feria II Hebdomadæ Vigesimæ quintæ Temporis per annum"}
+{"date":"2025-09-23","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StPioPietrelcina","name":"S. Pii de Pietrelcina, presbyteri"}
+{"date":"2025-09-24","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday25Wednesday","name":"Feria IV Hebdomadæ Vigesimæ quintæ Temporis per annum"}
+{"date":"2025-09-25","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday25Thursday","name":"Feria V Hebdomadæ Vigesimæ quintæ Temporis per annum"}
+{"date":"2025-09-26","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StsCosmasDamian","name":"Ss. Cosmæ et Damiani, martyrum"}
+{"date":"2025-09-27","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StVincentDePaul","name":"Sancti Vincentii de Paul, presbyteri"}
+{"date":"2025-09-28","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday26","name":"Dominica XXVI «Per Annum»"}
+{"date":"2025-09-29","grade":4,"grade_lcl":"FESTUM","colors":["white"],"key":"StsArchangels","name":"Sanctorum Michælis, Gabrielis et Raphælis, archangelorum"}
+{"date":"2025-09-30","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StJerome","name":"Sancti Hieronymi, presbyteri et Ecclesiæ doctoris"}
+{"date":"2025-10-01","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StThereseChildJesus","name":"Sanctæ Teresiæ a Iesu Infante, virginis et Ecclesiæ doctoris"}
+{"date":"2025-10-02","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"GuardianAngels","name":"Sanctorum Angelorum Custodum"}
+{"date":"2025-10-03","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday26Friday","name":"Feria VI Hebdomadæ Vigesimæ sextæ Temporis per annum"}
+{"date":"2025-10-04","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StFrancisAssisi","name":"Sancti Francisci Assisiensis"}
+{"date":"2025-10-05","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday27","name":"Dominica XXVII «Per Annum»"}
+{"date":"2025-10-06","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StBruno","name":"Sancti Brunonis, presbyteri"}
+{"date":"2025-10-07","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"OurLadyOfTheRosary","name":"Beatæ Mariæ Virginis a Rosario"}
+{"date":"2025-10-08","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday27Wednesday","name":"Feria IV Hebdomadæ Vigesimæ septimæ Temporis per annum"}
+{"date":"2025-10-09","grade":2,"grade_lcl":"memoria ad libitum","colors":["red"],"key":"StDenis","name":"Sanctorum Dionysii, episcopi, et sociorum, martyrum"}
+{"date":"2025-10-10","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday27Friday","name":"Feria VI Hebdomadæ Vigesimæ septimæ Temporis per annum"}
+{"date":"2025-10-11","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnXXIII","name":"S. Ioannis XXIII, papæ"}
+{"date":"2025-10-12","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday28","name":"Dominica XXVIII «Per Annum»"}
+{"date":"2025-10-13","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday28Monday","name":"Feria II Hebdomadæ Vigesimæ octavæ Temporis per annum"}
+{"date":"2025-10-14","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StCallistusIPope","name":"Sancti Callisti I, papæ et martyris"}
+{"date":"2025-10-15","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StTeresaJesus","name":"Sanctæ Teresiæ de Avila, virginis"}
+{"date":"2025-10-16","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StHedwig","name":"Sancti Hedvigis, religiosæ"}
+{"date":"2025-10-17","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StIgnatiusAntioch","name":"Sancti Ignatii Antiocheni, episcopi et martyris"}
+{"date":"2025-10-18","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StLukeEvangelist","name":"Sancti Lucæ, evangelistæ"}
+{"date":"2025-10-19","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday29","name":"Dominica XXIX «Per Annum»"}
+{"date":"2025-10-20","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday29Monday","name":"Feria II Hebdomadæ Vigesimæ nonæ Temporis per annum"}
+{"date":"2025-10-21","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday29Tuesday","name":"Feria III Hebdomadæ Vigesimæ nonæ Temporis per annum"}
+{"date":"2025-10-22","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnPaulII","name":"S. Ioannis Pauli II, papæ"}
+{"date":"2025-10-23","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnCapistrano","name":"Sancti Ioannis de Capestrano, presbyteri"}
+{"date":"2025-10-24","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StAnthonyMaryClaret","name":"Sancti Antonii Mariæ Claret, episcopi"}
+{"date":"2025-10-25","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM17","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-10-26","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday30","name":"Dominica XXX «Per Annum»"}
+{"date":"2025-10-27","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday30Monday","name":"Feria II Hebdomadæ Trigesimæ Temporis per annum"}
+{"date":"2025-10-28","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StSimonStJudeAp","name":"Sanctorum Simonis et Iudæ, apostolorum"}
+{"date":"2025-10-29","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday30Wednesday","name":"Feria IV Hebdomadæ Trigesimæ Temporis per annum"}
+{"date":"2025-10-30","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday30Thursday","name":"Feria V Hebdomadæ Trigesimæ Temporis per annum"}
+{"date":"2025-10-31","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday30Friday","name":"Feria VI Hebdomadæ Trigesimæ Temporis per annum"}
+{"date":"2025-11-01","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"AllSaints","name":"Omnium Sanctorum"}
+{"date":"2025-11-02","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["purple"],"key":"AllSouls","name":"In Commemoratione Omnium Fidelium Defunctorum"}
+{"date":"2025-11-03","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StMartinPorres","name":"Sancti Martini de Porres, religiosi"}
+{"date":"2025-11-04","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StCharlesBorromeo","name":"Sancti Caroli Borromeo, episcopi"}
+{"date":"2025-11-05","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday31Wednesday","name":"Feria IV Hebdomadæ Trigesimæ primæ Temporis per annum"}
+{"date":"2025-11-06","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday31Thursday","name":"Feria V Hebdomadæ Trigesimæ primæ Temporis per annum"}
+{"date":"2025-11-07","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday31Friday","name":"Feria VI Hebdomadæ Trigesimæ primæ Temporis per annum"}
+{"date":"2025-11-08","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM18","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-11-09","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["white"],"key":"DedicationLateran","name":"In Dedicatione Basilicæ Lateranensis"}
+{"date":"2025-11-10","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StLeoGreat","name":"Sancti Leonis Magni, papæ et Ecclesiæ doctoris"}
+{"date":"2025-11-11","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StMartinTours","name":"Sancti Martini, episcopi"}
+{"date":"2025-11-12","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StJosaphat","name":"Sancti Iosaphat, episcopi et martyris"}
+{"date":"2025-11-13","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday32Thursday","name":"Feria V Hebdomadæ Trigesimæ secundæ Temporis per annum"}
+{"date":"2025-11-14","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday32Friday","name":"Feria VI Hebdomadæ Trigesimæ secundæ Temporis per annum"}
+{"date":"2025-11-15","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StAlbertGreat","name":"Sancti Alberti Magni, episcopi et Ecclesiæ doctoris"}
+{"date":"2025-11-16","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["green"],"key":"OrdSunday33","name":"Dominica XXXIII «Per Annum»"}
+{"date":"2025-11-17","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StElizabethHungary","name":"Sanctæ Elisabeth Hungariæ"}
+{"date":"2025-11-18","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"DedicationStsPeterPaul","name":"In Dedicatione basilicarum Sanctorum Petri et Pauli, apostolorum"}
+{"date":"2025-11-19","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday33Wednesday","name":"Feria IV Hebdomadæ Trigesimæ tertiæ Temporis per annum"}
+{"date":"2025-11-20","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday33Thursday","name":"Feria V Hebdomadæ Trigesimæ tertiæ Temporis per annum"}
+{"date":"2025-11-21","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"PresentationMary","name":"In Præsentatione Beatæ Mariæ Virginis"}
+{"date":"2025-11-22","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StCecilia","name":"Sanctæ Cæciliæ, virginis et martyris"}
+{"date":"2025-11-23","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"ChristKing","name":"Domini Nostri Iesu Christi Universorum Regis"}
+{"date":"2025-11-24","grade":3,"grade_lcl":"Memoria obligatoria","colors":["red"],"key":"StAndrewDungLac","name":"Sanctorum Andreæ Dung-Lac, presbyteri, et sociorum, martyrum"}
+{"date":"2025-11-25","grade":2,"grade_lcl":"memoria ad libitum","colors":["white","red"],"key":"StCatherineAlexandria","name":"Sanctæ Catharinæ Alexandrinæ, virginis et martyris"}
+{"date":"2025-11-26","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday34Wednesday","name":"Feria IV Hebdomadæ Trigesimæ quartæ Temporis per annum"}
+{"date":"2025-11-27","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday34Thursday","name":"Feria V Hebdomadæ Trigesimæ quartæ Temporis per annum"}
+{"date":"2025-11-28","grade":0,"grade_lcl":"feria","colors":["green"],"key":"OrdWeekday34Friday","name":"Feria VI Hebdomadæ Trigesimæ quartæ Temporis per annum"}
+{"date":"2025-11-29","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"SatMemBVM20","name":"Memoria Sanctæ Mariæ in Sabbato"}
+{"date":"2025-11-30","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Advent1","name":"Dominica Prima Adventus"}
+{"date":"2025-12-01","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekday1Monday","name":"Feria II Hebdomadæ Primæ Adventus"}
+{"date":"2025-12-02","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekday1Tuesday","name":"Feria III Hebdomadæ Primæ Adventus"}
+{"date":"2025-12-03","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white"],"key":"StFrancisXavier","name":"Sancti Francisci Xavier, presbyteri"}
+{"date":"2025-12-04","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StJohnDamascene","name":"Sancti Ioannis Damasceni, presbyteri et Ecclesiæ doctoris"}
+{"date":"2025-12-05","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekday1Friday","name":"Feria VI Hebdomadæ Primæ Adventus"}
+{"date":"2025-12-06","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StNicholas","name":"Sancti Nicolai, episcopi"}
+{"date":"2025-12-07","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Advent2","name":"Dominica Secunda Adventus"}
+{"date":"2025-12-08","grade":6,"grade_lcl":"SOLLEMNITAS","colors":["white"],"key":"ImmaculateConception","name":"In Conceptione Immaculata Beatæ Mariæ Virginis"}
+{"date":"2025-12-09","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"JuanDiego","name":"Sancti Ioannis Didaci Cuauhtlatoatzin"}
+{"date":"2025-12-10","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"OurLadyOfLoreto","name":"Beatæ Mariæ Virginis de Loreto"}
+{"date":"2025-12-11","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"StDamasusIPope","name":"Sancti Damasi I, papæ"}
+{"date":"2025-12-12","grade":2,"grade_lcl":"memoria ad libitum","colors":["white"],"key":"OurLadyOfGuadalupe","name":"Beatæ Mariæ Virginis Guadalupensis"}
+{"date":"2025-12-13","grade":3,"grade_lcl":"Memoria obligatoria","colors":["white","red"],"key":"StLucySyracuse","name":"Sanctæ Luciæ, virginis et martyris"}
+{"date":"2025-12-14","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["rose","purple"],"key":"Advent3","name":"Dominica Tertia Adventus (Gaudete)"}
+{"date":"2025-12-15","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekday3Monday","name":"Feria II Hebdomadæ Tertiæ Adventus"}
+{"date":"2025-12-16","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekday3Tuesday","name":"Feria III Hebdomadæ Tertiæ Adventus"}
+{"date":"2025-12-17","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekdayDec17","name":"Feria IV Hebdomadæ Tertiæ Adventus"}
+{"date":"2025-12-18","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekdayDec18","name":"Feria V Hebdomadæ Tertiæ Adventus"}
+{"date":"2025-12-19","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekdayDec19","name":"Feria VI Hebdomadæ Tertiæ Adventus"}
+{"date":"2025-12-20","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekdayDec20","name":"Sabbato Hebdomadæ Tertiæ Adventus"}
+{"date":"2025-12-21","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["purple"],"key":"Advent4","name":"Dominica Quarta Adventus"}
+{"date":"2025-12-22","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekdayDec22","name":"Feria II Hebdomadæ Quartæ Adventus"}
+{"date":"2025-12-23","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StJohnKanty","name":"Sancti Ioannis de Kęty, presbyteri"}
+{"date":"2025-12-24","grade":0,"grade_lcl":"feria","colors":["purple"],"key":"AdventWeekdayDec24","name":"Feria IV Hebdomadæ Quartæ Adventus"}
+{"date":"2025-12-25","grade":7,"grade_lcl":"celebratio altioris ordinis quam sollemnitatis","colors":["white"],"key":"Christmas","name":"In Nativitate Domini"}
+{"date":"2025-12-26","grade":4,"grade_lcl":"FESTUM","colors":["red"],"key":"StStephenProtomartyr","name":"Sancti Stephani, protomartyris"}
+{"date":"2025-12-27","grade":4,"grade_lcl":"FESTUM","colors":["white"],"key":"StJohnEvangelist","name":"Sancti Ioannis, apostoli et evangelistæ"}
+{"date":"2025-12-28","grade":5,"grade_lcl":"FESTUM DOMINI","colors":["white"],"key":"HolyFamily","name":"S. Familiæ Iesu, Mariæ et Joseph"}
+{"date":"2025-12-29","grade":1,"grade_lcl":"commemoratio","colors":["white","red"],"key":"StThomasBecket","name":"Sancti Thomæ Becket, episcopi et martyris"}
+{"date":"2025-12-30","grade":0,"grade_lcl":"feria","colors":["white"],"key":"ChristmasWeekdayDec30","name":"Dies Sextus Octavæ Nativitatis"}
+{"date":"2025-12-31","grade":1,"grade_lcl":"commemoratio","colors":["white"],"key":"StSylvesterIPope","name":"Sancti Silvestri I, papæ"}
