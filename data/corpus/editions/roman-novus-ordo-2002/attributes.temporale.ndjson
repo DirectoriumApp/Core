@@ -1,2 +1,15 @@
+{"archetype":"epiphany","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":1}
+{"archetype":"nativity","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":1}
+{"archetype":"no-advent-feria","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"violet"},"rank":4}
+{"archetype":"no-advent-privileged","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"violet"},"rank":3}
+{"archetype":"no-advent-sunday","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"violet"},"rank":1}
+{"archetype":"no-advent-sunday-gaudete","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"violet","roseAllowed":true},"rank":1}
+{"archetype":"no-after-epiphany-feria","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":4}
+{"archetype":"no-baptism","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":2}
+{"archetype":"no-christmas-sunday-2","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":2}
+{"archetype":"no-christmas-weekday-january","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":4}
+{"archetype":"no-holy-family","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":2}
+{"archetype":"no-nativity-octave-weekday","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":3}
+{"archetype":"no-octave-day","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"white"},"rank":1}
 {"archetype":"ot-feria","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"green"},"rank":4}
 {"archetype":"ot-sunday","cites":{"colour":"nu-1969","rank":"nu-1969"},"colour":{"base":"green"},"rank":2}

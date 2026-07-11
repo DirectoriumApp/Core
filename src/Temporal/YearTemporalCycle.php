@@ -13,10 +13,13 @@ use Directorium\Core\Temporal\NovusOrdo\OrdinaryTime;
  *
  * The fillers are consulted in order; the first that owns a date supplies its
  * temporal office (the earlier blocks are the more specific, exactly as before the
- * list was abstracted behind {@see TemporalCycle}). {@see isTriduum()} feeds the
- * precedence context; the traditional cycle delegates it to {@see HolyWeek}, and a
- * cycle with no Triduum source (the Novus Ordo until its Holy Week filler lands with
- * the general-calendar corpus, #108) reports false.
+ * list was abstracted behind {@see TemporalCycle}). The Novus-Ordo cycle supplies
+ * {@see \Directorium\Core\Temporal\NovusOrdo\ChristmasCycle} and {@see OrdinaryTime}
+ * instances into the same list — any block-filler exposing `on()` is accepted, so the
+ * enumerated union below is the traditional set and not exhaustive. {@see isTriduum()}
+ * feeds the precedence context; the traditional cycle delegates it to {@see HolyWeek},
+ * and a cycle with no Triduum source (the Novus Ordo until its Holy Week filler lands
+ * with the paschal half, #108 follow-up) reports false.
  *
  * @internal Not part of the public API (docs/api-stability.md).
  */

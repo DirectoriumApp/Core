@@ -27,7 +27,32 @@
 # Time ranks as a second-class-equivalent Sunday; a weekday is the floor). It is NOT what
 # governs Novus-Ordo occurrence — the Table of Liturgical Days (NovusOrdoPrecedence, #257)
 # resolves that by the observance KIND and its Table line — so these values only shape the
-# display grade, and the precedence engine never reads them.
+# display grade, and the precedence engine never reads them. The display band is mapped:
+# solemnity / privileged Sunday of Advent → 1; feast of the Lord / Sunday of Christmas Time
+# → 2; privileged weekday (17–24 Dec, the Christmas octave) → 3; ordinary weekday → 4.
+#
+# KEYS. A Novus-Ordo temporal archetype whose office is genuinely edition-invariant reuses
+# the BASE 1962 archetype key so its identity dedupes into the shared cross-edition union
+# and the v2.0 comparison tool aligns it by id — for this Advent/Christmas slice that is the
+# two great feasts of the Lord, `nativity` and `epiphany`, re-declared below with the exact
+# base kind and Latin name (and citing the same public-domain Missal, mr-1920, so the identity
+# record is byte-identical and merges rather than collides). Their per-edition rank/colour go
+# in this edition's own attributes.temporale.ndjson, cited to the reform's norms. Everything
+# the reform re-shaped — Advent weekdays (it drops "infra Hebdomadam" and the Ember days, and
+# names 17–24 December by date), the Christmas octave, Holy Family on the Sunday in the octave,
+# the octave day as a Marian solemnity, the second Sunday after the Nativity, the Baptism of
+# the Lord ending Christmas Time — takes a NO-SPECIFIC `no-…` key (collision-free with the base
+# keys). The `no-` prefix and the `ot-` prefix (Ordinary Time, already shipped) both mark
+# reform-only archetypes; only the great-feast keys are shared.
+#
+# The NAME citation follows the honest source, key notwithstanding. Where a NO-specific archetype's
+# label is verbatim the ANCIENT label the base already transcribes from the public-domain Missal —
+# the Advent Sundays "Dominica … Adventus" and the weekdays "… post Epiphaniam" — it cites mr-1920,
+# the same public-domain text, even under its `no-…` key. Only a label the reform genuinely COINED
+# or re-worded cites the reference nu-1969 under option A: "… per annum", the date-named "Die …
+# decembris/ianuarii", "In Octava Nativitatis Domini", "Dominica II post Nativitatem", "In Baptismate
+# Domini", the "… Hebdomadae … Adventus" weekday form that drops the older "infra Hebdomadam", and the
+# "… Mariae et Ioseph" Holy-Family wording. A copyrighted modern book is never a source.
 
 archetypes:
   # ---- Ordinary Time (tempus per annum) — the two green blocks, one 1–34 week series ----
@@ -45,4 +70,95 @@ archetypes:
     name: "{feria} Hebdomadae {ord} per annum"
     rank: 4
     colour: green
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+
+  # ---- Advent (tempus Adventus) — four violet Sundays to the eve of the Nativity ----------
+  # Minted by NovusOrdo\ChristmasCycle. The Sundays and their name ("Dominica N Adventus") are
+  # unchanged from the tradition, but the reform re-shaped the weekdays: it drops the "infra
+  # Hebdomadam" phrasing and the Advent Ember days, and from 17 to 24 December it names the
+  # privileged ferias by date ("Die 17 decembris" … the days of the O antiphons). Gaudete (the
+  # third Sunday) keeps the rose option.
+  - key: no-advent-sunday
+    kind: sunday
+    name: "Dominica {ord} Adventus"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-advent-sunday-gaudete
+    kind: sunday
+    name: "Dominica {ord} Adventus"
+    rank: 1
+    colour: { base: violet, roseAllowed: true }
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-advent-feria
+    kind: feria
+    name: "{feria} Hebdomadae {ord} Adventus"
+    rank: 4
+    colour: violet
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-advent-privileged
+    kind: feria
+    name: "Die {dies} decembris"
+    rank: 3
+    colour: violet
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+
+  # ---- Christmas Time (tempus Nativitatis) — the Nativity to the Baptism of the Lord --------
+  # Minted by NovusOrdo\ChristmasCycle: the whole span (25 Dec → the Sunday after 6 Jan) is one
+  # white season, `christmastide`; the reform keeps no distinct green time after the Epiphany.
+  # `nativity` and `epiphany` are the shared great feasts (see the KEYS note above), re-declared
+  # here with the base identity so they dedupe into the union and align in the comparison tool.
+  - key: nativity
+    kind: feast
+    name: "In Nativitate Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-nativity-octave-weekday
+    kind: within-octave
+    name: "Die {dies} decembris"
+    rank: 3
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-holy-family
+    kind: feast
+    name: "In Festo Sanctae Familiae Iesu, Mariae et Ioseph"
+    rank: 2
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-octave-day
+    kind: octave-day
+    name: "In Octava Nativitatis Domini"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-christmas-sunday-2
+    kind: sunday
+    name: "Dominica II post Nativitatem"
+    rank: 2
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-christmas-weekday-january
+    kind: feria
+    name: "Die {dies} ianuarii"
+    rank: 4
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: epiphany
+    kind: feast
+    name: "In Epiphania Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-after-epiphany-feria
+    kind: feria
+    name: "{feria} post Epiphaniam"
+    rank: 4
+    colour: white
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-baptism
+    kind: feast
+    name: "In Baptismate Domini"
+    rank: 2
+    colour: white
     cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }

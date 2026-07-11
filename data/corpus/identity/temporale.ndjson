@@ -40,6 +40,17 @@
 {"archetype":"low-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica in Albis"}}
 {"archetype":"maundy-thursday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Feria V in Cena Domini"}}
 {"archetype":"nativity","cites":{"names.la":"mr-1920"},"kind":"feast","names":{"la":"In Nativitate Domini"}}
+{"archetype":"no-advent-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae {ord} Adventus"}}
+{"archetype":"no-advent-privileged","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"Die {dies} decembris"}}
+{"archetype":"no-advent-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
+{"archetype":"no-advent-sunday-gaudete","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
+{"archetype":"no-after-epiphany-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Epiphaniam"}}
+{"archetype":"no-baptism","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"In Baptismate Domini"}}
+{"archetype":"no-christmas-sunday-2","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica II post Nativitatem"}}
+{"archetype":"no-christmas-weekday-january","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"Die {dies} ianuarii"}}
+{"archetype":"no-holy-family","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"In Festo Sanctae Familiae Iesu, Mariae et Ioseph"}}
+{"archetype":"no-nativity-octave-weekday","cites":{"names.la":"nu-1969"},"kind":"within-octave","names":{"la":"Die {dies} decembris"}}
+{"archetype":"no-octave-day","cites":{"names.la":"nu-1969"},"kind":"octave-day","names":{"la":"In Octava Nativitatis Domini"}}
 {"archetype":"ot-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae {ord} per annum"}}
 {"archetype":"ot-sunday","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica {ord} per annum"}}
 {"archetype":"palm-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica II Passionis seu in Palmis"}}

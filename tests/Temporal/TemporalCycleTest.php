@@ -21,8 +21,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class TemporalCycleTest extends TestCase
 {
-    private const NO_FIXTURE = __DIR__ . '/../fixtures/novus-ordo-temporal';
-
     private static function utc(string $date): DateTimeImmutable
     {
         return new DateTimeImmutable($date . ' 00:00:00', new DateTimeZone('UTC'));
@@ -51,26 +49,32 @@ final class TemporalCycleTest extends TestCase
         self::assertFalse($cycle->isTriduum(self::utc('2024-07-01')), 'An ordinary July day is not.');
     }
 
-    public function testNovusOrdoCycleMintsOrdinaryTime(): void
+    public function testNovusOrdoCycleMintsOrdinaryTimeAndChristmas(): void
     {
         $cycle = (new NovusOrdoTemporalCycle())
-            ->forYear(2024, Corpus::at(self::NO_FIXTURE), 'roman-novus-ordo-2002');
+            ->forYear(2024, Corpus::default(), 'roman-novus-ordo-2002');
 
+        // Ordinary Time in the green blocks …
         self::assertSame(
             'roman:temporale:ordinary-time:sunday-2',
             $cycle->office(self::utc('2024-01-14'))->id()->toString()
         );
+        // … and the Advent → Christmas block on either side (the Nativity in December).
+        self::assertSame(
+            'roman:temporale:christmas:nativity',
+            $cycle->office(self::utc('2024-12-25'))->id()->toString()
+        );
     }
 
     /**
-     * The Novus-Ordo cycle carries no Triduum source yet (its Holy Week filler arrives
-     * with the general-calendar corpus, #108), so it reports false — and it is not yet
-     * reached through the resolver, which refuses the unbuilt edition at the boundary.
+     * The Novus-Ordo cycle carries no Triduum source yet (its Holy Week filler arrives with
+     * the paschal half, #108 follow-up), so it reports false — and it is not yet reached
+     * through the resolver, which refuses the unbuilt edition at the boundary.
      */
     public function testNovusOrdoCycleHasNoTriduumYet(): void
     {
         $cycle = (new NovusOrdoTemporalCycle())
-            ->forYear(2024, Corpus::at(self::NO_FIXTURE), 'roman-novus-ordo-2002');
+            ->forYear(2024, Corpus::default(), 'roman-novus-ordo-2002');
 
         self::assertFalse($cycle->isTriduum(self::utc('2024-03-29')));
     }
