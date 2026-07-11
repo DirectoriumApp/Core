@@ -1,0 +1,64 @@
+{
+  "sources": {
+    "litcal": {
+      "name": "LitCal — Liturgical Calendar API",
+      "homepage": "https://litcal.johnromanodorazio.com",
+      "repository": "https://github.com/Liturgical-Calendar/LiturgicalCalendarAPI",
+      "license": "Apache-2.0",
+      "apiVersion": "dev",
+      "engine": "PHP"
+    },
+    "calapi": {
+      "name": "calapi — In Adiutorium church calendar API",
+      "homepage": "http://calapi.inadiutorium.cz",
+      "repository": "https://github.com/igneus/church-calendar-api",
+      "license": "LGPL-3.0-or-later",
+      "apiVersion": "v0",
+      "engine": "Ruby"
+    }
+  },
+  "harvestedOn": "2026-07-11",
+  "range": {
+    "firstYear": 2025,
+    "lastYear": 2026
+  },
+  "files": {
+    "litcal": [
+      {
+        "year": 2025,
+        "days": 365
+      },
+      {
+        "year": 2026,
+        "days": 365
+      }
+    ],
+    "calapi": [
+      {
+        "year": 2025,
+        "days": 365
+      },
+      {
+        "year": 2026,
+        "days": 365
+      }
+    ]
+  },
+  "edition": "roman:novus-ordo-2002",
+  "fields": {
+    "litcal": {
+      "date": "ISO date (YYYY-MM-DD)",
+      "grade": "LitCal numeric grade: 0 weekday, 1 commemoration, 2 optional memorial, 3 memorial, 4 feast, 5 feast of the Lord, 6 solemnity, 7 higher solemnity",
+      "grade_lcl": "the grade's Latin label",
+      "colors": "liturgical colour word(s): white, red, green, purple, rose",
+      "key": "LitCal's stable event key (for readable reports; not compared)",
+      "name": "the office's Latin name (for readable reports; not compared)"
+    },
+    "calapi": {
+      "date": "ISO date (YYYY-MM-DD)",
+      "season": "calapi season: advent, christmas, lent, easter, ordinary",
+      "celebrations": "ordered list; [0] is the obligatory/ferial principal, optional memorials follow. Each: {title, colour, rank, rank_num}. rank strings: Easter triduum, Primary liturgical days, solemnity, feast of the Lord, Sunday, feast, memorial, optional memorial, commemoration, ferial"
+    }
+  },
+  "note": "Run-and-compare oracles only (never a data source). Two independent engines (LitCal / PHP, calapi / Ruby) satisfy the ≥2-oracle standard. The PHP harness (NovusOrdoOracle) normalises both — and our engine — to a coarse grade {solemnity, feast, memorial, feria} and compares grade + colour per day; the residual is frozen, categorised, in known-differences.ndjson."
+}

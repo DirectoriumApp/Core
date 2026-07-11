@@ -39,13 +39,15 @@ jobs:
       # The full suite above already includes the validation harness across every PHP
       # version; the dedicated `validate` job below runs it as an explicit, named gate.
 
-  # Per-target validation gate (#45 / #51 / #73 / #87): re-prove each rubric system, and
-  # each particular-calendar overlay, against its own pinned oracles on every PR, as a
+  # Per-target validation gate (#45 / #51 / #73 / #87 / #260): re-prove each rubric system,
+  # and each particular-calendar overlay, against its own pinned oracles on every PR, as a
   # MATRIX so a regression in one target fails only its leg and can never mask another
   # (fail-fast is off). `1962` runs Computus vs easter_days() and the missalemeum fixture;
-  # `1954`/`1955` run their Divinum Officium agreement fixtures; `overlays` runs the four
-  # particular-calendar conformance gates — SSPX (vs its live ordo feed), FSSP/ICKSP (vs
-  # pinned proper-day fixtures), and Generic 1962 (the identity-overlay proof). Each leg is
+  # `1954`/`1955` run their Divinum Officium agreement fixtures; `novus-ordo-2002` runs the
+  # reformed calendar against two independent engines (LitCal + calapi, the ≥2-oracle
+  # standard); `overlays` runs the four particular-calendar conformance gates — SSPX (vs its
+  # live ordo feed), FSSP/ICKSP (vs pinned proper-day fixtures), and Generic 1962 (the
+  # identity-overlay proof). Each leg is
   # an explicit, named check (`validate (<name>)`) that can be required to merge. The
   # fixtures are committed (no network at test time) and each leg runs only its PHPUnit
   # group, so only the Composer dependencies are cached to keep every leg fast.
@@ -59,6 +61,7 @@ jobs:
           - { name: '1962', group: 'edition-1962' }
           - { name: '1954', group: 'edition-1954' }
           - { name: '1955', group: 'edition-1955' }
+          - { name: 'novus-ordo-2002', group: 'edition-novus-ordo-2002' }
           - { name: 'overlays', group: 'overlays' }
     steps:
       - uses: actions/checkout@v4
