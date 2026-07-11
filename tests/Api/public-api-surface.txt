@@ -161,6 +161,9 @@ final class Directorium\Core\Directorium
   const VERSION
 final class Directorium\Core\Edition\RubricSystem
   const DIVINO_AFFLATU
+  const NOVUS_ORDO_1969
+  const NOVUS_ORDO_1975
+  const NOVUS_ORDO_2002
   const RUBRICAE_1955
   const RUBRICAE_1960
   __toString(): string
@@ -217,6 +220,7 @@ final class Directorium\Core\Temporal\Season
   const EASTERTIDE
   const EPIPHANY
   const LENT
+  const ORDINARY_TIME
   const PASSIONTIDE
   const PENTECOST
   const SEPTUAGESIMA
@@ -230,6 +234,7 @@ final class Directorium\Core\Temporal\Season
   static forEdition(string $value, string $edition): Directorium\Core\Temporal\Season
   static fromString(string $value): Directorium\Core\Temporal\Season
   static lent(): Directorium\Core\Temporal\Season
+  static ordinaryTime(): Directorium\Core\Temporal\Season
   static passiontide(): Directorium\Core\Temporal\Season
   static pentecost(): Directorium\Core\Temporal\Season
   static septuagesima(): Directorium\Core\Temporal\Season

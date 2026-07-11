@@ -28,32 +28,39 @@ final class SeasonVocabularyTest extends TestCase
         Season::PENTECOST,
     ];
 
-    /** The open union is exactly the traditional eight while only traditional editions are built. */
-    public function testUnionIsTheTraditionalEight(): void
+    /**
+     * The open union is the traditional eight plus the Novus Ordo's one new token,
+     * `ordinary-time` (appended when the NO subset is folded in) — the shared tokens
+     * are deduped, so the union grows by exactly one member.
+     */
+    public function testUnionIsTheTraditionalEightPlusOrdinaryTime(): void
     {
-        self::assertSame(self::TRADITIONAL, SeasonVocabulary::tokens());
+        $expected = array_merge(self::TRADITIONAL, [Season::ORDINARY_TIME]);
+
+        self::assertSame($expected, SeasonVocabulary::tokens());
     }
 
-    /** Every traditional token is registered; a non-token (and the NO's future token) is not. */
+    /** Every traditional token and the NO's `ordinary-time` are registered; a non-token is not. */
     public function testIsRegistered(): void
     {
         foreach (self::TRADITIONAL as $token) {
             self::assertTrue(SeasonVocabulary::isRegistered($token), "$token must be registered.");
         }
 
-        self::assertFalse(SeasonVocabulary::isRegistered('ordinary-time'));
+        self::assertTrue(SeasonVocabulary::isRegistered(Season::ORDINARY_TIME));
         self::assertFalse(SeasonVocabulary::isRegistered('ordinary'));
         self::assertFalse(SeasonVocabulary::isRegistered(''));
     }
 
-    /** The three built editions are registered, in historical order. */
-    public function testEditionsAreTheThreeBuiltSystems(): void
+    /** The registered editions, in historical order — the three traditional plus the NO 2002 snapshot. */
+    public function testEditionsAreTheRegisteredSystems(): void
     {
         self::assertSame(
             [
                 RubricSystem::DIVINO_AFFLATU,
                 RubricSystem::RUBRICAE_1955,
                 RubricSystem::RUBRICAE_1960,
+                RubricSystem::NOVUS_ORDO_2002,
             ],
             SeasonVocabulary::editions()
         );
@@ -95,12 +102,33 @@ final class SeasonVocabularyTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        SeasonVocabulary::subsetFor('roman:novus-ordo-2002');
+        // A reserved-but-unbuilt snapshot has no season subset registered until it is built.
+        SeasonVocabulary::subsetFor('roman:novus-ordo-1969');
     }
 
     public function testPermits(): void
     {
         self::assertTrue(SeasonVocabulary::permits(RubricSystem::RUBRICAE_1960, Season::LENT));
         self::assertFalse(SeasonVocabulary::permits(RubricSystem::RUBRICAE_1960, 'ordinary-time'));
+    }
+
+    /**
+     * The Novus-Ordo subset drops Septuagesima/Passiontide/Epiphany/Pentecost and adds
+     * `ordinary-time`; the shared tokens advent/lent/eastertide keep their bare names.
+     */
+    public function testNovusOrdoSubset(): void
+    {
+        self::assertSame(
+            [Season::ADVENT, Season::CHRISTMASTIDE, Season::ORDINARY_TIME, Season::LENT, Season::EASTERTIDE],
+            SeasonVocabulary::subsetFor(RubricSystem::NOVUS_ORDO_2002)
+        );
+
+        self::assertTrue(SeasonVocabulary::permits(RubricSystem::NOVUS_ORDO_2002, Season::ORDINARY_TIME));
+        self::assertTrue(SeasonVocabulary::permits(RubricSystem::NOVUS_ORDO_2002, Season::ADVENT));
+        self::assertFalse(SeasonVocabulary::permits(RubricSystem::NOVUS_ORDO_2002, Season::SEPTUAGESIMA));
+        self::assertFalse(SeasonVocabulary::permits(RubricSystem::NOVUS_ORDO_2002, Season::PASSIONTIDE));
+
+        // `ordinary-time` is now in the open union (registered by at least one edition).
+        self::assertTrue(SeasonVocabulary::isRegistered(Season::ORDINARY_TIME));
     }
 }

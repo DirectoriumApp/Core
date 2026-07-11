@@ -48,9 +48,28 @@ final class SeasonVocabulary
     ];
 
     /**
-     * The season subset each rubric system admits, keyed by edition URN. All three
-     * traditional editions share {@see TRADITIONAL}; a future edition adds its own row
-     * (e.g. the Novus Ordo's Ordinary-Time subset) without touching these.
+     * The Novus-Ordo (Ordinary-Form) subset — Advent, Christmas Time, Ordinary Time,
+     * Lent, and Easter Time. It drops Septuagesima, Passiontide, and the distinct
+     * Time-after-Epiphany / Time-after-Pentecost, and adds `ordinary-time`, the one
+     * genuinely new token. `advent`/`lent`/`eastertide` are the same bare tokens the
+     * traditional editions use, so the comparison diff aligns seasons by token with no
+     * remapping (docs/design/novus-ordo-calendar-model.md).
+     *
+     * @var list<string>
+     */
+    private const NOVUS_ORDO = [
+        Season::ADVENT,
+        Season::CHRISTMASTIDE,
+        Season::ORDINARY_TIME,
+        Season::LENT,
+        Season::EASTERTIDE,
+    ];
+
+    /**
+     * The season subset each rubric system admits, keyed by edition URN. The three
+     * traditional editions share {@see TRADITIONAL}; the Novus Ordo (built snapshot
+     * `roman:novus-ordo-2002`) registers {@see NOVUS_ORDO}. A reserved snapshot
+     * (1969 / 1975) registers its subset when it is built.
      *
      * @var array<string, list<string>>
      */
@@ -58,6 +77,7 @@ final class SeasonVocabulary
         RubricSystem::DIVINO_AFFLATU => self::TRADITIONAL,
         RubricSystem::RUBRICAE_1955 => self::TRADITIONAL,
         RubricSystem::RUBRICAE_1960 => self::TRADITIONAL,
+        RubricSystem::NOVUS_ORDO_2002 => self::NOVUS_ORDO,
     ];
 
     /**

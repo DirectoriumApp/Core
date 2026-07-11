@@ -22,11 +22,14 @@ use RuntimeException;
  *
  * A system carries its stable **edition URN** (stamped into the output contract's
  * {@see \Directorium\Core\Contract\Provenance}), its **corpus directory**, a display **label**,
- * and its historical **validity window**. All three declared systems — 1962 (Rubricae 1960),
- * 1954 (Divino Afflatu) and 1955 (Cum nostra) — are now built and publicly resolvable (Epics
- * #63 / #68 landed via the #453 burndown). The {@see isBuilt()} flag remains on the axis so a
- * future system (Tridentine, Novus Ordo) can be declared before its data and rules exist and be
- * refused at the public boundary until then. See docs/design/rubric-system-model.md.
+ * and its historical **validity window**. The three traditional systems — 1962 (Rubricae 1960),
+ * 1954 (Divino Afflatu) and 1955 (Cum nostra) — are built and publicly resolvable (Epics #63 /
+ * #68, via the #453 burndown). The **Novus Ordo** (Ordinary Form) is declared on the axis as a
+ * living calendar of *editio typica* snapshots (docs/design/novus-ordo-calendar-model.md,
+ * docs/design/edition-governance.md): `roman:novus-ordo-2002` is the build target of v1.1 and the
+ * 1969/1975 snapshots are reserved. Until each is built the {@see isBuilt()} flag keeps it
+ * refused at the public boundary — reachable only through {@see \Directorium\Core\Precedence\DayResolver::forEdition()}
+ * for its own build's tests. See docs/design/rubric-system-model.md.
  */
 final class RubricSystem
 {
@@ -38,6 +41,20 @@ final class RubricSystem
 
     /** The 1962 system (Rubricae 1960 / editio typica 1962): the four-class scheme. The built default. */
     public const RUBRICAE_1960 = 'roman:rubricae-1960';
+
+    /**
+     * The Novus Ordo (Ordinary Form) *editio typica tertia* 2002/2008 — the current General
+     * Roman Calendar (solemnity/feast/memorial ranks, Ordinary Time, the Table of Liturgical
+     * Days). A living calendar: this snapshot carries the roster to date, and dated decrees
+     * accrue as overlays (docs/design/edition-governance.md).
+     */
+    public const NOVUS_ORDO_2002 = 'roman:novus-ordo-2002';
+
+    /** The Novus Ordo *editio typica* 1969 — reserved (declared, not yet built). */
+    public const NOVUS_ORDO_1969 = 'roman:novus-ordo-1969';
+
+    /** The Novus Ordo *editio typica altera* 1975 — reserved (declared, not yet built). */
+    public const NOVUS_ORDO_1975 = 'roman:novus-ordo-1975';
 
     private string $urn;
 
@@ -72,9 +89,11 @@ final class RubricSystem
     }
 
     /**
-     * The rubric systems the platform knows, in historical order. All three are now built
-     * and resolvable (Epics #63 / #68, via the #453 burndown); the `built` flag stays so a
-     * future system can be declared before its data and rules land.
+     * The rubric systems the platform knows, in historical order. The three traditional
+     * systems are built and resolvable (Epics #63 / #68, via the #453 burndown); the Novus
+     * Ordo snapshots are declared with `built => false` — `roman:novus-ordo-2002` flips true
+     * when v1.1 completes, the 1969/1975 snapshots stay reserved. The `built` flag lets a
+     * system be declared on the axis before its data and rules land.
      *
      * @return array<string, array{dir: string, label: string, from: int, to: int|null,
      *     built: bool, discipline: string}>
@@ -106,6 +125,30 @@ final class RubricSystem
                 'built' => true,
                 'discipline' => 'cic-1917',
             ],
+            self::NOVUS_ORDO_1969 => [
+                'dir' => 'roman-novus-ordo-1969',
+                'label' => 'Novus Ordo (1969 editio typica)',
+                'from' => 1970,
+                'to' => 1974,
+                'built' => false,
+                'discipline' => 'cic-1983',
+            ],
+            self::NOVUS_ORDO_1975 => [
+                'dir' => 'roman-novus-ordo-1975',
+                'label' => 'Novus Ordo (1975 editio typica altera)',
+                'from' => 1975,
+                'to' => 2001,
+                'built' => false,
+                'discipline' => 'cic-1983',
+            ],
+            self::NOVUS_ORDO_2002 => [
+                'dir' => 'roman-novus-ordo-2002',
+                'label' => 'Novus Ordo (2002 editio typica tertia)',
+                'from' => 2002,
+                'to' => null,
+                'built' => false,
+                'discipline' => 'cic-1983',
+            ],
         ];
     }
 
@@ -133,7 +176,8 @@ final class RubricSystem
     /**
      * The system named by a selector: `null` for the default (1962), an edition URN
      * (`roman:rubricae-1960`), or a friendly alias (`1962`, `1960`, `1954`,
-     * `divino-afflatu`, `1955`).
+     * `divino-afflatu`, `1955`, `novus-ordo`, `ordinary-form`, `2002`). A declared-but-unbuilt
+     * system (the Novus Ordo snapshots) resolves here but is refused at the public boundary.
      */
     public static function fromString(?string $selector): self
     {
@@ -163,6 +207,11 @@ final class RubricSystem
         'divino-afflatu' => self::DIVINO_AFFLATU,
         '1955' => self::RUBRICAE_1955,
         'rubricae-1955' => self::RUBRICAE_1955,
+        'novus-ordo' => self::NOVUS_ORDO_2002,
+        'ordinary-form' => self::NOVUS_ORDO_2002,
+        '2002' => self::NOVUS_ORDO_2002,
+        '1975' => self::NOVUS_ORDO_1975,
+        '1969' => self::NOVUS_ORDO_1969,
     ];
 
     /**
