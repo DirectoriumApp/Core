@@ -36,13 +36,43 @@ test('a whole edition (Novus Ordo) carries only its own temporal archetypes', ()
   const out = buildToTemp();
   try {
     const no = temporaleArchetypes(out, 'roman-novus-ordo-2002');
-    // Its own Ordinary-Time overlay is present …
+    // Its own Ordinary-Time and Advent/Christmas overlays are present …
     assert.ok(no.has('ot-sunday'), 'NO temporale should carry ot-sunday');
     assert.ok(no.has('ot-feria'), 'NO temporale should carry ot-feria');
-    // … and NONE of the 1962 base archetypes leak in (no Septuagesima, no Advent-Sunday-I):
+    assert.ok(no.has('no-advent-sunday'), 'NO temporale should carry its own Advent Sunday');
+    assert.ok(no.has('no-advent-privileged'), 'NO temporale should carry its date-named late-Advent ferias');
+    assert.ok(no.has('no-baptism'), 'NO temporale should carry the Baptism of the Lord');
+    // … the two shared great feasts of the Lord are RE-DECLARED here (so they resolve for this
+    // edition) even though their identity lives in the shared union …
+    assert.ok(no.has('nativity'), 'NO re-declares the shared Nativity so it resolves for this edition');
+    assert.ok(no.has('epiphany'), 'NO re-declares the shared Epiphany');
+    // … and NONE of the reform-dropped 1962 base archetypes leak in:
     assert.ok(!no.has('septuagesima-sunday'), 'NO must not inherit the 1962 Septuagesima archetype');
     assert.ok(!no.has('advent-sunday-i'), 'NO must not inherit the 1962 Advent archetypes');
+    assert.ok(!no.has('advent-feria'), 'NO must not inherit the 1962 "infra Hebdomadam" Advent ferias');
+    assert.ok(!no.has('advent-ember'), 'NO dropped the Advent Ember days');
     assert.ok(!no.has('passion-sunday'), 'NO has no distinct Passiontide');
+  } finally {
+    rmSync(out, { recursive: true, force: true });
+  }
+});
+
+test('a shared great feast is deduped into the temporal identity union, not double-listed', () => {
+  const out = buildToTemp();
+  try {
+    const text = readFileSync(join(out, 'identity', 'temporale.ndjson'), 'utf8').trim();
+    const rows = text.split('\n').map((line) => JSON.parse(line));
+    // The Nativity is re-declared by the Novus Ordo with the base identity (same kind, name, and
+    // mr-1920 citation), so the union holds exactly ONE `nativity` row, not one per edition.
+    const nativity = rows.filter((r) => r.archetype === 'nativity');
+    assert.equal(nativity.length, 1, 'Nativity must appear once in the shared identity union');
+    assert.equal(nativity[0].cites['names.la'], 'mr-1920', 'the shared Nativity keeps its public-domain citation');
+    const epiphany = rows.filter((r) => r.archetype === 'epiphany');
+    assert.equal(epiphany.length, 1, 'Epiphany must appear once in the shared identity union');
+    // A NO-specific archetype is its own row, cited to the reform's norming document (option A).
+    const noOctave = rows.filter((r) => r.archetype === 'no-octave-day');
+    assert.equal(noOctave.length, 1, 'the NO octave day is its own identity row');
+    assert.equal(noOctave[0].cites['names.la'], 'nu-1969', 'a reform-specific label cites nu-1969');
   } finally {
     rmSync(out, { recursive: true, force: true });
   }

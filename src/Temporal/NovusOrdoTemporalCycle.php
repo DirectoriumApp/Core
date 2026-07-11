@@ -5,22 +5,30 @@ declare(strict_types=1);
 namespace Directorium\Core\Temporal;
 
 use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Temporal\NovusOrdo\ChristmasCycle;
 use Directorium\Core\Temporal\NovusOrdo\OrdinaryTime;
 
 /**
  * The Novus-Ordo (Ordinary-Form) Proper of Time.
  *
- * v1.1 (#258) delivers the season the reform genuinely invents — **Ordinary Time**,
- * the two green blocks under one 1–34 week count — as {@see OrdinaryTime}. The other
- * Novus-Ordo seasons (Advent, Christmas Time, Lent, Holy Week, Easter Time) reuse the
- * traditional structures minus the pre-conciliar apparatus and arrive with the
- * general-calendar corpus (#108); their fillers join this list there.
+ * v1.1 delivers the season the reform genuinely invents — **Ordinary Time**, the two
+ * green blocks under one 1–34 week count ({@see OrdinaryTime}, #258) — and the
+ * **Advent → Christmas Time** block ({@see ChristmasCycle}, #108). The remaining
+ * Novus-Ordo seasons (Lent, Holy Week, Easter Time) and the movable feasts join this
+ * list with the paschal half (#108 follow-up); until then the Triduum source is null.
  *
- * Because the Novus-Ordo precedence engine (#257) is not yet built, this cycle is not
- * reached through {@see \Directorium\Core\Precedence\DayResolver::resolveYear()} yet
- * (the edition is refused at the public boundary and has no precedence rules); it is
- * exercised directly by the filler tests until the edition is completed. Its Triduum
- * source is therefore null for now.
+ * The Christmas cycle spans a civil-year boundary (Advent of one year runs to the
+ * Baptism of the next), so — exactly as the {@see TraditionalTemporalCycle} does — a
+ * civil year is tiled by the PREVIOUS year's cycle (its January tail: the octave day,
+ * Epiphany, the Baptism) and the current year's cycle (its December head: Advent to the
+ * Nativity), with Ordinary Time filling the two green blocks between. The fillers are
+ * consulted in order and the first that owns a date wins; the blocks do not overlap, so
+ * the order only has to keep each date with the cycle that owns it.
+ *
+ * Because the Novus-Ordo edition is refused at the public boundary until it is validated
+ * (#260), this cycle is not yet reached through
+ * {@see \Directorium\Core\Precedence\DayResolver::resolveYear()} for a public edition; it
+ * is exercised directly by the filler tests until the edition is completed.
  *
  * @internal Not part of the public API (docs/api-stability.md).
  */
@@ -30,7 +38,9 @@ final class NovusOrdoTemporalCycle implements TemporalCycle
     {
         return new YearTemporalCycle(
             [
+                ChristmasCycle::forYear($year - 1, $corpus, $editionDir),
                 OrdinaryTime::forYear($year, $corpus, $editionDir),
+                ChristmasCycle::forYear($year, $corpus, $editionDir),
             ],
             null
         );
