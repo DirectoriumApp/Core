@@ -1,0 +1,2 @@
+{"archetype":"ot-feria","kind":"feria","names":{"la":"{feria} hebdomadae {ord} per annum"},"cites":{"names.la":"fixture"}}
+{"archetype":"ot-sunday","kind":"sunday","names":{"la":"Dominica {ord} per annum"},"cites":{"names.la":"fixture"}}

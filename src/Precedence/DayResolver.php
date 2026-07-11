@@ -20,15 +20,13 @@ use Directorium\Core\Observance\ObservanceKind;
 use Directorium\Core\Sanctoral\CorpusSanctoralData;
 use Directorium\Core\Sanctoral\SanctoralCalendar;
 use Directorium\Core\Sanctoral\SanctoralData;
-use Directorium\Core\Temporal\ChristmasCycle;
-use Directorium\Core\Temporal\Eastertide;
-use Directorium\Core\Temporal\HolyWeek;
-use Directorium\Core\Temporal\LentenCycle;
 use Directorium\Core\Temporal\MovableFeasts;
+use Directorium\Core\Temporal\NovusOrdoTemporalCycle;
 use Directorium\Core\Temporal\SaturdayOfOurLady;
 use Directorium\Core\Temporal\TemporalCalendar;
+use Directorium\Core\Temporal\TemporalCycle;
 use Directorium\Core\Temporal\TemporalObservance;
-use Directorium\Core\Temporal\TimeAfterPentecost;
+use Directorium\Core\Temporal\TraditionalTemporalCycle;
 use Directorium\Core\Trace\ResolutionTrace;
 
 /**
@@ -52,6 +50,8 @@ final class DayResolver
 {
     private PrecedenceRules $rules;
 
+    private TemporalCycle $temporalCycle;
+
     private CommemorationSelector $commemorations;
 
     private string $edition;
@@ -70,6 +70,7 @@ final class DayResolver
 
     private function __construct(
         PrecedenceRules $rules,
+        TemporalCycle $temporalCycle,
         string $edition,
         SanctoralData $sanctoralData,
         FastingResolver $fasting,
@@ -78,6 +79,7 @@ final class DayResolver
         bool $tracing = false
     ) {
         $this->rules = $rules;
+        $this->temporalCycle = $temporalCycle;
         $this->commemorations = new CommemorationSelector($rules);
         $this->edition = $edition;
         $this->sanctoralData = $sanctoralData;
@@ -104,6 +106,7 @@ final class DayResolver
 
         return new self(
             self::rulesFor($system, $corpus),
+            self::temporalCycleFor($system),
             $system->urn(),
             $sanctoralData ?? new CorpusSanctoralData($corpus, $system->corpusDir()),
             new FastingResolver(PenitentialDiscipline::fromCorpus($corpus, $system->penitentialDiscipline())),
@@ -133,6 +136,24 @@ final class DayResolver
         ));
     }
 
+    /**
+     * The temporal-cycle strategy for a rubric system: the traditional Proper of Time
+     * for the 1962/1954/1955 editions, the Novus-Ordo cycle for the Ordinary-Form
+     * snapshots. Keyed off the edition exactly as {@see rulesFor()} is, so the resolver
+     * is temporal-cycle-agnostic (docs/design/novus-ordo-calendar-model.md).
+     */
+    private static function temporalCycleFor(RubricSystem $system): TemporalCycle
+    {
+        switch ($system->urn()) {
+            case RubricSystem::NOVUS_ORDO_2002:
+            case RubricSystem::NOVUS_ORDO_1975:
+            case RubricSystem::NOVUS_ORDO_1969:
+                return new NovusOrdoTemporalCycle();
+        }
+
+        return new TraditionalTemporalCycle();
+    }
+
     /** The 1962 resolver (Rubricae 1960): a convenience for {@see forEdition()} with the default system. */
     public static function for1962(?SanctoralData $sanctoralData = null): self
     {
@@ -148,6 +169,7 @@ final class DayResolver
     {
         return new self(
             $this->rules,
+            $this->temporalCycle,
             $this->edition,
             $this->sanctoralData,
             $this->fasting,
@@ -170,15 +192,7 @@ final class DayResolver
 
     public function resolveYear(int $year): ResolvedYear
     {
-        $holyWeek = HolyWeek::forYear($year, $this->corpus, $this->editionDir);
-        $temporal = [
-            ChristmasCycle::forYear($year - 1, $this->corpus, $this->editionDir),
-            LentenCycle::forYear($year, $this->corpus, $this->editionDir),
-            $holyWeek,
-            Eastertide::forYear($year, $this->corpus, $this->editionDir),
-            TimeAfterPentecost::forYear($year, $this->corpus, $this->editionDir),
-            ChristmasCycle::forYear($year, $this->corpus, $this->editionDir),
-        ];
+        $cycle = $this->temporalCycle->forYear($year, $this->corpus, $this->editionDir);
         $movable = MovableFeasts::forYear($year, $this->corpus, $this->editionDir);
         $saturdayOfOurLady = SaturdayOfOurLady::forYear($year, $this->corpus, $this->editionDir);
         $sanctoral = SanctoralCalendar::forYear(
@@ -199,9 +213,9 @@ final class DayResolver
 
         while ($date <= $end) {
             $key = $date->format('Y-m-d');
-            $context = PrecedenceContext::of($date, $holyWeek->isTriduum($date));
+            $context = PrecedenceContext::of($date, $cycle->isTriduum($date));
 
-            $temporalOffice = $this->temporalOffice($temporal, $date);
+            $temporalOffice = $cycle->office($date);
             $candidates = $this->gather(
                 $temporalOffice,
                 $movable,
@@ -223,21 +237,6 @@ final class DayResolver
         $days = $this->withTransferLinks($days);
 
         return new ResolvedYear($year, $this->withConcurrence($days, $oneDay), $this->provenance());
-    }
-
-    /**
-     * @param list<ChristmasCycle|LentenCycle|HolyWeek|Eastertide|TimeAfterPentecost> $fillers
-     */
-    private function temporalOffice(array $fillers, DateTimeImmutable $date): ?TemporalObservance
-    {
-        foreach ($fillers as $filler) {
-            $office = $filler->on($date);
-            if ($office !== null) {
-                return $office;
-            }
-        }
-
-        return null;
     }
 
     /**
