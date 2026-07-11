@@ -6,6 +6,7 @@ namespace Directorium\Core\Tests;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 use function Directorium\Core\contract;
@@ -115,5 +116,17 @@ final class DayFunctionTest extends TestCase
         // The edition is a real discriminator: naming 1954 stamps its own edition URN, not 1962's.
         self::assertSame('roman:divino-afflatu', contract($date, false, null, '1954')['edition']);
         self::assertSame('roman:rubricae-1955', contract($date, false, null, '1955')['edition']);
+    }
+
+    public function testTheNovusOrdoIsRefusedAtThePublicBoundaryUntilBuilt(): void
+    {
+        // The Novus Ordo is declared on the edition axis but not yet built (v1.1 in progress);
+        // the public day()/contract() boundary refuses it with a clear message rather than
+        // resolving an empty or wrong calendar. It becomes resolvable when isBuilt() flips.
+        $date = new DateTimeImmutable('2026-01-25', new DateTimeZone('UTC'));
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('not yet built');
+        day($date, null, 'roman:novus-ordo-2002');
     }
 }

@@ -41,6 +41,14 @@ final class Season
     public const EASTERTIDE = 'eastertide';
     public const PENTECOST = 'pentecost';
 
+    /**
+     * Ordinary Time (tempus per annum) — the Novus-Ordo green season that has no
+     * traditional equivalent, so it is its own token, never a rename of `pentecost`
+     * or `epiphany` ({@see SeasonVocabulary}, docs/design/season-vocabulary.md). Only
+     * the Novus-Ordo subset admits it.
+     */
+    public const ORDINARY_TIME = 'ordinary-time';
+
     private string $value;
 
     private function __construct(string $value)
@@ -151,6 +159,11 @@ final class Season
     public static function pentecost(): self
     {
         return new self(self::PENTECOST);
+    }
+
+    public static function ordinaryTime(): self
+    {
+        return new self(self::ORDINARY_TIME);
     }
 
     /** The stable machine name used in output. */

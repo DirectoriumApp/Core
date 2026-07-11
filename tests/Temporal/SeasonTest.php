@@ -61,12 +61,25 @@ final class SeasonTest extends TestCase
         Season::forEdition('ordinary-time', RubricSystem::RUBRICAE_1960);
     }
 
-    /** An unregistered edition is rejected — the vocabulary is scoped to built editions. */
+    /** An edition with no registered season subset is rejected (the reserved 1969 snapshot). */
     public function testForEditionRejectsUnknownEdition(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        Season::forEdition(Season::LENT, 'roman:novus-ordo-2002');
+        Season::forEdition(Season::LENT, 'roman:novus-ordo-1969');
+    }
+
+    /** The Novus Ordo admits Ordinary Time and the shared tokens, but not Septuagesima. */
+    public function testForEditionAcceptsNovusOrdoSeasons(): void
+    {
+        $ordinary = Season::forEdition(Season::ORDINARY_TIME, RubricSystem::NOVUS_ORDO_2002);
+        self::assertTrue($ordinary->equals(Season::ordinaryTime()));
+
+        $lent = Season::forEdition(Season::LENT, RubricSystem::NOVUS_ORDO_2002);
+        self::assertTrue($lent->equals(Season::lent()));
+
+        $this->expectException(InvalidArgumentException::class);
+        Season::forEdition(Season::SEPTUAGESIMA, RubricSystem::NOVUS_ORDO_2002);
     }
 
     /**

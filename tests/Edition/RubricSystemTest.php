@@ -9,8 +9,10 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * The rubric-system (edition) selector (#59/#60). Three systems sit on the edition
- * axis; all three are now built and resolvable (#453), and the default resolves to 1962.
+ * The rubric-system (edition) selector (#59/#60). The three traditional systems are built
+ * and resolvable (#453); the Novus Ordo (Ordinary Form) is declared on the axis for v1.1
+ * (#256) with `roman:novus-ordo-2002` as the build target and the 1969/1975 snapshots
+ * reserved. The default resolves to 1962.
  */
 final class RubricSystemTest extends TestCase
 {
@@ -35,16 +37,34 @@ final class RubricSystemTest extends TestCase
     public function testFromStringRejectsAnUnknownSelector(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        RubricSystem::fromString('roman:novus-ordo-2002');
+        // A system not declared on the axis at all (Tridentine is a future edition, not yet declared).
+        RubricSystem::fromString('roman:tridentine-1570');
     }
 
-    public function testAllThreeSystemsAreBuilt(): void
+    public function testTraditionalSystemsAreBuiltAndNovusOrdoIsDeclaredButNotYet(): void
     {
-        // The #453 burndown flipped 1954 and 1955 from declared to built; the flag stays on
-        // the axis for a future edition (Tridentine, Novus Ordo) declared before its data lands.
+        // The #453 burndown flipped 1954 and 1955 from declared to built.
         self::assertTrue(RubricSystem::rubricae1960()->isBuilt());
         self::assertTrue(RubricSystem::divinoAfflatu()->isBuilt());
         self::assertTrue(RubricSystem::rubricae1955()->isBuilt());
+
+        // The Novus Ordo snapshots are declared on the axis (v1.1) but not yet built; the
+        // isBuilt() flag keeps each refused at the public boundary until its build completes.
+        self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_2002)->isBuilt());
+        self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_1969)->isBuilt());
+        self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_1975)->isBuilt());
+    }
+
+    public function testNovusOrdoIsResolvableByUrnAndAliases(): void
+    {
+        self::assertSame(RubricSystem::NOVUS_ORDO_2002, RubricSystem::fromString('roman:novus-ordo-2002')->urn());
+        self::assertSame(RubricSystem::NOVUS_ORDO_2002, RubricSystem::fromString('novus-ordo')->urn());
+        self::assertSame(RubricSystem::NOVUS_ORDO_2002, RubricSystem::fromString('ordinary-form')->urn());
+        self::assertSame(RubricSystem::NOVUS_ORDO_2002, RubricSystem::fromString('2002')->urn());
+        self::assertSame(RubricSystem::NOVUS_ORDO_1969, RubricSystem::fromString('1969')->urn());
+        self::assertSame(RubricSystem::NOVUS_ORDO_1975, RubricSystem::fromString('1975')->urn());
+        self::assertSame('roman-novus-ordo-2002', RubricSystem::fromString('novus-ordo')->corpusDir());
+        self::assertSame('cic-1983', RubricSystem::fromString('novus-ordo')->penitentialDiscipline());
     }
 
     public function testEachSystemCarriesItsCorpusDirectory(): void
@@ -66,6 +86,11 @@ final class RubricSystemTest extends TestCase
         self::assertFalse(RubricSystem::divinoAfflatu()->governs(1960));
         self::assertTrue(RubricSystem::rubricae1955()->governs(1958));
         self::assertFalse(RubricSystem::rubricae1955()->governs(1962));
+
+        // The Novus Ordo 2002 snapshot governs 2002 onward; the reserved 1969 snapshot 1970–1974.
+        self::assertTrue(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_2002)->governs(2026));
+        self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_2002)->governs(1990));
+        self::assertTrue(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_1969)->governs(1972));
     }
 
     public function testAllListsEveryDeclaredSystemIncludingUnbuilt(): void
@@ -73,7 +98,14 @@ final class RubricSystemTest extends TestCase
         $urns = array_map(static fn (RubricSystem $s): string => $s->urn(), RubricSystem::all());
 
         self::assertSame(
-            [RubricSystem::DIVINO_AFFLATU, RubricSystem::RUBRICAE_1955, RubricSystem::RUBRICAE_1960],
+            [
+                RubricSystem::DIVINO_AFFLATU,
+                RubricSystem::RUBRICAE_1955,
+                RubricSystem::RUBRICAE_1960,
+                RubricSystem::NOVUS_ORDO_1969,
+                RubricSystem::NOVUS_ORDO_1975,
+                RubricSystem::NOVUS_ORDO_2002,
+            ],
             $urns
         );
     }
