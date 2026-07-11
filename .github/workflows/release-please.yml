@@ -18,7 +18,7 @@ jobs:
       # When a release is actually cut (the release PR is merged), attach the
       # versioned CC0 dataset artifact to it (#239): the corpus tarball, its
       # sha256, and a SHA256SUMS manifest of every file inside.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: ${{ steps.release.outputs.release_created }}
         with:
           ref: ${{ steps.release.outputs.tag_name }}
