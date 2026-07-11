@@ -39,6 +39,15 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   validity window**; resolving an edition outside its window is anachronistic and will be flagged.
 - **Leap-year bissextile:** traditional reckoning doubles 24 February in a leap year (24 Feb "*bis*"),
   shifting St Matthias to 25 Feb and related observances — handled explicitly and tested.
+- **Novus Ordo Triduum season (#108):** the reformed season vocabulary has five tokens — advent,
+  christmastide, ordinary-time, lent, eastertide — and no distinct *Sacred Triduum* token, so the three
+  Triduum days (Holy Thursday, Good Friday, Holy Saturday) carry `season: lent` in the output contract.
+  Liturgically the Triduum (Holy Thursday evening → Easter, the *culmen* of the year, Universal Norms
+  nn. 18–19) is its own time, and Lent ends before the Mass of the Lord's Supper (n. 28), so `lent` is the
+  least-wrong of the available tokens for those days — a deliberate modelling choice, not a defect. Adding a
+  `triduum` token is a candidate refinement, a minor open-vocabulary bump
+  (docs/design/season-vocabulary.md) deferred to the validation/contract work (#260); it would touch only
+  those three days' reported season, never a date, colour, kind, or precedence.
 - **Fast & abstinence (holyday dispensation):** the `fasting` block (#248/#249) applies the 1917 Code's
   core rules — abstinence on Fridays, fast and abstinence on Ash Wednesday, the Fridays and Saturdays of
   Lent, the Ember days, and the vigils of Christmas/Pentecost/Assumption/All Saints, and the fast alone

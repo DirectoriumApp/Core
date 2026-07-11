@@ -47,8 +47,8 @@
     },
     "editions/roman-novus-ordo-2002/attributes.temporale.ndjson": {
       "primaryKey": "archetype",
-      "records": 15,
-      "sha256": "741a44dd095bba0b3c6c13ad8f72a0e1bdad2d98e2e4d21ef7efb38eae568dc2"
+      "records": 36,
+      "sha256": "a4f52d0e506f7acae83b87a96e0a32da06d728e38c5dd8f82f41a51fa572e945"
     },
     "editions/roman-rubricae-1955/attributes.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -107,8 +107,8 @@
     },
     "identity/temporale.ndjson": {
       "primaryKey": "archetype",
-      "records": 87,
-      "sha256": "819bc28a2dcf5c565428977456caa8fc14b105115d83dedbd142771cc0a7a90f"
+      "records": 105,
+      "sha256": "31b4438a1b7f8673c400e619c0b2b42c1643e0b47c6fa569392ba7d3d6b45a71"
     },
     "overlays/fssp/operations.ndjson": {
       "primaryKey": "target",
@@ -213,7 +213,7 @@
       "rights": "public-domain",
       "title": "Missale Romanum, editio typica",
       "urn": "directorium:source:mr-1920",
-      "uses": 451
+      "uses": 456
     },
     {
       "key": "nu-1969",
@@ -221,7 +221,7 @@
       "rights": "reference",
       "title": "Normae universales de Anno liturgico et de Calendario (1969)",
       "urn": "directorium:source:nu-1969",
-      "uses": 40
+      "uses": 95
     },
     {
       "key": "ordo-1954",

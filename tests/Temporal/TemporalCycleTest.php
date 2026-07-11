@@ -67,15 +67,39 @@ final class TemporalCycleTest extends TestCase
     }
 
     /**
-     * The Novus-Ordo cycle carries no Triduum source yet (its Holy Week filler arrives with
-     * the paschal half, #108 follow-up), so it reports false — and it is not yet reached
-     * through the resolver, which refuses the unbuilt edition at the boundary.
+     * The Novus-Ordo cycle now carries a Triduum source (its {@see \Directorium\Core\Temporal\NovusOrdo\PaschalCycle}
+     * paschal filler), so it reports the three days of the Sacred Triduum. Easter 2024 is 31
+     * March, so the Triduum is 28–30 March.
      */
-    public function testNovusOrdoCycleHasNoTriduumYet(): void
+    public function testNovusOrdoCycleReportsTheTriduum(): void
     {
         $cycle = (new NovusOrdoTemporalCycle())
             ->forYear(2024, Corpus::default(), 'roman-novus-ordo-2002');
 
-        self::assertFalse($cycle->isTriduum(self::utc('2024-03-29')));
+        self::assertTrue($cycle->isTriduum(self::utc('2024-03-28')), 'Maundy Thursday 2024 is in the Triduum.');
+        self::assertTrue($cycle->isTriduum(self::utc('2024-03-29')), 'Good Friday 2024 is in the Triduum.');
+        self::assertTrue($cycle->isTriduum(self::utc('2024-03-30')), 'Holy Saturday 2024 is in the Triduum.');
+        self::assertFalse($cycle->isTriduum(self::utc('2024-03-27')), 'Wednesday of Holy Week is not the Triduum.');
+        self::assertFalse($cycle->isTriduum(self::utc('2024-07-01')), 'An ordinary July day is not.');
+    }
+
+    /**
+     * The paschal half now fills the window Ordinary Time leaves between Ash Wednesday and
+     * Pentecost: the Sunday of the Passion (Palm Sunday), the Triduum, Easter, and the fifty
+     * days to Pentecost all resolve for the reformed edition.
+     */
+    public function testNovusOrdoCycleMintsThePaschalHalf(): void
+    {
+        $cycle = (new NovusOrdoTemporalCycle())
+            ->forYear(2024, Corpus::default(), 'roman-novus-ordo-2002');
+
+        self::assertSame(
+            'roman:temporale:paschal:easter',
+            $cycle->office(self::utc('2024-03-31'))->id()->toString()
+        );
+        self::assertSame(
+            'roman:temporale:paschal:pentecost',
+            $cycle->office(self::utc('2024-05-19'))->id()->toString()
+        );
     }
 }

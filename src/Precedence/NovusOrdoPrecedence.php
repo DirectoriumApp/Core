@@ -39,6 +39,15 @@ use Directorium\Core\Trace\ResolutionReason;
  * general calendar and its later national overlays supply their own table with no edit.
  * The rank scale is the Novus-Ordo grade normalised to a {@see \Directorium\Core\Attribute\RankClass}
  * (solemnity 1 / feast 2 / memorial 3 / optional memorial 4).
+ *
+ * The branching reads three membership sets — `privileged-temporal` (the four unmovable feasts of
+ * the Lord), `privileged-temporal-weekday` (Ash Wednesday, the Holy-Week weekdays, and the days of
+ * the Octave of Easter), and `feasts-of-the-lord` — and the tiers named in {@see tierOf()}. The
+ * shipped edition carries no precedence data yet; only the minimal fixture
+ * (tests/fixtures/novus-ordo-temporal) defines these, so the reformed edition is not resolvable
+ * through {@see DayResolver} until the real cited Table of Liturgical Days is authored with the
+ * sanctoral and validation (#260) — that table MUST define all three sets (in particular
+ * `privileged-temporal-weekday`, whose absence would throw the moment a paschal weekday is graded).
  */
 final class NovusOrdoPrecedence implements PrecedenceRules
 {
@@ -79,7 +88,26 @@ final class NovusOrdoPrecedence implements PrecedenceRules
             return $this->table->tier('privileged-temporal');
         }
 
+        // Line 2: the privileged temporal weekdays and octave days the reformed table ranks
+        // among the highest — Ash Wednesday, the weekdays of Holy Week (Mon–Wed; Holy Thursday
+        // is the Triduum, caught above), and the days of the Octave of Easter (each celebrated
+        // as a Solemnity of the Lord, n. 24). They are weekdays / days-within-an-octave by kind
+        // but privileged by identity, so the table names them in a membership set. This is
+        // load-bearing for the Annunciation transfer: {@see forcedTransferDate()} moves the
+        // impeded Solemnity only once it is outranked, which needs the Holy-Week / Easter-octave
+        // day it lands on to sit at line 2 (above the line-3 Solemnity).
+        if ($this->table->isMember('privileged-temporal-weekday', $id)) {
+            return $this->table->tier('privileged-temporal');
+        }
+
         $season = $this->seasonOf($observance);
+
+        // Line 9: the days within the Octave of the Nativity (the days within the Octave of
+        // Easter are caught above at line 2). A within-octave day is neither a Sunday nor a
+        // plain feria, so it is routed here before the sanctoral rank switch.
+        if ($kind === ObservanceKind::WITHIN_OCTAVE) {
+            return $this->table->tier('privileged-weekday');
+        }
 
         if ($kind === ObservanceKind::SUNDAY) {
             // Line 2: Sundays of Advent, Lent, and Easter — privileged over everything but the
@@ -96,17 +124,14 @@ final class NovusOrdoPrecedence implements PrecedenceRules
         }
 
         if ($kind === ObservanceKind::FERIA) {
-            // Line 9: the privileged weekdays (weekdays of Lent; the late-Advent 17-24 Dec and
-            // Christmas-octave weekdays join with their fillers, #108). Line 13: every other
-            // weekday — Ordinary Time, early Advent, Easter/Christmas Time.
-            //
-            // #108 MUST also route Ash Wednesday, the weekdays of Holy Week (Mon-Thu), and the
-            // days within the Octave of Easter to LINE 2 — the reformed table ranks those feriae
-            // among the privileged days, not at line 9/13. This is load-bearing for the
-            // Annunciation transfer: {@see forcedTransferDate()} only fires once the Annunciation
-            // (a line-3 Solemnity) is impeded, which requires the Holy-Week / Easter-octave day it
-            // lands on to OUTRANK it (line 2 < line 3). Those feriae are not minted yet (the Novus
-            // Ordo temporal cycle emits only Ordinary Time in v1.1), so this is dormant today.
+            // Line 9: the ordinary weekdays of Lent (Ash Wednesday and the Holy-Week weekdays are
+            // caught at line 2 above). Line 13: every other weekday — Ordinary Time, Easter Time,
+            // and Christmas Time. The late-Advent 17-24 December weekdays also belong at line 9;
+            // sorting them there is a refinement of the real cited Table (#108 sanctoral slice /
+            // #260), where the day-set is named — the fixture ranks them at line 13 for now. The
+            // line 9-vs-13 distinction only orders a weekday against a lower-ranked office (a
+            // memorial, lines 10-12), of which the reformed sanctoral carries none yet, so it
+            // cannot change a resolved day until that sanctoral is authored.
             return $season === Season::LENT
                 ? $this->table->tier('privileged-weekday')
                 : $this->table->tier('weekday');
