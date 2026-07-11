@@ -17,6 +17,7 @@ use Directorium\Core\Precedence\NovusOrdoPrecedence;
 use Directorium\Core\Precedence\PrecedenceContext;
 use Directorium\Core\Precedence\PrecedenceTable;
 use Directorium\Core\Temporal\Computus;
+use Directorium\Core\Temporal\NovusOrdo\PaschalCycle;
 use Directorium\Core\Temporal\Season;
 use Directorium\Core\Temporal\TemporalObservance;
 use PHPUnit\Framework\TestCase;
@@ -106,6 +107,16 @@ final class NovusOrdoPrecedenceTest extends TestCase
                 [self::temporal('roman:temporale:paschal:lent:sunday-2', 'sunday', Season::lent()), 2],
             'weekday of Lent → line 9 (privileged)' =>
                 [self::temporal('roman:temporale:paschal:lent:week-2:feria-2', 'feria', Season::lent()), 9],
+            'Ash Wednesday → line 2 (privileged weekday)' =>
+                [self::temporal('roman:temporale:paschal:lent:ash-wednesday', 'feria', Season::lent()), 2],
+            'weekday of Holy Week → line 2 (privileged weekday)' =>
+                [self::temporal('roman:temporale:paschal:holy-week:feria-2', 'feria', Season::lent()), 2],
+            'day within the Octave of Easter → line 2 (Solemnity of the Lord)' => [
+                self::temporal('roman:temporale:paschal:easter-octave:feria-2', 'within-octave', Season::eastertide()),
+                2,
+            ],
+            'weekday within the Octave of the Nativity → line 9' =>
+                [self::temporal('roman:temporale:christmas:december-27', 'within-octave', Season::christmastide()), 9],
             'named unmovable feast of the Lord (Pentecost) → line 2' =>
                 [self::temporal('roman:temporale:paschal:pentecost', 'sunday', Season::eastertide()), 2],
             'Solemnity → line 3' =>
@@ -136,6 +147,35 @@ final class NovusOrdoPrecedenceTest extends TestCase
         $feria = self::temporal('roman:temporale:paschal:holy-week:feria-6', 'feria', Season::eastertide());
 
         self::assertSame(1, $this->rules()->tierOf($feria, self::context(true))->line());
+    }
+
+    /**
+     * The privileged-temporal-weekday membership set names the actual slugs the paschal filler
+     * mints, so the days it flags — Ash Wednesday, the Holy-Week weekdays (Mon–Wed), and every
+     * day of the Octave of Easter — resolve to line 2. Feeding real minted offices (from the
+     * shipped corpus) through the fixture precedence proves the id-set and the filler agree; a
+     * slug drift on either side would drop a day to line 9/13 and fail here. Easter 2024 = 31 Mar.
+     */
+    public function testMintedPrivilegedTemporalWeekdaysRouteToLineTwo(): void
+    {
+        $rules = $this->rules();
+        $cycle = PaschalCycle::forYear(2024, Corpus::default(), 'roman-novus-ordo-2002');
+
+        $privileged = [
+            '2024-02-14', // Ash Wednesday
+            '2024-03-25', '2024-03-26', '2024-03-27', // Holy Week Monday–Wednesday
+            '2024-04-01', '2024-04-02', '2024-04-03', // Octave of Easter Monday–Wednesday
+            '2024-04-04', '2024-04-05', '2024-04-06', // Octave of Easter Thursday–Saturday
+        ];
+        foreach ($privileged as $day) {
+            $office = $cycle->on(new DateTimeImmutable($day . ' 00:00:00', new DateTimeZone('UTC')));
+            self::assertNotNull($office, "$day is inside the paschal window");
+            self::assertSame(2, $rules->tierOf($office, self::context())->line(), "$day should route to line 2");
+        }
+
+        // A control: an ordinary Lenten weekday is line 9, not line 2.
+        $lentWeekday = $cycle->on(new DateTimeImmutable('2024-02-19 00:00:00', new DateTimeZone('UTC')));
+        self::assertSame(9, $rules->tierOf($lentWeekday, self::context())->line());
     }
 
     /** A Solemnity and a Feast of the Lord outrank a Sunday of Ordinary Time; a saint's Feast does not. */

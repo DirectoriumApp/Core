@@ -39,7 +39,7 @@ use LogicException;
  * and the moveable **Solemnity of St Joseph** (the Wednesday before the 3rd Sunday
  * after Easter, Easter+17). The Solemnity's common octave is minted by {@see Eastertide}.
  */
-final class MovableFeasts
+final class MovableFeasts implements MovableFeastCalendar
 {
     private int $year;
 

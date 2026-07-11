@@ -32,7 +32,7 @@ use LogicException;
  * concern of the rubrics layer, not this skeleton. See
  * docs/design/temporal-fill-model.md.
  */
-final class HolyWeek
+final class HolyWeek implements TriduumWindow
 {
     private int $year;
 

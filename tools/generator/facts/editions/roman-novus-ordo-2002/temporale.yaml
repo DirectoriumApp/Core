@@ -28,31 +28,46 @@
 # governs Novus-Ordo occurrence — the Table of Liturgical Days (NovusOrdoPrecedence, #257)
 # resolves that by the observance KIND and its Table line — so these values only shape the
 # display grade, and the precedence engine never reads them. The display band is mapped:
-# solemnity / privileged Sunday of Advent → 1; feast of the Lord / Sunday of Christmas Time
-# → 2; privileged weekday (17–24 Dec, the Christmas octave) → 3; ordinary weekday → 4.
+# solemnity, privileged Sunday (Advent / Lent / Easter), the Triduum, and the days of the
+# Easter octave (celebrated as solemnities of the Lord, n. 24) → 1; feast of the Lord, Sunday
+# of Christmas Time, Ash Wednesday, and the weekdays of Holy Week → 2; privileged weekday
+# (17–24 Dec, the Christmas octave, and the ordinary weekdays of Lent) → 3; ordinary weekday
+# (Ordinary, Christmas, and Easter Time) → 4. The Table LINE the day actually occupies is the
+# precedence engine's concern, not this display key.
 #
 # KEYS. A Novus-Ordo temporal archetype whose office is genuinely edition-invariant reuses
 # the BASE 1962 archetype key so its identity dedupes into the shared cross-edition union
-# and the v2.0 comparison tool aligns it by id — for this Advent/Christmas slice that is the
-# two great feasts of the Lord, `nativity` and `epiphany`, re-declared below with the exact
-# base kind and Latin name (and citing the same public-domain Missal, mr-1920, so the identity
-# record is byte-identical and merges rather than collides). Their per-edition rank/colour go
-# in this edition's own attributes.temporale.ndjson, cited to the reform's norms. Everything
-# the reform re-shaped — Advent weekdays (it drops "infra Hebdomadam" and the Ember days, and
-# names 17–24 December by date), the Christmas octave, Holy Family on the Sunday in the octave,
-# the octave day as a Marian solemnity, the second Sunday after the Nativity, the Baptism of
-# the Lord ending Christmas Time — takes a NO-SPECIFIC `no-…` key (collision-free with the base
-# keys). The `no-` prefix and the `ot-` prefix (Ordinary Time, already shipped) both mark
-# reform-only archetypes; only the great-feast keys are shared.
+# and the v2.0 comparison tool aligns it by id. Across the whole temporal cycle that is the
+# great feasts of the Lord and Holy Thursday: `nativity` and `epiphany` (the Advent/Christmas
+# slice) and `ascension`, `pentecost`, and `maundy-thursday` (this paschal slice) — each
+# re-declared with the exact base kind and Latin name (and citing the same public-domain
+# Missal, mr-1920, so the identity record is byte-identical and merges rather than collides).
+# Their per-edition rank/colour go in this edition's own attributes.temporale.ndjson, cited to
+# the reform's norms. `easter` is NOT among them: the reform re-titled Easter Sunday "Dominica
+# Paschae in Resurrectione Domini" (the base transcribes "Dominica Resurrectionis"), so it
+# takes a `no-…` key. Everything the reform re-shaped — the Advent weekdays and the Christmas
+# octave (above); and here the pre-Lent that becomes Ordinary Time, the merged Palm Sunday
+# ("de Passione Domini"), the Easter octave celebrated as solemnities of the Lord, the Second
+# Sunday of Easter "de divina Misericordia", and the four movable solemnities the reform
+# re-titled (Trinity, Corpus Christi et Sanguinis, the Sacred Heart, Christ the King of the
+# Universe) — takes a NO-SPECIFIC `no-…` key (collision-free with the base keys). The `no-`
+# prefix and the `ot-` prefix (Ordinary Time) both mark reform-only archetypes; only the
+# great-feast and Holy-Thursday keys are shared.
 #
 # The NAME citation follows the honest source, key notwithstanding. Where a NO-specific archetype's
 # label is verbatim the ANCIENT label the base already transcribes from the public-domain Missal —
-# the Advent Sundays "Dominica … Adventus" and the weekdays "… post Epiphaniam" — it cites mr-1920,
-# the same public-domain text, even under its `no-…` key. Only a label the reform genuinely COINED
-# or re-worded cites the reference nu-1969 under option A: "… per annum", the date-named "Die …
-# decembris/ianuarii", "In Octava Nativitatis Domini", "Dominica II post Nativitatem", "In Baptismate
-# Domini", the "… Hebdomadae … Adventus" weekday form that drops the older "infra Hebdomadam", and the
-# "… Mariae et Ioseph" Holy-Family wording. A copyrighted modern book is never a source.
+# the Advent Sundays "Dominica … Adventus" and the weekdays "… post Epiphaniam"; and here Ash
+# Wednesday "Feria IV Cinerum", the weekdays "… post Cineres", the Lenten Sundays "Dominica … in
+# Quadragesima", and "Sabbato Sancto" — it cites mr-1920, the same public-domain text, even under
+# its `no-…` key. Only a label the reform genuinely COINED or re-worded cites the reference nu-1969
+# under option A: "… per annum", the date-named "Die … decembris/ianuarii", "In Octava Nativitatis
+# Domini", "Dominica II post Nativitatem", "In Baptismate Domini", the "… Hebdomadae … Adventus"
+# weekday form that drops the older "infra Hebdomadam", the "… Mariae et Ioseph" Holy-Family wording;
+# and here the reworded Lenten weekday "… Hebdomadae … Quadragesimae", the merged Palm Sunday
+# "Dominica in Palmis de Passione Domini", "… Hebdomadae Sanctae", "Feria VI in Passione Domini"
+# (dropping the base's "et Morte"), "Dominica Paschae in Resurrectione Domini", "… infra octavam
+# Paschae", "Dominica … Paschae", "Dominica II Paschae seu de divina Misericordia", "… Hebdomadae …
+# Paschae", and the four re-titled movable solemnities. A copyrighted modern book is never a source.
 
 archetypes:
   # ---- Ordinary Time (tempus per annum) — the two green blocks, one 1–34 week series ----
@@ -160,5 +175,168 @@ archetypes:
     kind: feast
     name: "In Baptismate Domini"
     rank: 2
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+
+  # ---- Lent (tempus Quadragesimae) — Ash Wednesday to the eve of Palm Sunday, violet -------
+  # Minted by NovusOrdo\PaschalCycle. The reform keeps Ash Wednesday and the five Sundays "in
+  # Quadragesima" (Laetare rose on the fourth), and the "post Cineres" ferias before the first
+  # Sunday, all under their ancient names; it drops Septuagesima and the Lenten Ember days, and
+  # re-words the weekday form to "… Hebdomadae … Quadragesimae" (the base's "infra Hebdomadam"
+  # is gone, as it is in Advent). Ash Wednesday and the weekdays of Holy Week rank at Table
+  # line 2 (above the Solemnities), the ordinary Lenten weekdays at line 9; precedence reads
+  # the KIND and identity, not this display rank.
+  - key: no-ash-wednesday
+    kind: feria
+    name: "Feria IV Cinerum"
+    rank: 2
+    colour: violet
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-post-cineres-feria
+    kind: feria
+    name: "{feria} post Cineres"
+    rank: 3
+    colour: violet
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-lent-sunday
+    kind: sunday
+    name: "Dominica {ord} in Quadragesima"
+    rank: 1
+    colour: violet
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-lent-sunday-laetare
+    kind: sunday
+    name: "Dominica {ord} in Quadragesima"
+    rank: 1
+    colour: { base: violet, roseAllowed: true }
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-lent-feria
+    kind: feria
+    name: "{feria} Hebdomadae {ord} Quadragesimae"
+    rank: 3
+    colour: violet
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+
+  # ---- Holy Week (Hebdomada Sancta) and the Sacred Triduum ----------------------------------
+  # Minted by NovusOrdo\PaschalCycle; still the violet Lenten season up to the Mass of the
+  # Lord's Supper (n. 28). The reform merged the old Palm Sunday and Passion Sunday into one
+  # "Dominica in Palmis de Passione Domini" in RED, re-worded the weekdays to "… Hebdomadae
+  # Sanctae", and made the Good Friday liturgy RED (the base's black is the 1962 colour, its
+  # note records the modern red). Holy Thursday is edition-invariant — "Feria V in Cena Domini",
+  # white — so it reuses the shared base key `maundy-thursday` and dedupes; Good Friday and Holy
+  # Saturday diverge (Good Friday drops "et Morte" and turns red; Holy Saturday is white for the
+  # Vigil), so they take `no-…` keys. All three days of the Triduum are kind=feria so the
+  # precedence engine routes them to the apex (line 1) when the day is in the Triduum window.
+  - key: no-palm-sunday
+    kind: sunday
+    name: "Dominica in Palmis de Passione Domini"
+    rank: 1
+    colour: red
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-holy-week-feria
+    kind: feria
+    name: "{feria} Hebdomadae Sanctae"
+    rank: 2
+    colour: violet
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: maundy-thursday
+    kind: feria
+    name: "Feria V in Cena Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: no-good-friday
+    kind: feria
+    name: "Feria VI in Passione Domini"
+    rank: 1
+    colour: red
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-holy-saturday
+    kind: feria
+    name: "Sabbato Sancto"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+
+  # ---- Easter Time (tempus paschale) — Easter Sunday to Pentecost, white (red on Pentecost) -
+  # Minted by NovusOrdo\PaschalCycle: one fifty-day white season, with no Ascension octave and
+  # no Pentecost octave (both suppressed in the reform). The eight days of the Easter octave are
+  # each celebrated as a Solemnity of the Lord (n. 24), so they rank at Table line 2; the octave
+  # closes on the Second Sunday of Easter "de divina Misericordia". Ascension (the fortieth day,
+  # Thursday, in the universal calendar — the transfer to the Seventh Sunday is a conference
+  # option deferred to resolve-time governance, #366) and Pentecost are edition-invariant of
+  # name, so they reuse the shared base keys `ascension` and `pentecost` and dedupe; Easter
+  # Sunday itself does not (see the KEYS note) and takes `no-easter`.
+  - key: no-easter
+    kind: sunday
+    name: "Dominica Paschae in Resurrectione Domini"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-easter-octave-feria
+    kind: within-octave
+    name: "{feria} infra octavam Paschae"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-easter-sunday-mercy
+    kind: sunday
+    name: "Dominica II Paschae seu de divina Misericordia"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-easter-sunday
+    kind: sunday
+    name: "Dominica {ord} Paschae"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-easter-feria
+    kind: feria
+    name: "{feria} Hebdomadae {ord} Paschae"
+    rank: 4
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: ascension
+    kind: feast
+    name: "In Ascensione Domini"
+    rank: 1
+    colour: white
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+  - key: pentecost
+    kind: sunday
+    name: "Dominica Pentecostes"
+    rank: 1
+    colour: red
+    cites: { name: mr-1920, rank: nu-1969, colour: nu-1969 }
+
+  # ---- Movable solemnities of the Lord in Ordinary Time (placed by an Easter / Advent rule) --
+  # Minted by NovusOrdo\MovableFeasts as white Ordinary-Time overlays; the reform re-titled all
+  # four, so each takes a `no-…` key. Trinity Sunday (the Sunday after Pentecost), Corpus Christi
+  # (the Thursday after Trinity in the universal calendar — the Sunday transfer is a conference
+  # option, #366), and the Sacred Heart (the Friday of the third week after Pentecost) are
+  # Easter-anchored; Christ the King is the last Sunday of Ordinary Time, the Sunday before Advent.
+  - key: no-trinity
+    kind: feast
+    name: "Sanctissimae Trinitatis"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-corpus-christi
+    kind: feast
+    name: "Sanctissimi Corporis et Sanguinis Christi"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-sacred-heart
+    kind: feast
+    name: "Sacratissimi Cordis Iesu"
+    rank: 1
+    colour: white
+    cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }
+  - key: no-christ-the-king
+    kind: feast
+    name: "Domini Nostri Iesu Christi Universorum Regis"
+    rank: 1
     colour: white
     cites: { name: nu-1969, rank: nu-1969, colour: nu-1969 }

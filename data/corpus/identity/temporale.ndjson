@@ -45,12 +45,30 @@
 {"archetype":"no-advent-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
 {"archetype":"no-advent-sunday-gaudete","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} Adventus"}}
 {"archetype":"no-after-epiphany-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Epiphaniam"}}
+{"archetype":"no-ash-wednesday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Feria IV Cinerum"}}
 {"archetype":"no-baptism","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"In Baptismate Domini"}}
+{"archetype":"no-christ-the-king","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"Domini Nostri Iesu Christi Universorum Regis"}}
 {"archetype":"no-christmas-sunday-2","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica II post Nativitatem"}}
 {"archetype":"no-christmas-weekday-january","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"Die {dies} ianuarii"}}
+{"archetype":"no-corpus-christi","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"Sanctissimi Corporis et Sanguinis Christi"}}
+{"archetype":"no-easter","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica Paschae in Resurrectione Domini"}}
+{"archetype":"no-easter-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae {ord} Paschae"}}
+{"archetype":"no-easter-octave-feria","cites":{"names.la":"nu-1969"},"kind":"within-octave","names":{"la":"{feria} infra octavam Paschae"}}
+{"archetype":"no-easter-sunday","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica {ord} Paschae"}}
+{"archetype":"no-easter-sunday-mercy","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica II Paschae seu de divina Misericordia"}}
+{"archetype":"no-good-friday","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"Feria VI in Passione Domini"}}
 {"archetype":"no-holy-family","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"In Festo Sanctae Familiae Iesu, Mariae et Ioseph"}}
+{"archetype":"no-holy-saturday","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"Sabbato Sancto"}}
+{"archetype":"no-holy-week-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae Sanctae"}}
+{"archetype":"no-lent-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae {ord} Quadragesimae"}}
+{"archetype":"no-lent-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} in Quadragesima"}}
+{"archetype":"no-lent-sunday-laetare","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica {ord} in Quadragesima"}}
 {"archetype":"no-nativity-octave-weekday","cites":{"names.la":"nu-1969"},"kind":"within-octave","names":{"la":"Die {dies} decembris"}}
 {"archetype":"no-octave-day","cites":{"names.la":"nu-1969"},"kind":"octave-day","names":{"la":"In Octava Nativitatis Domini"}}
+{"archetype":"no-palm-sunday","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica in Palmis de Passione Domini"}}
+{"archetype":"no-post-cineres-feria","cites":{"names.la":"mr-1920"},"kind":"feria","names":{"la":"{feria} post Cineres"}}
+{"archetype":"no-sacred-heart","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"Sacratissimi Cordis Iesu"}}
+{"archetype":"no-trinity","cites":{"names.la":"nu-1969"},"kind":"feast","names":{"la":"Sanctissimae Trinitatis"}}
 {"archetype":"ot-feria","cites":{"names.la":"nu-1969"},"kind":"feria","names":{"la":"{feria} Hebdomadae {ord} per annum"}}
 {"archetype":"ot-sunday","cites":{"names.la":"nu-1969"},"kind":"sunday","names":{"la":"Dominica {ord} per annum"}}
 {"archetype":"palm-sunday","cites":{"names.la":"mr-1920"},"kind":"sunday","names":{"la":"Dominica II Passionis seu in Palmis"}}

@@ -263,7 +263,9 @@ final class ChristmasCycleTest extends TestCase
             'roman:temporale:advent:sunday-1',
             $cycle->office(self::utc('2025-11-30'))->id()->toString()
         );
-        self::assertFalse($cycle->isTriduum(self::utc('2025-04-18')), 'the NO cycle has no Triduum source yet');
+        // The paschal half now fills the middle of the year and supplies the Triduum window:
+        // Easter 2025 is 20 April, so Good Friday (18 April) is in the Triduum.
+        self::assertTrue($cycle->isTriduum(self::utc('2025-04-18')), 'the NO cycle reports the Triduum');
     }
 
     public function testRejectsPreGregorianYear(): void
@@ -277,8 +279,10 @@ final class ChristmasCycleTest extends TestCase
      * The Christmas cycle and Ordinary Time tile a civil year with no gap and no overlap: every
      * day is owned by exactly one of the previous Advent's Christmas cycle, this year's Ordinary
      * Time, or this year's Advent — EXCEPT the paschal window (Ash Wednesday through Pentecost),
-     * which the deferred Lent/Easter fillers (#108 follow-up) will fill. Walking a whole year
-     * proves the Baptism → Ordinary Time seam and the Advent boundary meet exactly.
+     * which the {@see \Directorium\Core\Temporal\NovusOrdo\PaschalCycle} fills (proved by the
+     * whole-cycle sweep in {@see PaschalCycleTest}). Walking a whole year here proves the
+     * Baptism → Ordinary Time seam and the Advent boundary meet exactly, and that these three
+     * fillers leave precisely the paschal window free for the fourth.
      */
     public function testThreeFillersTileTheCivilYearWithNoGapOrOverlap(): void
     {

@@ -20,7 +20,9 @@ use Directorium\Core\Observance\ObservanceKind;
 use Directorium\Core\Sanctoral\CorpusSanctoralData;
 use Directorium\Core\Sanctoral\SanctoralCalendar;
 use Directorium\Core\Sanctoral\SanctoralData;
+use Directorium\Core\Temporal\MovableFeastCalendar;
 use Directorium\Core\Temporal\MovableFeasts;
+use Directorium\Core\Temporal\NovusOrdo\MovableFeasts as NovusOrdoMovableFeasts;
 use Directorium\Core\Temporal\NovusOrdoTemporalCycle;
 use Directorium\Core\Temporal\SaturdayOfOurLady;
 use Directorium\Core\Temporal\TemporalCalendar;
@@ -187,6 +189,22 @@ final class DayResolver
         return new Provenance($this->edition, $this->sanctoralData->version(), Directorium::VERSION);
     }
 
+    /**
+     * The movable feasts of the Lord for the year, edition-selected exactly as the temporal
+     * cycle is: the reformed general calendar keeps only four solemnities in Ordinary Time and
+     * re-places / re-titles them (Novus-Ordo {@see NovusOrdoMovableFeasts}), the traditional
+     * editions their historic six. Keyed off the already-selected temporal cycle so the
+     * resolver stays edition-agnostic and the traditional path is untouched.
+     */
+    private function movableFeasts(int $year): MovableFeastCalendar
+    {
+        if ($this->temporalCycle instanceof NovusOrdoTemporalCycle) {
+            return NovusOrdoMovableFeasts::forYear($year, $this->corpus, $this->editionDir);
+        }
+
+        return MovableFeasts::forYear($year, $this->corpus, $this->editionDir);
+    }
+
     public function resolveDay(DateTimeImmutable $date): LiturgicalDay
     {
         return $this->resolveYear((int) $date->format('Y'))->day($date);
@@ -195,7 +213,7 @@ final class DayResolver
     public function resolveYear(int $year): ResolvedYear
     {
         $cycle = $this->temporalCycle->forYear($year, $this->corpus, $this->editionDir);
-        $movable = MovableFeasts::forYear($year, $this->corpus, $this->editionDir);
+        $movable = $this->movableFeasts($year);
         $saturdayOfOurLady = SaturdayOfOurLady::forYear($year, $this->corpus, $this->editionDir);
         $sanctoral = SanctoralCalendar::forYear(
             $year,
@@ -248,7 +266,7 @@ final class DayResolver
      */
     private function gather(
         ?TemporalObservance $temporalOffice,
-        MovableFeasts $movable,
+        MovableFeastCalendar $movable,
         SaturdayOfOurLady $saturdayOfOurLady,
         SanctoralCalendar $sanctoral,
         array $forcedToday,

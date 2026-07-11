@@ -14,12 +14,13 @@ use Directorium\Core\Temporal\NovusOrdo\OrdinaryTime;
  * The fillers are consulted in order; the first that owns a date supplies its
  * temporal office (the earlier blocks are the more specific, exactly as before the
  * list was abstracted behind {@see TemporalCycle}). The Novus-Ordo cycle supplies
- * {@see \Directorium\Core\Temporal\NovusOrdo\ChristmasCycle} and {@see OrdinaryTime}
- * instances into the same list — any block-filler exposing `on()` is accepted, so the
- * enumerated union below is the traditional set and not exhaustive. {@see isTriduum()}
- * feeds the precedence context; the traditional cycle delegates it to {@see HolyWeek},
- * and a cycle with no Triduum source (the Novus Ordo until its Holy Week filler lands
- * with the paschal half, #108 follow-up) reports false.
+ * {@see \Directorium\Core\Temporal\NovusOrdo\ChristmasCycle}, {@see OrdinaryTime}, and
+ * {@see \Directorium\Core\Temporal\NovusOrdo\PaschalCycle} instances into the same list
+ * — any block-filler exposing `on()` is accepted, so the enumerated union below is the
+ * traditional set and not exhaustive. {@see isTriduum()} feeds the precedence context
+ * from a {@see TriduumWindow}: the traditional cycle supplies its {@see HolyWeek}, the
+ * Novus-Ordo cycle its {@see \Directorium\Core\Temporal\NovusOrdo\PaschalCycle}, and a
+ * cycle with no Triduum source reports false.
  *
  * @internal Not part of the public API (docs/api-stability.md).
  */
@@ -30,15 +31,15 @@ final class YearTemporalCycle
      */
     private array $fillers;
 
-    private ?HolyWeek $holyWeek;
+    private ?TriduumWindow $triduum;
 
     /**
      * @param list<ChristmasCycle|LentenCycle|HolyWeek|Eastertide|TimeAfterPentecost|OrdinaryTime> $fillers
      */
-    public function __construct(array $fillers, ?HolyWeek $holyWeek)
+    public function __construct(array $fillers, ?TriduumWindow $triduum)
     {
         $this->fillers = $fillers;
-        $this->holyWeek = $holyWeek;
+        $this->triduum = $triduum;
     }
 
     /** The temporal office of one day — the first filler that owns it, or null. */
@@ -57,6 +58,6 @@ final class YearTemporalCycle
     /** Whether the date falls in the Sacred Triduum (feeds the precedence context). */
     public function isTriduum(DateTimeImmutable $date): bool
     {
-        return $this->holyWeek !== null && $this->holyWeek->isTriduum($date);
+        return $this->triduum !== null && $this->triduum->isTriduum($date);
     }
 }
