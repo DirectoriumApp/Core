@@ -4,6 +4,14 @@
 // title (names.*, nameOverride.*) must come from a public-domain `text` source —
 // never a `reference` or `oracle` source. Facts (rank, colour, month, day) may
 // cite any registered source, because facts are uncopyrightable.
+//
+// One narrow exception (Core option A, #108): a TEMPORAL day-label — a `names.la`
+// on an `identity.temporale` row — is a generic, uncopyrightable descriptor
+// ("Dominica per annum"), not a literary title, so it may cite either a
+// public-domain text OR a `reference` source (the norming document that
+// establishes it, e.g. the 1969 Normae universales). A sanctoral saint's title
+// keeps the strict PD-text rule, and an `oracle` source is never a data source in
+// either case. See docs/design/text-licensing-model.md.
 
 /** The record fields whose values are transcribed, human-readable strings. */
 const NAME_GROUPS = [
@@ -42,11 +50,21 @@ export function checkProvenance(shapes, sources) {
           continue;
         }
         const isName = field.startsWith('names.') || field.startsWith('nameOverride.');
-        if (isName && (source.kind !== 'text' || source.rights !== 'public-domain')) {
-          problems.push(
-            `${shape} ${rowId}: "${field}" transcribes from "${key}" ` +
-              `(kind=${source.kind}, rights=${source.rights}); a title must cite a public-domain text source`,
-          );
+        if (isName) {
+          const pdText = source.kind === 'text' && source.rights === 'public-domain';
+          // A temporal day-label may also cite a `reference` source (option A): it is a
+          // generic descriptor, not a transcribed literary title. Sanctoral titles stay
+          // strict; an oracle is never admissible as a name source in either case.
+          const temporalLabelRef = shape === 'identity.temporale' && source.kind === 'reference';
+          if (!pdText && !temporalLabelRef) {
+            problems.push(
+              `${shape} ${rowId}: "${field}" transcribes from "${key}" ` +
+                `(kind=${source.kind}, rights=${source.rights}); ` +
+                (shape === 'identity.temporale'
+                  ? 'a temporal label must cite a public-domain text or a reference source'
+                  : 'a title must cite a public-domain text source'),
+            );
+          }
         }
       }
 

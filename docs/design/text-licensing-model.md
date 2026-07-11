@@ -56,6 +56,21 @@ These ship **only** under an explicit licence held for the build, or from a
 to establish a *fact* (a rank, a structure, a citation) but its text may never be
 transcribed — the same rule the corpus already enforces on `reference` sources.
 
+**Temporal day-labels are facts, not titles (option A).** A generic name of a
+*day of the temporal cycle* — "Dominica per annum", "Feria … hebdomadæ … per
+annum" — is an uncopyrightable descriptor, not a literary title. The reform
+(1969) coined a few such labels ("per annum") that exist only in the copyrighted
+modern books, so there is no public-domain text to transcribe them from; but a
+short generic day-label is not protected expression. So a `names.la` on an
+`identity.temporale` row may cite a `reference` source (the norming document that
+establishes it — the 1969 *Normae universales* / *Calendarium Romanum*) as well
+as a public-domain text. Ancient temporal names (the Nativity, Epiphany, …) still
+cite the public-domain 1920 Missal, and a **sanctoral** saint's proper title
+keeps the strict PD-text rule (a name that can be creative stays protected). An
+`oracle` source is never a name source. The provenance gate enforces exactly this
+narrowing; the full running texts of the modern books remain copyrighted and out
+of scope, as above.
+
 **Pre-1962 books are public domain by age.** The pre-1962 editions (see the table
 below) are out of copyright, so their **full texts** may ship freely, given a
 citation to the source edition. This is why the structural comparison and the
