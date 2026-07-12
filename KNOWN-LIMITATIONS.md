@@ -6,11 +6,11 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
 
 ## Coverage
 
-- **Editions:** three rubric systems are **built and publicly resolvable** — **1962 (Rubricae 1960)**,
-  **1954 (Divino Afflatu)**, and **1955 (Cum nostra / interim)** (#453). Tridentine (1570/~1906) and the
-  Novus Ordo are roadmapped — **not yet declared** on the edition axis, so a selector naming one is refused
-  as an unknown edition. When a future system is declared before its data and rules land, the `isBuilt()`
-  public-boundary guard refuses *it* until they do.
+- **Editions:** four rubric systems are **built and publicly resolvable** — **1962 (Rubricae 1960)**,
+  **1954 (Divino Afflatu)**, **1955 (Cum nostra / interim)** (#453), and the **Novus Ordo *editio typica
+  tertia* 2002** (#256, oracle-validated in #260). The reserved 1969/1975 Novus-Ordo snapshots and a future
+  Tridentine (1570/~1906) are declared/roadmapped but **not yet built**, so the `isBuilt()` public-boundary
+  guard refuses a selector naming one until its data and rules land.
 - **Pillars:** the **calendar** comes first; the **Missal** (Mass propers/ordinary) and **Breviary**
   (Divine Office) text layers are later milestones. The Office psalter is initially the 1962 scheme only;
   the pre-1911 and Divino Afflatu psalters are a later milestone.
@@ -48,14 +48,14 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   `triduum` token is a candidate refinement, a minor open-vocabulary bump
   (docs/design/season-vocabulary.md) deferred to the validation/contract work (#260); it would touch only
   those three days' reported season, never a date, colour, kind, or precedence.
-- **Novus Ordo optional memorials not yet surfaced (#108):** the reformed sanctoral carries ~40 *optional*
-  memorials (grade 4) the celebrant may freely elect. The day already resolves **correctly** — the
-  celebration is the obligatory memorial or the feria, and an un-elected optional memorial never displaces
-  it (`isElectableOptionalMemorial`) — but the electable options are not yet **listed** in the output
-  contract: they simply lapse. Surfacing them in the additive `optionalMemorials` slot (with the
-  `SHAPE_VERSION` 1.0.2 → 1.1.0 bump the Phase-A design reserved) lands with the validation slice (#260),
-  where the calendar is checked against the oracles that also list them. Until then the *celebration* is
-  right on every day; only the "what else could I choose today" list is absent.
+- **Novus Ordo Lenten memorial reduction (#260):** the reformed sanctoral's optional memorials are now
+  surfaced — the day resolves deterministically to the obligatory office (memorial or feria) and the
+  electable options are listed in the additive `optionalMemorials` slot (`SHAPE_VERSION` 1.1.0). One residual
+  nuance remains: on a **Lenten weekday** an *obligatory* memorial is reduced to a commemoration in the
+  reformed rite (the ferial Mass with the saint's collect), but the engine currently **displaces** it rather
+  than keeping it as a commemoration. The *celebration* (the Lenten feria) is right; only the reduced saint's
+  disposition differs. The finer office-level `optionality` marker (how the arms of a choice relate) stays a
+  reserved contract slot.
 - **Novus Ordo movable memorials (#108):** the fixed-date reformed sanctoral is complete, but two **movable**
   Marian memorials are deferred to the movable-feasts follow-up: the **Immaculate Heart of Mary** (the
   Saturday after the Sacred Heart, an obligatory memorial in the 2002 typical edition) and — a later 2018

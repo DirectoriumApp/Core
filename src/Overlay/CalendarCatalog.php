@@ -48,10 +48,11 @@ final class CalendarCatalog
     {
         $system = RubricSystem::fromString($rubricSystem);
         // A rubric system declared on the edition axis but not yet built is refused at this
-        // public boundary. All three current systems (1962, 1954, 1955) are built (#453), so
-        // this gate does not fire for them; it stands for the next edition to be declared —
-        // Tridentine or the Novus Ordo — which will sit on the axis before its data and rules
-        // exist and must not resolve an incomplete calendar. Built systems are advertised via
+        // public boundary. The four current systems (1962, 1954, 1955, and Novus Ordo 2002) are
+        // built (#453 / #256), so this gate does not fire for them; it stands for the reserved
+        // editions still on the axis — the 1969/1975 Novus-Ordo snapshots, and a future
+        // Tridentine — which sit on the axis before their data and rules exist and must not
+        // resolve an incomplete calendar. Built systems are advertised via
         // RubricSystem::isBuilt() (the Api /meta filter); this is the matching runtime gate.
         if (!$system->isBuilt()) {
             throw new InvalidArgumentException(sprintf(

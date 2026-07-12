@@ -36,7 +36,7 @@ final class DayContractTest extends TestCase
     public function testSimpleDaySerialisesToTheFrozenShape(): void
     {
         $expected = [
-            'contractVersion' => '1.0.2',
+            'contractVersion' => '1.1.0',
             'corpusVersion' => Corpus::default()->corpusVersion(),
             'engineVersion' => '0.4.0',
             'rite' => 'roman',
@@ -48,6 +48,7 @@ final class DayContractTest extends TestCase
             'commemoration' => [],
             'displaced' => [],
             'tempora' => [self::pentecostFeria('tempora')],
+            'optionalMemorials' => [],
             'secondVespers' => [
                 'outcome' => 'full-of-following',
                 'favoursFollowing' => true,
@@ -84,7 +85,7 @@ final class DayContractTest extends TestCase
     {
         $day = contract(self::utc('2025-07-15'));
 
-        self::assertSame('1.0.2', $day['contractVersion']);
+        self::assertSame('1.1.0', $day['contractVersion']);
         self::assertSame('0.4.0', $day['engineVersion']);
         self::assertSame('roman:rubricae-1960', $day['edition']);
         self::assertSame('roman', $day['rite']);

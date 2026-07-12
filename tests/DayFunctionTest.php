@@ -118,15 +118,24 @@ final class DayFunctionTest extends TestCase
         self::assertSame('roman:rubricae-1955', contract($date, false, null, '1955')['edition']);
     }
 
-    public function testTheNovusOrdoIsRefusedAtThePublicBoundaryUntilBuilt(): void
+    public function testTheNovusOrdoResolvesAtThePublicBoundary(): void
     {
-        // The Novus Ordo is declared on the edition axis but not yet built (v1.1 in progress);
-        // the public day()/contract() boundary refuses it with a clear message rather than
-        // resolving an empty or wrong calendar. It becomes resolvable when isBuilt() flips.
+        // The Novus Ordo 2002 is built (#256, validated in #260): the public day()/contract()
+        // boundary now resolves it and stamps its own edition URN, rather than refusing it.
         $date = new DateTimeImmutable('2026-01-25', new DateTimeZone('UTC'));
 
+        $day = day($date, null, 'roman:novus-ordo-2002');
+        self::assertFalse($day->isEmpty(), 'the Novus Ordo resolves a non-empty day');
+        self::assertCount(1, $day->celebration(), 'it celebrates exactly one office');
+        self::assertSame('roman:novus-ordo-2002', contract($date, false, null, 'novus-ordo')['edition']);
+    }
+
+    public function testAReservedEditionIsStillRefusedAtThePublicBoundary(): void
+    {
+        // The guard still stands for a declared-but-unbuilt edition — the reserved 1969 Novus
+        // Ordo snapshot — which must not resolve an incomplete calendar.
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('not yet built');
-        day($date, null, 'roman:novus-ordo-2002');
+        day(new DateTimeImmutable('2026-01-25', new DateTimeZone('UTC')), null, 'roman:novus-ordo-1969');
     }
 }

@@ -30,8 +30,8 @@ editions:
   # 1962 archetypes (the additive-octave model the 1954 diff uses). It still shares the
   # cross-edition identity UNION — a saint kept from the traditional calendar is referenced by the
   # same id — preserving alignment-by-id for the v2.0 comparison tool. `base` names the edition it
-  # shares the union with; there is no derive. The edition stays isBuilt=false in the engine until
-  # #260 validates it, so it is built into the corpus but refused at the public boundary.
+  # shares the union with; there is no derive. The edition is isBuilt=true in the engine (#260
+  # validated it against two independent oracles), so it resolves at the public boundary.
   - dir: roman-novus-ordo-2002  # Novus Ordo (Ordinary Form), 2002/2008 typical edition
     base: roman-rubricae-1960
     whole: true

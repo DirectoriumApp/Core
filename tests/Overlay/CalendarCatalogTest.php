@@ -80,6 +80,21 @@ final class CalendarCatalogTest extends TestCase
         }
     }
 
+    public function testResolvesTheNovusOrdoUnderTheUniversalCalendar(): void
+    {
+        // The Novus Ordo 2002 is built (#256/#260), so the catalog resolves it at the public
+        // boundary. The Assumption (15 Aug, a solemnity in the reformed calendar too) is the
+        // stable probe; an Ordinary-Time feria additionally surfaces its electable optional
+        // memorials, which the traditional editions never carry.
+        $catalog = new CalendarCatalog();
+
+        $assumption = $catalog->resolver(null, 'novus-ordo')->resolveDay(self::date('2025-08-15'));
+        self::assertSame('roman:sanctorale:assumptio', $assumption->celebration()[0]->id()->toString());
+
+        $feria = $catalog->resolver(null, 'roman:novus-ordo-2002')->resolveDay(self::date('2025-01-20'));
+        self::assertNotSame([], $feria->optionalMemorials(), 'a NO feria offers its optional memorials');
+    }
+
     public function testLayersTheSspxOverlayOverAHistoricalEdition(): void
     {
         // The orthogonal combination: a particular calendar layered over a non-1962 edition. St

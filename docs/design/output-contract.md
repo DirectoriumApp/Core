@@ -6,9 +6,10 @@ The versioned, serialisable shape that `Directorium\Core\contract()` emits — t
 The engine resolves a civil date to a `Calendar\LiturgicalDay` (Epic #29). That
 aggregate is kept pure: it holds value objects and knows nothing about JSON. A
 separate serialiser, `Contract\DayContract`, turns it into a stable, JSON-ready
-structure. The shape is **frozen on the 1.0 line** (currently `1.0.2`) and only
-ever grows additively (reserved slots fill as patch bumps; keys are added, never
-removed or repurposed). This document is the spec downstream teams build against.
+structure. The shape is **stable on the 1.x line** (currently `1.1.0`) and only
+ever grows additively (reserved slots fill as patch bumps; a new optional key is a
+minor bump; keys are never removed or repurposed before 2.0). This document is the
+spec downstream teams build against.
 
 ## Where it lives
 
@@ -31,7 +32,7 @@ cache on all three — any one moving means the resolved output may differ:
 
 | Field | Source | Meaning |
 | --- | --- | --- |
-| `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.0.2). |
+| `contractVersion` | `DayContract::SHAPE_VERSION` | SemVer of the **shape** (1.1.0). |
 | `corpusVersion` | `SanctoralData::version()` (seed: `1962-seed-<date>`) | The **calendar data** build; carries no edition token. |
 | `engineVersion` | `Directorium::VERSION` | The **resolver** version; hand-bumped when output changes. |
 
@@ -89,7 +90,7 @@ additive (see bump rules):
 - Within each role, offices are ordered deterministically (precedence tier, then
   canonical id) and pinned by snapshot.
 
-The 1.0 shape is frozen: `ContractShapeTest` pins the key layout above and the
+The 1.x shape is pinned: `ContractShapeTest` pins the key layout above and the
 golden-year digest pins the resolved values across the centuries, so a field cannot be
 removed, renamed, or reordered without a deliberate, reviewed change. How this relates to
 the PHP API and how versions move together is [`api-stability.md`](../api-stability.md).
@@ -123,7 +124,7 @@ field is open and that shared concepts share a token.
 
 | Field | Type | Source | Notes |
 | --- | --- | --- | --- |
-| `contractVersion` | string | `SHAPE_VERSION` | `1.0.2`. |
+| `contractVersion` | string | `SHAPE_VERSION` | `1.1.0`. |
 | `corpusVersion` | string | `SanctoralData::version()` | e.g. `1962-seed-2026-07-02`. |
 | `engineVersion` | string | `Directorium::VERSION` | e.g. `0.4.0`. |
 | `rite` | string | edition head | `roman`. |
@@ -135,6 +136,7 @@ field is open and that shared concepts share a token.
 | `commemoration` | office[] | `LiturgicalDay` | Offices commemorated within it. |
 | `displaced` | office[] | `LiturgicalDay` | Offices impeded this day (transferred or omitted). |
 | `tempora` | office[] | `LiturgicalDay` | The temporal office of the season, always reported. |
+| `optionalMemorials` | office[] | `LiturgicalDay` | The electable optional memorials the day **offers but does not celebrate** (#260) — a Novus-Ordo feria's free options; each a self-describing office of the fixed shape with `role`/`outcome`/transfer `null`. `[]` on every traditional day. Added at 1.1.0 (see [Choice-days & optionality](#choice-days--optionality-novus-ordo)). |
 | `secondVespers` | object \| null | `ConcurrenceOutcome` | The evening concurrence (below); null when unresolved. |
 | `firstVespers` | null | reserved | Office layer. |
 | `resolution` | object \| null | opt-in | The "why-this-won" trace (#233); null by default, filled by `explain()` / `contract($d, true)`. See resolution-trace-model.md. |
@@ -218,17 +220,21 @@ per-side degradation off this field.
 
 Some days legitimately offer the celebrant a choice — a Novus Ordo weekday may be
 kept as the feria **or** as an optional memorial. This is modelled **additively,
-never by widening a closed enum**:
+never by widening a closed enum**. As realised at **1.1.0** (#260):
 
-- The alternatives are **multiple `celebration` entries** (the feria *and* each
-  optional memorial), each a normal, self-describing office.
-- An additive, reserved **`optionality`** key on each such office marks it as one
-  arm of a choice and how the arms relate (e.g. free choice among memorials, or
-  memorial-over-feria). It is `null` on ordinary days.
+- The day resolves **deterministically**: the `celebration` is the obligatory
+  office (a memorial, a feast, or the feria), never an electable option.
+- The electable options are surfaced in the additive top-level **`optionalMemorials`**
+  list — each a normal, self-describing office of the fixed shape, with `role`,
+  `outcome`, and the transfer dates `null` (they are *offered*, not resolved). The
+  list is `[]` on every traditional day, which admits no electable office, so the
+  frozen 1.0 shape stays a strict subset.
 
-The closed `role` and `outcome` enums are **untouched**: a chosen-or-not office is
-still a `celebration`, and no new `role`/`outcome` member is minted. A 1962-only
-consumer that ignores `optionality` still reads a coherent (feria-first) day.
+The closed `role` and `outcome` enums are **untouched**, and no new member is minted.
+A 1962-only consumer that never reads `optionalMemorials` still sees a coherent
+(feria-first) day. The office-level **`optionality`** key stays **reserved** for a
+finer future marker (how the arms of a choice relate — free choice among memorials,
+or memorial-over-feria); v1.1 does not yet emit it.
 
 ### The `calendar` sub-shape
 
@@ -430,7 +436,7 @@ Pentecost; the feria is both the celebration and the tempora):
 
 ```json
 {
-  "contractVersion": "1.0.2",
+  "contractVersion": "1.1.0",
   "corpusVersion": "1962-seed-2026-07-02",
   "engineVersion": "0.4.0",
   "rite": "roman",
@@ -461,6 +467,7 @@ Pentecost; the feria is both the celebration and the tempora):
   "commemoration": [],
   "displaced": [],
   "tempora": [ { "…": "the same office, role: tempora" } ],
+  "optionalMemorials": [],
   "secondVespers": {
     "outcome": "full-of-following",
     "favoursFollowing": true,
@@ -507,6 +514,7 @@ transfer` pointing at the Monday:
       "transferredTo": "2017-03-20", "transferredFrom": null }
   ],
   "tempora": [ { "id": "roman:temporale:paschal:lent-3", "role": "tempora" } ],
+  "optionalMemorials": [],
   "secondVespers": { "outcome": "preceding-commem-following", "favoursFollowing": false }
 }
 ```

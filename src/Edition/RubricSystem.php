@@ -22,13 +22,14 @@ use RuntimeException;
  *
  * A system carries its stable **edition URN** (stamped into the output contract's
  * {@see \Directorium\Core\Contract\Provenance}), its **corpus directory**, a display **label**,
- * and its historical **validity window**. The three traditional systems — 1962 (Rubricae 1960),
- * 1954 (Divino Afflatu) and 1955 (Cum nostra) — are built and publicly resolvable (Epics #63 /
- * #68, via the #453 burndown). The **Novus Ordo** (Ordinary Form) is declared on the axis as a
- * living calendar of *editio typica* snapshots (docs/design/novus-ordo-calendar-model.md,
- * docs/design/edition-governance.md): `roman:novus-ordo-2002` is the build target of v1.1 and the
- * 1969/1975 snapshots are reserved. Until each is built the {@see isBuilt()} flag keeps it
- * refused at the public boundary — reachable only through {@see \Directorium\Core\Precedence\DayResolver::forEdition()}
+ * and its historical **validity window**. Four systems are built and publicly resolvable — the
+ * three traditional ones, 1962 (Rubricae 1960), 1954 (Divino Afflatu) and 1955 (Cum nostra)
+ * (Epics #63 / #68, via the #453 burndown), and the **Novus Ordo** *editio typica tertia* 2002
+ * (Epic #256, validated against two independent oracles in #260). The Novus Ordo is declared on
+ * the axis as a living calendar of *editio typica* snapshots (docs/design/novus-ordo-calendar-model.md,
+ * docs/design/edition-governance.md): `roman:novus-ordo-2002` is built; the 1969/1975 snapshots
+ * stay reserved. Until each is built the {@see isBuilt()} flag keeps it refused at the public
+ * boundary — reachable only through {@see \Directorium\Core\Precedence\DayResolver::forEdition()}
  * for its own build's tests. See docs/design/rubric-system-model.md.
  */
 final class RubricSystem
@@ -89,11 +90,11 @@ final class RubricSystem
     }
 
     /**
-     * The rubric systems the platform knows, in historical order. The three traditional
-     * systems are built and resolvable (Epics #63 / #68, via the #453 burndown); the Novus
-     * Ordo snapshots are declared with `built => false` — `roman:novus-ordo-2002` flips true
-     * when v1.1 completes, the 1969/1975 snapshots stay reserved. The `built` flag lets a
-     * system be declared on the axis before its data and rules land.
+     * The rubric systems the platform knows, in historical order. Four are built and
+     * resolvable — the three traditional systems (Epics #63 / #68, via the #453 burndown) and
+     * `roman:novus-ordo-2002` (Epic #256 / #260). The reserved 1969/1975 Novus-Ordo snapshots
+     * stay `built => false`. The `built` flag lets a system be declared on the axis before its
+     * data and rules land.
      *
      * @return array<string, array{dir: string, label: string, from: int, to: int|null,
      *     built: bool, discipline: string}>
@@ -146,7 +147,7 @@ final class RubricSystem
                 'label' => 'Novus Ordo (2002 editio typica tertia)',
                 'from' => 2002,
                 'to' => null,
-                'built' => false,
+                'built' => true,
                 'discipline' => 'cic-1983',
             ],
         ];

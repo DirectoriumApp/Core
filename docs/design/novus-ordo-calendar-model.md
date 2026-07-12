@@ -58,10 +58,12 @@ declared-but-unbuilt URNs; they later become a cheap "replay the decree ledger a
 exercise, not a hand-authored corpus, so naming their slots now keeps their eventual insertion
 additive. Aliases: `novus-ordo`, `ordinary-form`, `2002` → the 2002 snapshot.
 
-Following the 1954/1955 precedent, the NO edition is declared `isBuilt=false` during the build
-(reachable only through `DayResolver::forEdition()` for testing, **refused at the public
-`CalendarCatalog` boundary** with the "declared but not yet built" message) and its flag flips to
-`true` at the epic wrap, once the calendar is complete and oracle-validated.
+Following the 1954/1955 precedent, the NO edition was declared `isBuilt=false` during the build
+(reachable only through `DayResolver::forEdition()` for testing, refused at the public
+`CalendarCatalog` boundary). With the calendar complete and oracle-validated against two
+independent engines (#260), the flag was **flipped to `true`**: `roman:novus-ordo-2002` now
+resolves at the public boundary alongside 1962/1954/1955. The guard stands for the reserved
+1969/1975 snapshots, still `isBuilt=false`.
 
 ## The rank scale and the Table of Liturgical Days (#257)
 
@@ -156,8 +158,9 @@ naming gate once, holistically: (1) the **per-edition `temporal-skeleton.yaml`**
 and its block→season map — deferred because Ordinary Time expresses its seasons in the filler and
 needs no new offsets; and (2) the **remaining NO season fillers** (Advent / Christmas Time / Lent /
 Holy Week / Easter Time) with their cited archetypes. The `NovusOrdoTemporalCycle` filler set and the
-Triduum source are completed there. The edition remains `isBuilt=false` throughout, so nothing is
-publicly resolvable until `#108`/`#260` land.
+Triduum source are completed there. The edition stayed `isBuilt=false` throughout the corpus build,
+so nothing was publicly resolvable until `#108` completed the data and `#260` validated it and
+flipped the flag.
 
 ## Precedence — simpler, not harder (#257)
 
@@ -242,23 +245,23 @@ Priest*) are **particular-calendar overlays** (`directorium:overlay:roman:usccb`
 validated per conference — the exact analogue of the SSPX/FSSP/ICKSP overlays over universal 1962.
 Both are documented hooks; their content is a later slice.
 
-## The two additive contract bumps (1.0.2 → 1.1.0)
+## The two additive contract bumps (1.0.2 → 1.1.0) — landed
 
 Both extensions were **reserved** in the Phase-A design wave, so both are additive-within-1.x — the
-frozen 1.0.2 shape stays a strict subset and every existing consumer is unaffected:
+1.0.2 shape stays a strict subset and every existing consumer is unaffected:
 
 1. **The `ordinary-time` season token** — a new open-vocabulary member, a minor bump by the
-   season-vocabulary rule.
+   season-vocabulary rule (#258).
 2. **Optional-memorial choice-days** — a NO Ordinary-Time weekday may carry **0..n optional
-   memorials** the celebrant freely elects. v1.1 resolves the day **deterministically** (the
-   `celebration` is the obligatory memorial if any, else the feria) and lists the electable
-   options in an additive `optionalMemorials` slot (the shape Phase A reserved for exactly this —
-   "multiple celebration entries + an additive optionality key, never new closed-enum members").
-   A Saturday of Ordinary Time with no obligatory memorial additionally admits the optional
-   memorial of the BVM.
+   memorials** the celebrant freely elects. The day resolves **deterministically** (the
+   `celebration` is the obligatory memorial if any, else the feria) and the electable options are
+   listed in the additive top-level `optionalMemorials` slot (#260). The office-level `optionality`
+   marker Phase A also reserved stays reserved for a finer future refinement.
 
-`SHAPE_VERSION` moves `1.0.2 → 1.1.0`; `PublicApiSnapshotTest` / `ContractShapeTest` are updated to
-the new additive shape, and the 1962 golden value digest (which never emits these) is unmoved.
+`SHAPE_VERSION` moved `1.0.2 → 1.1.0` (#260); `PublicApiSnapshotTest` / `ContractShapeTest` were
+re-frozen to the additive shape, and the 1962 golden value digest — which never emits these — was
+re-frozen too, its liturgical values byte-for-byte unmoved (only the version string and the empty
+`optionalMemorials: []` key change).
 
 ## Validation — ≥2 independent oracles (#260)
 

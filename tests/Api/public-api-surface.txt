@@ -42,7 +42,7 @@ final class Directorium\Core\Attribute\RankClass
   label(): string
   ordinal(): int
 final class Directorium\Core\Calendar\LiturgicalDay
-  __construct(DateTimeImmutable $date, array $celebration, array $commemoration, array $displaced, array $tempora, ?Directorium\Core\Precedence\ConcurrenceOutcome $secondVespers = …, ?Directorium\Core\Trace\ResolutionTrace $trace = …, ?int $commemorationLimit = …, ?Directorium\Core\Discipline\FastingObligation $fasting = …)
+  __construct(DateTimeImmutable $date, array $celebration, array $commemoration, array $displaced, array $tempora, ?Directorium\Core\Precedence\ConcurrenceOutcome $secondVespers = …, ?Directorium\Core\Trace\ResolutionTrace $trace = …, ?int $commemorationLimit = …, ?Directorium\Core\Discipline\FastingObligation $fasting = …, array $optionalMemorials = …)
   celebration(): array
   commemoration(): array
   commemorationLimit(): ?int
@@ -51,6 +51,7 @@ final class Directorium\Core\Calendar\LiturgicalDay
   fasting(): ?Directorium\Core\Discipline\FastingObligation
   isEmpty(): bool
   offices(): array
+  optionalMemorials(): array
   static placeholder(DateTimeImmutable $date): Directorium\Core\Calendar\LiturgicalDay
   secondVespers(): ?Directorium\Core\Precedence\ConcurrenceOutcome
   tempora(): array
