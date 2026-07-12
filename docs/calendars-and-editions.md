@@ -10,7 +10,8 @@ in the source ledger, [SOURCES.md](../SOURCES.md).
 ## Editions (the `$rubricSystem` selector)
 
 An **edition** is a rules-family: the rubrics that govern precedence and the calendar
-data of a given era. The three built today are all pre-conciliar Roman.
+data of a given era. Four are built today: three pre-conciliar Roman editions and the
+reformed **Novus Ordo** (Ordinary Form).
 
 ### 1962 — Rubricae 1960 · *the default*
 
@@ -39,6 +40,21 @@ data of a given era. The three built today are all pre-conciliar Roman.
   removed (three kept), vigils cut to seven, the semidouble rank suppressed — the
   intermediate state between Divino Afflatu and the 1960 rubrics.
 - **Who follows it:** those reconstructing the brief 1956–1960 interim period.
+
+### 2002 — Novus Ordo (Ordinary Form)
+
+- **Select with:** `novus-ordo`, `ordinary-form`, `2002`, or the URN `roman:novus-ordo-2002`.
+- **What it is:** the reformed **General Roman Calendar** of the 2002 *editio typica tertia* —
+  a distinct rules-family, not a diff of 1962. Five seasons with a two-block **Ordinary Time**;
+  the **solemnity / feast / memorial / optional-memorial** grades; the Table of Liturgical Days
+  for precedence; and the reformed penitential discipline (`cic-1983` — fast on Ash Wednesday and
+  Good Friday only). A weekday's electable **optional memorials** are surfaced in the contract's
+  `optionalMemorials` list; the day itself resolves to the obligatory office or the feria.
+- **What it excludes:** universal decrees promulgated *after* the 2002 typical edition (e.g. the
+  2018 Mary, Mother of the Church) — those arrive with the dated decree-overlay governance (#366).
+- **Who follows it:** the Ordinary Form of the Roman rite as celebrated across the Latin Church.
+  Cross-checked against two independent open-source calendar engines (#260). Historical window
+  2002–present.
 
 ## Particular calendars (the `$calendar` overlay selector)
 

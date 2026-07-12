@@ -41,16 +41,17 @@ final class RubricSystemTest extends TestCase
         RubricSystem::fromString('roman:tridentine-1570');
     }
 
-    public function testTraditionalSystemsAreBuiltAndNovusOrdoIsDeclaredButNotYet(): void
+    public function testBuiltSystemsAreBuiltAndReservedSnapshotsAreNot(): void
     {
-        // The #453 burndown flipped 1954 and 1955 from declared to built.
+        // The #453 burndown flipped 1954 and 1955 from declared to built; #256/#260 built the
+        // Novus Ordo 2002.
         self::assertTrue(RubricSystem::rubricae1960()->isBuilt());
         self::assertTrue(RubricSystem::divinoAfflatu()->isBuilt());
         self::assertTrue(RubricSystem::rubricae1955()->isBuilt());
+        self::assertTrue(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_2002)->isBuilt());
 
-        // The Novus Ordo snapshots are declared on the axis (v1.1) but not yet built; the
-        // isBuilt() flag keeps each refused at the public boundary until its build completes.
-        self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_2002)->isBuilt());
+        // The reserved 1969/1975 Novus-Ordo snapshots are declared on the axis but not yet
+        // built; the isBuilt() flag keeps each refused at the public boundary until it is.
         self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_1969)->isBuilt());
         self::assertFalse(RubricSystem::fromString(RubricSystem::NOVUS_ORDO_1975)->isBuilt());
     }

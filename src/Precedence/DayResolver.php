@@ -383,19 +383,26 @@ final class DayResolver
         // feast, or the feria), never to an *electable* optional memorial: the celebrant may choose
         // one, but it does not displace the day. Such offices are removed from the winning contest
         // before the celebration is chosen, so an optional memorial (line 12) cannot outrank the
-        // feria (line 13). They neither celebrate, commemorate, nor displace — they lapse. (Their
-        // surfacing in the contract's `optionalMemorials` slot is the exposure slice #260; the
-        // three traditional editions answer isElectableOptionalMemorial() false, so this is inert
-        // for them and the 1962 golden is unmoved.) A day is never wholly electable — the temporal
-        // office is always non-electable — but the guard restores the field if it ever were.
+        // feria (line 13). They neither celebrate, commemorate, nor displace — they lapse from the
+        // resolution, but are surfaced (electable, not celebrated) in the contract's
+        // `optionalMemorials` slot (#260). The three traditional editions answer
+        // isElectableOptionalMemorial() false, so `$electable` stays empty for them and the 1962
+        // golden's liturgical values are unmoved. A day is never wholly electable — the temporal
+        // office is always non-electable — but the guard leaves the contest intact if it ever were
+        // (in which case nothing is treated as merely optional).
+        $electable = [];
         $contest = [];
         foreach ($candidates as $candidate) {
-            if (!$this->rules->isElectableOptionalMemorial($candidate)) {
+            if ($this->rules->isElectableOptionalMemorial($candidate)) {
+                $electable[] = $candidate;
+            } else {
                 $contest[] = $candidate;
             }
         }
         if ($contest !== []) {
             $candidates = $contest;
+        } else {
+            $electable = [];
         }
 
         $celebration = $candidates[0];
@@ -480,7 +487,8 @@ final class DayResolver
             null,
             null,
             $this->rules->commemorationClassLimit($celebration),
-            $fasting
+            $fasting,
+            $electable
         );
 
         if (!$this->tracing) {

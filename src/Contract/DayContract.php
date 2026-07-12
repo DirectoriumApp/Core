@@ -7,6 +7,7 @@ namespace Directorium\Core\Contract;
 use DateTimeImmutable;
 use Directorium\Core\Calendar\CelebrationRole;
 use Directorium\Core\Calendar\LiturgicalDay;
+use Directorium\Core\Calendar\RealizedObservance;
 use Directorium\Core\Calendar\RoledObservance;
 use Directorium\Core\Calendrical\CalendricalYear;
 use Directorium\Core\Calendrical\LunarAge;
@@ -20,11 +21,13 @@ use LogicException;
  * public output contract every other Directorium repo (Api/Site/Ordo) builds on.
  *
  * {@see LiturgicalDay} is kept a pure aggregate; this class is the seam that
- * turns it into a stable JSON-ready structure. The shape is frozen on the 1.0 line
+ * turns it into a stable JSON-ready structure. The shape is stable on the 1.x line
  * ({@see SHAPE_VERSION}): a day carries its three provenance axes
  * ({@see Provenance}) and the four office roles, each office a self-describing
  * record of identity, per-edition attributes, occurrence outcome, and transfer
- * links. The `calendar` block carries the calendrical/astronomical figures (#242) and
+ * links. The additive `optionalMemorials` list (1.1) carries the electable options a
+ * Novus-Ordo feria offers but does not celebrate (#260) — empty on every traditional day.
+ * The `calendar` block carries the calendrical/astronomical figures (#242) and
  * `fasting` the penitential obligation (#250); the remaining reserved slots
  * (`firstVespers`, `resolution`, and the office-level
  * `octaveOf`/`aliases`/`citations`/`text`/`chant`/`audio`) are emitted as null now and
@@ -34,7 +37,7 @@ use LogicException;
 final class DayContract
 {
     /** SemVer of the contract *shape* (distinct from the corpus and engine versions). */
-    public const SHAPE_VERSION = '1.0.2';
+    public const SHAPE_VERSION = '1.1.0';
 
     private LiturgicalDay $day;
 
@@ -104,6 +107,7 @@ final class DayContract
             'commemoration' => $byRole[CelebrationRole::COMMEMORATION],
             'displaced' => $byRole[CelebrationRole::DISPLACED],
             'tempora' => $byRole[CelebrationRole::TEMPORA],
+            'optionalMemorials' => $this->optionalMemorials(),
             'secondVespers' => $this->secondVespers(),
             'firstVespers' => null,
             'resolution' => $this->resolution(),
@@ -215,18 +219,60 @@ final class DayContract
     }
 
     /**
+     * The day's electable optional memorials (#260), each a self-describing office with the
+     * same shape as the four roles but no occurrence `role`/`outcome`/transfer (they are
+     * offered, not resolved): a Novus-Ordo feria's free options. Empty on every traditional
+     * day — the three pre-conciliar editions admit no electable office — so the frozen 1.0
+     * shape stays a strict subset and the 1962 golden's liturgical values are unmoved.
+     *
+     * @return list<array<string, mixed>>
+     */
+    private function optionalMemorials(): array
+    {
+        $out = [];
+        foreach ($this->day->optionalMemorials() as $observance) {
+            $out[] = $this->observanceToArray($observance, null, null, null, null);
+        }
+
+        return $out;
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function officeToArray(RoledObservance $office): array
     {
-        $observance = $office->observance();
+        return $this->observanceToArray(
+            $office->observance(),
+            $office->role()->value(),
+            $office->outcome() !== null ? $office->outcome()->value() : null,
+            $office->transferredTo(),
+            $office->transferredFrom()
+        );
+    }
+
+    /**
+     * Serialise one realized observance to the fixed office shape. `$role`/`$outcome`/the
+     * transfer dates are the occurrence facts of a resolved office (celebration, commemoration,
+     * displaced, tempora); they are null for an office that is only *offered* — an electable
+     * optional memorial — which carries no occurrence role.
+     *
+     * @return array<string, mixed>
+     */
+    private function observanceToArray(
+        RealizedObservance $observance,
+        ?string $role,
+        ?string $outcome,
+        ?DateTimeImmutable $transferredTo,
+        ?DateTimeImmutable $transferredFrom
+    ): array {
         $id = $observance->id()->toString();
         $colour = $observance->colour();
 
         $shape = [
             'id' => $id,
             'urn' => 'directorium:observance:' . $id,
-            'role' => $office->role()->value(),
+            'role' => $role,
             'kind' => $observance->kind()->value(),
             'rank' => $observance->rank()->label(),
             'rankOrdinal' => $observance->rank()->ordinal(),
@@ -237,9 +283,9 @@ final class DayContract
             ],
             'names' => ['la' => $observance->latinName()],
             'titulars' => [],
-            'outcome' => $office->outcome() !== null ? $office->outcome()->value() : null,
-            'transferredTo' => self::formatDate($office->transferredTo()),
-            'transferredFrom' => self::formatDate($office->transferredFrom()),
+            'outcome' => $outcome,
+            'transferredTo' => self::formatDate($transferredTo),
+            'transferredFrom' => self::formatDate($transferredFrom),
             'vigilOf' => null,
             'octaveOf' => null,
             'aliases' => null,

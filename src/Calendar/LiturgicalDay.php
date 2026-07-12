@@ -20,6 +20,10 @@ use Directorium\Core\Trace\ResolutionTrace;
  *  - **tempora** — the temporal office of the season (the Sunday or feria),
  *    always reported even when it is also the celebration.
  *
+ * Beyond the four roles it also carries the day's **optional memorials**
+ * ({@see optionalMemorials()}) — a Novus-Ordo feria's electable options, offered but not
+ * celebrated (they neither win, commemorate, nor displace); empty in the traditional editions.
+ *
  * Each role holds {@see RoledObservance}s: an office paired with its role and,
  * where relevant, its occurrence outcome and transfer links. Convenience readers
  * ({@see celebration()} and the other three) hand back the bare
@@ -53,6 +57,9 @@ final class LiturgicalDay
 
     private ?FastingObligation $fasting;
 
+    /** @var list<RealizedObservance> */
+    private array $optionalMemorials;
+
     /**
      * @param list<RoledObservance> $celebration
      * @param list<RoledObservance> $commemoration
@@ -64,6 +71,9 @@ final class LiturgicalDay
      * @param FastingObligation|null $fasting the day's fast/abstinence obligation under the
      *        active penitential discipline ({@see fasting()}), or null when none applies or the
      *        day was not stamped
+     * @param list<RealizedObservance> $optionalMemorials the electable optional memorials the day
+     *        offers but does not celebrate ({@see optionalMemorials()}) — a Novus-Ordo feria's
+     *        free options; empty in the traditional editions, which admit no electable office
      */
     public function __construct(
         DateTimeImmutable $date,
@@ -74,7 +84,8 @@ final class LiturgicalDay
         ?ConcurrenceOutcome $secondVespers = null,
         ?ResolutionTrace $trace = null,
         ?int $commemorationLimit = null,
-        ?FastingObligation $fasting = null
+        ?FastingObligation $fasting = null,
+        array $optionalMemorials = []
     ) {
         $this->date = $date;
         $this->celebration = array_values($celebration);
@@ -85,6 +96,7 @@ final class LiturgicalDay
         $this->trace = $trace;
         $this->commemorationLimit = $commemorationLimit;
         $this->fasting = $fasting;
+        $this->optionalMemorials = array_values($optionalMemorials);
     }
 
     /** An empty placeholder day for the given date: no observances in any role. */
@@ -164,6 +176,18 @@ final class LiturgicalDay
         return $this->fasting;
     }
 
+    /**
+     * The electable optional memorials the day offers but does not celebrate (#260): a
+     * Novus-Ordo feria's free options, which the reform lets the celebrant choose but which do
+     * not displace the day. Empty in the traditional editions, which admit no electable office.
+     *
+     * @return list<RealizedObservance>
+     */
+    public function optionalMemorials(): array
+    {
+        return $this->optionalMemorials;
+    }
+
     /** A copy of the day with its evening concurrence resolved. */
     public function withSecondVespers(ConcurrenceOutcome $secondVespers): self
     {
@@ -176,7 +200,8 @@ final class LiturgicalDay
             $secondVespers,
             $this->trace,
             $this->commemorationLimit,
-            $this->fasting
+            $this->fasting,
+            $this->optionalMemorials
         );
     }
 
@@ -192,7 +217,8 @@ final class LiturgicalDay
             $this->secondVespers,
             $trace,
             $this->commemorationLimit,
-            $this->fasting
+            $this->fasting,
+            $this->optionalMemorials
         );
     }
 
@@ -224,7 +250,8 @@ final class LiturgicalDay
             $this->secondVespers,
             $this->trace,
             $this->commemorationLimit,
-            $this->fasting
+            $this->fasting,
+            $this->optionalMemorials
         );
     }
 

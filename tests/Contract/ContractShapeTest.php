@@ -11,24 +11,24 @@ use function Directorium\Core\contract;
 use function Directorium\Core\explain;
 
 /**
- * The frozen 1.0 output-contract shape (#90). These pins are the *structural* freeze —
- * the exact key layout of the contract, independent of the values — so a field added,
- * removed, renamed, or reordered fails here with a clear message. Value-level stability
- * across the centuries is the separate, exhaustive job of the golden-year digest.
+ * The 1.x output-contract shape (#90). These pins are the *structural* freeze — the exact
+ * key layout of the contract, independent of the values — so a field added, removed,
+ * renamed, or reordered fails here with a clear message. Value-level stability across the
+ * centuries is the separate, exhaustive job of the golden-year digest.
  *
  * Adding a field is a minor contract change (docs/design/output-contract.md), but it
  * must be a *conscious* one: it fails this test until the expected shape below is
- * updated in the same, reviewed change.
+ * updated in the same, reviewed change. (`optionalMemorials` joined at 1.1.0, #260.)
  */
 final class ContractShapeTest extends TestCase
 {
-    private const CONTRACT_VERSION = '1.0.2';
+    private const CONTRACT_VERSION = '1.1.0';
 
     /** The reserved top-level keys, in order. Every one is always present. */
     private const TOP_LEVEL = [
         'contractVersion', 'corpusVersion', 'engineVersion', 'rite', 'edition', 'date',
         'season', 'commemorationLimit', 'celebration', 'commemoration', 'displaced',
-        'tempora', 'secondVespers', 'firstVespers', 'resolution', 'fasting', 'calendar',
+        'tempora', 'optionalMemorials', 'secondVespers', 'firstVespers', 'resolution', 'fasting', 'calendar',
     ];
 
     /** Every office (celebration/commemoration/…) carries this fixed key set. */
@@ -52,6 +52,20 @@ final class ContractShapeTest extends TestCase
 
         self::assertNotSame([], $contract['celebration']);
         self::assertSame(self::OFFICE, array_keys($contract['celebration'][0]), 'the frozen office shape changed');
+    }
+
+    public function testOptionalMemorialsShapeIsFrozen(): void
+    {
+        // Empty on every traditional day — the 1962 golden's values are unmoved by the slot.
+        self::assertSame([], contract(new DateTimeImmutable('2026-06-30'))['optionalMemorials']);
+
+        // A Novus-Ordo Ordinary-Time feria offers its electable optional memorials (Fabian and
+        // Sebastian on 20 Jan): each is a self-describing office of the fixed shape, with no
+        // occurrence role (they are offered, not resolved).
+        $no = contract(new DateTimeImmutable('2025-01-20'), false, null, 'roman:novus-ordo-2002');
+        self::assertNotSame([], $no['optionalMemorials'], 'the NO feria should offer optional memorials');
+        self::assertSame(self::OFFICE, array_keys($no['optionalMemorials'][0]), 'the optional-memorial shape changed');
+        self::assertNull($no['optionalMemorials'][0]['role'], 'an offered office carries no occurrence role');
     }
 
     public function testCalendarBlockShapeIsFrozen(): void

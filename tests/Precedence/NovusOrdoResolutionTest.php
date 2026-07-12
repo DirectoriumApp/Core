@@ -16,9 +16,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * End-to-end resolution of the Novus-Ordo (2002) General Roman Calendar over the real corpus
  * (#108): the reformed sanctoral, its Table of Liturgical Days, the electable-optional-memorial
- * rule, and the reformed penitential discipline. The edition is isBuilt=false, so it is reached
- * through {@see DayResolver::forEdition()} (the public {@see \Directorium\Core\Overlay\CalendarCatalog}
- * boundary stays closed until the validation slice #260); this pins the resolved calendar directly.
+ * rule, and the reformed penitential discipline. It reaches the engine through
+ * {@see DayResolver::forEdition()} to pin the resolved calendar directly; the edition is now
+ * built and also resolvable at the public {@see \Directorium\Core\Overlay\CalendarCatalog}
+ * boundary (#260 flipped isBuilt — see {@see \Directorium\Core\Tests\Overlay\CalendarCatalogTest}).
  *
  * 2025 is the pinned year: Easter is 20 April (Ash Wednesday 5 March, Good Friday 18 April), and
  * every Sunday of November falls on an even-numbered date (2/9/16/23/30), so the "outranks a Sunday"
@@ -87,14 +88,22 @@ final class NovusOrdoResolutionTest extends TestCase
     {
         // 20 Jan 2025 is a Monday of Ordinary Time; Fabian and Sebastian are BOTH optional
         // memorials. The day resolves to the feria — the electable options do not displace it and
-        // are not celebrated, commemorated, or displaced (they lapse; #260 surfaces them).
+        // are not celebrated, commemorated, or displaced — but they are surfaced (electable, not
+        // celebrated) in the day's optionalMemorials (#260).
         $day = self::resolve(2025)->day(self::utc('2025-01-20'));
 
         self::assertSame('feria', $day->celebration()[0]->kind()->value());
-        // Neither optional memorial appears anywhere on the day — they are electable, not celebrated.
+        // Neither optional memorial appears in the four resolved roles — they are electable.
         $offices = self::allObservances($day);
         self::assertFalse(self::containsId($offices, 'roman:sanctorale:fabianus'));
         self::assertFalse(self::containsId($offices, 'roman:sanctorale:sebastianus'));
+        // But both are offered as optional memorials of the day.
+        $optional = [];
+        foreach ($day->optionalMemorials() as $observance) {
+            $optional[] = $observance->id()->toString();
+        }
+        self::assertContains('roman:sanctorale:fabianus', $optional);
+        self::assertContains('roman:sanctorale:sebastianus', $optional);
     }
 
     public function testASolemnityIsCelebrated(): void
