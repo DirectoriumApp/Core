@@ -28,8 +28,9 @@ use InvalidArgumentException;
  *  - **Easter-anchored** (via the {@see PaschalSkeleton}): the Most Holy Trinity
  *    (the Sunday after Pentecost, Easter+56), the Most Holy Body and Blood of Christ
  *    (the Thursday after Trinity, Easter+60 — the universal-calendar placement; the
- *    Sunday transfer where it is not a holy day of obligation is a resolve-time option
- *    deferred to edition governance, #366), and the Most Sacred Heart (the Friday of
+ *    Sunday transfer where it is not a holy day of obligation is a *conference* resolve-time
+ *    option, a future addition on the conference-propers hook, not a dated decree — see
+ *    docs/design/edition-governance.md), and the Most Sacred Heart (the Friday of
  *    the third week after Pentecost, Easter+68).
  *  - **Advent-anchored**: Christ the King, the **last** Sunday of Ordinary Time — the
  *    Sunday before the First Sunday of Advent — not the traditional last Sunday of

@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace Directorium\Core\Overlay;
 
-use Directorium\Core\Attribute\RankClass;
-use Directorium\Core\Citation\CitationSet;
 use Directorium\Core\Corpus\Corpus;
 use Directorium\Core\Corpus\CorpusRecord;
-use Directorium\Core\Observance\Observance;
-use Directorium\Core\Observance\ObservanceId;
-use Directorium\Core\Observance\ObservanceKind;
-use Directorium\Core\Sanctoral\SanctoralEntry;
 use RuntimeException;
 
 /**
@@ -70,7 +64,7 @@ final class CorpusOverlayData
 
         $operations = [];
         foreach ($this->corpus->overlayOperations($slug) as $row) {
-            $operations[] = $this->operation($row);
+            $operations[] = OverlayOperationFactory::fromRow($row);
         }
 
         return new CalendarOverlay(
@@ -78,85 +72,5 @@ final class CorpusOverlayData
             CorpusRecord::requireString($meta, 'name'),
             $operations
         );
-    }
-
-    /**
-     * @param array<string, mixed> $row
-     */
-    private function operation(array $row): OverlayOperation
-    {
-        $op = CorpusRecord::requireString($row, 'op');
-        switch ($op) {
-            case 'rerank':
-                return $this->rerank($row);
-            case 'suppress':
-                return $this->suppress($row);
-            case 'add':
-                return $this->add($row);
-            default:
-                throw new RuntimeException(sprintf('Corpus overlay has an unknown operation "%s".', $op));
-        }
-    }
-
-    /**
-     * @param array<string, mixed> $row
-     */
-    private function rerank(array $row): RerankOperation
-    {
-        $colour = isset($row['colour']) ? CorpusRecord::elementColour($row) : null;
-
-        return new RerankOperation(
-            ObservanceId::parse(CorpusRecord::requireString($row, 'target')),
-            RankClass::fromOrdinal(CorpusRecord::requireInt($row, 'rank')),
-            $colour,
-            CitationSet::fromMarkers(CorpusRecord::cites($row))
-        );
-    }
-
-    /**
-     * @param array<string, mixed> $row
-     */
-    private function suppress(array $row): SuppressOperation
-    {
-        return new SuppressOperation(
-            ObservanceId::parse(CorpusRecord::requireString($row, 'target')),
-            CitationSet::fromMarkers(CorpusRecord::cites($row))
-        );
-    }
-
-    /**
-     * @param array<string, mixed> $row
-     */
-    private function add(array $row): AddOperation
-    {
-        $entry = $row['entry'] ?? null;
-        if (!is_array($entry)) {
-            throw new RuntimeException('Corpus overlay add operation has no entry.');
-        }
-        /** @var array<string, mixed> $entry */
-
-        $id = CorpusRecord::requireString($entry, 'id');
-        $vigilOf = CorpusRecord::optionalString($entry, 'vigilOf');
-        // Forwarded for symmetry with vigilOf so an overlay-added observance can carry its
-        // octave link too; the overlay-operation schema does not yet expose octaveOf, so this
-        // is null in practice today (a particular calendar adds feasts, not octaves).
-        $octaveOf = CorpusRecord::optionalString($entry, 'octaveOf');
-
-        return new AddOperation(new SanctoralEntry(
-            CorpusRecord::requireInt($entry, 'month'),
-            CorpusRecord::requireInt($entry, 'day'),
-            new Observance(
-                ObservanceId::parse($id),
-                ObservanceKind::fromString(CorpusRecord::requireString($entry, 'kind')),
-                CorpusRecord::titulars($entry),
-                CorpusRecord::names($entry)
-            ),
-            RankClass::fromOrdinal(CorpusRecord::requireInt($entry, 'rank')),
-            CorpusRecord::elementColour($entry),
-            $vigilOf !== null ? ObservanceId::parse($vigilOf) : null,
-            CitationSet::fromMarkers(CorpusRecord::cites($entry)),
-            null,
-            $octaveOf !== null ? ObservanceId::parse($octaveOf) : null
-        ));
     }
 }

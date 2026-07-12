@@ -1,11 +1,9 @@
 {"date":"2025-03-07","oracle":"litcal","field":"grade","engine":"feria","source":"memorial","category":"grade-oracle-higher"}
 {"date":"2025-04-17","oracle":"calapi","field":"colour","engine":"white","source":"violet","category":"colour"}
 {"date":"2025-04-19","oracle":"calapi","field":"colour","engine":"white","source":"violet","category":"colour"}
-{"date":"2025-06-09","oracle":"calapi","field":"grade","engine":"feria","source":"memorial","category":"grade-oracle-higher"}
-{"date":"2025-06-09","oracle":"litcal","field":"grade","engine":"feria","source":"memorial","category":"grade-oracle-higher"}
 {"date":"2025-06-28","oracle":"calapi","field":"grade","engine":"memorial","source":"feria","category":"grade-core-higher"}
 {"date":"2025-06-28","oracle":"litcal","field":"grade","engine":"memorial","source":"feria","category":"grade-core-higher"}
-{"date":"2025-07-22","oracle":"calapi","field":"grade","engine":"memorial","source":"feast","category":"grade-oracle-higher"}
+{"date":"2025-07-22","oracle":"litcal","field":"grade","engine":"feast","source":"memorial","category":"grade-core-higher"}
 {"date":"2025-07-29","oracle":"calapi","field":"colour","engine":"white","source":"red","category":"colour"}
 {"date":"2025-09-20","oracle":"litcal","field":"colour","engine":"red","source":"white","category":"colour"}
 {"date":"2025-11-02","oracle":"calapi","field":"grade","engine":"feast","source":"solemnity","category":"grade-oracle-higher"}
@@ -14,11 +12,9 @@
 {"date":"2025-11-11","oracle":"calapi","field":"colour","engine":"white","source":"red","category":"colour"}
 {"date":"2026-04-02","oracle":"calapi","field":"colour","engine":"white","source":"violet","category":"colour"}
 {"date":"2026-04-04","oracle":"calapi","field":"colour","engine":"white","source":"violet","category":"colour"}
-{"date":"2026-05-25","oracle":"calapi","field":"grade","engine":"feria","source":"memorial","category":"grade-oracle-higher"}
-{"date":"2026-05-25","oracle":"litcal","field":"grade","engine":"feria","source":"memorial","category":"grade-oracle-higher"}
 {"date":"2026-06-13","oracle":"calapi","field":"grade","engine":"memorial","source":"feria","category":"grade-core-higher"}
 {"date":"2026-06-13","oracle":"litcal","field":"grade","engine":"memorial","source":"feria","category":"grade-core-higher"}
-{"date":"2026-07-22","oracle":"calapi","field":"grade","engine":"memorial","source":"feast","category":"grade-oracle-higher"}
+{"date":"2026-07-22","oracle":"litcal","field":"grade","engine":"feast","source":"memorial","category":"grade-core-higher"}
 {"date":"2026-07-29","oracle":"calapi","field":"colour","engine":"white","source":"red","category":"colour"}
 {"date":"2026-11-02","oracle":"calapi","field":"grade","engine":"feast","source":"solemnity","category":"grade-oracle-higher"}
 {"date":"2026-11-02","oracle":"litcal","field":"grade","engine":"feast","source":"solemnity","category":"grade-oracle-higher"}

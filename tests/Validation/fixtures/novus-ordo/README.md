@@ -53,22 +53,30 @@ Two coverage notes for maintainers extending the fixtures:
   `grade-core-higher` (the engine over-celebrates the fixed memorial). A year where that
   Saturday is otherwise free would instead show the engine's plain feria against the oracles'
   obligatory memorial — a new `grade-oracle-higher` row to baseline.
-- Post-2002 decrees (§1) accrue over time; a later year adds whichever new universal
-  memorials the reform has decreed since, each a fresh tracked row until #366 lands the
-  dated decree overlays.
+- Post-2002 decrees (§1) are now applied by the dated decree overlays (#366): the engine
+  replays each decree from its effective date, so a later fixture year adds only whichever
+  *further* universal memorials the reform decrees after those already authored, each a fresh
+  tracked row until its decree file lands.
 
 ## The tracked differences
 
-### 1 — Post-2002 decrees the 2002 typical edition excludes (→ #366)
+### 1 — Post-2002 decrees, now applied via dated decree overlays (#366)
 
-Our baseline is the *editio typica tertia* (2002). Later universal decrees are out of scope
-until the decree-overlay governance (#366) lands; the oracles track the current calendar, so
-they carry these and we resolve the underlying feria/memorial:
+The 2002 *editio typica* is a frozen snapshot; the living calendar is that snapshot plus
+**dated decrees** the engine replays by their effective date (docs/design/edition-governance.md).
+#366 landed the first two real post-2002 universal decrees, so the engine now resolves them —
+retiring the rows the 2002-only baseline used to carry:
 
-- **Mary, Mother of the Church** — Monday after Pentecost, instituted 2018. `2025-06-09`,
-  `2026-05-25` (both oracles). We resolve the Ordinary-Time feria.
-- **Mary Magdalene raised to a Feast** — decree of 3 June 2016. `2025-07-22`, `2026-07-22`
-  (calapi). We keep her 2002 grade (memorial).
+- **Mary, Mother of the Church** — Monday after Pentecost, decree *Ecclesia Mater* (11 Feb
+  2018). The engine now celebrates the obligatory memorial (white); **both oracles agree**, so
+  `2025-06-09` and `2026-05-25` are no longer tracked differences.
+- **Mary Magdalene raised to a Feast** — decree *Apostolorum Apostola* (3 June 2016). The
+  engine now reads a **feast** from 2016 onward, matching **calapi**. The committed **LitCal
+  fixture** was harvested without this change (it grades her an obligatory memorial), so the
+  engine now correctly reads *higher* than that fixture — the one place edition-governance
+  makes Core lead an oracle whose snapshot lags the decree:
+  - `2025-07-22`, `2026-07-22` (LitCal) — `grade-core-higher`. Core follows the decree and
+    calapi corroborates; a LitCal re-harvest reflecting the 2016 decree would retire both rows.
 
 ### 2 — The movable Immaculate Heart of Mary (deferred; KNOWN-LIMITATIONS)
 

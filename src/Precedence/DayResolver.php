@@ -12,6 +12,8 @@ use Directorium\Core\Calendar\RealizedObservance;
 use Directorium\Core\Calendar\RoledObservance;
 use Directorium\Core\Contract\Provenance;
 use Directorium\Core\Corpus\Corpus;
+use Directorium\Core\Decree\DecreeOffices;
+use Directorium\Core\Decree\DecreeSet;
 use Directorium\Core\Discipline\FastingResolver;
 use Directorium\Core\Discipline\PenitentialDiscipline;
 use Directorium\Core\Edition\RubricSystem;
@@ -68,6 +70,9 @@ final class DayResolver
     /** The corpus dir key of this resolver's edition, threaded into the temporal fillers. */
     private string $editionDir;
 
+    /** The edition's dated decrees, applied per resolution year — empty for an edition with none (#366). */
+    private DecreeSet $decrees;
+
     private bool $tracing;
 
     private function __construct(
@@ -78,6 +83,7 @@ final class DayResolver
         FastingResolver $fasting,
         Corpus $corpus,
         string $editionDir,
+        DecreeSet $decrees,
         bool $tracing = false
     ) {
         $this->rules = $rules;
@@ -88,6 +94,7 @@ final class DayResolver
         $this->fasting = $fasting;
         $this->corpus = $corpus;
         $this->editionDir = $editionDir;
+        $this->decrees = $decrees;
         $this->tracing = $tracing;
     }
 
@@ -113,7 +120,8 @@ final class DayResolver
             $sanctoralData ?? new CorpusSanctoralData($corpus, $system->corpusDir()),
             new FastingResolver(PenitentialDiscipline::fromCorpus($corpus, $system->penitentialDiscipline())),
             $corpus,
-            $system->corpusDir()
+            $system->corpusDir(),
+            DecreeSet::forEdition($corpus, $system->corpusDir())
         );
     }
 
@@ -179,6 +187,7 @@ final class DayResolver
             $this->fasting,
             $this->corpus,
             $this->editionDir,
+            $this->decrees,
             true
         );
     }
@@ -215,11 +224,17 @@ final class DayResolver
         $cycle = $this->temporalCycle->forYear($year, $this->corpus, $this->editionDir);
         $movable = $this->movableFeasts($year);
         $saturdayOfOurLady = SaturdayOfOurLady::forYear($year, $this->corpus, $this->editionDir);
+        // The edition's dated decrees, applied for THIS year (#366): the fixed-date changes fold
+        // into the sanctoral before precedence, the movable additions become extra candidates. Both
+        // are gated by each decree's effective date, so a decree is replayed only from the year it
+        // took force. Inert for an edition with no decrees — the sanctoral is returned unchanged and
+        // the decree offices are empty — so the traditional editions (and the 1962 golden) are unmoved.
         $sanctoral = SanctoralCalendar::forYear(
             $year,
-            $this->sanctoralData,
+            $this->decrees->applyTo($this->sanctoralData, $year),
             $this->rules->anticipatesSundayVigils()
         );
+        $decreeOffices = $this->decrees->officesFor($year);
 
         $ledger = new TransferLedger();
         /** @var array<string, list<RealizedObservance>> $forced Feasts placed on a fixed target date. */
@@ -241,6 +256,7 @@ final class DayResolver
                 $movable,
                 $saturdayOfOurLady,
                 $sanctoral,
+                $decreeOffices,
                 $forced[$key] ?? [],
                 $date
             );
@@ -269,6 +285,7 @@ final class DayResolver
         MovableFeastCalendar $movable,
         SaturdayOfOurLady $saturdayOfOurLady,
         SanctoralCalendar $sanctoral,
+        DecreeOffices $decreeOffices,
         array $forcedToday,
         DateTimeImmutable $date
     ): array {
@@ -279,6 +296,16 @@ final class DayResolver
         $movableFeast = $movable->on($date);
         if ($movableFeast !== null) {
             $candidates[] = $movableFeast;
+        }
+        // A movable memorial a dated decree adds (#366) — e.g. the Blessed Virgin Mary, Mother of
+        // the Church on the Monday after Pentecost. It competes as an ordinary sanctoral candidate;
+        // null on every day of an edition/year with no such decree in force. On the rare year where
+        // it coincides with a fixed obligatory memorial the two share a tier and the winner is by
+        // the deterministic id tie-break, not yet by the decree's precedence clause — a deferred
+        // refinement tracked in KNOWN-LIMITATIONS.md (no fixture year collides).
+        $decreeOffice = $decreeOffices->on($date);
+        if ($decreeOffice !== null) {
+            $candidates[] = $decreeOffice;
         }
         // The votive Office of Our Lady on a free Saturday (#453): an edition-gated overlay
         // (1954/1955 only), it competes as an ordinary candidate — winning a free Saturday

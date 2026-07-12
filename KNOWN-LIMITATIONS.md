@@ -56,11 +56,26 @@ relevant) as `confidence` flags in the data and in the API's coverage report.
   than keeping it as a commemoration. The *celebration* (the Lenten feria) is right; only the reduced saint's
   disposition differs. The finer office-level `optionality` marker (how the arms of a choice relate) stays a
   reserved contract slot.
-- **Novus Ordo movable memorials (#108):** the fixed-date reformed sanctoral is complete, but two **movable**
-  Marian memorials are deferred to the movable-feasts follow-up: the **Immaculate Heart of Mary** (the
-  Saturday after the Sacred Heart, an obligatory memorial in the 2002 typical edition) and — a later 2018
-  decree, so an edition-governance overlay (#366) — the **BVM Mother of the Church** (the Monday after
-  Pentecost). Neither changes a fixed-date resolution; both are additive to `NovusOrdo\MovableFeasts`.
+- **Novus Ordo movable memorials (#108 / #366):** the fixed-date reformed sanctoral is complete, and the
+  **movable-memorial mechanism now exists** — #366's dated-decree engine (`src/Decree/`) places a movable
+  memorial by its Easter offset, gated by date. It resolves the **BVM Mother of the Church** (Monday after
+  Pentecost), a 2018 decree, from its effective year. **One movable memorial remains deferred:** the
+  **Immaculate Heart of Mary** (the Saturday after the Sacred Heart), an obligatory memorial *original to the
+  2002 typical edition* (not a later decree), so it belongs in the base edition rather than a decree; it will
+  reuse the same Easter-offset placement the decree engine established. It does not change a fixed-date
+  resolution.
+- **Novus Ordo Mother-of-the-Church coincidence precedence (#366):** the movable memorial of the BVM Mother
+  of the Church (Monday after Pentecost, Easter+50) is celebrated correctly on a free green weekday, but on
+  the ~14 years in 1583–2200 where that Monday coincides with a **fixed obligatory memorial** (the first is
+  1 June 2020, St Justin; also 5 June 2028, St Boniface; 26 May 2042/2053, St Philip Neri; etc.) two rank-3
+  obligatory memorials share the same precedence tier and the resolver breaks the tie by its deterministic
+  id order rather than by a liturgical rule. The correct handling is a precedence *ruling* not yet
+  implemented — either the instituting decree's clause that **Mother of the Church takes precedence**, or the
+  general reformed rule that two coincident obligatory memorials both become optional and the **feria** is
+  celebrated; settling which governs (with sources) is the follow-up. None of the validation fixture years
+  (2025/2026) collide, so the oracle cross-check is unaffected, and the result is deterministic and
+  reproducible (the golden and reproducibility invariants hold) — only the precedence *rule* on those dates
+  is unruled.
 - **Novus Ordo Friday abstinence on a solemnity (#108):** the reformed discipline (`cic-1983`) lays
   abstinence on every Friday of the year, but the c.1251 lifting of that abstinence when a **solemnity**
   falls on the Friday is not yet modelled (the resolver's Friday rule does not consult the day's grade);

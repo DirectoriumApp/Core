@@ -2,7 +2,7 @@
 # so the build is reproducible: datestamp + serial (bump the serial on a re-cut of
 # the same day). No edition token here — the editions are named below and keyed into
 # the output tree.
-corpusVersion: "1962-2026-07-11.1"
+corpusVersion: "1962-2026-07-11.2"
 
 # `edition` is the BASE edition (the fullest, best-sourced dataset the others are
 # authored as diffs from). It is built exactly as before — its output is byte-stable.
@@ -35,5 +35,11 @@ editions:
   - dir: roman-novus-ordo-2002  # Novus Ordo (Ordinary Form), 2002/2008 typical edition
     base: roman-rubricae-1960
     whole: true
+    # The Novus Ordo is a LIVING calendar (#366): the 2002 snapshot above is frozen, and dated
+    # decrees over it are authored as additive, effective-dated files under
+    # facts/editions/roman-novus-ordo-2002/decrees/*.yaml (compiled to decrees.ndjson). Each is
+    # discovered automatically (loadDecrees); no key here. The resolver replays the decrees in
+    # force by a resolution year, so a snapshot resolves reproducibly and the same date always
+    # resolves the same way. See docs/design/edition-governance.md.
 
 generator: "@directorium/corpus-generator"

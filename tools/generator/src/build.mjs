@@ -22,6 +22,7 @@ import {
   transformTemporale,
   transformPrecedence,
   transformOverlay,
+  transformDecrees,
   transformDiscipline,
   checkCoPlacement,
 } from './transform.mjs';
@@ -91,6 +92,32 @@ function loadDisciplines() {
 }
 
 /**
+ * Discover and transform each edition's dated decrees (#366): every
+ * facts/editions/<dir>/decrees/*.yaml, file-sorted for a deterministic build. Returns
+ * one `{ dir, rows, opProvenance, movableIdentity }` per edition that ships decrees; an
+ * empty list when none do, so the corpus builds unchanged before any decree exists (the
+ * traditional editions carry no decree directory).
+ */
+function loadDecrees(editionDirs) {
+  const out = [];
+  for (const dir of editionDirs) {
+    const decreeDir = join(FACTS_DIR, 'editions', dir, 'decrees');
+    if (!existsSync(decreeDir)) {
+      continue;
+    }
+    const files = readdirSync(decreeDir)
+      .filter((file) => file.endsWith('.yaml'))
+      .sort();
+    if (files.length === 0) {
+      continue;
+    }
+    const decrees = files.map((file) => loadYaml(join(decreeDir, file)));
+    out.push(transformDecrees(decrees, dir));
+  }
+  return out;
+}
+
+/**
  * Build the corpus into `outDir` (defaults to the engine's data/corpus).
  * Returns the sorted list of generated file paths (relative to `outDir`).
  * Throws if any record fails schema validation — the build fails closed.
@@ -122,6 +149,10 @@ export function build(outDir = DEFAULT_OUT) {
 
   const overlays = loadOverlays();
   const disciplines = loadDisciplines();
+  // Dated decrees turn a frozen editio typica snapshot into a living calendar (#366): each is
+  // additive, effective-dated data, so an edition with none builds byte-identically. Discovered
+  // across the base edition and every extra edition (only the Novus Ordo ships any today).
+  const decrees = loadDecrees([edition, ...(meta.editions || []).map((e) => e.dir)]);
 
   // Additional editions (Core v0.3.0: 1954, later 1955), each authored as a diff from a
   // base edition and materialised into its own dir. Only the per-edition Layer-2 and
@@ -336,6 +367,7 @@ export function build(outDir = DEFAULT_OUT) {
     ...validateAll(validators['source'], sources, 'source'),
     ...overlays.flatMap((o) => validateAll(validators['overlay-operation'], o.rows, `overlay:${o.slug}`)),
     ...overlays.flatMap((o) => validateAll(validators['overlay'], [o.meta], `overlay-meta:${o.slug}`)),
+    ...decrees.flatMap((d) => validateAll(validators['decree'], d.rows, `decree:${d.dir}`)),
     ...disciplines.flatMap((d) => validateAll(validators['fasting-rules'], d.rules, `discipline:${d.key}`)),
     ...extraEditions.flatMap((ed) => [
       ...validateAll(validators['attributes.sanctorale'], ed.attributes, `attributes.sanctorale:${ed.dir}`),
@@ -366,6 +398,11 @@ export function build(outDir = DEFAULT_OUT) {
       // particular calendar's authority for the changed fact, an add carries a full
       // entry whose title must cite a public-domain text source. Same born-cited gate.
       ...overlays.map((o) => ({ shape: `overlay:${o.slug}`, records: o.provenance })),
+      // A decree's fixed-date operation cites are checked as its own shape (no transcribed name on
+      // a rerank/suppress); a movable memorial's reform-coined Latin name is checked as a sanctoral
+      // IDENTITY, so the descriptor exemption (option A) admits its reference cite (#366).
+      ...decrees.map((d) => ({ shape: `decree:${d.dir}`, records: d.opProvenance })),
+      ...decrees.map((d) => ({ shape: 'identity.sanctorale', records: d.movableIdentity })),
       ...extraEditions.flatMap((ed) => [
         { shape: `attributes.sanctorale:${ed.dir}`, records: ed.attributes },
         { shape: `attributes.temporale:${ed.dir}`, records: ed.temporaleAttributes },
@@ -386,6 +423,12 @@ export function build(outDir = DEFAULT_OUT) {
   // governing law), cite-checked like the other structural facts; the meta's `name` is
   // an authored label, not a transcribed title, so it is not run through the PD gate.
   const disciplineRows = disciplines.flatMap((d) => [...d.rules, { cite: d.meta.cite, rule: d.key }]);
+  // Each decree carries its own promulgating authority (`cite`); resolve and count it like the
+  // other structural facts. Its operation and movable-addition cites are already checked by the
+  // born-cited gate above (as `decree:<dir>` and `identity.sanctorale` shapes).
+  const decreeCiteRows = decrees.flatMap((d) =>
+    d.rows.filter((r) => r.cite !== undefined).map((r) => ({ cite: r.cite, rule: r.id })),
+  );
   for (const row of [
     ...offsets,
     ...blockSeasons,
@@ -393,6 +436,7 @@ export function build(outDir = DEFAULT_OUT) {
     ...precedence.rules,
     ...extraPrecedenceRows,
     ...disciplineRows,
+    ...decreeCiteRows,
   ]) {
     const key = String(row.cite).split(':')[0];
     usage.set(key, (usage.get(key) || 0) + 1);
@@ -474,6 +518,17 @@ export function build(outDir = DEFAULT_OUT) {
     outputs[`disciplines/${d.key}/discipline.json`] = {
       text: toPretty(d.meta),
       records: 1,
+      primaryKey: 'id',
+    };
+  }
+
+  // Each edition with dated decrees (#366) contributes a decrees.ndjson — one row per decree,
+  // sorted by id (which leads with the effective date, so chronological). Emitted only for an
+  // edition that ships any, so the manifest's presence of the file is how the loader discovers it.
+  for (const d of decrees) {
+    outputs[`editions/${d.dir}/decrees.ndjson`] = {
+      text: toNdjson(d.rows),
+      records: d.rows.length,
       primaryKey: 'id',
     };
   }

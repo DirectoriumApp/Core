@@ -247,6 +247,27 @@ final class Corpus
     }
 
     /**
+     * The dated decree rows an edition ships (`editions/<dir>/decrees.ndjson`), one row
+     * per decree — its effective date and its `sanctoral` / `movable` changes (#366).
+     * Empty when the edition carries no decrees: the file is emitted only for an edition
+     * that has any, so its absence from the manifest is the normal, non-error case and
+     * this returns an empty list rather than throwing (the traditional editions, and the
+     * Novus Ordo before its first decree, ship none).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function editionDecrees(string $editionDir): array
+    {
+        $relativePath = 'editions/' . $editionDir . '/decrees.ndjson';
+        $files = $this->manifest()['files'] ?? [];
+        if (!is_array($files) || !isset($files[$relativePath])) {
+            return [];
+        }
+
+        return $this->records($relativePath);
+    }
+
+    /**
      * The particular-calendar overlay slugs the corpus ships, from the manifest
      * (Core #76). Empty when the corpus carries no overlays.
      *

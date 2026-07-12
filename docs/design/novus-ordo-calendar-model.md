@@ -222,20 +222,29 @@ never transcribed. The **penitential discipline** for the NO is the 1983 Code /
 abstinence; Fridays of Lent abstinence; Fridays of the year abstinence-or-substitution) authored
 as a new discipline record so NO fasting is correct rather than reusing the 1917 Code.
 
-## Edition governance — the decree ledger (#366)
+## Edition governance — the decree ledger (#366, landed)
 
 The base `roman:novus-ordo-2002` corpus carries the roster as of the 2002/2008 editio typica.
-Post-2002 general-calendar **decrees** (St Mary Magdalene raised to a **Feast**, 22 Jul, Prot.
-257/16, 3 Jun 2016; the **BVM Mother of the Church** obligatory memorial, Monday after Pentecost,
-Prot. 10/18, 2018; St Faustina 5 Oct 2020; the 2021 Doctors — Gregory of Narek / John of Ávila /
-Hildegard; etc.) are modelled as **dated overlay files** under
-`editions/roman-novus-ordo-2002/decrees/<effective-date>-<slug>.yaml`, reusing the particular-
-calendar overlay engine. Each carries an **effective date** and applies **on or after** it, so
-"the calendar as of date D" = base + decrees effective ≤ D reproducibly. This satisfies the #366
-ACs (snapshots resolve independently and are diffable; a dated decree applies on/after its
-effective date only; the snapshot/decree axis is reserved in the edition grammar); the decree
-ledger is a **first-party temporal overlay** on the OF base, distinct from the society/national
-overlays.
+Post-2002 general-calendar **decrees** are modelled as **dated files** under
+`editions/roman-novus-ordo-2002/decrees/<effective-date>-<slug>.yaml`, reusing the
+particular-calendar overlay vocabulary; each carries an **effective date** and applies **on or
+after** it, so "the calendar as of date D" = base + decrees effective ≤ D, reproducibly. **#366
+implemented this** (`src/Decree/`, see [`edition-governance.md`](edition-governance.md)) and
+shipped the first two real decrees:
+
+- *Apostolorum Apostola* (Prot. 257/16, 3 Jun 2016) — **St Mary Magdalene** raised to a **Feast**
+  (22 Jul): a fixed-date `rerank`, gated to the day (a memorial through 2015, a feast from 2016).
+- *Ecclesia Mater* (11 Feb 2018) — the **BVM Mother of the Church** obligatory memorial on the
+  **Monday after Pentecost** (Easter + 50): a **movable** addition placed by its Easter offset,
+  in force from 2018.
+
+Later universal decrees (St Faustina 2020, the 2021 Doctors — Gregory of Narek / John of Ávila /
+Hildegard, etc.) are further decree files authored the same way when a fixture year needs them.
+This satisfies the #366 ACs (snapshots resolve independently and are diffable; a dated decree
+applies on/after its effective date only; the snapshot/decree axis is reserved in the edition
+grammar and coordinated with the rite-units, #299). The decree ledger is a **first-party dated
+layer** on the OF base, distinct from the society/national overlays. Decrees change resolved
+values, never the contract shape (no `SHAPE_VERSION` bump), and are inert for the 1962 base.
 
 **Conference variation stays out of the universal core.** The three Sunday-transfer choices
 (**Ascension**, **Epiphany**, **Corpus Christi** → Sunday) are **resolve-time toggles** (the same
