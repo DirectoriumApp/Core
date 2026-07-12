@@ -116,4 +116,20 @@ final class RubricSystemTest extends TestCase
         self::assertSame('Rubricae 1960 (1962)', RubricSystem::rubricae1960()->label());
         self::assertStringContainsString('1954', RubricSystem::divinoAfflatu()->label());
     }
+
+    public function testCarriesItsSupersessionPointer(): void
+    {
+        // The edition-governance metadata (#366): each edition names the one that replaced it,
+        // within its own line. The traditional line: 1954 → 1955 → 1962; the Novus-Ordo line:
+        // 1969 → 1975 → 2002.
+        self::assertSame(RubricSystem::RUBRICAE_1955, RubricSystem::divinoAfflatu()->supersededBy());
+        self::assertSame(RubricSystem::RUBRICAE_1960, RubricSystem::rubricae1955()->supersededBy());
+        self::assertSame(RubricSystem::NOVUS_ORDO_1975, RubricSystem::fromString('1969')->supersededBy());
+        self::assertSame(RubricSystem::NOVUS_ORDO_2002, RubricSystem::fromString('1975')->supersededBy());
+
+        // 1962 is still in authorised traditional use (the reform opened a parallel line, it did
+        // not supersede it); the 2002 Novus Ordo is the current head, kept living by decrees (#366).
+        self::assertNull(RubricSystem::rubricae1960()->supersededBy());
+        self::assertNull(RubricSystem::fromString('novus-ordo')->supersededBy());
+    }
 }

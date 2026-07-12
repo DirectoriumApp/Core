@@ -145,6 +145,7 @@ final class Directorium\Core\Corpus\Corpus
   static default(): Directorium\Core\Corpus\Corpus
   disciplineMeta(string $disciplineKey): array
   easterOffsets(): array
+  editionDecrees(string $editionDir): array
   fastingRules(string $disciplineKey): array
   static flush(): void
   identitySanctorale(): array
@@ -180,6 +181,7 @@ final class Directorium\Core\Edition\RubricSystem
   penitentialDiscipline(): string
   static rubricae1955(): Directorium\Core\Edition\RubricSystem
   static rubricae1960(): Directorium\Core\Edition\RubricSystem
+  supersededBy(): ?string
   urn(): string
   validFrom(): int
   validTo(): ?int

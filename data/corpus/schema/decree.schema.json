@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.directorium.app/corpus/decree.schema.json",
+  "title": "Dated edition decree",
+  "description": "One row of an edition's decrees.ndjson (#366): a dated change to a living calendar, applied on or after its effective date. A decree carries fixed-date `sanctoral` operations (the same add / rerank / suppress vocabulary a particular-calendar overlay uses) and/or `movable` additions placed by an Easter offset (a memorial no fixed month/day entry can express). Mirrors the PHP Decree value object; the file is sorted by decree id.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "effective", "title", "cite"],
+  "anyOf": [
+    { "required": ["sanctoral"], "properties": { "sanctoral": { "minItems": 1 } } },
+    { "required": ["movable"], "properties": { "movable": { "minItems": 1 } } }
+  ],
+  "properties": {
+    "id": {
+      "description": "The decree's stable slug: <effective-date>-<title-slug> (its file basename).",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "effective": {
+      "description": "ISO date (YYYY-MM-DD) the decree takes force; it applies to a day on or after it.",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "title": {
+      "description": "The decree's incipit / short title, e.g. \"Apostolorum Apostola\".",
+      "type": "string",
+      "minLength": 1
+    },
+    "cite": {
+      "description": "The decree's own authority (its registered source key).",
+      "$ref": "#/$defs/sourceRef"
+    },
+    "sanctoral": {
+      "description": "Fixed-date changes, the overlay operation vocabulary.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/sanctoralOp" }
+    },
+    "movable": {
+      "description": "Memorials placed by an Easter offset, which no fixed-date operation can express.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/movable" }
+    }
+  },
+  "$defs": {
+    "sanctoralId": {
+      "description": "An ObservanceId slug in the sanctorale cycle.",
+      "type": "string",
+      "pattern": "^roman:sanctorale:[a-z0-9]+(-[a-z0-9]+)*(:[a-z0-9]+(-[a-z0-9]+)*)*$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "rank": {
+      "description": "Liturgical class 1 (highest) .. 4 (commemoration-grade).",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "colour": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base"],
+      "properties": {
+        "base": { "enum": ["white", "red", "green", "violet", "black", "rose"] },
+        "roseAllowed": { "const": true }
+      }
+    },
+    "observanceKind": {
+      "enum": [
+        "sunday", "feria", "feast", "special-movable", "vigil",
+        "octave-day", "within-octave", "ember-day", "rogation-day",
+        "lady-on-saturday", "commemoration-only", "office-of-the-dead"
+      ]
+    },
+    "names": {
+      "type": "object",
+      "required": ["la"],
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "sourceRef": {
+      "description": "A source key, optionally suffixed with a :locator.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9.]+)*(:[^\\s]+)?$"
+    },
+    "cites": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/sourceRef" }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "titulars", "names", "rank", "colour", "month", "day", "cites"],
+      "properties": {
+        "id": { "$ref": "#/$defs/sanctoralId" },
+        "kind": { "$ref": "#/$defs/observanceKind" },
+        "titulars": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/slug" }
+        },
+        "names": { "$ref": "#/$defs/names" },
+        "rank": { "$ref": "#/$defs/rank" },
+        "colour": { "$ref": "#/$defs/colour" },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "day": { "type": "integer", "minimum": 1, "maximum": 31 },
+        "vigilOf": { "$ref": "#/$defs/sanctoralId" },
+        "cites": {
+          "allOf": [
+            { "$ref": "#/$defs/cites" },
+            { "required": ["names.la"] }
+          ]
+        }
+      }
+    },
+    "sanctoralOp": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "rerank",
+          "additionalProperties": false,
+          "required": ["op", "target", "rank", "cites"],
+          "properties": {
+            "op": { "const": "rerank" },
+            "target": { "$ref": "#/$defs/sanctoralId" },
+            "rank": { "$ref": "#/$defs/rank" },
+            "colour": { "$ref": "#/$defs/colour" },
+            "cites": {
+              "allOf": [
+                { "$ref": "#/$defs/cites" },
+                { "required": ["rank"] }
+              ]
+            }
+          }
+        },
+        {
+          "title": "suppress",
+          "additionalProperties": false,
+          "required": ["op", "target", "cites"],
+          "properties": {
+            "op": { "const": "suppress" },
+            "target": { "$ref": "#/$defs/sanctoralId" },
+            "cites": {
+              "allOf": [
+                { "$ref": "#/$defs/cites" },
+                { "required": ["suppressed"] }
+              ]
+            }
+          }
+        },
+        {
+          "title": "add",
+          "additionalProperties": false,
+          "required": ["op", "entry"],
+          "properties": {
+            "op": { "const": "add" },
+            "entry": { "$ref": "#/$defs/entry" }
+          }
+        }
+      ]
+    },
+    "movable": {
+      "description": "A movable memorial a decree adds, placed by a signed day-offset from Easter (Pentecost Monday = 50). Self-contained: identity + attributes + the offset.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "titulars", "names", "rank", "colour", "easterOffset", "cites"],
+      "properties": {
+        "id": { "$ref": "#/$defs/sanctoralId" },
+        "kind": { "$ref": "#/$defs/observanceKind" },
+        "titulars": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/slug" }
+        },
+        "names": { "$ref": "#/$defs/names" },
+        "rank": { "$ref": "#/$defs/rank" },
+        "colour": { "$ref": "#/$defs/colour" },
+        "easterOffset": { "type": "integer" },
+        "cites": {
+          "allOf": [
+            { "$ref": "#/$defs/cites" },
+            { "required": ["names.la"] }
+          ]
+        }
+      }
+    }
+  }
+}

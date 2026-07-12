@@ -651,57 +651,64 @@ export function transformOctaves(entries, editionDir, decls) {
 }
 
 /**
- * Fan a particular-calendar overlay's YAML into its NDJSON operation rows, the
- * metadata singleton, and the born-cited provenance shadow records (Core #76).
- *
- * Each operation is one row; the three kinds mirror the PHP {@see OverlayOperation}
- * value objects — `rerank` (change an existing feast's rank, optionally its colour),
- * `add` (a proper feast the universal calendar lacks, carrying a full entry), and
- * `suppress` (drop a universal feast). Rows are sorted by their target observance id,
- * so the file is deterministic and the order it is written in matches the
- * order-independent order the decorator applies them. The `provenance` records feed
- * the same born-cited gate the sanctoral uses: every cite must resolve to a registered
- * source, and an added feast's title must cite a public-domain text source.
+ * Fan one add / rerank / suppress operation into its canonical NDJSON row and its
+ * born-cited provenance shadow record — the shape both a particular-calendar overlay
+ * and a dated edition decree share (#366), since the PHP loader
+ * ({@link OverlayOperationFactory}) rebuilds them from an identical row. `context` names
+ * the containing overlay/decree for a legible error. Returns `{ row, provenance }`.
+ */
+function transformOverlayOperation(op, context) {
+  if (op.op === 'rerank') {
+    const cites = op.cites || {};
+    const row = { op: 'rerank', target: op.target, rank: op.rank, cites };
+    if (op.colour !== undefined) {
+      row.colour = colourOf(op.colour);
+    }
+    return { row, provenance: { id: op.target, cites } };
+  }
+  if (op.op === 'suppress') {
+    const cites = op.cites || {};
+    return { row: { op: 'suppress', target: op.target, cites }, provenance: { id: op.target, cites } };
+  }
+  if (op.op === 'add') {
+    const e = op.entry;
+    const cites = e.cites || {};
+    const entry = {
+      id: e.id,
+      kind: e.kind,
+      titulars: e.titulars,
+      names: e.names,
+      rank: e.rank,
+      colour: colourOf(e.colour),
+      month: e.month,
+      day: e.day,
+      cites,
+    };
+    if (e.vigilOf) {
+      entry.vigilOf = e.vigilOf;
+    }
+    return { row: { op: 'add', entry }, provenance: { id: e.id, cites, names: e.names } };
+  }
+  throw new Error(`${context}: unknown operation "${String(op.op)}"`);
+}
+
+/**
+ * Fan a particular-calendar overlay's YAML into its NDJSON operation rows, the metadata
+ * singleton, and the born-cited provenance shadow records (Core #76). Each add / rerank /
+ * suppress operation becomes one row via {@link transformOverlayOperation}; rows are sorted
+ * by their target observance id, so the file is deterministic and its order matches the
+ * order-independent order the decorator applies them. The `provenance` records feed the
+ * same born-cited gate the sanctoral uses (every cite resolves; an added feast's title
+ * cites a public-domain text source). Returns `{ meta, rows, provenance }`.
  */
 export function transformOverlay(overlay) {
   const rows = [];
   const provenance = [];
 
   for (const op of overlay.operations || []) {
-    if (op.op === 'rerank') {
-      const cites = op.cites || {};
-      const row = { op: 'rerank', target: op.target, rank: op.rank, cites };
-      if (op.colour !== undefined) {
-        row.colour = colourOf(op.colour);
-      }
-      rows.push(row);
-      provenance.push({ id: op.target, cites });
-    } else if (op.op === 'suppress') {
-      const cites = op.cites || {};
-      rows.push({ op: 'suppress', target: op.target, cites });
-      provenance.push({ id: op.target, cites });
-    } else if (op.op === 'add') {
-      const e = op.entry;
-      const cites = e.cites || {};
-      const entry = {
-        id: e.id,
-        kind: e.kind,
-        titulars: e.titulars,
-        names: e.names,
-        rank: e.rank,
-        colour: colourOf(e.colour),
-        month: e.month,
-        day: e.day,
-        cites,
-      };
-      if (e.vigilOf) {
-        entry.vigilOf = e.vigilOf;
-      }
-      rows.push({ op: 'add', entry });
-      provenance.push({ id: e.id, cites, names: e.names });
-    } else {
-      throw new Error(`overlay ${overlay.id}: unknown operation "${String(op.op)}"`);
-    }
+    const { row, provenance: prov } = transformOverlayOperation(op, `overlay ${overlay.id}`);
+    rows.push(row);
+    provenance.push(prov);
   }
 
   const targetOf = (row) => (row.op === 'add' ? row.entry.id : row.target);
@@ -716,6 +723,65 @@ export function transformOverlay(overlay) {
     rows,
     provenance,
   };
+}
+
+/**
+ * Fan an edition's dated decrees (#366) into its `decrees.ndjson` rows and the
+ * born-cited provenance records the gate checks. Each decree becomes one row —
+ * `{ id, effective, title, cite?, sanctoral, movable }` — with its fixed-date changes
+ * carried in the shared overlay-operation shape and its movable additions as
+ * self-contained `{ id, kind, titulars, names, rank, colour, easterOffset, cites }`.
+ *
+ * Two provenance groups are returned so the gate applies the right rule to each:
+ *   - `opProvenance` (shape `decree:<dir>`) — the sanctoral operations' cites; a rerank
+ *     or suppress carries no transcribed name, an add's title would need a public-domain
+ *     text exactly as a universal identity row does; and
+ *   - `movableIdentity` (shape `identity.sanctorale`) — a movable memorial's Latin name,
+ *     a reform-coined descriptor cited to the promulgating decree (option A), which the
+ *     gate's descriptor exemption admits only on the sanctoral-identity shape.
+ *
+ * Rows are sorted by decree id (chronological, since the id leads with the date) for a
+ * deterministic file.
+ */
+export function transformDecrees(decrees, editionDir) {
+  const rows = [];
+  const opProvenance = [];
+  const movableIdentity = [];
+
+  for (const decree of decrees) {
+    const sanctoral = [];
+    for (const op of decree.sanctoral || []) {
+      const { row, provenance } = transformOverlayOperation(op, `decree ${decree.id}`);
+      sanctoral.push(row);
+      opProvenance.push(provenance);
+    }
+
+    const movable = [];
+    for (const m of decree.movable || []) {
+      const cites = m.cites || {};
+      movable.push({
+        id: m.id,
+        kind: m.kind,
+        titulars: m.titulars,
+        names: m.names,
+        rank: m.rank,
+        colour: colourOf(m.colour),
+        easterOffset: m.easterOffset,
+        cites,
+      });
+      movableIdentity.push({ id: m.id, names: m.names, cites });
+    }
+
+    const row = { id: decree.id, effective: decree.effective, title: decree.title, sanctoral, movable };
+    if (decree.cite !== undefined) {
+      row.cite = decree.cite;
+    }
+    rows.push(row);
+  }
+
+  rows.sort(byKey('id'));
+
+  return { dir: editionDir, rows, opProvenance, movableIdentity };
 }
 
 /** Sort a list of rows by a string key in code-unit order (stable, explicit). */

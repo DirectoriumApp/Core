@@ -1,0 +1,25 @@
+# Decree "Apostolorum Apostola" (Congregation for Divine Worship and the Discipline of the
+# Sacraments, Prot. N. 257/16, 3 June 2016) — a DATED decree over the 2002 editio typica
+# snapshot (#366, docs/design/edition-governance.md).
+#
+# It raised the celebration of St Mary Magdalene (22 July) from an obligatory MEMORIAL to a
+# FEAST in the General Roman Calendar. That is a fixed-date sanctoral change, so it is
+# authored with the overlay `rerank` vocabulary the decree engine shares with the
+# particular calendars: the reform's memorial (novusRank memorial → RankClass 3, in the base
+# 2002 sanctoral) is re-ranked to a feast (RankClass 2); the colour (white) is unchanged, so
+# only the grade is stated. Applied on or after the effective date, so the engine reads a
+# memorial for 22 July through 2015 and a feast from 2016 onward — the same date always
+# resolving the same way. The grade change is an uncopyrightable fact cited to the decree
+# (consult-only, cdw-2016-magdalene); the decree's text is never transcribed. St Mary
+# Magdalene keeps her existing public-domain identity and title from the shared union, so no
+# name is restated here.
+id: 2016-06-03-mariae-magdalenae-festum
+effective: "2016-06-03"
+title: "Apostolorum Apostola"
+cite: cdw-2016-magdalene
+sanctoral:
+  - op: rerank
+    target: roman:sanctorale:maria-magdalena
+    rank: 2
+    cites:
+      rank: cdw-2016-magdalene

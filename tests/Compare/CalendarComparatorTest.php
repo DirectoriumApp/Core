@@ -22,6 +22,31 @@ final class CalendarComparatorTest extends TestCase
     private const E1962 = RubricSystem::RUBRICAE_1960;
     private const E1954 = RubricSystem::DIVINO_AFFLATU;
     private const E1955 = RubricSystem::RUBRICAE_1955;
+    private const ENO = RubricSystem::NOVUS_ORDO_2002;
+
+    /**
+     * The Novus-Ordo 2002 snapshot resolves independently and is diffable against a
+     * traditional edition through the ordinary comparison machinery (#366 AC). On 22 July
+     * 2025 both keep St Mary Magdalene, but the snapshot replays the reform's 2016 decree
+     * (Apostolorum Apostola), which raised her to a FEAST — so the day diverges on rank
+     * while agreeing on the feast itself. This proves both that the snapshot is a
+     * first-class comparison participant and that a dated decree flows into the diff.
+     */
+    public function testTheNovusOrdoSnapshotIsDiffableAndReflectsItsDecrees(): void
+    {
+        $day = (new CalendarComparator())->compareDay(
+            ['roman:novus-ordo-2002', '1962'],
+            TemporalCalendar::utcDate(2025, 7, 22)
+        );
+
+        self::assertTrue($day->isDivergent());
+        self::assertSame('roman:sanctorale:maria-magdalena', $day->cell(self::ENO)->feastId());
+        self::assertSame('roman:sanctorale:maria-magdalena', $day->cell(self::E1962)->feastId());
+        self::assertTrue($day->agreesOn(ComparisonField::FEAST));
+        self::assertContains(ComparisonField::RANK, $day->divergences());
+        self::assertSame(2, $day->cell(self::ENO)->rankOrdinal(), 'a feast under the 2016 decree');
+        self::assertSame(3, $day->cell(self::E1962)->rankOrdinal(), 'her memorial-grade double in 1962');
+    }
 
     /** Christmas is I class white in every edition — a day the reforms never touched. */
     public function testIdenticalDayHasNoDivergences(): void

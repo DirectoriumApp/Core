@@ -1,0 +1,32 @@
+# Decree "Ecclesia Mater" (Congregation for Divine Worship and the Discipline of the
+# Sacraments, 11 February 2018) — a DATED decree over the 2002 editio typica
+# snapshot (#366, docs/design/edition-governance.md).
+#
+# It inscribed the obligatory memorial of the Blessed Virgin Mary, Mother of the Church, in
+# the General Roman Calendar on the MONDAY AFTER PENTECOST. That day is movable (Easter + 50),
+# so no fixed month/day sanctoral entry can express it; it is authored as a `movable` addition
+# the decree engine places by its Easter offset each year and gates by the effective date —
+# appearing from Pentecost Monday 2018 onward. It is an obligatory memorial (RankClass 3),
+# white, and competes as an ordinary sanctoral candidate, winning the green Ordinary-Time
+# weekday it falls on. The reform-coined Latin title is an uncopyrightable descriptor cited to
+# the decree (option A, docs/design/text-licensing-model.md), not a transcription of the
+# copyrighted Missal; the grade, colour, and offset are uncontroversial facts, likewise cited
+# to the decree (consult-only, cdw-2018-mater-ecclesiae).
+id: 2018-02-11-mater-ecclesiae
+effective: "2018-02-11"
+title: "Ecclesia Mater"
+cite: cdw-2018-mater-ecclesiae
+movable:
+  - id: roman:sanctorale:maria-mater-ecclesiae
+    kind: feast
+    titulars: [beata-maria-virgo]
+    names:
+      la: "Beatae Mariae Virginis, Ecclesiae Matris"
+    rank: 3
+    easterOffset: 50
+    colour: white
+    cites:
+      names.la: cdw-2018-mater-ecclesiae
+      rank: cdw-2018-mater-ecclesiae
+      colour: cdw-2018-mater-ecclesiae
+      easterOffset: cdw-2018-mater-ecclesiae

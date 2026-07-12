@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1962-2026-07-11.1",
+  "corpusVersion": "1962-2026-07-11.2",
   "disciplines": [
     "cic-1917",
     "cic-1983"
@@ -65,6 +65,11 @@
       "primaryKey": "archetype",
       "records": 36,
       "sha256": "a4f52d0e506f7acae83b87a96e0a32da06d728e38c5dd8f82f41a51fa572e945"
+    },
+    "editions/roman-novus-ordo-2002/decrees.ndjson": {
+      "primaryKey": "id",
+      "records": 2,
+      "sha256": "5c1de5e655b0b76ba38bca2dfafd288ace60f8bb39dba36c2279436cee1a0937"
     },
     "editions/roman-novus-ordo-2002/placement.sanctorale.ndjson": {
       "primaryKey": "id",
@@ -183,8 +188,8 @@
     },
     "sources.ndjson": {
       "primaryKey": "key",
-      "records": 14,
-      "sha256": "e8c07c3d0e19a2782217e83a0738ea19fbef53ae42c58c2aaef37a76caba5655"
+      "records": 16,
+      "sha256": "3dec2e87fff9b48bb4d9fb2edcca336dd5cdcb18d72055a640fcf8353f2bd4dd"
     },
     "temporal/block-seasons.ndjson": {
       "primaryKey": "block",
@@ -213,6 +218,22 @@
       "title": "Calendarium Romanum (ex decreto Sacrosancti Oecumenici Concilii Vaticani II instauratum)",
       "urn": "directorium:source:cal-rom-1969",
       "uses": 1069
+    },
+    {
+      "key": "cdw-2016-magdalene",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Decree Apostolorum Apostola on the celebration of St Mary Magdalene in the General Roman Calendar",
+      "urn": "directorium:source:cdw-2016-magdalene",
+      "uses": 2
+    },
+    {
+      "key": "cdw-2018-mater-ecclesiae",
+      "kind": "reference",
+      "rights": "reference",
+      "title": "Decree Ecclesia Mater on the celebration of the Blessed Virgin Mary, Mother of the Church",
+      "urn": "directorium:source:cdw-2018-mater-ecclesiae",
+      "uses": 5
     },
     {
       "key": "cic-1917",

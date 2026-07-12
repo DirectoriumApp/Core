@@ -71,6 +71,8 @@ final class RubricSystem
 
     private string $discipline;
 
+    private ?string $supersededBy;
+
     private function __construct(
         string $urn,
         string $corpusDir,
@@ -78,7 +80,8 @@ final class RubricSystem
         int $validFrom,
         ?int $validTo,
         bool $built,
-        string $discipline
+        string $discipline,
+        ?string $supersededBy
     ) {
         $this->urn = $urn;
         $this->corpusDir = $corpusDir;
@@ -87,6 +90,7 @@ final class RubricSystem
         $this->validTo = $validTo;
         $this->built = $built;
         $this->discipline = $discipline;
+        $this->supersededBy = $supersededBy;
     }
 
     /**
@@ -97,7 +101,7 @@ final class RubricSystem
      * data and rules land.
      *
      * @return array<string, array{dir: string, label: string, from: int, to: int|null,
-     *     built: bool, discipline: string}>
+     *     built: bool, discipline: string, superseded: string|null}>
      */
     private static function registry(): array
     {
@@ -109,6 +113,7 @@ final class RubricSystem
                 'to' => 1955,
                 'built' => true,
                 'discipline' => 'cic-1917',
+                'superseded' => self::RUBRICAE_1955,
             ],
             self::RUBRICAE_1955 => [
                 'dir' => 'roman-rubricae-1955',
@@ -117,6 +122,7 @@ final class RubricSystem
                 'to' => 1960,
                 'built' => true,
                 'discipline' => 'cic-1917',
+                'superseded' => self::RUBRICAE_1960,
             ],
             self::RUBRICAE_1960 => [
                 'dir' => 'roman-rubricae-1960',
@@ -125,6 +131,9 @@ final class RubricSystem
                 'to' => null,
                 'built' => true,
                 'discipline' => 'cic-1917',
+                // Still in authorised traditional use, not abolished: the reform opened a
+                // parallel line (the Novus Ordo), it did not supersede 1962.
+                'superseded' => null,
             ],
             self::NOVUS_ORDO_1969 => [
                 'dir' => 'roman-novus-ordo-1969',
@@ -133,6 +142,7 @@ final class RubricSystem
                 'to' => 1974,
                 'built' => false,
                 'discipline' => 'cic-1983',
+                'superseded' => self::NOVUS_ORDO_1975,
             ],
             self::NOVUS_ORDO_1975 => [
                 'dir' => 'roman-novus-ordo-1975',
@@ -141,6 +151,7 @@ final class RubricSystem
                 'to' => 2001,
                 'built' => false,
                 'discipline' => 'cic-1983',
+                'superseded' => self::NOVUS_ORDO_2002,
             ],
             self::NOVUS_ORDO_2002 => [
                 'dir' => 'roman-novus-ordo-2002',
@@ -149,6 +160,9 @@ final class RubricSystem
                 'to' => null,
                 'built' => true,
                 'discipline' => 'cic-1983',
+                // The current General Roman Calendar: not superseded by a later typica, kept
+                // living instead by dated decrees over this snapshot (#366).
+                'superseded' => null,
             ],
         ];
     }
@@ -245,7 +259,8 @@ final class RubricSystem
             $meta['from'],
             $meta['to'],
             $meta['built'],
-            $meta['discipline']
+            $meta['discipline'],
+            $meta['superseded']
         );
     }
 
@@ -286,6 +301,18 @@ final class RubricSystem
     public function governs(int $year): bool
     {
         return $year >= $this->validFrom && ($this->validTo === null || $year <= $this->validTo);
+    }
+
+    /**
+     * The URN of the edition that replaced this one, or null for an edition not superseded —
+     * one still in use (1962, in authorised traditional use) or the current head of its line
+     * (the 2002 Novus Ordo, kept living by dated decrees rather than a new typica, #366). The
+     * supersession pointer plus the {@see validFrom()}/{@see validTo()} window is the
+     * edition-governance metadata of docs/design/edition-governance.md, surfaced for discovery.
+     */
+    public function supersededBy(): ?string
+    {
+        return $this->supersededBy;
     }
 
     /** Whether this system's data and precedence rules are built and resolvable today. */

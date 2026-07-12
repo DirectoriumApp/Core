@@ -50,8 +50,11 @@ reformed **Novus Ordo** (Ordinary Form).
   for precedence; and the reformed penitential discipline (`cic-1983` — fast on Ash Wednesday and
   Good Friday only). A weekday's electable **optional memorials** are surfaced in the contract's
   `optionalMemorials` list; the day itself resolves to the obligatory office or the feria.
-- **What it excludes:** universal decrees promulgated *after* the 2002 typical edition (e.g. the
-  2018 Mary, Mother of the Church) — those arrive with the dated decree-overlay governance (#366).
+- **Post-2002 decrees:** the 2002 snapshot is kept **living** by dated decrees (#366): the engine
+  replays each decree from its effective date, so resolving a current year reflects it and an early
+  year does not — the same date always resolving the same way. Shipped: **St Mary Magdalene** raised
+  to a Feast (2016) and the **BVM Mother of the Church** on the Monday after Pentecost (2018). Later
+  universal decrees are added as further dated files.
 - **Who follows it:** the Ordinary Form of the Roman rite as celebrated across the Latin Church.
   Cross-checked against two independent open-source calendar engines (#260). Historical window
   2002–present.

@@ -30,6 +30,7 @@ segments.
 | `audio` | `<rite>:<genre>:<observance-body>` | `directorium:audio:roman:introit:sanctorale:laurentius` |
 | `devotion` | `<rite>:<subject-slug>` | `directorium:devotion:roman:rosarium` |
 | `overlay` | `<rite>:<overlay-slug>` | `directorium:overlay:roman:sspx` |
+| `decree` | `<rite>:<snapshot>:<effective-date>-<slug>` | `directorium:decree:roman:novus-ordo-2002:2016-06-03-mariae-magdalenae-festum` |
 
 The `rite-unit` type is what the **comparison tool's rite mode** diffs: the Order of Mass modeled as an
 ordered tree of URN'd parts, each with per-edition presence/text/rubric/chant.
@@ -53,6 +54,13 @@ ordered tree of URN'd parts, each with per-edition presence/text/rubric/chant.
   calendars. An overlay is **not an edition**: it does not restate the rubric family, it adds/removes/reranks
   observances over one. See [`edition-governance.md`](edition-governance.md) for how overlays, snapshots,
   and decrees relate.
+- **`decree`** carries one **dated change to a living calendar** (#366). The native id is scoped under the
+  **snapshot** it modifies (`<rite>:<snapshot>`, e.g. `roman:novus-ordo-2002`) then the decree's own
+  `<effective-date>-<slug>` — so the snapshot/decree axis is reserved here as a first-class URN, coordinated
+  with the `edition`/snapshot naming above and the `rite-unit` axis (#299): a `rite-unit`, like an
+  observance, is resolved under `(snapshot, decrees-in-force, overlays)`, so the edition, decree, and
+  rite-unit axes are named together and the grammar freezes with all three in place. A decree is data on the
+  edition axis, never itself an edition or an overlay. See [`edition-governance.md`](edition-governance.md).
 
 ## Translations are not URNs
 
